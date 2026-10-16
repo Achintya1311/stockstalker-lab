@@ -32,3 +32,5 @@ Traceback (most recent call last):
     raise KeyError(key) from err
 KeyError: 'TtlTrdgVal'
 ```
+
+RESOLVED in this commit: the turnover column is `TtlTrfVal`, not `TtlTrdgVal`. The synthetic test header was also wrong (`SsrIndctr`); both now follow docs/nse_formats.md.

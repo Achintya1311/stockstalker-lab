@@ -1,9 +1,13 @@
 name: Build dataset
-# Builds the parsed dataset from cached raw zips (first run) or updates it with the
-# latest days (daily, after the NSE close). Runs scripts/build_dataset.py, which the
-# lab writes in build item B2. Only a manifest (date range, rows, checksum) is committed.
+# Rebuilds the parsed dataset from scratch on every run, from the per-year raw caches
+# (backfill.yml) plus an accumulating cache of recent days fetched here. A full rebuild
+# is slower than an append but cannot silently miss years. Only a manifest (date range,
+# rows, checksum) is committed.
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Backfill NSE history"]
+    types: [completed]
   push:
     branches: [main]
     paths: [scripts/build_dataset.py]
@@ -26,28 +30,31 @@ jobs:
         with: {python-version: '3.12'}
       - run: pip install -r requirements.txt
         if: steps.has.outputs.ok && hashFiles('requirements.txt') != ''
-      - name: Restore the latest dataset
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2015, key: nse-raw-2015-x, restore-keys: nse-raw-2015-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2016, key: nse-raw-2016-x, restore-keys: nse-raw-2016-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2017, key: nse-raw-2017-x, restore-keys: nse-raw-2017-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2018, key: nse-raw-2018-x, restore-keys: nse-raw-2018-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2019, key: nse-raw-2019-x, restore-keys: nse-raw-2019-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2020, key: nse-raw-2020-x, restore-keys: nse-raw-2020-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2021, key: nse-raw-2021-x, restore-keys: nse-raw-2021-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2022, key: nse-raw-2022-x, restore-keys: nse-raw-2022-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2023, key: nse-raw-2023-x, restore-keys: nse-raw-2023-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2024, key: nse-raw-2024-x, restore-keys: nse-raw-2024-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2025, key: nse-raw-2025-x, restore-keys: nse-raw-2025-}}
+      - {uses: actions/cache/restore@v4, if: steps.has.outputs.ok, with: {path: raw/2026, key: nse-raw-2026-x, restore-keys: nse-raw-2026-}}
+      - name: Restore days fetched by earlier runs
         if: steps.has.outputs.ok
         uses: actions/cache/restore@v4
-        with: {path: data, key: nse-dataset-none, restore-keys: nse-dataset-}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2015, key: nse-raw-2015-x, restore-keys: nse-raw-2015-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2016, key: nse-raw-2016-x, restore-keys: nse-raw-2016-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2017, key: nse-raw-2017-x, restore-keys: nse-raw-2017-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2018, key: nse-raw-2018-x, restore-keys: nse-raw-2018-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2019, key: nse-raw-2019-x, restore-keys: nse-raw-2019-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2020, key: nse-raw-2020-x, restore-keys: nse-raw-2020-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2021, key: nse-raw-2021-x, restore-keys: nse-raw-2021-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2022, key: nse-raw-2022-x, restore-keys: nse-raw-2022-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2023, key: nse-raw-2023-x, restore-keys: nse-raw-2023-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2024, key: nse-raw-2024-x, restore-keys: nse-raw-2024-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2025, key: nse-raw-2025-x, restore-keys: nse-raw-2025-}}
-      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2026, key: nse-raw-2026-x, restore-keys: nse-raw-2026-}}
-      - name: Fetch the last 10 calendar days fresh
+        with: {path: raw/recent, key: nse-raw-recent-x, restore-keys: nse-raw-recent-}
+      - name: Fetch the last 10 calendar days (skips files already present)
         if: steps.has.outputs.ok
         run: python3 scripts/fetch_bhavcopy.py --start $(date -u -d '10 days ago' +%F) --end $(date -u +%F) --out raw/recent
+      - uses: actions/cache/save@v4
+        if: steps.has.outputs.ok
+        with: {path: raw/recent, key: 'nse-raw-recent-${{ github.run_id }}'}
       - name: Build or update
         if: steps.has.outputs.ok
-        run: set -o pipefail; python3 scripts/build_dataset.py --raw raw --out data/dataset.parquet --manifest state/data_manifest.json 2>&1 | tee /tmp/dataset.log
+        run: rm -rf data; set -o pipefail; python3 scripts/build_dataset.py --raw raw --out data/dataset.parquet --manifest state/data_manifest.json 2>&1 | tee /tmp/dataset.log
       - uses: actions/cache/save@v4
         if: steps.has.outputs.ok
         with: {path: data, key: 'nse-dataset-${{ github.run_id }}'}

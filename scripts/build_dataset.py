@@ -13,7 +13,7 @@ UDiFF era (from 2024-07-08), one shared schema for both segments:
   TradDt,BizDt,Sgmt,Src,FinInstrmTp,FinInstrmId,ISIN,TckrSymb,SctySrs,XpryDt,
   FininstrmActlXpryDt,StrkPric,OptnTp,FinInstrmNm,OpnPric,HghPric,LwPric,
   ClsPric,LastPric,PrvsClsgPric,UndrlygPric,SttlmPric,OpnIntrst,
-  ChngInOpnIntrst,TtlTradgVol,TtlTrdgVal,TtlNbOfTxsExctd,SsrIndctr,Rmks,
+  ChngInOpnIntrst,TtlTradgVol,TtlTrfVal,TtlNbOfTxsExctd,SsnId,NewBrdLotQty,Rmks,
   Rsvd1,Rsvd2,Rsvd3,Rsvd4
   CM rows have Sgmt == "CM" and FinInstrmTp == "STK"; FO stock-future rows
   have Sgmt == "FO" and FinInstrmTp == "STF".
@@ -95,7 +95,7 @@ def parse_cm_file(path: Path) -> pd.DataFrame:
             "close": df["ClsPric"].astype(float),
             "prevclose": df["PrvsClsgPric"].astype(float),
             "volume": df["TtlTradgVol"].astype("int64"),
-            "turnover": df["TtlTrdgVal"].astype(float),
+            "turnover": df["TtlTrfVal"].astype(float),
         })
     else:
         raise ValueError(f"unrecognised CM bhavcopy columns in {path}: {sorted(cols)}")

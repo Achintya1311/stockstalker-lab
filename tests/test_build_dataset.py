@@ -24,7 +24,7 @@ OLD_FO_CSV = (
 UDIFF_CM_CSV = (
     "TradDt,BizDt,Sgmt,Src,FinInstrmTp,FinInstrmId,ISIN,TckrSymb,SctySrs,XpryDt,FininstrmActlXpryDt,"
     "StrkPric,OptnTp,FinInstrmNm,OpnPric,HghPric,LwPric,ClsPric,LastPric,PrvsClsgPric,UndrlygPric,"
-    "SttlmPric,OpnIntrst,ChngInOpnIntrst,TtlTradgVol,TtlTrdgVal,TtlNbOfTxsExctd,SsrIndctr,Rmks,"
+    "SttlmPric,OpnIntrst,ChngInOpnIntrst,TtlTradgVol,TtlTrfVal,TtlNbOfTxsExctd,SsnId,NewBrdLotQty,Rmks,"
     "Rsvd1,Rsvd2,Rsvd3,Rsvd4\n"
     "2024-07-08,2024-07-08,CM,NSE,STK,1001,INE002A01018,RELIANCE,EQ,,,,,"
     "RELIANCE,200.00,205.00,199.00,204.00,204.00,200.00,,,,,600000,122400000.00,3000,,,,,,\n"
@@ -35,7 +35,7 @@ UDIFF_CM_CSV = (
 UDIFF_FO_CSV = (
     "TradDt,BizDt,Sgmt,Src,FinInstrmTp,FinInstrmId,ISIN,TckrSymb,SctySrs,XpryDt,FininstrmActlXpryDt,"
     "StrkPric,OptnTp,FinInstrmNm,OpnPric,HghPric,LwPric,ClsPric,LastPric,PrvsClsgPric,UndrlygPric,"
-    "SttlmPric,OpnIntrst,ChngInOpnIntrst,TtlTradgVol,TtlTrdgVal,TtlNbOfTxsExctd,SsrIndctr,Rmks,"
+    "SttlmPric,OpnIntrst,ChngInOpnIntrst,TtlTradgVol,TtlTrfVal,TtlNbOfTxsExctd,SsnId,NewBrdLotQty,Rmks,"
     "Rsvd1,Rsvd2,Rsvd3,Rsvd4\n"
     "2024-07-08,2024-07-08,FO,NSE,STF,2001,INE002A01018,RELIANCE,,2024-07-25,2024-07-25,,,"
     "RELIANCEFUT,200.00,205.00,199.00,204.00,204.00,,,204.00,10000,50,400,81600.00,20,,,,,,\n"
