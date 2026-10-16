@@ -1,0 +1,7 @@
+# Paths the autonomous routine must never change. The guard check fails any PR touching them.
+SPEC.md
+PROTECTED.txt
+config/splits.yml
+engine/
+gates/
+.github/

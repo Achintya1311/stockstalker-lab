@@ -1,0 +1,5 @@
+# Fixed. Changing these invalidates every comparison in the ledger.
+train:      {start: 2015-01-01, end: 2020-12-31}
+validation: {start: 2021-01-01, end: 2023-12-31, holdout: thresholdout, max_queries_per_week: 60}
+test:       {start: 2024-01-01, end: 2026-07-31, max_looks_per_week: 2}
+exam:       {start: 2026-08-01, end: go-live}

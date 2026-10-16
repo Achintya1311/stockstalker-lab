@@ -1,0 +1,3 @@
+# Point-in-time universe: stocks with an active stock future (FUTSTK) in that day's F&O bhavcopy.
+min_median_turnover_20d_cr: 25
+picks_per_table: 5
