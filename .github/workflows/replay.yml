@@ -30,10 +30,17 @@ jobs:
         with: {path: data, key: nse-dataset-none, restore-keys: nse-dataset-}
       - name: Run queued experiments
         if: steps.has.outputs.ok
-        run: python3 -m engine.run_queue --data data/dataset.parquet
+        run: set -o pipefail; python3 -m engine.run_queue --data data/dataset.parquet 2>&1 | tee /tmp/replay.log
       - name: Commit results
         if: steps.has.outputs.ok
         run: |
           git config user.name Achintya1311; git config user.email 67464985+Achintya1311@users.noreply.github.com
           git add -A ledger reports experiments state 2>/dev/null || true
           git diff --cached --quiet || { git commit -m "replay: results $(date -u +%FT%H%MZ)"; git pull --rebase -q; git push; }
+      - name: Report failure where the routine can read it
+        if: failure() && steps.has.outputs.ok
+        run: |
+          git config user.name Achintya1311; git config user.email 67464985+Achintya1311@users.noreply.github.com
+          git reset -q --hard; git pull -q
+          { echo "## $(date -u +%FT%H:%MZ) replay failed"; echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; echo '```'; tail -n 60 /tmp/replay.log 2>/dev/null || echo "(no log)"; echo '```'; } >> state/workflow_failures.md
+          git add state/workflow_failures.md; git commit -qm "ci: replay failure report"; git push -q
