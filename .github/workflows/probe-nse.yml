@@ -1,0 +1,13 @@
+name: Probe NSE archive reachability
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch a few old-format and UDiFF bhavcopy files
+        run: |
+          python3 scripts/fetch_bhavcopy.py --start 2015-01-01 --end 2015-01-02 --out /tmp/raw
+          python3 scripts/fetch_bhavcopy.py --start 2026-10-14 --end 2026-10-16 --out /tmp/raw
+          find /tmp/raw -name '*.zip' -printf '%s %p\n' | sort -k2
+          cat /tmp/raw/missing.txt 2>/dev/null || true
