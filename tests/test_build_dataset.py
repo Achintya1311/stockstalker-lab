@@ -125,3 +125,12 @@ def test_parse_cm_file_rejects_unrecognised_columns(tmp_path):
     path = _write_zip(tmp_path, "cm_20150102.csv.zip", "A,B,C\n1,2,3\n")
     with pytest.raises(ValueError):
         parse_cm_file(path)
+
+
+def test_manifest_reports_trading_days_and_largest_gap(tmp_path):
+    from scripts.build_dataset import write_manifest
+    import json
+    df = pd.DataFrame({"date": ["2015-01-01", "2015-01-02", "2015-01-12"], "symbol": ["A", "A", "A"]})
+    write_manifest(df, tmp_path / "none.parquet", tmp_path / "m.json")
+    m = json.loads((tmp_path / "m.json").read_text())
+    assert m["trading_days"] == 3 and m["max_gap_days"] == 10

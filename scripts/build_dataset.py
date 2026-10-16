@@ -152,6 +152,8 @@ def write_manifest(df: pd.DataFrame, dataset_path: Path, manifest_path: Path) ->
         "symbols": int(df["symbol"].nunique()) if not df.empty else 0,
         "date_start": str(df["date"].min()) if not df.empty else None,
         "date_end": str(df["date"].max()) if not df.empty else None,
+        "trading_days": int(df["date"].nunique()) if not df.empty else 0,
+        "max_gap_days": int(pd.to_datetime(pd.Series(sorted(df["date"].unique()))).diff().dt.days.max()) if df["date"].nunique() > 1 else 0,
         "sha256": checksum,
     }
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
