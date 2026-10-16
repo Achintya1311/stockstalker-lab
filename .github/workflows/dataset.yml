@@ -1,0 +1,58 @@
+name: Build dataset
+# Builds the parsed dataset from cached raw zips (first run) or updates it with the
+# latest days (daily, after the NSE close). Runs scripts/build_dataset.py, which the
+# lab writes in build item B2. Only a manifest (date range, rows, checksum) is committed.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [scripts/build_dataset.py]
+  schedule:
+    - cron: '23 13 * * 1-5'   # 18:53 IST, weekdays
+permissions:
+  contents: write
+concurrency: dataset
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip until the builder exists
+        id: has
+        run: if [ -f scripts/build_dataset.py ]; then echo "ok=1" >> $GITHUB_OUTPUT; else echo "build_dataset.py not written yet"; fi
+      - uses: actions/setup-python@v5
+        if: steps.has.outputs.ok
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+        if: steps.has.outputs.ok && hashFiles('requirements.txt') != ''
+      - name: Restore the latest dataset
+        if: steps.has.outputs.ok
+        uses: actions/cache/restore@v4
+        with: {path: data, key: nse-dataset-none, restore-keys: nse-dataset-}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2015, key: nse-raw-2015-x, restore-keys: nse-raw-2015-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2016, key: nse-raw-2016-x, restore-keys: nse-raw-2016-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2017, key: nse-raw-2017-x, restore-keys: nse-raw-2017-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2018, key: nse-raw-2018-x, restore-keys: nse-raw-2018-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2019, key: nse-raw-2019-x, restore-keys: nse-raw-2019-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2020, key: nse-raw-2020-x, restore-keys: nse-raw-2020-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2021, key: nse-raw-2021-x, restore-keys: nse-raw-2021-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2022, key: nse-raw-2022-x, restore-keys: nse-raw-2022-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2023, key: nse-raw-2023-x, restore-keys: nse-raw-2023-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2024, key: nse-raw-2024-x, restore-keys: nse-raw-2024-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2025, key: nse-raw-2025-x, restore-keys: nse-raw-2025-}}
+      - {uses: actions/cache/restore@v4, if: "steps.has.outputs.ok && hashFiles('data/dataset.parquet') == ''", with: {path: raw/2026, key: nse-raw-2026-x, restore-keys: nse-raw-2026-}}
+      - name: Fetch the last 10 calendar days fresh
+        if: steps.has.outputs.ok
+        run: python3 scripts/fetch_bhavcopy.py --start $(date -u -d '10 days ago' +%F) --end $(date -u +%F) --out raw/recent
+      - name: Build or update
+        if: steps.has.outputs.ok
+        run: python3 scripts/build_dataset.py --raw raw --out data/dataset.parquet --manifest state/data_manifest.json
+      - uses: actions/cache/save@v4
+        if: steps.has.outputs.ok
+        with: {path: data, key: 'nse-dataset-${{ github.run_id }}'}
+      - name: Commit the manifest only
+        if: steps.has.outputs.ok
+        run: |
+          git config user.name Achintya1311; git config user.email 67464985+Achintya1311@users.noreply.github.com
+          git add state/data_manifest.json; git diff --cached --quiet || { git commit -m "data: manifest $(date -u +%F)"; git pull --rebase -q; git push; }

@@ -2,7 +2,7 @@
 
 | # | Item | Done |
 |---|------|------|
-| B1 | Fetch NSE bhavcopy history 2015 to date (`scripts/fetch_bhavcopy.py`) | [ ] |
+| B1 | Fetch NSE bhavcopy history 2015 to date: `backfill.yml` in GitHub Actions, zips kept in the Actions cache only (never committed or published) | [ ] |
 | B2 | Parse old and UDiFF formats into one table: date, symbol, open, high, low, close, prevclose, volume, turnover; plus the daily FUTSTK universe | [ ] |
 | B3 | Adjustment factors from PREVCLOSE / previous CLOSE; check against known splits and bonuses | [ ] |
 | B4 | Replay engine: truncated slices, pick log hashed before outcomes, split authorisation | [ ] |

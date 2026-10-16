@@ -20,6 +20,10 @@ It runs every 2 hours, on its own, with no human approval step. Code-enforced ga
 - **Prices:** NSE equity bhavcopy, EQ series, which includes names later delisted or merged.
 - **Adjustments:** split and bonus adjustment factors come from the bhavcopy's PREVCLOSE (the exchange's adjusted base price) divided by the previous day's CLOSE. Indicators use adjusted series. Day open-to-close moves need no adjustment.
 - **Liquidity floor:** 20-day median turnover of at least ₹25 cr (in `config/universe.yml`).
+- **Where data lives:** everything runs in the cloud and nothing on a personal machine.
+  - NSE zips and the parsed dataset live only in this repo's GitHub Actions cache, never in a commit or a public release.
+  - `backfill.yml` downloads them, `dataset.yml` builds the dataset and updates it every weekday after the close, and `replay.yml` runs experiments.
+  - If a cache entry is evicted, it is downloaded again from NSE.
 - **Futures:** a short is realistic only through stock futures. Hit or miss is scored on the underlying stock's move, which futures track.
 
 ## 3. Scoring
@@ -118,6 +122,11 @@ Every 2 hours (`7 */2 * * *`, Sonnet). A run claims a **lane** by committing `st
 | `diagnose` | yes | `research/diagnostics/*.md`, new cards |
 | `evaluate` | **exclusive** | holdout queries, test looks, roster changes, `ledger/` |
 | `live` | **exclusive**, after 15:45 IST on trading days | scoring of live picks, decay monitor |
+
+**Brain and muscle:**
+- The routine never holds the full data. It writes code, strategy cards and experiment files under `experiments/pending/`.
+- Pushing those starts `replay.yml`. It runs them on the cached dataset and commits only the results the engine is allowed to reveal.
+- The next run reads those results.
 
 **Every run:**
 1. Read `state/journal.md`, `state/queue.md` and the ledger.

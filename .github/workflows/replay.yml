@@ -1,0 +1,39 @@
+name: Replay
+# The lab's compute. The routine queues experiments as files; this job runs them against
+# the cached dataset with engine/run_queue.py (written in build items B4-B8) and commits
+# only the results the engine is allowed to reveal (train metrics, holdout answers, test
+# looks within budget). The data itself never leaves the Actions cache.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['experiments/pending/**', 'strategies/**', 'engine/**', 'gates/**']
+permissions:
+  contents: write
+concurrency: replay
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip until the engine exists
+        id: has
+        run: if [ -f engine/run_queue.py ]; then echo "ok=1" >> $GITHUB_OUTPUT; else echo "engine not written yet"; fi
+      - uses: actions/setup-python@v5
+        if: steps.has.outputs.ok
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+        if: steps.has.outputs.ok && hashFiles('requirements.txt') != ''
+      - uses: actions/cache/restore@v4
+        if: steps.has.outputs.ok
+        with: {path: data, key: nse-dataset-none, restore-keys: nse-dataset-}
+      - name: Run queued experiments
+        if: steps.has.outputs.ok
+        run: python3 -m engine.run_queue --data data/dataset.parquet
+      - name: Commit results
+        if: steps.has.outputs.ok
+        run: |
+          git config user.name Achintya1311; git config user.email 67464985+Achintya1311@users.noreply.github.com
+          git add -A ledger reports experiments state 2>/dev/null || true
+          git diff --cached --quiet || { git commit -m "replay: results $(date -u +%FT%H%MZ)"; git pull --rebase -q; git push; }

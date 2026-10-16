@@ -1,0 +1,31 @@
+name: Backfill NSE history
+# One-time (or repair) download of NSE equity and F&O bhavcopy zips, one year per job.
+# Zips go into the Actions cache only, never a public release: NSE's files stay private
+# to this repo's workflows, and anything evicted can be re-downloaded from NSE.
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: JSON list of years
+        default: '[2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026]'
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      max-parallel: 3
+      fail-fast: false
+      matrix:
+        year: ${{ fromJSON(inputs.years) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download one year
+        run: |
+          END="${{ matrix.year }}-12-31"; TODAY=$(date -u +%F)
+          if [[ "$END" > "$TODAY" ]]; then END=$TODAY; fi
+          python3 scripts/fetch_bhavcopy.py --start ${{ matrix.year }}-01-01 --end $END --out raw/${{ matrix.year }}
+          find raw -name '*.zip' | wc -l
+      - uses: actions/cache/save@v4
+        with:
+          path: raw/${{ matrix.year }}
+          key: nse-raw-${{ matrix.year }}-${{ github.run_id }}
