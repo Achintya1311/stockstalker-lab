@@ -18,6 +18,12 @@ Rules for build items (added 16 Oct after the first run):
 | B9 | Live picks JSON plus GitHub Actions (evening and morning runs); exam backfill | [ ] |
 | B10 | Start the 2-hourly lab routine with lanes | [ ] |
 
+## After the build (Mode B, discover and port lanes)
+
+- **D1:** extend the dataset with near-month stock-futures and options open interest from the F&O files already cached. This unlocks catalog rows D01–D02.
+- **D2:** add a fetcher for NSE's security-wise delivery file. This unlocks D03.
+- Work through `cards/catalog.csv` in the testing order SPEC.md §5 gives.
+
 ## Acceptance per item (a tick needs all of it; "the logic is written" is not enough)
 
 - **B3:** once B2 is done, run `detect_corporate_actions` on the full dataset in Actions and write `reports/corporate_actions_check.md`. At least 10 detected events must be checked against an independent public source (NSE corporate announcements or news), with date and ratio matching and the source linked. Every mismatch is explained. Events where the adjusted close jumps more than 30% in one day are listed and explained.

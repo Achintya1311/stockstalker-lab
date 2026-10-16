@@ -64,6 +64,12 @@ It runs every 2 hours, on its own, with no human approval step. Code-enforced ga
   - a synthetic unit test with a known expected signal
   - attribution in its header
 - **Sources:** each idea becomes a `cards/<id>.yml` card with these fields: `source_url`, `author`, `license`, `published_on`, `claim_as_stated`, `horizon`, `rules_plain`, `params`, `red_flags`, `status`.
+- **Baseline archive:**
+  - `cards/catalog.csv` lists the known and community strategies to start from: the rule in our own words, default parameters, data needed, source and published claim. It started with 51 rows; discovery adds rows.
+  - `third_party/` holds unmodified copies of permissively licensed code (PKScreener and Qlib, MIT), with licences and commit hashes.
+  - Papers, books, forum posts and non-open scripts are never copied, only summarised and cited.
+  - Testing order: the rows marked `testable_now: yes`, academic anomalies before indicator rules.
+  - A row becomes a `cards/<id>.yml` card when it is picked for testing, and its `status` in the catalog is updated with the result.
 - **No claim is assumed true.** Every card's claim is tested on NSE data and marked `confirmed` or `refuted`, with the numbers.
 - **Idea vintage:** an idea published in year Y is only truly out-of-sample after Y. Where possible, its post-publication record is reported separately.
 - **Sources kept open (read only; nothing is ever posted):**
