@@ -1,9 +1,0 @@
-{
-  "id": "engine-smoketest-day",
-  "strategy": "strategies.engine_smoketest",
-  "split": "train",
-  "horizon": "day",
-  "n_picks": 29542,
-  "n_dates": 20,
-  "pick_log_sha256": "b5c15f2d4e0519b43ce6659497032b57b3dc8a2f24558145079de1a650f38813"
-}

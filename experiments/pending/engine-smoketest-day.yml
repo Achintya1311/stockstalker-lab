@@ -1,0 +1,14 @@
+# Proves the replay engine runs on real cached data in Actions (B4 acceptance),
+# not a strategy under evaluation. See strategies/engine_smoketest.py.
+# Re-queued once more: the prior run (01b0ad6) committed only manifest.json
+# because picks were written as picks.parquet, which .gitignore's blanket
+# `*.parquet` rule (meant for the NSE dataset) silently swallowed - leaving a
+# hash with nothing committed to check it against. run_queue now writes
+# picks.json instead, matching "picks JSON are committed".
+id: engine-smoketest-day
+strategy: strategies.engine_smoketest
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2015-01-31

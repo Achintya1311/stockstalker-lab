@@ -117,7 +117,7 @@ def test_main_processes_the_queue_and_moves_the_experiment_to_done(tmp_path, mon
     assert manifest["id"] == "demo-experiment"
     assert manifest["n_picks"] > 0
     assert len(manifest["pick_log_sha256"]) == 64
-    picks = pd.read_parquet(out_dir / "picks.parquet")
+    picks = pd.read_json(out_dir / "picks.json")
     assert set(picks.columns) == {"date", "symbol", "score"}
 
 

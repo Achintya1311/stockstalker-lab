@@ -106,7 +106,10 @@ def main() -> None:
 
         out_dir = done_dir / exp_id
         out_dir.mkdir(parents=True, exist_ok=True)
-        picks.to_parquet(out_dir / "picks.parquet", index=False)
+        # JSON, not parquet: `.gitignore`'s blanket `*.parquet` rule (for the
+        # NSE dataset) would otherwise silently swallow the pick log, leaving
+        # only its hash committed with nothing on disk to check it against.
+        (out_dir / "picks.json").write_text(picks.to_json(orient="records", indent=2) + "\n")
         manifest = {
             "id": exp_id,
             "strategy": exp["strategy"],
