@@ -330,7 +330,12 @@ these sessions into the cache (safe to re-run for every year, not just
 the eleven dates found here, since 2017/2018/2021/2022 weren't checked
 and the fetch is idempotent either way); `dataset.yml` auto-triggers on
 `workflow_run: Backfill NSE history completed` and will then rebuild
-`data/dataset.parquet` with the gaps closed. Only after that: delete
+`data/dataset.parquet` with the gaps closed.
+
+Triggered this run: https://github.com/Achintya1311/stockstalker-lab/actions/runs/39049507308
+(all years, `workflow_dispatch` on `main` at commit `e0f161a`). The next
+run should check its status (and `dataset.yml`'s chained run after it)
+before doing anything else with this entry. Only after that: delete
 `reports/corporate_actions_check.md` so `dataset.yml` regenerates it,
 confirm the eleven spike dates are gone (or shrunk to real ratios), and
 only then do B3's real job — cross-check at least 10 of the *remaining*
