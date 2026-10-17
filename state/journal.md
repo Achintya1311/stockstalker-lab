@@ -346,3 +346,86 @@ is the next unblocked build item - it needs reading STOCKSTALKER's actual
 blended-score logic and porting it as a `strategies/` module scored
 through the same `engine.replay`/`engine.scoring` path this run already
 exercised end to end.
+
+## 2026-10-17T0822Z — build lane
+
+Claimed `build` (free, no contention). Next unticked, unblocked item was
+B7: champion v1 = current StockStalker blended score, day and week, train
+then validation (B3 is still only READY FOR WIRING in
+`state/engine-issues.md`, needs a supervised `.github/` change, so stays
+blocked and skipped).
+
+Hypothesis: B7 splits into two parts with different dependencies - the
+train-split report needs porting the strategy and a real `replay.yml` run
+against the cached dataset (same B5/B6 shape), but "then validation" needs
+a reusable-holdout (Thresholdout) query mechanism that doesn't exist yet -
+Thresholdout itself is bundled into B8 ("Gates, ledger, Thresholdout,
+budgets..."), not B7. So this run does the achievable half and leaves the
+rest explicit rather than skipping the item or faking the second half.
+
+Read `STOCKSTALKER/stockstalker/screener.py` and
+`stockstalker/signals/{trend,momentum,volume}.py` (read-only reference) to
+get the exact blended-score formula: trend = SMA(20,50) crossover spread
+x10 clipped to [-1,1]; momentum = 0.5 x RSI(14, Wilder) re-centred on 50 +
+0.5 x MACD(12,26,9) histogram as % of price, each clipped to [-1,1];
+volume = 0.5 x rolling 20-day volume z-score /3 + 0.5 x 20-day OBV change
+over 20-day traded volume, each clipped to [-1,1]; blend = weighted
+average, weights {trend: 0.4, momentum: 0.35, volume: 0.25}. Ported this
+(not imported - STOCKSTALKER isn't checked out in GitHub Actions) into
+`strategies/champion_v1.py`, operating on the adjusted close series
+(`scripts.adjustments.compute_adjustment_factors`, since B3's own report
+wiring is blocked but the adjustment math itself already exists and is
+tested) and raw volume. Score is kept in StockStalker's native [-1,1]
+blend, not remapped to [0,1], so its sign carries direction per SPEC.md
+section 5 - the same score-sign-as-side convention `engine.selftest`
+already uses for the B6 self-tests. A symbol abstains (dropped, same as
+NaN) below `MIN_ROWS=50` rows so no component's own insufficient-history
+default (0.0) masquerades as a real reading.
+
+Added `strategies/champion_v1_audit.py` (SPEC.md section 5: "audit.py
+causality check" required per strategy) - not re-proving engine-level
+truncation (B4 already does that), but proving the strategy's own
+per-symbol groupby never lets one symbol's extra trailing row (a
+realistic shape given NSE's ragged trading calendar) leak into another
+symbol's score. 9 new tests in `tests/test_champion_v1.py`: known-signal
+synthetic cases (steady uptrend -> bullish, steady downtrend -> bearish,
+flat -> exactly neutral), the abstain floor, cross-symbol independence,
+`rules_fired` wording, and the causality audit.
+
+Added `engine/champion_report.py` (writes `reports/champion_v1_train.md`:
+B7's acceptance in `state/queue.md`), wired into `engine.run_queue.main`
+the same way B5/B6's reports are, so a push touching `engine/`,
+`strategies/` or `experiments/pending/` regenerates it from the real
+cached dataset. Reports picks/accuracy/edge by calendar year, per side,
+for day and week, matching the gate-3 ("positive edge in >= 70% of
+calendar years") breakdown. Deliberately left out gate 6's random-list
+percentile: on 6 years of the real universe across 2 horizons x 2 sides,
+1,000 redraws each proved far too slow for a report meant to regenerate
+on every relevant push - confirmed by timing it locally (a 3-symbol,
+~100-day synthetic fixture alone took over 2 minutes before the random
+baseline was dropped); gate 6 belongs to the promotion job checking it
+once on test, not to a report. 7 new tests in
+`tests/test_champion_report.py` against a synthetic UP/DOWN/FLAT dataset,
+plus a manual end-to-end run of `python3.13 -m engine.run_queue` against a
+tiny synthetic parquet to confirm the CLI wiring itself. 107 tests total,
+all passing (`python3.13 -m pytest tests/` - this sandbox's bare `pytest`
+resolves to a different, package-less Python 3.13 install; pre-existing,
+unrelated to this change).
+
+Pushed (commit pending). This triggers `replay.yml` against the real
+cached dataset, which should commit the real `reports/champion_v1_train.md`
+if it succeeds.
+
+Next: check the `replay.yml` run this push triggers
+(https://github.com/Achintya1311/stockstalker-lab/actions/workflows/replay.yml)
+succeeded and `reports/champion_v1_train.md` landed with sane numbers
+(positive edge in most years, on both sides, for a strategy that's shipped
+in production before - a flat or negative edge across the board would be
+a bug worth finding before going further, not a result to report as-is).
+If it looks sane, the next unblocked part of B7 is "then validation": a
+minimal reusable-holdout (Thresholdout, Dwork et al. 2015) query mechanism
+over champion v1's validation-split edge, logged as the one row
+`ledger/holdout_queries.csv` needs - built now as its own small, focused
+module (reusable by B8's fuller gates/budgets machinery later), not as
+part of B8's whole bundle. Only then does B7 tick. B3 remains the one
+other blocked item (READY FOR WIRING).

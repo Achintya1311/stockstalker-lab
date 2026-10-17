@@ -30,6 +30,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from engine.champion_report import maybe_write_champion_report
 from engine.replay import SplitViolation, hash_picks, load_splits, run_dates
 from engine.reports import maybe_write_market_line_report
 from engine.selftest import maybe_write_selftest_report
@@ -38,6 +39,7 @@ PENDING_DIR = Path("experiments/pending")
 DONE_DIR = Path("experiments/done")
 MARKET_LINE_REPORT = Path("reports/market_line_train.md")
 SELFTEST_REPORT = Path("reports/selftest.md")
+CHAMPION_REPORT = Path("reports/champion_v1_train.md")
 
 
 def load_experiment(path: Path) -> dict:
@@ -89,6 +91,7 @@ def main() -> None:
     ap.add_argument("--done", default=str(DONE_DIR))
     ap.add_argument("--market-line-report", default=str(MARKET_LINE_REPORT))
     ap.add_argument("--selftest-report", default=str(SELFTEST_REPORT))
+    ap.add_argument("--champion-report", default=str(CHAMPION_REPORT))
     args = ap.parse_args()
 
     pending_dir, done_dir = Path(args.pending), Path(args.done)
@@ -101,6 +104,8 @@ def main() -> None:
             print(f"wrote {args.market_line_report}")
         if maybe_write_selftest_report(dataset, Path(args.selftest_report)):
             print(f"wrote {args.selftest_report}")
+        if maybe_write_champion_report(dataset, Path(args.champion_report)):
+            print(f"wrote {args.champion_report}")
 
     queue = sorted(pending_dir.glob("*.yml")) if pending_dir.exists() else []
     if not queue:
