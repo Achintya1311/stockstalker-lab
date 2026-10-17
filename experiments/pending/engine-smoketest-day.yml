@@ -3,7 +3,9 @@
 # Re-queued: the first run (f5a9a40, run 38994265344) computed real output but
 # replay.yml's commit step silently staged nothing, because `git add -A ledger
 # reports experiments state` fails outright when `ledger/` doesn't exist yet -
-# fixed by adding ledger/.gitkeep in this same commit.
+# fixed by adding ledger/.gitkeep, but that alone wasn't enough: `reports/`
+# was ALSO missing (same failure, run 38994463762 on 8f52259), so re-queued
+# again now that both ledger/.gitkeep and reports/.gitkeep exist.
 id: engine-smoketest-day
 strategy: strategies.engine_smoketest
 split: train
