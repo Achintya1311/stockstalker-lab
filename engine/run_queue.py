@@ -14,10 +14,11 @@ authorised to run on, a horizon, and a date range. For each one this:
    at) to `experiments/done/<id>/`, then removes the pending file.
 
 Whenever a dataset is loaded and it carries the columns B5's scoring needs,
-this also (re)writes `reports/market_line_train.md` (`engine.reports`), so a
-push that touches `engine/`, `strategies/`, `experiments/pending/` or
-`gates/` and triggers `replay.yml` regenerates it from the real cached
-dataset - independently of whether anything is queued.
+this also (re)writes `reports/market_line_train.md` (`engine.reports`) and
+`reports/selftest.md` (`engine.selftest`, B6), so a push that touches
+`engine/`, `strategies/`, `experiments/pending/` or `gates/` and triggers
+`replay.yml` regenerates both from the real cached dataset - independently
+of whether anything is queued.
 """
 
 from __future__ import annotations
@@ -31,10 +32,12 @@ import pandas as pd
 
 from engine.replay import SplitViolation, hash_picks, load_splits, run_dates
 from engine.reports import maybe_write_market_line_report
+from engine.selftest import maybe_write_selftest_report
 
 PENDING_DIR = Path("experiments/pending")
 DONE_DIR = Path("experiments/done")
 MARKET_LINE_REPORT = Path("reports/market_line_train.md")
+SELFTEST_REPORT = Path("reports/selftest.md")
 
 
 def load_experiment(path: Path) -> dict:
@@ -85,6 +88,7 @@ def main() -> None:
     ap.add_argument("--pending", default=str(PENDING_DIR))
     ap.add_argument("--done", default=str(DONE_DIR))
     ap.add_argument("--market-line-report", default=str(MARKET_LINE_REPORT))
+    ap.add_argument("--selftest-report", default=str(SELFTEST_REPORT))
     args = ap.parse_args()
 
     pending_dir, done_dir = Path(args.pending), Path(args.done)
@@ -95,6 +99,8 @@ def main() -> None:
         dataset = pd.read_parquet(data_path)
         if maybe_write_market_line_report(dataset, Path(args.market_line_report)):
             print(f"wrote {args.market_line_report}")
+        if maybe_write_selftest_report(dataset, Path(args.selftest_report)):
+            print(f"wrote {args.selftest_report}")
 
     queue = sorted(pending_dir.glob("*.yml")) if pending_dir.exists() else []
     if not queue:
