@@ -498,3 +498,120 @@ Thresholdout query module - exactly as the previous entry planned. If
 39017169385 failed or timed out, record it under `state/workflow_failures.md`
 (the workflow's own failure-reporting step should already have done this on
 failure; check it landed).
+
+## 2026-10-17T1211Z — build lane
+
+Claimed `build` (free, no lease held). Orientation first: run 39017169385
+(the previous entry's open question) had finished `success` at 11:49:22Z,
+3.5h after it started - the fix in the next commit never retroactively
+sped it up (queued behind it, no `cancel-in-progress`, as already
+expected) - and its commit `ad965e6` landed `reports/champion_v1_train.md`
+on `main` with the same sane-looking numbers (positive edge in most
+years, both sides) the previous entry wanted checked. So the unblocked
+next step was exactly as planned: B7's "then validation" - the minimal
+reusable Thresholdout query module.
+
+But the *next* queued run (39024479250, for the vectorization-fix commit
+itself) had meanwhile failed - not at `engine.run_queue` (which ran fine
+and wrote the report again) but at `replay.yml`'s own commit step: an
+add/add merge conflict from racing the already-landed `ad965e6` commit
+(both runs' checkouts predate each other's push, so each one sees itself
+as *creating* `reports/champion_v1_train.md`), and the commit step's own
+failure-recovery line (`git reset --hard; git pull`) made it worse - a
+failed `git rebase` leaves `HEAD` detached, so `reset --hard` never
+reattaches it to `main`, and the following bare `git pull` (no
+branch given) errored out before even the failure-reporting step could
+run. Nothing was lost (the correct report had already landed from the
+run ahead of it) but `state/workflow_failures.md` never got an entry
+automatically - added by hand from the job's log via the public API, with
+the full diagnosis and three `.github/`-side fix options in
+`state/engine-issues.md` ("READY FOR WIRING: replay.yml's commit step
+can't survive two queued runs landing the same report").
+
+Hypothesis: SPEC.md section 4 describes exactly what's needed here -
+Thresholdout (Dwork et al. 2015), "noisy pass/fail answers" - and the
+previous entry already scoped it as a standalone module (`engine/holdout.py`),
+separate from B8's fuller gate/budget machinery, built once and reused
+later.
+
+What I did (`investigate-first` read of `engine/replay.py`, `engine/scoring.py`,
+`engine/champion_report.py`, `config/splits.yml` first): added
+`engine/holdout.py` - a single `thresholdout_query(train_value,
+holdout_value, *, threshold, tolerance, rng)` function implementing the
+textbook algorithm (Laplace noise on the train/holdout comparison; if they
+disagree by more than noise can explain, release the holdout value plus
+its own noise - "budget spent" - otherwise release the train value for
+free). The true, un-noised holdout value is never returned from the
+function at all, let alone logged anywhere - only `released_value` and
+whether `budget_spent`.
+
+Added `engine/holdout_report.py` to actually run the one real query B7
+needs: champion v1's day-horizon, bullish-side edge, train vs. validation
+(2021-2023), through that function, logged as one row in
+`ledger/holdout_queries.csv`. Gave `engine.champion_report.horizon_results`
+a `split` parameter (default `"train"`, every existing call site
+unaffected) so this could reuse it for the validation split instead of
+duplicating the day/week pick-date logic. `maybe_log_holdout_query` is
+idempotent against an already-logged query id, so this only ever runs its
+expensive computation once - every push after the first is a cheap no-op
+read of the ledger, not a second un-budgeted query.
+
+14 new tests (`tests/test_holdout.py`, `tests/test_holdout_report.py`):
+the free-vs-paid branches, that the true holdout value never appears
+verbatim even when budget is spent, idempotency, and that `maybe_log_holdout_query`
+only fires once real train+validation coverage and the right columns are
+present. One of my own first drafts of `test_holdout.py` was itself wrong
+on first run (`test_identical_values_never_spend_budget_across_many_seeds`
+asserted a flaky "never" that's actually an ~11% per-seed chance at
+`tolerance=0.01` against `threshold=0.03` - basic Laplace-tail arithmetic
+I'd skipped; fixed by tightening that one test's `tolerance` to `0.001`,
+where the same tail probability is negligible, rather than touching the
+module). 121 passed, 2 failed (`python3.13 -m pytest tests/` - the same
+pre-existing, unrelated pyarrow-not-installed sandbox gap as every earlier
+entry).
+
+Pushed (`51e20b4`). The triggered `Replay` run (39032187555) took ~34
+minutes end to end - longer than the ~19 minutes the previous (vectorized)
+commit's own `Replay` run took for its two `horizon_results` calls
+(champion_report's day+week, train only). Root cause, found while it was
+still running: `engine.scoring.universe_membership` and
+`moves_for_horizon` both recompute their rolling-window pass over *every*
+row of the full cached dataset (now ~5M rows, 3,818 symbols) on *every*
+`horizon_results` call, regardless of which split or how few dates it
+asks for - already paid twice per `Replay` run by `champion_report` itself
+(once for day, once for week), and my two added calls (duplicate day/train,
+plus day/validation) each pay that same whole-dataset tax a third and
+fourth time. Not a bug in this commit and not something worth fixing as
+part of B7 (`champion_report`'s existing double-payment predates this
+change and will keep recurring on every future push regardless; my two
+extra payments are one-time only, guarded by the same idempotency check
+above) - flagging it here as a real "Duplicated Derivation" finding
+(`ml-pipeline-audit`) worth a future, focused optimization (cache
+`universe_membership`/`moves_for_horizon` per dataset instead of
+recomputing per `horizon_results` call) if `Replay` run times become a
+problem again as the lab adds more strategies that each want their own
+report.
+
+Result: the run succeeded. `ledger/holdout_queries.csv` now has its first
+real row: `champion_v1-day-bullish-edge-v1`, `train_value≈-0.00113`
+(matches `reports/champion_v1_train.md`'s "Day - Bullish... edge -0.11
+points" exactly), `released_value≈0.02529`, `budget_spent=True` - meaning
+the mechanism judged validation-split day-bullish edge to disagree with
+train by more than noise can explain, and released a noisy estimate of
+the true (never-logged) validation value instead of the free train
+answer. That is exactly what Thresholdout is supposed to do when train
+and holdout genuinely diverge; it says nothing by itself about whether
+champion v1 is good or bad on validation - that reading, and any gating
+on it, is B8's job, not B7's. B7 ticked in `state/queue.md`: both halves
+(train report with sane numbers, one logged validation query) are done.
+
+Next: B3 remains the only other blocked item (READY FOR WIRING, needs a
+supervised `.github/` change - unrelated to this entry's new
+engine-issues.md entry, which needs a *different* `.github/` change to
+`replay.yml`'s commit step). With B7 done, B8 ("Gates, ledger,
+Thresholdout, budgets, guard check, CI, branch protection, auto-merge")
+is the next unblocked build item - it can lean on `engine/holdout.py`
+directly rather than rebuilding Thresholdout from scratch, but still owes
+its own weekly query-budget enforcement (`ledger/holdout_queries.csv`
+only has one manually-triggered row so far, no rate limiting yet) and the
+full gate checks from SPEC.md section 6.

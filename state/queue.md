@@ -13,7 +13,7 @@ Rules for build items (added 16 Oct after the first run):
 | B4 | Replay engine: truncated slices, pick log hashed before outcomes, split authorisation | [x] |
 | B5 | Scoring: hits, market line, edge, directional move after costs, random baseline | [x] |
 | B6 | Engine self-tests: a leaky strategy must be caught, a random strategy must show no edge | [x] |
-| B7 | Champion v1 = current StockStalker blended score; day and week; train, then validation | [ ] |
+| B7 | Champion v1 = current StockStalker blended score; day and week; train, then validation | [x] |
 | B8 | Gates, ledger, Thresholdout, budgets, guard check, CI, branch protection, auto-merge | [ ] |
 | B9 | Live picks JSON plus GitHub Actions (evening and morning runs); exam backfill | [ ] |
 | B10 | Start the 2-hourly lab routine with lanes | [ ] |
