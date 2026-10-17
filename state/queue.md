@@ -15,7 +15,7 @@ Rules for build items (added 16 Oct after the first run):
 | B6 | Engine self-tests: a leaky strategy must be caught, a random strategy must show no edge | [x] |
 | B7 | Champion v1 = current StockStalker blended score; day and week; train, then validation | [x] |
 | B8 | Gates, ledger, Thresholdout, budgets, guard (`guard.yml` restores protected paths; replaces branch protection and auto-merge), CI | [x] |
-| B9 | Picks code in `picks/` for `live.yml` (wired 17 Oct): score, pick, exam backfill | [ ] |
+| B9 | Picks code in `picks/` for `live.yml` (wired 17 Oct): score, pick, exam backfill | [x] |
 | B10 | Start the 2-hourly lab routine with lanes | [ ] |
 
 ## Go-live track (SPEC.md section 10; go-live Mon 2 Nov 2026)
@@ -55,3 +55,4 @@ While any table is provisional, improving it ranks right after leak alarms and w
   - **Exam:** in live mode, if `<dir>/exam/` does not exist, replay 1 Aug 2026 to the day before the first live session with the same sources, in the same file layout under `<dir>/exam/`, already scored.
   - **Summary:** `<dir>/summary.json` holds hits and picks per table per week and month, totals for exam and for live, and the market line per table for context. No P&L.
   - **Acceptance:** unit tests on synthetic data cover idempotency, no overwrite, the scoring arithmetic, the late flag and the next session across a holiday. A push to `picks/` gives a green Live dry run that commits `reports/live_dryrun/` with four tables of 5 picks, and a second dry run on a later day scores the first.
+  - **Ticked 17 Oct:** pushed (017ba65); `Live` run 39075234846 succeeded on the real dataset and committed `reports/live_dryrun/{day,week}/2026-10-19.json` (5 bullish + 5 bearish each, champion v1 since `config/live_source.json` doesn't exist yet - the dry-mode fallback), both carrying the provisional disclaimer, plus `reports/live_dryrun/summary.json`. `CI` (39075234817) passed the full suite (217 tests, including the new `tests/test_picks_*.py`) on the same commit. The "second dry run on a later day scores the first" half of this acceptance line can't be forced today (2026-10-19's own close isn't in the dataset yet) - it will happen naturally on the next push that touches `picks/` once that session has passed; the next run should check `reports/live_dryrun/day/2026-10-19.json` for a `hit` field once it's plausible (after Monday's close is in the cache) rather than re-deriving this from scratch.

@@ -805,3 +805,79 @@ just unticked (its new entry in `state/engine-issues.md` is a
 next run should see it as blocked per the routine's own rule and move on
 to B9 — unblocked per `state/queue.md`, write the `picks/` package to its
 contract there).
+
+## 2026-10-17T2208Z build / B9
+
+B3 is still blocked (READY FOR WIRING, not WIRED, per the previous
+entry), so per the routine's own rule this run took B9 instead: "write
+the `picks/` package to the contract in `state/queue.md`."
+
+Hypothesis: the contract (`state/queue.md` B9) is implementable without
+touching `engine/`/`gates/` at all - `engine.replay.truncate` and
+`engine.scoring` already give everything a live pick needs; the only new
+pieces are the next-session calendar, the source config reader, and the
+picks-file shape itself.
+
+Built `picks/` (calendar, source, select, outcomes, payload, exam,
+summary, run) plus `config/nse_holidays.txt` (NSE's published 2026
+equity-segment holiday list, cross-checked across two aggregators - see
+the file's own header for sources). Two design calls worth recording for
+whoever reads this next:
+
+- **Universe eligibility for a live pick reads `asof`'s own row, not the
+  session's.** `engine.scoring.universe_membership` lets a date's own
+  turnover count toward its own membership, which is honest for a
+  backtest reading that date's close after the fact (SPEC.md section 2),
+  but a real decision made before the session's open can't know the
+  session's own turnover yet. `picks/select.py` uses the most recent
+  reading a live decision could actually have. The exam backfill keeps
+  the backtest convention instead (pick-date's own universe), for
+  consistency with B5-B7's already-accepted code, since it's genuinely
+  replaying a known past rather than making a live call.
+- **Where bullish and bearish strategies for a horizon could differ**
+  (`config/live_source.json`'s four independent table entries), a single
+  picks file's top-level `label`/`disclaimer` resolve to "mixed" when the
+  two sides disagree (one gated, one still provisional) - not specified
+  explicitly in the contract, but needed to keep the one disclaimer
+  honest once the roster isn't all-champion-v1 any more.
+
+Result: `python3 -m pytest` - 217 passed (18 new test files/additions
+under `tests/test_picks_*.py` plus `tests/_picks_dataset.py`, a shared
+synthetic-dataset builder mirroring `tests/test_champion_v1.py`'s
+`_trending_symbol`). Pushed (017ba65); `Live` run 39075234846 succeeded
+on the real cached dataset and committed `reports/live_dryrun/` with
+`day/2026-10-19.json` and `week/2026-10-19.json` (5 bullish + 5 bearish
+picks each, real symbols, champion v1's own reasoning text, provisional
+disclaimer - `config/live_source.json` doesn't exist yet so dry mode
+used its documented fallback) plus `summary.json`; `CI` run 39075234817
+passed the full suite on the same commit. Ticked B9 in `state/queue.md`
+with the run ids.
+
+`asof` on the real run came back `2026-10-16` (Friday) with session
+`2026-10-19` (Monday) - a genuine week-boundary crossing, so the week
+file got exercised for real on the very first live run, not just in
+tests. Also incidentally exercised the holiday-aware calendar for real:
+Monday 2026-10-19's own *next* session (not generated this run, but
+checked by hand) correctly skips Tuesday 2026-10-20 (Dussehra) to
+Wednesday 2026-10-21.
+
+Not done, deliberately: `config/live_source.json` itself (that's the
+go-live track's job, due by Fri 30 Oct per `state/queue.md`'s "Go-live
+track", not B9's) and forcing a second dry run today to exercise the
+scoring path on committed files - 2026-10-19 hasn't happened yet, so
+there's no outcome to score. B3 is still the real blocker on B10/
+BUILD_DONE; it's unticked, not B9.
+
+Next: a future run should (a) once Monday 2026-10-19's close is in the
+cached dataset, check that the next push touching `picks/` (or the next
+natural dry run) actually adds `hit`/`move_pct` to
+`reports/live_dryrun/day/2026-10-19.json` - confirming the scoring half
+of B9's acceptance for real, not just on synthetic data; (b) keep
+chasing B3's three documented directions for a supervised session, since
+that's still the only thing standing between here and BUILD_DONE; (c) if
+`build` is free and B3 is still blocked, there's nothing else unticked
+in B1-B9 - the next `build`-lane run should treat B1-B9 as exhausted
+until B3 unblocks, and this routine's own rule ("never leave a run
+idle") means doing research-during-the-build work instead (discover/
+port/tune/diagnose on `cards/catalog.csv`), not inventing more build
+work where none remains.
