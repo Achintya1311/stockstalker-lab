@@ -62,13 +62,44 @@ def compute_adjustment_factors(df: pd.DataFrame) -> pd.DataFrame:
     with at most one row per (date, symbol) and `date` sortable as strings
     (ISO `YYYY-MM-DD`, as build_dataset.py produces) or as datetimes.
     Returns a copy; input is not mutated.
+
+    The dataset only keeps SERIES == "EQ" rows (SPEC.md section 2), so a
+    symbol that spends one or more trading days in another series (most
+    commonly "BE", NSE's trade-to-trade surveillance series) has no row
+    here for those days: `groupby("symbol")["close"].shift(1)` then skips
+    straight past the gap to that symbol's last *EQ* close, which can be
+    weeks stale, while `prevclose` on the row after the gap is the
+    exchange's real, continuous previous-day close (NSE does not reset
+    PREVCLOSE for a series change). The mismatch between a stale prior
+    close and a correct PREVCLOSE then looks exactly like a corporate
+    action's rebasing, even though nothing happened to the share count.
+    Detected directly against real NSE data: AUTOIND traded BE on
+    2020-08-17 (CLOSE 37.40, filtered out) and EQ again on 2020-08-18
+    (PREVCLOSE 37.40, correct), but this dataset's previous EQ row for
+    AUTOIND was stale, producing a spurious ~2.68x "action" ratio.
+    Such a gap is detected per row by comparing each symbol's previous
+    *dataset* row's date against the whole market's actual previous
+    trading day; a mismatch means a gap, so the ratio is treated the same
+    as a symbol's first row: unknowable, hence unadjusted (factor 1.0)
+    rather than a detected event.
     """
     out = df.sort_values(["symbol", "date"]).reset_index(drop=True)
     prior_close = out.groupby("symbol")["close"].shift(1)
+    prior_date = out.groupby("symbol")["date"].shift(1)
+
+    all_dates = pd.Index(sorted(df["date"].unique()))
+    pos = all_dates.get_indexer(out["date"])
+    expected_prior_date = pd.Series(
+        [all_dates[p - 1] if p > 0 else None for p in pos], index=out.index
+    )
+    gap = prior_date.notna() & (prior_date != expected_prior_date)
+
     ratio = daily_factor(out["prevclose"], prior_close)
     # First row of each symbol has no prior close: no action is knowable,
-    # so treat it as unadjusted (factor 1.0) rather than NaN.
+    # so treat it as unadjusted (factor 1.0) rather than NaN. Same for a
+    # row after a series gap (see docstring above).
     ratio = ratio.where(prior_close.notna(), other=1.0)
+    ratio = ratio.where(~gap, other=1.0)
 
     # cum_factor(d) = product of ratio(e) for every e > d, per symbol.
     # That is a reverse cumulative product of `ratio` shifted back one row
@@ -84,6 +115,7 @@ def compute_adjustment_factors(df: pd.DataFrame) -> pd.DataFrame:
     for field in PRICE_FIELDS:
         out[f"adj_{field}"] = out[field] * cum_factor
     out["action_ratio"] = ratio
+    out["series_gap"] = gap
     return out
 
 

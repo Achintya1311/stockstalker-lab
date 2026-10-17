@@ -124,6 +124,45 @@ def test_open_high_low_scaled_by_same_factor_as_close():
     assert out.loc["2020-01-01", "adj_low"] == pytest.approx(98.0 * factor)
 
 
+def test_series_gap_is_not_mistaken_for_a_corporate_action():
+    # ABC trades 01-01 and 01-02, is filtered out of the dataset on 01-03
+    # (e.g. it spent that day in NSE's BE/trade-to-trade series, which
+    # build_dataset.py drops), then is back on 01-04. NSE's own PREVCLOSE
+    # on 01-04 is continuous across the gap (it reflects the real 01-03
+    # close, 51.0), so it does not equal this dataset's stale prior EQ
+    # close (102.0 from 01-02) -- that is a dataset gap, not a split.
+    # XYZ trades every day so the market's calendar includes 01-03.
+    df = pd.concat([
+        _frame("ABC", ["2020-01-01", "2020-01-02", "2020-01-04"],
+               [100.0, 102.0, 52.0], [float("nan"), 100.0, 51.0]),
+        _frame("XYZ", ["2020-01-01", "2020-01-02", "2020-01-03", "2020-01-04"],
+               [10.0, 10.0, 10.0, 10.0], [float("nan"), 10.0, 10.0, 10.0]),
+    ], ignore_index=True)
+
+    events = detect_corporate_actions(df)
+    assert events[events["symbol"] == "ABC"].empty
+
+    out = compute_adjustment_factors(df)
+    abc = out[out["symbol"] == "ABC"].set_index("date")
+    assert bool(abc.loc["2020-01-04", "series_gap"]) is True
+    assert abc.loc["2020-01-04", "action_ratio"] == pytest.approx(1.0)
+    assert abc.loc["2020-01-04", "adj_factor"] == pytest.approx(1.0)
+    # Not a gap: no action ratio applied, so adj_close is unscaled.
+    assert abc.loc["2020-01-02", "adj_factor"] == pytest.approx(1.0)
+    assert abc.loc["2020-01-02", "adj_close"] == pytest.approx(102.0)
+
+
+def test_consecutive_trading_day_is_not_flagged_as_a_gap():
+    df = _frame(
+        "ABC",
+        ["2020-01-01", "2020-01-02", "2020-01-03"],
+        [100.0, 102.0, 101.0],
+        [float("nan"), 100.0, 102.0],
+    )
+    out = compute_adjustment_factors(df)
+    assert not out["series_gap"].any()
+
+
 def test_detect_corporate_actions_finds_only_the_real_event():
     df = pd.concat([
         _frame(
