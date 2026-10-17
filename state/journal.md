@@ -226,3 +226,70 @@ will break again the same way if any of those four ever get removed or
 renamed, with no failure signal anywhere (the job stays green). A per-path
 `git add` (or `mkdir -p` before the `add`) would remove that fragility for
 good, but that edit is inside `.github/` and this routine cannot make it.
+
+## 2026-10-17T04:08Z — build lane
+
+Mode A, build lease. B3 (corporate-actions report) remains blocked on the
+supervised `.github/` wiring already logged in `state/engine-issues.md`
+("READY FOR WIRING: B3"); nothing new to add there since the last run.
+Took B5 next, per the previous run's own recommendation: scoring (hits,
+market line, edge, directional move after costs, random baseline), which
+doesn't depend on anything blocked.
+
+Hypothesis: SPEC.md section 3's scoring primitives can be built as pure
+functions over `(date, symbol, move)` and `(date, symbol, in_universe)`
+frames, re-using the existing pick-log shape (`date, symbol, score`) by
+reading a pick's side as the sign of its score, and the cost model falls
+out directly from section 2's "a short is realistic only through stock
+futures": bullish picks cost as a cash-delivery round trip, bearish picks
+as a stock-future short/cover, so there's no free parameter to pick for
+which cost model applies.
+
+What I built, all in `engine/` (open for B5) with tests in `tests/`:
+- `engine/scoring.py`: `hit()` (a flat move is always a miss - `move*side`
+  is exactly 0 whenever `move` is 0, failing the strict `>0` test for either
+  side); `universe_membership()` (active FUTSTK AND 20-day trailing median
+  turnover >= `config/universe.yml`'s Rs 25cr floor - both bullet points of
+  SPEC.md section 2, not just the FUTSTK one); `market_line()`; `edge()`
+  (refuses mixed-side pick frames rather than silently averaging a hit rate
+  against the wrong line - section 6 checks every gate "separately for
+  each horizon and side"); `directional_move_after_costs()`; and
+  `random_baseline_percentile()` (same-shaped random pick lists: for every
+  (date, side) group in the real picks, draws the same count of symbols
+  without replacement from that date's universe, scores them against the
+  real market move, and reports the fraction of 1,000 random lists the
+  real pooled hit rate strictly beats).
+- `engine/reports.py`: turns these into `reports/market_line_train.md`
+  (B5's acceptance in `state/queue.md`) - share of the universe up/down,
+  by year, 2015-2020, day and week. Wired into `engine/run_queue.main()`
+  so it (re)writes whenever a loaded dataset has the needed columns,
+  independently of whether anything is queued; it no-ops otherwise, which
+  is what kept the existing `run_queue` tests' minimal synthetic datasets
+  (no `open`/`has_future`/`turnover` columns) passing unchanged.
+
+Result: B5 ticked. All its conditions hold with real evidence: 19 new
+tests in `tests/test_scoring.py` plus 4 in `tests/test_reports.py` and
+`tests/test_run_queue.py`, each reproducing a hand-computed value where
+the acceptance text asks for one (including an exact 0.0 case for the
+random percentile: when the real picks ARE the entire universe, every
+random draw without replacement is forced to select that same universe,
+so the real rate can never be strictly greater than a random one - 73/73
+tests pass). `python -m engine.run_queue` exercised by hand end to end
+against a synthetic 2-symbol dataset before pushing. Pushed (`56721e1`),
+which triggered `replay.yml` on `engine/**`; the run succeeded
+(https://github.com/Achintya1311/stockstalker-lab/actions/runs/39002009113)
+and committed `reports/market_line_train.md` (`3155ca9`) against the real
+cached dataset - by-year day/week shares for 2015-2020 all sit near 44-56%,
+consistent with a liquid-stock universe with no extreme directional bias.
+No new entries in `state/workflow_failures.md`.
+
+Next: B3 is still the only blocked item (needs the supervised `.github/`
+wiring). B6 (engine self-tests: a leaky strategy must be flagged, a random
+strategy must show no edge) is the next unblocked build item and can
+reuse this run's `engine/scoring.py` directly - a leaky strategy's "edge"
+would be computed from a same-day close, which `hit()`/`edge()` as written
+don't defend against by themselves (they trust whatever `move` they're
+given); B6's self-test needs a strategy that peeks at the pick date's own
+close, fed through the real replay engine, to prove the *engine* path
+doesn't let that leak through, not just that `scoring.py`'s arithmetic is
+correct in isolation.
