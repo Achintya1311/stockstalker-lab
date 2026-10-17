@@ -86,3 +86,63 @@ hashed pick log, split authorisation) against synthetic fixtures the same
 way, or run `detect_corporate_actions` against whatever partial real data
 exists once a `dataset.parquet` is available, as a sanity spot-check ahead
 of the full cross-reference.
+
+## 2026-10-17T00:13Z — build lane
+
+Hypothesis: B1 and B2's gates might now be satisfied by data that landed
+since the last run, without needing new work — only a check.
+
+What I did: claimed the `build` lease (none existed; no other run had it).
+Checked `backfill.yml`'s latest run via the public Actions API: run
+38944581180 (dispatched 2026-10-16T18:04:56Z) is `completed`/`success` — B1's
+condition. Read the committed `state/data_manifest.json`: `date_start
+2015-01-01`, `date_end 2026-10-16`, `trading_days 2911`, `max_gap_days 5` —
+all four of B2's explicit bar (`date_start<=2015-01-02`, `date_end` within 3
+trading days of today 2026-10-17, `trading_days>=2850`, `max_gap_days<=7`)
+are met. Ticked both B1 and B2 in `state/queue.md` with this evidence,
+rather than leaving a satisfied gate unticked for another 2-hour cycle.
+
+That makes B3 (adjustment factors) the first unticked item, reopened per
+the 17 Oct queue note (its corporate-actions cross-check was previously
+deferred, which the note now treats as not done). Its acceptance needs an
+Actions run of `detect_corporate_actions` against the *real* full dataset,
+writing `reports/corporate_actions_check.md`, then >=10 of the detected
+events checked against an independent public source.
+
+Wrote `scripts/check_corporate_actions.py`: loads a dataset parquet, runs
+`detect_corporate_actions` (already in `scripts/adjustments.py`), classifies
+each event's ratio against common split/bonus ratios (2:1 split or 1:1
+bonus == 0.5, etc.), and writes a markdown report listing every candidate
+event, a sub-table of events with a >=30% single-day jump, and a TODO
+placeholder for the independent-source cross-check (which needs real
+detected events and an actual lookup — not something this script, with no
+dataset access outside Actions, can do). 4 new unit tests
+(`tests/test_check_corporate_actions.py`): ratio classification, the
+report separates big-jump events from the full list, the empty case, and
+that the independent-check TODO is present. Ran it end-to-end against a
+synthetic parquet (one 2:1-style event) locally to confirm the CLI works
+and the output reads correctly. All 25 tests in the suite green.
+
+Found the actual blocker: no existing workflow runs this script on real
+data and commits the result. `dataset.yml`'s commit step only stages
+`state/data_manifest.json`; `replay.yml` already stages `reports/` but only
+triggers on `experiments/pending/**`, `strategies/**`, `engine/**` or
+`gates/**` changes, and its job runs `engine.run_queue`, not this script.
+Since the routine cannot edit `.github/`, wrote the exact wiring needed
+(two options) to `state/engine-issues.md` as "READY FOR WIRING: B3
+corporate-actions report" for a supervised session.
+
+Result: B1 ticked, B2 ticked, B3's script+tests written and passing, B3's
+wiring gap documented for a human to add. B3 itself stays unticked — it
+needs the real report and the manual cross-check against >=10 independent
+sources, neither possible yet.
+
+Next: once a supervised session wires `dataset.yml` (or an on-demand job)
+to run `scripts/check_corporate_actions.py` and commit
+`reports/corporate_actions_check.md`, a build-lane run should read that
+report, cross-check >=10 events against NSE corporate announcements or
+news (date and ratio matching, source linked, mismatches explained), fill
+in the report's TODO columns, and tick B3. Until then, the next build run
+can start B4 (replay engine) on synthetic fixtures, or a discover-lane run
+can proceed with catalog research per SPEC.md section 5 while the build
+lease is held.
