@@ -86,9 +86,99 @@ long," compare it against the historical durations in the Actions run list
 (`curl .../actions/runs`) - a multi-x jump versus history is a real signal
 even without reading a single log line, exactly how this one was caught.
 
-Still unresolved: whether run 39017169385 itself finished - it was still
-`in_progress` when this commit was pushed (pushing queues behind it; the
-`replay` concurrency group has no `cancel-in-progress`). The next run
-should check its outcome and, if it failed or hit the 300-minute timeout,
-confirm `state/workflow_failures.md` recorded it (the workflow's own
-failure-reporting step should do this automatically).
+Resolved (2026-10-17T12:xxZ): run 39017169385 finished `success` at
+11:49:22Z (after ~3.5h total, mostly queued/pre-fix execution time - the
+fix in this same commit was never retroactively applied to it), and its
+commit (`ad965e6`, "replay: results 2026-10-17T1149Z") landed
+`reports/champion_v1_train.md` with sane numbers on `main`. But the run
+queued behind it (39024479250, for the vectorization-fix commit itself)
+then hit a *different*, new failure - see the next entry.
+
+## READY FOR WIRING: `replay.yml`'s commit step can't survive two queued runs landing the same report (2026-10-17)
+
+`Replay` run 39024479250 (commit a19c61e9, queued behind 39017169385 in
+the same `replay` concurrency group, no `cancel-in-progress`) ran
+`engine.run_queue` successfully (`wrote reports/champion_v1_train.md`,
+confirmed in its own log) but then failed at the commit step:
+
+```
+[main ee4858c] replay: results 2026-10-17T1208Z
+ 1 file changed, 59 insertions(+)
+ create mode 100644 reports/champion_v1_train.md
+Auto-merging reports/champion_v1_train.md
+CONFLICT (add/add): Merge conflict in reports/champion_v1_train.md
+error: could not apply ee4858c... replay: results 2026-10-17T1208Z
+##[error]Process completed with exit code 1.
+```
+
+Root cause: this run's checkout predates 39017169385's push (both start
+from the same base commit; the concurrency group only serialises *when*
+each job's steps run, not when each job's checkout was taken - and
+`actions/checkout@v4` only runs once, at job start, well before the
+long `engine.run_queue` step). So by the time 39024479250 tries to
+commit, `reports/champion_v1_train.md` already exists on `main` from
+39017169385's commit - and because *this* run's local working tree never
+had that file (it checked out before it existed), git sees "created
+report_file" on both sides and calls it an add/add conflict, not a
+clean 3-way merge, even though the two reports are near-identical
+content.
+
+That alone would just need a `git fetch && git merge` with the add/add
+conflict auto-resolved toward the newer content (or a `git pull
+--rebase` that actually succeeds) - but the workflow's own
+failure-recovery step made it worse:
+
+```
+git reset -q --hard; git pull -q
+You are not currently on a branch.
+Please specify which branch you want to merge with.
+##[error]Process completed with exit code 1.
+```
+
+A failed `git pull --rebase` (the commit step's own recovery attempt)
+leaves the repo mid-rebase, which is a detached `HEAD` relative to any
+branch ref. `git reset --hard` in that state does not reattach `HEAD` to
+`main` - it just discards the rebase's partial state while *staying*
+detached - so the following bare `git pull` (no remote/branch given, and
+no upstream configured for a detached `HEAD`) immediately fails with "You
+are not currently on a branch." The net effect: this run's whole
+`replay: results` commit is silently dropped (never pushed, never
+retried), and its own failure-reporting step (which runs after this
+already-failed recovery, on the same detached `HEAD`) also never ran
+far enough to append to `state/workflow_failures.md` - recorded there by
+hand instead, from the job's log via the public API.
+
+No data was lost (the correct, already-pushed `ad965e6` report has the
+same numbers; this run's would have been identical, just not sped up for
+future runs), but the pattern will recur every time two `replay.yml` runs
+queue back to back in the same concurrency group and both regenerate the
+same report file, which is routine (the workflow triggers on any push
+touching `engine/`, `strategies/`, `experiments/pending/` or `gates/`,
+and the lab makes several such pushes a day). Needs one of (routine
+cannot edit `.github/`):
+
+1. Before the commit step's `git pull --rebase`, add `git rebase --abort
+   2>/dev/null || true` as the very first line of the failure-recovery
+   step (so a failed rebase is actually abandoned, re-attaching `HEAD` to
+   the branch, before `git reset --hard` runs) - cheapest fix, keeps the
+   current rebase-based flow.
+2. Or replace `git pull --rebase` with `git pull --rebase -X theirs` (or
+   `-X ours`) for this specific commit step, since every file it commits
+   (`ledger/`, `reports/`, `experiments/done/`, `state/leases/*.json`,
+   `state/workflow_failures.md`) is either append-only or fully
+   regenerated from the same inputs on every run, so either side of an
+   add/add or content conflict on these specific paths is an acceptable
+   resolution - there is no hand-authored content under these paths that
+   `-X theirs`/`-X ours` could silently destroy.
+3. Or switch the concurrency group's behaviour so only the newest queued
+   `replay.yml` run actually executes the commit step when several are
+   queued (closer to `cancel-in-progress`, but for the commit step only -
+   a full `cancel-in-progress` would also cancel the possibly-long
+   `engine.run_queue` step of a run that's actually making progress,
+   which is what the original "WATCH" entry above was about).
+
+Also worth revisiting while `.github/` is touched for this: the
+failure-reporting step should run via its own fresh checkout state (e.g.
+`git fetch && git reset --hard origin/<default-branch>` instead of a bare
+`git reset --hard; git pull`), so a broken rebase in the commit step
+can never take the failure report down with it the way it did here.

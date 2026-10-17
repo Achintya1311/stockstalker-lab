@@ -34,3 +34,32 @@ KeyError: 'TtlTrdgVal'
 ```
 
 RESOLVED in this commit: the turnover column is `TtlTrfVal`, not `TtlTrdgVal`. The synthetic test header was also wrong (`SsrIndctr`); both now follow docs/nse_formats.md.
+
+## 2026-10-17T1208Z replay failed (commit step itself; `engine.run_queue` succeeded)
+Run: https://github.com/Achintya1311/stockstalker-lab/actions/runs/39024479250
+
+This run's own failure-reporting step also failed, so nothing landed here
+automatically - appended by hand after reading the job log via the public
+API (`curl .../actions/jobs/117388818220/logs`). Full diagnosis in
+`state/engine-issues.md` ("READY FOR WIRING: replay.yml commit-step race").
+
+```
+wrote reports/market_line_train.md
+wrote reports/selftest.md
+wrote reports/champion_v1_train.md
+no experiments queued
+[main ee4858c] replay: results 2026-10-17T1208Z
+ 1 file changed, 59 insertions(+)
+ create mode 100644 reports/champion_v1_train.md
+Auto-merging reports/champion_v1_train.md
+CONFLICT (add/add): Merge conflict in reports/champion_v1_train.md
+error: could not apply ee4858c... replay: results 2026-10-17T1208Z
+Could not apply ee4858c... # replay: results 2026-10-17T1208Z
+##[error]Process completed with exit code 1.
+git reset -q --hard; git pull -q
+You are not currently on a branch.
+Please specify which branch you want to merge with.
+##[error]Process completed with exit code 1.
+```
+
+NOT RESOLVED (routine cannot edit `.github/`) - see engine-issues.md.

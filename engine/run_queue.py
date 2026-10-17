@@ -31,6 +31,7 @@ from pathlib import Path
 import pandas as pd
 
 from engine.champion_report import maybe_write_champion_report
+from engine.holdout_report import LEDGER_PATH as HOLDOUT_LEDGER, maybe_log_holdout_query
 from engine.replay import SplitViolation, hash_picks, load_splits, run_dates
 from engine.reports import maybe_write_market_line_report
 from engine.selftest import maybe_write_selftest_report
@@ -92,6 +93,7 @@ def main() -> None:
     ap.add_argument("--market-line-report", default=str(MARKET_LINE_REPORT))
     ap.add_argument("--selftest-report", default=str(SELFTEST_REPORT))
     ap.add_argument("--champion-report", default=str(CHAMPION_REPORT))
+    ap.add_argument("--holdout-ledger", default=str(HOLDOUT_LEDGER))
     args = ap.parse_args()
 
     pending_dir, done_dir = Path(args.pending), Path(args.done)
@@ -106,6 +108,8 @@ def main() -> None:
             print(f"wrote {args.selftest_report}")
         if maybe_write_champion_report(dataset, Path(args.champion_report)):
             print(f"wrote {args.champion_report}")
+        if maybe_log_holdout_query(dataset, Path(args.holdout_ledger)):
+            print(f"wrote {args.holdout_ledger}")
 
     queue = sorted(pending_dir.glob("*.yml")) if pending_dir.exists() else []
     if not queue:

@@ -118,11 +118,17 @@ def side_results(
     }
 
 
-def horizon_results(dataset: pd.DataFrame, horizon: str, start: str = TRAIN_START, end: str = TRAIN_END) -> dict:
+def horizon_results(
+    dataset: pd.DataFrame, horizon: str, start: str = TRAIN_START, end: str = TRAIN_END, split: str = "train"
+) -> dict:
+    """`split` authorises `start`/`end` with `engine.replay.run_dates` (SPEC.md
+    section 4): it must match whichever split `[start, end]` actually falls
+    inside, or the engine raises `SplitViolation` - e.g. `engine.holdout_report`
+    reuses this same function for the validation split by passing both."""
     splits = load_splits()
     available = sorted(dataset["date"].unique())
     dates = _pick_dates_for_horizon(available, start, end, horizon)
-    picks = run_dates(dataset, champion_v1, dates, "train", splits)
+    picks = run_dates(dataset, champion_v1, dates, split, splits)
     moves = moves_for_horizon(dataset, horizon)
     universe = universe_membership(dataset)
     return {side: side_results(picks, side, moves, universe) for side in SIDES}
