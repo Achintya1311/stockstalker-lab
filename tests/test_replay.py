@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from engine.replay import SplitViolation, authorize, hash_picks, pick_date, run_dates, truncate
+from engine.replay import SplitViolation, authorize, hash_picks, load_pick_log, pick_date, run_dates, truncate
 
 SPLITS = {
     "train": {"start": "2015-01-01", "end": "2020-12-31"},
@@ -140,3 +140,27 @@ def test_hash_picks_is_computed_before_any_outcome_column_exists():
     assert "outcome" not in picks.columns and "hit" not in picks.columns
     h = hash_picks(picks)
     assert len(h) == 64  # sha256 hex digest
+
+
+def test_hash_picks_is_unchanged_by_a_whole_number_score_becoming_int64():
+    # A score column that is every value 1.0 round-trips through JSON (the
+    # committed pick-log format) as int64, not float64 - the hash must not
+    # care, or a verifier re-hashing the committed file gets a false mismatch.
+    as_float = pd.DataFrame({"date": ["2015-01-01"], "symbol": ["AAA"], "score": pd.array([1.0], dtype="float64")})
+    as_int = pd.DataFrame({"date": ["2015-01-01"], "symbol": ["AAA"], "score": pd.array([1], dtype="int64")})
+    assert hash_picks(as_float) == hash_picks(as_int)
+
+
+def test_load_pick_log_round_trips_through_json_with_a_matching_hash(tmp_path):
+    picks = pd.DataFrame({
+        "date": ["2015-01-02", "2015-01-02", "2015-01-05"],
+        "symbol": ["AAA", "BBB", "AAA"],
+        "score": [1.0, 1.0, 1.0],
+    })
+    original_hash = hash_picks(picks)
+
+    path = tmp_path / "picks.json"
+    path.write_text(picks.to_json(orient="records", indent=2) + "\n")
+
+    reloaded = load_pick_log(path)
+    assert hash_picks(reloaded) == original_hash

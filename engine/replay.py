@@ -77,8 +77,35 @@ def hash_picks(picks: pd.DataFrame) -> str:
     sort_cols = [c for c in ("date", "symbol") if c in picks.columns]
     canonical = picks.sort_values(sort_cols) if sort_cols else picks
     canonical = canonical.reindex(sorted(canonical.columns), axis=1).reset_index(drop=True)
+    # A score column round-tripped through JSON (committed pick logs are
+    # JSON, not parquet - see run_queue.py) can come back int64 instead of
+    # float64 when every value happens to be a whole number; without this,
+    # a verifier re-hashing the committed file would get a different digest
+    # than the one actually computed pre-serialisation, for data that is
+    # otherwise identical.
+    for col in canonical.columns:
+        if pd.api.types.is_numeric_dtype(canonical[col]):
+            canonical[col] = canonical[col].astype("float64")
     payload = canonical.to_csv(index=False).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()
+
+
+def load_pick_log(path) -> pd.DataFrame:
+    """Read a committed `picks.json` back with the dtypes `hash_picks` expects.
+
+    Plain `pd.read_json` infers types from the JSON itself: a `date` column
+    of ISO strings becomes `datetime64` (changing how `to_csv` renders it)
+    and a `score` column that happens to be all whole numbers becomes
+    `int64`. Both silently change `hash_picks`' output on an otherwise
+    unchanged pick log. This restores `date` to plain ISO strings so the
+    digest a verifier recomputes matches the one in the pick log's own
+    `manifest.json` (the numeric-dtype side of this is already handled
+    inside `hash_picks` itself).
+    """
+    df = pd.read_json(path, convert_dates=False)
+    if "date" in df.columns:
+        df["date"] = df["date"].astype(str)
+    return df
 
 
 def pick_date(history: pd.DataFrame, strategy, date: str, split: str, splits: dict | None = None) -> pd.DataFrame:
