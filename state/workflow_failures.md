@@ -63,3 +63,7 @@ Please specify which branch you want to merge with.
 ```
 
 RESOLVED (supervised, 17 Oct, commit "ci: wire guard, live picks and safe pushes"): replay checks out the latest main and every workflow commits through `.github/push.sh`. See the WIRED entry in engine-issues.md.
+
+## 2026-10-17T15:58Z guard restored protected paths
+Commits in 8470946..8131980 changed protected paths outside a supervised session, so they are back as they were at 8470946. Describe the change you need in state/engine-issues.md instead, then add RESOLVED <commit> under this entry.
+- `engine/__init__.py`
