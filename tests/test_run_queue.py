@@ -121,6 +121,33 @@ def test_main_processes_the_queue_and_moves_the_experiment_to_done(tmp_path, mon
     assert set(picks.columns) == {"date", "symbol", "score"}
 
 
+def test_main_writes_market_line_report_even_with_an_empty_queue_when_dataset_has_the_columns(tmp_path):
+    dates = [f"2015-01-{d:02d}" for d in range(1, 26)]
+    rows = []
+    for d in dates:
+        rows.append({"date": d, "symbol": "AAA", "open": 100.0, "close": 101.0,
+                      "has_future": True, "turnover": 1e9})
+    data_path = tmp_path / "dataset.parquet"
+    pd.DataFrame(rows).to_parquet(data_path, index=False)
+
+    report_path = tmp_path / "market_line_train.md"
+    argv = [
+        "run_queue.py", "--data", str(data_path),
+        "--pending", str(tmp_path / "pending"), "--done", str(tmp_path / "done"),
+        "--market-line-report", str(report_path),
+    ]
+    import sys as _sys
+    old_argv = _sys.argv
+    try:
+        _sys.argv = argv
+        main()
+    finally:
+        _sys.argv = old_argv
+
+    assert report_path.exists()
+    assert "Market line" in report_path.read_text()
+
+
 def test_main_with_an_empty_queue_does_nothing(tmp_path, capsys):
     main_args = ["--data", str(tmp_path / "nope.parquet"), "--pending", str(tmp_path / "pending"), "--done", str(tmp_path / "done")]
     import engine.run_queue as rq

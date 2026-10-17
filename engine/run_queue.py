@@ -11,11 +11,13 @@ authorised to run on, a horizon, and a date range. For each one this:
 3. Runs `engine.replay.run_dates`, which authorises and truncates every date
    before the strategy ever sees it.
 4. Writes the pick log and its SHA-256 (taken before any outcome is looked
-   at — there is no outcome-scoring here at all yet, that is B5) to
-   `experiments/done/<id>/`, then removes the pending file.
+   at) to `experiments/done/<id>/`, then removes the pending file.
 
-Scoring picks against outcomes is out of scope for this module (B5); this
-only produces hashed, authorised pick logs.
+Whenever a dataset is loaded and it carries the columns B5's scoring needs,
+this also (re)writes `reports/market_line_train.md` (`engine.reports`), so a
+push that touches `engine/`, `strategies/`, `experiments/pending/` or
+`gates/` and triggers `replay.yml` regenerates it from the real cached
+dataset - independently of whether anything is queued.
 """
 
 from __future__ import annotations
@@ -28,9 +30,11 @@ from pathlib import Path
 import pandas as pd
 
 from engine.replay import SplitViolation, hash_picks, load_splits, run_dates
+from engine.reports import maybe_write_market_line_report
 
 PENDING_DIR = Path("experiments/pending")
 DONE_DIR = Path("experiments/done")
+MARKET_LINE_REPORT = Path("reports/market_line_train.md")
 
 
 def load_experiment(path: Path) -> dict:
@@ -80,19 +84,26 @@ def main() -> None:
     ap.add_argument("--data", required=True)
     ap.add_argument("--pending", default=str(PENDING_DIR))
     ap.add_argument("--done", default=str(DONE_DIR))
+    ap.add_argument("--market-line-report", default=str(MARKET_LINE_REPORT))
     args = ap.parse_args()
 
     pending_dir, done_dir = Path(args.pending), Path(args.done)
+    data_path = Path(args.data)
+
+    dataset = None
+    if data_path.exists():
+        dataset = pd.read_parquet(data_path)
+        if maybe_write_market_line_report(dataset, Path(args.market_line_report)):
+            print(f"wrote {args.market_line_report}")
+
     queue = sorted(pending_dir.glob("*.yml")) if pending_dir.exists() else []
     if not queue:
         print("no experiments queued")
         return
 
-    data_path = Path(args.data)
-    if not data_path.exists():
+    if dataset is None:
         print(f"no dataset at {data_path}; leaving queue untouched")
         return
-    dataset = pd.read_parquet(data_path)
     splits = load_splits()
 
     for exp_path in queue:
