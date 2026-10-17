@@ -10,7 +10,7 @@ Rules for build items (added 16 Oct after the first run):
 | B1 | Fetch NSE bhavcopy history 2015 to date: `backfill.yml` in GitHub Actions, zips kept in the Actions cache only (never committed or published) | [x] |
 | B2 | Parse old and UDiFF formats into one table: date, symbol, open, high, low, close, prevclose, volume, turnover; plus the daily FUTSTK universe | [x] |
 | B3 | Adjustment factors from PREVCLOSE / previous CLOSE; check against known splits and bonuses | [ ] |
-| B4 | Replay engine: truncated slices, pick log hashed before outcomes, split authorisation | [ ] |
+| B4 | Replay engine: truncated slices, pick log hashed before outcomes, split authorisation | [x] |
 | B5 | Scoring: hits, market line, edge, directional move after costs, random baseline | [ ] |
 | B6 | Engine self-tests: a leaky strategy must be caught, a random strategy must show no edge | [ ] |
 | B7 | Champion v1 = current StockStalker blended score; day and week; train, then validation | [ ] |

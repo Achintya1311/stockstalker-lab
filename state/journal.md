@@ -146,3 +146,83 @@ in the report's TODO columns, and tick B3. Until then, the next build run
 can start B4 (replay engine) on synthetic fixtures, or a discover-lane run
 can proceed with catalog research per SPEC.md section 5 while the build
 lease is held.
+
+## 2026-10-17T02:10Z — build lane
+
+Hypothesis: B3 stays blocked on a supervised session (per the last entry);
+B4 (replay engine) can be built and tested now, since its three
+requirements - truncated slices, split authorisation, hashing picks before
+outcomes - don't need the corporate-actions wiring at all.
+
+What I did: claimed the `build` lease (free). Wrote `engine/replay.py`
+(`truncate`, `authorize`/`SplitViolation`, `hash_picks`, `pick_date`,
+`run_dates`) and `engine/run_queue.py` (the `replay.yml` entrypoint: loads
+each `experiments/pending/*.yml`, resolves its strategy module, runs it
+over the dates its horizon implies, writes a hashed pick log to
+`experiments/done/<id>/`, consumes the pending file). Added `strategies/`
+with `engine_smoketest.py` - an always-bullish, no-signal module, never a
+roster candidate - and queued it over Jan 2015 (train split) specifically
+so `replay.yml` would exercise the engine against the *real* cached
+dataset, not an empty queue. 25 new tests (`tests/test_replay.py`,
+`tests/test_run_queue.py`), all green locally alongside the existing 23.
+
+Pushed, and the engine genuinely ran on real NSE data in Actions
+(run 38994265344: "29542 picks over 20 dates") - but no commit landed on
+main. Traced it myself rather than filing it to `state/engine-issues.md`:
+`replay.yml`'s commit step runs `git add -A ledger reports experiments
+state` as one command over four pathspecs, and `git add` aborts the whole
+invocation if *any* one pathspec matches nothing. Neither `ledger/` nor
+`reports/` existed yet, so the command failed outright (swallowed by
+`2>/dev/null || true`), silently staging nothing - not even the real,
+non-ignored changes under `experiments/`. The job still reported green
+because the empty `git diff --cached --quiet` that follows is also a clean
+exit. Confirmed by cloning the repo at the failing commit and replaying
+the exact commands locally. Neither directory is in `PROTECTED.txt`
+(only `engine/` and `gates/` are), so I fixed it directly: added
+`ledger/.gitkeep` and `reports/.gitkeep`, re-queued the smoketest
+experiment each time, and re-pushed until a real commit landed
+(`01b0ad6`).
+
+Also found, while trying to verify that committed output: picks were
+being written as `picks.parquet`, which `.gitignore`'s blanket
+`*.parquet` rule (there for the NSE dataset) silently swallowed - so the
+first real commit held only `manifest.json` with a hash and nothing to
+check it against, violating "picks JSON are committed". Switched
+`run_queue.py` to `picks.json` and re-ran (`1c274e0`). Then checked the
+*committed* `picks.json` against its own `manifest.json` hash by hand and
+it still didn't match: `pd.read_json` turns an all-whole-number `score`
+column into `int64` (was `float64` before serialisation) and `date` into
+`datetime64`, both silently changing `hash_picks`' `to_csv`-based
+rendering. Fixed `hash_picks` to cast numeric columns to `float64` before
+hashing, and added `load_pick_log()` to restore `date` to plain ISO
+strings on read - then re-verified by hand that
+`hash_picks(load_pick_log("experiments/done/engine-smoketest-day/picks.json"))`
+now equals the hash recorded in that experiment's own `manifest.json`.
+Without this a committed pick-log hash was correct the instant it was
+written and unfalsifiable forever after - the opposite of what hashing
+before outcomes is supposed to buy.
+
+Result: B4 ticked. All four of its conditions hold with real evidence, not
+just passing tests: `replay.yml` ran the engine against real cached NSE
+data on the train split and succeeded (manifest: 29542 picks, 20 trading
+dates, Jan 2015); `test_pick_date_never_shows_the_strategy_the_pick_dates_
+own_row_or_later` and `test_run_dates_sees_only_dates_before_each_
+respective_pick_date` prove a strategy never sees its own pick date or
+later; picks are hashed before any outcome column could exist, and that
+hash is now independently reproducible from the committed pick log, not
+just asserted; `test_authorize_rejects_validation_date_for_a_train_job`
+and `test_authorize_rejects_test_date_for_a_train_job` prove an
+unauthorised split raises rather than silently running.
+
+Next: B5 (scoring - hits, market line, edge, directional move after costs,
+random baseline) is the next build item and doesn't depend on anything
+blocked. It will need real outcome data (next day's/week's close) joined
+in *after* `hash_picks` runs, which `run_queue.py` doesn't do yet - that
+join point is exactly where B5's code belongs. B3 is still blocked on the
+supervised session named in `state/engine-issues.md`. Worth a second look
+by whoever does that wiring: `replay.yml`'s `git add -A ledger reports
+experiments state` is still one fragile command over four pathspecs - it
+will break again the same way if any of those four ever get removed or
+renamed, with no failure signal anywhere (the job stays green). A per-path
+`git add` (or `mkdir -p` before the `add`) would remove that fragility for
+good, but that edit is inside `.github/` and this routine cannot make it.
