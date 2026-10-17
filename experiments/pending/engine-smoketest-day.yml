@@ -1,0 +1,9 @@
+# Proves the replay engine runs on real cached data in Actions (B4 acceptance),
+# not a strategy under evaluation. See strategies/engine_smoketest.py.
+id: engine-smoketest-day
+strategy: strategies.engine_smoketest
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2015-01-31
