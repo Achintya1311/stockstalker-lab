@@ -429,3 +429,72 @@ over champion v1's validation-split edge, logged as the one row
 module (reusable by B8's fuller gates/budgets machinery later), not as
 part of B8's whole bundle. Only then does B7 tick. B3 remains the one
 other blocked item (READY FOR WIRING).
+
+## 2026-10-17T10:18Z — build lane
+
+Hypothesis: the `Replay` run triggered by the previous commit (dc6a0a1, B7
+champion v1 train-half) was still `in_progress` after 1h45m+ (checked via
+`curl .../actions/runs/39017169385`), where every historically comparable
+`Replay` run (B4-B6, also against the real cached dataset) had completed in
+2-3 minutes. That gap is itself evidence of a real performance bug in the
+new code this run introduced, not normal variance - worth investigating
+before waiting on it any further.
+
+What I found (`investigate-first`): `engine.replay.run_dates` calls
+`strategy.score(history)` fresh for every pick date - once per symbol per
+date, over that symbol's whole truncated history, by design (SPEC.md
+section 4's causal truncation). `strategies/champion_v1.py`'s `score()`
+had two costs that don't show up on any existing small/short fixture but
+dominate at real scale:
+
+1. `_wilder_smooth` (inside `_rsi`) ran a pure-Python `for` loop over each
+   symbol's full truncated history length, on every call.
+2. `score()` ran `compute_adjustment_factors` - a full `sort_values` +
+   `groupby().shift()` + `groupby().cumprod()` - over *every* EQ-series
+   symbol in `history` (3,818 on the real dataset per
+   `state/data_manifest.json`), even though only F&O-eligible names
+   (a few hundred) can ever survive `_restrict_to_universe` downstream.
+
+For B7's train-split report that's ~1,800 pick dates (day + week,
+2015-2020) x up to 3,818 symbols x a growing per-symbol history - squarely
+why this run (the first to exercise `champion_v1.score()` against the real
+dataset at this scale) is the first to run long, when B4-B6's self-tests
+(trivial `score()` implementations, or 6-month windows) never hit it.
+
+What I did (`surgical-patch`): vectorized `_wilder_smooth` with
+`pandas.Series.ewm(adjust=False)` (same linear recursion, re-factored;
+proven equal to the original Python loop to floating-point rounding by a
+new regression test, `test_wilder_smooth_matches_reference_loop`, over 400
+random rows). Added a `has_future`-based prefilter at the top of `score()`
+that drops symbols that can never be F&O-eligible before the expensive
+work starts (loose only in the inclusive direction - it can't exclude a
+symbol that should score, see its docstring and
+`test_score_prefilter_does_not_change_an_eligible_symbols_score`). A
+synthetic 400-symbol/20-eligible/600-row micro-benchmark (not committed -
+`/tmp` scratch) showed 17.3x: 1.886s -> 0.109s per `score()` call with the
+old vs new code; the real dataset's ratio of eligible-to-total symbols is
+far more lopsided (a few hundred F&O names out of 3,818 EQ-series symbols),
+so the real speedup should be larger still. 110 tests pass
+(`python3.13 -m pytest tests/`); the only 2 failures are the pre-existing,
+unrelated `pyarrow`-not-installed sandbox gap noted in earlier entries
+(reproduced identically on `dc6a0a1` before this change, via `git stash`).
+
+Result: pushing now queues behind the still-running `Replay` run (the
+`replay` concurrency group has no `cancel-in-progress`), so this fix won't
+retroactively speed up run 39017169385 - that run will still finish
+(success, or a correctness/engine_issues-worthy failure) or hit its
+300-minute timeout on its own. But every push after it lands - including
+the one this commit makes - should regenerate `reports/champion_v1_train.md`
+in a reasonable number of minutes instead of hours, which matters a lot
+given `replay.yml` fires on every future push touching `engine/`,
+`strategies/`, `gates/` or `experiments/pending/`.
+
+Next: check whether run 39017169385 finished (success/failure/timeout) and
+whether the queued run for *this* commit lands `reports/champion_v1_train.md`
+quickly. If the numbers in that report look sane (positive edge in most
+years, both sides, for a strategy that's shipped in production before),
+continue B7's remaining "then validation" step - the minimal reusable
+Thresholdout query module - exactly as the previous entry planned. If
+39017169385 failed or timed out, record it under `state/workflow_failures.md`
+(the workflow's own failure-reporting step should already have done this on
+failure; check it landed).

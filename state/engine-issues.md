@@ -57,3 +57,38 @@ experiments state` immediately before it, so this class of bug can't
 recur silently (e.g. if one of these four directories is ever renamed or
 removed) — right now nothing would signal it; the job would just keep
 reporting green while committing nothing.
+
+## WATCH: real-data Replay run took 1h45m+ before this commit's fix (2026-10-17)
+
+Not open as an action item for a supervised session - fixed within this
+commit without needing `.github/` changes - recorded so the pattern is
+recognised quickly if a future strategy hits the same wall.
+
+`Replay` run 39017169385 (commit dc6a0a1, B7 champion v1 train-half) was
+still `in_progress` at 1h45m+, versus 2-3 minutes for every earlier
+`Replay` run against the same real cached dataset. Root cause: any
+strategy's `score(history)` is called once per symbol per pick date by
+`engine.replay.run_dates` (SPEC.md section 4's causal truncation - by
+design, not a bug), so a strategy that (a) loops in pure Python instead of
+vectorizing, or (b) processes every symbol `history` contains rather than
+pre-restricting to symbols that could plausibly be picked, pays that cost
+multiplied by thousands of dates against the real multi-year dataset -
+even though it looks instant against every small/short test fixture.
+`strategies/champion_v1.py` had both; this commit fixes both (vectorized
+`_wilder_smooth`, `has_future` prefilter in `score()`) - see
+`state/journal.md`'s entry at this timestamp for the full account and the
+17.3x micro-benchmark.
+
+Worth a general note for future strategy ports/discoveries: a strategy
+that's fast on `tests/` fixtures is not proven fast at real scale. Before
+trusting a `Replay` run's wall-clock as "it'll always be roughly this
+long," compare it against the historical durations in the Actions run list
+(`curl .../actions/runs`) - a multi-x jump versus history is a real signal
+even without reading a single log line, exactly how this one was caught.
+
+Still unresolved: whether run 39017169385 itself finished - it was still
+`in_progress` when this commit was pushed (pushing queues behind it; the
+`replay` concurrency group has no `cancel-in-progress`). The next run
+should check its outcome and, if it failed or hit the 300-minute timeout,
+confirm `state/workflow_failures.md` recorded it (the workflow's own
+failure-reporting step should do this automatically).

@@ -92,3 +92,70 @@ def test_rules_fired_reports_abstain_on_insufficient_history():
 def test_causality_audit_passes():
     result = check_cross_symbol_causality()
     assert result["passed"], result
+
+
+def _wilder_smooth_reference_loop(values: pd.Series, period: int) -> pd.Series:
+    """The pre-vectorization implementation, kept here (not in
+    `strategies/champion_v1.py`) purely as a reference the vectorized
+    `_wilder_smooth` is checked against - see that function's docstring
+    for why it was replaced."""
+    arr = values.to_numpy(dtype=float)
+    out = np.full(arr.shape, np.nan)
+    if arr.size > period:
+        out[period] = arr[1 : period + 1].mean()
+        for i in range(period + 1, arr.size):
+            out[i] = (out[i - 1] * (period - 1) + arr[i]) / period
+    return pd.Series(out, index=values.index)
+
+
+def test_wilder_smooth_matches_reference_loop():
+    rng = np.random.default_rng(0)
+    # Longer and noisier than any fixture elsewhere in this file, on purpose:
+    # the vectorized ewm() recursion and the original Python loop factor the
+    # same arithmetic differently, so agreement needs proving over more rows
+    # than `MIN_ROWS` to rule out an off-by-one at the seed boundary.
+    values = pd.Series(rng.normal(size=400))
+
+    vectorized = champion_v1._wilder_smooth(values, champion_v1.RSI_PERIOD)
+    reference = _wilder_smooth_reference_loop(values, champion_v1.RSI_PERIOD)
+
+    pd.testing.assert_series_equal(vectorized, reference, rtol=1e-9, atol=1e-12)
+
+
+def test_wilder_smooth_handles_too_short_a_series():
+    values = pd.Series(np.arange(champion_v1.RSI_PERIOD, dtype=float))
+    result = champion_v1._wilder_smooth(values, champion_v1.RSI_PERIOD)
+    assert result.isna().all()
+
+
+def test_score_drops_a_symbol_that_never_had_a_future():
+    """The `has_future` prefilter must never exclude a symbol that would
+    otherwise be scored (that's `_restrict_to_universe`'s job, downstream,
+    on the real date-specific universe) - but it should skip a symbol that
+    could never pass it, no matter how clean its own trend looks."""
+    history = _trending_symbol("AAA", champion_v1.MIN_ROWS + 10, daily_move=0.01)
+    history["has_future"] = False
+    scores = champion_v1.score(history)
+    assert "AAA" not in scores
+
+
+def test_score_keeps_an_eligible_symbol_with_has_future_column_present():
+    history = _trending_symbol("AAA", champion_v1.MIN_ROWS + 10, daily_move=0.01)
+    history["has_future"] = True
+    scores = champion_v1.score(history)
+    assert scores["AAA"] > 0
+
+
+def test_score_prefilter_does_not_change_an_eligible_symbols_score():
+    """The prefilter drops ineligible symbols before `compute_adjustment_factors`
+    runs; it must not change what an eligible symbol's own score comes out
+    to, since that would mean the prefilter leaked into the actual signal."""
+    bullish = _trending_symbol("AAA", champion_v1.MIN_ROWS + 10, daily_move=0.01)
+    ineligible = _trending_symbol("ZZZ", champion_v1.MIN_ROWS + 10, daily_move=-0.01)
+
+    with_future_column = pd.concat([bullish, ineligible], ignore_index=True)
+    with_future_column["has_future"] = with_future_column["symbol"] == "AAA"
+
+    without_future_column = bullish  # no ineligible symbol, no has_future column at all
+
+    assert champion_v1.score(with_future_column)["AAA"] == champion_v1.score(without_future_column)["AAA"]

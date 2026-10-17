@@ -70,13 +70,29 @@ def _trend_component(close: pd.Series) -> float:
 def _wilder_smooth(values: pd.Series, period: int) -> pd.Series:
     """Wilder's smoothing: simple-mean seed, then his recursion (see
     STOCKSTALKER/stockstalker/signals/momentum.py for why plain `ewm` disagrees
-    early on)."""
+    early on).
+
+    Vectorized via `ewm(adjust=False)` instead of a per-row Python loop:
+    `out[i] = (out[i-1]*(period-1) + arr[i]) / period` is the same linear
+    recursion as `y[t] = (1-alpha)*y[t-1] + alpha*x[t]` with `alpha =
+    1/period`, just factored differently (confirmed equal to the old loop
+    to floating-point rounding, not bit-for-bit, by
+    `tests/test_champion_v1.py::test_wilder_smooth_matches_reference_loop`).
+    `engine.replay` calls `score()` fresh for every pick date - once per
+    symbol per date, over that symbol's whole truncated history - so a
+    per-row Python loop here turns the real multi-year, multi-thousand-
+    symbol dataset into a replay job several orders of magnitude slower
+    than the small/short fixtures this was tested against; a GitHub
+    Actions `Replay` run against the real cached dataset (run id
+    39017169385, commit dc6a0a1) was still in progress 1h45m+ after
+    historically comparable runs finished in 2-3 minutes before this fix
+    (see `state/engine-issues.md`)."""
     arr = values.to_numpy(dtype=float)
     out = np.full(arr.shape, np.nan)
     if arr.size > period:
-        out[period] = arr[1 : period + 1].mean()
-        for i in range(period + 1, arr.size):
-            out[i] = (out[i - 1] * (period - 1) + arr[i]) / period
+        seed = arr[1 : period + 1].mean()
+        tail = np.concatenate(([seed], arr[period + 1 :]))
+        out[period:] = pd.Series(tail).ewm(alpha=1.0 / period, adjust=False).mean().to_numpy()
     return pd.Series(out, index=values.index)
 
 
@@ -163,6 +179,27 @@ def score(history: pd.DataFrame) -> pd.Series:
     """
     if history.empty:
         return pd.Series(dtype=float)
+
+    if "has_future" in history.columns:
+        # Performance prefilter, not a correctness check (safe to be loose
+        # in the inclusive direction, never the exclusive one): a symbol
+        # with no F&O future anywhere in its visible history can never
+        # survive `_restrict_to_universe` downstream (`engine.champion_report`,
+        # `engine.selftest`) regardless of what it scores here, but without
+        # this, every call recomputes adjustment factors and every indicator
+        # across the WHOLE EQ series (~3800 symbols on the real dataset,
+        # most of which never had a future) instead of the much smaller set
+        # that could ever actually be picked. `engine.replay.run_dates` calls
+        # `score()` fresh for every pick date, so on a real multi-year
+        # replay this - together with `_wilder_smooth`'s former per-row
+        # Python loop - was the dominant cost: a `Replay` run against the
+        # real cached dataset (commit dc6a0a1) was still in progress 1h45m+
+        # after historically comparable runs finished in 2-3 minutes before
+        # this fix (see `state/engine-issues.md`).
+        eligible = history.loc[history["has_future"], "symbol"].unique()
+        history = history[history["symbol"].isin(eligible)]
+        if history.empty:
+            return pd.Series(dtype=float)
 
     adjusted = compute_adjustment_factors(history)
     out: dict[str, float] = {}
