@@ -1,5 +1,9 @@
 # Proves the replay engine runs on real cached data in Actions (B4 acceptance),
 # not a strategy under evaluation. See strategies/engine_smoketest.py.
+# Re-queued: the first run (f5a9a40, run 38994265344) computed real output but
+# replay.yml's commit step silently staged nothing, because `git add -A ledger
+# reports experiments state` fails outright when `ledger/` doesn't exist yet -
+# fixed by adding ledger/.gitkeep in this same commit.
 id: engine-smoketest-day
 strategy: strategies.engine_smoketest
 split: train
