@@ -62,4 +62,4 @@ Please specify which branch you want to merge with.
 ##[error]Process completed with exit code 1.
 ```
 
-NOT RESOLVED (routine cannot edit `.github/`) - see engine-issues.md.
+RESOLVED (supervised, 17 Oct, commit "ci: wire guard, live picks and safe pushes"): replay checks out the latest main and every workflow commits through `.github/push.sh`. See the WIRED entry in engine-issues.md.

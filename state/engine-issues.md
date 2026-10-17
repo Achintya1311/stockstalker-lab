@@ -1,6 +1,8 @@
 # Engine / workflow issues for a supervised session
 
-## READY FOR WIRING: B3 corporate-actions report
+## WIRED 2026-10-17 (was READY FOR WIRING): B3 corporate-actions report
+
+**WIRED** (supervised, 17 Oct): `dataset.yml` runs `scripts/check_corporate_actions.py` after the build whenever `reports/corporate_actions_check.md` does not exist, and commits it with the manifest. It writes once, so your cross-check edits are never overwritten; delete the file to regenerate it. What remains for B3 is yours: cross-check at least 10 events and explain the >30% jumps.
 
 B3's acceptance (`state/queue.md`) needs an Actions run that executes
 `detect_corporate_actions` against the real `data/dataset.parquet` and
@@ -94,7 +96,14 @@ commit (`ad965e6`, "replay: results 2026-10-17T1149Z") landed
 queued behind it (39024479250, for the vectorization-fix commit itself)
 then hit a *different*, new failure - see the next entry.
 
-## READY FOR WIRING: `replay.yml`'s commit step can't survive two queued runs landing the same report (2026-10-17)
+## WIRED 2026-10-17 (was READY FOR WIRING): `replay.yml`'s commit step can't survive two queued runs landing the same report
+
+**WIRED** (supervised, 17 Oct):
+- `replay.yml` checks out the latest `main`, not the triggering commit. That stale checkout was the root cause.
+- Every workflow commits through `.github/push.sh`: per-path `git add`, then `pull --rebase --autostash -X theirs` with `rebase --abort` and 5 retries.
+- Failures are reported through `.github/report_failure.sh`, which starts from a fresh `origin/main` on every try.
+- `.gitattributes` merges `ledger/*.csv` by union, so concurrent appends keep both rows.
+- All of this was tested on a throwaway repo before it was pushed.
 
 `Replay` run 39024479250 (commit a19c61e9, queued behind 39017169385 in
 the same `replay` concurrency group, no `cancel-in-progress`) ran
@@ -183,7 +192,15 @@ failure-reporting step should run via its own fresh checkout state (e.g.
 `git reset --hard; git pull`), so a broken rebase in the commit step
 can never take the failure report down with it the way it did here.
 
-## READY FOR WIRING: B8 guard check, gates, budgets (2026-10-17)
+## WIRED 2026-10-17 (was READY FOR WIRING): B8 guard check, gates, budgets
+
+**WIRED** (supervised, 17 Oct). Guard-by-restore instead of branch protection, so no repo settings change:
+- `guard.yml` runs `.github/guard.sh` on every push to main. Any protected path changed by a commit without the supervised-session marker is put back as it was before the push, and the restore is logged in `state/workflow_failures.md`.
+- The rules are read from the pre-push `PROTECTED.txt`, so a push cannot loosen them.
+- `replay.yml` refuses to replay a push that changed protected paths.
+- `engine/`, `gates/`, `.gitattributes` and `live/` are protected from now on. Put new code (B9) in `picks/`, and log engine changes here.
+- `scripts/guard_check.py` stays as a local pre-push self-check.
+- Budgets: no CI step yet. They are enforced in code before spending (`gates/budgets.py`). Add a CI check when the evaluate lane starts spending.
 
 B8's acceptance (`state/queue.md`: "Write the code (`scripts/guard_check.py`,
 gates, budgets, picks generator) with tests, then add a line 'READY FOR

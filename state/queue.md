@@ -14,9 +14,22 @@ Rules for build items (added 16 Oct after the first run):
 | B5 | Scoring: hits, market line, edge, directional move after costs, random baseline | [x] |
 | B6 | Engine self-tests: a leaky strategy must be caught, a random strategy must show no edge | [x] |
 | B7 | Champion v1 = current StockStalker blended score; day and week; train, then validation | [x] |
-| B8 | Gates, ledger, Thresholdout, budgets, guard check, CI, branch protection, auto-merge | [ ] |
-| B9 | Live picks JSON plus GitHub Actions (evening and morning runs); exam backfill | [ ] |
+| B8 | Gates, ledger, Thresholdout, budgets, guard (`guard.yml` restores protected paths; replaces branch protection and auto-merge), CI | [ ] |
+| B9 | Picks code in `picks/` for `live.yml` (wired 17 Oct): score, pick, exam backfill | [ ] |
 | B10 | Start the 2-hourly lab routine with lanes | [ ] |
+
+## Go-live track (SPEC.md section 10; go-live Mon 2 Nov 2026)
+
+Go-live happens on that date with or without a strategy that passes the gates. Dates are hard:
+- **By Wed 28 Oct:** B9 ticked (a green dry run on real data).
+- **By Fri 30 Oct, 12:00 UTC:** `config/live_source.json` committed, choosing each table's strategy by the provisional rule in SPEC.md section 10, plus the holdout queries that rule needs (each logged).
+
+While any table is provisional, improving it ranks right after leak alarms and workflow failures, in this order:
+- **P1 (port, diagnose):** keep working through `cards/catalog.csv` in SPEC order. Every train replay with a positive edge and positive directional move on some table gets one validation query for that table (Mode B, within budget). That is how a provisional candidate earns its place.
+- **P2 (port):** a consensus strategy, `consensus_v1`: the rank-average of the 3 to 5 best train strategies per table, which come from different families. Weak, unrelated signals often add up to more than any one of them. It is tested like any other strategy, and every member counts as a trial.
+- **P3 (build):** D1 and D2 below move ahead of the indicator rules. Futures open interest and delivery share are where an F&O-only universe is most likely to hold an edge that price rules miss. Both are `scripts/` changes, which the routine can make.
+- **P4 (diagnose):** a regime filter for the provisional strategy (trend, volatility bucket, weekday, expiry week) from its diagnostics, as a new versioned strategy. It is tested on train, then queried once.
+- Every Friday before 12:00 UTC, the evaluate lane checks whether any candidate beats a provisional table by the SPEC rule, and updates `config/live_source.json` if so, saying why in the commit body.
 
 ## After the build (Mode B, discover and port lanes)
 
@@ -31,4 +44,12 @@ Rules for build items (added 16 Oct after the first run):
 - **B5:** unit tests reproduce a small hand-computed example for hit, market line, edge, directional move after costs and random percentile. An Actions run writes `reports/market_line_train.md`: the share of the universe up open-to-close, by year for 2015–2020, for day and week.
 - **B6:** an Actions run writes `reports/selftest.md`. A leaky strategy (same-day close) is flagged, and a random strategy's train edge is within ±1.5 points over 5 seeds.
 - **B7:** champion v1 train results for day and week, by year and side, in `reports/champion_v1_train.md`. One validation query goes through the holdout, logged in `ledger/holdout_queries.csv`.
-- **B8 and B9:** the routine cannot edit `.github/`. Write the code (`scripts/guard_check.py`, gates, budgets, picks generator) with tests, then add a line "READY FOR WIRING: <item>" to `state/engine-issues.md`. A supervised session adds the workflows and branch protection and ticks the item.
+- **B8:** code done (gates, trials, budgets, `scripts/guard_check.py`). Wired 17 Oct: `guard.yml` restores protected paths changed without supervision, and `replay.yml` will not run on such a push. This replaces branch protection and auto-merge, so no repo settings change. A supervised session ticks B8 once `guard.yml` has run green on a real push.
+- **B9:** `live.yml` is wired. It runs after each dataset update and does a dry run on any push to `picks/`. Write the package `picks/` (not `engine/` or `gates/`, which are protected now and restored by the guard; a needed engine change goes to `state/engine-issues.md`). The entry point is `python3 -m picks.run --data <parquet> --out <dir> --mode live|dry`, and its contract is:
+  - **Source:** read `config/live_source.json`: `{"chosen_on": "YYYY-MM-DD", "tables": {"day_bullish": {"strategy": "<id>@vN", "label": "provisional"|"gated", "why": "..."}, "day_bearish": ..., "week_bullish": ..., "week_bearish": ...}}`. In dry mode, if the file is missing, use champion v1 for all four tables. In live mode, if it is missing, do nothing and exit 0.
+  - **Score first:** for every picks file in `<dir>` whose session is now in the data, add `open`, `close`, `move_pct`, `move_rs` and `hit` to each pick (SPEC.md section 3; scoring through `engine.scoring`). Add `late: true` if the file's first commit (`git log --diff-filter=A --format=%cI`) is after 09:15 IST on the session date. Late picks are shown but left out of hit rates.
+  - **Then pick:** write `<dir>/day/<session>.json` for the next trading session, and on the week's last trading day also `<dir>/week/<monday>.json`. The next session is the next weekday not in `config/nse_holidays.txt`, which you create from NSE's published holiday list with the source linked. Never overwrite an existing picks file; every run must be idempotent.
+  - **Picks file:** `{"session", "horizon", "asof" (last close used), "generated_at" (UTC ISO), "label", "disclaimer", "tables": {"bullish": [5 x {"symbol", "strategy", "reasoning"}], "bearish": [...]}}`. Reasoning comes from `rules_fired`. The disclaimer is SPEC.md section 10's, word for word. Never write buy, sell, target, stop or entry.
+  - **Exam:** in live mode, if `<dir>/exam/` does not exist, replay 1 Aug 2026 to the day before the first live session with the same sources, in the same file layout under `<dir>/exam/`, already scored.
+  - **Summary:** `<dir>/summary.json` holds hits and picks per table per week and month, totals for exam and for live, and the market line per table for context. No P&L.
+  - **Acceptance:** unit tests on synthetic data cover idempotency, no overwrite, the scoring arithmetic, the late flag and the next session across a holiday. A push to `picks/` gives a green Live dry run that commits `reports/live_dryrun/` with four tables of 5 picks, and a second dry run on a later day scores the first.

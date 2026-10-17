@@ -58,15 +58,14 @@ jobs:
       - uses: actions/cache/save@v4
         if: steps.has.outputs.ok
         with: {path: data, key: 'nse-dataset-${{ github.run_id }}'}
-      - name: Commit the manifest only
+      - name: Corporate-actions report for B3 (written once; delete the file to regenerate)
+        if: steps.has.outputs.ok && hashFiles('scripts/check_corporate_actions.py') != '' && hashFiles('reports/corporate_actions_check.md') == ''
+        run: set -o pipefail; python3 scripts/check_corporate_actions.py --data data/dataset.parquet --out reports/corporate_actions_check.md 2>&1 | tee -a /tmp/dataset.log
+      - name: Commit the manifest and report only
         if: steps.has.outputs.ok
         run: |
-          git config user.name Achintya1311; git config user.email 67464985+Achintya1311@users.noreply.github.com
-          git add state/data_manifest.json; git diff --cached --quiet || { git commit -m "data: manifest $(date -u +%F)"; git pull --rebase -q; git push; }
+          bash .github/push.sh "data: manifest $(date -u +%F)" state/data_manifest.json reports/corporate_actions_check.md
       - name: Report failure where the routine can read it
         if: failure() && steps.has.outputs.ok
         run: |
-          git config user.name Achintya1311; git config user.email 67464985+Achintya1311@users.noreply.github.com
-          git reset -q --hard; git pull -q
-          { echo "## $(date -u +%FT%H:%MZ) dataset failed"; echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; echo '```'; tail -n 60 /tmp/dataset.log 2>/dev/null || echo "(no log)"; echo '```'; } >> state/workflow_failures.md
-          git add state/workflow_failures.md; git commit -qm "ci: dataset failure report"; git push -q
+          bash .github/report_failure.sh dataset /tmp/dataset.log

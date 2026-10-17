@@ -1,0 +1,20 @@
+name: Guard
+# Protected paths (PROTECTED.txt) change only in supervised sessions. On every push to main,
+# any protected path changed by a commit without "[supervised]" in its message is put back
+# and the restore is logged in state/workflow_failures.md for the routine (SPEC.md section 9).
+# Pushes made by workflows (GITHUB_TOKEN) do not trigger this, which is intended: those are
+# the engine's own outputs.
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+concurrency: guard
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main, fetch-depth: 0}
+      - run: bash .github/guard.sh ${{ github.event.before }} ${{ github.sha }} --restore

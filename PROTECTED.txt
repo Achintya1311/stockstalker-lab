@@ -5,3 +5,5 @@ config/splits.yml
 engine/
 gates/
 .github/
+.gitattributes
+live/

@@ -1,0 +1,55 @@
+name: Live
+# Public picks (SPEC.md section 10). After each dataset update it scores the last session's
+# picks and writes the next session's, so a session's picks are committed the evening before
+# it and the commit time proves they came before the open. Picks code is build item B9:
+#   python3 -m picks.run --data <parquet> --out <dir> --mode live|dry
+# A push to picks/ runs a dry run into reports/live_dryrun/ so the routine can check its
+# code on real data. Waits until picks/run.py exists.
+on:
+  workflow_run:
+    workflows: ["Build dataset"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: ['picks/**']
+  workflow_dispatch:
+    inputs:
+      mode: {description: 'live or dry', default: live}
+permissions:
+  contents: write
+concurrency: live
+jobs:
+  live:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      MODE: ${{ github.event_name == 'push' && 'dry' || inputs.mode || 'live' }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main, fetch-depth: 0}   # full history: the late flag reads each picks file's first commit time
+      - name: Skip until the picks code exists
+        id: has
+        run: if [ -f picks/run.py ]; then echo "ok=1" >> $GITHUB_OUTPUT; else echo "picks/run.py not written yet"; fi
+      - uses: actions/setup-python@v5
+        if: steps.has.outputs.ok
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+        if: steps.has.outputs.ok && hashFiles('requirements.txt') != ''
+      - uses: actions/cache/restore@v4
+        if: steps.has.outputs.ok
+        with: {path: data, key: nse-dataset-none, restore-keys: nse-dataset-}
+      - name: Score and pick
+        if: steps.has.outputs.ok
+        run: |
+          out=live; [ "$MODE" = dry ] && out=reports/live_dryrun
+          echo "OUT=$out" >> $GITHUB_ENV
+          set -o pipefail; python3 -m picks.run --data data/dataset.parquet --out $out --mode $MODE 2>&1 | tee /tmp/live.log
+      - name: Commit picks and scores
+        if: steps.has.outputs.ok
+        run: |
+          bash .github/push.sh "live($MODE): $(date -u +%FT%H%MZ)" $OUT
+      - name: Report failure where the routine can read it
+        if: failure() && steps.has.outputs.ok
+        run: |
+          bash .github/report_failure.sh "live($MODE)" /tmp/live.log
