@@ -67,3 +67,4 @@ RESOLVED (supervised, 17 Oct, commit "ci: wire guard, live picks and safe pushes
 ## 2026-10-17T15:58Z guard restored protected paths
 Commits in 8470946..8131980 changed protected paths outside a supervised session, so they are back as they were at 8470946. Describe the change you need in state/engine-issues.md instead, then add RESOLVED <commit> under this entry.
 - `engine/__init__.py`
+RESOLVED 8131980 (supervised): a deliberate live test of the guard. Nothing to redo.

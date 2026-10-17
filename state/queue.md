@@ -14,7 +14,7 @@ Rules for build items (added 16 Oct after the first run):
 | B5 | Scoring: hits, market line, edge, directional move after costs, random baseline | [x] |
 | B6 | Engine self-tests: a leaky strategy must be caught, a random strategy must show no edge | [x] |
 | B7 | Champion v1 = current StockStalker blended score; day and week; train, then validation | [x] |
-| B8 | Gates, ledger, Thresholdout, budgets, guard (`guard.yml` restores protected paths; replaces branch protection and auto-merge), CI | [ ] |
+| B8 | Gates, ledger, Thresholdout, budgets, guard (`guard.yml` restores protected paths; replaces branch protection and auto-merge), CI | [x] |
 | B9 | Picks code in `picks/` for `live.yml` (wired 17 Oct): score, pick, exam backfill | [ ] |
 | B10 | Start the 2-hourly lab routine with lanes | [ ] |
 
@@ -44,7 +44,7 @@ While any table is provisional, improving it ranks right after leak alarms and w
 - **B5:** unit tests reproduce a small hand-computed example for hit, market line, edge, directional move after costs and random percentile. An Actions run writes `reports/market_line_train.md`: the share of the universe up open-to-close, by year for 2015–2020, for day and week.
 - **B6:** an Actions run writes `reports/selftest.md`. A leaky strategy (same-day close) is flagged, and a random strategy's train edge is within ±1.5 points over 5 seeds.
 - **B7:** champion v1 train results for day and week, by year and side, in `reports/champion_v1_train.md`. One validation query goes through the holdout, logged in `ledger/holdout_queries.csv`.
-- **B8:** code done (gates, trials, budgets, `scripts/guard_check.py`). Wired 17 Oct: `guard.yml` restores protected paths changed without supervision, and `replay.yml` will not run on such a push. This replaces branch protection and auto-merge, so no repo settings change. A supervised session ticks B8 once `guard.yml` has run green on a real push.
+- **B8:** code done (gates, trials, budgets, `scripts/guard_check.py`). Wired 17 Oct: `guard.yml` restores protected paths changed without supervision, and `replay.yml` will not run on such a push. This replaces branch protection and auto-merge, so no repo settings change. Ticked 17 Oct after a live test: an unsupervised edit to `engine/__init__.py` (8131980) was restored by the guard (040c23a), and Replay skipped that push.
 - **B9:** `live.yml` is wired. It runs after each dataset update and does a dry run on any push to `picks/`. Write the package `picks/` (not `engine/` or `gates/`, which are protected now and restored by the guard; a needed engine change goes to `state/engine-issues.md`). The entry point is `python3 -m picks.run --data <parquet> --out <dir> --mode live|dry`, and its contract is:
   - **Source:** read `config/live_source.json`: `{"chosen_on": "YYYY-MM-DD", "tables": {"day_bullish": {"strategy": "<id>@vN", "label": "provisional"|"gated", "why": "..."}, "day_bearish": ..., "week_bullish": ..., "week_bearish": ...}}`. In dry mode, if the file is missing, use champion v1 for all four tables. In live mode, if it is missing, do nothing and exit 0.
   - **Score first:** for every picks file in `<dir>` whose session is now in the data, add `open`, `close`, `move_pct`, `move_rs` and `hit` to each pick (SPEC.md section 3; scoring through `engine.scoring`). Add `late: true` if the file's first commit (`git log --diff-filter=A --format=%cI`) is after 09:15 IST on the session date. Late picks are shown but left out of hit rates.
