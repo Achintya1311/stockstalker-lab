@@ -1,0 +1,2 @@
+query_id,timestamp,metric,horizon,side,threshold,tolerance,train_value,released_value,budget_spent
+champion_v1-day-bullish-edge-v1,2026-10-17T12:54:48.969333+00:00,edge,day,bullish,0.03,0.01,-0.001131733146885622,0.025290506206555877,True

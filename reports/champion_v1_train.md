@@ -6,39 +6,39 @@
 
 ### Day - Bullish
 
-Whole split: 107754 picks, accuracy 44.56%, edge -0.11 points, directional move after costs -0.54 points.
+Whole split: 107735 picks, accuracy 44.55%, edge -0.11 points, directional move after costs -0.54 points.
 
 | Year | Picks | Accuracy | Edge (points) |
 |---|---|---|---|
-| 2015 | 8800 | 43.02% | -0.51 |
-| 2016 | 16056 | 45.66% | -0.53 |
-| 2017 | 24552 | 43.92% | 0.18 |
+| 2015 | 8797 | 43.01% | -0.52 |
+| 2016 | 16053 | 45.65% | -0.54 |
+| 2017 | 24540 | 43.92% | 0.18 |
 | 2018 | 18615 | 44.46% | 0.12 |
 | 2019 | 18707 | 43.97% | 0.25 |
-| 2020 | 21024 | 45.70% | -0.25 |
+| 2020 | 21023 | 45.70% | -0.26 |
 
 ### Day - Bearish
 
-Whole split: 95004 picks, accuracy 53.95%, edge 0.19 points, directional move after costs -0.12 points.
+Whole split: 94993 picks, accuracy 53.95%, edge 0.19 points, directional move after costs -0.12 points.
 
 | Year | Picks | Accuracy | Edge (points) |
 |---|---|---|---|
-| 2015 | 12060 | 54.10% | -0.03 |
-| 2016 | 13584 | 53.89% | -0.28 |
-| 2017 | 14099 | 54.49% | 0.20 |
+| 2015 | 12059 | 54.10% | -0.03 |
+| 2016 | 13582 | 53.89% | -0.28 |
+| 2017 | 14096 | 54.48% | 0.20 |
 | 2018 | 23300 | 53.87% | 0.50 |
 | 2019 | 18483 | 53.30% | -0.11 |
-| 2020 | 13478 | 54.38% | 0.82 |
+| 2020 | 13473 | 54.37% | 0.82 |
 
 ## Week
 
 ### Week - Bullish
 
-Whole split: 22799 picks, accuracy 48.80%, edge 0.07 points, directional move after costs -0.53 points.
+Whole split: 22798 picks, accuracy 48.80%, edge 0.07 points, directional move after costs -0.53 points.
 
 | Year | Picks | Accuracy | Edge (points) |
 |---|---|---|---|
-| 2015 | 1814 | 49.17% | -0.59 |
+| 2015 | 1813 | 49.15% | -0.63 |
 | 2016 | 3437 | 49.14% | -1.27 |
 | 2017 | 5068 | 50.00% | 0.34 |
 | 2018 | 4091 | 45.03% | 1.11 |
@@ -47,13 +47,13 @@ Whole split: 22799 picks, accuracy 48.80%, edge 0.07 points, directional move af
 
 ### Week - Bearish
 
-Whole split: 19987 picks, accuracy 51.54%, edge 0.75 points, directional move after costs -0.13 points.
+Whole split: 19985 picks, accuracy 51.54%, edge 0.75 points, directional move after costs -0.13 points.
 
 | Year | Picks | Accuracy | Edge (points) |
 |---|---|---|---|
-| 2015 | 2521 | 48.55% | 1.17 |
+| 2015 | 2520 | 48.53% | 1.15 |
 | 2016 | 2825 | 52.14% | 0.82 |
 | 2017 | 2998 | 48.63% | 0.96 |
 | 2018 | 4939 | 56.37% | 2.08 |
 | 2019 | 3870 | 50.52% | -0.76 |
-| 2020 | 2834 | 49.65% | 0.28 |
+| 2020 | 2833 | 49.66% | 0.29 |
