@@ -182,3 +182,71 @@ failure-reporting step should run via its own fresh checkout state (e.g.
 `git fetch && git reset --hard origin/<default-branch>` instead of a bare
 `git reset --hard; git pull`), so a broken rebase in the commit step
 can never take the failure report down with it the way it did here.
+
+## READY FOR WIRING: B8 guard check, gates, budgets (2026-10-17)
+
+B8's acceptance (`state/queue.md`: "Write the code (`scripts/guard_check.py`,
+gates, budgets, picks generator) with tests, then add a line 'READY FOR
+WIRING: <item>'... A supervised session adds the workflows and branch
+protection and ticks the item.") is the code side of this build item. Written
+and tested this run, all on synthetic/hand-picked data - none of it needs the
+real dataset or an Actions run to be correct:
+
+- `gates/gates.py`: SPEC.md section 6's eight roster gates plus the
+  high-conviction tag and the leak-alarm trigger/clear predicates, as pure
+  functions over a `StrategyMetrics` dataclass (`tests/test_gates.py`).
+  Gate 2's trial-corrected significance bar (`required_t`) is a Bonferroni
+  correction on the single-trial t>=3 bar, parameterised by cumulative
+  trial count.
+- `gates/trials.py`: `ledger/trials.csv` schema (`FIELDS`) and an
+  append-only `record_trial`/`cumulative_trial_count` pair — the trial
+  count `gates.gates.required_t` needs (`tests/test_trials.py`). The
+  ledger file itself does not exist yet; nothing has logged a real trial
+  under it, so there's nothing to commit before a first real trial run
+  writes it (same reasoning `ledger/holdout_queries.csv` followed before
+  B7's one query).
+- `gates/budgets.py`: weekly (ISO calendar week) rate limits for
+  `ledger/holdout_queries.csv` (`config/splits.yml`'s
+  `validation.max_queries_per_week`, currently 60) and the not-yet-created
+  `ledger/test_looks.csv` (`test.max_looks_per_week`, currently 2), plus
+  `record_test_look` for the latter (`tests/test_budgets.py`). Deliberately
+  does not touch `engine/holdout_report.py` — its own docstring already
+  says the weekly budget is B8's job, and it is B7's already-ticked,
+  already-tested module; this module is what a future `evaluate`-lane
+  query/look should consult *before* spending one, not a retrofit onto B7.
+- `scripts/guard_check.py`: parses `PROTECTED.txt` (exact-file or
+  directory-prefix entries) and fails (exit 1, lists every offending path)
+  if `git diff --name-only <base>...<head>` touches any of them
+  (`tests/test_guard_check.py`, including against the real `PROTECTED.txt`).
+
+Not written this run (left for the item that needs it, so each build item
+stays reviewable on its own): the "picks generator" B8/B9's acceptance note
+also names is `state/queue.md` item B9's job ("Live picks JSON plus GitHub
+Actions"), not B8's gates/budgets/guard scope.
+
+Needs one of (routine cannot edit `.github/` or add branch protection):
+
+1. A CI workflow (new, or a job added to an existing one) that runs on every
+   PR/push and executes `python3 scripts/guard_check.py --base
+   origin/<default-branch> --head <sha>`, failing the check on a non-zero
+   exit. The script already defaults `--base` to `origin/main` and `--head`
+   to `HEAD`, so a plain `python3 scripts/guard_check.py` after `actions/checkout@v4`
+   with `fetch-depth: 0` (needed for the `...` merge-base diff to see
+   `origin/main`) should work with no extra flags in the common case.
+2. Branch protection on `main` requiring that check (plus the existing
+   test suite) to pass before merge, and auto-merge configured to respect
+   it — SPEC.md section 9: "Auto-merge requires green checks: tests, audit,
+   protected paths untouched, budgets respected."
+3. "Budgets respected" as an auto-merge condition needs a small CI step of
+   its own once the `evaluate` lane actually starts spending holdout
+   queries/test looks: e.g. fail the check if a PR's diff adds more rows to
+   `ledger/holdout_queries.csv` or `ledger/test_looks.csv` than
+   `gates.budgets.holdout_budget_remaining`/`test_look_budget_remaining`
+   allowed at the time it was opened. Not written yet — no code path spends
+   either budget yet (B8 only builds the check functions), so there is
+   nothing real to wire against until a later build or lab run adds the
+   spending side.
+
+B8 itself stays unticked per the acceptance note above — a supervised
+session ticks it once the wiring above lands and the CI check is confirmed
+running green on a real PR.

@@ -615,3 +615,85 @@ directly rather than rebuilding Thresholdout from scratch, but still owes
 its own weekly query-budget enforcement (`ledger/holdout_queries.csv`
 only has one manually-triggered row so far, no rate limiting yet) and the
 full gate checks from SPEC.md section 6.
+
+## 2026-10-17T1409Z — build lane
+
+Mode A, build lease (no competing holder - no `state/leases/` directory
+existed at all this run). B3 is still only READY FOR WIRING (needs the
+supervised `.github/` change to `dataset.yml`); B4-B7 are ticked. B8
+("Gates, ledger, Thresholdout, budgets, guard check, CI, branch
+protection, auto-merge") is next, and per its own acceptance note in
+`state/queue.md` ("Write the code ... with tests, then add a line 'READY
+FOR WIRING: <item>' ... A supervised session ... ticks the item") this
+run's job is the code-and-tests half only, same shape as B3's.
+
+Hypothesis: the three things `state/queue.md`'s B8 line names - "the
+guard: a CI check that fails if any path in `PROTECTED.txt` changed,
+budgets in the ledger (`ledger/holdout_queries.csv`,
+`ledger/test_looks.csv`) and the leak alarm" - plus the eight roster gates
+from SPEC.md section 6, can all be written as pure, dataset-free code
+(policy over already-computed numbers, or ledger/CSV bookkeeping),
+leaving only the Actions/branch-protection wiring for a supervised
+session, exactly like B3's split.
+
+What I did:
+- `gates/gates.py`: the eight gates (edge, trial-corrected significance,
+  70%-of-years, >=500 test picks, directional move, random baseline,
+  param-nudge robustness, roster overlap) as named bools on a
+  `StrategyMetrics` dataclass, plus `high_conviction_tag` and
+  `leak_alarm_triggered`/`leak_alarm_cleared`. Gate 2's rising bar
+  (`required_t`) is a Bonferroni correction on the literal t>=3 single-trial
+  bar, using `statistics.NormalDist` (stdlib, no new dependency) -
+  `required_t(1) == 3.0` exactly, and rises monotonically with more
+  cumulative trials.
+- `gates/trials.py`: `ledger/trials.csv`'s schema and an append-only
+  `record_trial`/`cumulative_trial_count` pair (the trial count gate 2
+  needs). No file committed yet - nothing has logged a real trial, same
+  as `ledger/holdout_queries.csv` before B7's first query.
+- `gates/budgets.py`: ISO-calendar-week rate limiting for
+  `ledger/holdout_queries.csv` (validation, cap from
+  `config/splits.yml`'s `max_queries_per_week`, currently 60) and the new
+  `ledger/test_looks.csv` (test, `max_looks_per_week`, currently 2), plus
+  `record_test_look`. Deliberately does not touch
+  `engine/holdout_report.py` (B7's already-shipped, already-tested single
+  query) - this is the reusable mechanism a future `evaluate` lane should
+  call *before* spending a query/look.
+- `scripts/guard_check.py`: parses `PROTECTED.txt` (exact-file or
+  directory-prefix entries) and diffs `git diff --name-only
+  <base>...<head>` against them; exits 1 and lists every offending path on
+  a hit.
+- Tests for all four (`tests/test_gates.py`, `tests/test_trials.py`,
+  `tests/test_budgets.py`, `tests/test_guard_check.py`), including
+  `test_guard_check.py` against the real `PROTECTED.txt`, not just a
+  synthetic copy.
+- Added "READY FOR WIRING: B8" to `state/engine-issues.md`: the CI
+  workflow step to run `guard_check.py`, the branch-protection rule to
+  require it, and a note that "budgets respected" as an auto-merge
+  condition has nothing to wire against yet (no code path spends a
+  holdout query or test look outside B7's one already-shipped query).
+
+Result: `pytest -q` - 159 passed, 0 failures, after one small fix: my
+first pass imported `gates.budgets.test_looks_this_week` and
+`test_look_budget_remaining` by their real names into
+`tests/test_budgets.py`, and pytest collected both as test functions in
+their own right (names start with `test_`), producing two
+`PytestReturnNotNoneWarning`s - harmless (they ran against a
+nonexistent default ledger path and returned 0) but sloppy. Fixed by
+importing them under aliases (`looks_this_week`, `look_budget_remaining`)
+in the test module; re-ran clean, no warnings, same 34 passing in the new
+files plus all 125 pre-existing tests still green. `state/queue.md`'s B8
+row stays unticked, per its own acceptance note - a supervised session
+ticks it once `.github/` is wired and the guard check runs green on a
+real PR.
+
+Next: B3 is still the only item blocked purely on `.github/` wiring with
+no code of its own left to write. B8's *code* is now done, but it also
+stays blocked on `.github/` wiring (CI + branch protection) before it can
+tick - so after this run, every remaining build item (B3, B8, B9, B10)
+needs either a supervised `.github/` change or build-lane code B8/B9
+haven't written yet. The next build-lane run should write B9's "picks
+generator" (the one piece B8/B9's acceptance note names that this run
+deliberately left out) and its tests, then check whether a supervised
+session has since wired B3/B8 - if both are wired and ticked by then,
+the next run after that can finally write `state/BUILD_DONE` once B9 is
+also ticked.
