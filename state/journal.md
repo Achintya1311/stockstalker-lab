@@ -737,3 +737,71 @@ corporate announcements or news) and explain every mismatch and every
 scattered smaller-deviation candidates left in the current report are a
 separate question (EQ/BE series switches, thin-trading gaps) not
 investigated this run. B3 stays unticked.
+
+## 2026-10-17T20:09Z — build lane
+
+Hypothesis: last run's next step was clear — the triggered all-years
+backfill re-run (for the weekend-session fix) had landed by this run's
+start (`Backfill NSE history` 39049507308 and the chained `Build dataset`
+39054392433 both `success`), so delete the stale
+`reports/corporate_actions_check.md` (still showing the old 19,825-count),
+let `dataset.yml` regenerate it, confirm the eleven mega-spike dates were
+gone, then do B3's actual job: cross-check >=10 events.
+
+Result: regenerated report dropped to 5,503 candidates (down from
+19,825) — the eleven mega-spikes were gone, but several smaller
+single-date spikes remained (100-230 symbols "acting" at once, mostly on
+Tuesdays), the same shape as the resolved bug one order of magnitude
+down. Traced it directly against raw NSE data (AUTOIND, 17/18 Aug 2020):
+root cause is the EQ-only dataset dropping a symbol's row on any day it
+trades in NSE's BE (trade-to-trade) series, so `compute_adjustment_factors`'s
+"prior close" silently skips the gap to a stale EQ row, while the real
+PREVCLOSE (continuous across the series switch) looks like a corporate
+action against it. Fixed in `scripts/adjustments.py` (detect a dataset
+row-gap against the whole market's actual previous trading day; treat it
+as unadjusted, same as a symbol's first row) with 2 new tests
+(`tests/test_adjustments.py`); full suite 161 passed. Regenerated again
+on the real dataset (Actions run 39066804573): **3** candidates remain.
+
+That number (3, not "low thousands") led to the real finding this run:
+checked two confirmed, named, real NSE corporate actions directly against
+raw bhavcopy (HDFCBANK's 1:2 split, ex-date 19-Sep-2019; WIPRO's 1:3
+bonus, ex-date 06-Mar-2019, NSE circular 33/2019) and in both, PREVCLOSE
+on the ex-date is the **unrebased, literal prior-day close** — the whole
+share-count change shows up only in that day's ordinary OPEN/CLOSE
+trading. SPEC.md section 2's premise (adjustment factors come from
+PREVCLOSE/prior CLOSE) does not hold for either action type on real data.
+So `detect_corporate_actions` structurally cannot find real splits or
+bonuses — full stop, not a tuning problem. What it *can* find (and all 3
+remaining candidates are): face-value/unit changes NSE does rebase for
+(SETFGOLD's confirmed 100:1 face-value split, ex-date 06-Jan-2022, NSE
+circular — ratio matches exactly) and dividend-linked base-price nudges
+(CARERATING, plausible but unconfirmed by a primary source; CUPID,
+unexplained by any dividend/bonus/split found). All 3 cross-checked and
+written into `reports/corporate_actions_check.md`'s table with sources.
+
+Wrote the full finding and three possible directions (independent
+corporate-actions data source; detect the price-side signature instead;
+narrow what SPEC.md section 2 means by "adjusted") in
+`state/engine-issues.md`'s new "`detect_corporate_actions` cannot find
+what B3 needs it to find" entry, and updated B3's acceptance note in
+`state/queue.md` to point there. B3 stays unticked, but its status
+changed from "noise, not yet cleaned up" to "blocked on a design
+decision for a supervised session" — "at least 10 events" is not
+reachable by cleaning up more noise, since real splits/bonuses can't
+surface in this detector's output at all.
+
+Also worth noting for champion_v1: the series-gap fix in this run changes
+its live adjusted prices for any symbol with BE-series history (it calls
+the same `compute_adjustment_factors`), not just the report — a real
+correctness fix, not just report hygiene.
+
+Next: a supervised session should pick one of the three directions in
+`state/engine-issues.md` for B3 (most direct: an independent
+corporate-actions fetcher, likely new `scripts/` + Actions-workflow
+infrastructure similar to `backfill.yml`). Until then, B3 is blocked, not
+just unticked (its new entry in `state/engine-issues.md` is a
+`READY FOR WIRING` entry not yet marked `WIRED`, so the `build` lane's
+next run should see it as blocked per the routine's own rule and move on
+to B9 — unblocked per `state/queue.md`, write the `picks/` package to its
+contract there).

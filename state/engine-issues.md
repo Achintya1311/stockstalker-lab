@@ -343,3 +343,131 @@ events against an independent public source. The remaining ~18,000
 scattered small-deviation candidates are a separate, smaller question
 (EQ/BE series switches and thin-trading gaps are still plausible there)
 that this run did not investigate.
+
+## FIXED (no wiring needed): EQ/BE series gaps mistaken for corporate actions (2026-10-17)
+
+Not open — root-caused and fixed in `scripts/adjustments.py` this run
+(commit `84c6d2c`), no `.github/` change needed. Picks up where the
+weekend-session fix left off: after that fix, `reports/corporate_actions_check.md`
+still showed eleven-ish single dates (mostly Tuesdays) where 100-230
+symbols all "acted" at once — same shape as the resolved weekend bug, one
+order of magnitude smaller.
+
+Root cause: the dataset only keeps `SERIES == "EQ"` rows (SPEC.md section
+2). A symbol that trades in NSE's BE (trade-to-trade surveillance) series
+on a given day has no row for that day, so `compute_adjustment_factors`'s
+`groupby("symbol")["close"].shift(1)` skips straight past the gap to that
+symbol's last *EQ* close — possibly weeks stale — while `PREVCLOSE` on
+the row after the gap is the exchange's real, continuous previous-day
+close (confirmed directly against raw NSE data: AUTOIND traded BE on
+2020-08-17, close 37.40 filtered out; EQ again on 2020-08-18, PREVCLOSE
+37.40 — correct and continuous — but our stale prior EQ close produced a
+spurious ~2.68x "action"). Fixed by detecting the gap directly: compare
+each symbol's previous dataset row's date against the whole market's
+actual previous trading day; a mismatch is treated like a symbol's first
+row (unadjusted, factor 1.0), not a detected event. Two new tests in
+`tests/test_adjustments.py`. Full suite: 161 passed.
+
+This also fixes `strategies/champion_v1.py`'s live price adjustment for
+any symbol with BE-series history, not just the report — it calls the
+same `compute_adjustment_factors`. Dropped the candidate count from
+5,503 to 3 once regenerated on the real dataset (Actions run
+39066804573) — see the next entry for why 3, not "low thousands," turned
+out to be the real number, and why that's a bigger problem than it looks.
+
+## READY FOR WIRING (methodology, not code): `detect_corporate_actions` cannot find what B3 needs it to find (2026-10-17)
+
+Needs a supervised decision on direction, most likely a new data source;
+not a one-line fix. B3 (`state/queue.md`) is blocked on this, not just
+unticked — see below for why.
+
+**Finding:** NSE's bhavcopy `PREVCLOSE` field does **not** get rebased on
+a split or bonus ex-date. Checked directly against two confirmed, named,
+real events (raw `cmDDMONYYYYbhav.csv`, not a secondary aggregator):
+
+- **HDFCBANK, 1:2 stock split, ex-date 19-Sep-2019** (face value ₹2 → ₹1).
+  18-Sep close 2187.75 (old scale). 19-Sep: `OPEN`/`CLOSE` ≈ 1100
+  (correctly half, via ordinary trading), but `PREVCLOSE` = **2187.75**
+  — the literal, unrebased prior close, still on the old scale. Ratio
+  PREVCLOSE/prior-CLOSE = 1.0: no detection.
+- **WIPRO, 1:3 bonus, ex-date 06-Mar-2019** (NSE F&O circular 33/2019,
+  record date 07-Mar-2019). 5-Mar close 363.60. 6-Mar: `OPEN`/`CLOSE` ≈
+  277 (correctly ~3/4 of 363.60, via ordinary trading), but `PREVCLOSE` =
+  **363.60** again — unrebased. Same null result.
+
+So the ~25-50%+ single-day move a real split or bonus causes shows up
+only in that day's own `OPEN`/`HIGH`/`LOW`/`CLOSE` trading, exactly like
+an ordinary large price move would — there is no exchange-side signal in
+the bhavcopy columns this dataset carries that tells the two apart.
+SPEC.md section 2's premise ("split and bonus adjustment factors come
+from the bhavcopy's PREVCLOSE... divided by the previous day's CLOSE")
+does not hold for either action type tested; `scripts/adjustments.py`
+was built correctly to that premise, but the premise itself is false for
+real NSE data, not a bug in how it's coded.
+
+**What `detect_corporate_actions` *does* find instead**, confirmed on all
+3 of the candidates that survive both fixes above (one real `PREVCLOSE`
+jump per the whole EQ-only dataset, 2015-01-01 to the run date, is
+genuinely rare):
+
+1. **Face-value / unit changes that NSE does rebase for**: SETFGOLD's
+   ₹100→₹1 face-value sub-division, confirmed against the NSE circular
+   (ex-date 06-Jan-2022, ratio 0.0101 ≈ 1/100 — exact match). This is a
+   real corporate action, just not a share-count split or bonus.
+2. **Dividend-linked base-price adjustments** (NSE's own circular-based
+   practice of nudging the base price down for a dividend above a
+   threshold — separate from splits/bonuses): CARERATING's -2.84% move
+   on 18-Sep-2018 plausibly lines up with a dividend aggregator lists
+   around that date, though no primary NSE/BSE filing was found to
+   confirm it outright.
+3. **Still-unexplained small moves**: CUPID's -1.12% on the same date has
+   no matching dividend, bonus or split found anywhere (its real 2018
+   corporate actions — a ₹1 dividend ex-dated 19-Nov and a 1:5 bonus
+   around Oct/Nov — are both on different dates with different ratios).
+   Open; possibly a small adjustment no aggregator indexes, possibly a
+   genuine data anomaly (not investigated further this run).
+
+Full detail and sources in `reports/corporate_actions_check.md`'s
+cross-check table (regenerated on Actions run 39066804573, after both
+fixes).
+
+**Why this blocks B3, not just leaves it short of 10 events:** the
+acceptance note's ">= 10 events, independent-source cross-checked" was
+written assuming the detector would keep finding genuine splits/bonuses
+once the noise (weekend sessions, then series gaps) was cleaned out.
+Instead, real splits/bonuses structurally cannot appear in its output at
+all — there will likely never be 10 genuine split/bonus events to check
+this way, no matter how much more noise gets fixed. B3 needs one of
+these directions, which only a supervised session should pick (each is
+a real design choice, not a bugfix):
+
+1. **Source real corporate-action dates and ratios independently** —
+   e.g. NSE's corporate-announcements archive/API (`nsearchives` hosts
+   circulars; there may be a structured feed, not just PDFs — worth
+   checking), or a reliable aggregator with a stable, scrapable history
+   — then adjust on those directly instead of inferring from `PREVCLOSE`.
+   This is new fetch infrastructure (a new `scripts/` fetcher plus
+   probably a new/extended Actions workflow to cache it, similar to
+   `backfill.yml`), not a change to `engine/`/`gates/`.
+2. **Detect the price-side signature instead**: flag a day where a
+   symbol's raw `OPEN`/`CLOSE` move is implausibly large (well past what
+   `gates`'s cost model or normal volatility would explain) *and* the lot
+   size or lower/upper circuit band resets, as a split/bonus candidate —
+   still needs a secondary source to confirm the ratio and distinguish
+   "real split" from "real 40% single-day crash," which does happen.
+3. **Narrow SPEC.md section 2's own scope**: if (1) and (2) are judged
+   not worth the cost given the roster only needs *adjusted* prices to
+   avoid a false single-day spike at a strategy's indicators (not a
+   historically-accurate corporate-action ledger), a supervised session
+   could decide the cheaper fix is detecting the day of an implausible
+   move and excluding/capping it from indicator inputs, rather than
+   computing a true retroactive adjustment factor. This changes what
+   "adjusted" means versus SPEC.md's current wording, so needs the
+   SPEC.md author's sign-off, not a routine-level call.
+
+Whichever direction is picked, it's worth revisiting `strategies/champion_v1.py`
+and any future strategy's indicators for whether they've been silently
+computed over 1-2 un-adjusted split/bonus days per affected symbol across
+the full 2015-2026 history — likely a small number of symbol-days in
+absolute terms (splits/bonuses are rare events), but worth knowing the
+scale before judging it immaterial.
