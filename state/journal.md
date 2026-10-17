@@ -293,3 +293,56 @@ given); B6's self-test needs a strategy that peeks at the pick date's own
 close, fed through the real replay engine, to prove the *engine* path
 doesn't let that leak through, not just that `scoring.py`'s arithmetic is
 correct in isolation.
+
+## 2026-10-17T0624Z — build lane
+
+Claimed `build` (free, no contention). Next unticked, unblocked item was
+B6: engine self-tests (B3 is still only READY FOR WIRING - needs a
+supervised `.github/` change, so stays blocked and skipped per
+`state/engine-issues.md`).
+
+Hypothesis: B4's causality tests (`tests/test_replay.py`) already prove
+`truncate()` withholds the pick date and everything after, so B6's "a
+leaky strategy must be flagged" needs a *different* leak shape to be a
+real test - not the engine failing to truncate, but a strategy module
+holding its own reference to the full dataset outside the `history`
+argument the engine ever hands it, which `truncate()` can't stop by
+construction. Built that as `LeakyStrategy` (picks only symbols that will
+actually close up the next trading day, so every pick is a guaranteed
+hit) in `engine/selftest.py`, run through the real `engine.replay`
+machinery, scored with the leak-alarm thresholds from SPEC.md section 6
+(accuracy >= 70% or edge >= 15 points). Alongside it, `RandomStrategy`
+(uniform random direction, no signal) over 5 seeds, checked against the
++-1.5 point tolerance `state/queue.md` sets. Both wired into
+`engine.run_queue.main` alongside B5's market-line report, writing
+`reports/selftest.md`.
+
+Sized the self-test window at 2018-01-01 to 2018-06-30 (~125 trading
+days), not the B4 smoketest's one-month window: random-pick noise only
+averages down with independent trading days (each day's hit rate is an
+unbiased draw from that day's own already-realised up/down split, so
+more symbols on the same few days doesn't help as much as more days
+does), and one month's worth of the real universe's typical size was too
+thin a sample to land inside +-1.5 points reliably.
+
+Result: B6 ticked. 20 new tests in `tests/test_selftest.py` (91 total,
+all passing), including an end-to-end check against a synthetic
+1,000-symbol x 60-trading-day dataset sized so the random check's
+expected-zero edge holds in practice, not just on average, plus a
+regression guard so a dataset with the right columns but no data in the
+self-test window (as two of `tests/test_run_queue.py`'s small synthetic
+fixtures have) no-ops instead of crashing the whole queue run. Pushed
+(`e272d85`), which triggered `replay.yml`
+(https://github.com/Achintya1311/stockstalker-lab/actions/runs/39009574017,
+succeeded) and committed the real `reports/selftest.md` (`d8a64d3`)
+against the cached dataset: the leaky strategy came back 100% accurate
+with a 56.14-point edge (flagged), and all 5 random seeds landed within
++-0.3 points of zero on both sides - both PASS.
+
+Next: B3 is still the only blocked item (READY FOR WIRING in
+`state/engine-issues.md`, needs a supervised session). B7 (champion v1 =
+current StockStalker blended score, day and week, train then validation)
+is the next unblocked build item - it needs reading STOCKSTALKER's actual
+blended-score logic and porting it as a `strategies/` module scored
+through the same `engine.replay`/`engine.scoring` path this run already
+exercised end to end.
