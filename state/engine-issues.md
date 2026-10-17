@@ -267,3 +267,74 @@ Needs one of (routine cannot edit `.github/` or add branch protection):
 B8 itself stays unticked per the acceptance note above — a supervised
 session ticks it once the wiring above lands and the CI check is confirmed
 running green on a real PR.
+
+## FIXED (no wiring needed): corporate-actions detector's 19,825 candidates were mostly one bug (2026-10-17)
+
+Not open — root-caused and fixed in `scripts/fetch_bhavcopy.py` this run, no
+`.github/` change needed. Recorded for context since the corporate-actions
+report (`reports/corporate_actions_check.md`) is now stale and needs
+regenerating once the backfill below lands.
+
+B3's acceptance note (`state/queue.md`) said the 19,825 candidates were
+implausibly high ("real splits and bonuses... should be in the low
+thousands at most") and listed likely causes including "the previous row
+is not the previous trading day." That one, confirmed:
+
+`detect_corporate_actions`'s candidates cluster into ~18,000 scattered,
+small (mostly 0.5-10%) per-symbol deviations (plausibly real noise/series
+switches, still to investigate) plus eleven dates where **1,000+ of
+~3,200 symbols all show a "corporate action" on the same single day** —
+`2015-03-02` (1080), `2016-11-01` (1092), `2019-10-29` (1141),
+`2020-02-03` (1304), `2020-11-17` (1198), `2023-11-13` (1341),
+`2024-01-23` (1316), `2024-03-04` (1166), `2024-05-21` (1187),
+`2025-02-03` (1522), `2026-02-02` (2017). No real corporate action hits
+a third of the market on one day; a dataset gap does.
+
+Checked directly against NSE's live archive (`nsearchives.nseindia.com`):
+every one of these dates is the first weekday after a real NSE session
+that fell on a **Saturday or Sunday** — Union Budget special trading
+(1 Feb on a weekend: `cm01FEB2020bhav.csv.zip`, `BhavCopy_NSE_CM..._20250201...`,
+`BhavCopy_NSE_CM..._20260201...`, and `cm28FEB2015bhav.csv.zip` from when
+Budget day was still in February), Diwali Muhurat trading
+(`cm30OCT2016bhav.csv.zip`, `cm27OCT2019bhav.csv.zip`,
+`cm12NOV2023bhav.csv.zip`), and apparent BCP/DR mock sessions
+(`cm20JAN2024bhav.csv.zip`, `cm02MAR2024bhav.csv.zip`,
+`cm18MAY2024bhav.csv.zip`). F&O traded those days too (checked
+`fo28FEB2015bhav.csv.zip`, HTTP 200). Spot check: on `cm_20150302.csv.zip`,
+`3IINFOTECH`'s PREVCLOSE (7.95) doesn't match `cm_20150227.csv.zip`'s
+CLOSE (8.2, a spurious 3% "action") but matches `cm28FEB2015bhav.csv.zip`'s
+real CLOSE (7.95) exactly — the missing Saturday session, not a corporate
+action.
+
+Root cause: `scripts/fetch_bhavcopy.py`'s date loop only ever attempted
+`d.weekday() < 5` (Mon-Fri), so these real sessions were never fetched —
+not even attempted, let alone recorded as a 404/holiday. Every symbol
+that traded that weekend session then had its dataset "previous row"
+land one real session too early, so `scripts/adjustments.py`'s
+`PREVCLOSE / prior CLOSE` (correct given a complete dataset) priced in
+that whole weekend session's real move as a fake split/bonus ratio, for
+every such symbol at once.
+
+Fixed by attempting every calendar day (not just weekdays) in
+`fetch_bhavcopy.py`; ordinary weekends with no NSE session just 404 both
+URL variants and land in `missing.txt` same as a weekday holiday. Covered
+by `tests/test_fetch_bhavcopy.py`. This does not touch `scripts/adjustments.py`
+or `engine/` — the per-row comparison was already correct, it was starved
+of rows.
+
+**Still to do** (not this run): the fix only changes what a *future*
+backfill fetches. `ledger`/`reports`/the current `data/dataset.parquet`
+cache still reflect the old, weekend-less fetch. A `backfill.yml`
+workflow_dispatch re-run across all years is needed to actually pull
+these sessions into the cache (safe to re-run for every year, not just
+the eleven dates found here, since 2017/2018/2021/2022 weren't checked
+and the fetch is idempotent either way); `dataset.yml` auto-triggers on
+`workflow_run: Backfill NSE history completed` and will then rebuild
+`data/dataset.parquet` with the gaps closed. Only after that: delete
+`reports/corporate_actions_check.md` so `dataset.yml` regenerates it,
+confirm the eleven spike dates are gone (or shrunk to real ratios), and
+only then do B3's real job — cross-check at least 10 of the *remaining*
+events against an independent public source. The remaining ~18,000
+scattered small-deviation candidates are a separate, smaller question
+(EQ/BE series switches and thin-trading gaps are still plausible there)
+that this run did not investigate.

@@ -697,3 +697,43 @@ deliberately left out) and its tests, then check whether a supervised
 session has since wired B3/B8 - if both are wired and ticked by then,
 the next run after that can finally write `state/BUILD_DONE` once B9 is
 also ticked.
+
+## 2026-10-17T16:30Z — build lane
+
+Hypothesis: B3's acceptance note flagged the corporate-actions detector's
+19,825 candidates as implausibly high and named likely causes, including
+"the previous row is not the previous trading day." Checked that first,
+since cross-checking events against a detector known to be noisy would be
+wasted work.
+
+Result: found it. Parsed `reports/corporate_actions_check.md`'s full event
+list and found eleven single dates where 1,000+ of ~3,200 symbols all show
+a "corporate action" at once (full breakdown and evidence in
+`state/engine-issues.md`'s new entry) — every one is the first weekday
+after a real NSE Saturday/Sunday session (Budget-day special trading,
+Diwali Muhurat trading, BCP/DR mock sessions) that `scripts/fetch_bhavcopy.py`
+never attempted, because its date loop only tried `weekday() < 5`. Verified
+directly against `nsearchives.nseindia.com` (several of these weekend
+URLs return real, full bhavcopy files, both CM and FO) and with a direct
+3-file spot check for `3IINFOTECH` on 2015-02-27/28/03-02 — the "corporate
+action" PREVCLOSE matches the missing Saturday's real close exactly, not
+a split/bonus. Fixed `fetch_bhavcopy.py` to attempt every calendar day;
+added `tests/test_fetch_bhavcopy.py` (2 new tests). Full suite: 159 passed
+(157 pre-existing + 2 new), `pytest -q`, no failures.
+
+Triggered a fresh `backfill.yml` run (all years; the fetch is idempotent,
+and only 11 of the 12 years were spot-checked) so the newly-added weekend
+sessions actually land in the Actions cache; `dataset.yml` auto-chains off
+`workflow_run: Backfill NSE history completed` and will rebuild
+`data/dataset.parquet` once it finishes.
+
+Next: once that backfill + dataset rebuild lands (check Actions run
+status), delete `reports/corporate_actions_check.md` so `dataset.yml`
+regenerates it, confirm the eleven spike dates are gone/shrunk to
+plausible ratios, then do B3's actual job — cross-check at least 10 of
+the *remaining* events against an independent public source (NSE
+corporate announcements or news) and explain every mismatch and every
+>=30% jump, per `state/queue.md`'s B3 acceptance note. The ~18,000
+scattered smaller-deviation candidates left in the current report are a
+separate question (EQ/BE series switches, thin-trading gaps) not
+investigated this run. B3 stays unticked.

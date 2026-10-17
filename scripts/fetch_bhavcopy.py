@@ -8,7 +8,19 @@ universe). Zips are saved unmodified; parsing is a separate step.
 Formats: until 2024-07-05 NSE published the old CSVs
 (content/historical/EQUITIES|DERIVATIVES/YYYY/MON/cmDDMONYYYYbhav.csv.zip);
 from 2024-07-08 it publishes UDiFF files (content/cm|fo/BhavCopy_NSE_*_YYYYMMDD_F_0000.csv.zip).
-A 404 on a weekday is a holiday; it is remembered in missing.txt so reruns skip it.
+A 404 means there was no session that day; it is remembered in missing.txt so
+reruns skip it.
+
+Every calendar day is attempted, not just weekdays: NSE runs real, full
+bhavcopy-publishing sessions on some Saturdays and Sundays - a special
+live session on Union Budget day when 1 Feb falls on a weekend (e.g.
+2020-02-01, 2025-02-01, 2026-02-01), the one-hour Diwali Muhurat session
+(e.g. 2016-10-30, 2019-10-27, 2023-11-12), and occasional BCP/DR mock
+sessions (e.g. 2024-01-20, 2024-03-02, 2024-05-18). Skipping weekends
+outright left those sessions out of the dataset, which made
+`scripts/adjustments.py` compare the next weekday's PREVCLOSE against the
+wrong (one session too old) prior close for almost every symbol at once -
+see `state/engine-issues.md` for the diagnosis that found this.
 
 Usage:
     python scripts/fetch_bhavcopy.py --start 2015-01-01 --end 2026-10-16 --out ~/.cache/stockstalker-lab/raw
@@ -66,29 +78,28 @@ def main() -> None:
     d, end = date.fromisoformat(a.start), date.fromisoformat(a.end)
     got = skipped = 0
     while d <= end:
-        if d.weekday() < 5:
-            for seg in ("cm", "fo"):
-                target = out / seg / str(d.year) / f"{seg}_{d:%Y%m%d}.csv.zip"
-                key = f"{seg}:{d:%Y%m%d}"
-                if target.exists() or key in missing:
-                    skipped += 1
-                    continue
-                blob = None
-                for u in urls(seg, d):
-                    blob = get(u)
-                    time.sleep(PAUSE)
-                    if blob:
-                        break
+        for seg in ("cm", "fo"):
+            target = out / seg / str(d.year) / f"{seg}_{d:%Y%m%d}.csv.zip"
+            key = f"{seg}:{d:%Y%m%d}"
+            if target.exists() or key in missing:
+                skipped += 1
+                continue
+            blob = None
+            for u in urls(seg, d):
+                blob = get(u)
+                time.sleep(PAUSE)
                 if blob:
-                    target.parent.mkdir(parents=True, exist_ok=True)
-                    target.write_bytes(blob)
-                    got += 1
-                else:
-                    missing.add(key)
-                    with missing_file.open("a") as f:
-                        f.write(key + "\n")
-            if d.day == 1 or d == end:
-                print(f"{d} downloaded={got} skipped={skipped} holidays/missing={len(missing)}", flush=True)
+                    break
+            if blob:
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(blob)
+                got += 1
+            else:
+                missing.add(key)
+                with missing_file.open("a") as f:
+                    f.write(key + "\n")
+        if d.day == 1 or d == end:
+            print(f"{d} downloaded={got} skipped={skipped} holidays/missing={len(missing)}", flush=True)
         d += timedelta(days=1)
     print(f"done: downloaded={got} skipped={skipped} missing={len(missing)}")
 
