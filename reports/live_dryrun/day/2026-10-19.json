@@ -1,0 +1,64 @@
+{
+  "session": "2026-10-19",
+  "horizon": "day",
+  "asof": "2026-10-16",
+  "generated_at": "2026-10-17T22:29:10.038971+00:00",
+  "label": "provisional",
+  "disclaimer": "Model output in testing. Not investment advice or a recommendation. Not a SEBI-registered research analyst. Every pick is shown, including misses. Provisional strategy: it has not passed the lab's tests. No proven edge yet.",
+  "tables": {
+    "bullish": [
+      {
+        "symbol": "TECHM",
+        "strategy": "champion_v1@v1",
+        "reasoning": "champion v1 (StockStalker blended score): trend -0.179, momentum +0.756, volume +0.739 -> blended +0.378 (bullish)"
+      },
+      {
+        "symbol": "KOTAKBANK",
+        "strategy": "champion_v1@v1",
+        "reasoning": "champion v1 (StockStalker blended score): trend +0.240, momentum +0.445, volume +0.141 -> blended +0.287 (bullish)"
+      },
+      {
+        "symbol": "ANGELONE",
+        "strategy": "champion_v1@v1",
+        "reasoning": "champion v1 (StockStalker blended score): trend +0.009, momentum +0.414, volume +0.545 -> blended +0.285 (bullish)"
+      },
+      {
+        "symbol": "INDHOTEL",
+        "strategy": "champion_v1@v1",
+        "reasoning": "champion v1 (StockStalker blended score): trend +0.046, momentum +0.408, volume +0.432 -> blended +0.269 (bullish)"
+      },
+      {
+        "symbol": "ICICIGI",
+        "strategy": "champion_v1@v1",
+        "reasoning": "champion v1 (StockStalker blended score): trend +0.095, momentum +0.567, volume +0.111 -> blended +0.265 (bullish)"
+      }
+    ],
+    "bearish": [
+      {
+        "symbol": "TIINDIA",
+        "strategy": "champion_v1@v1",
+        "reasoning": "champion v1 (StockStalker blended score): trend -0.881, momentum -0.420, volume -0.075 -> blended -0.518 (bearish)"
+      },
+      {
+        "symbol": "FORTIS",
+        "strategy": "champion_v1@v1",
+        "reasoning": "champion v1 (StockStalker blended score): trend -0.742, momentum -0.435, volume -0.273 -> blended -0.517 (bearish)"
+      },
+      {
+        "symbol": "MAXHEALTH",
+        "strategy": "champion_v1@v1",
+        "reasoning": "champion v1 (StockStalker blended score): trend -0.438, momentum -0.755, volume -0.158 -> blended -0.479 (bearish)"
+      },
+      {
+        "symbol": "SWIGGY",
+        "strategy": "champion_v1@v1",
+        "reasoning": "champion v1 (StockStalker blended score): trend -0.651, momentum -0.398, volume -0.286 -> blended -0.471 (bearish)"
+      },
+      {
+        "symbol": "YESBANK",
+        "strategy": "champion_v1@v1",
+        "reasoning": "champion v1 (StockStalker blended score): trend -0.416, momentum -0.775, volume +0.016 -> blended -0.434 (bearish)"
+      }
+    ]
+  }
+}
