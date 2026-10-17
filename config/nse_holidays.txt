@@ -1,0 +1,26 @@
+# NSE equity segment trading holidays (weekday closures only; weekend
+# holidays like Mahashivratri 2026 are omitted since they close nothing a
+# weekday calendar would otherwise count as a trading day).
+#
+# Source: NSE's published 2026 holiday list, cross-checked across two
+# independent aggregators on 2026-10-17 (https://www.bajajbroking.in/nse-holidays,
+# https://rupeezy.in/share-market-holiday/nse). Covers 2026 only - extend
+# this file once NSE publishes the following year's circular (usually
+# released in the preceding December).
+#
+# Format: one ISO date per line, optionally followed by " # <name>".
+2026-01-26  # Republic Day
+2026-03-03  # Holi
+2026-03-26  # Shri Ram Navami
+2026-03-31  # Shri Mahavir Jayanti
+2026-04-03  # Good Friday
+2026-04-14  # Dr. Baba Saheb Ambedkar Jayanti
+2026-05-01  # Maharashtra Day
+2026-05-28  # Bakri Id
+2026-06-26  # Muharram
+2026-09-14  # Ganesh Chaturthi
+2026-10-02  # Mahatma Gandhi Jayanti
+2026-10-20  # Dussehra
+2026-11-10  # Diwali-Balipratipada
+2026-11-24  # Prakash Gurpurb Sri Guru Nanak Dev
+2026-12-25  # Christmas
