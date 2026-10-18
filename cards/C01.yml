@@ -1,0 +1,85 @@
+source_url: ""
+author: "French (1980) Stock Returns and the Weekend Effect, JFE (cards/catalog.csv's own summary)"
+license: "academic paper, not code; summarised only (SPEC.md section 5)"
+published_on: "1980"
+claim_as_stated: >
+  cards/catalog.csv's own reading: "Bias picks by weekday based on
+  train-period weekday base rates." `prior_claim`: "US: historically weak
+  Mondays; many calendar effects faded after publication." The literal
+  claim is about the pick date's *own* weekday (Monday's own return is
+  unusually low).
+horizon: day
+rules_plain: >
+  The catalog's rule as literally stated needs the pick date's own weekday
+  to decide today's bias - but `engine.replay.pick_date` calls
+  `strategy.score(history)` with no date argument at all (SPEC.md section 5:
+  the interface is `score(history: pd.DataFrame) -> pd.Series`, nothing
+  else), and `history` is truncated strictly before the pick date (B4), so
+  nothing in `history` ever carries today's own calendar date either. No
+  calendar-effect strategy can read "today is a Monday" directly; this is a
+  new, more general wall than A09's (gap fade still had the information
+  inside the engine, just dated wrong - this family doesn't have the
+  pick-date's identity inside the engine at all). Flagged generally in
+  `state/engine-issues.md` since C02-C04 hit the identical wall, and C03
+  additionally needs a holiday calendar that doesn't exist for the
+  2015-2020 train period at all (`config/nse_holidays.txt` covers 2026
+  only).
+
+  The honest port here uses a proxy that needs no pick-date knowledge: the
+  weekday of the *last visible row's date* (`history`'s own last trading
+  day, i.e. "yesterday", already inside the truncated slice) stands in for
+  "today's weekday minus one trading day", and base rates are built the
+  same way - every historical (date, next trading date) pair in `history`
+  keys the *next* date's realised return by the *first* date's weekday.
+  Since NSE trading days almost always increment Mon->Tue->...->Fri->Mon
+  with no gap, "yesterday was a Friday" means "today is a Monday" in the
+  overwhelming majority of weeks, and the training pairs are built with
+  the exact same lens (every historical "Friday" bucket entry *is* that
+  week's following trading day's return, Monday nearly always, occasionally
+  Tuesday when Monday itself is a holiday). Construction and application
+  use the identical proxy, so this is self-consistent, not a different
+  claim wearing the same name (unlike A09's one-day lag, which tests a
+  different day's gap than the catalog's literal same-day claim) - it is
+  the same claim, measured through a proxy that is wrong only in the rare
+  week a holiday falls immediately after the keying day.
+
+  Market-wide, not per-symbol (the catalog gives no per-symbol
+  differentiation): pool every F&O-universe row's open-to-close return per
+  date (mean across symbols with `has_future` true that date), giving one
+  pooled return per trading date in `history`. For every consecutive pair
+  of dates present in `history`, bucket the *second* date's pooled return
+  under the *first* date's Python weekday (0=Mon..4=Fri). Look up the
+  bucket keyed by the weekday of `history`'s own last date; if it has at
+  least `MIN_OCCURRENCES` entries, every symbol with any `has_future` row
+  gets that bucket's mean pooled return as its score (same value for all -
+  a market-wide tilt, not a cross-sectional rank); otherwise abstain
+  (empty Series, selective like A02/A09).
+params:
+  min_occurrences: 20
+red_flags:
+  - "The yesterday's-weekday proxy silently mislabels the bucket in the
+    rare week where the keying day's own following weekday is itself a
+    holiday (e.g. yesterday Friday, Monday is a holiday, so the paired
+    'next date' is actually Tuesday) - the Friday bucket then mixes true
+    Monday and true Tuesday outcomes. This blurs the signal; it does not
+    leak anything (both bucket-construction and bucket-lookup use the same
+    proxy), and NSE holidays are a small minority of weeks."
+  - "Market-wide and not cross-sectional: every eligible symbol gets the
+    identical score on a given pick date. Downstream top-N pick selection
+    breaks ties by whatever rule the engine already uses for equal scores
+    (not this module's concern) - this is a deliberate consequence of the
+    catalog's own rule, not an oversight."
+  - "MIN_OCCURRENCES=20 is a round number, not tuned - the tune lane
+    revisits this once a real train edge exists worth tuning (SPEC.md
+    section 8)."
+  - "No claim is assumed true (SPEC.md section 5): status moves to
+    confirmed/refuted only after a real train (then validation/test)
+    replay of this proxied variant, not the catalog's literal
+    pick-date-own-weekday claim."
+  - "This card's wall (score() has no access to the pick date) is general,
+    not C01-specific - see the new entry in state/engine-issues.md. C02
+    (turn-of-month) uses the identical day-before proxy. C03 (pre-holiday)
+    cannot be ported this way at all: it needs to know about a *future*
+    date (tomorrow being a holiday), which no amount of past data can
+    supply, and the only holiday list in the repo covers 2026 alone."
+status: queued

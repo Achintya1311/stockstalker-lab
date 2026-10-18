@@ -553,3 +553,67 @@ score distribution sanity checks) — real edge/accuracy numbers are not
 computable by this routine for A01 or anything ported after it. This run
 moved on to `port`ing A02 instead rather than leaving the run idle on this
 blocker (SPEC.md's "the work never runs out").
+
+## READY FOR WIRING (methodology, not an engine bug): `score(history)` never carries the pick date — blocks C02-C04, not just C01
+
+Not urgent for B1-B9 (no B item needs a calendar-effect strategy) but worth
+recording now: found while porting C01 (day-of-week effect), the next card
+in SPEC testing order after A01-A09.
+
+**The wall:** `engine/replay.py`'s `pick_date(history, strategy, date, ...)`
+knows `date` (the pick date) but never passes it to `strategy.score()` —
+and SPEC.md section 5's own interface contract is `score(history: pd.DataFrame)
+-> pd.Series`, nothing else. `history` itself is truncated strictly before
+`date` (B4), so nothing inside it carries the pick date's identity either.
+Any strategy whose rule is a function of the pick date itself — not of past
+prices — cannot read that fact at all, by design, not by oversight (B4's
+whole point is that a strategy must never see today's own row).
+
+This is more fundamental than A09's gap-fade wall (`cards/A09.yml`): A09's
+problem was *timing* (the right information existed somewhere in the
+engine, just dated one day later than the catalog's literal claim needed).
+Here there is no information to find anywhere in `history` — "what calendar
+weekday is today" isn't derivable from any amount of past price data.
+
+**C01 (day-of-week) ported anyway**, using a proxy that needs no pick-date
+knowledge at all: the weekday of `history`'s own last visible date stands
+in for "today minus one trading day" (NSE trading days almost always
+increment Mon→Tue→…→Fri→Mon with no gap), and both the historical base
+rates and the live lookup use that identical proxy — self-consistent, see
+`cards/C01.yml`'s `rules_plain` for the full reasoning and its one real
+caveat (a holiday landing right after the keying day mixes two true
+weekdays into one bucket). No engine change was needed for C01; this entry
+exists for C02-C04, where the same trick either still works or runs out:
+
+- **C02 (turn-of-month)** — likely portable the same way C01 was: "is
+  `history`'s last visible date near a month boundary" is answerable from
+  dates already inside `history`, no pick-date knowledge needed. Next
+  `port`-lane candidate after this entry is read.
+- **C03 (pre-holiday)** — *not* portable this way, and not just an interface
+  problem: the rule needs to know whether **tomorrow** (relative to the pick
+  date) is a holiday, which is future information no amount of past price
+  history can ever supply, proxy or not. It would need a real, pre-declared
+  holiday calendar covering every date a job might run on — and
+  `config/nse_holidays.txt` covers 2026 only (its own header says so). This
+  card needs one of: (a) a supervised session sourcing NSE's full holiday
+  history back to 2015 (circulars are published yearly; the same "new
+  fetch infrastructure" shape as B3's proposed direction 1), or (b) staying
+  `untested` with `testable_now` reconsidered, since without full history no
+  split can be replayed at all, not just train.
+- **C04 (expiry-week)** — same future-information shape as C03 (needs to
+  know whether the pick date falls in an expiry week), but may be more
+  tractable than C03: NSE's monthly expiry is a near-deterministic rule
+  (last Thursday of the month, shifted a day earlier only on a holiday —
+  the same holiday-calendar gap C03 hits), *and* the catalog's own
+  `data_needed` for D04 — sorry, for C04 — is "expiry calendar from FO
+  bhavcopy", which may already be inferable from the dataset's own FUTSTK
+  expiry-date field (not yet checked by this run) rather than a hand-built
+  calendar rule — worth checking `scripts/build_dataset.py`'s FO parsing
+  for an expiry column before assuming this needs the same holiday-history
+  fetch C03 does.
+
+No `.github/` or `engine/` change is proposed here — C01 shipped without
+one, and C02 looks likely to as well. Flagging this now so whoever picks up
+C03/C04 doesn't re-discover the holiday-calendar gap from scratch, and so a
+supervised session can decide whether sourcing full NSE holiday history is
+worth doing before C03/C04's turn comes up in SPEC order.
