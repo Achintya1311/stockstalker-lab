@@ -1093,3 +1093,64 @@ experiments, not one. Until then, further `port`-lane runs should keep
 working through `cards/catalog.csv` in SPEC order (A05, MAX effect /
 lottery stocks, is next). `build` is still blocked on B3 and B10 -
 nothing changed there this run.
+
+## 2026-10-18T08:10Z — port lane
+
+Hypothesis: A05 (MAX effect / lottery stocks, Bali, Cakici and Whitelaw
+2011) is next in `cards/catalog.csv`'s testing order after A01-A04; `port`
+was free (no lease held), `build` remains blocked on B3 (methodology
+decision for a supervised session) and B10 (needs a `.github/` change),
+and `diagnose` remains blocked on the `engine/experiment_report.py`
+proposal in `state/engine-issues.md` (no automated way yet to score a
+landed pick log) - so `port` is the right lane to keep research moving
+(SPEC.md's "the work never runs out").
+
+What I did: the catalog's own rule for A05 ("highest single-day return
+over the past month: high MAX bearish, low MAX bullish") is, like A04's
+"close / 52-week high", not directly signed around zero - MAX is a
+maximum of a roughly mean-zero return distribution, so it's typically
+positive regardless of whether a stock is, in the paper's own
+cross-sectional sense, unusually lottery-like for its own history.
+Adapted it the same way A04 adapted its ratio: centred per-symbol, this
+time against a trailing volatility baseline rather than the stock's own
+price range. `z = MAX / sigma`, where `MAX` is the largest daily return
+over the trailing 21 trading days and `sigma` is the standard deviation
+of daily returns over the 60 trading days immediately *preceding* that
+window (a separate, non-overlapping baseline, so the month being judged
+can't inflate the yardstick it's judged against - the same trick A02
+uses to keep an extreme day out of its own sigma estimate). `score = -z`,
+so an unusually large best day relative to the stock's own normal
+volatility (lottery-like) scores bearish, and a muted one scores bullish.
+Flagged this adaptation explicitly in `cards/A05.yml`'s red flags, same as
+A04's.
+
+Added `cards/A05.yml`, `strategies/a05_max_effect.py` (same `has_future`
+prefilter and walk-forward adjustment as A01-A04), its causality audit
+(`strategies/a05_max_effect_audit.py`, same per-symbol-groupby shape), and
+`tests/test_a05_max_effect.py` (15 tests: known expected-`z` fixtures via
+a deterministic alternating-return baseline plus a constant-return month,
+a large-best-day-scores-bearish case, a muted-best-day-scores-bullish
+case, zero-baseline-volatility abstain, a leading-history-doesn't-leak
+check, threshold/insufficient-history abstain, per-symbol independence,
+`has_future` prefilter, causality audit). Queued the train replay as
+`experiments/pending/a05-max-effect-week.yml` (train split, week horizon)
+and marked A05 `queued` in `cards/catalog.csv`.
+
+Result: `python3.13 -m pytest -q` (full suite, this sandbox's
+`/usr/bin/python3.13` interpreter; `pytest`/`pandas`/`pyarrow`/`numpy`/
+`pyyaml` had to be installed into it first via `python3.13 -m pip install`
+- no interpreter in this sandbox had them preinstalled this run, unlike
+the 2026-10-18T04:09Z entry's note) - 290 passed (275 existing + 15 new),
+0 failed, in 217.89s. No regressions. Pushing this should trigger
+`replay.yml` (queue touched) against the real cached dataset.
+
+Next: once `replay.yml` lands `experiments/done/a05-max-effect-week/`, it
+will hit the same scoring blocker A01-A04 already did - still waiting on
+the `engine/experiment_report.py` proposal in `state/engine-issues.md` for
+a supervised session to pick up; that blocker now affects five landed
+experiments, not one, and is worth prioritising once a supervised session
+is available, since every further `port` just adds another unscored
+experiment to the pile. Until then, further `port`-lane runs should keep
+working through `cards/catalog.csv` in SPEC order (A06, low volatility /
+idiosyncratic volatility, is next). `build` is still blocked on B3 and
+B10 - nothing changed there this run.

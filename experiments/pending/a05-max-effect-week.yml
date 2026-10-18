@@ -1,0 +1,13 @@
+# A05: MAX effect (lottery stocks), train-split replay (port lane, `state/queue.md`).
+# See cards/A05.yml and strategies/a05_max_effect.py.
+# Week horizon only - the catalog row's own rule is a weekly pick ranked by
+# MAX (the trailing month's largest daily return, z-scored against its own
+# prior baseline volatility); there is no day-horizon variant to queue
+# alongside it.
+id: a05-max-effect-week
+strategy: strategies.a05_max_effect
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
