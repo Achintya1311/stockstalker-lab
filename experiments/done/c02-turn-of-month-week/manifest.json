@@ -1,0 +1,9 @@
+{
+  "id": "c02-turn-of-month-week",
+  "strategy": "strategies.c02_turn_of_month",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 42264,
+  "n_dates": 185,
+  "pick_log_sha256": "82eee8123956a15f12b32f15408a0ceb29f4a5082b5fea0a04464ca68eb62df8"
+}
