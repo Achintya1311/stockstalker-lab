@@ -1,0 +1,9 @@
+{
+  "id": "a06-low-volatility-week",
+  "strategy": "strategies.a06_low_volatility",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 61415,
+  "n_dates": 296,
+  "pick_log_sha256": "df82517070535d1b926e9eb4bf2a72143b3ddfe7bb071117a5977f5aa4e9d38c"
+}
