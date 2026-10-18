@@ -471,3 +471,85 @@ computed over 1-2 un-adjusted split/bonus days per affected symbol across
 the full 2015-2026 history — likely a small number of symbol-days in
 absolute terms (splits/bonuses are rare events), but worth knowing the
 scale before judging it immaterial.
+
+## READY FOR WIRING: no automated way to score a finished train replay (blocks `diagnose` for every future `port`, not just A01)
+
+Needs a supervised session: the fix lives in `engine/`, which is protected
+(this run can describe it but not write it). Found while trying to do the
+`diagnose` work the previous run's journal entry (2026-10-18T00:17Z) queued
+up: record A01's train edge in `cards/catalog.csv` and `ledger/trials.csv`,
+and write `research/diagnostics/A01.md`.
+
+**The blocker:** `experiments/done/a01-weekly-reversal-week/picks.json` (now
+landed by `replay.yml`, 64,157 rows, one `date,symbol,score` triple each) is
+a raw pick log, not a scored one — it has no `open`/`close`/`move`/`hit`
+columns. Computing edge, accuracy or directional move needs joining it
+against the real dataset (`moves_for_horizon`, `universe_membership` in
+`engine/scoring.py`), exactly what `engine/champion_report.py` already does
+for champion v1 — but:
+
+- The real dataset (`data/dataset.parquet`) lives only in the GitHub Actions
+  cache (SPEC.md section 4), never checked out to this sandbox or any
+  non-Actions environment. There is no way to join `picks.json` against real
+  prices outside a workflow run.
+- `champion_report.py` is hardcoded to one strategy (`strategies.champion_v1`)
+  and recomputes picks itself by calling `run_dates` live, rather than reading
+  a committed pick log — it does not generalise to an arbitrary strategy in
+  `experiments/done/`.
+- The only workflow that touches the real dataset for replay purposes is
+  `replay.yml`, and its one compute step is the fixed command
+  `python3 -m engine.run_queue --data data/dataset.parquet` (no
+  `workflow_dispatch` input lets the routine point it at an arbitrary script,
+  and this run cannot edit `.github/` to add one). `engine/run_queue.py`
+  itself (inside the protected `engine/` tree) is the only place already
+  wired to run with the real dataset in hand every time `replay.yml` fires.
+
+So nothing this run can write outside `engine/`/`.github/` ever actually
+executes against real prices. This is the same shape of blocker B3 hit
+(`detect_corporate_actions` needing a workflow step only a supervised
+session could add), not a one-off for A01 — every future `port`-lane card
+will land in `experiments/done/` just as unscored, and `diagnose` will hit
+this exact wall every time, unless it's fixed once, generally.
+
+**Proposed fix** (one `engine/` module plus a two-line call in
+`engine/run_queue.py`, mirroring how `champion_report.py` is already wired
+in rather than inventing a new mechanism):
+
+1. Add `engine/experiment_report.py` with a function
+   `score_pick_log(picks: pd.DataFrame, dataset: pd.DataFrame, horizon: str) -> dict`
+   that does exactly what `champion_report.side_results`/`_yearly_table`
+   already do, generalised to take a pick log directly instead of calling a
+   strategy's `score()` live: split `picks` into bullish/bearish by the sign
+   of its own `score` column (`champion_report._side_picks`'s exact logic),
+   restrict to the universe (`_restrict_to_universe`), join against
+   `moves_for_horizon(dataset, horizon)`, and compute `hit`/`edge`/
+   `directional_move_after_costs` whole-split and by calendar year
+   (`engine.scoring`, already imported by `champion_report.py` so no new
+   import surface). Render the same table shape `champion_report.render`
+   already produces, to `research/diagnostics/<id>.md` (a stable per-year/
+   side numbers section the `diagnose` lane's prose can sit above — not
+   replacing the qualitative "where it works and fails" writeup `state/queue.md`
+   asks for, feeding it real numbers instead of none).
+2. In `engine/run_queue.py`'s `main()`, after the existing
+   `maybe_write_champion_report` call, loop `done_dir.iterdir()` and call the
+   new function for every experiment directory that has a `picks.json` and
+   whose `research/diagnostics/<id>.md` does not exist yet (same "write once,
+   never overwrite a cross-check" idiom `check_corporate_actions.py` already
+   uses in `dataset.yml`, so a manually-edited diagnostics file is never
+   clobbered by the next push). Read `horizon` from the experiment's own
+   `manifest.json` (already carries it) rather than re-deriving it.
+3. No `.github/` change needed: `replay.yml` already triggers on
+   `experiments/pending/**` changing (which is exactly when a new experiment
+   is queued and, two runs later, lands in `experiments/done/`), and already
+   commits everything under `reports/`, `experiments/`, `ledger/` via
+   `.github/push.sh`; `research/` would need adding to that commit's path
+   list in `replay.yml` — this one line *is* a `.github/` change, so note it
+   explicitly for whoever picks this up, it's the one piece of the proposal
+   that isn't purely an `engine/` edit.
+
+Until this lands, `diagnose` work on any `port`ed card is limited to what
+can be read from `picks.json`'s own `score` column without outcomes (e.g.
+score distribution sanity checks) — real edge/accuracy numbers are not
+computable by this routine for A01 or anything ported after it. This run
+moved on to `port`ing A02 instead rather than leaving the run idle on this
+blocker (SPEC.md's "the work never runs out").

@@ -926,3 +926,60 @@ run reaches the evaluate lane. A02 (daily reversal after an extreme day)
 is next in the `port` queue after A01. `build` is still blocked on B3 -
 the three documented directions in `state/engine-issues.md` still need a
 supervised pick; nothing changed there this run.
+
+## 2026-10-18T02:11Z — port lane
+
+Hypothesis: `build` is still blocked (B3 needs a supervised data-source
+decision; B10 needs B1-B9 all ticked) and A01's train replay had already
+landed in `experiments/done/` with the previous run's journal entry
+flagging "research during the build" as the next step and A02 (daily
+reversal after an extreme day) as the next catalog row in SPEC order. Tried
+first to do the `diagnose` work that same entry queued up (record A01's
+train edge in `cards/catalog.csv`/`ledger/trials.csv`, write
+`research/diagnostics/A01.md`), but hit a structural blocker: scoring a
+pick log needs the real dataset, which lives only in the Actions cache, and
+the only workflow that touches it (`replay.yml`) runs a fixed
+`engine.run_queue` command with no way to point it at a new script, while
+`champion_report.py` (the only existing scoring-by-year/side code) is
+hardcoded to champion v1 and lives inside the protected `engine/` tree.
+Wrote this up in full in `state/engine-issues.md` ("READY FOR WIRING: no
+automated way to score a finished train replay") with a concrete proposed
+fix (`engine/experiment_report.py` generalising `champion_report.py`'s
+per-year/side scoring to any `experiments/done/<id>/picks.json`, called
+from `run_queue.main()`), since this blocks `diagnose` for every future
+`port`ed card, not just A01 - then moved on rather than leaving the run
+idle on it.
+
+What I did: ported A02, daily reversal after an extreme day (microstructure
+liquidity-overreaction literature, no single canonical paper per the
+catalog's own `prior_claim`) - `cards/A02.yml` (source, claim, params,
+red flags - including that there's no single dated study to check vintage
+against), `strategies/a02_extreme_day_reversal.py` (score = -(yesterday's
+close-to-close return / trailing 20-day sigma, sigma excluding yesterday's
+own return), selective: abstains unless |z| >= 2.0; day horizon, same
+`has_future` prefilter as A01/champion_v1), `strategies/a02_extreme_day_reversal_audit.py`
+(cross-symbol causality check - built a deterministic alternating-return
+fixture, since a pure random walk may or may not clear the 2-sigma gate for
+any given seed, unlike A01's unconditional continuous score), and
+`tests/test_a02_extreme_day_reversal.py` (16 tests: known-sign and exact
+z-score-magnitude checks via the same deterministic fixture, threshold
+abstain both sides of the gate, zero-volatility abstain, insufficient
+history, per-symbol independence, `has_future` prefilter, causality audit).
+Queued the train replay as `experiments/pending/a02-extreme-day-reversal-day.yml`
+(train split, day horizon) and marked A02 `queued` in `cards/catalog.csv`.
+
+Result: `python3 -m pytest -q` - 246 passed (230 existing + 16 new), no
+regressions. Pushing this should trigger `replay.yml` (queue touched)
+against the real cached dataset.
+
+Next: once `replay.yml` lands `experiments/done/a02-extreme-day-reversal-day/`,
+it will hit the exact same scoring blocker A01 already did - a `diagnose`-lane
+run can't turn either pick log into real edge numbers until a supervised
+session picks up the `engine/experiment_report.py` proposal in
+`state/engine-issues.md`. Until then, further `port`-lane runs should keep
+working through `cards/catalog.csv` in SPEC order (A03 price momentum 12-1
+is next) rather than stall on `diagnose` - and a future run should re-check
+whether a supervised session has picked up the engine-issues entry, since
+once it lands, A01's and A02's pick logs are both sitting ready to be
+scored immediately with no further replay needed. `build` is still blocked
+on B3 - nothing changed there this run.

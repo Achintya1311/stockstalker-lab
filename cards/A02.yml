@@ -1,0 +1,30 @@
+source_url: ""
+author: "Microstructure literature on short-horizon reversal (practitioner/academic consensus, no single canonical paper cited in cards/catalog.csv)"
+license: "no single paper; summarised and cited only (SPEC.md section 5)"
+published_on: "ongoing microstructure literature"
+claim_as_stated: >
+  After a very large down day, the price is bullish for the next day; after
+  a very large up day, bearish. The usual explanation is liquidity-driven
+  overreaction on the extreme day (forced selling/buying, stop runs) that
+  partially reverses once the pressure clears, rather than a fundamental
+  repricing.
+horizon: day
+rules_plain: >
+  For each symbol, compute yesterday's close-to-close return and a trailing
+  daily-return volatility (sigma) from the `sigma_window` days before that
+  (excluding yesterday's own return, so the extreme move does not inflate
+  its own volatility estimate). z = yesterday's return / sigma. Abstain
+  unless |z| >= `z_threshold`. Score = -z, so a big down day scores bullish
+  and a big up day scores bearish; magnitude beyond the threshold gives
+  conviction, the same "sign gives direction, magnitude gives conviction"
+  convention `strategies/a01_weekly_reversal.py` and `strategies/champion_v1.py`
+  already use.
+params:
+  sigma_window: 20
+  z_threshold: 2.0
+red_flags:
+  - "No single source paper or published effect size - the catalog's own prior_claim already calls this 'microstructure literature', not one dated study, so there is no specific out-of-sample-after-year-Y test to apply the way A01's vintage check works. Treat the claim itself (not just the date) as unverified until the train replay says otherwise."
+  - "Day horizon (open-to-close), but the signal and its abstain gate are both computed off daily close-to-close returns - the extreme day's own next-session gap could already be priced in by the open, which this score cannot see or adjust for (SPEC.md section 4's truncation hands this module data only through the prior close, same as every other day strategy here)."
+  - "A single global z_threshold=2.0 and sigma_window=20 are catalog defaults, not tuned - SPEC.md section 8 tuning (train-only, middle of a stable plateau) comes later if this shows a train edge worth tuning."
+  - "No claim is assumed true (SPEC.md section 5): this card's status moves to confirmed/refuted only after a real train (then validation/test) replay."
+status: queued
