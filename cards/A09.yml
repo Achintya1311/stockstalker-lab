@@ -1,0 +1,83 @@
+source_url: ""
+author: "Practitioner gap-trading literature (no single canonical academic source; cards/catalog.csv's own `source` field)"
+license: "practitioner folklore, not code; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  cards/catalog.csv's own reading of the practitioner gap-fade claim: "Large
+  gap up at the open bearish for open-to-close, large gap down bullish" -
+  a stock that opens well away from its prior close tends to partly retrace
+  that gap during the same session, so fading the gap direction (bearish on
+  a big gap up, bullish on a big gap down) for that day's open-to-close
+  move is argued to have an edge. `prior_claim` in the catalog: "Opening
+  gaps partly fill intraday."
+horizon: day
+rules_plain: >
+  The catalog's rule as literally stated needs the *pick date's own* open
+  (the gap being faded is today's gap) to decide today's direction - but
+  `engine/replay.py`'s `truncate()` withholds the pick date's own row from
+  every strategy by construction (B4; SPEC.md section 4: "a strategy
+  receives only data up to the previous close"). No day-horizon strategy,
+  this one included, can ever condition on the pick date's own open. The
+  literal same-day gap-fade trade is therefore untestable inside this
+  engine, not merely unimplemented - and this isn't specific to this
+  card's reading of the idea: the whole "gap" family hits the same wall
+  (A10, gap-and-go, is the identical case, flagged below so whoever ports
+  it next doesn't re-discover this from scratch).
+
+  The honest, causality-respecting port keeps the catalog's mechanism (a
+  large open-vs-prior-close gap tends to partly reverse) but applies it one
+  day later than literally stated: *yesterday's* gap is fully observed by
+  the time a pick is made for today (yesterday's whole row, open included,
+  is inside the truncated slice), and if the fade/reversal mechanism is
+  real and persists even slightly past the single session the catalog
+  assumes, some of that reversal should still be working itself out into
+  today's open-to-close move. Concretely:
+
+    gap_t = adj_open_t / adj_close_(t-1) - 1   (close-to-open gap, day t)
+
+  Over the `SIGMA_WINDOW` (20) trading days before yesterday (yesterday's
+  own gap excluded, so an unusually large gap can't inflate the very sigma
+  used to judge how large it was - the same exclusion
+  `strategies/a02_extreme_day_reversal.py` uses on close-to-close returns),
+  compute `sigma` = the population std of `gap_t`. Let
+  `z = gap_yesterday / sigma`. If `|z| >= Z_THRESHOLD`: `score = -z` (a big
+  gap up yesterday, z > 0, scores negative/bearish for today; a big gap
+  down yesterday scores positive/bullish). Otherwise abstain (selective,
+  like A02's own Z_THRESHOLD gate).
+
+  Prices are the split/bonus-adjusted series (`scripts.adjustments`) so a
+  corporate action landing between a close and the next open doesn't
+  masquerade as a real gap, exactly as A08 already does for its own
+  overnight leg.
+params:
+  sigma_window: 20
+  z_threshold: 2.0
+red_flags:
+  - "This card's own rule, as the catalog states it, cannot be tested at all
+    inside this engine (see rules_plain) - the version tested here is a
+    one-day-lagged reinterpretation of the same mechanism, not the literal
+    same-day gap-fade trade practitioners describe. If the true same-day
+    effect and this lagged one don't share a sign or a magnitude,
+    confirming or refuting this card says nothing about the literal claim,
+    only about the lagged variant. Closing this gap for real would need the
+    pick timing itself to move - picks made after the open, using that
+    day's own open - which SPEC.md section 10 already rules out for
+    *published* picks ('before the open'), so even an engine change
+    couldn't close it without a SPEC change; not filed in
+    state/engine-issues.md since there is no code fix to propose, only a
+    SPEC-level tradeoff for the SPEC.md author."
+  - "A10 (gap and go) hits the identical same-day-information wall and will
+    need the identical one-day-lag treatment when its turn comes."
+  - "Z_THRESHOLD=2.0 and SIGMA_WINDOW=20 mirror A02's own defaults exactly
+    (matching the shape of this card's 'gap > k x 20-day sigma'
+    default_params, not independently re-derived) - untuned; the tune lane
+    revisits this once a real train edge exists worth tuning."
+  - "A08 (overnight vs intraday tug of war) and this lagged A09 both now
+    trade a function of the overnight/gap component, one day apart; A08's
+    own card already flagged expecting correlated picks with A09 - worth
+    checking pick overlap once both have train results (SPEC.md section 6
+    gate 8's roster-level 50% overlap check)."
+  - "No claim is assumed true (SPEC.md section 5): status moves to
+    confirmed/refuted only after a real train (then validation/test) replay
+    of this lagged variant, not the catalog's literal claim."
+status: queued

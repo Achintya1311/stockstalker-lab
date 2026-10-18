@@ -1,0 +1,12 @@
+# A09: gap fade (1-day lag), train-split replay (port lane, `state/queue.md`).
+# See cards/A09.yml and strategies/a09_gap_fade.py.
+# Day horizon only - the catalog row's own rule predicts the open-to-close
+# move, exactly our day pick's own horizon; there is no week-horizon
+# variant to queue alongside it.
+id: a09-gap-fade-day
+strategy: strategies.a09_gap_fade
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
