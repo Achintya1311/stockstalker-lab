@@ -1,0 +1,51 @@
+source_url: ""
+author: "Andrew Ang; Robert J. Hodrick; Yuhang Xing; Xiaoyan Zhang"
+license: "academic paper, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "2006"
+claim_as_stated: >
+  Ang, Hodrick, Xing and Zhang (2006), "The Cross-Section of Volatility and
+  Expected Returns", JF: US stocks with high lagged idiosyncratic
+  volatility (the standard deviation of daily returns left unexplained by
+  a factor model, typically Fama-French three-factor) earn abnormally low
+  subsequent average returns, and low-idiosyncratic-volatility stocks earn
+  abnormally high ones - a puzzle, since standard asset-pricing theory
+  predicts volatility should be rewarded, not punished. The paper's own
+  holding period is one month, formed from one month of daily returns;
+  this card tests whether any of that pattern shows at a one-week NSE
+  horizon, much shorter than what was published.
+horizon: week
+rules_plain: >
+  The catalog's own rule ("low recent volatility bullish, high volatility
+  bearish") is, like A04 and A05, not directly signed around zero: a
+  realised standard deviation of returns is never negative, so a raw sigma
+  reading is bearish-leaning by construction regardless of whether the
+  stock is, in its own history, unusually calm or unusually turbulent right
+  now. This card centres `recent_window`-day realised volatility against a
+  `baseline_window`-day baseline immediately preceding it (non-overlapping,
+  the same boundary trick A02 and A05 use so the window being judged can't
+  inflate the yardstick it's judged against): `ratio = sigma_recent /
+  sigma_baseline`; `score = -(ratio - 1)` = `1 - ratio`, so a stock calmer
+  than its own recent normal (ratio < 1) scores bullish, and one more
+  turbulent than its own recent normal (ratio > 1) scores bearish, with
+  magnitude set by how far the ratio sits from 1.
+
+  This is a materially simplified stand-in for the paper's own
+  idiosyncratic volatility, not a port of its methodology: the paper
+  measures the standard deviation of a stock's *residual* return after
+  removing co-movement with the Fama-French three factors (market, size,
+  value); this card measures total realised volatility of the raw daily
+  return series, with no factor model fitted at all. The catalog's own
+  `default_params` ("20- or 60-day sigma") already describes a plain sigma
+  window, not a residual one, so this follows the catalog's own
+  simplification rather than introducing a factor model unprompted.
+params:
+  recent_window: 20
+  baseline_window: 60
+red_flags:
+  - "Published holding period (one month) is longer than the one-week horizon tested here; the paper's own effect size says nothing about whether this pattern survives at a much shorter horizon - test train-only sign and stability before trusting the direction at all, same caveat as A03/A04/A05."
+  - "This is total realised volatility, not the paper's idiosyncratic (factor-residual) volatility: no market, size or value factor is fitted or removed. The two can differ a lot for a stock whose volatility is mostly systematic (market-driven) rather than stock-specific. Flagged explicitly since the paper's own puzzle is specifically about the idiosyncratic component, and this card does not isolate it (SPEC.md section 5's 'no claim is assumed true' - this includes not assuming the un-isolated version carries the same effect)."
+  - "The catalog's rule (raw sigma, always >= 0) is not directly signed; this card centres it against the stock's own trailing baseline sigma (ratio = sigma_recent / sigma_baseline, score = 1 - ratio) rather than the paper's cross-sectional decile sort across the whole universe on a given date. This is a deliberate adaptation, not a literal replication - flagged explicitly since 'low volatility' here means low relative to this stock's own recent normal, not low relative to the rest of the universe that day."
+  - "`baseline_window` (60 trading days) is this card's own addition on top of the catalog's default (a plain 20- or 60-day sigma) - needed for the per-symbol centring above. Not tuned; a plain, round baseline length, same spirit as A02's and A05's baseline-window choices."
+  - "A thinly-traded stretch inside either window could produce a stale, non-representative volatility reading; the liquidity floor in `config/universe.yml` is applied downstream by the universe filter, not inside this score."
+  - "No claim is assumed true (SPEC.md section 5): this card's status moves to confirmed/refuted only after a real train (then validation/test) replay, not from the paper's own reported effect sizes."
+status: queued

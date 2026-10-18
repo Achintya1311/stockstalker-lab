@@ -1154,3 +1154,67 @@ experiment to the pile. Until then, further `port`-lane runs should keep
 working through `cards/catalog.csv` in SPEC order (A06, low volatility /
 idiosyncratic volatility, is next). `build` is still blocked on B3 and
 B10 - nothing changed there this run.
+
+## 2026-10-18T10:10Z — port lane
+
+Hypothesis: A06 (low volatility / idiosyncratic volatility, Ang, Hodrick,
+Xing and Zhang 2006) is next in `cards/catalog.csv`'s testing order after
+A01-A05, as the previous run's journal entry queued up. `build` remains
+blocked on B3 (methodology decision for a supervised session) and B10
+(needs a `.github/` change); `diagnose` remains blocked on the
+`engine/experiment_report.py` proposal in `state/engine-issues.md` (no
+automated way yet to score a landed pick log, now affecting five landed
+experiments); no lease was held for `port`. So `port` is the right lane
+to keep research moving (SPEC.md's "the work never runs out").
+
+What I did: the catalog's own rule for A06 ("low recent volatility
+bullish, high volatility bearish") is, like A04 and A05, not directly
+signed around zero - a realised standard deviation of returns is never
+negative, so raw sigma is bearish-leaning by construction regardless of
+whether a stock is, in its own history, unusually calm or unusually
+turbulent right now. Also decided not to attempt the paper's own
+methodology: Ang et al. measure *idiosyncratic* volatility (the std of a
+Fama-French three-factor regression residual), but the catalog's own
+`default_params` ("20- or 60-day sigma") already describes a plain sigma
+window with no factor model, so this card follows that simplification -
+total realised volatility, not isolated idiosyncratic volatility -
+flagged explicitly in `cards/A06.yml`'s red flags rather than introducing
+a factor model the catalog row never asked for. Centred it the same way
+A05 centred MAX: against a trailing baseline, this time a ratio rather
+than a z-score. `ratio = sigma_recent / sigma_baseline`, where
+`sigma_recent` is realised volatility over the trailing 20 trading days
+and `sigma_baseline` is realised volatility over the 60 trading days
+immediately *preceding* that window (a separate, non-overlapping
+baseline, the same boundary trick A02 and A05 use). `score = 1 - ratio`,
+so a stock calmer than its own recent normal scores bullish and one more
+turbulent than normal scores bearish.
+
+Added `cards/A06.yml`, `strategies/a06_low_volatility.py` (same
+`has_future` prefilter and walk-forward adjustment as A01-A05), its
+causality audit (`strategies/a06_low_volatility_audit.py`, same
+per-symbol-groupby shape), and `tests/test_a06_low_volatility.py` (16
+tests: known expected-ratio fixtures via a deterministic alternating-
+return baseline and recent window, both score directions, a neutral
+ratio-of-1 case, zero-baseline-volatility abstain, a leading-history-
+doesn't-leak check, threshold/insufficient-history abstain, per-symbol
+independence, `has_future` prefilter, causality audit). Queued the train
+replay as `experiments/pending/a06-low-volatility-week.yml` (train split,
+week horizon) and marked A06 `queued` in `cards/catalog.csv`.
+
+Result: `python3.13 -m pytest -q` (full suite, this sandbox's
+`/usr/bin/python3.13` interpreter; `pytest`/`pandas`/`pyarrow`/`numpy`/
+`pyyaml` had to be installed into it first via `python3.13 -m pip
+install`, same as the previous two runs) - 306 passed (290 existing + 16
+new), 0 failed, in 223.97s. No regressions. Pushing this should trigger
+`replay.yml` (queue touched) against the real cached dataset.
+
+Next: once `replay.yml` lands `experiments/done/a06-low-volatility-week/`,
+it will hit the same scoring blocker A01-A05 already did - still waiting
+on the `engine/experiment_report.py` proposal in `state/engine-issues.md`
+for a supervised session to pick up; that blocker now affects six landed
+experiments, not one, and is worth prioritising once a supervised session
+is available, since every further `port` just adds another unscored
+experiment to the pile. Until then, further `port`-lane runs should keep
+working through `cards/catalog.csv` in SPEC order (A07, high-volume
+return premium, is next). `build` is still blocked on B3 and B10 -
+nothing changed there this run.
