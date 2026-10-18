@@ -34,6 +34,7 @@ While any table is provisional, improving it ranks right after leak alarms and w
 ## After the build (Mode B, discover and port lanes)
 
 - **D1:** extend the dataset with near-month stock-futures and options open interest from the F&O files already cached. This unlocks catalog rows D01–D02.
+  - **D1, partial (18 Oct):** `scripts/build_dataset.py`'s `parse_fo_file` now also parses each FUTSTK/STF row's expiry date and OI, and `build()` keeps the near-month (soonest-expiry) contract's `oi_futstk`/`oi_chg_futstk` per (date, symbol) when more than one expiry trades the same day — tested on synthetic fixtures with two and three simultaneous expiries, in both the old and UDiFF formats (`tests/test_build_dataset.py`). This unlocks **D01** (`testable_now` now `yes`); the next `port`-lane run can card and test it. **D02 is still blocked**: near-month *options* OI (summed by option type across strikes, for a stock-level put/call ratio) is a separate, larger parse (multiple strikes × 2 option types per symbol per expiry, not a single row) and was not done this run — left for a follow-up `port`/`discover` unit, not filed in `state/engine-issues.md` since no supervised session is needed, just more of the same kind of work.
 - **D2:** add a fetcher for NSE's security-wise delivery file. This unlocks D03.
 - Work through `cards/catalog.csv` in the testing order SPEC.md §5 gives.
 

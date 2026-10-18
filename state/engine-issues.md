@@ -1,5 +1,37 @@
 # Engine / workflow issues for a supervised session
 
+## WATCH: `tests/test_c01_day_of_week.py::test_causality_audit_passes` is pandas-version-sensitive (2026-10-18)
+
+Not filed as blocking - found by accident this run (`port` lane, D1 dataset
+work below), not reproduced on CI. `requirements.txt` pins no versions
+(`pandas`, `pyarrow`, `numpy`, `pytest`, `pyyaml`, one per line, no `==`).
+A fresh `pip install -r requirements.txt` in this sandbox resolved
+`pandas==3.0.6`, `numpy==2.4.6` - and with that pair,
+`check_proxy_reads_from_history_not_wall_clock()` (C01's causality audit,
+`strategies/c01_day_of_week_audit.py`) deterministically returns
+`passed: False` (`bias_base == bias_shifted == 0.02`, so the two runs agree
+with each other - the audit's actual invariant - but the function's own
+pass/fail predicate still reports failure; not investigated further than
+confirming this with `git stash` against the exact same commit CI had just
+passed). The same commit's `CI` run on GitHub Actions
+(39171231919, commit `183946a4`) passed at the same time, so whatever
+GitHub's runner resolved for "pandas" differs from what PyPI gave this
+sandbox just now, or some other environment difference (Python 3.11.17
+here vs 3.12.15 on the runner per `state/workflow_failures.md`) is the
+real variable - not confirmed which.
+
+Not acted on this run: CI is the authoritative environment and is green,
+and root-causing a specific pandas/numpy pair's date-arithmetic difference
+inside an already-landed card's audit is a separate unit of work from what
+this run set out to do. Worth a future `diagnose`-lane look (or pinning
+`requirements.txt` to the versions CI actually resolves, so local sandbox
+runs stop drifting from what CI checks) before trusting this audit's
+"passed" field in a sandbox session again. If CI itself ever starts
+failing this same test after a `pip`-cache refresh picks up a newer
+pandas, it would silently stop proving C01's causality property - worth
+noticing if `test_causality_audit_passes` ever shows up in
+`state/workflow_failures.md`.
+
 ## WIRED 2026-10-17 (was READY FOR WIRING): B3 corporate-actions report
 
 **WIRED** (supervised, 17 Oct): `dataset.yml` runs `scripts/check_corporate_actions.py` after the build whenever `reports/corporate_actions_check.md` does not exist, and commits it with the manifest. It writes once, so your cross-check edits are never overwritten; delete the file to regenerate it. What remains for B3 is yours: cross-check at least 10 events and explain the >30% jumps.

@@ -2,6 +2,80 @@
 
 One entry per run: date, lane, hypothesis, result, next.
 
+## 2026-10-18T22:30Z — port lane
+
+Hypothesis: with `diagnose` and `tune` both still blocked on the
+`engine/experiment_report.py` scoring gap (`state/engine-issues.md`, now
+ten landed experiments with zero of them diagnosed), and `build` blocked
+on B3/B10, the highest-value unit of research work is the go-live
+track's P3 (`state/queue.md`, SPEC.md section 10): "D1 and D2... move
+ahead of the indicator rules... scripts/ changes, which the routine can
+make." C01-C04 (calendar effects) are exhausted (C03/C04 blocked on a
+holiday calendar and a dataset expiry field that doesn't exist - checked
+`scripts/build_dataset.py`'s FO parsing directly this run and confirmed
+`parse_fo_file` drops `EXPIRY_DT`/`XpryDt` entirely, so C04 is genuinely
+blocked, not just unconfirmed), so D1 (extend the dataset with near-month
+OI) is next in priority, ahead of T01.
+
+What I did: scoped D1 to its futures half only (one unit of work, not the
+full "futures and options OI" the queue line describes - options OI is a
+materially different parse, left as a named follow-up). `parse_fo_file`
+in `scripts/build_dataset.py` now keeps each FUTSTK/STF row's expiry date
+and OI/change-in-OI (old format: `EXPIRY_DT` as `%d-%b-%Y`, `OPEN_INT`,
+`CHG_IN_OI`; UDiFF: `XpryDt` already ISO, `OpnIntrst`, `ChngInOpnIntrst`),
+and where a symbol has more than one live expiry on the same date
+(near/next/far month - confirmed from `docs/nse_formats.md`'s "~210
+stocks x 3 expiries" note), keeps only the soonest-expiry row - D01's
+"near-month" convention, not an average or sum. `build()` carries this
+through into the merged dataset as `oi_futstk`/`oi_chg_futstk`, NaN for
+any (date, symbol) with no active future, same pattern `has_future`
+already used. No `engine/` or `.github/` change needed - `dataset.yml`
+already reruns `build_dataset.py` against the full raw cache on its own
+schedule, so the real dataset picks this up without a backfill.
+
+Added two new synthetic fixtures (`tests/test_build_dataset.py`): three
+simultaneous expiries in the old format, two in UDiFF, each asserting the
+near-month row's OI/change-in-OI is kept and the others discarded - the
+actual thing this change is for, not just "it still parses." Extended the
+three existing `parse_fo_file`/`build` tests with OI assertions on single-
+expiry fixtures too. Marked **D01 `testable_now: yes`** in
+`cards/catalog.csv` (D02 stays `no` - options OI untouched). Added a note
+under `state/queue.md`'s D1 line recording this as partial, so the next
+`port` run knows D01 is ready to card-and-test and D02's options-OI parse
+is still open, without re-deriving either from scratch.
+
+Also found, by accident, while installing test dependencies fresh in this
+sandbox (`requirements.txt` pins no versions): `pip install`'ing
+`pandas==3.0.6`/`numpy==2.4.6` makes `tests/test_c01_day_of_week.py::test_causality_audit_passes`
+deterministically fail locally, on the exact commit (`183946a4`) whose own
+`CI` run on GitHub Actions passed minutes earlier - confirmed this
+reproduces independently of my own changes via `git stash`. Not root-
+caused (Python 3.11.17 here vs 3.12.15 on the runner, or a pandas version
+difference, or both) and not acted on - CI is the authoritative
+environment and is green, and this is a pre-existing fragility in an
+already-landed card's audit, not something this run's D1 change touches.
+Recorded as a new `state/engine-issues.md` WATCH entry so a future session
+doesn't waste time re-diagnosing it from zero, and notices if it ever
+starts failing on CI itself.
+
+Result: `python3 -m pytest -q --deselect tests/test_c01_day_of_week.py::test_causality_audit_passes`
+(full suite, that one pre-existing/environment-specific failure excluded)
+- 376 passed, 0 failed, in 332.30s. No regressions from this change.
+
+Next: card and test D01 (OI build-up classification: price up with OI up
+= long build-up/bullish, price down with OI up = short build-up/bearish)
+now that `oi_futstk`/`oi_chg_futstk` exist - next `port`-lane run, or this
+one if a future run has spare budget. Options OI for D02 (stock PCR) is
+still a separate, larger parse (sum by option type across strikes within
+the near-month expiry) - not started. The `engine/experiment_report.py`
+scoring blocker remains the single highest-priority item for a supervised
+session, now overdue relative to the 30 Oct `config/live_source.json`
+deadline: ten landed experiments (A01-A09, C01, C02), zero diagnosed,
+and the go-live track's P1 cannot award a single validation query without
+it. `build` is still blocked on B3 (methodology decision) and B10 (needs
+`.github/` plus B1-B9 all ticked, and B3 isn't) - nothing changed there
+this run.
+
 ## 2026-10-18T20:23Z — port lane
 
 Hypothesis: C02 (turn-of-month effect), the next untested `testable_now:

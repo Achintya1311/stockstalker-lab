@@ -65,6 +65,43 @@ def test_parse_fo_old_keeps_only_futstk(tmp_path):
     out = parse_fo_file(path)
     assert list(out["symbol"]) == ["RELIANCE"]
     assert out.iloc[0]["date"] == "2015-01-02"
+    assert out.iloc[0]["open_int"] == 10000.0 and out.iloc[0]["chg_in_oi"] == 100.0
+
+
+OLD_FO_TWO_EXPIRIES_CSV = (
+    "INSTRUMENT,SYMBOL,EXPIRY_DT,STRIKE_PR,OPTION_TYP,OPEN,HIGH,LOW,CLOSE,SETTLE_PR,CONTRACTS,VAL_INLAKH,OPEN_INT,CHG_IN_OI,TIMESTAMP\n"
+    "FUTSTK,RELIANCE,29-JAN-2015,0,XX,100.00,105.00,99.00,104.00,104.00,500,50000.00,10000,100,02-JAN-2015\n"
+    "FUTSTK,RELIANCE,26-FEB-2015,0,XX,101.00,106.00,98.00,105.00,105.00,80,8000.00,2000,30,02-JAN-2015\n"
+    "FUTSTK,RELIANCE,26-MAR-2015,0,XX,102.00,107.00,97.00,106.00,106.00,20,2000.00,500,5,02-JAN-2015\n"
+)
+
+
+def test_parse_fo_old_keeps_near_month_oi_when_several_expiries_trade(tmp_path):
+    path = _write_zip(tmp_path, "fo_20150102.csv.zip", OLD_FO_TWO_EXPIRIES_CSV)
+    out = parse_fo_file(path)
+    # three expiries for the same symbol/date collapse to one row: the soonest
+    # (29-JAN), not the next (26-FEB) or far (26-MAR) month's OI.
+    assert list(out["symbol"]) == ["RELIANCE"]
+    assert out.iloc[0]["open_int"] == 10000.0 and out.iloc[0]["chg_in_oi"] == 100.0
+
+
+UDIFF_FO_TWO_EXPIRIES_CSV = (
+    "TradDt,BizDt,Sgmt,Src,FinInstrmTp,FinInstrmId,ISIN,TckrSymb,SctySrs,XpryDt,FininstrmActlXpryDt,"
+    "StrkPric,OptnTp,FinInstrmNm,OpnPric,HghPric,LwPric,ClsPric,LastPric,PrvsClsgPric,UndrlygPric,"
+    "SttlmPric,OpnIntrst,ChngInOpnIntrst,TtlTradgVol,TtlTrfVal,TtlNbOfTxsExctd,SsnId,NewBrdLotQty,Rmks,"
+    "Rsvd1,Rsvd2,Rsvd3,Rsvd4\n"
+    "2024-07-08,2024-07-08,FO,NSE,STF,2001,INE002A01018,RELIANCE,,2024-07-25,2024-07-25,,,"
+    "RELIANCEFUT,200.00,205.00,199.00,204.00,204.00,,,204.00,10000,50,400,81600.00,20,,,,,,\n"
+    "2024-07-08,2024-07-08,FO,NSE,STF,2003,INE002A01018,RELIANCE,,2024-08-29,2024-08-29,,,"
+    "RELIANCEFUT,201.00,206.00,198.00,205.00,205.00,,,205.00,2000,10,80,16400.00,30,,,,,,\n"
+)
+
+
+def test_parse_fo_udiff_keeps_near_month_oi_when_several_expiries_trade(tmp_path):
+    path = _write_zip(tmp_path, "fo_20240708.csv.zip", UDIFF_FO_TWO_EXPIRIES_CSV)
+    out = parse_fo_file(path)
+    assert list(out["symbol"]) == ["RELIANCE"]
+    assert out.iloc[0]["open_int"] == 10000.0 and out.iloc[0]["chg_in_oi"] == 50.0
 
 
 def test_parse_cm_udiff_keeps_only_eq_stk(tmp_path):
@@ -80,6 +117,7 @@ def test_parse_fo_udiff_keeps_only_stf(tmp_path):
     path = _write_zip(tmp_path, "fo_20240708.csv.zip", UDIFF_FO_CSV)
     out = parse_fo_file(path)
     assert list(out["symbol"]) == ["RELIANCE"]  # NIFTY is IDF (index future), dropped
+    assert out.iloc[0]["open_int"] == 10000.0 and out.iloc[0]["chg_in_oi"] == 50.0
 
 
 def test_build_merges_cm_and_fo_with_has_future_flag(tmp_path):
@@ -94,6 +132,9 @@ def test_build_merges_cm_and_fo_with_has_future_flag(tmp_path):
     by_symbol = df.set_index("symbol")
     assert by_symbol.loc["RELIANCE", "has_future"] == True  # noqa: E712
     assert by_symbol.loc["TATAMOTORS", "has_future"] == False  # noqa: E712
+    assert by_symbol.loc["RELIANCE", "oi_futstk"] == 10000.0
+    assert by_symbol.loc["RELIANCE", "oi_chg_futstk"] == 100.0
+    assert pd.isna(by_symbol.loc["TATAMOTORS", "oi_futstk"])  # no future, no OI
 
 
 def test_build_finds_files_regardless_of_directory_nesting(tmp_path):

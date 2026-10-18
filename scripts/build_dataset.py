@@ -19,8 +19,11 @@ UDiFF era (from 2024-07-08), one shared schema for both segments:
   have Sgmt == "FO" and FinInstrmTp == "STF".
 
 The equity (CM) table keeps SERIES/SctySrs == "EQ" only, per SPEC.md section 2.
-The FO table is used only to mark which symbols had an active stock future
-that date (`has_future`); option and index rows are dropped.
+The FO table marks which symbols had an active stock future that date
+(`has_future`) and carries that near-month (soonest-expiry) contract's open
+interest and change in OI as `oi_futstk`/`oi_chg_futstk` (catalog row D01);
+option and index rows are still dropped (D02's options-OI PCR is not parsed
+yet - see `state/queue.md`'s D1 entry).
 
 Input layout: fetch_bhavcopy.py writes <out>/<seg>/<year>/<seg>_<YYYYMMDD>.csv.zip
 under whatever --out root the caller gives it (raw/2015/cm/2015/..., raw/recent/cm/2026/...),
@@ -103,19 +106,38 @@ def parse_cm_file(path: Path) -> pd.DataFrame:
 
 
 def parse_fo_file(path: Path) -> pd.DataFrame:
-    """Return (date, symbol) pairs for symbols with an active stock future that date."""
+    """Return one row per (date, symbol) with an active stock future that date,
+    carrying the near-month contract's open interest and change in open interest.
+
+    A symbol can have up to three live stock-future expiries (near/next/far
+    month) on the same date; D01's "near-month futures OI" convention means
+    the soonest-expiry contract, so where more than one expiry is present the
+    others are dropped here, not averaged or summed.
+    """
     df = _read_zip_csv(path)
     d = _filename_date(path)
     cols = set(df.columns)
     if "INSTRUMENT" in cols:  # old FO format
         df = df[df["INSTRUMENT"].str.strip() == "FUTSTK"]
-        symbols = df["SYMBOL"].str.strip()
+        out = pd.DataFrame({
+            "symbol": df["SYMBOL"].str.strip(),
+            "expiry": pd.to_datetime(df["EXPIRY_DT"].str.strip(), format="%d-%b-%Y"),
+            "open_int": df["OPEN_INT"].astype(float),
+            "chg_in_oi": df["CHG_IN_OI"].astype(float),
+        })
     elif "FinInstrmTp" in cols:  # UDiFF
         df = df[(df["Sgmt"].str.strip() == "FO") & (df["FinInstrmTp"].str.strip() == "STF")]
-        symbols = df["TckrSymb"].str.strip()
+        out = pd.DataFrame({
+            "symbol": df["TckrSymb"].str.strip(),
+            "expiry": pd.to_datetime(df["XpryDt"].str.strip()),
+            "open_int": df["OpnIntrst"].astype(float),
+            "chg_in_oi": df["ChngInOpnIntrst"].astype(float),
+        })
     else:
         raise ValueError(f"unrecognised FO bhavcopy columns in {path}: {sorted(cols)}")
-    return pd.DataFrame({"date": d, "symbol": symbols}).drop_duplicates().reset_index(drop=True)
+    out["date"] = d
+    out = out.sort_values("expiry").drop_duplicates(subset=["symbol"], keep="first")
+    return out[["date", "symbol", "open_int", "chg_in_oi"]].reset_index(drop=True)
 
 
 def build(raw_root: Path) -> pd.DataFrame:
@@ -123,11 +145,13 @@ def build(raw_root: Path) -> pd.DataFrame:
     fo_frames = [parse_fo_file(p) for p in sorted(raw_root.rglob("fo_*.csv.zip"))]
 
     prices = pd.concat(cm_frames, ignore_index=True) if cm_frames else pd.DataFrame(columns=PRICE_COLUMNS)
-    futures = pd.concat(fo_frames, ignore_index=True) if fo_frames else pd.DataFrame(columns=["date", "symbol"])
+    futures = (pd.concat(fo_frames, ignore_index=True) if fo_frames
+               else pd.DataFrame(columns=["date", "symbol", "open_int", "chg_in_oi"]))
 
     prices = prices.drop_duplicates(subset=["date", "symbol"], keep="last")
-    futures = futures.drop_duplicates(subset=["date", "symbol"])
+    futures = futures.drop_duplicates(subset=["date", "symbol"], keep="last")
     futures["has_future"] = True
+    futures = futures.rename(columns={"open_int": "oi_futstk", "chg_in_oi": "oi_chg_futstk"})
 
     merged = prices.merge(futures, on=["date", "symbol"], how="left")
     merged["has_future"] = merged["has_future"].fillna(False)
@@ -169,9 +193,10 @@ def main() -> None:
 
     raw_root = Path(a.raw)
     out_path = Path(a.out)
-    fresh = build(raw_root) if raw_root.exists() else pd.DataFrame(columns=PRICE_COLUMNS + ["has_future"])
+    empty_columns = PRICE_COLUMNS + ["has_future", "oi_futstk", "oi_chg_futstk"]
+    fresh = build(raw_root) if raw_root.exists() else pd.DataFrame(columns=empty_columns)
 
-    existing = pd.read_parquet(out_path) if out_path.exists() else pd.DataFrame(columns=PRICE_COLUMNS + ["has_future"])
+    existing = pd.read_parquet(out_path) if out_path.exists() else pd.DataFrame(columns=empty_columns)
     final = merge_with_existing(existing, fresh)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
