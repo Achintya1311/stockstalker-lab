@@ -1,0 +1,9 @@
+{
+  "id": "a03-momentum-12-1-week",
+  "strategy": "strategies.a03_momentum_12_1",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 54228,
+  "n_dates": 255,
+  "pick_log_sha256": "4a395fca2dbaed72f4feb0ef9ef5809f2d3bb684841b994662d4ec6c90c04de3"
+}
