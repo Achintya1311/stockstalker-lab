@@ -1,0 +1,9 @@
+{
+  "id": "a02-extreme-day-reversal-day",
+  "strategy": "strategies.a02_extreme_day_reversal",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 24019,
+  "n_dates": 1464,
+  "pick_log_sha256": "58cfb561ff245be140237cca2e734ffdf178f4b0ba2d485e50c1df3418d926f1"
+}
