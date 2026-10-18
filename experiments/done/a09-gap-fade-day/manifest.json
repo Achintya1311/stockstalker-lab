@@ -1,0 +1,9 @@
+{
+  "id": "a09-gap-fade-day",
+  "strategy": "strategies.a09_gap_fade",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 26375,
+  "n_dates": 1449,
+  "pick_log_sha256": "22c11a3e2e353bc716969cdbaa8d4f58c288986f89363e016bb25dda4ff14dc8"
+}
