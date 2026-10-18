@@ -1218,3 +1218,76 @@ experiment to the pile. Until then, further `port`-lane runs should keep
 working through `cards/catalog.csv` in SPEC order (A07, high-volume
 return premium, is next). `build` is still blocked on B3 and B10 -
 nothing changed there this run.
+
+## 2026-10-18T12:16Z — port lane
+
+Hypothesis: A07 (high-volume return premium, Gervais, Kaniel and
+Mingelgrin 2001) is next in `cards/catalog.csv`'s testing order after
+A01-A06, as the previous run's journal entry queued up. `build` remains
+blocked on B3 (methodology decision for a supervised session) and B10
+(needs a `.github/` change); `diagnose` remains blocked on the
+`engine/experiment_report.py` proposal in `state/engine-issues.md` (no
+automated way yet to score a landed pick log, now affecting six landed
+experiments); no lease was held for `port`. So `port` is the right lane
+to keep research moving (SPEC.md's "the work never runs out"), and it
+also serves the go-live track's P1 priority (SPEC.md section 10,
+`state/queue.md`: "keep working through `cards/catalog.csv` in SPEC
+order" ranks right after leak alarms and workflow failures while any
+table is provisional).
+
+What I did: unlike A04/A05/A06, the catalog's own rule for A07
+("unusually high volume bullish, unusually low bearish") is already
+directly signed around zero - a two-sided z-score claim, not a one-sided
+non-negative quantity like a range position or a raw sigma that first
+needs centring before it can point either way. So this card needed no
+sign-flip or `1 - ratio` transform: `score = z = (avg_recent_volume -
+baseline_mean) / baseline_std`, with `avg_recent_volume` the mean of the
+trailing 5 trading days' ("last week") volume and `baseline_mean`/
+`baseline_std` the mean/population std of the 50 trading days immediately
+*preceding* that window (non-overlapping, the same boundary trick
+A02/A05/A06 use). High recent volume (z > 0) scores bullish, low recent
+volume (z < 0) scores bearish, matching the catalog row and the paper's
+claim with no inversion.
+
+Flagged one confound explicitly in `cards/A07.yml`'s red flags that
+earlier cards didn't need to worry about: volume is used raw, not
+price-adjusted, so a split/bonus's share-count change could shift raw
+volume independent of any real demand change and masquerade as a
+high-volume bullish signal exactly on a split day - worth checking in
+`diagnose` once that lane is unblocked, not assumed immaterial.
+
+Added `cards/A07.yml`, `strategies/a07_high_volume_premium.py` (same
+`has_future` prefilter as A01-A06; no `scripts.adjustments` import needed
+since this card scores raw volume, not price, so there is nothing to
+adjust), its causality audit
+(`strategies/a07_high_volume_premium_audit.py`, same per-symbol-groupby
+shape), and `tests/test_a07_high_volume_premium.py` (16 tests: known-z
+fixtures via a deterministic alternating-volume baseline and a flat
+recent window, both score directions, a neutral z=0 case, zero-baseline-
+std abstain, a leading-history-doesn't-leak check, threshold/
+insufficient-history abstain, per-symbol independence, `has_future`
+prefilter, causality audit). Queued the train replay as
+`experiments/pending/a07-high-volume-premium-week.yml` (train split, week
+horizon - the catalog row's own rule has no day-horizon variant) and
+marked A07 `queued` in `cards/catalog.csv`.
+
+Result: `python3.13 -m pytest -q` (full suite, this sandbox's
+`/usr/bin/python3.13` interpreter; `pytest`/`pandas`/`pyarrow`/`numpy`/
+`pyyaml` installed into it first via `python3.13 -m pip install`, same as
+every recent run) - 322 passed (306 existing + 16 new), 0 failed, in
+227.22s. No regressions. Pushing this should trigger `replay.yml` (queue
+touched) against the real cached dataset.
+
+Next: once `replay.yml` lands `experiments/done/a07-high-volume-premium-week/`,
+it will hit the same scoring blocker A01-A06 already did - still waiting
+on the `engine/experiment_report.py` proposal in `state/engine-issues.md`
+for a supervised session to pick up; that blocker now affects seven
+landed experiments, not one, and is worth prioritising once a supervised
+session is available (it's also what the go-live track's P1 validation
+queries, SPEC.md section 10, ultimately depend on - a provisional
+candidate needs a known positive train edge and directional move before
+it can earn a validation query, and nothing here can compute either yet).
+Until then, further `port`-lane runs should keep working through
+`cards/catalog.csv` in SPEC order (A08, overnight vs intraday tug of war,
+is next - still an academic anomaly, day horizon this time). `build` is
+still blocked on B3 and B10 - nothing changed there this run.

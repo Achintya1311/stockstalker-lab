@@ -1,0 +1,43 @@
+source_url: ""
+author: "Simon Gervais; Ron Kaniel; Dan H. Mingelgrin"
+license: "academic paper, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "2001"
+claim_as_stated: >
+  Gervais, Kaniel and Mingelgrin (2001), "The High-Volume Return Premium",
+  JF: stocks whose trading volume over a short recent window is unusually
+  high relative to their own trailing history earn abnormally high returns
+  over the following weeks, and stocks with unusually low recent volume
+  earn abnormally low returns - attributed to a visibility/investor-
+  recognition effect: a volume spike draws new investor attention, which
+  itself raises demand (and later price) independent of any news the
+  volume accompanied. The paper's own holding period is measured in weeks
+  after the volume shock; this card tests the pattern directly at a
+  one-week NSE horizon, close to the paper's own.
+horizon: week
+rules_plain: >
+  Unlike A04 (range position), A05 (MAX/sigma) and A06 (sigma ratio),
+  the catalog's own rule for A07 is already directly signed around zero -
+  "unusually high volume bullish, unusually low bearish" is a two-sided
+  z-score claim, not a one-sided non-negative quantity that needs centring
+  before it can point either way. So this card computes a plain
+  volume z-score and uses it as the score with no sign flip or `1 - ratio`
+  transform: `z = (avg_recent_volume - baseline_mean) / baseline_std`,
+  where `avg_recent_volume` is the mean of `RECENT_WINDOW` (5, "last week")
+  trading days' volume and `baseline_mean`/`baseline_std` are the mean and
+  population standard deviation of daily volume over the `BASELINE_WINDOW`
+  (50) trading days immediately *preceding* that window (non-overlapping,
+  the same boundary trick A02/A05/A06 use so the window being judged can't
+  inflate the yardstick it's judged against). `score = z`: unusually high
+  recent volume (z > 0) scores bullish, unusually low recent volume
+  (z < 0) scores bearish, matching the catalog row's rule and the paper's
+  claim with no inversion needed.
+params:
+  recent_window: 5
+  baseline_window: 50
+red_flags:
+  - "Published holding period is measured in weeks after the volume shock, close to but not identical to this card's fixed one-week NSE horizon - test train-only sign and stability before trusting the direction at all, same caveat as every other ported card."
+  - "Volume is used raw (`TtlTradgVol` as parsed into the dataset's `volume` column), not adjusted for a split/bonus share-count change inside either window: a 1:2 split roughly doubles share count and so roughly doubles volume for the same traded value on and after the ex-date, which could read as a spurious 'high volume' bullish signal exactly on a split day. `scripts/adjustments.py` adjusts prices, not volume, and no volume-adjustment exists in this codebase yet. Flagged explicitly since this is a real, not hypothetical, confound for any card using raw volume - SPEC.md section 5's 'no claim is assumed true' includes not assuming this confound is immaterial without checking it in `diagnose`."
+  - "`baseline_window` (50 trading days) and `recent_window` (5 trading days, 'last week') are this card's own choice reading the catalog's own default_params ('volume z vs 50-day') literally; not tuned."
+  - "The paper's own investor-recognition mechanism is about a stock crossing into investor attention it didn't have before, which is more plausible for a stock usually quiet; this card does not control for a symbol's own baseline liquidity level (e.g. always-high-volume large caps vs. always-thin small caps) beyond the liquidity floor in `config/universe.yml` applied downstream by the universe filter."
+  - "No claim is assumed true (SPEC.md section 5): this card's status moves to confirmed/refuted only after a real train (then validation/test) replay, not from the paper's own reported effect sizes."
+status: queued

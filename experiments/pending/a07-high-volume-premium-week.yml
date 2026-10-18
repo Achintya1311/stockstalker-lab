@@ -1,0 +1,13 @@
+# A07: high-volume return premium, train-split replay
+# (port lane, `state/queue.md`).
+# See cards/A07.yml and strategies/a07_high_volume_premium.py.
+# Week horizon only - the catalog row's own rule is a weekly pick ranked
+# by a volume z-score; there is no day-horizon variant to queue alongside
+# it.
+id: a07-high-volume-premium-week
+strategy: strategies.a07_high_volume_premium
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
