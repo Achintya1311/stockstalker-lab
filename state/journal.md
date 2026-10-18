@@ -1044,3 +1044,52 @@ further `port`-lane runs should keep working through `cards/catalog.csv`
 in SPEC order (A04, 52-week-high proximity, is next) rather than stall on
 `diagnose`. `build` is still blocked on B3 and B10 - nothing changed there
 this run.
+
+## 2026-10-18T06:11Z — port lane
+
+Hypothesis: A04 (52-week-high proximity, George and Hwang 2004) is next in
+`cards/catalog.csv`'s testing order after A01-A03; it can be ported and
+train-queued the same way, with `diagnose` still blocked (see
+2026-10-18T02:11Z and 04:19Z entries) and `build` still blocked on B3
+(needs a supervised data-source decision) and B10 (needs a `.github/`
+change).
+
+What I did: the catalog's own rule ("close / 52-week high: nearest to the
+high bullish, farthest bearish") is a ratio in (0, 1], not directly
+signed - every other card on this roster (and
+`engine.champion_report`/`engine.selftest`) reads a pick's side from its
+own score's sign in absolute terms, not a cross-sectional rank, so a
+literal close/high ratio could never produce a bearish pick. Adapted it
+by centring the ratio on each stock's own trailing 252-day high/low range:
+`score = 2 * (close - low) / (high - low) - 1`, so a close at the 52-week
+high scores +1 and a close at the 52-week low scores -1. Flagged this
+adaptation explicitly in `cards/A04.yml`'s red flags since it changes what
+"farthest from the high" means (farthest within the stock's own range,
+not farthest among all stocks that day, which is what the paper's own
+decile-sort portfolio construction uses).
+
+Added `cards/A04.yml`, `strategies/a04_52_week_high.py` (same `has_future`
+prefilter and walk-forward adjustment as A01-A03), its causality audit
+(`strategies/a04_52_week_high_audit.py`, same per-symbol-groupby shape),
+and `tests/test_a04_52_week_high.py` (15 tests: known expected-signal
+fixtures at the window high, window low, midpoint and an arbitrary
+interior point exactly 0.5, a leading-history-doesn't-leak-into-the-window
+check, threshold/insufficient-history abstain, per-symbol independence,
+`has_future` prefilter, causality audit). Queued the train replay as
+`experiments/pending/a04-52-week-high-week.yml` (train split, week
+horizon) and marked A04 `queued` in `cards/catalog.csv`.
+
+Result: `python3.13 -m pytest -q` (full suite, this sandbox's
+`/usr/bin/python3.13` interpreter per the 2026-10-18T04:09Z entry's
+tooling note) - 275 passed (260 existing + 15 new), 0 failed, in 243.84s.
+No regressions. Pushing this should trigger `replay.yml` (queue touched)
+against the real cached dataset.
+
+Next: once `replay.yml` lands `experiments/done/a04-52-week-high-week/`,
+it will hit the same scoring blocker A01-A03 already did - still waiting
+on the `engine/experiment_report.py` proposal in `state/engine-issues.md`
+for a supervised session to pick up; that blocker now affects four landed
+experiments, not one. Until then, further `port`-lane runs should keep
+working through `cards/catalog.csv` in SPEC order (A05, MAX effect /
+lottery stocks, is next). `build` is still blocked on B3 and B10 -
+nothing changed there this run.

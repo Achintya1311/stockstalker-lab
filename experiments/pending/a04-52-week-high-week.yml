@@ -1,0 +1,12 @@
+# A04: 52-week-high proximity, train-split replay (port lane, `state/queue.md`).
+# See cards/A04.yml and strategies/a04_52_week_high.py.
+# Week horizon only - the catalog row's own rule is a weekly pick ranked by
+# nearness to the trailing 252-day high; there is no day-horizon variant to
+# queue alongside it.
+id: a04-52-week-high-week
+strategy: strategies.a04_52_week_high
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
