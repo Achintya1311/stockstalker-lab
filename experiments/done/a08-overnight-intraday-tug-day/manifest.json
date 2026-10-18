@@ -1,0 +1,9 @@
+{
+  "id": "a08-overnight-intraday-tug-day",
+  "strategy": "strategies.a08_overnight_intraday_tug",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 302038,
+  "n_dates": 1465,
+  "pick_log_sha256": "37e4eb583a98b64b9e0b15e73e5d877c9fcd083f0d4bb7d5fca033244b9f7b72"
+}
