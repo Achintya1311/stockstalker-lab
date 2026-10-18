@@ -1,0 +1,9 @@
+{
+  "id": "c01-day-of-week-day",
+  "strategy": "strategies.c01_day_of_week",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 289527,
+  "n_dates": 1380,
+  "pick_log_sha256": "da4de13472204803e2bb142dc12c5c68d548c61cd93ea3725c23a28258afbc8d"
+}
