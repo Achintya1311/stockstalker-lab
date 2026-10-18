@@ -1,0 +1,9 @@
+{
+  "id": "a01-weekly-reversal-week",
+  "strategy": "strategies.a01_weekly_reversal",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 64157,
+  "n_dates": 312,
+  "pick_log_sha256": "8899ae2ad7bb7dc37dea209e9e137b2beaf0511ab8f43219211ed410cd194a45"
+}
