@@ -1,0 +1,9 @@
+{
+  "id": "a04-52-week-high-week",
+  "strategy": "strategies.a04_52_week_high",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 55129,
+  "n_dates": 260,
+  "pick_log_sha256": "177d1bd47de5310e83ae6ca0d0d5bd88345c824e9b75d7d13fdd3df1b679e38d"
+}
