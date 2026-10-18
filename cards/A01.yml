@@ -1,0 +1,26 @@
+source_url: ""
+author: "Uriel G. Lehmann; Narasimhan Jegadeesh"
+license: "academic paper, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "1990"
+claim_as_stated: >
+  Lehmann (1990), "Fads, Martingales, and Market Efficiency", QJE: weekly
+  portfolio returns on NYSE/AMEX stocks show short-term reversal - last
+  week's losers outperform last week's winners over the following week,
+  consistent with a transitory, non-fundamental component in short-horizon
+  prices rather than a risk premium. Jegadeesh (1990), JF, finds the same
+  reversal pattern at the one-month horizon.
+horizon: week
+rules_plain: >
+  Rank NSE F&O stocks by their trailing return over the last `lookback`
+  trading days (5, approximating the prior week). The biggest losers score
+  bullish for the coming week, the biggest winners score bearish. Score is
+  continuous and signed: score = -(trailing return), so a deeper loss gives
+  a larger bullish score and a bigger gain gives a larger bearish score.
+params:
+  lookback_days: 5
+red_flags:
+  - "Published pre-1990 on US NYSE/AMEX data; India/NSE out-of-sample entirely - idea vintage is not in question here (this is the oldest reversal paper on the list), but market structure (circuit filters, delivery-vs-intraday mix, F&O-only universe) is untested."
+  - "Short-term reversal is a well-known classic finding that is also well known to have decayed or reversed into momentum in some markets/periods since publication - test both train-only sign and stability across train years before trusting the direction at all, don't assume the 1990 sign holds on NSE."
+  - "A 5-trading-day lookback on a weekly-horizon pick made at Monday's open uses data through the prior Friday's close only (SPEC.md section 4's walk-forward truncation already enforces this mechanically); nothing here extends the lookback into the pick week itself."
+  - "No claim is assumed true (SPEC.md section 5): this card's status moves to confirmed/refuted only after a real train (then validation/test) replay, not from the papers' own reported effect sizes."
+status: queued

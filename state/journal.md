@@ -881,3 +881,48 @@ until B3 unblocks, and this routine's own rule ("never leave a run
 idle") means doing research-during-the-build work instead (discover/
 port/tune/diagnose on `cards/catalog.csv`), not inventing more build
 work where none remains.
+
+## 2026-10-18T00:10Z — port lane
+
+Hypothesis: with `build` blocked (B3 needs a supervised data-source decision
+per `state/engine-issues.md`; B10 needs B1-B9 all ticked) and no catalog row
+ever ported yet (all 51 `cards/catalog.csv` rows were still `untested`,
+`cards/`, `strategies/`, `experiments/pending/`, `experiments/done/` and
+`ledger/trials.csv` all empty of any real strategy work), "research during
+the build" (SPEC.md's own answer to a run finding nothing to do) means the
+`port` lane is free and A01 is next in SPEC.md section 5's testing order
+(academic anomalies before indicator rules; A01 is the first anomaly row,
+`testable_now: yes`, needs only `ohlcv`).
+
+What I did: ported A01, short-term (weekly) reversal (Lehmann 1990, QJE;
+Jegadeesh 1990, JF) - `cards/A01.yml` (source, claim, params, red flags),
+`strategies/a01_weekly_reversal.py` (score = -(trailing 5-day return) on
+the adjusted close series, same sign convention and `has_future` prefilter
+as `strategies/champion_v1.py`; week horizon only, per the card's own
+rule), `strategies/a01_weekly_reversal_audit.py` (cross-symbol causality
+check, same shape as `champion_v1_audit.py`), and
+`tests/test_a01_weekly_reversal.py` (13 tests: known-sign and exact-
+magnitude checks on a deterministic flat-then-move fixture, abstain on
+thin history, per-symbol independence, `has_future` prefilter, causality
+audit, `rules_fired`). Queued the train replay as
+`experiments/pending/a01-weekly-reversal-week.yml` (train split,
+2015-01-01 to 2020-12-31, week horizon) and marked A01 `queued` in
+`cards/catalog.csv`.
+
+Result: `python3 -m pytest -q` - 230 passed (217 existing + 13 new), no
+regressions. Pushing this should trigger `replay.yml` (queue touched)
+against the real cached dataset.
+
+Next: once `replay.yml` lands `experiments/done/a01-weekly-reversal-week/`,
+a `diagnose`-lane run should record A01's train edge (day N/A, week
+bullish/bearish) in `cards/catalog.csv`'s `status` column and in
+`ledger/trials.csv` (first-ever row - the ledger didn't exist before this
+run), then write `research/diagnostics/A01.md` (which years/regimes it
+works or fails in, what to try next). Per the go-live track (P1,
+`state/queue.md`): if A01 shows a positive train edge and positive
+directional move on week-bullish or week-bearish, it earns one validation
+query toward provisional-strategy status once `build` or a later Mode B
+run reaches the evaluate lane. A02 (daily reversal after an extreme day)
+is next in the `port` queue after A01. `build` is still blocked on B3 -
+the three documented directions in `state/engine-issues.md` still need a
+supervised pick; nothing changed there this run.
