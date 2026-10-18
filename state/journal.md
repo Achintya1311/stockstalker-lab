@@ -983,3 +983,64 @@ whether a supervised session has picked up the engine-issues entry, since
 once it lands, A01's and A02's pick logs are both sitting ready to be
 scored immediately with no further replay needed. `build` is still blocked
 on B3 - nothing changed there this run.
+
+## 2026-10-18T04:09Z — port lane
+
+Hypothesis: `build` is still blocked (B3 needs a supervised data-source
+decision; B10 needs B1-B9 all ticked, and B10 itself is a `.github/` change
+only a supervised session can make) and the previous run's journal entry
+named A03 (price momentum 12-1) as the next catalog row in SPEC order. The
+`diagnose` blocker on A01/A02 (`state/engine-issues.md`'s "READY FOR
+WIRING: no automated way to score a finished train replay") is still open
+- checked `engine/` for `experiment_report.py` before starting; it does
+not exist yet, so a supervised session has not picked this up. Rather than
+stall waiting on that, kept working through the catalog (SPEC.md's "the
+work never runs out").
+
+What I did: ported A03, price momentum 12-1 (Jegadeesh and Titman 1993,
+JF) - `cards/A03.yml` (source, claim, params, red flags - including that
+the paper's own horizon is 3-12 months, far longer than the one week
+tested here, and that momentum is known to crash sharply in reversal
+periods), `strategies/a03_momentum_12_1.py` (score = +(trailing 252-day
+return, skipping the most recent 21 days) - continuous, signed, opposite
+sign convention from A01's reversal since this is a continuation bet, not
+a reversal one; week horizon; same `has_future` prefilter as
+A01/A02/champion_v1), `strategies/a03_momentum_12_1_audit.py` (cross-symbol
+causality check, same per-symbol-groupby shape as A01/A02's audits), and
+`tests/test_a03_momentum_12_1.py` (16 tests: a new fixture that places a
+known move only between the two formation-window anchors so the exact
+formation-return magnitude is a known expected signal, a separate check
+that a move strictly inside the skipped month does not change the score at
+all, threshold/insufficient-history abstain, per-symbol independence,
+`has_future` prefilter, causality audit) - 14 tests. Queued the train
+replay as `experiments/pending/a03-momentum-12-1-week.yml` (train split,
+week horizon) and marked A03 `queued` in `cards/catalog.csv`.
+
+Also hit and fixed a sandbox-only tooling snag, not a lab code issue: this
+container's `python3` (3.11, via `/usr/local/bin/python3`) has no
+`pandas`/`pytest`, while `pip3`'s underlying interpreter (3.13) has
+`pandas` but initially neither `pytest` nor `pyarrow`. Installed `pytest`,
+`pyarrow` and `pyyaml` for `/usr/bin/python3.13` (`--user`) and ran the
+suite with that interpreter explicitly; this is local-sandbox environment
+state only, nothing committed, and shouldn't recur identically in Actions
+(which has its own `requirements.txt`-driven environment) or in a future
+sandbox session, but worth knowing if a future run hits the same
+`ModuleNotFoundError` wall.
+
+Result: `/usr/bin/python3.13 -m pytest -q` - 260 passed (246 existing + 14
+new), 0 failed. Before installing `pyarrow` the same run showed 9 failures,
+all `ImportError: ... no usable [parquet] engine` in
+`tests/test_picks_run.py`/`tests/test_run_queue.py`; those disappeared
+once `pyarrow` was installed, confirming they were never a real
+regression from this change, just this sandbox missing a dependency
+`requirements.txt` already lists. No regressions. Pushing this should
+trigger `replay.yml` (queue touched) against the real cached dataset.
+
+Next: once `replay.yml` lands `experiments/done/a03-momentum-12-1-week/`,
+it will hit the same scoring blocker A01 and A02 already did - still
+waiting on the `engine/experiment_report.py` proposal in
+`state/engine-issues.md` for a supervised session to pick up. Until then,
+further `port`-lane runs should keep working through `cards/catalog.csv`
+in SPEC order (A04, 52-week-high proximity, is next) rather than stall on
+`diagnose`. `build` is still blocked on B3 and B10 - nothing changed there
+this run.

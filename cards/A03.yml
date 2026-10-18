@@ -1,0 +1,33 @@
+source_url: ""
+author: "Narasimhan Jegadeesh; Sheridan Titman"
+license: "academic paper, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "1993"
+claim_as_stated: >
+  Jegadeesh and Titman (1993), "Returns to Buying Winners and Selling
+  Losers: Implications for Stock Market Efficiency", JF: ranking US stocks
+  by their return over the prior 12 months, skipping the most recent month,
+  and buying the top decile while selling the bottom decile earns a
+  significant positive return over the following 3-12 months. The paper's
+  own horizon is 3-12 months; this card tests whether any of that
+  continuation shows at a one-week horizon on NSE, which is far shorter
+  than what was published.
+horizon: week
+rules_plain: >
+  Rank NSE F&O stocks by their return over the trailing `lookback_days`
+  trading days (approximating 12 months), ending `skip_days` trading days
+  before the pick date (approximating the most recent month, skipped per
+  the paper). The biggest past winners score bullish for the coming week,
+  the biggest past losers score bearish - the opposite sign convention
+  from A01's short-term reversal. Score is continuous and signed: score =
+  +(12-1 trailing return), so a bigger past gain gives a larger bullish
+  score and a bigger past loss a larger bearish score.
+params:
+  lookback_days: 252
+  skip_days: 21
+red_flags:
+  - "Published horizon (3-12 months) is far longer than the one-week horizon tested here; the paper's own effect size says nothing about whether any continuation survives at this much shorter horizon - test train-only sign and stability before trusting the direction at all."
+  - "Momentum is well known to crash sharply in reversal periods (e.g. market rebounds after a crash) - a train-only replay that looks good on average could still hide a few catastrophic years; check per-year edge, not just the pooled number."
+  - "252/21 trading-day windows are US-NYSE conventions; NSE's own holiday calendar and circuit-filter regime were not checked for whether they shift the effective calendar-month equivalents enough to matter."
+  - "A 'top decile / bottom decile' portfolio construction in the paper becomes a continuous signed score here (same convention as A01/A02/champion_v1, SPEC.md section 5: 'one score per symbol' with sign giving direction) - this is a deliberate adaptation, not a literal replication of the paper's decile-sort methodology."
+  - "No claim is assumed true (SPEC.md section 5): this card's status moves to confirmed/refuted only after a real train (then validation/test) replay, not from the paper's own reported effect sizes."
+status: queued
