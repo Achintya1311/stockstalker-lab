@@ -2,6 +2,84 @@
 
 One entry per run: date, lane, hypothesis, result, next.
 
+## 2026-10-18T20:23Z — port lane
+
+Hypothesis: C02 (turn-of-month effect), the next untested `testable_now:
+yes` card in SPEC order after C01, was flagged in `cards/C01.yml`'s own
+red_flags as "likely portable the same way C01 was" via the
+yesterday's-proxy trick - worth confirming that holds for a week-horizon
+card, not just C01's day-horizon one.
+
+What I did: it does hold, with one real design wrinkle found along the
+way. `score()` proxies "is the upcoming pick week close to turn-of-month"
+with "is `history`'s own last visible trading day (the day right before
+the pick week starts) itself turn-of-month" - turn-of-month membership
+computed purely from trading-day rank within each calendar month among
+the dates `history` contains (last trading day of a month, or first 3
+trading days of the next one, matching the catalog's "window -1..+3"),
+never an external holiday calendar. Construction and lookup key on the
+identical quantity, so it's self-consistent like C01.
+
+The wrinkle: my first draft built historical base rates by grouping
+`history` into true ISO calendar weeks (`.isocalendar()`), mirroring how
+`engine.run_queue` actually picks weekly dates. Writing the causality
+audit (shift every date in a synthetic market by 10 years, same technique
+`c01_day_of_week_audit.py` uses) caught that this breaks: a whole-year
+`DateOffset` shift does NOT reliably preserve weekday once a 29 February
+is crossed (confirmed directly: `2016-02-29 + 11y = 2027-02-28`, and more
+broadly 262 of 1000 synthetic dates land on a different weekday after an
+11-year shift that happens to preserve the *anchor* date's weekday). That
+scrambles which calendar days an ISO week groups together after the
+shift, so the audit failed - correctly, not a false alarm: the
+underlying design really was fragile, just not in a way day-to-day
+replay on real, unshifted NSE dates would ever surface (real dates are
+never shifted). Fixed by building historical base rates from
+non-overlapping runs of 5 consecutive trading days counted by *position*
+from `history`'s own earliest visible date (a "trading-day week") instead
+of `.isocalendar()` - this doesn't change what `score()` itself reads at
+live-scoring time (still just `history`'s own last visible date), only
+how the internal training buckets are built, and it made the module
+immune to the same class of bug, not just this one instance of it.
+
+Wrote `cards/C02.yml` (reasoning, params, red flags including this
+wrinkle), `strategies/c02_turn_of_month.py` (`score`/`rules_fired`/
+`_is_totm`/`_pooled_week_returns`), `strategies/c02_turn_of_month_audit.py`
+(the corrected causality check: a synthetic market with a deterministic
+turn-of-month bias, built and verified independently of the module's own
+ranking code, shift-invariant under an 11-year `DateOffset`, plus
+determinism), and `tests/test_c02_turn_of_month.py` (10 tests: known bias
+in whichever bucket the fixture's last day actually falls into, bearish
+sign, zero-bias abstain, below-threshold abstain, empty history, `has_future`
+exclusion, `rules_fired` reasoning, a direct `_is_totm` boundary check
+against a hand-read January 2015 calendar, the causality audit). Queued
+the train replay as `experiments/pending/c02-turn-of-month-week.yml` (week
+horizon, matching the catalog row) and marked C02 `queued` in
+`cards/catalog.csv`.
+
+Result: `python3.13 -m pytest -q` (full suite) - 375 passed (365 existing
++ 10 new), 0 failed, in 220.01s. No regressions. The audit module also
+runs standalone (`python3.13 -m strategies.c02_turn_of_month_audit`) and
+passes (`bias_base`/`bias_shifted` both 0.02, matching the fixture's
+expected bucket).
+
+Next: once `replay.yml` lands `experiments/done/c02-turn-of-month-week/`,
+it hits the same still-open blocker every ported card has hit since A01 -
+`state/engine-issues.md`'s "READY FOR WIRING: no automated way to score a
+finished train replay" (now ten landed experiments, zero scored) - this
+is the highest-value thing for a supervised session to pick up before
+30 Oct, since the go-live track's P1 (one validation query per positive-
+train-edge card) cannot start without real train numbers for *any* ported
+card. Until then, `port`-lane runs should keep working through
+`cards/catalog.csv` in SPEC order: next candidates are C03 (pre-holiday -
+`state/engine-issues.md` already flags this as needing a real NSE holiday
+history back to 2015, not portable by proxy) and C04 (expiry-week - may
+be more tractable if the dataset's own FUTSTK expiry field is usable,
+worth checking `scripts/build_dataset.py`'s FO parsing before assuming it
+needs the same fetch), then T01 onward. `build` is still blocked on B3
+(methodology decision for a supervised session) and B10 (needs a
+`.github/` change plus B1-B9 all ticked, and B3 isn't) - nothing changed
+there this run.
+
 ## 2026-10-18T18:21Z — port lane
 
 Hypothesis: C01 (day-of-week effect), next in SPEC testing order after

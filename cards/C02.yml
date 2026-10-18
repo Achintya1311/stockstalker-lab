@@ -1,0 +1,79 @@
+source_url: ""
+author: "Ariel (1987) A Monthly Effect in Stock Returns, JFE (cards/catalog.csv's own summary)"
+license: "academic paper, not code; summarised only (SPEC.md section 5)"
+published_on: "1987"
+claim_as_stated: >
+  cards/catalog.csv's own reading: "Bullish tilt in the last day and first
+  3 days of a month." `default_params`: "window -1..+3." `prior_claim`:
+  "US: returns concentrated around the turn of the month." The literal
+  claim is about the pick date's own position within the trading-day
+  calendar (is today one of the turn-of-month days).
+horizon: week
+rules_plain: >
+  This is the same wall `cards/C01.yml` documents in full: a calendar-effect
+  rule needs the pick date's own calendar position, but
+  `engine.replay.pick_date` never passes a date into `strategy.score()`
+  (SPEC.md section 5's interface is `score(history: pd.DataFrame) ->
+  pd.Series`, nothing else), and `history` is truncated strictly before the
+  pick date (B4), so nothing in `history` ever carries the upcoming pick
+  date's own identity. C02 is a week-horizon card
+  (`engine.run_queue._dates_for_horizon`: one pick per ISO week, scored at
+  Monday's open with `history` truncated through the prior Friday's close).
+
+  The honest port uses the identical proxy idea C01 uses, applied to
+  turn-of-month membership instead of weekday identity: "turn-of-month" is
+  defined purely from the trading days present in `history` - a date is
+  turn-of-month if it is the last trading day of its calendar month, or one
+  of the first 3 trading days of its calendar month (`TOTM_LAST_N`/
+  `TOTM_FIRST_N`, matching the catalog's "window -1..+3"), ranked among the
+  trading days `history` itself contains, never an external holiday
+  calendar. Historical base rates are built from every non-overlapping run
+  of 5 consecutive trading days in `history` (a *trading-day* week, counted
+  by position from `history`'s own earliest visible date - not a true ISO
+  calendar week; see `strategies/c02_turn_of_month.py`'s `_pooled_week_returns`
+  docstring for why: a true calendar-week grouping depends on each date's
+  actual weekday, which this module's own causality audit found is not
+  reliably preserved by a whole-year date shift once a 29 February is
+  crossed - counting fixed-size trading-day chunks avoids that fragility
+  entirely and keeps the construction a pure function of which trading days
+  `history` contains). Each such chunk's pooled, market-wide return (mean
+  across `has_future` symbols of close(chunk's last day)/open(chunk's first
+  day) - 1) is bucketed by whether the trading day immediately before that
+  chunk started was itself turn-of-month.
+
+  Application: `score()` looks up the bucket keyed by whether `history`'s
+  own last visible trading day (the day immediately before the upcoming
+  pick week starts) is turn-of-month - construction and lookup key on the
+  identical quantity (the trading day immediately preceding a
+  period's first date), so this is self-consistent, not a different claim
+  wearing the same name.
+params:
+  min_occurrences: 20
+  totm_first_n: 3
+  totm_last_n: 1
+red_flags:
+  - "The chunk return is built from non-overlapping runs of 5 consecutive
+    trading days counted from history's own earliest visible date, not
+    true calendar (Monday-Friday) weeks - a holiday anywhere in a chunk
+    shifts which weekday its first/last day falls on relative to a real
+    NSE week, same shape of blur C01's yesterday's-weekday proxy already
+    accepts (does not leak anything; both construction and lookup use the
+    same chunking, so it is self-consistent) but a source of noise in the
+    base rates, not precision."
+  - "Market-wide and not cross-sectional: every eligible symbol gets the
+    identical score on a given pick date, same as C01 - a deliberate
+    consequence of the catalog's own rule (no per-symbol differentiation),
+    not an oversight."
+  - "MIN_OCCURRENCES=20 and the -1..+3 window are the catalog's own round
+    numbers, not tuned - the tune lane revisits this once a real train
+    edge exists worth tuning (SPEC.md section 8)."
+  - "No claim is assumed true (SPEC.md section 5): status moves to
+    confirmed/refuted only after a real train (then validation/test)
+    replay of this proxied variant, not the catalog's literal
+    pick-date-own-calendar-position claim."
+  - "C03 (pre-holiday) still cannot be ported this way at all - it needs to
+    know about a future date (tomorrow being a holiday), which no amount of
+    past data can supply, and config/nse_holidays.txt covers 2026 only. C04
+    (expiry-week) may be more tractable; see state/engine-issues.md's entry
+    on this wall for both."
+status: queued
