@@ -1,0 +1,38 @@
+source_url: ""
+author: "Thomas J. George; Chuan-Yang Hwang"
+license: "academic paper, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "2004"
+claim_as_stated: >
+  George and Hwang (2004), "The 52-Week High and Momentum Investing", JF:
+  a stock's nearness to its 52-week high predicts future returns better
+  than its own past return does - stocks trading close to their 52-week
+  high keep outperforming, stocks trading far below it keep underperforming,
+  and this subsumes most of the standard 12-month price momentum effect on
+  US data. The paper's own horizon is several months to a year; this card
+  tests whether any of that continuation shows at a one-week horizon on
+  NSE, which is far shorter than what was published.
+horizon: week
+rules_plain: >
+  For each NSE F&O stock, over the trailing `window_days` trading days
+  (approximating 52 weeks), find the rolling high and rolling low of the
+  adjusted close, and the stock's current adjusted close within that
+  range. Score is continuous and signed: score = 2 * (close - low) /
+  (high - low) - 1, so a close sitting at the 52-week high scores +1
+  (most bullish), a close sitting at the 52-week low scores -1 (most
+  bearish), and a close at the midpoint of its own 52-week range scores 0.
+  This is a per-symbol adaptation of the catalog's "close / 52-week high"
+  rule: rather than comparing the raw close/high ratio across the universe
+  (which the paper does via a cross-sectional decile sort), the score is
+  centred on each stock's own 52-week range so a single symbol's score has
+  a meaningful zero-crossing, matching the sign convention every other
+  card on this roster uses (SPEC.md section 5; `engine/champion_report.py`
+  and `engine/selftest.py` both read a pick's side from `score`'s sign).
+params:
+  window_days: 252
+red_flags:
+  - "Published horizon (several months to a year, per the paper's own momentum-style holding periods) is far longer than the one-week horizon tested here; the paper's own effect size says nothing about whether any continuation survives at this much shorter horizon - test train-only sign and stability before trusting the direction at all."
+  - "The catalog's rule (`close / 52-week high`, a ratio in (0, 1]) is not directly signed; this card centres it on the stock's own 52-week range (score = 2 * nearness-within-range - 1) instead of the paper's cross-sectional decile sort, so a stock near its high scores positive and a stock near its low scores negative in absolute terms, not relative to the rest of the universe on that date. This is a deliberate adaptation, not a literal replication of the paper's portfolio construction - flagged explicitly since it changes what 'farthest from the high' means (farthest within the stock's own range, not farthest among all stocks that day)."
+  - "252/day trading windows are a US-NYSE convention; NSE's own holiday calendar was not checked for whether it shifts the effective 52-week equivalent enough to matter."
+  - "A 52-week high reached on a thinly-traded illiquid day inside the window could be a stale, non-representative price; the liquidity floor in `config/universe.yml` is applied downstream by the universe filter, not inside this score."
+  - "No claim is assumed true (SPEC.md section 5): this card's status moves to confirmed/refuted only after a real train (then validation/test) replay, not from the paper's own reported effect sizes."
+status: queued
