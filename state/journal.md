@@ -1291,3 +1291,78 @@ Until then, further `port`-lane runs should keep working through
 `cards/catalog.csv` in SPEC order (A08, overnight vs intraday tug of war,
 is next - still an academic anomaly, day horizon this time). `build` is
 still blocked on B3 and B10 - nothing changed there this run.
+
+## 2026-10-18T14:18Z — port lane
+
+Hypothesis: A08 (overnight vs intraday tug of war, Lou, Polk and Skouras
+2019, JFE) is next in `cards/catalog.csv`'s testing order after A01-A07,
+as the previous run's journal entry queued up. `build` remains blocked on
+B3 (methodology decision for a supervised session) and B10 (needs a
+`.github/` change); `diagnose` remains blocked on the
+`engine/experiment_report.py` proposal in `state/engine-issues.md` (no
+automated way yet to score a landed pick log, now affecting seven landed
+experiments); no lease was held for `port`. So `port` is the right lane
+to keep research moving (SPEC.md's "the work never runs out"), and it
+also serves the go-live track's P1 priority (SPEC.md section 10,
+`state/queue.md`: "keep working through `cards/catalog.csv` in SPEC
+order" ranks right after leak alarms and workflow failures while any
+table is provisional).
+
+What I did: unlike A01-A07, A08 is a day-horizon card whose predicted
+quantity (open-to-close) is exactly our own day pick's scored outcome, not
+a proxy for it - picked ahead in SPEC.md's testing order for that reason.
+The catalog's rule ("strong past overnight returns but weak intraday
+returns: bearish for open-to-close, and the reverse") decomposes each of
+the trailing 20 trading days into an overnight leg
+(`adj_open_t / adj_close_(t-1) - 1`) and an intraday leg
+(`adj_close_t / adj_open_t - 1`), averages each over the window, and
+scores `avg_intraday - avg_overnight`: a stock whose recent gains came
+from the intraday leg scores bullish, one whose recent gains came mostly
+overnight (with weak or negative intraday) scores bearish - matching the
+catalog row with no sign flip. Prices are the split/bonus-adjusted series
+(`scripts.adjustments.compute_adjustment_factors`, same as A02) so a
+corporate action between a close and the next open doesn't masquerade as
+a real gap; the intraday leg needs no adjustment (same-row factor
+cancels) but is read from the same adjusted frame for one consistent
+column set.
+
+Added `cards/A08.yml`, `strategies/a08_overnight_intraday_tug.py` (same
+`has_future` prefilter and `compute_adjustment_factors` use as A02), its
+causality audit (`strategies/a08_overnight_intraday_tug_audit.py`, same
+per-symbol independent-open/close synthetic fixture as A02/A07's audits,
+extended to draw open and close as two independent legs so the overnight
+and intraday components are genuinely distinct), and
+`tests/test_a08_overnight_intraday_tug.py` (16 tests: known-score fixture
+via constant per-day overnight/intraday returns - exact expected
+`avg_intraday - avg_overnight` - both score directions, a zero-tug case
+that must still be included (not an abstain), a leading-history-doesn't-
+leak check, a non-positive-price abstain, insufficient-history abstain,
+per-symbol independence, `has_future` prefilter, causality audit). Hit
+and fixed one test-fixture bug before trusting the suite: the leading-
+history fixture's own `pd.bdate_range` call started from the same default
+date as the tail fixture, so concatenating them produced duplicate dates
+for the same symbol - not a strategy bug, but it would have let a real
+leak slip past the test undetected, since `compute_adjustment_factors`'s
+previous-trading-day logic needs a real chronological axis to prove
+anything. Fixed by giving the leading fixture an explicit earlier
+`start_date`; confirmed the originally-intended property (tail-window
+scores are unaffected by rows before it) only once dates were real.
+Queued the train replay as `experiments/pending/a08-overnight-intraday-tug-day.yml`
+(train split, day horizon - the catalog row's own rule has no week-horizon
+variant) and marked A08 `queued` in `cards/catalog.csv`.
+
+Result: `python3.13 -m pytest -q` (full suite) - 338 passed (322 existing
++ 16 new), 0 failed, in 210.27s. No regressions. Pushing this should
+trigger `replay.yml` (queue touched) against the real cached dataset.
+
+Next: once `replay.yml` lands `experiments/done/a08-overnight-intraday-tug-day/`,
+it will hit the same scoring blocker A01-A07 already did - still waiting
+on the `engine/experiment_report.py` proposal in `state/engine-issues.md`
+for a supervised session to pick up; that blocker now affects eight
+landed experiments, not one. Until then, further `port`-lane runs should
+keep working through `cards/catalog.csv` in SPEC order (A09, gap fade, is
+next - another day-horizon anomaly, closely related to A08 per both
+cards' red flags: worth checking A08/A09 pick overlap once both have
+train results, ahead of SPEC.md section 6 gate 8's roster-level 50%
+overlap check). `build` is still blocked on B3 and B10 - nothing changed
+there this run.

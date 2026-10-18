@@ -1,0 +1,57 @@
+source_url: ""
+author: "Dong Lou; Christopher Polk; Spyros Skouras"
+license: "academic paper, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "2019"
+claim_as_stated: >
+  Lou, Polk and Skouras (2019), "A Tug of War: Overnight Versus Intraday
+  Expected Returns", JFE: a stock's past overnight return (close-to-open
+  gap) and its past intraday return (open-to-close) component are
+  persistent but pull in opposite directions for future returns - the
+  paper's mechanism is that overnight returns track slow-moving,
+  sentiment/flow-driven demand (concentrated in the close-to-open window)
+  while intraday returns track the trading that fades it, so a stock whose
+  recent return has been earned overnight rather than intraday tends to
+  give some of it back intraday going forward, and the reverse: a stock
+  whose recent return has been earned intraday rather than overnight tends
+  to keep earning it intraday. The catalog's own rule ("strong past
+  overnight returns but weak intraday returns: bearish for open-to-close,
+  and the reverse") is this card's reading of that finding, applied
+  directly to our own open-to-close day horizon - picked ahead of the
+  indicator rules in SPEC.md section 5's testing order precisely because
+  our day picks are open-to-close by construction (SPEC.md section 1), so
+  this card's predicted quantity and our scored outcome are the same
+  thing, not a proxy for it.
+horizon: day
+rules_plain: >
+  Over the `WINDOW` (20) trading days immediately before the pick date,
+  compute two per-day components from each day's own open and close (no
+  look-ahead: for a day pick, `history` is truncated to end at yesterday's
+  close, so every one of these `WINDOW` days is already fully observed -
+  SPEC.md section 4):
+    overnight_t = adj_open_t / adj_close_(t-1) - 1   (close-to-open gap)
+    intraday_t  = adj_close_t / adj_open_t - 1        (open-to-close)
+  averaged over the window to `avg_overnight` and `avg_intraday`. Prices
+  are the split/bonus-adjusted series (`scripts.adjustments`) so a
+  corporate action landing between a close and the next open doesn't
+  masquerade as a real overnight move - `adj_open_t` and `adj_close_t`
+  share the same row's `adj_factor`, so intraday returns are unaffected by
+  adjustment either way (the factor cancels within a row); only the
+  overnight leg, which spans two different rows' factors, needs it.
+
+  `score = avg_intraday - avg_overnight`: a stock whose recent return has
+  come from the intraday leg more than the overnight leg scores positive
+  (bullish, i.e. the tug-of-war's intraday-persistence side), and one
+  whose recent return has come mostly overnight with weak or negative
+  intraday returns scores negative (bearish) - matching the catalog row's
+  "strong overnight / weak intraday -> bearish, and the reverse" exactly,
+  with no inversion needed: strong overnight and weak intraday makes
+  `avg_overnight` large and positive and `avg_intraday` small or negative,
+  so `avg_intraday - avg_overnight` is negative (bearish).
+params:
+  window: 20
+red_flags:
+  - "The paper's own evidence is on US equities with a different market microstructure (overnight gaps, closing auctions, after-hours trading all differ from NSE's); the mechanism is plausible but not assumed to transfer (SPEC.md section 5's 'no claim is assumed true') until a real train replay shows a sign and a stable edge on NSE data."
+  - "`WINDOW=20` trading days is this card's own reading of the catalog's 'past 20-day overnight and intraday components' default_params, not tuned; tuning (train-only) happens in the tune lane once this card has a real train edge worth tuning."
+  - "A08 and A09 (gap fade, queued right after it in the catalog) both trade the overnight-vs-intraday split and could end up highly correlated in their picks even though they're derived from different literatures; worth checking pick overlap once both have train results, ahead of SPEC.md section 6 gate 8's roster-level 50% overlap check."
+  - "No claim is assumed true (SPEC.md section 5): this card's status moves to confirmed/refuted only after a real train (then validation/test) replay, not from the paper's own reported effect sizes."
+status: queued

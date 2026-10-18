@@ -1,0 +1,13 @@
+# A08: overnight vs intraday tug of war, train-split replay
+# (port lane, `state/queue.md`).
+# See cards/A08.yml and strategies/a08_overnight_intraday_tug.py.
+# Day horizon only - the catalog row's own rule predicts the open-to-close
+# move, exactly our day pick's own horizon; there is no week-horizon
+# variant to queue alongside it.
+id: a08-overnight-intraday-tug-day
+strategy: strategies.a08_overnight_intraday_tug
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
