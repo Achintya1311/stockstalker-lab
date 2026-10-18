@@ -1,0 +1,9 @@
+{
+  "id": "a07-high-volume-premium-week",
+  "strategy": "strategies.a07_high_volume_premium",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 62624,
+  "n_dates": 302,
+  "pick_log_sha256": "6b86680e405b559d2c6dd5d7a6a4244ba57ba317da2dcf0598ac10eaf2623a0f"
+}
