@@ -1,0 +1,44 @@
+source_url: ""
+author: "Turan G. Bali; Nusret Cakici; Robert F. Whitelaw"
+license: "academic paper, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "2011"
+claim_as_stated: >
+  Bali, Cakici and Whitelaw (2011), "Maxing Out: Stocks as Lotteries and
+  the Cross-Section of Expected Returns", JFE: stocks with a high maximum
+  daily return over the past month (MAX) subsequently underperform,
+  consistent with investors overpaying for lottery-like upside and this
+  effect partly subsuming the low-volatility anomaly. The paper's own
+  holding period is one month; this card tests whether any of that
+  underperformance/outperformance pattern shows at a one-week horizon on
+  NSE, which is much shorter than what was published.
+horizon: week
+rules_plain: >
+  For each NSE F&O stock, over the trailing `max_window` trading days
+  (approximating "the past month"), find MAX: the single largest daily
+  close-to-close return in that window. The catalog's own rule ("high MAX
+  bearish, low MAX bullish") is not directly signed around zero - MAX is a
+  maximum of a roughly mean-zero distribution, so it is typically positive
+  regardless of whether the stock is, in the paper's own sense, "lottery-like"
+  for its own history. This card centres MAX the same way A04 centred
+  52-week-high proximity on the stock's own range: against a per-symbol
+  volatility baseline, not the paper's cross-sectional decile sort. The
+  baseline is the standard deviation of daily returns (`sigma`) over the
+  `sigma_window` trading days immediately preceding the MAX window itself
+  (a separate, non-overlapping period, so the month being judged can't
+  inflate the yardstick it's judged against - the same trick A02 uses to
+  keep an extreme day out of its own sigma estimate). `z = MAX / sigma`;
+  `score = -z`, so a month with an unusually large best day relative to the
+  stock's own normal volatility (lottery-like, high MAX) scores bearish,
+  and a month with a muted best day relative to normal (low MAX) scores
+  bullish - the same "sign gives direction, magnitude gives conviction"
+  convention every other card on this roster uses.
+params:
+  max_window: 21
+  sigma_window: 60
+red_flags:
+  - "Published holding period (one month) is far longer than the one-week horizon tested here; test train-only sign and stability before trusting the direction at all, same caveat as A03/A04."
+  - "The catalog's rule (MAX, an unsigned maximum) is not directly signed; this card centres it against a per-symbol trailing-volatility baseline (z = MAX / sigma, score = -z) rather than the paper's cross-sectional decile sort across the whole universe on a given date. This is a deliberate adaptation, not a literal replication - flagged explicitly since 'high MAX' here means high relative to this stock's own recent normal volatility, not high relative to the rest of the universe that day."
+  - "`sigma_window` (60 trading days) is this card's own addition on top of the catalog's default (`max_window` only) - needed for the per-symbol centring above. Not tuned; a plain, round baseline length, same spirit as A02's `SIGMA_WINDOW` choice."
+  - "MAX is driven by a single day's return inside the window; a stale or thinly-traded print on that one day could dominate the whole month's reading. The liquidity floor in `config/universe.yml` is applied downstream by the universe filter, not inside this score."
+  - "No claim is assumed true (SPEC.md section 5): this card's status moves to confirmed/refuted only after a real train (then validation/test) replay, not from the paper's own reported effect sizes."
+status: queued
