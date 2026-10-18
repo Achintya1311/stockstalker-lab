@@ -1366,3 +1366,60 @@ cards' red flags: worth checking A08/A09 pick overlap once both have
 train results, ahead of SPEC.md section 6 gate 8's roster-level 50%
 overlap check). `build` is still blocked on B3 and B10 - nothing changed
 there this run.
+
+## 2026-10-18T16:19Z — port lane
+
+Hypothesis: A09 (gap fade), next in SPEC testing order after A08, can be
+ported honestly despite its catalog rule needing information (the pick
+date's own open) that `engine/replay.py`'s `truncate()` structurally
+withholds from every day-horizon strategy (B4) - a one-day-lagged variant
+(yesterday's gap predicting today's open-to-close move, via the same
+z-score shape A02 already uses on close-to-close returns) keeps the
+catalog's fade mechanism testable without violating causality.
+
+What I did: wrote `cards/A09.yml` documenting the reinterpretation and why
+the literal same-day claim is untestable here (not a code bug - the
+engine is correctly refusing to leak today's open to a day-horizon
+strategy, and closing this gap for real would need a SPEC-level change to
+when picks are made, not an engine fix, so it is not filed in
+`state/engine-issues.md`), flagging that A10 (gap and go) will hit the
+identical wall. Wrote `strategies/a09_gap_fade.py` (score = -z, where
+z = yesterday's close-to-open gap / trailing-20-day gap sigma, yesterday's
+own gap excluded from that sigma - mirrors A02's structure exactly,
+applied to the gap component instead of close-to-close return),
+`strategies/a09_gap_fade_audit.py` (cross-symbol causality proof via a
+deterministic alternating-gap fixture), and `tests/test_a09_gap_fade.py`
+(17 tests: known-score fixture, both score directions, threshold
+boundary, zero-gap-volatility abstain, insufficient history, per-symbol
+independence, `has_future` prefilter, causality audit, plus a
+same-strategy-level sanity check that only the fixture's own last row
+drives the score). Queued the train replay as
+`experiments/pending/a09-gap-fade-day.yml` (day horizon only, matching the
+catalog row) and marked A09 `queued` in `cards/catalog.csv`.
+
+Result: `python3.13 -m pytest -q` (full suite) - 355 passed (338 existing
++ 17 new), 0 failed, in 206.60s. No regressions. The causality audit
+module also runs standalone (`python3.13 -m strategies.a09_gap_fade_audit`)
+and passes. Pushing this should trigger `replay.yml` against the real
+cached dataset.
+
+Next: once `replay.yml` lands `experiments/done/a09-gap-fade-day/`, it
+will hit the same scoring blocker A01-A08 already did - still waiting on
+the `engine/experiment_report.py` proposal in `state/engine-issues.md`
+("READY FOR WIRING: no automated way to score a finished train replay")
+for a supervised session to pick up; that blocker now affects nine landed
+experiments with zero of them diagnosed, and the go-live track's P1 (every
+positive-train-edge card earns one validation query toward a provisional
+table) cannot start at all until it lands, since no train edge numbers
+exist yet for any ported card. With `config/live_source.json` due by Fri
+30 Oct 12:00 UTC and nothing ported since A01 (2026-10-17) actually
+scored, this is worth a supervised session's attention soon rather than
+at the deadline - flagging this explicitly since several runs in a row
+have hit the same wall without it being picked up. Until then, further
+`port`-lane runs should keep working through `cards/catalog.csv` in SPEC
+order (next candidates in order: C01-C04 calendar effects, then T01
+onward - A10, gap-and-go, is only "partly" testable_now per the catalog
+since opening volume is unavailable, so it stays behind the clean `yes`
+rows). `build` is still blocked on B3 (methodology decision for a
+supervised session) and B10 (needs a `.github/` change plus B1-B9 all
+ticked, and B3 isn't) - nothing changed there this run.
