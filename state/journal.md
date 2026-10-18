@@ -2,6 +2,73 @@
 
 One entry per run: date, lane, hypothesis, result, next.
 
+## 2026-10-18T18:21Z — port lane
+
+Hypothesis: C01 (day-of-week effect), next in SPEC testing order after
+A01-A09, looked blocked at first glance - its catalog rule needs the pick
+date's own weekday, and `engine.replay.pick_date` never passes a date into
+`strategy.score()` at all (SPEC.md section 5's interface is `score(history)`
+only), with `history` itself truncated strictly before the pick date (B4).
+Unlike A09's gap-fade wall (the right information existed, just dated a day
+late), this looked like it might have no workaround - "today's weekday"
+isn't derivable from any amount of past price data. But it is derivable
+indirectly: `history`'s own last visible date ("yesterday") has a weekday,
+and NSE trading days almost always increment Mon->Tue->...->Fri->Mon with
+no gap, so yesterday's weekday is nearly always today's weekday minus one
+trading day - a proxy that needs no pick-date knowledge, and is
+self-consistent as long as both the historical base-rate construction and
+the live lookup use it identically (which this port does).
+
+What I did: wrote `cards/C01.yml` documenting the wall and the proxy (plus
+why it's a cleaner reinterpretation than A09's - same claim measured
+through a one-step-earlier lens, not a different day's effect), with a
+red flag that the proxy mislabels the rare week where a holiday falls
+right after the keying day. Wrote `strategies/c01_day_of_week.py`: pools
+open-to-close returns across the F&O universe per date (market-wide, not
+cross-sectional - the catalog gives no per-symbol differentiation), buckets
+every historical (date, next-date) pair by the first date's weekday, and
+scores every `has_future`-eligible symbol identically with the bucket mean
+keyed by yesterday's weekday, abstaining below `MIN_OCCURRENCES` (20)
+pairs. Wrote `strategies/c01_day_of_week_audit.py` - a different shape of
+audit than A01-A09's (nothing cross-symbol to leak here, since every
+symbol gets the same score by design): it proves the module reads weekday
+only off `history`'s own dates by checking the predicted bias is invariant
+to shifting every date in a synthetic market ten years later. Wrote
+`tests/test_c01_day_of_week.py` (10 tests). Queued the train replay as
+`experiments/pending/c01-day-of-week-day.yml` (day horizon, matching the
+catalog row) and marked C01 `queued` in `cards/catalog.csv`.
+
+Also wrote a new `state/engine-issues.md` entry generalising this finding:
+`score(history)` structurally can never carry the pick date, which is a
+wall the whole calendar-effect family (C01-C04) shares, but unevenly - C02
+(turn-of-month) looks portable the same yesterday-relative way C01 was,
+while C03 (pre-holiday) and C04 (expiry-week) need *future* calendar
+knowledge (is tomorrow a holiday / an expiry day) that no proxy on past
+data can ever supply, and `config/nse_holidays.txt` covers 2026 only -
+flagged so whoever picks those up doesn't rediscover the gap from scratch.
+
+Result: `python3.13 -m pytest -q` (full suite) - 365 passed (355 existing +
+10 new), 0 failed, in 212.06s. No regressions. The causality/purity audit
+also runs standalone (`python3.13 -m strategies.c01_day_of_week_audit`) and
+passes. Pushing this should trigger `replay.yml` against the real cached
+dataset.
+
+Next: once `replay.yml` lands `experiments/done/c01-day-of-week-day/`, it
+hits the same scoring blocker A01-A09 already did (`engine/experiment_report.py`
+proposal in `state/engine-issues.md`, still not landed - a supervised
+session's attention is overdue here; ten landed experiments now have zero
+of them diagnosed, and go-live track P1 cannot start without it). Next
+`port`-lane run: try C02 (turn-of-month effect) using the same
+yesterday-relative proxy this run validated for C01 - check whether
+"history's last visible date is near a month boundary" is enough, same as
+weekday was. If C02 also needs no engine change, C03/C04 come next but
+hit the holiday-calendar gap flagged above; a supervised session may want
+to pick a direction for that (full NSE holiday history back to 2015, same
+shape as B3's proposed fetcher) before C03/C04's turn, rather than at the
+go-live deadline. `build` is still blocked on B3 (methodology decision for
+a supervised session) and B10 (needs a `.github/` change plus B1-B9 all
+ticked, and B3 isn't) - nothing changed there this run.
+
 ## 2026-10-16T18:16Z — build lane
 
 Hypothesis: B2 (parse old CM/FO CSV and UDiFF bhavcopy formats into one table)
