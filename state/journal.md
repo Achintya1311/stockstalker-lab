@@ -1642,3 +1642,82 @@ since opening volume is unavailable, so it stays behind the clean `yes`
 rows). `build` is still blocked on B3 (methodology decision for a
 supervised session) and B10 (needs a `.github/` change plus B1-B9 all
 ticked, and B3 isn't) - nothing changed there this run.
+
+## 2026-10-19T00:09Z — port lane
+
+Hypothesis: D01 (OI build-up classification), unlocked by D1's near-month
+futures OI columns (landed 2026-10-18T22:31Z) and explicitly moved ahead
+of the plain indicator rules (T/I/X rows) by the go-live track's P3 (`state/queue.md`:
+"D1 and D2 ... move ahead of the indicator rules... where an F&O-only
+universe is most likely to hold an edge that price rules miss") - a
+derivatives-family card, next in priority even though C03/C04/T01 sit
+earlier in the catalog's raw row order.
+
+What I did: the catalog's own classification (price up/down x OI up/down)
+reads a session's own close and own OI change - the identical same-day
+wall A09's gap fade hit (`cards/A09.yml`), since `engine/replay.py`'s
+`truncate()` correctly withholds the pick date's own close/OI from a
+day-horizon strategy. Ported as the honest one-day lag: `history`'s last
+visible row (the session right before the pick date) is classified
+long/short build-up or long-unwinding/short-covering from its own
+`close`/`prevclose` and `oi_chg_futstk`/`oi_futstk`, and that
+classification predicts the *next* session. `score = direction *
+abs(oi_pct_chg) * weight`: direction always follows the last row's own
+price-move sign (matching the catalog's four-way table's sign in every
+quadrant), `weight` is 1.0 for a build-up (OI up) and 0.5 (`WEAK_WEIGHT`,
+a new strategy parameter, not tuned) for unwinding/covering (OI down) -
+the catalog's "treated as weaker" instruction applied to magnitude only,
+sign untouched, exactly as stated.
+
+Wrote `cards/D01.yml` (documenting the lag reinterpretation and the
+`weak_weight` choice in its red flags, same shape as A09's card),
+`strategies/d01_oi_buildup.py` (`has_future` prefilter, abstains on zero
+price move, non-positive `prior_oi`, or missing OI/price fields),
+`strategies/d01_oi_buildup_audit.py` (cross-symbol causality proof: giving
+one symbol an extra trailing row changes only that symbol's score, via a
+four-row synthetic fixture whose arithmetic I hand-verified before trusting
+the test), and `tests/test_d01_oi_buildup.py` (22 tests: one test per
+quadrant with a hand-computed expected score, a direct check that
+unwinding/covering reads weaker than an equal-sized build-up, abstain
+cases for zero move/non-positive prior OI/zero prevclose/no future/missing
+OI columns, "only the last visible row counts" (an earlier build-up row
+must not leak through once a later, differently-classified row exists),
+per-symbol independence, `rules_fired` text for all four quadrants plus
+both abstain messages, the causality audit, and the `has_future` prefilter).
+Queued the train replay as `experiments/pending/d01-oi-buildup-day.yml`
+(day horizon only - the catalog row's own horizon field is `day`, and
+there is no natural weekly OI-build-up reading to invent) and marked D01
+`queued` in `cards/catalog.csv`.
+
+Result: `pip3 install -r requirements.txt` (no pytest/pandas preinstalled
+in this sandbox this run, unlike prior runs' notes - installed cleanly,
+no version pin issues hit) then `python3.13 -m pytest -q` (full suite) -
+399 passed (377 existing + 22 new), 0 failed, in 243.70s. No regressions.
+Pushing this should trigger `replay.yml` against the real cached dataset
+(D1's dataset rebuild already landed 2026-10-18T22:37Z, so OI columns
+should be populated back through 2015 for every symbol-day that had an
+active future, not just recent history).
+
+Next: this run did not touch the `engine/experiment_report.py` proposal
+in `state/engine-issues.md` ("READY FOR WIRING: no automated way to score
+a finished train replay") - that entry now affects eleven landed
+experiments (A01-A09, C01, C02) with zero of them diagnosed, and D01 will
+be the twelfth once its replay lands. It is worth flagging explicitly
+again: the go-live track's P1 ("every train replay with a positive edge
+... gets one validation query ... that is how a provisional candidate
+earns its place") structurally cannot start - there are no train edge
+numbers for anything ported since A01 (2026-10-17) - and `config/live_source.json`
+is due by Fri 30 Oct 12:00 UTC. The SPEC's own fallback (champion v1 when
+nothing qualifies) covers that specific deadline either way, so this is
+not a go-live blocker by itself, but every day this stays unpicked-up is
+a day the lab cannot tell whether any of its eleven-going-on-twelve ported
+cards are worth anything, on train or otherwise. Further `port`-lane runs
+should keep working through `cards/catalog.csv` in SPEC order, factoring
+in the go-live P3 reordering (D02 is next in the derivatives family but is
+still blocked - `testable_now: no`, options OI is a separate, larger
+parse not yet done; after that, C03/C04 are next in raw catalog order but
+both are flagged blocked in `state/engine-issues.md`: C03 needs full NSE
+holiday history back to 2015, C04 might be unblocked by the FO expiry
+field already in the dataset - worth checking before assuming it needs
+the same holiday fetch). `build` is still blocked on B3 and B10 - nothing
+changed there this run.

@@ -1,0 +1,12 @@
+# D01: OI build-up classification, train-split replay (port lane, `state/queue.md`).
+# See cards/D01.yml and strategies/d01_oi_buildup.py.
+# Day horizon only - the catalog row's own horizon field is `day`, and daily
+# OI build-up/unwind is inherently a session-level classification with no
+# natural weekly reading to port alongside it.
+id: d01-oi-buildup-day
+strategy: strategies.d01_oi_buildup
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

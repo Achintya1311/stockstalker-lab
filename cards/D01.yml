@@ -1,0 +1,71 @@
+source_url: ""
+author: "Indian derivatives desk convention (no single named source; standard commentary vocabulary used across NSE F&O desks and financial media)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  Standard F&O desk reading of a day's own price move alongside its own
+  change in open interest: price up with OI up is "long build-up" (read as
+  bullish - fresh long positions being added with conviction); price down
+  with OI up is "short build-up" (read as bearish - fresh shorts being
+  added with conviction); price down with OI down is "long unwinding"
+  (existing longs exiting - bearish, but read as weaker than a short
+  build-up since it is position-closing, not fresh conviction); price up
+  with OI down is "short covering" (existing shorts exiting - bullish, but
+  weaker than a long build-up for the same reason). This is commentary on
+  the session that just happened, not stated anywhere as a forward-looking
+  signal for the next session - untested here (SPEC.md section 5: "no
+  claim is assumed true") until a real train replay says whether yesterday's
+  classification has any predictive value for today's pick at all.
+horizon: day
+rules_plain: >
+  The catalog's own classification (`price up/down` x `OI up/down`) is
+  computed from one session's own close vs. its own prevclose and that same
+  session's own change in open interest - exactly the information
+  `engine/replay.py`'s `truncate()` withholds from a day-horizon strategy
+  about the pick date itself, the identical wall `cards/A09.yml` hit for gap
+  fade. Ported honestly as a one-day lag instead: `history`'s last visible
+  row (the trading session immediately before the pick date, after
+  truncation) is classified build-up/unwind/covering from its own
+  `close`/`prevclose` and `oi_chg_futstk`, and that classification's implied
+  direction is used to score the *next* session (the pick date) - the same
+  "does yesterday's pattern carry forward" reinterpretation A09 used for its
+  gap, not a same-day leak.
+
+  For the last visible row: `price_move = (close - prevclose) / prevclose`.
+  `direction = sign(price_move)` (abstain if exactly zero - no move, no
+  clear direction, same reasoning B5's "no move at all counts as a miss"
+  gives scoring generally). `prior_oi = oi_futstk - oi_chg_futstk` (the FO
+  bhavcopy's own `OPEN_INT`/`CHG_IN_OI` pair already gives today's OI level
+  and today's change in it, so yesterday's starting OI is just the
+  difference). `oi_pct_chg = oi_chg_futstk / prior_oi` (abstain if
+  `prior_oi` is zero, negative or missing - undefined base).
+
+  `score = direction * abs(oi_pct_chg) * weight`, where `weight = 1.0` if
+  `oi_chg_futstk > 0` (a build-up - direction read at full strength, matching
+  the catalog's "long/short build-up" wording) and `weight = WEAK_WEIGHT`
+  (0.5, a strategy parameter) if `oi_chg_futstk <= 0` (unwinding or
+  covering - same direction as the price move, but read at half strength,
+  matching the catalog's own "treated as weaker" instruction literally: the
+  *sign* still follows the price move in every quadrant exactly as the
+  catalog's four-way table says, only the *magnitude* is damped for the two
+  closing-position quadrants).
+
+  A symbol whose last visible row has no active future (`has_future` false,
+  so no `oi_futstk`/`oi_chg_futstk` at all - D1's own partial-dataset
+  caveat), or whose `oi_chg_futstk`/`oi_futstk`/`prevclose` is missing or
+  zero in a way that makes the arithmetic above undefined, abstains for
+  that pick date rather than guessing.
+default_params:
+  weak_weight: 0.5
+data_needed: "FO bhavcopy OI (dataset extension D1, partial 18 Oct: near-month futures open interest and change in OI, `oi_futstk`/`oi_chg_futstk`)"
+testable_now: "yes (unlocked by D1's near-month futures OI columns, 18 Oct)"
+source: "Indian derivatives desk convention"
+link: ""
+prior_claim: "Standard daily F&O desk reading; untested here"
+red_flags:
+  - "Same-day-information wall, same shape as A09 (`cards/A09.yml`): the catalog's literal classification uses the pick session's own close and own OI change, which `truncate()` correctly withholds from a day-horizon strategy (B4). Ported as a one-day lag (yesterday's build-up/unwind pattern predicting today's open-to-close move) instead of the literal same-day reading - a real behavioural claim (does yesterday's positioning pattern carry forward one session?), not the originally-stated same-session commentary. Train results below test the lagged claim, not the desk's literal same-day one."
+  - "`weak_weight` (0.5) is this card's own choice for how much lighter unwinding/covering should read versus build-up - the catalog gives no numeric ratio, only 'weaker' in words. Not tuned; a `tune`-lane candidate once this has a train edge worth tuning at all."
+  - "D1 is explicitly partial (`state/queue.md`): near-month (soonest-expiry) futures OI only, dropping the next/far-month contracts entirely when more than one expiry trades the same symbol-day, and covering stock futures only (no options OI yet - that's D02, still blocked). A symbol can look OI-silent here on a day it actually had live OI in a further-dated contract; not expected to matter much (the near-month contract usually carries the bulk of open interest) but not measured."
+  - "No separate week-horizon variant: the catalog's own `horizon` field for D01 is `day` only, and daily OI build-up/unwind is inherently a session-level classification - there is no natural 'weekly OI build-up' reading to lag into a week pick without inventing a new rule the catalog doesn't state, so none is ported."
+  - "No claim is assumed true (SPEC.md section 5): this card's status moves to confirmed/refuted only after a real train (then validation/test) replay, not from desk convention or this card's own reasoning about why the lag should carry forward."
+status: queued
