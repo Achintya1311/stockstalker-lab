@@ -1,0 +1,40 @@
+source_url: ""
+author: "Classic technical-analysis convention (no single named source; `cards/catalog.csv`'s own summary)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "Fast SMA above slow SMA bullish,
+  below bearish (StockStalker's current trend signal)." `prior_claim`:
+  "Widely used; weak evidence at short horizons." No specific paper is
+  cited; this is the same 20/50 SMA crossover
+  `strategies/champion_v1.py`'s trend component already uses, isolated
+  here as its own standalone, untuned signal rather than blended with
+  momentum and volume.
+horizon: both
+rules_plain: >
+  Score = (20-day SMA - 50-day SMA) / |50-day SMA| on the adjusted close
+  series, continuous and signed (sign gives direction, magnitude gives
+  conviction, the same convention `cards/A01.yml` and `cards/champion_v1`
+  already use) - not a bare bullish/bearish flag. A symbol abstains until
+  it has at least 50 rows of history (the slow SMA's own window).
+
+  Unlike the calendar-effect cards (C01-C04), this rule needs no pick-date
+  knowledge at all: both SMAs are computed purely from past prices already
+  inside whatever truncated `history` slice `engine.replay` hands the
+  strategy, so one module (`strategies/t01_sma_crossover.py`) serves both
+  horizons - the same way `strategies/champion_v1.py` does, rather than
+  needing a day/week split the way C01/C02/C04 do.
+default_params:
+  fast: 20
+  slow: 50
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Classic"
+link: ""
+prior_claim: "Widely used; weak evidence at short horizons"
+red_flags:
+  - "This is the exact signal `strategies/champion_v1.py`'s trend component already contributes 40% of its blend from - a real train edge here says something about champion v1's own trend leg, and a real train replay of this card will very likely overlap heavily with champion v1's picks (SPEC.md section 6 gate 8: pick overlap with every roster member below 50% - worth checking directly once both have train results, not assumed from the shared formula alone)."
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay, not from the catalog's own 'weak evidence at short horizons' prior."
+  - "20/50 is the conventional pair, not tuned on NSE data at all - a `tune`-lane candidate once a real train edge exists worth tuning (SPEC.md section 8)."
+  - "Whipsaws through a flat/choppy market are a known weakness of any SMA crossover; the diagnose-lane writeup once `engine/experiment_report.py` (state/engine-issues.md) lands should look at edge by year/regime specifically for this, not just the headline number."
+status: queued

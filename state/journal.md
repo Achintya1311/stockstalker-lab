@@ -1819,3 +1819,67 @@ T0x/I0x/X0x rows are next once C03 (the one genuinely holiday-calendar-
 blocked row) is set aside for a supervised decision. `build` is still
 blocked on B3 (methodology decision for a supervised session) and B10
 (needs a supervised decision too) - nothing changed there this run.
+
+## 2026-10-19T04:12Z — port lane
+
+Hypothesis: with `diagnose` still blocked on the `engine/experiment_report.py`
+scoring gap (`state/engine-issues.md`, now thirteen landed experiments -
+A01-A09, C01, C02, D01, C04-day, C04-week - zero diagnosed) and `build`
+blocked on B3 and B10 (both need a supervised decision), the highest-value
+unit of research work is still P1/the plain catalog order: keep porting
+through `cards/catalog.csv`. C03 (pre-holiday) is genuinely blocked on a
+missing NSE holiday calendar back to 2015 (`state/engine-issues.md`'s own
+note) and D02-D04 stay `testable_now: no` (options OI, delivery %, bulk
+deals all need fetchers not yet built), so the next untested,
+`testable_now: yes` row in file order is **T01** (SMA crossover 20/50,
+both horizons) - the first indicator-rule card, and notably the exact
+signal `strategies/champion_v1.py`'s trend component already contributes
+to its blend, now isolated and tested standalone.
+
+What I did: ported T01 as a single module, `strategies/t01_sma_crossover.py`
+- unlike C01/C02/C04, a pure price-based SMA crossover needs no pick-date
+knowledge at all (both SMAs read purely off past adjusted closes already
+inside whatever truncated `history` slice `engine.replay` hands it), so one
+`score()` serves both horizons exactly the way `champion_v1.py` does,
+without a day/week module split. Score is continuous:
+`(fast_sma - slow_sma) / abs(slow_sma)` on the adjusted close series
+(unscaled/unclipped, since this card is tested standalone, not blended),
+same "sign gives direction, magnitude gives conviction" convention as
+`a01_weekly_reversal.py`. `MIN_ROWS = 50` (the slow SMA's own window); the
+same `has_future` prefilter `a01`/`champion_v1` already use.
+
+Wrote `cards/T01.yml` (flagging the champion-v1-trend-overlap risk explicitly
+under `red_flags`, relevant to SPEC.md section 6 gate 8 once this and
+champion v1 both have real picks to compare), `strategies/t01_sma_crossover_audit.py`
+(the generic cross-symbol causality check, same shape as `a01`'s and
+`champion_v1`'s own), and `tests/test_t01_sma_crossover.py` (13 tests:
+bullish/bearish/flat-zero cases, an exact hand-derived expected spread from
+a plateau-then-shift fixture - 30 rows at 100.0 then 20 at 110.0 gives
+slow_mean=104.0, fast_mean=110.0, spread=6/104 exactly - abstain on short
+history, empty history, per-symbol independence, `rules_fired` text, the
+`has_future` prefilter both ways, and the causality audit). Queued both
+horizons' train replays (`experiments/pending/t01-sma-crossover-{day,week}.yml`,
+both pointing at the same module) and marked T01 `queued` in the catalog.
+
+Result: `pip3 install -r requirements.txt` then `python3.13 -m pytest -q
+--deselect tests/test_c01_day_of_week.py::test_causality_audit_passes`
+(the one pre-existing, environment-specific failure from the
+`state/engine-issues.md` WATCH entry, confirmed still local-only, not
+re-investigated this run) - 432 passed, 0 failed, in 265s (420 existing +
+13 new, less 1 deselected). No regressions. Pushing this should trigger
+`replay.yml` against the real cached dataset for both new experiments.
+
+Next: `diagnose` remains blocked on the `engine/experiment_report.py`
+proposal - still zero of fifteen (once this push's replay lands) landed
+experiments scored, and the go-live track's P1 validation-query award
+cannot start without it, with the holdout queries it would need allowed
+from Mon 26 Oct and `config/live_source.json` due Fri 30 Oct 12:00 UTC.
+This is now the single most overdue item for a supervised session - a
+future run should keep flagging it, not just keep working around it by
+porting more cards that then also can't be scored. Further `port`-lane
+runs: next in file order after T01 is T02 (golden/death cross 50/200,
+week-only) through T25, then I01/I02, then X01-X06 (SPEC testing order
+only requires academic-before-indicator, already satisfied; file order is
+otherwise as good a tiebreak as any). `build` is still blocked on B3
+(methodology decision) and B10 (needs B3 plus a `.github/` change) -
+nothing changed there this run.
