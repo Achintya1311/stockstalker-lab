@@ -1,0 +1,9 @@
+{
+  "id": "c04-expiry-week-day",
+  "strategy": "strategies.c04_expiry_week_day",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 0,
+  "n_dates": 0,
+  "pick_log_sha256": "3486f26525224c3ef92863b4505f32d5003758af0b69f69fa4b2804fe7022c15"
+}

@@ -1,9 +1,0 @@
-# C04 (day horizon): F&O expiry-week effect, train-split replay (port lane,
-# `state/queue.md`). See cards/C04.yml and strategies/c04_expiry_week_day.py.
-id: c04-expiry-week-day
-strategy: strategies.c04_expiry_week_day
-split: train
-horizon: day
-dates:
-  start: 2015-01-01
-  end: 2020-12-31
