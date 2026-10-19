@@ -1,0 +1,9 @@
+{
+  "id": "t01-sma-crossover-day",
+  "strategy": "strategies.t01_sma_crossover",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 297601,
+  "n_dates": 1436,
+  "pick_log_sha256": "350c4bb1ad9599db4462a5eca20d3a678189984a21d83fb0564e672f523873c4"
+}
