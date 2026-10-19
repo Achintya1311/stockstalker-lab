@@ -1,0 +1,77 @@
+source_url: ""
+author: "India-specific practitioner convention (no single named source; `cards/catalog.csv`'s own summary)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "Different behaviour in the week of
+  the monthly F&O expiry." `default_params`: "expiry calendar from FO
+  bhavcopy." `prior_claim`: "Claimed volatility and reversal around
+  expiry; test it" - direction not stated, only that one exists. The
+  literal claim is about the pick date's own position relative to NSE's
+  published monthly expiry schedule.
+horizon: both
+rules_plain: >
+  Same wall `cards/C01.yml` and `cards/C02.yml` document in full:
+  `score(history)` is never told the pick date, and `history` is
+  truncated strictly before it (B4), so nothing here ever carries the
+  upcoming pick date's own calendar position. This card is different from
+  C01/C02 in *what* information it needs, though: not a weekday or a
+  day-of-month rank, but whether a specific future date - NSE's own
+  pre-scheduled monthly expiry - is coming up soon. `state/engine-issues.md`'s
+  original C03/C04 entry worried this needed an external holiday calendar
+  the lab doesn't have; it turns out C04 does not, because the already-scheduled
+  expiry date of the near-month contract active on any day already inside
+  `history` is itself recorded in the FO bhavcopy on that day - not unknowable
+  future information, just a fact `scripts/build_dataset.py` was dropping after
+  using it internally (to pick the near-month contract) instead of keeping it.
+  This run's dataset extension keeps it as `expiry_futstk` (ISO string, one
+  per `has_future` row). C03 (pre-holiday) has no equivalent: whether
+  tomorrow is an NSE holiday is not recorded anywhere in the FO bhavcopy,
+  so it still needs the external holiday-history fetch `state/engine-issues.md`
+  describes.
+
+  Two strategy modules, one per horizon, because `score(history)` has no
+  way to know which horizon it is being asked for (same reason C01 and C02
+  are each a single-horizon card - see `strategies/c04_expiry_week_day.py`
+  and `strategies/c04_expiry_week_week.py`'s own docstrings for the full
+  proxy construction):
+
+  - **Day** (`strategies/c04_expiry_week_day.py`): the proxy is "yesterday's
+    near-month contract expires in yesterday's own ISO week" - the same
+    "yesterday stands in for today" idiom C01 uses for weekday - predicting
+    today's open-to-close move. Accurate on every day of an expiry week
+    except the one right after expiry Friday (the active contract has
+    already rolled by then), a known, accepted blur of the same shape as
+    C01's own weekday-proxy caveat.
+  - **Week** (`strategies/c04_expiry_week_week.py`): week picks are made at
+    Monday's open with `history` truncated through the prior Friday's
+    close, and by Friday the contract has typically already rolled past
+    the week just finished - so "yesterday was in expiry week" doesn't
+    transfer here the way it does for the day variant. The proxy instead
+    adds exactly 7 calendar days to the last visible Friday (always
+    landing in the very next ISO week, i.e. the upcoming pick week) and
+    checks whether that marker shares an ISO week with the near-month
+    contract's own expiry.
+
+  Both variants build their historical base rates from real ISO calendar
+  weeks (not C02's trading-day-chunk workaround, which existed only to
+  dodge a weekday-alignment risk that doesn't apply to an ISO-week-keyed
+  rule - see `strategies/c04_expiry_week_week.py`'s docstring) and are
+  market-wide, not per-symbol (the catalog gives no per-symbol
+  differentiation).
+default_params:
+  min_occurrences: 20
+data_needed: "ohlcv plus expiry dates (this run's dataset extension: `scripts/build_dataset.py` now carries each `has_future` row's near-month contract's own expiry date as `expiry_futstk`)"
+testable_now: "yes"
+source: "India-specific practitioner claim"
+link: ""
+prior_claim: "Claimed volatility and reversal around expiry; test it"
+red_flags:
+  - "Direction not assumed (SPEC.md section 5): the catalog states only that expiry weeks behave differently, not which way. Both variants' score is simply the historical bucket mean, so the sign (bullish/bearish tilt) comes entirely from whatever the real train data shows, same as C01/C02."
+  - "The day variant's proxy misreads the day right after expiry Friday as still 'expiry week' (yesterday, expiry Thursday, was in-week; today, the contract has already rolled) - a known blur, not a leak, same shape as C01's own weekday-proxy caveat."
+  - "The week variant's +7-day marker assumes the last visible trading day really is a Friday (true whenever `history` is truncated for a week pick per `engine.run_queue`) and that NSE's trading calendar has no gap spanning that week - a holiday-shifted week could misalign the marker by a day or two, same blur family C01/C02 already accept."
+  - "`expiry_futstk` is the *modal* near-month expiry across `has_future` rows on a date (`strategies/c04_common.py`), a robustness choice against stray per-symbol data quirks, not a per-symbol signal - every eligible symbol still gets the identical market-wide score."
+  - "MIN_OCCURRENCES=20 (the same round number C01/C02 use) is not tuned - a `tune`-lane candidate once either variant has a real train edge worth tuning (SPEC.md section 8)."
+  - "D02 (stock put-call ratio) remains blocked - the expiry-date extension this card unlocks is about futures' own expiry schedule, not options OI, which is a separate, larger parse (`state/queue.md`'s D1 entry)."
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay of each variant, not from this card's own reasoning about why the proxy should track the catalog's literal claim."
+status: queued

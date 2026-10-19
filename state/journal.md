@@ -1721,3 +1721,101 @@ holiday history back to 2015, C04 might be unblocked by the FO expiry
 field already in the dataset - worth checking before assuming it needs
 the same holiday fetch). `build` is still blocked on B3 and B10 - nothing
 changed there this run.
+
+## 2026-10-19T02:11Z — port lane
+
+Hypothesis: the previous run's journal entry flagged C04 (F&O expiry-week
+effect) as possibly unblockable without the holiday-history fetch C03
+needs, "worth checking before assuming it needs the same holiday fetch."
+Checked: `scripts/build_dataset.py`'s `parse_fo_file` already parses each
+FUTSTK/STF row's own expiry date (used internally to pick the near-month
+contract when several expiries trade the same symbol-day) but then
+dropped it before the final output columns - never actually in the
+dataset. So C04 was blocked by an implementation gap, not a genuine
+future-information problem: NSE's monthly expiry schedule is already
+published and already present in the FO bhavcopy on every day it is
+active, unlike C03's "is tomorrow a holiday" (which truly isn't derivable
+from any amount of past price data).
+
+What I did: extended `scripts/build_dataset.py` to keep that near-month
+expiry date as a new column, `expiry_futstk` (ISO string, alongside
+`oi_futstk`/`oi_chg_futstk` from D1), and updated `tests/test_build_dataset.py`
+to assert it end to end (per-expiry parsing, near-month selection among
+several simultaneous expiries, and the merged `build()` output for both
+the old and UDiFF formats). Then ported C04 as two strategy modules
+(`score(history)` is never told which horizon it's running for, the same
+reason C01/C02 are each single-horizon cards - a calendar-anchored rule
+like this can't share one function across both):
+
+- `strategies/c04_expiry_week_day.py`: "yesterday's near-month contract
+  expires in yesterday's own ISO week" stands in for "today is in expiry
+  week" (C01's weekday-proxy idiom, applied to expiry-week membership).
+- `strategies/c04_expiry_week_week.py`: week picks are made at Monday's
+  open with history truncated through the prior Friday, and by Friday the
+  contract has usually already rolled past whatever week just finished -
+  so the day variant's proxy doesn't transfer. Instead: does the near-month
+  contract active on the last visible Friday expire in the ISO week
+  exactly 7 calendar days later (always the upcoming pick week)?
+
+Both are market-wide (every eligible symbol gets the identical bucketed
+historical-mean score, direction not assumed - the catalog states only
+that expiry weeks behave differently, not which way) and build their base
+rates from real ISO calendar weeks rather than C02's trading-day-chunk
+workaround (that workaround existed only to dodge a weekday-alignment risk
+that doesn't apply to an ISO-week-keyed rule). Shared calendar helpers live
+in `strategies/c04_common.py` (not a strategy itself - no `score`, nothing
+calls it directly) to avoid duplicating the `expiry_futstk` reading between
+the two variants.
+
+Wrote `cards/C04.yml` (horizon: both, documenting the dataset-gap finding
+and both proxies' reasoning), `strategies/c04_expiry_week_{day,week}.py`,
+matching `_audit.py` causality checks (a pure day-count-multiple-of-7 shift
+of both `date` and `expiry_futstk` together must leave every score
+unchanged, since only the relationship between the two columns should ever
+matter - not C01's whole-years shift, which doesn't apply once the proxy
+compares two absolute dates to each other instead of reading one date's
+own weekday), and `tests/test_c04_expiry_week_{day,week}.py` (21 new tests:
+known-bias exact scores for day and week, bearish sign, zero-bias and
+under-threshold abstains, `has_future` exclusion, missing-expiry abstain,
+`rules_fired` text, causality audit). Queued both horizons' train replays
+(`experiments/pending/c04-expiry-week-{day,week}.yml`) and marked C04
+`queued` in the catalog.
+
+Caught and fixed one performance bug before committing: the week variant's
+first `_cutoff_with_enough_history` test helper recomputed the *entire*
+base-rate table from scratch for every candidate trading day while
+searching for a scoreable cutoff, making the week test file take over two
+minutes (quadratic in trading days) versus ~1s for everything else -
+noticed only because the test run visibly hung past the usual few-second
+turnaround, in the same spirit as `state/engine-issues.md`'s existing
+"a strategy fast on test fixtures is not proven fast at real scale" WATCH
+note. Rewrote it as a single O(n) walk that counts the exact condition the
+real base-rate function buckets on, without rebuilding the table each
+time; the test file dropped from 2+ minutes to ~6s with identical
+assertions and results. The strategies' own `score()` implementations were
+never affected - the slow code was only in the audit/test fixture
+generator, not in anything a real replay runs.
+
+Result: `pip3 install -r requirements.txt` then `python3.13 -m pytest -q`
+(full suite) - 420 passed (399 existing + 21 new), 0 failed, in 278.34s.
+No regressions. Pushing this should trigger `replay.yml` against the real
+cached dataset; the dataset rebuild it needs (to backfill `expiry_futstk`
+for all historical has_future rows, same mechanism D1's OI columns used)
+should happen automatically on the next `dataset.yml` run as long as the
+raw NSE zip cache hasn't been evicted since D1 landed.
+
+Next: `diagnose` is still blocked on the `engine/experiment_report.py`
+proposal in `state/engine-issues.md` - thirteen landed experiments now
+(A01-A09, C01, C02, D01, and once this push's replay lands, C04-day and
+C04-week), zero of them diagnosed, and the go-live track's P1 ("every
+train replay with a positive edge ... gets one validation query") still
+cannot start without it. A supervised session should pick that up soon;
+Fri 30 Oct 12:00 UTC (`config/live_source.json` due) is getting closer
+with no train numbers yet for anything ported since A01. Further
+`port`-lane runs should keep working through `cards/catalog.csv`: D02
+(options OI, still `testable_now: no` - options OI is a separate, larger
+parse than the futures-only expiry/OI work D1 and this run did) and the
+T0x/I0x/X0x rows are next once C03 (the one genuinely holiday-calendar-
+blocked row) is set aside for a supervised decision. `build` is still
+blocked on B3 (methodology decision for a supervised session) and B10
+(needs a supervised decision too) - nothing changed there this run.

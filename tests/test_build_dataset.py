@@ -66,6 +66,7 @@ def test_parse_fo_old_keeps_only_futstk(tmp_path):
     assert list(out["symbol"]) == ["RELIANCE"]
     assert out.iloc[0]["date"] == "2015-01-02"
     assert out.iloc[0]["open_int"] == 10000.0 and out.iloc[0]["chg_in_oi"] == 100.0
+    assert out.iloc[0]["expiry"] == "2015-01-29"
 
 
 OLD_FO_TWO_EXPIRIES_CSV = (
@@ -83,6 +84,7 @@ def test_parse_fo_old_keeps_near_month_oi_when_several_expiries_trade(tmp_path):
     # (29-JAN), not the next (26-FEB) or far (26-MAR) month's OI.
     assert list(out["symbol"]) == ["RELIANCE"]
     assert out.iloc[0]["open_int"] == 10000.0 and out.iloc[0]["chg_in_oi"] == 100.0
+    assert out.iloc[0]["expiry"] == "2015-01-29"  # the soonest, not 26-FEB/26-MAR
 
 
 UDIFF_FO_TWO_EXPIRIES_CSV = (
@@ -102,6 +104,7 @@ def test_parse_fo_udiff_keeps_near_month_oi_when_several_expiries_trade(tmp_path
     out = parse_fo_file(path)
     assert list(out["symbol"]) == ["RELIANCE"]
     assert out.iloc[0]["open_int"] == 10000.0 and out.iloc[0]["chg_in_oi"] == 50.0
+    assert out.iloc[0]["expiry"] == "2024-07-25"  # the soonest, not 2024-08-29
 
 
 def test_parse_cm_udiff_keeps_only_eq_stk(tmp_path):
@@ -118,6 +121,7 @@ def test_parse_fo_udiff_keeps_only_stf(tmp_path):
     out = parse_fo_file(path)
     assert list(out["symbol"]) == ["RELIANCE"]  # NIFTY is IDF (index future), dropped
     assert out.iloc[0]["open_int"] == 10000.0 and out.iloc[0]["chg_in_oi"] == 50.0
+    assert out.iloc[0]["expiry"] == "2024-07-25"
 
 
 def test_build_merges_cm_and_fo_with_has_future_flag(tmp_path):
@@ -134,7 +138,9 @@ def test_build_merges_cm_and_fo_with_has_future_flag(tmp_path):
     assert by_symbol.loc["TATAMOTORS", "has_future"] == False  # noqa: E712
     assert by_symbol.loc["RELIANCE", "oi_futstk"] == 10000.0
     assert by_symbol.loc["RELIANCE", "oi_chg_futstk"] == 100.0
+    assert by_symbol.loc["RELIANCE", "expiry_futstk"] == "2015-01-29"
     assert pd.isna(by_symbol.loc["TATAMOTORS", "oi_futstk"])  # no future, no OI
+    assert pd.isna(by_symbol.loc["TATAMOTORS", "expiry_futstk"])  # no future, no expiry
 
 
 def test_build_finds_files_regardless_of_directory_nesting(tmp_path):
