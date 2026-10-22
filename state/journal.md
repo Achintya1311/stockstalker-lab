@@ -1949,3 +1949,73 @@ unblocked. Absent a supervised session, the next autonomous run should
 keep working through plain catalog/port order (T02 next) or D1's still-open
 options-OI continuation (unlocks D02), since neither needs
 `engine/experiment_report.py` to be queued, only to eventually be scored.
+
+## 2026-10-22T12:23Z port lane: D1 options-OI continuation (unlocks D02)
+
+Mode: Mode A (BUILD_DONE still absent). No `state/leases/` lease files existed
+at the start of this run, so `build` was free to check, but both unticked B
+items (B3: methodology decision; B10: needs B3 plus a `.github/` change) are
+still blocked on a supervised session — unchanged since the last run. `diagnose`
+remains fully blocked by the `engine/experiment_report.py` gap (still flagged,
+still zero landed experiments scored) and `tune` needs a diagnosed edge first,
+so `discover`/`port` were the only open lanes, same as the previous two runs.
+
+Hypothesis: the go-live track's P3 ("D1 and D2... move ahead of the indicator
+rules... scripts/ changes, which the routine can make") ranks above plain
+catalog order while any table is provisional (all four still are), and the
+previous run's own next-steps flagged D1's options-OI continuation
+(unlocks D02) as open and needing no supervised wiring — a better use of this
+run than T02, since D1/D2 outrank indicator rules right now.
+
+What I did: fetched real sample files directly in this sandbox (zero spend,
+read-only, same NSE archive host `fetch_bhavcopy.py` already uses) to confirm
+the options-row shape before writing anything, per rule 2 ("never write NSE
+column names from memory") — the same rule applies to instrument-code *values*,
+not just column names, after the 16 Oct bug that rule exists to prevent.
+Confirmed against a real old-era file (`fo02JAN2015bhav.csv`, fetched this
+run): distinct `INSTRUMENT` values are `FUTIDX, FUTIVX, FUTSTK, OPTIDX, OPTSTK`
+— stock options are `OPTSTK`, `OPTION_TYP` in `{CE, PE}` (24,368 such rows on
+02-Jan-2015 alone). Confirmed against a real UDiFF file
+(`BhavCopy_NSE_FO_0_0_0_20260915_F_0000.csv`): `FinInstrmTp == STO` rows carry
+`StrkPric`, `OptnTp` in `{CE, PE}`, and the same `OpnIntrst`/`ChngInOpnIntrst`
+pair `STF` rows already use. Documented both in `docs/nse_formats.md`.
+
+Added `scripts/build_dataset.py`'s `parse_fo_options_file`: filters each FO
+zip's option rows (`OPTSTK` old era / `STO` UDiFF era), keeps only each
+symbol's own near-month expiry (found independently per symbol, not assumed
+to match the stock future's near-month), and sums `OPEN_INT`/`OpnIntrst` by
+option type across strikes into `oi_ce_optstk`/`oi_pe_optstk` (catalog row
+D02's "near-month options OI... for a stock-level put/call ratio" need).
+Wired into `build()`'s merge alongside the existing futures-OI and delivery
+left-joins. No `.github/` change needed and nothing new to fetch: these rows
+live inside the same already-cached `fo_*.csv.zip` files D01 already parses
+(confirmed by `backfill.yml`'s existing cm/fo fetch, already live since
+before D01 landed), so D02's data need is satisfied by a pure parsing
+addition — the same shape D01 itself was. Six new tests in
+`tests/test_build_dataset.py`: both eras' near-month-only filtering (a
+far-month decoy row with an implausible OI must not leak into the sum),
+a symbol with only one option type trading (the other side reads 0.0, not
+missing), the no-options-rows case, and two `build()`-level merge/NaN tests
+mirroring the existing futures/delivery ones. Updated D02's catalog row
+(`testable_now` now `yes`, naming why no wiring is needed) and
+`state/queue.md`'s D1 entry with this continuation's result.
+
+Result: `python3.13 -m pytest -q --deselect
+tests/test_c01_day_of_week.py::test_causality_audit_passes` — 447 passed, 1
+deselected (the pre-existing pandas-version-sensitive case from the WATCH
+entry, not re-investigated), in 287s (441 existing + 6 new). No regressions.
+This change touches no protected path; it also touches no
+`experiments/pending/`/`strategies/`/`engine/`/`gates/` path, so it should not
+trigger `replay.yml` on its own (same as the previous D2 run).
+
+Next: the highest-value supervised item is unchanged —
+`engine/experiment_report.py` (still blocking every landed experiment's
+scoring; the go-live track's P1 validation queries, allowed from Mon 26 Oct,
+depend on it) and wiring D2's fetcher into `backfill.yml`/`dataset.yml` (both
+already flagged in `state/engine-issues.md`). Absent a supervised session,
+D02 is now `testable_now: yes` and ready for the next `port`-lane run to card
+and queue its train replay (card it like D01 was: a stock-level PCR from
+`oi_ce_optstk`/`oi_pe_optstk`, "extreme PCR... test both" per the catalog's
+own wording — both a contrarian and a confirmatory read are worth trying as
+separate scored variants, or one card with a sign parameter). Otherwise the
+next run should fall back to plain catalog/port order (T02).

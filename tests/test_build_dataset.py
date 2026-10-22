@@ -5,7 +5,14 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from scripts.build_dataset import build, merge_with_existing, parse_cm_file, parse_delivery_file, parse_fo_file
+from scripts.build_dataset import (
+    build,
+    merge_with_existing,
+    parse_cm_file,
+    parse_delivery_file,
+    parse_fo_file,
+    parse_fo_options_file,
+)
 
 OLD_CM_CSV = (
     "SYMBOL,SERIES,OPEN,HIGH,LOW,CLOSE,LAST,PREVCLOSE,TOTTRDQTY,TOTTRDVAL,TIMESTAMP,TOTALTRADES,ISIN\n"
@@ -124,6 +131,79 @@ def test_parse_fo_udiff_keeps_only_stf(tmp_path):
     assert out.iloc[0]["expiry"] == "2024-07-25"
 
 
+OLD_FO_OPTIONS_CSV = (
+    "INSTRUMENT,SYMBOL,EXPIRY_DT,STRIKE_PR,OPTION_TYP,OPEN,HIGH,LOW,CLOSE,SETTLE_PR,CONTRACTS,VAL_INLAKH,OPEN_INT,CHG_IN_OI,TIMESTAMP\n"
+    "FUTSTK,RELIANCE,29-JAN-2015,0,XX,100.00,105.00,99.00,104.00,104.00,500,50000.00,10000,100,02-JAN-2015\n"
+    "OPTSTK,RELIANCE,29-JAN-2015,100,CE,1.00,1.00,1.00,1.00,1.00,10,10.00,500,10,02-JAN-2015\n"
+    "OPTSTK,RELIANCE,29-JAN-2015,110,CE,1.00,1.00,1.00,1.00,1.00,10,10.00,300,10,02-JAN-2015\n"
+    "OPTSTK,RELIANCE,29-JAN-2015,100,PE,1.00,1.00,1.00,1.00,1.00,10,10.00,200,10,02-JAN-2015\n"
+    "OPTSTK,RELIANCE,26-FEB-2015,100,CE,1.00,1.00,1.00,1.00,1.00,10,10.00,9999,10,02-JAN-2015\n"
+)
+
+
+def test_parse_fo_options_old_sums_oi_by_type_across_strikes_near_month_only(tmp_path):
+    path = _write_zip(tmp_path, "fo_20150102.csv.zip", OLD_FO_OPTIONS_CSV)
+    out = parse_fo_options_file(path)
+    assert list(out["symbol"]) == ["RELIANCE"]
+    row = out.iloc[0]
+    assert row["oi_ce_optstk"] == 800.0  # 500 + 300, the two near-month (29-JAN) CE strikes
+    assert row["oi_pe_optstk"] == 200.0
+    assert row["date"] == "2015-01-02"
+    # the far-month (26-FEB) CE row's 9999 OI must not leak into the near-month sum
+
+
+UDIFF_FO_OPTIONS_CSV = (
+    "TradDt,BizDt,Sgmt,Src,FinInstrmTp,FinInstrmId,ISIN,TckrSymb,SctySrs,XpryDt,FininstrmActlXpryDt,"
+    "StrkPric,OptnTp,FinInstrmNm,OpnPric,HghPric,LwPric,ClsPric,LastPric,PrvsClsgPric,UndrlygPric,"
+    "SttlmPric,OpnIntrst,ChngInOpnIntrst,TtlTradgVol,TtlTrfVal,TtlNbOfTxsExctd,SsnId,NewBrdLotQty,Rmks,"
+    "Rsvd1,Rsvd2,Rsvd3,Rsvd4\n"
+    "2024-07-08,2024-07-08,FO,NSE,STO,3001,INE002A01018,RELIANCE,,2024-07-25,2024-07-25,200.00,CE,"
+    "RELIANCECE200,1.00,1.00,1.00,1.00,1.00,,,1.00,500,10,10,100.00,5,,,,,,\n"
+    "2024-07-08,2024-07-08,FO,NSE,STO,3002,INE002A01018,RELIANCE,,2024-07-25,2024-07-25,210.00,CE,"
+    "RELIANCECE210,1.00,1.00,1.00,1.00,1.00,,,1.00,300,10,10,100.00,5,,,,,,\n"
+    "2024-07-08,2024-07-08,FO,NSE,STO,3003,INE002A01018,RELIANCE,,2024-07-25,2024-07-25,200.00,PE,"
+    "RELIANCEPE200,1.00,1.00,1.00,1.00,1.00,,,1.00,200,10,10,100.00,5,,,,,,\n"
+    "2024-07-08,2024-07-08,FO,NSE,STO,3004,INE002A01018,RELIANCE,,2024-08-29,2024-08-29,200.00,CE,"
+    "RELIANCECE200F,1.00,1.00,1.00,1.00,1.00,,,1.00,9999,10,10,100.00,5,,,,,,\n"
+)
+
+
+def test_parse_fo_options_udiff_sums_oi_by_type_across_strikes_near_month_only(tmp_path):
+    path = _write_zip(tmp_path, "fo_20240708.csv.zip", UDIFF_FO_OPTIONS_CSV)
+    out = parse_fo_options_file(path)
+    assert list(out["symbol"]) == ["RELIANCE"]
+    row = out.iloc[0]
+    assert row["oi_ce_optstk"] == 800.0
+    assert row["oi_pe_optstk"] == 200.0
+    assert row["date"] == "2024-07-08"
+
+
+FUTURES_ONLY_FO_CSV = (
+    "INSTRUMENT,SYMBOL,EXPIRY_DT,STRIKE_PR,OPTION_TYP,OPEN,HIGH,LOW,CLOSE,SETTLE_PR,CONTRACTS,VAL_INLAKH,OPEN_INT,CHG_IN_OI,TIMESTAMP\n"
+    "FUTSTK,RELIANCE,29-JAN-2015,0,XX,100.00,105.00,99.00,104.00,104.00,500,50000.00,10000,100,02-JAN-2015\n"
+    "FUTIDX,NIFTY,29-JAN-2015,0,XX,8000,8100,7950,8050,8050,1000,100000.00,50000,500,02-JAN-2015\n"
+)
+
+
+def test_parse_fo_options_handles_no_options_rows(tmp_path):
+    path = _write_zip(tmp_path, "fo_20150102.csv.zip", FUTURES_ONLY_FO_CSV)  # no OPTSTK rows at all
+    out = parse_fo_options_file(path)
+    assert out.empty
+    assert list(out.columns) == ["date", "symbol", "oi_ce_optstk", "oi_pe_optstk"]
+
+
+def test_parse_fo_options_handles_symbol_with_only_one_option_type(tmp_path):
+    csv = (
+        "INSTRUMENT,SYMBOL,EXPIRY_DT,STRIKE_PR,OPTION_TYP,OPEN,HIGH,LOW,CLOSE,SETTLE_PR,CONTRACTS,VAL_INLAKH,OPEN_INT,CHG_IN_OI,TIMESTAMP\n"
+        "OPTSTK,TATAMOTORS,29-JAN-2015,50,CE,1.00,1.00,1.00,1.00,1.00,10,10.00,400,10,02-JAN-2015\n"
+    )
+    path = _write_zip(tmp_path, "fo_20150102.csv.zip", csv)
+    out = parse_fo_options_file(path)
+    row = out.iloc[0]
+    assert row["oi_ce_optstk"] == 400.0
+    assert row["oi_pe_optstk"] == 0.0  # no PE strikes traded that day, not missing
+
+
 def test_build_merges_cm_and_fo_with_has_future_flag(tmp_path):
     raw = tmp_path / "raw"
     (raw / "2015" / "cm" / "2015").mkdir(parents=True)
@@ -141,6 +221,33 @@ def test_build_merges_cm_and_fo_with_has_future_flag(tmp_path):
     assert by_symbol.loc["RELIANCE", "expiry_futstk"] == "2015-01-29"
     assert pd.isna(by_symbol.loc["TATAMOTORS", "oi_futstk"])  # no future, no OI
     assert pd.isna(by_symbol.loc["TATAMOTORS", "expiry_futstk"])  # no future, no expiry
+
+
+def test_build_merges_options_oi_columns(tmp_path):
+    raw = tmp_path / "raw"
+    (raw / "2015" / "cm" / "2015").mkdir(parents=True)
+    (raw / "2015" / "fo" / "2015").mkdir(parents=True)
+    _write_zip(raw / "2015" / "cm" / "2015", "cm_20150102.csv.zip", OLD_CM_CSV)
+    _write_zip(raw / "2015" / "fo" / "2015", "fo_20150102.csv.zip", OLD_FO_OPTIONS_CSV)
+
+    df = build(raw)
+    by_symbol = df.set_index("symbol")
+    assert by_symbol.loc["RELIANCE", "oi_ce_optstk"] == 800.0
+    assert by_symbol.loc["RELIANCE", "oi_pe_optstk"] == 200.0
+    # TATAMOTORS has a price row but no matching option rows that date
+    assert pd.isna(by_symbol.loc["TATAMOTORS", "oi_ce_optstk"])
+
+
+def test_build_without_any_option_rows_leaves_columns_all_nan(tmp_path):
+    raw = tmp_path / "raw"
+    (raw / "2015" / "cm" / "2015").mkdir(parents=True)
+    (raw / "2015" / "fo" / "2015").mkdir(parents=True)
+    _write_zip(raw / "2015" / "cm" / "2015", "cm_20150102.csv.zip", OLD_CM_CSV)
+    _write_zip(raw / "2015" / "fo" / "2015", "fo_20150102.csv.zip", FUTURES_ONLY_FO_CSV)  # no OPTSTK rows
+
+    df = build(raw)
+    assert df["oi_ce_optstk"].isna().all()
+    assert df["oi_pe_optstk"].isna().all()
 
 
 def test_build_finds_files_regardless_of_directory_nesting(tmp_path):
