@@ -1,0 +1,12 @@
+# T04 (day horizon): Connors RSI-2, train-split replay (port lane,
+# `state/queue.md`). See cards/T04.yml and strategies/t04_connors_rsi2.py.
+# Catalog lists this card's horizon as day only (the book's setup is a
+# next-day mean-reversion trade inside a 200-day trend filter, not a
+# week-ahead one), so only this one experiment is queued.
+id: t04-connors-rsi2-day
+strategy: strategies.t04_connors_rsi2
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

@@ -1,0 +1,63 @@
+source_url: ""
+author: "Connors and Alvarez (2009) Short Term Trading Strategies That Work"
+license: "book, not code; summarised only (SPEC.md section 5)"
+published_on: "2009"
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "Price above 200-day SMA and RSI(2)
+  under 10 bullish; below 200-day SMA and RSI(2) over 90 bearish."
+  `prior_claim`: "US equities: short-term mean reversion inside a long-term
+  trend." Unlike T01-T03, which each read a single indicator on its own,
+  this card's literal rule is a conjunction of a long trend filter and a
+  short mean-reversion oscillator - it only fires with both legs agreed,
+  and (unlike T03) is also asymmetric by construction: there is no
+  bullish case below the 200-day SMA and no bearish case above it, since
+  the book's rule never describes those crosswise combinations.
+horizon: day
+rules_plain: >
+  Two conditions, both read from the adjusted close series
+  (`scripts.adjustments.compute_adjustment_factors`, same as every other
+  `strategies/t0*` card):
+
+  - **Bullish:** latest adjusted close above its own 200-day SMA, and a
+    2-period Wilder RSI under 10 (oversold inside an uptrend).
+  - **Bearish:** latest adjusted close below its own 200-day SMA, and
+    RSI(2) over 90 (overbought inside a downtrend).
+  - Anything else abstains (NaN, SPEC.md section 3) - including the two
+    crosswise cases catalog.csv's rule never states a view on (above the
+    200-day SMA with RSI(2) over 90, or below it with RSI(2) under 10).
+
+  Score is continuous within each active case, same convention every
+  other card here uses: `score = (10 - rsi2) / 10` when bullish (0 at the
+  rsi2=10 boundary, 1.0 at rsi2=0), `score = -(rsi2 - 90) / 10` when
+  bearish (0 at rsi2=90, -1.0 at rsi2=100) - symmetric since RSI is
+  bounded to [0, 100], same shape `cards/T03.yml`'s 30/70 thresholds use,
+  with the 200-day trend filter gating which side (if either) is even
+  reachable on a given symbol-date.
+
+  `strategies/t04_connors_rsi2.py` reuses `strategies/t03_rsi_thresholds.py`'s
+  Wilder-smoothing shape (simple-mean seed, then `ewm(alpha=1/period,
+  adjust=False)`) with `period=2` instead of 14, plus a plain trailing-mean
+  200-day SMA (`strategies/t02_golden_death_cross.py`'s `_sma` shape) - both
+  copied, not imported, so this card stays standalone like every other
+  `strategies/t0*` card.
+
+  Catalog lists this card's horizon as day only (unlike T01/T03's "both"):
+  the book's own setup is an intraday-to-next-day mean-reversion trade
+  inside a slow trend filter, not a week-ahead one, so only a day-split
+  experiment is queued.
+default_params:
+  rsi_period: 2
+  oversold: 10
+  overbought: 90
+  trend_window: 200
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Connors and Alvarez (2009) Short Term Trading Strategies That Work"
+link: ""
+prior_claim: "US equities: short-term mean reversion inside a long-term trend"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay - the book's own popularity is not evidence of edge, same caveat every ported card here already carries."
+  - "Asymmetric and doubly selective by construction (needs both the trend filter AND the RSI(2) extreme to agree): expect a much lower coverage than T03's single-oscillator gate, let alone T01/T02's always-on spread - coverage (SPEC.md section 3) needs reporting alongside any accuracy figure once `engine/experiment_report.py` (state/engine-issues.md) can score this card's picks, same blocker every ported card since A01 has hit."
+  - "The 10/90 thresholds and the 200-day window are the book's stated defaults, not tuned on NSE data - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
+  - "RSI(2) is a much faster, noisier oscillator than T03's RSI(14): on a 200-day-SMA-filtered day-horizon test, pick overlap with T03 (SPEC.md section 6 gate 8) is worth checking directly once both have real numbers, since both ultimately read the same close series through the same Wilder-smoothing shape at different periods."
+status: queued

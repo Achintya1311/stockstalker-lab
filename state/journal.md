@@ -2233,3 +2233,90 @@ catalog rows from SPEC.md section 5's sources) is also still open and
 untouched for several runs if a future run prefers it over more T0x
 indicator ports. `build` is still blocked on B3 and B10 — nothing changed
 there this run.
+
+## 2026-10-22T20:11Z port lane: T04 (Connors RSI-2, day)
+
+Mode: Mode A (BUILD_DONE still absent). B3 and B10 remain the only
+unticked B items, both still blocked on a supervised session, unchanged.
+`diagnose` remains fully blocked by the `engine/experiment_report.py` gap
+(state/engine-issues.md, now six days old) — twenty-one landed experiments
+in `experiments/done/` now (T04's day run will make twenty-two once
+replayed), zero scored into `research/diagnostics/` or `ledger/trials.csv`.
+`tune` needs a diagnosed edge first, so `discover`/`port` were again the
+only open lanes. Previous run's own "next" note pointed here: T04 (Connors
+RSI-2) is the next untested `testable_now: yes` row in plain catalog order
+after T03 — C03 (pre-holiday effect) stays blocked, confirmed again this
+run: `config/nse_holidays.txt` only covers 2026 (built for B9's live
+picks), not the 2015-2020 train split a port needs.
+
+Hypothesis: Connors RSI-2 (Connors and Alvarez 2009) is structurally
+different from every T0x card so far — a conjunction of a slow 200-day
+trend filter and a fast 2-period RSI extreme, rather than one indicator
+read on its own. Worth testing as its own standalone signal: it is
+plausibly a cleaner mean-reversion-inside-a-trend read than T03's
+single-oscillator gate, at the cost of being asymmetric by construction
+(no bullish case below the 200-day SMA, no bearish case above it) and
+doubly selective (needs both legs to agree).
+
+What happened: `cards/T04.yml` (claim, horizon "day" only — the book's
+setup is a next-day trade inside a slow filter, not a week-ahead one — red
+flags noting the doubled selectivity and the as-stated 10/90 thresholds as
+a future `tune`-lane candidate). `strategies/t04_connors_rsi2.py`: bullish
+when `close > SMA200` and `RSI(2) < 10`, scoring `(10 - rsi2) / 10`;
+bearish when `close < SMA200` and `RSI(2) > 90`, scoring
+`-(rsi2 - 90) / 10`; NaN (abstain) otherwise, including the two crosswise
+cases (above SMA with RSI(2) > 90, below SMA with RSI(2) < 10) the
+catalog's rule never states a view on. RSI(2) reuses T03's vectorized
+Wilder-smoothing shape with `period=2` instead of 14; the 200-day SMA
+reuses T02's plain trailing-mean shape; both copied, not imported, so this
+card stays standalone. `strategies/t04_connors_rsi2_audit.py`: same
+cross-symbol causality proof shape as T01-T03's, `MIN_ROWS=200` fixture.
+
+12 new tests (`tests/test_t04_connors_rsi2.py`). Unlike T01-T03, this
+card's firing region is not reachable from a globally monotonic series —
+a fully monotonic uptrend gives RSI(2)=100 (the overbought threshold)
+while price sits above its own SMA200 (the bullish trend reading), so the
+two legs always disagree and the strategy abstains; same mirrored for a
+fully monotonic downtrend. Used that exact-degenerate property as two
+clean abstain tests, then built two directional fixtures (a long linear
+drift over 215 rows, ending in a sharp 2-day countermove) for the firing
+cases, cross-checked against an independent loop-based Wilder RSI(2) and
+plain-mean SMA200 reference implemented directly in the test file (not
+reused from the module) — the fixture lands RSI(2) at ~1.96 (bullish
+case) and ~98.04 (bearish case), well past the 10/90 thresholds, confirmed
+by direct computation before trusting the test. Catalog lists this card's
+horizon as day only, so one experiment is queued:
+`experiments/pending/t04-connors-rsi2-day.yml`. `cards/catalog.csv`'s T04
+row now reads `queued`.
+
+This sandbox was missing `pyarrow` (only `numpy`/`pandas`/`pyyaml`/`pytest`
+were present going in, via `python3 -m pip install` after confirming
+`pip`'s own resolver points at a different Python than `python3` here —
+same mismatch the previous run's journal entry already flagged). Ran the
+new test file alone first (12 passed), then the full suite without
+`pyarrow` (495 passed, 10 failed — the one pre-existing pandas-version
+flake plus nine `ImportError: pyarrow`/`fastparquet` failures in
+`tests/test_picks_run.py` and `tests/test_run_queue.py`, both pre-existing
+parquet-backed suites unrelated to this card), then installed `pyarrow`
+and re-ran exactly those three files: 25 passed, 1 failed (the same
+pre-existing pandas-version-sensitive flake `state/engine-issues.md`
+already documents) — confirms zero regressions from this change, the nine
+parquet failures were this sandbox's own missing dependency, not a bug.
+
+Flags still open from the last two runs, now six days old (first flagged
+2026-10-18): `engine/experiment_report.py` sits in front of twenty-two
+fully-replayed, zero-scored experiments once T04's run lands. The go-live
+track's P1 validation-query window opens Mon 26 Oct — four days from this
+run — and `config/live_source.json` is due Fri 30 Oct 12:00 UTC, eight
+days out. Neither deadline can be met with a real validation-backed
+candidate (as opposed to falling straight through to champion v1 by
+default) unless this wiring lands first; this run is escalating it outside
+the lab loop itself (a push notification to Achintya) rather than letting
+it sit for a seventh day with only a journal note, since a supervised
+session is the only thing that can act on it and the next unsupervised run
+cannot.
+
+Next: continue plain catalog order for `port` — T05 (MACD crossover) is
+the next untested `testable_now: yes` row after T04. `discover` remains
+open and untouched for several runs if a future run prefers it. `build` is
+still blocked on B3 and B10 — nothing changed there this run.
