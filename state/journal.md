@@ -2019,3 +2019,83 @@ and queue its train replay (card it like D01 was: a stock-level PCR from
 own wording — both a contrarian and a confirmatory read are worth trying as
 separate scored variants, or one card with a sign parameter). Otherwise the
 next run should fall back to plain catalog/port order (T02).
+
+## 2026-10-22T14:14Z port lane: D02 (stock put/call OI ratio, both variants)
+
+Mode: Mode A (BUILD_DONE still absent). B3 (methodology decision) and B10
+(needs B3 plus a `.github/` change) remain the only unticked B items and
+both are still blocked on a supervised session, unchanged. `diagnose`
+remains fully blocked by the `engine/experiment_report.py` gap (still
+flagged, zero of seventeen-plus landed experiments scored) and `tune` needs
+a diagnosed edge first, so `discover`/`port` were the only open lanes.
+Followed the previous run's own "next": the go-live track's P3 ranks D1/D2
+above plain catalog order while any table is provisional (all four still
+are), D1's options-OI continuation unlocked D02 (`testable_now: yes`) last
+run, and this run's job was exactly what that run flagged - card it.
+
+Hypothesis: the catalog itself disputes D02's direction ("contrarian or
+confirmatory, test both"), so this is honestly ported as two separate,
+equally untested strategies sharing one core, not as a card that picks a
+side (SPEC.md section 5: "no claim is assumed true").
+
+What I did: claimed the `port` lease (free). Wrote `cards/D02.yml`: PCR per
+session = `oi_pe_optstk / oi_ce_optstk` (D1's near-month options OI,
+already summed by type across strikes); "extreme" = `|z| >= 2.0` against
+the *same symbol's own* trailing 20-session PCR mean/std (Bollinger-band
+style, the scored session itself included in the window) - reused D03's
+own catalog-stated "z > 2 vs 20-day" threshold for consistency across the
+two OI/flow-extreme cards in this family, since D02 gives no number of its
+own. Read from `history`'s last visible row only, lagging one week the same
+way `cards/D01.yml` lags one day for its day-horizon rule.
+
+Wrote `strategies/d02_stock_pcr_core.py` (the shared z-score/threshold/
+F&O-universe-gate machinery, `signal(history, *, contrarian: bool)`) and
+two thin wrappers, `strategies/d02_stock_pcr_contrarian.py` (extreme-high
+PCR -> bullish reversal, extreme-low -> bearish) and
+`strategies/d02_stock_pcr_confirmatory.py` (the opposite sign - extreme-high
+PCR -> bearish continuation), differing only in a final sign flip - same
+shared-core shape `strategies/t01_sma_crossover.py` already uses to serve
+two horizons from one module, applied here to serve two sign readings
+instead. `strategies/d02_stock_pcr_audit.py` proves the shared per-symbol
+rolling z-score can't leak across symbols (same shape as
+`d01_oi_buildup_audit.py`'s cross-symbol check): giving one symbol an extra
+extreme trailing session changes only that symbol's score, verified by hand
+before trusting the test (`python3.13 -m` the audit module directly - both
+`AAA`/`CCC` stayed un-scored in both scenarios, `BBB` newly scored only with
+the extra session).
+
+19 new tests (`tests/test_d02_stock_pcr.py`): both variants' sign on an
+extreme-high and an extreme-low PCR, that the two variants agree on
+magnitude and only disagree on sign, non-extreme/short-history/zero-`oi_ce`/
+missing-columns/no-future/degenerate-std abstains, cross-symbol
+independence, `rules_fired` wording for both variants and for the abstain
+case, and the causality audit. Queued both variants as separate train-split
+(week horizon, per the catalog) experiments -
+`experiments/pending/d02-stock-pcr-contrarian-week.yml` and
+`...-confirmatory-week.yml` - each will be its own trial in
+`ledger/trials.csv` once scored, not a shared one. Marked D02 `queued` in
+`cards/catalog.csv` and recorded this in `state/queue.md`'s D1/D2 note.
+
+Result: `python3.13 -m pytest -q --deselect
+tests/test_c01_day_of_week.py::test_causality_audit_passes` - 466 passed, 1
+deselected (the pre-existing pandas-version-sensitive case from the WATCH
+entry, not re-investigated), in 231s (447 existing + 19 new). No
+regressions. This change touches `experiments/pending/` and `strategies/`,
+so pushing it should trigger `replay.yml` against the real cached dataset.
+
+Next: once `replay.yml` lands both
+`experiments/done/d02-stock-pcr-{contrarian,confirmatory}-week/`, they hit
+the same still-open blocker every ported card has hit since A01 -
+`engine/experiment_report.py` (now blocking eighteen-plus landed
+experiments' scoring) - this remains the single most overdue item for a
+supervised session, more so now: the go-live track's P1 validation queries
+are allowed from Mon 26 Oct and `config/live_source.json` is due Fri 30 Oct
+12:00 UTC, and P1 cannot award a single query without real train numbers
+for any candidate. Absent a supervised session, the next `port`-lane run
+should fall back to plain catalog order (T02, golden/death cross 50/200,
+week-only) - D1 and D2's own go-live-track priority (P3) is now fully spent
+(both D01 and D02 are carded and queued; D03 still needs the separate
+`backfill.yml`/`dataset.yml` wiring already flagged in
+`state/engine-issues.md`, not something `port` alone can finish). `build`
+is still blocked on B3 (methodology decision) and B10 (needs B3 plus a
+`.github/` change) - nothing changed there this run.

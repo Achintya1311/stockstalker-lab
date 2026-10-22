@@ -1,0 +1,64 @@
+source_url: ""
+author: "Practitioner convention (F&O desk commentary; no single named source)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  Extreme put/call open interest ratio (PCR) on a stock's own near-month
+  options signals something about the stock's near-term direction, but the
+  catalog itself flags the direction of the effect as disputed: a
+  "contrarian" read treats an extreme-high PCR (relatively many puts) as
+  excessive bearish hedging/positioning that is more likely to reverse
+  (bullish), and an extreme-low PCR (relatively many calls) as excessive
+  bullish positioning that is more likely to reverse (bearish); a
+  "confirmatory" read treats the same extremes as the market's positioning
+  being informed and likely to persist (extreme-high PCR -> bearish,
+  extreme-low PCR -> bullish). SPEC.md section 5: "no claim is assumed
+  true" - both readings are ported as separate, equally untested variants
+  rather than picking one.
+horizon: week
+rules_plain: >
+  PCR for a session = `oi_pe_optstk / oi_ce_optstk` (D1's options-OI
+  continuation: near-month stock-option open interest, puts over calls,
+  already summed by option type across strikes in
+  `scripts/build_dataset.py`). Undefined (abstain for that session) when
+  `oi_ce_optstk` is zero, NaN, or missing, or `oi_pe_optstk` is NaN or
+  missing.
+
+  "Extreme" is a z-score against the *same symbol's own* trailing 20-session
+  PCR distribution, Bollinger-band style - the session itself is the most
+  recent of the 20 used to compute the mean/std, not a separate forward
+  window: `z = (pcr_last - mean(pcr, last 20 valid sessions)) /
+  std(pcr, last 20 valid sessions)`. A symbol abstains unless it has at
+  least 20 valid (non-abstaining) trailing PCR sessions and a non-zero
+  standard deviation, and then only scores if `|z| >= 2.0`; the catalog
+  gives no numeric threshold, so this card reuses D03's own "z > 2 vs
+  20-day" convention for consistency across the two OI/flow-extreme cards
+  in this family rather than inventing a different number.
+
+  Both variants read from `history`'s own last visible row only (the same
+  "last visible row" convention `cards/D01.yml` uses to lag a day-horizon
+  rule; here it lags one week, since this card's horizon is `week` per the
+  catalog) and share every line of logic except the final sign:
+  - **Contrarian** (`strategies/d02_stock_pcr_contrarian.py`): `direction =
+    sign(z)` - extreme-high PCR (z > 0) scores bullish, extreme-low scores
+    bearish.
+  - **Confirmatory** (`strategies/d02_stock_pcr_confirmatory.py`):
+    `direction = -sign(z)` - extreme-high PCR scores bearish, extreme-low
+    scores bullish.
+  `score = direction * abs(z)` for whichever variant; magnitude is the same
+  for both on the same symbol/date, only the sign differs.
+default_params:
+  threshold_z: 2.0
+  window: 20
+data_needed: "FO bhavcopy options OI (D1's options-OI continuation, 22 Oct: near-month stock-option OI summed by type, oi_ce_optstk/oi_pe_optstk)"
+testable_now: "yes (unlocked 22 Oct by D1's options-OI continuation; no .github/ wiring needed)"
+source: "Practitioner"
+link: ""
+prior_claim: "Sentiment gauge; direction of effect disputed"
+red_flags:
+  - "The catalog explicitly disputes the direction of this effect ('contrarian or confirmatory, test both') - ported as two separate strategy variants sharing one core module (`strategies/d02_stock_pcr_core.py`), rather than this card picking a side. Both are independent trials in `ledger/trials.csv` once queued through `gates/trials.py`."
+  - "The 2.0 z-score threshold and 20-session window are this card's own choice, reused from D03's catalog-stated 'z > 2 vs 20-day' for consistency, not from any source this card cites for PCR specifically. A `tune`-lane candidate on train, once either variant shows an edge worth tuning at all."
+  - "PCR uses near-month stock OPTIONS open interest only (D1's options-OI continuation), independent of the near-month FUTURES OI D01 uses - a symbol can have an active future with no liquid options market at all on a given date (illiquid names), in which case `oi_ce_optstk`/`oi_pe_optstk` are NaN (left join) and this card abstains, same as D01 abstaining when a future itself is inactive."
+  - "The z-score's own mean/std window includes the session being scored (Bollinger-band convention, matching D03's planned reading of the same style of threshold) - not a separate out-of-window baseline. A trailing-19-plus-current window is still fully causal (every session in it is at or before `history`'s own last visible row, which `engine/replay.py`'s `truncate()` already keeps strictly before the pick date/week), but it does mean an unusually large single session can shift its own baseline, which a future diagnostics pass should check for (e.g. one huge OI print dominating its own 20-session mean)."
+  - "No claim is assumed true (SPEC.md section 5): this card's status moves to confirmed/refuted per variant only after a real train (then validation/test) replay, not from this card's own reasoning about which reading is more plausible."
+status: queued
