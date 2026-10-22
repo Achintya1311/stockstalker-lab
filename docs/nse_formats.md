@@ -14,3 +14,15 @@ Never write these column names from memory; a wrong name passed every synthetic 
 - Equity rows: `Sgmt == CM`, `FinInstrmTp == STK`, series in `SctySrs` (EQ, BE, SM, ST, GS, GB, ...). On 15 Sep 2026 there were 2,652 EQ rows.
 - F&O instrument types: `STF` stock futures (629 rows on 15 Sep 2026, about 210 stocks × 3 expiries), `STO` stock options, `IDF` index futures, `IDO` index options.
 - Volume is `TtlTradgVol`; turnover in rupees is `TtlTrfVal`.
+
+**Security-wise delivery position (MTO), one era since at least 2015**, `https://nsearchives.nseindia.com/archives/equities/mto/MTO_DDMMYYYY.DAT` (plain text, not zipped; D02/D03 in `cards/catalog.csv`). Confirmed against real files dated 2015-01-02, 2015-06-15, 2024-07-08/09, 2026-09-15 and 2026-10-19 — same shape the whole span, no old/UDiFF split:
+
+```
+Security Wise Delivery Position - Compulsory Rolling Settlement
+10,MTO,02012015,325859130,0001536
+Trade Date <02-JAN-2015>,Settlement Type <N>,Settlement No <2015002>,Settlement Date <06-JAN-2015>
+Record Type,Sr No,Name of Security,Quantity Traded,Deliverable Quantity(gross across client level),% of Deliverable Quantity to Traded Quantity
+20,1,20MICRONS,EQ,76443,50983,66.69
+```
+
+Only `20,...` rows carry data: `RecordType,SrNo,SYMBOL,SERIES,QtyTraded,DeliverableQty,DeliveryPct` (7 fields, always numeric — no `-` placeholders seen). The three header lines above it vary slightly by era (the `Trade Date <...>` line sometimes carries a trailing `,Settlement No <...>,Settlement Date <...>` and sometimes doesn't) so a parser should skip to the first `20,` line rather than assume a fixed header length. No trailer line. Restrict to `SERIES == "EQ"` same as the main bhavcopy.

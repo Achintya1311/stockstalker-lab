@@ -30,6 +30,11 @@ is not parsed yet - see `state/queue.md`'s D1 entry).
 Input layout: fetch_bhavcopy.py writes <out>/<seg>/<year>/<seg>_<YYYYMMDD>.csv.zip
 under whatever --out root the caller gives it (raw/2015/cm/2015/..., raw/recent/cm/2026/...),
 so this script finds files by name pattern under --raw, not by directory shape.
+fetch_delivery.py writes <out>/delivery/<year>/delivery_<YYYYMMDD>.dat (plain
+text, not zipped) the same way; its rows add `deliv_qty`/`deliv_pct`
+(catalog rows D02/D03) for `SERIES == "EQ"` symbols, left-joined onto the
+price table so dates with no delivery file yet (not fetched, or genuinely
+missing) just carry NaN instead of being dropped.
 
 Usage:
     python scripts/build_dataset.py --raw raw --out data/dataset.parquet \
@@ -49,6 +54,7 @@ from pathlib import Path
 import pandas as pd
 
 FILENAME_RE = re.compile(r"(cm|fo)_(\d{8})\.csv\.zip$")
+DELIVERY_FILENAME_RE = re.compile(r"delivery_(\d{8})\.dat$")
 
 PRICE_COLUMNS = ["date", "symbol", "open", "high", "low", "close", "prevclose", "volume", "turnover"]
 
@@ -146,21 +152,57 @@ def parse_fo_file(path: Path) -> pd.DataFrame:
     return out[["date", "symbol", "open_int", "chg_in_oi", "expiry"]].reset_index(drop=True)
 
 
+def parse_delivery_file(path: Path) -> pd.DataFrame:
+    """Return one row per EQ symbol with that date's delivered quantity and
+    delivery percentage (catalog rows D02/D03), from an NSE MTO file.
+
+    The file is plain text, not CSV with a fixed header: three preamble
+    lines of varying shape, then one `20,...` data row per symbol (see
+    docs/nse_formats.md). Parsed line-by-line rather than with
+    `pd.read_csv` so a preamble line with a different field count on an
+    older file never gets mistaken for data.
+    """
+    m = DELIVERY_FILENAME_RE.search(path.name)
+    if not m:
+        raise ValueError(f"unrecognised delivery filename: {path}")
+    raw = m.group(1)
+    d = f"{raw[0:4]}-{raw[4:6]}-{raw[6:8]}"
+
+    rows = []
+    for line in path.read_text().splitlines():
+        parts = line.split(",")
+        if len(parts) != 7 or parts[0] != "20":
+            continue
+        _, _, symbol, series, qty_traded, deliv_qty, deliv_pct = parts
+        if series.strip() != "EQ":
+            continue
+        rows.append((symbol.strip(), float(deliv_qty), float(deliv_pct)))
+
+    out = pd.DataFrame(rows, columns=["symbol", "deliv_qty", "deliv_pct"])
+    out["date"] = d
+    return out.drop_duplicates(subset=["symbol"], keep="last")[["date", "symbol", "deliv_qty", "deliv_pct"]].reset_index(drop=True)
+
+
 def build(raw_root: Path) -> pd.DataFrame:
     cm_frames = [parse_cm_file(p) for p in sorted(raw_root.rglob("cm_*.csv.zip"))]
     fo_frames = [parse_fo_file(p) for p in sorted(raw_root.rglob("fo_*.csv.zip"))]
+    delivery_frames = [parse_delivery_file(p) for p in sorted(raw_root.rglob("delivery_*.dat"))]
 
     prices = pd.concat(cm_frames, ignore_index=True) if cm_frames else pd.DataFrame(columns=PRICE_COLUMNS)
     futures = (pd.concat(fo_frames, ignore_index=True) if fo_frames
                else pd.DataFrame(columns=["date", "symbol", "open_int", "chg_in_oi", "expiry"]))
+    delivery = (pd.concat(delivery_frames, ignore_index=True) if delivery_frames
+                else pd.DataFrame(columns=["date", "symbol", "deliv_qty", "deliv_pct"]))
 
     prices = prices.drop_duplicates(subset=["date", "symbol"], keep="last")
     futures = futures.drop_duplicates(subset=["date", "symbol"], keep="last")
+    delivery = delivery.drop_duplicates(subset=["date", "symbol"], keep="last")
     futures["has_future"] = True
     futures = futures.rename(columns={"open_int": "oi_futstk", "chg_in_oi": "oi_chg_futstk", "expiry": "expiry_futstk"})
 
     merged = prices.merge(futures, on=["date", "symbol"], how="left")
     merged["has_future"] = merged["has_future"].fillna(False)
+    merged = merged.merge(delivery, on=["date", "symbol"], how="left")
     return merged.sort_values(["date", "symbol"]).reset_index(drop=True)
 
 
@@ -199,7 +241,7 @@ def main() -> None:
 
     raw_root = Path(a.raw)
     out_path = Path(a.out)
-    empty_columns = PRICE_COLUMNS + ["has_future", "oi_futstk", "oi_chg_futstk", "expiry_futstk"]
+    empty_columns = PRICE_COLUMNS + ["has_future", "oi_futstk", "oi_chg_futstk", "expiry_futstk", "deliv_qty", "deliv_pct"]
     fresh = build(raw_root) if raw_root.exists() else pd.DataFrame(columns=empty_columns)
 
     existing = pd.read_parquet(out_path) if out_path.exists() else pd.DataFrame(columns=empty_columns)

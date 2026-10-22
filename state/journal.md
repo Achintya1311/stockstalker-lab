@@ -1883,3 +1883,69 @@ only requires academic-before-indicator, already satisfied; file order is
 otherwise as good a tiebreak as any). `build` is still blocked on B3
 (methodology decision) and B10 (needs B3 plus a `.github/` change) -
 nothing changed there this run.
+
+## 2026-10-22T10:13Z port lane: D2 (security-wise delivery fetcher)
+
+Mode: Mode A (BUILD_DONE still absent). Both unticked B items remain
+blocked (B3 needs a supervised methodology decision; B10 needs B3 plus a
+`.github/` change), so this run did research-during-build per SPEC's "the
+work never runs out." `diagnose` is still fully blocked by the
+`engine/experiment_report.py` gap (unchanged, still flagged in
+`state/engine-issues.md`, still zero of seventeen landed experiments
+scored) and `tune` needs a diagnosed edge first, so `discover`/`port` were
+the only open lanes. The go-live track's P3 ("D1 and D2... move ahead of
+the indicator rules... scripts/ changes, which the routine can make") ranks
+above plain catalog order while any table is provisional (all four are),
+and D1 is already partial, so this run picked up **D2**: a fetcher for
+NSE's security-wise delivery file, which D03 (delivery percentage spike)
+needs.
+
+Hypothesis: NSE publishes delivered-quantity/delivery-% separately from the
+ordinary bhavcopy, and per rule 2 in `state/queue.md` ("never write NSE
+column names from memory") the real format had to be found, not guessed.
+
+What I did: fetched real sample files directly in this sandbox (zero spend,
+read-only, same NSE archive host `fetch_bhavcopy.py` already uses) and
+confirmed `https://nsearchives.nseindia.com/archives/equities/mto/MTO_DDMMYYYY.DAT`
+is live and format-stable from 2015-01-02 (checked against 2015-01-02,
+2015-06-15, 2024-07-08/09, 2026-09-15, 2026-10-19) - one 7-field data-row
+shape (`20,SrNo,Symbol,Series,QtyTraded,DeliverableQty,DeliveryPct`) the
+whole span, no old/UDiFF-style split. Documented it in
+`docs/nse_formats.md` with the real header. Wrote
+`scripts/fetch_delivery.py` (same polite/resumable/missing.txt shape as
+`fetch_bhavcopy.py`, one segment) and extended `scripts/build_dataset.py`
+with `parse_delivery_file` plus a left-join of `deliv_qty`/`deliv_pct` into
+`build()`'s output by (date, symbol), EQ-series only. New tests:
+`tests/test_fetch_delivery.py` (4 cases) and 5 new cases in
+`tests/test_build_dataset.py` covering both real preamble variants, series
+filtering, the merge, and the no-delivery-files case. Updated D03's catalog
+row (still `testable_now: no`, now naming the real blocker) and filed
+"READY FOR WIRING: D2 delivery-% fetcher" in `state/engine-issues.md` -
+like B3, the `scripts/` half is done but `backfill.yml`/`dataset.yml` need
+a supervised step added to actually fetch and cache these files for
+Actions; nothing this run wrote ever touches `.github/` or commits real
+NSE data.
+
+Result: `python3.13 -m pytest -q --deselect
+tests/test_c01_day_of_week.py::test_causality_audit_passes` - 441 passed,
+1 deselected (the pre-existing pandas-version-sensitive case from the WATCH
+entry, not re-investigated), in 229s. No regressions (401 existing + 20
+new - 1 deselected... 420 existing this run's base, consistent with last
+run's count plus this run's 20 additions less the 1 pre-existing
+deselection carried forward). This change touches no protected path and no
+`experiments/pending/` or `strategies/` file, so it should not trigger
+`replay.yml` on its own.
+
+Next: the highest-value supervised item is still
+`engine/experiment_report.py` (now blocking seventeen landed experiments'
+scoring, not just A01/T01's two) - every `port` since 18 Oct has added more
+cards that then can't be diagnosed, and the go-live track's P1 validation
+queries (allowed from Mon 26 Oct, `config/live_source.json` due Fri 30 Oct
+12:00 UTC) depend on it to know which candidate has a positive train edge
+at all. A second, now-also-queued ask for a supervised session: wire D2's
+fetcher into `backfill.yml`/`dataset.yml` per the new entry in
+`state/engine-issues.md`, so D03 can actually be tested once scoring is
+unblocked. Absent a supervised session, the next autonomous run should
+keep working through plain catalog/port order (T02 next) or D1's still-open
+options-OI continuation (unlocks D02), since neither needs
+`engine/experiment_report.py` to be queued, only to eventually be scored.

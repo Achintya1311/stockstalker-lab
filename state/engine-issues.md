@@ -1,5 +1,52 @@
 # Engine / workflow issues for a supervised session
 
+## READY FOR WIRING: D2 delivery-% fetcher written, not yet in the Actions-cached dataset (2026-10-22)
+
+Needs a `.github/` change (routine cannot edit it); not an engine bug. This is
+the go-live track's P3 item (`state/queue.md`: "D1 and D2... move ahead of
+the indicator rules... scripts/ changes, which the routine can make") - the
+`scripts/` half is done this run, the workflow half needs a supervised
+session, same shape as B3's "new fetch infrastructure" blocker.
+
+**What exists now:** `scripts/fetch_delivery.py` downloads NSE's
+security-wise delivery file (the "MTO" file, confirmed live and stable back
+to 2015-01-02 through 2026-10-19 by direct fetch in this sandbox -
+`https://nsearchives.nseindia.com/archives/equities/mto/MTO_DDMMYYYY.DAT`,
+documented in `docs/nse_formats.md`). `scripts/build_dataset.py`'s
+`parse_delivery_file`/`build()` now parse it and left-join
+`deliv_qty`/`deliv_pct` (catalog rows D02's sibling/D03) onto the price table
+by (date, symbol), restricted to `SERIES == "EQ"`. Both are covered by new
+tests (`tests/test_fetch_delivery.py`, plus four new cases in
+`tests/test_build_dataset.py`) on synthetic fixtures built from the real
+file's documented shape - no real data fetched into any committed file, per
+the zero-commit-NSE-data rule.
+
+**What's missing:** nothing in Actions actually calls `fetch_delivery.py` or
+caches its output, so `data/dataset.parquet` will never gain real
+`deliv_qty`/`deliv_pct` values until a supervised session extends the
+workflows (mirrors `backfill.yml`'s existing cm/fo pattern exactly - same
+shape of change, new file type):
+
+1. `backfill.yml`: add a step that runs
+   `python3 scripts/fetch_delivery.py --start 2015-01-01 --end <today> --out <raw-cache-dir>`
+   alongside the existing cm/fo fetch, into the same Actions cache key (or a
+   new one) so `dataset.yml` can see the files it writes
+   (`<out>/delivery/<year>/delivery_<YYYYMMDD>.dat`).
+2. `dataset.yml`: restore that cache before calling
+   `scripts/build_dataset.py --raw <raw-cache-dir> ...` - already true for
+   cm/fo, `build()` already looks for `delivery_*.dat` under the same
+   `--raw` root unconditionally, so no new flag or step is needed here
+   beyond making sure the delivery cache is restored into the same tree.
+3. Trigger the fetch for the full 2015-2026 backfill once (same
+   `workflow_dispatch` re-run B3's weekend-session fix used), then let the
+   normal daily `backfill.yml`/`dataset.yml` chain keep it current.
+
+Once wired and a real `Replay` run shows `deliv_qty`/`deliv_pct` populated in
+`data/dataset.parquet`, D03's `testable_now` in `cards/catalog.csv` can move
+to `yes` and it becomes portable like any other card (next in SPEC testing
+order once D1's options-OI continuation and D02 are also clear, or sooner if
+the go-live track's P3 priority says to jump it ahead).
+
 ## WATCH: `tests/test_c01_day_of_week.py::test_causality_audit_passes` is pandas-version-sensitive (2026-10-18)
 
 Not filed as blocking - found by accident this run (`port` lane, D1 dataset

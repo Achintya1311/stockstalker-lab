@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from scripts.build_dataset import build, merge_with_existing, parse_cm_file, parse_fo_file
+from scripts.build_dataset import build, merge_with_existing, parse_cm_file, parse_delivery_file, parse_fo_file
 
 OLD_CM_CSV = (
     "SYMBOL,SERIES,OPEN,HIGH,LOW,CLOSE,LAST,PREVCLOSE,TOTTRDQTY,TOTTRDVAL,TIMESTAMP,TOTALTRADES,ISIN\n"
@@ -172,6 +172,78 @@ def test_parse_cm_file_rejects_unrecognised_columns(tmp_path):
     path = _write_zip(tmp_path, "cm_20150102.csv.zip", "A,B,C\n1,2,3\n")
     with pytest.raises(ValueError):
         parse_cm_file(path)
+
+
+OLD_DELIVERY_DAT = (
+    "Security Wise Delivery Position - Compulsory Rolling Settlement\n"
+    "10,MTO,02012015,325859130,0001536\n"
+    "Trade Date <02-JAN-2015>,Settlement Type <N>,Settlement No <2015002>,Settlement Date <06-JAN-2015>\n"
+    "Record Type,Sr No,Name of Security,Quantity Traded,Deliverable Quantity(gross across client level),"
+    "% of Deliverable Quantity to Traded Quantity\n"
+    "20,1,RELIANCE,EQ,76443,50983,66.69\n"
+    "20,2,TATAMOTORS,BE,3463989,1431340,41.32\n"
+)
+
+RECENT_DELIVERY_DAT = (
+    "Security Wise Delivery Position - Compulsory Rolling Settlement\n"
+    "10,MTO,19102026,1725126165,0003405\n"
+    "Trade Date <19-OCT-2026>,Settlement Type <N>\n"
+    "Record Type,Sr No,Name of Security,Quantity Traded,Deliverable Quantity(gross across client level),"
+    "% of Deliverable Quantity to Traded Quantity\n"
+    "20,1,RELIANCE,EQ,3480001,2208053,63.45\n"
+)
+
+
+def test_parse_delivery_old_era_preamble_keeps_only_eq_series(tmp_path):
+    path = tmp_path / "delivery_20150102.dat"
+    path.write_text(OLD_DELIVERY_DAT)
+    out = parse_delivery_file(path)
+    assert list(out["symbol"]) == ["RELIANCE"]  # TATAMOTORS is series BE, dropped
+    row = out.iloc[0]
+    assert row["date"] == "2015-01-02"
+    assert row["deliv_qty"] == 50983.0
+    assert row["deliv_pct"] == 66.69
+
+
+def test_parse_delivery_recent_era_shorter_preamble(tmp_path):
+    path = tmp_path / "delivery_20261019.dat"
+    path.write_text(RECENT_DELIVERY_DAT)
+    out = parse_delivery_file(path)
+    assert list(out["symbol"]) == ["RELIANCE"]
+    assert out.iloc[0]["date"] == "2026-10-19"
+    assert out.iloc[0]["deliv_qty"] == 2208053.0
+    assert out.iloc[0]["deliv_pct"] == 63.45
+
+
+def test_parse_delivery_rejects_unrecognised_filename(tmp_path):
+    path = tmp_path / "not_a_delivery_file.dat"
+    path.write_text(OLD_DELIVERY_DAT)
+    with pytest.raises(ValueError):
+        parse_delivery_file(path)
+
+
+def test_build_merges_delivery_columns_by_date_and_symbol(tmp_path):
+    raw = tmp_path / "raw"
+    (raw / "2015" / "cm" / "2015").mkdir(parents=True)
+    (raw / "2015" / "delivery" / "2015").mkdir(parents=True)
+    _write_zip(raw / "2015" / "cm" / "2015", "cm_20150102.csv.zip", OLD_CM_CSV)
+    (raw / "2015" / "delivery" / "2015" / "delivery_20150102.dat").write_text(OLD_DELIVERY_DAT)
+
+    df = build(raw)
+    by_symbol = df.set_index("symbol")
+    assert by_symbol.loc["RELIANCE", "deliv_qty"] == 50983.0
+    assert by_symbol.loc["RELIANCE", "deliv_pct"] == 66.69
+    # TATAMOTORS has a price row but no matching EQ delivery row that date
+    assert pd.isna(by_symbol.loc["TATAMOTORS", "deliv_qty"])
+
+
+def test_build_without_any_delivery_files_leaves_columns_all_nan(tmp_path):
+    raw = tmp_path / "raw"
+    (raw / "2015" / "cm" / "2015").mkdir(parents=True)
+    _write_zip(raw / "2015" / "cm" / "2015", "cm_20150102.csv.zip", OLD_CM_CSV)
+
+    df = build(raw)
+    assert df["deliv_qty"].isna().all()  # column present (joined schema), no delivery files fetched yet
 
 
 def test_manifest_reports_trading_days_and_largest_gap(tmp_path):
