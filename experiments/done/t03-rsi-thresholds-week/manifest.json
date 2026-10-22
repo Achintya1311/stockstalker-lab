@@ -1,0 +1,9 @@
+{
+  "id": "t03-rsi-thresholds-week",
+  "strategy": "strategies.t03_rsi_thresholds",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 8137,
+  "n_dates": 310,
+  "pick_log_sha256": "a149eecb8a27c7b3b81d27ae147c045fca24d01b9ece9dba6a458c7729255a1b"
+}
