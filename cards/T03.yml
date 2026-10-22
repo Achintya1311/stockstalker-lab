@@ -1,0 +1,52 @@
+source_url: ""
+author: "Wilder (1978) New Concepts in Technical Trading Systems"
+license: "book, not code; summarised only (SPEC.md section 5)"
+published_on: "1978"
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "RSI(14) below 30 bullish
+  (oversold), above 70 bearish (overbought)." `prior_claim`: "Most common
+  retail rule; also test 20/80." This card tests the literal, stated
+  30/70 thresholds only - the catalog's own "also test 20/80" aside is a
+  second variant, not assumed better or worse, left as a `tune`-lane
+  follow-up once this card has a real train edge to compare it against
+  (SPEC.md section 8: tuning trigger values happens on train only), not
+  carded here as its own row.
+horizon: both
+rules_plain: >
+  Wilder's RSI(14) on the adjusted close series. Unlike `cards/T01.yml`
+  and `cards/T02.yml`'s always-on SMA-crossover spread, the literal rule
+  only takes a stance at the two extremes: a symbol with RSI between 30
+  and 70 abstains (SPEC.md section 3), it does not get a weak score in
+  either direction just because its RSI happens to tilt one way.
+
+  Within each active zone the score is still continuous and signed, same
+  convention every other card here uses: `score = (30 - rsi) / 30` when
+  oversold (RSI < 30; 0 at the boundary, 1.0 at RSI=0) and
+  `score = -(rsi - 70) / 30` when overbought (RSI > 70; 0 at the
+  boundary, -1.0 at RSI=100) - symmetric since RSI is bounded to [0, 100].
+
+  `strategies/t03_rsi_thresholds.py` reimplements `strategies/champion_v1.py`'s
+  own vectorized Wilder's-smoothing shape (simple-mean seed, then
+  `ewm(alpha=1/period, adjust=False)`) rather than a per-row Python loop -
+  `state/engine-issues.md`'s "real-data Replay run took 1h45m+" entry is
+  exactly the trap a naive RSI loop would fall into again at real dataset
+  scale. Copied, not imported, so this card stays a standalone module like
+  every other `strategies/t0*` card.
+
+  RSI needs no pick-date knowledge, so one module serves both horizons the
+  same way `cards/T01.yml`'s does.
+default_params:
+  period: 14
+  oversold: 30
+  overbought: 70
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Wilder (1978) New Concepts in Technical Trading Systems"
+link: ""
+prior_claim: "Most common retail rule; also test 20/80"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay, not from the catalog's own 'most common retail rule' prior - popularity is not evidence of edge, same caveat T01/T02's media-popularity priors already carry."
+  - "This is the same RSI(14) formula half of `strategies/champion_v1.py`'s momentum component already uses (re-centred continuously, not thresholded); once both have train results it is worth checking pick overlap directly (SPEC.md section 6 gate 8) rather than assuming the threshold gating decorrelates them enough on its own."
+  - "The 30/70 thresholds are the textbook convention, not tuned on NSE data - a `tune`-lane candidate once a real train edge exists worth tuning (SPEC.md section 8), and the catalog's own '20/80' aside is the natural first alternative to compare against, not a continuous grid point."
+  - "Selective by construction (abstains outside the two bands): coverage (SPEC.md section 3) should be reported alongside accuracy once `engine/experiment_report.py` (state/engine-issues.md) can score this card's picks - a threshold rule firing on only a small share of symbol-dates is expected, not a bug, but needs the real coverage number before any accuracy figure is read on its own."
+status: queued

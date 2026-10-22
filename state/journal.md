@@ -2166,3 +2166,70 @@ rather than waiting for another run to re-flag it. Absent a supervised
 session, the next `port`-lane run should continue plain catalog order:
 T03 (RSI(14) overbought/oversold) is next (`testable_now: yes`). `build`
 is still blocked on B3 and B10 — nothing changed there this run.
+
+## 2026-10-22T18:11Z port lane: T03 (RSI(14) 30/70 thresholds, both horizons)
+
+Mode: Mode A (BUILD_DONE still absent). B3 and B10 remain the only
+unticked B items, both still blocked on a supervised session, unchanged.
+`diagnose` remains fully blocked by the `engine/experiment_report.py` gap
+(state/engine-issues.md) — twenty landed experiments in `experiments/done/`
+now (T02 landed since the last run), zero scored into `research/diagnostics/`
+or `ledger/trials.csv` (both still empty, confirmed this run). `tune` needs
+a diagnosed edge first, so `discover`/`port` were again the only open
+lanes. Previous run's own "next" note pointed here: T03 (RSI(14)
+overbought/oversold) is the next untested `testable_now: yes` row in plain
+catalog order after T02.
+
+Hypothesis: T03 is the most common retail oscillator rule (Wilder 1978),
+structurally different from T01/T02's always-on SMA-spread shape — the
+catalog's literal claim ("RSI below 30 bullish, above 70 bearish") only
+takes a stance at the two extremes, so this card is selective by
+construction (abstains inside 30-70), not continuous across the whole
+range the way T01/T02 are. Worth testing as its own standalone signal
+since it's half of `strategies/champion_v1.py`'s momentum component
+already (re-centred continuously there, thresholded here).
+
+What happened: `cards/T03.yml` (claim, horizon "both", red flags including
+the catalog's own "also test 20/80" aside, left for a future `tune`-lane
+pass rather than carded as a second row). `strategies/t03_rsi_thresholds.py`:
+score = `(30 - rsi) / 30` when RSI < 30, `-(rsi - 70) / 30` when RSI > 70,
+NaN (abstain) otherwise; RSI via a reimplemented (copied, not imported)
+version of `champion_v1`'s vectorized Wilder's-smoothing (`ewm(alpha=1/period,
+adjust=False)` after a simple-mean seed) — a per-row Python loop here would
+hit the exact real-dataset slowdown `state/engine-issues.md`'s "Replay took
+1h45m+" entry already documents for an unvectorized indicator.
+`strategies/t03_rsi_thresholds_audit.py`: same cross-symbol causality proof
+as T01/T02's, generalised to tolerate either flanking symbol abstaining on
+a given random seed (a threshold rule won't always fire on arbitrary noise,
+unlike T01/T02's always-on spread) rather than assuming both always score.
+13 new tests (`tests/test_t03_rsi_thresholds.py`): exact boundary cases
+(all-gains -> RSI=100 -> fully bearish; all-losses -> RSI=0 -> fully
+bullish; flat -> RSI=50 -> abstain) rather than an approximate numeric
+check, since Wilder's recursion converges to those exact values under
+those constructions, plus the usual abstain/prefilter/causality coverage
+every other card's suite carries. Catalog lists this card's horizon as
+"both" (RSI needs no pick-date knowledge, same reasoning T01's card gives),
+so two experiments are queued: `experiments/pending/t03-rsi-thresholds-{day,week}.yml`.
+`cards/catalog.csv`'s T03 row now reads `queued`. Ran the new test file
+alone (13 passed) and the full suite (`python3 -m pytest -q`, after fixing
+this sandbox's pip/python version mismatch — `pip3` was resolving to
+Python 3.13's site-packages while `python3` is 3.11; `python3 -m pip
+install` instead) before committing; see this run's commit for the final
+pass count and confirmation of no regressions.
+
+Flags unchanged from the last run, now five days old (first flagged
+2026-10-18): `engine/experiment_report.py` still sits in front of twenty
+fully-replayed, zero-scored experiments, and go-live's `config/live_source.json`
+deadline (Fri 30 Oct 12:00 UTC) is eight days out. The go-live track's P1
+validation queries open Mon 26 Oct — four days from this run — and still
+cannot be awarded to a single candidate beyond champion v1 without this
+wiring landing first. Sending this to Achintya directly this run (per the
+last run's own note) rather than letting it sit for a sixth day unflagged
+outside the journal.
+
+Next: continue plain catalog order for `port` — T04 (Connors RSI-2) is the
+next untested `testable_now: yes` row after T03. `discover` (adding new
+catalog rows from SPEC.md section 5's sources) is also still open and
+untouched for several runs if a future run prefers it over more T0x
+indicator ports. `build` is still blocked on B3 and B10 — nothing changed
+there this run.
