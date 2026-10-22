@@ -1,0 +1,9 @@
+{
+  "id": "d02-stock-pcr-confirmatory-week",
+  "strategy": "strategies.d02_stock_pcr_confirmatory",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 7061,
+  "n_dates": 309,
+  "pick_log_sha256": "5754518bb7d963b9ed5b660d010901529cfc8b0465b1389af05c710abd46c270"
+}

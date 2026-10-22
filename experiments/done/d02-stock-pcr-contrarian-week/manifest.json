@@ -1,0 +1,9 @@
+{
+  "id": "d02-stock-pcr-contrarian-week",
+  "strategy": "strategies.d02_stock_pcr_contrarian",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 7061,
+  "n_dates": 309,
+  "pick_log_sha256": "23d7f271728b752d707054973055cd61d3c0a358fdd4bed155733be16939b216"
+}
