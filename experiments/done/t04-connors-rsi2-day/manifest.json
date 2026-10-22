@@ -1,0 +1,9 @@
+{
+  "id": "t04-connors-rsi2-day",
+  "strategy": "strategies.t04_connors_rsi2",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 27372,
+  "n_dates": 1285,
+  "pick_log_sha256": "fcb29dde4486459648a5de4787487c1aefb31f79bb32a148e3e4a5405ae67013"
+}
