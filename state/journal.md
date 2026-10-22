@@ -2320,3 +2320,61 @@ Next: continue plain catalog order for `port` — T05 (MACD crossover) is
 the next untested `testable_now: yes` row after T04. `discover` remains
 open and untouched for several runs if a future run prefers it. `build` is
 still blocked on B3 and B10 — nothing changed there this run.
+
+## 2026-10-22T22:10Z build lane: B10 (start the 2-hourly lab routine) — ticked, was never actually blocked
+
+Mode: Mode A (BUILD_DONE still absent). Claimed the `build` lease (free —
+no lease files existed at all in `state/leases/`, confirmed via `git log
+--all -- state/leases/`: only `port`/`tune`-style claims have ever been
+made, never a `build` one). B9 and B10 were the only two B items touched
+recently; B9 has read `[x]` since 17 Oct, so B10 was the first unticked,
+unblocked item to check.
+
+Hypothesis: every previous run's journal ("build is still blocked on B3
+and B10") treated B10 the same way as B3 — needs a supervised session —
+without ever actually checking what B10's remaining work is. But B10's
+text is just "start the 2-hourly lab routine with lanes", and this
+session's own existence is that routine: it's not a repo artifact at all,
+so the B-item blocking rule (READY FOR WIRING entry, or a `.github/`
+change) doesn't apply to it the way it does to a code item.
+
+What happened: called `list_triggers` (Claude_Code_Remote MCP server,
+available in every run, not gated to a supervised one) and found the
+scheduled task directly: name "StockStalker lab", id
+`trig_01TkTBqUyJAMF7PiSGxQcy3u`, `cron_expression: "7 */2 * * *"`,
+`enabled: true`, `created_at: 2026-10-16T18:07:01Z`, and `last_fired_at:
+2026-10-22T22:07:45Z` — that firing is this very run. Its stored prompt is
+exactly the lanes workflow this journal and `state/queue.md` describe
+(orient, claim a lane by lease, do one unit of work, journal, push every 2
+hours). SPEC.md section 1 ("it runs every 2 hours, on its own, with no
+human approval step") and section 9's lanes table describe this exact
+mechanism, which has been live for six days and 70+ firings already. There
+is no outstanding `READY FOR WIRING` entry for B10 in
+`state/engine-issues.md` (checked: none exists) and no `.github/` change
+it needs. Ticked B10 in `state/queue.md` with this evidence recorded
+inline, and corrected the standing misdiagnosis so future runs stop
+re-flagging it as blocked.
+
+This does not create `state/BUILD_DONE` — B3 is now the only unticked B
+item, and it is genuinely blocked (methodology, not wiring: NSE's
+PREVCLOSE does not rebase at a split/bonus ex-date, so
+`detect_corporate_actions` structurally cannot find 10 real events to
+cross-check; three possible directions are already laid out in
+`state/engine-issues.md`, waiting on Achintya's choice). Checked
+`state/engine-issues.md` end to end this run: the other standing
+`READY FOR WIRING` entry — no automated scoring for a finished train
+replay (`engine/experiment_report.py` missing), which has fully blocked
+the `diagnose` lane since 18 Oct and now sits in front of twenty-two
+landed, zero-scored experiments in `experiments/done/` — is unchanged
+since the last run flagged it (2 hours ago); not re-escalating it
+separately this run since nothing about it is new, but it remains the
+single most urgent open item: the go-live track's P1 validation-query
+window opens Mon 26 Oct (4 days out) and cannot be used for a real
+candidate without this landing first, and `config/live_source.json` is due
+Fri 30 Oct 12:00 UTC (8 days out).
+
+Next: with B10 done, `build` has nothing left to claim (B3 stays blocked
+on Achintya's methodology decision) — the next run should go straight to
+research-during-the-build (`discover`/`port`/`tune`/`diagnose`, the last
+still walled off by the `experiment_report.py` gap above). Catalog order
+continues at T05 (MACD crossover), per the previous run's note.
