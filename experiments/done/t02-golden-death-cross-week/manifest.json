@@ -1,0 +1,9 @@
+{
+  "id": "t02-golden-death-cross-week",
+  "strategy": "strategies.t02_golden_death_cross",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 57045,
+  "n_dates": 271,
+  "pick_log_sha256": "d7581646afc5db1bc30606edf68cf5641f8837e97b3263d5fb0881c057dcc362"
+}
