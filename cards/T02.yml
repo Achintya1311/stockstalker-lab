@@ -1,0 +1,37 @@
+source_url: ""
+author: "Classic technical-analysis convention (no single named source; `cards/catalog.csv`'s own summary)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "50-day SMA crossing above 200-day
+  bullish, below bearish." `prior_claim`: "Popular in media; trend signal,
+  slow." No specific paper is cited - this is the "golden cross" / "death
+  cross" convention financial media reports on, distinct from
+  `cards/T01.yml`'s faster 20/50 pair (champion v1's own trend leg):
+  T02 is tested here as its own, slower, standalone signal.
+horizon: week
+rules_plain: >
+  Score = (50-day SMA - 200-day SMA) / |200-day SMA| on the adjusted close
+  series, continuous and signed (sign gives direction, magnitude gives
+  conviction - same convention `cards/T01.yml` already uses, swapping only
+  the window lengths). A symbol abstains until it has at least 200 rows of
+  history (the slow SMA's own window).
+
+  `cards/catalog.csv` lists this row's horizon as week only (unlike T01's
+  "both") - a 50/200 crossover moves too slowly to plausibly carry a
+  one-day signal, so this card is tested on week picks only, per the
+  catalog's own horizon field.
+default_params:
+  fast: 50
+  slow: 200
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Classic"
+link: ""
+prior_claim: "Popular in media; trend signal, slow"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay, not from the catalog's own 'popular in media' prior."
+  - "200-row minimum history means roughly the first trading year of any symbol's life (new listings, newly F&O-enabled names) abstains throughout - worth checking in diagnose whether that abstention rate materially shrinks the picked universe versus T01's 50-row minimum."
+  - "Shares its SMA-crossover shape and fast/slow convention with `cards/T01.yml`; once both have train results, check pick overlap directly (SPEC.md section 6 gate 8) rather than assuming the slower window decorrelates them enough on its own."
+  - "50/200 is the conventional pair reported in financial media, not tuned on NSE data - a `tune`-lane candidate once a real train edge exists worth tuning (SPEC.md section 8)."
+status: queued

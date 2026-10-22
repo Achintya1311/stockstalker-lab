@@ -2099,3 +2099,70 @@ week-only) - D1 and D2's own go-live-track priority (P3) is now fully spent
 `state/engine-issues.md`, not something `port` alone can finish). `build`
 is still blocked on B3 (methodology decision) and B10 (needs B3 plus a
 `.github/` change) - nothing changed there this run.
+
+## 2026-10-22T16:13Z port lane: T02 (golden/death cross 50/200, week)
+
+Mode: Mode A (BUILD_DONE still absent). B3 and B10 remain the only
+unticked B items, both still blocked on a supervised session, unchanged.
+`diagnose` remains fully blocked by the `engine/experiment_report.py` gap
+(state/engine-issues.md) - now nineteen landed experiments in
+`experiments/done/`, zero scored into `research/diagnostics/` or
+`ledger/trials.csv` (confirmed this run: both directories/files are still
+empty). `tune` needs a diagnosed edge first, so `discover`/`port` were
+again the only open lanes. The previous run's own "next" note pointed here:
+D1/D2 (go-live track P3) are now fully carded and queued (both D01 and D02
+variants), C03 (pre-holiday) stays genuinely blocked on a missing NSE
+holiday calendar back to 2015, so the next untested `testable_now: yes`
+row in plain catalog order is T02.
+
+Hypothesis: T02 (50/200 "golden/death cross") is the slower, media-reported
+cousin of T01's 20/50 pair already ported — same shape, different windows,
+worth testing standalone per SPEC.md section 5's "no claim is assumed
+true", since media popularity is not evidence.
+
+What I did: claimed the `port` lease (free, pushed immediately). Wrote
+`cards/T02.yml` (source: classic/media convention, no paper; catalog's own
+`prior_claim`: "popular in media; trend signal, slow"). Wrote
+`strategies/t02_golden_death_cross.py` — identical structure to
+`strategies/t01_sma_crossover.py` (continuous signed score
+`(fast_sma - slow_sma) / abs(slow_sma)`, `FAST=50, SLOW=200`,
+`MIN_ROWS=SLOW`, same `has_future` prefilter, same adjusted-close input via
+`scripts.adjustments.compute_adjustment_factors`) and
+`strategies/t02_golden_death_cross_audit.py` (cross-symbol causality proof,
+same construction as T01's audit: one symbol gets an extra trailing row,
+the other two symbols' scores must not move). Catalog lists T02's horizon
+as week only (unlike T01's "both"), so only one experiment file was
+queued: `experiments/pending/t02-golden-death-cross-week.yml`. Marked T02
+`queued` in `cards/catalog.csv` and recorded this in `state/queue.md`.
+
+13 new tests (`tests/test_t02_golden_death_cross.py`), mirroring
+`tests/test_t01_sma_crossover.py`'s suite with the hand-derived spread
+re-worked for 200 total rows / 50 fast rows (slow_mean =
+(150*100 + 50*110)/200 = 102.5 for the rising-tail case, spread =
+7.5/102.5): rising/falling tail sign, flat-series exact zero, the
+hand-derived magnitude, insufficient-history abstain (both in `score` and
+`rules_fired`), empty history, per-symbol independence, the `has_future`
+prefilter (keeps an eligible symbol unchanged, drops one with no future
+anywhere), and the causality audit.
+
+Result: `pip3 install -r requirements.txt` then `python3.13 -m pytest -q
+--deselect tests/test_c01_day_of_week.py::test_causality_audit_passes` —
+479 passed, 1 deselected (the pre-existing pandas-version-sensitive case
+from the WATCH entry, not re-investigated), in 223s (466 existing + 13
+new). No regressions. This change touches `experiments/pending/` and
+`strategies/`, so pushing it should trigger `replay.yml` against the real
+cached dataset.
+
+Next: `engine/experiment_report.py` is now a four-day-old blocker (first
+flagged 2026-10-18) sitting in front of nineteen fully-replayed, zero-scored
+experiments, and it is getting more urgent, not less: go-live is Mon 2 Nov,
+`config/live_source.json` is due Fri 30 Oct 12:00 UTC, and the go-live
+track's P1 ("every train replay with a positive edge ... gets one
+validation query") cannot award a single query without real train numbers
+for any candidate beyond champion v1 — meaning every table's provisional
+choice currently has no way to beat the champion-v1 fallback regardless of
+how much `port`/`discover` work lands. This should go to Achintya directly
+rather than waiting for another run to re-flag it. Absent a supervised
+session, the next `port`-lane run should continue plain catalog order:
+T03 (RSI(14) overbought/oversold) is next (`testable_now: yes`). `build`
+is still blocked on B3 and B10 — nothing changed there this run.

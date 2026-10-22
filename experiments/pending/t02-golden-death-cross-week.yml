@@ -1,0 +1,12 @@
+# T02 (week horizon only, per cards/T02.yml): golden/death cross 50/200,
+# train-split replay (port lane, state/queue.md). See cards/T02.yml and
+# strategies/t02_golden_death_cross.py. No day-horizon experiment is queued:
+# the catalog lists this card's horizon as week only - a 200-day SMA moves
+# too slowly to plausibly carry a one-day signal.
+id: t02-golden-death-cross-week
+strategy: strategies.t02_golden_death_cross
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
