@@ -1,0 +1,71 @@
+source_url: ""
+author: "Gerald Appel (1970s)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: "1970s"
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "MACD line crossing above signal
+  bullish, below bearish." `prior_claim`: "Common retail signal." The
+  catalog's wording is explicitly an event ("crossing"), not a persisted
+  state ("is above") the way `cards/T01.yml`'s SMA spread reads - so unlike
+  T01/T03/T04, this card only fires on the bar where the two lines actually
+  cross, and abstains on every other bar even if MACD sits well above (or
+  below) its signal line without a fresh cross that day.
+horizon: both
+rules_plain: >
+  Standard MACD(12, 26, 9) on the adjusted close series
+  (`scripts.adjustments.compute_adjustment_factors`, same as every other
+  `strategies/t0*` card):
+
+  - MACD line = EMA(12) - EMA(26), both plain (non-Wilder) exponential
+    moving averages (`close.ewm(span=N, adjust=False).mean()` - pandas'
+    own recursive EMA, seeded by the first observation; this is a
+    different smoothing convention from `strategies/t03_rsi_thresholds.py`/
+    `strategies/t04_connors_rsi2.py`'s hand-seeded Wilder smoothing
+    (`alpha=1/period`), because MACD's own published definition is a plain
+    EMA, not Wilder's).
+  - Signal line = EMA(9) of the MACD line itself.
+  - **Bullish:** MACD line was at or below the signal line on the prior
+    bar and is strictly above it on the latest bar (a fresh cross up).
+  - **Bearish:** MACD line was at or above the signal line on the prior
+    bar and is strictly below it on the latest bar (a fresh cross down).
+  - Anything else (no fresh cross this bar) abstains (NaN, SPEC.md
+    section 3).
+
+  Score is continuous within each firing case, same sign-gives-direction/
+  magnitude-gives-conviction convention every other card here uses:
+  `score = (macd_latest - signal_latest) / abs(close_latest)` - normalised
+  by the latest adjusted close since MACD is price-denominated (an
+  absolute EMA difference), not already a ratio the way T01's SMA spread
+  or T03/T04's RSI readings are. The sign of this expression always
+  matches the cross direction by construction (positive just after a
+  cross up, negative just after a cross down), so no separate sign check
+  is needed once a fresh cross is confirmed.
+
+  `strategies/t05_macd_crossover.py` needs no pick-date knowledge - both
+  EMAs and the cross comparison are computed purely from past adjusted
+  closes already inside whatever truncated `history` slice `engine.replay`
+  hands this module, so one module serves both horizons, the same way
+  `strategies/t01_sma_crossover.py` and `strategies/t03_rsi_thresholds.py`
+  already do.
+
+  Minimum history: the slow (26-day) EMA and the 9-day signal EMA on top
+  of it need at least 26 + 9 = 35 rows before the signal line is read as
+  a stable value (not pandas' own unseeded-recursion value from only a
+  handful of rows), plus one more row to have a prior-bar signal/MACD
+  pair to compare against for the cross itself - `MIN_ROWS = 36`.
+default_params:
+  fast: 12
+  slow: 26
+  signal: 9
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Appel (1970s)"
+link: ""
+prior_claim: "Common retail signal"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay - the rule's popularity is not evidence of edge, same caveat every ported card here already carries."
+  - "Literal 'crossing' reading makes this card selective by construction, firing only on the bar a cross actually happens - expect much lower coverage than T01's always-on spread, and coverage (SPEC.md section 3) needs reporting alongside any accuracy figure once `engine/experiment_report.py` (state/engine-issues.md) can score this card's picks, same blocker every ported card since A01 has hit."
+  - "12/26/9 is Appel's stated default, not tuned on NSE data at all - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
+  - "A continuous 'MACD currently above/below signal' variant (same shape as T01's always-on spread, rather than only the crossing bar) is a plausible second card once this one has real numbers - not carded separately yet since the catalog's own wording is explicitly the crossing event, and no claim should be invented beyond what's stated."
+  - "MACD's fast/slow EMAs ultimately read the same close series T01's SMA pair and T02's 50/200 pair already do, just with exponential rather than simple weighting - pick overlap with T01/T02 (SPEC.md section 6 gate 8) is worth checking directly once all three have real numbers."
+status: queued

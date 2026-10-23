@@ -2378,3 +2378,102 @@ on Achintya's methodology decision) — the next run should go straight to
 research-during-the-build (`discover`/`port`/`tune`/`diagnose`, the last
 still walled off by the `experiment_report.py` gap above). Catalog order
 continues at T05 (MACD crossover), per the previous run's note.
+
+## 2026-10-23T00:19Z port lane: T05 (MACD crossover, both horizons)
+
+Mode: Mode A (BUILD_DONE still absent). B3 remains the only unticked B
+item, still blocked on Achintya's methodology decision
+(`state/engine-issues.md`: NSE's PREVCLOSE does not rebase at a split or
+bonus ex-date, so `detect_corporate_actions` structurally cannot find the
+10 real events B3's acceptance line asks for). `diagnose` remains fully
+blocked by the missing `engine/experiment_report.py` wiring (now flagged
+since 18 Oct, escalated to Achintya directly by the last two runs on 22
+Oct) — confirmed again this run: `ledger/trials.csv` still does not exist
+anywhere in the repo, `research/diagnostics/` still does not exist, and
+`experiments/done/` now holds 24 fully-replayed, zero-scored experiment
+directories once this run's T05 queue lands two more. `tune` needs a
+diagnosed edge first, so `discover`/`port` remain the only open lanes.
+Previous run's own "next" note pointed here: T05 (MACD crossover) is the
+next untested `testable_now: yes` row in plain catalog order after T04
+(C03 pre-holiday stays blocked, confirmed again: `config/nse_holidays.txt`
+only covers 2026, not the train split a port needs).
+
+Hypothesis: MACD(12, 26, 9) (Appel, 1970s) is structurally different from
+every T0x card so far in one specific way: the catalog's own wording
+("crossing above ... crossing below") is explicitly an event, not a
+persisted state the way T01's always-on SMA spread, T02's golden/death
+cross, T03's RSI thresholds, or T04's conjunction all read continuously
+(or at the boundary) every bar. MACD should therefore fire far less often
+than T01 — worth testing as its own standalone signal both because it's a
+different smoothing family entirely (plain EMA, not Wilder's) and because
+the literal "crossing" reading changes the selectivity story completely
+from a continuous "is above" variant.
+
+What happened: `cards/T05.yml` (claim, horizon "both" per the catalog,
+red flags including the "crossing vs. is-above" distinction and a
+possible future continuous variant as a separate, not-yet-carded card).
+`strategies/t05_macd_crossover.py`: MACD line = EMA(12) - EMA(26) of the
+adjusted close (plain EMA via `close.ewm(span=N, adjust=False).mean()`,
+pandas' own recursive formula, no custom seeding needed since MACD's
+published definition isn't Wilder-smoothed); signal = EMA(9) of the MACD
+line; fires only on a fresh cross (`macd_prev <= signal_prev and
+macd_latest > signal_latest`, or the mirrored `>=`/`<` for bearish),
+scoring `(macd_latest - signal_latest) / abs(close_latest)` (sign always
+matches cross direction by construction); abstains (NaN) on every other
+bar, including one where MACD already sits well clear of signal without a
+fresh cross. `MIN_ROWS = 36` (26 + 9 for a stable signal value, plus one
+more row for the prior-bar comparison the cross itself needs).
+`strategies/t05_macd_crossover_audit.py`: same cross-symbol causality
+proof shape as T01-T04's.
+
+11 new tests (`tests/test_t05_macd_crossover.py`): a steady monotonic
+uptrend proves the "already crossed, no fresh cross" abstain case (found
+empirically first — confirmed in this sandbox that a 80-row linspace
+uptrend settles into MACD sitting persistently ~5.29 above a signal line
+~5.28, both still rising together, no bar where the inequality flips —
+before writing it up as a test, rather than assuming the behaviour); a
+flat series proves the pinned-at-zero no-cross case. Two directional
+fixtures (long decline then a sharp 2-day rally for the bullish cross,
+long rally then a sharp 2-day decline for the bearish cross, same
+"long drift then countermove" construction T04's tests already use) are
+cross-checked against an independent loop-based plain-EMA reference
+(alpha = 2/(span+1), seeded by the first observation) computed directly in
+the test file rather than reusing the module's own arithmetic as its own
+check. Both fixtures were found by brute-force search over a few
+candidate decline/rally lengths and tail shapes in this sandbox (not
+analytically derived — a precise crossing bar is hard to hand-solve for a
+recursive EMA), then locked in as fixed, deterministic series once
+confirmed to actually cross. Ran the new test file alone first (11
+passed), then the full suite: 515 passed, 1 failed (only the pre-existing,
+already-documented `test_c01_day_of_week.py::test_causality_audit_passes`
+pandas-version flake — `state/engine-issues.md`'s WATCH entry, unrelated
+to this change) — no regressions. This sandbox needed `python3 -m pip
+install numpy pandas pyyaml pytest pyarrow` first (same `pip3`/`python3`
+version-mismatch workaround every recent run's journal entry documents).
+
+Catalog lists this card's horizon as "both" (MACD needs no pick-date
+knowledge, same reasoning T01's and T03's cards give), so two experiments
+are queued: `experiments/pending/t05-macd-crossover-{day,week}.yml`.
+`cards/catalog.csv`'s T05 row now reads `queued`.
+
+Flags unchanged from the last two runs, now flagged for a seventh time
+since 18 Oct: `engine/experiment_report.py` sits in front of what will be
+26 fully-replayed, zero-scored experiments once this run's two T05 queue
+entries land. The go-live track's P1 validation-query window opens Mon 26
+Oct — three days from this run — and `config/live_source.json` is due Fri
+30 Oct 12:00 UTC, seven days out. Neither deadline can be met with a real
+validation-backed candidate (as opposed to falling straight through to
+champion v1 by default for every table) unless this wiring lands first.
+The last two runs (22 Oct, 18:11Z and 20:11Z) each recorded sending this
+directly to Achintya outside the journal; not re-sending a third
+notification this run on the same unchanged finding, but recording here
+that the window is now measured in days, not weeks, and every further run
+that finds this still unfixed should treat it as the most urgent possible
+escalation, not routine journal noise.
+
+Next: continue plain catalog order for `port` — T06 is the next untested
+`testable_now: yes` row after T05 (check `cards/catalog.csv` for its exact
+rule before carding; not previewed in this entry). `discover` remains open
+and untouched for several runs if a future run prefers it over more T0x
+indicator ports. `build` is still blocked on B3 alone — nothing changed
+there this run.
