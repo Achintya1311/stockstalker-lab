@@ -1,0 +1,9 @@
+{
+  "id": "t06-bollinger-pctb-day",
+  "strategy": "strategies.t06_bollinger_pctb",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 39554,
+  "n_dates": 1466,
+  "pick_log_sha256": "fb056e0ccd14d37484624c9f529eee63c7d725df1436af7673b33ae1b7efccee"
+}
