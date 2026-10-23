@@ -2587,3 +2587,83 @@ blocked on B3 alone (unchanged, needs a supervised session per the
 methodology note). Go-live track: Mon 26 Oct (P1 holdout-query window
 opens) is 3 days out; `config/live_source.json` is due Fri 30 Oct 12:00
 UTC, 7 days out.
+
+## 2026-10-23T0619Z — Mode A (build blocked on B3 alone), lane: port
+
+**Hypothesis:** the prior run's `Next` note named T07 (Bollinger squeeze
+breakout, week horizon) as the next plain-catalog-order `testable_now: yes`
+row after T06 (which the 05:16Z replay has now landed). `build` is still
+blocked on B3 alone (unchanged - the methodology note's direction choice
+is a supervised-session call). `diagnose`/`tune` stay blocked on the same
+`engine/experiment_report.py` scoring gap: this run's replay landed nine
+more unscored experiments (T02-T06, both D02 variants, C03), on top of
+A01-A09's earlier backlog - `research/diagnostics/` still doesn't exist
+and `ledger/trials.csv` still doesn't exist, confirmed by directly checking
+both paths this run. That blocker is already fully written up in
+`state/engine-issues.md`; nothing new to add there beyond noting the
+backlog keeps growing every replay cycle it stays unfixed.
+
+**What happened:** claimed the `port` lease (`aa695f1`'s commit pattern,
+no race - no lease files existed when this run started). Ported T07: the
+catalog's literal rule ("band width at a 6-month low, then close outside
+a band: direction of the break") is a breakout/continuation read of the
+exact same Bollinger(20, 2) bands `cards/T06.yml` already builds, not a
+second mean-reversion card - a close above the upper band while the band
+width (normalised `2*band_width/middle`) sits at its own trailing
+126-session low is **bullish** (opposite sign from T06's mean-reversion
+mapping of the identical %B reading), below the lower band is **bearish**.
+Read "then" as "both conditions true on the same bar" (every other card
+here reads one bar with no cross-bar state, and `engine.replay` gives a
+strategy no way to remember an earlier squeeze) rather than inventing
+state the interface doesn't support - flagged as an interpretation choice
+in `cards/T07.yml`'s red_flags, with the cross-bar variant named as the
+first thing to try if this literal reading shows no edge.
+
+Wrote `cards/T07.yml`, `strategies/t07_bollinger_squeeze_breakout.py`
+(`MIN_ROWS = WINDOW + WIDTH_LOOKBACK - 1 = 145`, tail-bounded to
+`close.iloc[-MIN_ROWS:]` before any rolling computation so the cost per
+call stays fixed regardless of accumulated history - same WATCH-entry
+concern T06 already addresses), `strategies/t07_bollinger_squeeze_breakout_audit.py`
+(same cross-symbol causality proof shape as T01-T06's). 15 new tests in
+`tests/test_t07_bollinger_squeeze_breakout.py`: a squeeze constructed by
+narrowing the oscillation amplitude over the trailing 19 bars (not a
+globally flat or constant-amplitude series, which would make every window
+trivially tie for the 126-session low and never exercise the "squeeze
+really is a new low" branch), cross-checked against an independent
+numpy-loop reference (not pandas rolling) for both the %B and the squeeze
+boolean; a dedicated "break without a squeeze abstains" case (wide-then-
+narrow... actually narrow-then-wide amplitude, %B pushed well outside the
+upper band while width is nowhere near a new low) proving the squeeze gate
+itself does the suppressing, not just a coincidentally-unmet band break;
+plus flat-bands, insufficient-history, empty-history, has_future-prefilter
+and rules_fired coverage mirroring T01-T06's pattern. Queued
+`experiments/pending/t07-bollinger-squeeze-breakout-week.yml` (catalog
+lists this card's horizon as week only). `cards/catalog.csv`'s T07 row now
+reads `queued`.
+
+Full suite, run twice in this sandbox: first pass showed 9 failures, all
+`ImportError: ... pyarrow or fastparquet is required for parquet support`
+in `tests/test_picks_run.py`/`tests/test_run_queue.py` - a sandbox gap
+(`python3.13`'s pandas had no parquet engine installed), not a regression;
+installing `pyarrow` and rerunning both files directly (16 passed) then
+the whole suite again confirmed this: **557 passed, 0 failed** (548 + 9
+once pyarrow was present), including the pre-existing
+`test_c01_day_of_week.py::test_causality_audit_passes` pandas-version
+flake passing clean this time, consistent with its own WATCH entry
+describing it as intermittent rather than consistently broken.
+
+**Next:** T08 (Donchian/Turtle breakout, week horizon per catalog) is next
+in plain catalog order. `diagnose`/`tune` stay blocked until a supervised
+session wires `engine/experiment_report.py` per `state/engine-issues.md` -
+worth that session's attention soon: every `port` cycle since A01 (16 cards
+now: A01-A09, C01-C04, T01-T07, D01-D02) has landed a train replay with
+zero of them actually scored, which also stalls the go-live track's P1
+rule ("every train replay with positive edge... gets one validation
+query") since no replay's edge is yet computable at all, not just unmeasured.
+`build` is still blocked on B3 alone. Go-live track: Mon 26 Oct (P1
+holdout-query window opens) is 2 days out; `config/live_source.json` is
+due Fri 30 Oct 12:00 UTC, 6 days out - the provisional-strategy fallback
+(champion v1 for any table with no qualifying candidate, SPEC.md section
+10) still applies cleanly even with the scoring gap unresolved, so go-live
+itself isn't at risk, only the quality of what sits behind it until the
+gap is fixed.

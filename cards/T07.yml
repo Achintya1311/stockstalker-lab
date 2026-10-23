@@ -1,0 +1,98 @@
+source_url: ""
+author: "John Bollinger (2001) Bollinger on Bollinger Bands"
+license: "book, not code; summarised only (SPEC.md section 5)"
+published_on: "2001"
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "Band width at a 6-month low, then
+  close outside a band: direction of the break." `prior_claim`:
+  "Volatility contraction precedes expansion." `default_params`:
+  "20, 2 sigma; 126-day width low" - the textbook Bollinger window/
+  multiplier plus a 6-month (126 trading day) squeeze lookback, tested
+  literally here, not re-derived.
+horizon: week
+rules_plain: >
+  Same Bollinger Bands(20, 2) construction as `cards/T06.yml` (middle =
+  20-day SMA of adjusted close, band width = 2 * 20-day population std
+  (`ddof=0`, same consistency choice T06 and the `a0*` cards already
+  make), upper/lower = middle +/- band width, %B = (close - lower) /
+  (upper - lower)), but this card is a **breakout/continuation** read,
+  not T06's mean-reversion one - the catalog's own wording is explicit
+  that the squeeze has to come first:
+
+  - **Squeeze:** today's band width, expressed as a fraction of the
+    middle band (`2 * band_width / middle`, Bollinger's own normalised
+    "%width" so a squeeze reads the same way at any price level) is at
+    or below its own trailing 126-session low (`WIDTH_LOOKBACK = 126`,
+    the catalog's literal "6-month low" - roughly 6 calendar months of
+    NSE trading sessions). Since today's own width is itself one of the
+    126 values being compared, this means today's width equals the
+    minimum of the trailing window, not an approximation.
+  - **Break:** latest close outside a band on the *same* bar the squeeze
+    condition holds (%B < 0 or %B > 1). The catalog's "then" could in
+    principle mean a squeeze bar followed, some unspecified number of
+    bars later, by a break bar - but every other card in this codebase
+    (A01-A09, C01-C04, T01-T06) reads its signal off a single bar handed
+    by `history`, with no state carried across calls, and `engine.replay`
+    gives no mechanism for a strategy to remember "I saw a squeeze N
+    bars ago." Reading "then" as "on the bar where both conditions are
+    simultaneously true" is the narrowest claim this interface can test
+    without inventing cross-bar state the engine doesn't support; flagged
+    as an interpretation choice below, not a silent assumption.
+  - **Direction is the break, not mean reversion:** close above the
+    upper band (%B > 1) while squeezed is **bullish** (the expansion
+    breaks upward, trend continuation) and close below the lower band
+    (%B < 0) while squeezed is **bearish** - the opposite sign mapping
+    from T06's mean-reversion read of the identical bands, because this
+    is a different claim about the same construction, not the same claim
+    twice.
+  - No squeeze, or squeeze but %B inside [0, 1] (narrow bands but no
+    break yet), or a flat window (band width exactly 0, %B undefined):
+    abstain (NaN).
+
+  Score is continuous within each firing case, same sign-gives-direction/
+  magnitude-gives-conviction convention every other card here uses:
+  `score = pctB - 1` when bullish (0 at the upper-band boundary, growing
+  positive the further above) and `score = pctB` when bearish (already
+  negative since %B < 0 there, growing more negative the further below) -
+  both monotonic in distance from the triggering band, sign matches
+  direction by construction.
+
+  Catalog lists this card's horizon as week only (unlike T01/T03/T05's
+  "both"), so only a week-split experiment is queued - a volatility-
+  contraction setup followed by a breakout is a multi-session regime
+  change, not plausibly a same-day open-to-close read the way T04's
+  2-day RSI extreme is.
+
+  `strategies/t07_bollinger_squeeze_breakout.py` needs no pick-date
+  knowledge - the SMA, std, %B and the 126-day width-percentile window
+  are all computed purely from past adjusted closes already inside
+  whatever truncated `history` slice `engine.replay` hands this module.
+
+  Minimum history: the width series itself needs `WINDOW` rows per point
+  and `WIDTH_LOOKBACK` points to compare against, so
+  `MIN_ROWS = WINDOW + WIDTH_LOOKBACK - 1 = 145` - the same "need N
+  rows before this reads a stable value, not pandas' partial-window
+  default" reasoning T01/T06 already use, just chained one level deeper
+  since the squeeze condition is itself a rolling statistic of a rolling
+  statistic. Only the trailing `MIN_ROWS` rows of `close` are ever used
+  (`close.iloc[-MIN_ROWS:]`), same tail-bounding T06 uses, so the rolling
+  computation stays a fixed size regardless of how much history the
+  replay has accumulated by a given date (`state/engine-issues.md`'s
+  "Replay took 1h45m+" WATCH entry).
+default_params:
+  window: 20
+  sigma: 2
+  width_lookback: 126
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Bollinger (2001) Bollinger on Bollinger Bands"
+link: ""
+prior_claim: "Volatility contraction precedes expansion"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay - same caveat every ported card here already carries."
+  - "Same-bar squeeze-and-break is an interpretation choice, not the only reading of the catalog's \"then\" - see rules_plain above. If this card shows no edge, a cross-bar variant (break within N sessions of a squeeze, needing new engine state) is a candidate before concluding the underlying claim is refuted, not just this literal reading of it."
+  - "Shares its entire band construction with cards/T06.yml but maps the identical %B reading to opposite directions (breakout-continuation here vs. mean-reversion there) - pick overlap with T06 (SPEC.md section 6 gate 8) needs checking directly once both have real numbers; by construction the two can never fire on the same bar for the same symbol (T06 requires no squeeze constraint and fires on every band break, so T06's fires are a superset of bar-dates where T07 could fire, but T07 additionally requires the squeeze - worth confirming numerically, not just by this construction argument, once engine/experiment_report.py can score picks)."
+  - "20-day window / 2-sigma multiplier / 126-day width lookback are Bollinger's own stated defaults and a round 6-month convention, not tuned on NSE data at all - a tune-lane candidate on all three once a real train edge exists (SPEC.md section 8)."
+  - "Selective by construction (needs both a squeeze AND a break on the same bar, a narrower condition than T06's band-break alone, so likely a much lower coverage than T06's already-selective reads): coverage (SPEC.md section 3) needs reporting alongside any accuracy figure once engine/experiment_report.py (state/engine-issues.md) can score this card's picks, same blocker every ported card since A01 has hit."
+  - "ddof=0 (population std) chosen for consistency with T06 and the a0* cards' rolling-window convention, not because Bollinger's original text mandates one convention over the other, same flag T06 already carries."
+status: untested
