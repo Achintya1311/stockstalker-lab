@@ -25,7 +25,7 @@ T09,Supertrend,technical,both,"Close above the ATR-based Supertrend line bullish
 T10,NR7 / NR4 narrow range,technical,day,Narrowest range of the last 7 (or 4) days: pick next day in the direction of the trend filter,"NR4, NR7",ohlcv,yes,Crabel (1990) Day Trading with Short Term Price Patterns,,Range contraction precedes expansion,queued
 T11,Inside bar,technical,day,Today's range inside yesterday's: next day in the direction of the trend filter,trend filter 20-day SMA,ohlcv,yes,Classic price action; in PKScreener,,Contraction pattern,queued
 T12,Stochastic %K/%D,technical,day,"%K crossing up below 20 bullish, crossing down above 80 bearish","14,3,3",ohlcv,yes,Lane (1950s),,"Oscillator, mean reversion",queued
-T13,Williams %R,technical,day,"%R below -80 bullish, above -20 bearish",14,ohlcv,yes,Williams,,Oscillator,untested
+T13,Williams %R,technical,day,"%R below -80 bullish, above -20 bearish",14,ohlcv,yes,Williams,,Oscillator,queued
 T14,CCI,technical,both,"CCI crossing above -100 bullish, below +100 bearish",20,ohlcv,yes,Lambert (1980),,Oscillator,untested
 T15,ADX trend filter,technical,both,"Use ADX > 25 to choose trend rules, < 20 to choose mean-reversion rules",14,ohlcv,yes,Wilder (1978),,"A regime filter, best tested combined with others",untested
 T16,Parabolic SAR,technical,both,"Price above SAR bullish, below bearish",0.02/0.2,ohlcv,yes,Wilder (1978),,Trend-following stop system,untested

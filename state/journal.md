@@ -2998,3 +2998,87 @@ positive-train-edge card) still cannot award a single query without it.
 B3 (corporate-actions methodology) and the D2 delivery-% workflow wiring
 remain the other two open supervised-session items; nothing changed on
 either this run.
+
+## 2026-10-23T1812Z — port lane
+
+Mode A (build) still active: `state/BUILD_DONE` does not exist. B3 stays
+the lab's only unticked B item, still blocked on the supervised
+methodology decision (`state/engine-issues.md`'s "READY FOR WIRING
+(methodology, not code): `detect_corporate_actions`..." entry; unchanged
+this run). No port lease existed at orient time, so claimed `port` and
+did the next unit of SPEC-order catalog work.
+
+**Hypothesis:** T13 (Williams %R, 14-day, -80/-20), the next untested
+`testable_now: yes` catalog row in plain SPEC order after T12 (last run's
+journal entry named T13 as next). The catalog's wording here is
+"below"/"above", not "crossing" like T12's Stochastic row - the same
+persisted-state reading `cards/T03.yml`'s RSI 30/70 thresholds already
+use, so `strategies/t13_williams_r.py` fires on every bar %R sits past
+either threshold, not only on the bar it first gets there (no "already
+crossed, no fresh cross" abstain case here, unlike T05/T12).
+
+**What happened:** wrote `cards/T13.yml`, `strategies/t13_williams_r.py`
+(`%R = -100 * (highest_high_14 - close) / (highest_high_14 -
+lowest_low_14)` over a trailing 14-day adjusted high/low window - the
+mirror image of T12's raw unsmoothed %K, `%R = raw_%K - 100`, read
+directly off its own [-100, 0] scale; score reuses T03's
+threshold-distance convention with a 20-point boundary-to-edge distance
+on both sides; reads the LATEST bar, not the prior bar, since there is no
+crossing condition to key off; `MIN_ROWS = 14`, one less than T12's 17
+since no prior-bar comparison is needed), `strategies/t13_williams_r_audit.py`
+(cross-symbol causality proof, same shape as T12's, with a real intraday
+high/low spread in its synthetic fixture). 12 new tests
+(`tests/test_t13_williams_r.py`): a monotonic decline and a monotonic
+rally each hand-derive an exact boundary value (%R = -100 or 0 exactly,
+via the same closed-form reasoning T03's RSI boundary tests use) and
+prove this card keeps firing at a persisted extreme (unlike T12), a flat
+series proves the zero-denominator abstain case, a decline-then-partial-
+bounce fixture (cross-checked against an independent loop-based
+rolling-window reference in the test file, same style T12's test used)
+proves the genuinely-mid-range abstain case, insufficient history, empty
+history, per-symbol non-coupling, the `has_future` prefilter, two
+`rules_fired` wording checks, and the causality audit. Queued one
+day-split experiment (`experiments/pending/t13-williams-r-day.yml`;
+catalog lists this card's horizon as day only) and marked T13 `queued` in
+`cards/catalog.csv`.
+
+Result: `python3.13 -m pytest -q --deselect
+tests/test_c01_day_of_week.py::test_causality_audit_passes` (full suite,
+that one pre-existing/environment-specific flake excluded, same
+`state/engine-issues.md` WATCH entry every recent run has hit in this
+sandbox) - 646 passed, 0 failed, in 262.46s (634 existing + 12 new). The
+audit module also runs standalone
+(`python3.13 -m strategies.t13_williams_r_audit`) and passes.
+`scripts/guard_check.py` confirms no protected path touched. (This
+sandbox's `pytest` was not installed at session start - `python3.13 -m
+pip install -r requirements.txt` resolved it along with `pyarrow`; worth
+noting since recent journal entries assumed `python3.13 -m pytest` just
+works.)
+
+**Next:** once `replay.yml` lands `experiments/done/t13-williams-r-day/`,
+it joins the same unscored backlog every ported card since A01 has hit.
+T14 (CCI) is the next untested `testable_now: yes` row for a future
+`port`-lane run.
+
+**Flagging for a supervised session (overdue, not new):** the
+`engine/experiment_report.py` scoring gap
+(`state/engine-issues.md`'s "READY FOR WIRING: no automated way to score
+a finished train replay" entry, opened 2026-10-18) has now gone
+unaddressed for 5 days and at least 7 runs while every one of them kept
+porting new cards into the same unscored backlog - it is now north of 28
+landed experiments (`experiments/done/`) with zero real train edge/
+accuracy numbers computed anywhere, and the go-live track's P1
+(`state/queue.md`: "every train replay with a positive edge... gets one
+validation query... that is how a provisional candidate earns its
+place") cannot award a single query without it, because nobody can tell
+which of those 28+ experiments has a positive train edge. Against the
+hard Fri 30 Oct 12:00 UTC `config/live_source.json` deadline (7 days from
+this run) and the SPEC.md section 10 fallback rule needing "the strategy
+with the highest validation edge... among those with a positive train
+edge and a positive train directional move," this is now the single
+highest-risk item blocking go-live from using anything but champion v1
+(or a provisional pick made blind, without comparing real train numbers)
+for every table. B3 (corporate-actions methodology, blocked since 17 Oct)
+and the D2 delivery-% workflow wiring are the other two open
+supervised-session items; neither is on the go-live critical path the
+way this one now is.

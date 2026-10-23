@@ -1,0 +1,11 @@
+# T13 (day horizon): Williams %R(14), -80/-20 persisted-threshold, train-split
+# replay (port lane, `state/queue.md`). See cards/T13.yml and
+# strategies/t13_williams_r.py. Catalog lists this card's horizon as day
+# only, so only this one experiment is queued.
+id: t13-williams-r-day
+strategy: strategies.t13_williams_r
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
