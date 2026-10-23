@@ -25,7 +25,8 @@ jobs:
       - uses: actions/cache/save@v4
         with: {path: intraday, key: 'intraday-5m-${{ github.run_id }}'}
       - name: Commit the manifest only
-        run: bash .github/push.sh "data: intraday manifest $(date -u +%F)" state/intraday_manifest.json
+        run: |
+          bash .github/push.sh "data: intraday manifest $(date -u +%F)" state/intraday_manifest.json
       - name: Report failure where the routine can read it
         if: failure()
         run: bash .github/report_failure.sh intraday /tmp/intraday.log
