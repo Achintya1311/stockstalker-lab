@@ -1,0 +1,61 @@
+source_url: ""
+author: "Classic price action pattern; listed in PKScreener's scanner set"
+license: "trading pattern, not code or text; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "Today's range inside yesterday's:
+  next day in the direction of the trend filter." `prior_claim`:
+  "Contraction pattern" - the same family of claim as T10's NR4/NR7
+  (range contraction precedes expansion), tested here as a two-bar
+  pattern instead of a trailing-N-day minimum.
+horizon: day
+rules_plain: >
+  An "inside bar": today's high is at or below yesterday's high AND
+  today's low is at or above yesterday's low (adjusted OHLC, SPEC.md
+  section 2) - today's whole range sits inside yesterday's, a two-bar
+  pattern rather than T10's trailing-N-day minimum. Equality on either
+  side (today's high exactly equals yesterday's, or today's low exactly
+  equals yesterday's) still counts as inside: the catalog's own wording
+  ("inside yesterday's") gives no strict/non-strict distinction, and
+  real adjusted high/low values essentially never land on an exact tie
+  with the prior day's, so this choice is not expected to matter in
+  practice (same kind of flagged, undecided tie convention T10's argmin
+  red_flag already notes for a different comparison).
+
+  The catalog names no trend filter of its own, exactly like T10, so
+  this card reuses `strategies/t01_sma_crossover.py`'s exact fast/slow
+  (20/50) SMA spread, `(fast_sma - slow_sma) / abs(slow_sma)`, on this
+  card's own adjusted close series (copied, not imported, same
+  "every card stays standalone" convention every `t0*` card already
+  follows) - the only trend filter already established in this codebase
+  with no card-specific parameter to invent from nothing. On an inside
+  bar day the score is that spread (sign gives direction, magnitude
+  gives conviction); on every other day, and on an inside bar day where
+  the spread is exactly 0 (fast SMA equals slow SMA - undefined
+  direction), the symbol abstains (NaN, SPEC.md section 5).
+
+  Catalog lists this card's horizon as day only, so only a day-split
+  experiment is queued; no week variant.
+
+  Needs `MIN_ROWS = SLOW + 1` adjusted rows (50 + 1 = 51): `SLOW = 50`
+  for the trend filter's slow SMA (T01's own minimum), plus one more row
+  so the inside-bar comparison always has two real, adjacent rows inside
+  the slice (today and yesterday), neither of them a slice boundary with
+  no real predecessor - unlike T09/T10's true-range calculations, the
+  inside-bar check never fabricates a prior value for a missing row, so
+  it needs no extra buffer beyond that one guaranteed-real pair.
+default_params:
+  trend_fast: 20
+  trend_slow: 50
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Classic price action; in PKScreener"
+link: ""
+prior_claim: "Contraction pattern"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay - same caveat every ported card here already carries."
+  - "The trend filter is this card's own substitution, not the catalog's: the catalog names no trend filter at all for inside bar, same gap T10 hit. A refutation of this card refutes 'inside bar + SMA20/50 trend' specifically, not inside bars read against some other filter."
+  - "Shares T10's whole framing (range contraction precedes expansion) and the same reused trend filter as T01/T02/T08/T10 - pick overlap with those (SPEC.md section 6 gate 8) is worth checking directly once all have real numbers, not assumed from the shared framing. An inside bar is a looser, two-bar condition than NR4/NR7's trailing-minimum test, so the two are expected to correlate but not coincide day-for-day."
+  - "Equality on either side of the high/low comparison counts as inside bar (not strict); untested against the strict alternative and flagged here rather than silently assumed equivalent, same shape as T10's argmin tie-break red_flag."
+  - "Coverage and edge both need SPEC.md section 3's reporting once `engine/experiment_report.py` (state/engine-issues.md's open READY FOR WIRING entry) can score this card's picks - same blocker every ported card since A01 has hit; this card does not change that, it just joins the backlog."
+status: untested

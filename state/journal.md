@@ -2864,3 +2864,67 @@ per positive-train-edge card) cannot award a single query without it. B3
 (corporate-actions methodology) and the D2 delivery-% workflow wiring
 remain the other two open supervised-session items; nothing changed on
 either this run.
+
+## 2026-10-23T1417Z — port lane
+
+Mode A (build) still active: `state/BUILD_DONE` does not exist. B3 stays
+the lab's only unticked B item, and it is blocked (`state/queue.md`:
+"B3 stays unticked until that direction is chosen" — a supervised
+methodology decision, `state/engine-issues.md`'s "READY FOR WIRING
+(methodology, not code): `detect_corporate_actions` cannot find what B3
+needs it to find"). No lease was held (`state/leases/` didn't exist at
+orient time), so claimed `port` and did the next unit of SPEC-order
+catalog work rather than leaving the run idle on the blocked build item
+(SPEC.md section 1: "the work never runs out").
+
+**Hypothesis:** T11 (inside bar), the next untested `testable_now: yes`
+catalog row in plain SPEC order after T10 (last run's journal entry
+named T11 as next). Same claim family as T10 (range contraction
+precedes expansion), but a plain two-bar comparison instead of a
+trailing-N-day minimum: today's high/low both sit inside yesterday's.
+The catalog names no trend filter for this row either, same gap T10
+hit, so reused `strategies/t01_sma_crossover.py`'s exact SMA20/50 spread
+rather than inventing a new one — no new tunable parameter to justify
+from nothing.
+
+**What happened:** wrote `cards/T11.yml`, `strategies/t11_inside_bar.py`
+(`MIN_ROWS = 51`: the trend filter's own 50-row minimum plus one more row
+so the two-bar comparison always has a real adjacent pair, no fabricated
+prior-row true-range reasoning needed since this card never computes a
+true range at all), `strategies/t11_inside_bar_audit.py` (cross-symbol
+causality proof, same shape as T10's: give `BBB` one extra deliberately
+inside trailing day, `AAA`/`CCC` must be unaffected, only `BBB` newly
+scores). 12 new tests (`tests/test_t11_inside_bar.py`): inside bar in an
+uptrend scores bullish, non-inside day abstains, a downtrend fixture
+scores bearish, a flat-trend fixture proves the "inside bar fires but
+trend spread is exactly 0" abstain case, an exact-tie fixture confirms
+equality on either side of the high/low comparison still counts as
+inside (this card's own red_flag — the catalog gives no
+strict/non-strict rule), insufficient history, empty history, the
+`has_future` prefilter, two `rules_fired` wording checks, and the
+causality audit. Queued one day-split experiment
+(`experiments/pending/t11-inside-bar-day.yml`; catalog lists this card's
+horizon as day only) and marked T11 `queued` in `cards/catalog.csv`.
+
+Result: `python3.13 -m pytest -q --deselect
+tests/test_c01_day_of_week.py::test_causality_audit_passes` (full suite,
+that one pre-existing/environment-specific flake excluded, same
+`state/engine-issues.md` WATCH entry every recent run has hit in this
+sandbox's pandas/numpy pair) — 622 passed, 0 failed, in 216.50s (610
+existing + 12 new). The audit module also runs standalone
+(`python3.13 -m strategies.t11_inside_bar_audit`) and passes.
+`scripts/guard_check.py` confirms no protected path touched.
+
+**Next:** once `replay.yml` lands `experiments/done/t11-inside-bar-day/`,
+it joins the same unscored backlog every ported card since A01 has hit.
+T12 (Stochastic %K/%D) is the next untested `testable_now: yes` row for a
+future `port`-lane run. The single highest-priority item for a supervised
+session is unchanged and now even more overdue against the 30 Oct
+`config/live_source.json` deadline: `engine/experiment_report.py`
+(`state/engine-issues.md`'s open READY FOR WIRING entry) — the unscored
+backlog is now north of 26 landed experiments with zero real train
+numbers, and go-live track P1 (one validation query per positive-train-
+edge card) still cannot award a single query without it. B3
+(corporate-actions methodology) and the D2 delivery-% workflow wiring
+remain the other two open supervised-session items; nothing changed on
+either this run.
