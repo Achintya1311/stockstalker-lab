@@ -1,0 +1,9 @@
+{
+  "id": "t05-macd-crossover-day",
+  "strategy": "strategies.t05_macd_crossover",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 22974,
+  "n_dates": 1450,
+  "pick_log_sha256": "35aec67a342e02507e8047631fd8debe71ca5ab8ad5f1192ae3162563ac7219d"
+}
