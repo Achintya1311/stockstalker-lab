@@ -1,0 +1,100 @@
+source_url: ""
+author: "J. Welles Wilder Jr. (1978)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: "1978"
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "Use ADX > 25 to choose trend rules,
+  < 20 to choose mean-reversion rules." `prior_claim`: "A regime filter,
+  best tested combined with others." Unlike every earlier `t0*` card, ADX
+  on its own gives no direction at all - Wilder's own index is a trend-
+  strength reading (0-100, unsigned), not a bullish/bearish score. The
+  catalog's own wording already says as much: it is a *chooser between
+  two other rules*, not a rule itself. SPEC.md section 5: "No claim is
+  assumed true" - this card tests the catalog's own chooser reading
+  literally, pairing ADX with the two simplest already-ported
+  representatives of each family it names (`strategies/t01_sma_crossover.py`
+  for "trend rules", `strategies/t03_rsi_thresholds.py` for "mean-reversion
+  rules") rather than inventing new ones, exactly as flagged in red_flags
+  below.
+horizon: both
+rules_plain: >
+  ADX(14) (Wilder 1978) on the adjusted high/low/close series
+  (`scripts.adjustments.compute_adjustment_factors`, same as every other
+  `strategies/t*` card):
+
+  - True range TR, per bar: same formula as
+    `strategies/t09_supertrend.py::_true_range` (max of high-low,
+    |high - prior close|, |low - prior close|; row 0 falls back to its own
+    close as "prior close", a value `_wilder_smooth` never reads anyway).
+  - Directional movement, per bar: `up_move = high - prior high`,
+    `down_move = prior low - low`. `+DM = up_move` when
+    `up_move > down_move and up_move > 0`, else 0. `-DM = down_move` when
+    `down_move > up_move and down_move > 0`, else 0 (Wilder's own
+    "only the larger, and only if positive" rule - a bar never contributes
+    to both).
+  - Wilder-smooth (`strategies/champion_v1.py::_wilder_smooth`'s exact
+    formula, copied not imported, period 14) TR, +DM and -DM separately,
+    each giving its first valid value at the same bar index.
+  - `+DI = 100 * smoothed(+DM) / smoothed(TR)`,
+    `-DI = 100 * smoothed(-DM) / smoothed(TR)` (0 where `smoothed(TR)` is
+    0 or NaN, since no true range at all means no directional reading
+    either).
+  - `DX = 100 * |+DI - -DI| / (+DI + -DI)`, 0 where `+DI + -DI` is 0 (a
+    dead/flat bar; Wilder's own index is unsigned, so a defined-but-zero
+    reading is the faithful "no trend" answer, not an abstain).
+  - `ADX` = a SECOND Wilder smoothing pass over the now fully-valid `DX`
+    tail (the part of `DX` past its own first valid bar), seeded from the
+    simple mean of its first 14 values rather than skipping one value the
+    way `_wilder_smooth`'s `close.diff()`-shaped seed does - DX carries no
+    "lost to a diff" leading value the way RSI/CCI's inputs do, so the
+    textbook Wilder seed (simple average of the first `period` DX values)
+    is used as-is (`_wilder_smooth_from_valid` below). First valid ADX is
+    therefore exactly at bar index `2*PERIOD - 1` (0-indexed) of the
+    history slice fed to it.
+  - **Regime choice** (the catalog's own rule, read literally):
+    - `ADX > 25`: **trend regime**. Direction/score =
+      `strategies/t01_sma_crossover.py`'s own SMA(20,50) spread,
+      `(fast_sma - slow_sma) / abs(slow_sma)`, unchanged - always returned
+      (even when the spread is exactly 0), same always-on convention T01
+      itself uses.
+    - `ADX < 20`: **mean-reversion regime**. Direction/score =
+      `strategies/t03_rsi_thresholds.py`'s own RSI(14) 30/70 threshold
+      score, unchanged - only returned when RSI(14) is actually past one
+      of the two thresholds; inside 30-70 abstains, same selective
+      convention T03 itself uses (ADX choosing the mean-reversion rule
+      does not force that rule to fire when its own gate doesn't agree).
+    - `20 <= ADX <= 25`: Wilder's own "no man's land" - neither rule is
+      chosen. Abstain.
+  - RSI(14) itself reuses `strategies/t03_rsi_thresholds.py::_rsi`'s exact
+    Wilder-smoothing shape, copied not imported, same reason every other
+    `strategies/t0*` card gives for copying rather than importing a
+    sibling card's helper (standalone, independently testable modules).
+
+  Needs no pick-date knowledge - every input is past adjusted OHLC already
+  inside whatever truncated `history` slice `engine.replay` hands this
+  module, so one module serves both horizons, the same way T01/T03/T14
+  already do.
+
+  Minimum history: the slower of the two possible branches,
+  `strategies/t01_sma_crossover.py`'s own `SLOW = 50`, dominates ADX(14)'s
+  own `2*PERIOD = 28`-row requirement for a first valid reading - `MIN_ROWS
+  = 50`. Only the trailing `MIN_ROWS` rows per symbol are ever read, same
+  bounded-tail convention T07/T08/T14 already use
+  (`state/engine-issues.md`'s "Replay took 1h45m+" WATCH entry).
+default_params:
+  adx_period: 14
+  trend_threshold: 25
+  mean_reversion_threshold: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Wilder (1978)"
+link: ""
+prior_claim: "A regime filter, best tested combined with others"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay - the rule's name recognition is not evidence of edge, same caveat every ported card here already carries."
+  - "ADX gives no direction of its own - the catalog's rule is explicitly a chooser between two OTHER rules it never names. This card pairs it with the two simplest already-ported representatives of each family (T01's SMA(20,50) spread for 'trend rules', T03's RSI(14) 30/70 for 'mean-reversion rules') rather than inventing new ones. A different trend or mean-reversion rule would give a different T15 result entirely - this card tests one specific pairing, not 'ADX regime filtering' in general. If this card shows no edge, that is evidence about THIS pairing, not necessarily about ADX regime-switching as a concept; a `diagnose`-lane look should try pairing ADX with other already-ported rules (T02's 50/200 cross, T12's stochastic) before concluding the concept itself fails."
+  - "This card's result is mechanically bounded by T01's and T03's own real train edges (SPEC.md section 5's own prior_claim already says ADX is 'best tested combined with others', i.e. not expected to add a signal on its own) - a `diagnose`-lane look, once all three are scored, should check whether T15 beats T01-filtered-to-its-own-ADX>25-dates and T03-filtered-to-its-own-ADX<20-dates (the counterfactual of regime-switching adding nothing over just running each rule everywhere), not just whether T15 alone clears the gates."
+  - "The 20/25 ADX threshold pair and the 14-bar period are Wilder's stated defaults, not tuned on NSE data at all - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
+  - "The DX->ADX second smoothing pass uses a different seed convention (simple mean of DX's own first 14 valid values) than the `_wilder_smooth` helper every other card copies (which skips one 'lost to a diff' leading value) - a deliberate choice documented in rules_plain above, since DX carries no such leading value to skip, but worth a unit test cross-check against an independent loop-based reference rather than trusting the two slightly different smoothing shapes agree by inspection alone."
+  - "+DI/-DI/DX are defined as 0 (not NaN/abstain) wherever the denominator is 0 (a genuinely flat bar) - a faithful 'no trend' reading for ADX itself, but it means a long dead-flat stretch early in a symbol's history could pull the ADX<20 mean-reversion branch's RSI gate into play on a symbol that is simply illiquid or newly listed, not actually range-bound. Worth checking in a `diagnose`-lane look if this card's mean-reversion side shows an unusual concentration of picks right after a listing or long halt."
+status: untested

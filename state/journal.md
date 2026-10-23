@@ -3168,3 +3168,89 @@ is a supervised session landing `engine/experiment_report.py` - without
 it, every further `port` just adds to the same unscored backlog, and P1
 cannot spend a single validation query no matter how many more cards
 are ported.
+
+## 2026-10-23T2226Z port lane: T15 ADX(14) regime filter ported; train leaderboard now live
+
+**Mode:** A (build) - B3 is still the only unticked B item and still
+blocked (supervised decision needed, same as every recent run), so this
+run did research during the build.
+
+**Hypothesis/task:** T15 (ADX trend filter, Wilder 1978) was the next
+untested `testable_now: yes` row in plain catalog order after T14.
+
+**What happened:** `cards/T15.yml`, `strategies/t15_adx_regime.py`. Unlike
+every earlier `t0*` card, the catalog's own rule ("use ADX > 25 to choose
+trend rules, < 20 to choose mean-reversion rules") gives no direction of
+its own - it is a chooser between two OTHER rules it never names. Ported
+literally: ADX(14) > 25 picks `strategies/t01_sma_crossover.py`'s own
+SMA(20,50) spread (trend regime); ADX(14) < 20 picks
+`strategies/t03_rsi_thresholds.py`'s own RSI(14) 30/70 threshold score
+(mean-reversion regime, still selective - T03's own gate is unchanged, so
+ADX choosing this branch doesn't force it to fire); 20-25 is Wilder's own
+"no man's land", abstain. Flagged clearly in `cards/T15.yml`'s red_flags:
+this tests ONE specific pairing (T01+T03), not "ADX regime filtering" as
+a concept, and the result is mechanically bounded by T01's and T03's own
+real edges. ADX itself needed a second, differently-seeded Wilder
+smoothing pass (`_wilder_smooth_from_valid`) for the DX->ADX step, since
+DX (unlike RSI/CCI's `close.diff()`-shaped inputs) carries no leading
+"lost to a diff" value to skip - documented in the card and the module
+docstring. 15 new tests (`tests/test_t15_adx_regime.py`): fixtures for
+all three regime bands were found by scanning an independent loop-based
+reference ADX/RSI implementation (same cross-check technique T04's audit
+test uses for RSI, extended here to ADX) against synthetic series until
+each landed reliably in the claimed band, then pinned to fixed
+parameters - not hand-derived numbers, since ADX has no simple closed
+form the way T01-T14's indicators do. Both bullish/bearish trend-regime
+cases, both bullish/bearish mean-reversion cases, the inside-thresholds
+mean-reversion abstain, the no-man's-land abstain, insufficient history,
+empty history, `has_future` prefilter, `rules_fired` wording for all
+three regimes, and the causality audit. Catalog horizon "both" (needs no
+pick-date knowledge, same as T01/T03/T14), so two experiments queued:
+`experiments/pending/t15-adx-regime-{day,week}.yml`.
+`cards/catalog.csv`'s T15 row now reads `queued`.
+
+**Result:** `python3.13 -m pytest -q --deselect
+tests/test_c01_day_of_week.py::test_causality_audit_passes` (full suite,
+same pre-existing environment-specific flake every recent run excludes) -
+679 passed, 0 failed (665 existing + 15 new T14 era). This sandbox was
+missing `pyarrow`/`pytest` entirely before this run (fresh container);
+both installed via `pip install -r requirements.txt`-equivalent packages
+to get a real signal - not a code issue, just a clean-container gap, not
+worth an `engine-issues.md` entry since it self-resolves per session.
+`scripts/guard_check.py` confirms no protected path touched.
+
+**The single highest-risk item from the last several runs' journal
+entries - `engine/experiment_report.py` not existing, so none of the 39+
+landed `experiments/done/` replays had real numbers - was resolved this
+cycle by a supervised session** (commit `0fab5da`, "feat(engine): score
+finished replays and answer validation via holdout [supervised]"), and
+its own triggered `Replay` run (40028055985, started 21:36Z, finished
+22:20Z, ~44 min) backfilled `results.json`/`.md` for all 39 existing
+experiments and wrote `reports/train_leaderboard.md` for the first time -
+pulled into this branch via `git merge origin/main` before this run's own
+push. **The go-live track's P1 rule can now actually be evaluated**: the
+leaderboard already marks 6 rows `candidate` (positive train edge AND
+positive train directional move) - `c02-turn-of-month-week` (bullish,
+edge 11.87), `a09-gap-fade-day` (bearish, edge 3.21),
+`a01-weekly-reversal-week` (bearish, edge 2.48),
+`c03-pre-holiday-day` (bearish, edge 2.21, only 5 train picks though - a
+very thin sample before trusting it),
+`t05-macd-crossover-week` (bearish, edge 2.02), and
+`d02-stock-pcr-contrarian-week` (bearish, edge 3.75). **None of these have
+been queried yet** - SPEC.md section 10 / `state/queue.md`'s own go-live
+track explicitly gates this: "the holdout queries the provisional rule
+needs are allowed from Mon 26 Oct even before BUILD_DONE" - today is Fri
+23 Oct, so no query was spent this run. T15's own two queued experiments
+will add to this leaderboard once their `Replay` run lands.
+
+**Next:** from Monday 26 Oct onward, the `evaluate`-capable work (go-live
+track P1) becomes the top priority per `state/queue.md` (ranks right
+after leak alarms/workflow failures, both clear right now) - spend one
+budget-checked holdout validation query per table for each of the 6
+current `candidate` rows above (check `gates/budgets.py`'s weekly limit
+first), starting with whichever table has no query yet, before touching
+anything else. `t16` (Parabolic SAR, next untested `testable_now: yes`
+row) is the next `port`-lane target in the meantime if the `evaluate`
+lane's own exclusivity or Monday's date gate is still blocking it when a
+run lands before then. The Fri 30 Oct 12:00 UTC `config/live_source.json`
+deadline is now 7 days out.

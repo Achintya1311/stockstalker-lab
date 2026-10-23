@@ -1,0 +1,10 @@
+# T15 (week horizon): ADX(14) regime filter choosing between T01's trend
+# rule and T03's mean-reversion rule, train-split replay (port lane,
+# `state/queue.md`). See cards/T15.yml and strategies/t15_adx_regime.py.
+id: t15-adx-regime-week
+strategy: strategies.t15_adx_regime
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
