@@ -1,0 +1,9 @@
+{
+  "id": "t13-williams-r-day",
+  "strategy": "strategies.t13_williams_r",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 129490,
+  "n_dates": 1472,
+  "pick_log_sha256": "895b69110d83aff2d107a98616e4c1cf54b71de1de752cb98c92e7e16bec8e87"
+}
