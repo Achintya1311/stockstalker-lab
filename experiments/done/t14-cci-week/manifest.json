@@ -1,0 +1,9 @@
+{
+  "id": "t14-cci-week",
+  "strategy": "strategies.t14_cci",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 6014,
+  "n_dates": 309,
+  "pick_log_sha256": "8ebea5b4906527460ef6c5620fefd2baebe5af4051d80a54d11c42a09d69501d"
+}
