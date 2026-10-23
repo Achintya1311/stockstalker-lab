@@ -1,0 +1,24 @@
+source_url: ''
+author: Smart-money / ICT order-block convention (no single named source)
+license: trading convention, not code or a paper; summarised only (SPEC.md section 5)
+published_on: ''
+horizon: both
+data_needed: ohlcv
+testable_now: 'yes'
+link: ''
+status: untested
+claim_as_stated: 'A last-opposite-candle zone with no impulse requirement. Control for O01: if impulse
+  and structure break matter, O01 must beat this.'
+rules_plain: 'Same detector as O01 (`strategies/ob_core.py`) with `impulse_atr=0` and `require_break=False`:
+  any up bar is ''the move'', the last down candle before it is the zone, score = proximity of the last
+  close to the zone (1 inside, fading to 0 at 2 ATR).'
+default_params:
+  impulse_atr: 0
+  require_break: false
+  max_dist_atr: 2.0
+source: docs/orderblock_hypotheses.md
+prior_claim: Popular with retail traders; no independent backtest found
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- A placebo, not a hypothesis of an edge. A positive O00 edge would mean last-candle proximity itself
+  carries information.

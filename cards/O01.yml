@@ -1,0 +1,29 @@
+source_url: ''
+author: Smart-money / ICT order-block convention (no single named source)
+license: trading convention, not code or a paper; summarised only (SPEC.md section 5)
+published_on: ''
+horizon: both
+data_needed: ohlcv
+testable_now: 'yes'
+link: ''
+status: untested
+claim_as_stated: An order block is the last opposite-colour candle before an impulsive move that breaks
+  structure; price is expected to revisit the zone. Vendor claims (order-block.com) are unverified and
+  unpublished.
+rules_plain: 'ATR(14, Wilder) on adjusted OHLC. Impulse bar: body >= 1.5 x prior-bar ATR in the direction
+  and close beyond the 10-bar high (low). Zone = low-high of the last opposite candle within 5 bars before
+  the impulse. Valid until a later close passes the zone''s far side. Pick when the last close is in or
+  within 2 ATR beyond the zone on its side; score = signed closeness. Abstains otherwise.'
+default_params:
+  atr_period: 14
+  impulse_atr: 1.5
+  break_bars: 10
+  ob_lookback: 5
+  max_age: 20
+  max_dist_atr: 2.0
+source: docs/orderblock_hypotheses.md
+prior_claim: Popular with retail traders; no independent backtest found
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- 'All four numbers (1.5, 10, 5, 2) are guesses, not tuned; tune only on train and count every point as
+  a trial. Selective strategy: report coverage.'

@@ -3254,3 +3254,8 @@ row) is the next `port`-lane target in the meantime if the `evaluate`
 lane's own exclusivity or Monday's date gate is still blocking it when a
 run lands before then. The Fri 30 Oct 12:00 UTC `config/live_source.json`
 deadline is now 7 days out.
+
+## 2026-10-24 supervised session: order-block lane + 5-minute archive
+- Added `intraday.yml` (daily 5-minute bar archive, Actions cache only, 212 stocks x 60 sessions from 29 Jul on first run) and `scripts/fetch_intraday.py`.
+- Ported O00 (placebo) and O01 (order-block retest) with `strategies/ob_core.py`; queued day and week train replays. Catalog rows O00-O06 added; queue.md has the order-block lane.
+- Next run: diagnose O00 vs O01 when the replays finish, then port O02 to O05 (see state/queue.md).
