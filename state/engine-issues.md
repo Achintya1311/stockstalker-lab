@@ -696,3 +696,42 @@ one, and C02 looks likely to as well. Flagging this now so whoever picks up
 C03/C04 doesn't re-discover the holiday-calendar gap from scratch, and so a
 supervised session can decide whether sourcing full NSE holiday history is
 worth doing before C03/C04's turn comes up in SPEC order.
+
+## UPDATE 2026-10-23 (research lane): C03's half of this entry resolved without a supervised session
+
+Direction (a) above ("a supervised session sourcing NSE's full holiday
+history back to 2015") turned out not to need supervision: `config/
+nse_holidays.txt` is not a protected path (`PROTECTED.txt` only lists
+`config/splits.yml` under `config/`), and sourcing historical holiday
+dates is plain research (WebSearch/WebFetch, cross-checked across
+sources), the same category of work the `discover`/`port` lanes already
+do - not a protected-path edit. Extended the file to cover 2015-2020
+(primary NSE circulars where they surfaced in search - 2017 F&O circular,
+2018/2020 Capital Market circulars, 2019 F&O circular plus two separately
+NSE-confirmed election-day closures; secondary aggregators only for
+2015-2016, cross-checked across at least two independent sites each year;
+two individual lines flagged single-sourced/disputed in the file's own
+comments: 2015-09-25 Bakri Id, 2017-10-19 Diwali-Laxmi Pujan). Verified
+`picks.calendar.load_holidays`/`next_trading_session` read the extended
+file correctly (103 total holidays across 2015-2020 plus 2026, all on
+real weekdays).
+
+This also corrects this entry's own characterisation of C03's wall: "needs
+to know about a future date... which no amount of past price history can
+supply" conflated the pick date's own *price* (genuinely unknowable, B4's
+whole point) with the pick date's *calendar identity* (publicly known
+months in advance via NSE's own circulars, same category of fact as
+"today's weekday" - not price history at all). Once the holiday calendar
+covers the dates in question, "today" is computable exactly as
+`picks.calendar.next_trading_session(yesterday)`, and "is tomorrow a
+holiday" follows directly - no proxy needed, unlike C01/C02. `cards/C03.yml`,
+`strategies/c03_pre_holiday.py` (+ `_audit.py`), `tests/test_c03_pre_holiday.py`
+(14 tests) ported on this reasoning; `experiments/pending/c03-pre-holiday-day.yml`
+queued. Full suite: 541 passed, 1 failed (the pre-existing
+`test_c01_day_of_week.py::test_causality_audit_passes` flake this file's
+own WATCH entry already documents, unrelated to this change).
+
+C04 (expiry-week) was already ported separately before this update (see
+`state/queue.md`'s build log) using the dataset's own FUTSTK expiry field,
+not a holiday calendar - the "may be more tractable" note above was
+borne out, and nothing about C04 needed revisiting here.

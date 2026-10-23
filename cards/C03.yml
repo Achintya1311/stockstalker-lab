@@ -1,0 +1,91 @@
+source_url: ""
+author: "Ariel (1990) High Stock Returns before Holidays, JF (cards/catalog.csv's own summary)"
+license: "academic paper, not code; summarised only (SPEC.md section 5)"
+published_on: "1990"
+claim_as_stated: >
+  cards/catalog.csv's own reading: "Bullish tilt on the trading day before
+  an NSE holiday." `prior_claim`: "US: pre-holiday days earn unusually high
+  returns."
+horizon: day
+rules_plain: >
+  This card was blocked across several earlier `port`-lane runs (see
+  `state/engine-issues.md`'s "score(history) never carries the pick date"
+  entry and this card's own prior status notes) for two stated reasons:
+  (1) the same wall C01/C02 hit - `engine.replay.pick_date` never passes
+  the pick date into `strategy.score(history)` (SPEC.md section 5) - and
+  (2) `config/nse_holidays.txt` covered 2026 only, not the 2015-2020 train
+  split.
+
+  Reason (2) is now fixed (2026-10-23, research lane): the file was
+  extended to cover 2015-2020, sourced from NSE's own circulars where they
+  surfaced in search, cross-checked against independent aggregators
+  otherwise - see that file's own header for per-year citations and
+  confidence notes.
+
+  Reason (1), on closer reading, does not actually block this card the
+  way it blocks C01/C02, and the earlier framing ("needs to know about a
+  future date... which no amount of past price history can supply") was
+  an overstatement: whether the *pick date itself* is pre-holiday is not
+  price information at all - it is a fixed calendar fact, publicly known
+  months in advance (NSE issues its holiday circular every December for
+  the following year), the same category of fact as "today's weekday"
+  that C01 already uses. The only thing standing between `history` (which
+  carries no pick-date identity) and an exact answer was the holiday
+  calendar's coverage, not a conceptual wall - once the calendar covers
+  the dates in question, "today" is computable *exactly* (not merely
+  proxied) as `picks.calendar.next_trading_session(yesterday)`, where
+  "yesterday" is `history`'s own last visible trading day. This module's
+  causality is therefore *stronger* than C01/C02's proxy, which
+  deliberately avoids computing "today" at all: C03 answers the catalog's
+  literal question, not an approximation of it.
+
+  Pre-holiday is defined calendar-wise, not dataset-wise: a trading day
+  `d` is pre-holiday if the next calendar weekday (Mon-Fri) strictly after
+  `d` - regardless of whether that weekday is itself ever a dataset row -
+  is in `config/nse_holidays.txt`. This covers both the ordinary case
+  (Thursday before a Friday holiday) and the classic case (Friday before
+  a Monday holiday), and deliberately excludes a plain weekend on its own
+  (Friday before an ordinary Saturday is not pre-holiday).
+
+  Construction and application: pool every F&O-universe row's open-to-close
+  return per date (mean across symbols with `has_future` true that date,
+  same as C01's `_pooled_daily_return`), then bucket each historical
+  trading date's *own* pooled return (not the next date's, unlike
+  C01/C02 - this claim is about the pre-holiday day's own return) by
+  whether it is itself pre-holiday. If today (computed as above) is
+  pre-holiday and the pre-holiday bucket has at least `MIN_OCCURRENCES`
+  historical days, every symbol with any `has_future` row gets that
+  bucket's mean return as its score (market-wide, like C01/C02); otherwise
+  abstain, same as T03's selective shape - the catalog states no view on
+  non-pre-holiday days.
+params:
+  min_occurrences: 20
+red_flags:
+  - "Depends on config/nse_holidays.txt's own accuracy, not on
+    engine/dataset causality: 2015-2016 are sourced from independent
+    secondary aggregators only (no NSE circular for those two years
+    surfaced in search), and two specific lines (2015-09-25 Bakri Id;
+    2017-10-19 Diwali-Laxmi Pujan) are flagged single-sourced /
+    disputed in that file's own comments. A wrong holiday date silently
+    mislabels a handful of historical bucket entries (it does not leak
+    anything - both construction and lookup read the same static file -
+    but it is a source of noise in the base rate, same category of risk
+    C01's yesterday-weekday proxy already accepts for the rare
+    holiday-adjacent week)."
+  - "Market-wide and not cross-sectional: every eligible symbol gets the
+    identical score on a given pick date, same as C01/C02 - a deliberate
+    consequence of the catalog's own rule (no per-symbol differentiation),
+    not an oversight."
+  - "MIN_OCCURRENCES=20 is the same round number C01/C02 use, not tuned -
+    the tune lane revisits this once a real train edge exists worth
+    tuning (SPEC.md section 8)."
+  - "No claim is assumed true (SPEC.md section 5): status moves to
+    confirmed/refuted only after a real train (then validation/test)
+    replay, not from this card's reasoning alone."
+  - "This card's own prior status notes (from earlier blocked runs) and
+    cards/C01.yml/cards/C02.yml's red_flags both asserted C03 'cannot be
+    ported this way at all' - that assertion is superseded by this
+    version's reasoning above; left the earlier cards' own text alone
+    (their own claims were about themselves, not about this card) rather
+    than editing already-queued cards to match."
+status: queued

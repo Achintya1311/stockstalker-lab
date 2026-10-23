@@ -2534,3 +2534,56 @@ breakout, week horizon) is the next untested `testable_now: yes` row after
 T06. `discover` remains open and untouched for several runs if a future
 run prefers it over more T0x indicator ports. `build` is still blocked on
 B3 alone — nothing changed there this run.
+
+## 2026-10-23T0429Z — Mode A (build blocked on B3 alone), lane: port
+
+**Hypothesis:** C03 (pre-holiday effect) has been logged as "genuinely
+blocked" by five-plus consecutive `port`-lane runs since 18 Oct, each
+citing `config/nse_holidays.txt` covering 2026 only. On closer reading of
+`state/engine-issues.md`'s own entry, the second half of that blocker
+("needs to know about a future date... which no amount of past price
+history can supply") conflates the pick date's *price* (genuinely
+unknowable) with its *calendar identity* (publicly known months ahead via
+NSE's own circulars - the same category as "today's weekday", not price
+history). `config/nse_holidays.txt` is not a protected path
+(`PROTECTED.txt` only lists `config/splits.yml` under `config/`), so
+extending it to cover the train split is plain research, not a
+supervised-session task.
+
+**What happened:** forked a research sub-agent to gather NSE equity-segment
+weekday holidays for 2015-2020 via WebSearch/WebFetch, preferring NSE's
+own circulars (found for 2017-2020) and cross-checking secondary
+aggregators otherwise (2015-2016); did one more round of searches myself
+to chase down its two flagged uncertain dates (2015-09-25, 2017-10-19) -
+kept both on the balance of evidence, flagged in the file's own comments.
+Extended `config/nse_holidays.txt` from 15 (2026-only) to 103 lines
+(2015-2020 plus 2026), verified all land on real weekdays and that
+`picks.calendar.load_holidays`/`next_trading_session` read them correctly.
+
+With the calendar in hand, `today` (the pick date) is now computable
+*exactly* from `history`'s last visible date via
+`picks.calendar.next_trading_session` - not a proxy the way C01/C02 use
+"yesterday's weekday", an exact answer to the catalog's literal question.
+Wrote `cards/C03.yml`, `strategies/c03_pre_holiday.py` (score + rules_fired,
+market-wide, selective - abstains when the inferred pick date isn't
+pre-holiday), `strategies/c03_pre_holiday_audit.py` (pre-holiday-flag
+correctness against an independent plain-`datetime` reimplementation,
+abstain-when-not-pre-holiday, cross-symbol uniformity), and 14 tests in
+`tests/test_c03_pre_holiday.py`. Added a dated update to
+`state/engine-issues.md`'s C03 entry recording the fix and correcting its
+own earlier "cannot be ported this way at all" framing. Full suite: 541
+passed, 1 failed (the pre-existing `test_c01_day_of_week.py` pandas-version
+flake the WATCH entry already documents, unrelated). Catalog's C03 row now
+reads `queued`. Catalog horizon for C03 is "day" only, so one experiment
+is queued: `experiments/pending/c03-pre-holiday-day.yml`.
+
+**Next:** once this replay lands in `experiments/done/`, `diagnose` is
+still blocked on the unwired `engine/experiment_report.py` scoring gap
+(unchanged, same entry) - record the eventual edge/direction by hand from
+`picks.json`'s own `score` column if a future run wants a sanity check
+before that lands. Continue plain catalog order for `port` otherwise: T07
+(Bollinger squeeze breakout, week horizon) is next. `build` is still
+blocked on B3 alone (unchanged, needs a supervised session per the
+methodology note). Go-live track: Mon 26 Oct (P1 holdout-query window
+opens) is 3 days out; `config/live_source.json` is due Fri 30 Oct 12:00
+UTC, 7 days out.

@@ -1,0 +1,11 @@
+# C03 (day horizon): pre-holiday effect, train-split replay (port lane,
+# `state/queue.md`). See cards/C03.yml and strategies/c03_pre_holiday.py.
+# Catalog lists this card's horizon as "day" only, so no week variant is
+# queued.
+id: c03-pre-holiday-day
+strategy: strategies.c03_pre_holiday
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
