@@ -10,6 +10,7 @@ from engine.experiment_report import (
     SCORER_VERSION,
     Context,
     answer_validation,
+    record_trials,
     score_done,
     score_picks,
     select,
@@ -82,10 +83,36 @@ def test_score_done_scores_train_once_and_skips_other_splits(ctx, tmp_path):
     r["scorer_version"] = -1
     (tmp_path / "a" / "results.json").write_text(json.dumps(r))
     assert score_done(ctx, tmp_path) == ["a"]  # stale version is rescored
-    assert write_leaderboard(tmp_path, tmp_path / "board.md") == 2
+
+
+def _fake_results(done_dir, exp_id, strategy, sides):
+    d = done_dir / exp_id
+    d.mkdir(parents=True)
+    top = {side: {"n_picks": n, "edge": e, "edge_t": t, "accuracy": 0.55, "market_line": 0.5,
+                  "directional_move": dm, "positive_year_share": 1.0, "leak_alarm": False}
+           for side, (n, e, t, dm) in sides.items()}
+    (d / "results.json").write_text(json.dumps({"id": exp_id, "strategy": strategy, "split": "train",
+                                                "horizon": "day", "selections": {"top": top}}))
+
+
+def test_leaderboard_ranks_by_t_flags_small_samples_and_drops_engine_checks(tmp_path):
+    done = tmp_path / "done"
+    _fake_results(done, "big", "strategies.big", {"bullish": (4000, 0.03, 4.5, 0.001), "bearish": (4000, 0.01, 1.0, -0.001)})
+    _fake_results(done, "tiny", "strategies.tiny", {"bullish": (40, 0.12, 1.4, 0.008), "bearish": (40, -0.02, -0.5, -0.002)})
+    _fake_results(done, "smoke", "strategies.engine_smoketest", {"bullish": (10, 0.08, 0.5, 0.001), "bearish": (10, 0.0, None, 0.0)})
+    ledger = tmp_path / "trials.csv"
+    assert record_trials(done, ledger) == 4  # engine check excluded
+    assert record_trials(done, ledger) == 0  # never re-recorded
+    assert write_leaderboard(done, tmp_path / "board.md", ledger) == 4
     board = (tmp_path / "board.md").read_text()
-    assert board.index("| a | day | bearish") < board.index("| a | day | bullish")  # 75 points before 50
-    assert "LEAK ALARM" in board
+    order = [board.index(f"| {r} |") for r in ("big | day | bullish", "tiny | day | bullish", "big | day | bearish")]
+    assert order == sorted(order)  # t 4.5, then 1.4, then 1.0, despite tiny's larger edge
+    assert "smoke" not in board
+    assert "Trials recorded: 4. Gate 2's bar at that count: t >= 3." in board
+    big_bull = next(l for l in board.splitlines() if l.startswith("| big | day | bullish"))
+    tiny_bull = next(l for l in board.splitlines() if l.startswith("| tiny | day | bullish"))
+    assert "| yes |" in big_bull and big_bull.endswith("| candidate |")
+    assert tiny_bull.endswith("| too few picks |")
 
 
 def _ledger_rows(path):

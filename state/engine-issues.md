@@ -565,6 +565,11 @@ scale before judging it immaterial.
   - `run_queue` replays it and asks one Thresholdout query per side on the `top` edge. It logs to `ledger/holdout_queries.csv` (metric `edge_top`) and writes only the released values to `experiments/done/<id>/holdout.json`. No validation pick log is ever written.
   - The experiment stays pending while this week's budget can't cover both sides. A query already in the ledger is never asked again.
 - **Other splits:** `test`, `exam` and anything else are refused, with `experiments/done/<id>/refused.json`.
+- **Update 24 Oct (supervised):**
+  - Every scored train experiment is now recorded in `ledger/trials.csv` automatically, one row per side (trial id `<experiment id>-<side>`). Don't add rows for experiments yourself.
+  - The leaderboard ranks by t and shows gate 2's bar at the current trial count.
+  - It marks a row as a candidate only with at least 500 picks; anything smaller is flagged "too few picks".
+  - SPEC.md section 10's provisional rule now has the same 500-pick minimum.
 - **Next for you:** queue champion v1 as a train experiment for day and week (`strategies.champion_v1`). The fallback then has `top` numbers comparable with everything else.
 
 

@@ -22,8 +22,8 @@ is refused with `experiments/done/<id>/refused.json` (test looks belong to the
 promotion job, the exam to `picks/`).
 
 After the queue, every train experiment without current results is scored
-(`results.json`/`results.md` next to its pick log) and
-`reports/train_leaderboard.md` is rebuilt.
+(`results.json`/`results.md` next to its pick log), recorded as trials in
+`ledger/trials.csv`, and `reports/train_leaderboard.md` is rebuilt.
 
 Whenever a dataset is loaded and it carries the columns B5's scoring needs,
 this also (re)writes `reports/market_line_train.md` (`engine.reports`) and
@@ -43,7 +43,7 @@ from pathlib import Path
 import pandas as pd
 
 from engine.champion_report import REQUIRED_COLUMNS, maybe_write_champion_report
-from engine.experiment_report import LEADERBOARD, Context, answer_validation, score_done, write_leaderboard
+from engine.experiment_report import LEADERBOARD, TRIALS_LEDGER, Context, answer_validation, record_trials, score_done, write_leaderboard
 from engine.holdout_report import LEDGER_PATH as HOLDOUT_LEDGER, maybe_log_holdout_query
 from engine.replay import SplitViolation, hash_picks, load_splits, run_dates
 from engine.reports import maybe_write_market_line_report
@@ -108,6 +108,7 @@ def main() -> None:
     ap.add_argument("--champion-report", default=str(CHAMPION_REPORT))
     ap.add_argument("--holdout-ledger", default=str(HOLDOUT_LEDGER))
     ap.add_argument("--leaderboard", default=str(LEADERBOARD))
+    ap.add_argument("--trials-ledger", default=str(TRIALS_LEDGER))
     args = ap.parse_args()
 
     pending_dir, done_dir = Path(args.pending), Path(args.done)
@@ -178,7 +179,8 @@ def main() -> None:
     ctx = Context(dataset)
     for exp_id in score_done(ctx, done_dir):
         print(f"{exp_id}: scored -> {done_dir / exp_id / 'results.json'}")
-    print(f"{write_leaderboard(done_dir, Path(args.leaderboard))} rows -> {args.leaderboard}")
+    print(f"{record_trials(done_dir, Path(args.trials_ledger))} trial(s) -> {args.trials_ledger}")
+    print(f"{write_leaderboard(done_dir, Path(args.leaderboard), Path(args.trials_ledger))} rows -> {args.leaderboard}")
 
     for exp_path, exp in validation:
         try:

@@ -86,7 +86,7 @@ It runs every 2 hours, on its own, with no human approval step. Code-enforced ga
 Every gate is checked separately for each horizon and side. A strategy needs all of these on **test**:
 
 1. Edge of at least 5 points over the market line.
-2. A trial-corrected significance of t ≥ 3, where the trial count is the cumulative count in `ledger/trials.csv`. The bar rises as more is tried.
+2. A trial-corrected significance of t ≥ 3, where the trial count is the cumulative count in `ledger/trials.csv`. The bar rises as more is tried. The engine records every scored train experiment there automatically, one row per side; nobody adds rows for those by hand, and no row is ever deleted.
 3. Positive edge in at least 70% of calendar years across train, validation and test.
 4. At least 500 test picks.
 5. Directional move greater than 0 after costs.
@@ -161,7 +161,7 @@ The routine never edits protected paths, never posts anywhere, and never uses pa
 - The strategy behind each table is named in `config/live_source.json`: `strategy@version` per table, its label and the date chosen. It changes only when the roster may (section 7), and every change is a commit, so the history is public.
 
 **Going live without a gated strategy (Achintya's decision, 17 Oct 2026).** Go-live is Monday 2 Nov 2026 whether or not a strategy has passed section 6 by then. The first `config/live_source.json` is committed by Friday 30 Oct, 12:00 UTC, so that evening's run writes the picks for 2 Nov and for that week.
-- A table with no gated strategy uses a **provisional** one: the strategy with the highest validation edge released by the holdout, among those with a positive train edge and a positive train directional move for that table's horizon and side. All three numbers are for the `top` selection (the 5 picks a table would publish each date; `engine/experiment_report.py`). If none qualifies, champion v1. Choosing it spends no test looks.
+- A table with no gated strategy uses a **provisional** one: the strategy with the highest validation edge released by the holdout, among those with at least 500 train picks, a positive train edge and a positive train directional move for that table's horizon and side. All three numbers are for the `top` selection (the 5 picks a table would publish each date; `engine/experiment_report.py`). If none qualifies, champion v1. Choosing it spends no test looks.
 - Every provisional table, and the headline, carries: "Provisional strategy: it has not passed the lab's tests. No proven edge yet."
 - When the roster may change, a provisional strategy is replaced by a candidate whose released validation edge is at least 1 point higher, or by a strategy that passes every gate, which ends provisional status for that table.
 - A replaced strategy keeps its public record under its own name. Picks are never re-attributed.

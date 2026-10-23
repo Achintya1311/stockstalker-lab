@@ -22,7 +22,13 @@ reusable holdout (`answer_validation`), which records released values only.
 
 Results go next to each pick log (`experiments/done/<id>/results.json` and
 `results.md`), rescored only when missing or when SCORER_VERSION changes.
-`reports/train_leaderboard.md` is rebuilt from every results file each run.
+
+Every scored train experiment is also a trial: one row per side goes into
+`ledger/trials.csv` (`record_trials`), so gate 2's bar rises with everything
+tried. `reports/train_leaderboard.md` is rebuilt from every results file each
+run, ranked by t, with that bar shown. A row is a provisional-rule candidate
+only with at least 500 picks (the same bar as gate 4), positive edge and
+positive directional move.
 """
 
 from __future__ import annotations
@@ -45,11 +51,14 @@ from engine.scoring import (
     universe_membership,
 )
 from gates.budgets import holdout_budget_remaining
-from gates.gates import leak_alarm_triggered
+from gates.gates import MIN_TEST_PICKS, leak_alarm_triggered, required_t
+from gates.trials import LEDGER_PATH as TRIALS_LEDGER, cumulative_trial_count, record_trial
 
 SCORER_VERSION = 1
 SIDES = {1: "bullish", -1: "bearish"}
 LEADERBOARD = Path("reports/train_leaderboard.md")
+MIN_CANDIDATE_PICKS = MIN_TEST_PICKS
+NOT_STRATEGIES = {"strategies.engine_smoketest"}  # engine checks, not hypotheses: no trial, no leaderboard row
 
 
 class Context:
@@ -184,26 +193,63 @@ def score_done(ctx: Context, done_dir: Path) -> list[str]:
     return scored
 
 
-def write_leaderboard(done_dir: Path, out_path: Path = LEADERBOARD) -> int:
-    """One row per (experiment, side) for the `top` selection, best train edge first."""
-    rows = []
+def _results(done_dir: Path):
     for f in sorted(done_dir.glob("*/results.json")):
         r = json.loads(f.read_text())
+        if r["strategy"] not in NOT_STRATEGIES:
+            yield r
+
+
+def record_trials(done_dir: Path, ledger: Path = TRIALS_LEDGER) -> int:
+    """One `ledger/trials.csv` row per (train experiment, side), on the `top` selection.
+    Append-only and idempotent by trial id; returns the number of rows added."""
+    seen = set()
+    if ledger.exists() and ledger.stat().st_size:
+        with open(ledger, newline="") as f:
+            seen = {row["trial_id"] for row in csv.DictReader(f)}
+    added = 0
+    for r in _results(done_dir):
         for side, m in r["selections"]["top"].items():
-            if m.get("n_picks"):
-                rows.append((r["id"], r["horizon"], side, m))
-    rows.sort(key=lambda row: row[3]["edge"], reverse=True)
+            trial_id = f"{r['id']}-{side}"
+            if trial_id in seen or not m.get("n_picks"):
+                continue
+            record_trial({"trial_id": trial_id, "timestamp": pd.Timestamp.now(tz="UTC").isoformat(),
+                          "strategy_id": r["strategy"], "version": r.get("version", ""), "horizon": r["horizon"],
+                          "side": side, "split": r["split"], "edge": m["edge"], "t_stat": m["edge_t"],
+                          "all_gates_passed": "n/a", "notes": "train, top selection; recorded by engine/experiment_report.py"},
+                         ledger)
+            added += 1
+    return added
+
+
+def write_leaderboard(done_dir: Path, out_path: Path = LEADERBOARD, ledger: Path = TRIALS_LEDGER) -> int:
+    """One row per (experiment, side) for the `top` selection, highest t first."""
+    rows = [(r["id"], r["horizon"], side, m) for r in _results(done_dir)
+            for side, m in r["selections"]["top"].items() if m.get("n_picks")]
+    rows.sort(key=lambda row: row[3]["edge_t"] if row[3]["edge_t"] is not None else float("-inf"), reverse=True)
+    n_trials = max(cumulative_trial_count(ledger), 1)
+    bar = required_t(n_trials)
     lines = ["# Train leaderboard (top picks per table)", "",
-             "Train split only (2015 to 2020), the picks a table would publish. A **candidate** for the provisional "
-             "rule (SPEC.md section 10) has positive edge and positive directional move after costs; it still needs "
+             "Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is "
+             "to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least "
+             f"{MIN_CANDIDATE_PICKS} picks, positive edge and positive directional move after costs; it still needs "
              "a validation query. Rebuilt by `engine/run_queue.py` on every replay.", "",
-             "| Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Dir. move | Positive years | |",
-             "|---|---|---|---|---|---|---|---|---|---|---|"]
+             f"Trials recorded: {n_trials}. Gate 2's bar at that count: t >= {bar:.2f}.", "",
+             "| Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |",
+             "|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for exp_id, horizon, side, m in rows:
         t = "n/a" if m["edge_t"] is None else f"{m['edge_t']:.2f}"
-        flag = "LEAK ALARM" if m["leak_alarm"] else ("candidate" if m["edge"] > 0 and m["directional_move"] > 0 else "")
+        clears = "yes" if m["edge_t"] is not None and m["edge_t"] >= bar else ""
+        if m["leak_alarm"]:
+            flag = "LEAK ALARM"
+        elif m["n_picks"] < MIN_CANDIDATE_PICKS:
+            flag = "too few picks"
+        elif m["edge"] > 0 and m["directional_move"] > 0:
+            flag = "candidate"
+        else:
+            flag = ""
         lines.append(f"| {exp_id} | {horizon} | {side} | {m['n_picks']} | {_pct(m['accuracy'])}% | {_pct(m['market_line'])}% "
-                     f"| {_pct(m['edge'])} | {t} | {_pct(m['directional_move'])} | {_pct(m['positive_year_share'])}% | {flag} |")
+                     f"| {_pct(m['edge'])} | {t} | {clears} | {_pct(m['directional_move'])} | {_pct(m['positive_year_share'])}% | {flag} |")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text("\n".join(lines) + "\n")
     return len(rows)
