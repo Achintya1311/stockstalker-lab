@@ -1,0 +1,9 @@
+{
+  "id": "c03-pre-holiday-day",
+  "strategy": "strategies.c03_pre_holiday",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 13427,
+  "n_dates": 61,
+  "pick_log_sha256": "b8fc116fd4fc52407c6d0e45f568f004c124c047d480e2f61c92fdcd2cc781c4"
+}
