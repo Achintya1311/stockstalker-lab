@@ -1,0 +1,12 @@
+# T10 NR7 variant (day horizon): narrowest true range of the last 7 days,
+# read in the direction of the SMA20/50 trend filter (port lane,
+# `state/queue.md`). See cards/T10.yml and
+# strategies/t10_nr7_narrow_range.py. Catalog lists this card's horizon as
+# day only, so no week variant is queued.
+id: t10-nr7-narrow-range-day
+strategy: strategies.t10_nr7_narrow_range
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

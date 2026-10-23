@@ -2784,3 +2784,83 @@ provisional-strategy fallback (champion v1 for any table with no
 qualifying candidate, SPEC.md section 10) still applies cleanly even
 with the scoring gap unresolved, so go-live itself isn't at risk, only
 the quality of what sits behind it until the gap is fixed.
+
+## 2026-10-23T1213Z — port lane
+
+Hypothesis: with `build` blocked (B3 is the only unticked item, still
+needing a supervised methodology decision per `state/engine-issues.md`)
+and `diagnose`/`tune` still blocked on the open `engine/experiment_report.py`
+scoring gap (same entry - now ~25+ landed `experiments/done/*` directories,
+still zero of them scored or diagnosed, since no card has ever produced a
+real train edge number), the highest-value unit of research work is plain
+`port`-lane progress through `cards/catalog.csv` in SPEC order. T10 (NR4/NR7
+narrow range, Crabel 1990) is the next untested `testable_now: yes` row
+after T09 (Supertrend, ported by the immediately preceding run).
+
+What I did: Crabel's actual rule trades an intraday breakout of the NR
+day's own high/low, which this engine's once-before-the-open
+`score(history)` interface structurally cannot see (SPEC.md section 4) -
+the catalog's own rule already simplifies this to "pick next day in the
+direction of the trend filter," so this card tests that simplification,
+not the original intraday system (documented in `cards/T10.yml`'s
+claim_as_stated and red_flags, not silently assumed equivalent). The
+catalog names no trend filter of its own, so rather than inventing a new
+one I reused `strategies/t01_sma_crossover.py`'s exact fast/slow (20/50)
+SMA spread - the only trend filter already established in this codebase
+with no card-specific parameter to justify from nothing. True range
+reuses `strategies/t09_supertrend.py::_true_range`'s formula exactly. A
+day counts as NR<N> when its true range is the *strict* minimum of the
+trailing N days' true ranges (`np.argmin`, breaking an exact tie toward
+the earliest occurrence rather than today - flagged as a deliberate,
+untested-against-the-alternative choice, since the catalog gives no
+tie-break rule and real adjusted true-range values essentially never tie
+exactly anyway).
+
+Wrote `cards/T10.yml`, a shared core (`strategies/t10_narrow_range_core.py`)
+plus two thin variant wrappers for the catalog's own "NR4, NR7"
+`default_params` (`strategies/t10_nr4_narrow_range.py`,
+`strategies/t10_nr7_narrow_range.py`) - the same core-plus-variants shape
+`cards/D02.yml`'s two sign variants already use, since the only
+difference between the two windows is the lookback length, not the logic.
+`strategies/t10_narrow_range_audit.py` (cross-symbol causality proof over
+the shared core: a `BBB` symbol gets one extra, deliberately narrow
+trailing day appended; `AAA`/`CCC` must stay unaffected and only `BBB`
+should newly score). 16 new tests (`tests/test_t10_narrow_range.py`,
+parametrized over both variants where the logic is shared): narrow-range
+day in an uptrend scores bullish, non-narrow day abstains, a downtrend
+fixture scores bearish, a flat-trend fixture proves the "narrow range
+fires but the trend spread is exactly 0" abstain case (fast SMA == slow
+SMA, undefined direction), an NR4-vs-NR7 fixture confirms both variants
+agree on sign when both fire on the same deliberately-narrow day,
+insufficient history, empty history, the `has_future` prefilter, three
+`rules_fired` wording checks, and the causality audit. Queued both train
+replays (`experiments/pending/t10-nr{4,7}-narrow-range-day.yml`, day
+horizon only per the catalog) and marked T10 `queued` in
+`cards/catalog.csv`.
+
+Result: `python3 -m pytest -q --deselect tests/test_c01_day_of_week.py::test_causality_audit_passes`
+(full suite, that one pre-existing/environment-specific flake excluded,
+same `state/engine-issues.md` WATCH entry as every recent run has hit in
+this sandbox's pandas/numpy pair) - 610 passed, 0 failed, in 308.12s (594
+existing + 16 new). The audit module also runs standalone
+(`python3 -m strategies.t10_narrow_range_audit`) and passes. `guard_check.py`
+confirms no protected path touched. Pushing this should trigger `replay.yml`
+against the real cached dataset for both new experiment files.
+
+Next: once `replay.yml` lands both `experiments/done/t10-nr{4,7}-narrow-range-day/`
+directories, they join the same backlog of unscored train replays every
+ported card since A01 has hit. T11 (inside bar, same "trend filter"
+wording as T10 - likely the same SMA20 substitution question, worth
+checking whether the catalog's single-SMA phrasing there wants a
+different filter than T10's reused 20/50 pair before assuming it's
+identical) is the next untested `testable_now: yes` row for a future
+`port`-lane run. The single highest-priority item for a supervised
+session remains unchanged and is now materially overdue against the 30
+Oct `config/live_source.json` deadline: `engine/experiment_report.py`
+(`state/engine-issues.md`'s open READY FOR WIRING entry) - with this run,
+somewhere north of 25 landed experiments across A/C/D/T-family cards have
+zero real train numbers, and the go-live track's P1 (one validation query
+per positive-train-edge card) cannot award a single query without it. B3
+(corporate-actions methodology) and the D2 delivery-% workflow wiring
+remain the other two open supervised-session items; nothing changed on
+either this run.

@@ -1,0 +1,84 @@
+source_url: ""
+author: "Toby Crabel (1990), Day Trading with Short-Term Price Patterns and Opening Range Breakout"
+license: "trading pattern, not code or text; summarised only (SPEC.md section 5)"
+published_on: "1990"
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "Narrowest range of the last 7 (or 4)
+  days: pick next day in the direction of the trend filter." `prior_claim`:
+  "Range contraction precedes expansion." Crabel's own book ties NR4/NR7 to
+  an intraday opening-range breakout trade (enter on the break of the NR
+  day's own high/low), which this engine cannot replicate: `score(history)`
+  is only ever called once, before the pick date's open (SPEC.md section 4),
+  so nothing in this card can condition on the pick date's own intraday
+  high/low the way the original trade does - exactly the catalog's own
+  "pick next day in the direction of the trend filter" simplification,
+  taken as given rather than re-derived, the same way T08's acceptance of
+  "Donchian/Turtle breakout" already substitutes a prior-close-only test
+  for an intraday stop-and-reverse system.
+horizon: day
+rules_plain: >
+  True range per day (adjusted OHLC, same formula `strategies/t09_supertrend.py::_true_range`
+  already uses: `max(high-low, |high-prev_close|, |low-prev_close|)`, row 0
+  of any slice falling back to `high[0]-low[0]` for lack of a real prior
+  close - discarded the same way T09 discards it, see MIN_ROWS below). A
+  day is "NR<N>" when its own true range is the strict minimum of the
+  trailing N days' true ranges (that day included): `tr_window =
+  tr[-N:]; is_nr = tr_window.argmin() == N - 1`. Using `argmin` rather than
+  `tr_window[-1] <= tr_window.min()` matters only on an exact tie (two days
+  with bit-identical true range): `argmin` returns the *earliest* tied
+  index, so today only counts as NR<N> if it is a strict new low, not a
+  repeat of one already set earlier in the window - a deliberate,
+  deterministic choice (red_flags), not forced by the catalog, which gives
+  no tie-breaking rule at all.
+
+  The catalog's own rule names no trend filter, so this card reuses
+  `strategies/t01_sma_crossover.py`'s exact fast/slow (20/50) SMA spread,
+  `(fast_sma - slow_sma) / abs(slow_sma)`, on this card's own adjusted
+  close series (copied, not imported, same "every card stays standalone"
+  convention every `t0*` card already follows) - the only trend filter
+  already established in this codebase with no card-specific tuning of
+  its own, so picking it introduces no new parameter this card would
+  otherwise have to invent and justify from nothing. On an NR<N> day the
+  score is that spread (sign gives direction, magnitude gives conviction,
+  same convention every card here uses); on every other day, and on an
+  NR<N> day where the spread is exactly 0 (fast SMA equals slow SMA - an
+  undefined direction), the symbol abstains (NaN, SPEC.md section 5).
+
+  Two separate, equally-weighted variants are ported per the catalog's own
+  "NR4, NR7" `default_params` (same "catalog names two named windows, test
+  both" shape as T08's two Donchian lengths): `strategies/t10_nr4_narrow_range.py`
+  (N=4) and `strategies/t10_nr7_narrow_range.py` (N=7), both thin wrappers
+  around the shared logic in `strategies/t10_narrow_range_core.py` (same
+  core-plus-variants shape `cards/D02.yml`'s two sign variants already
+  use) - every NR7 day is, by construction, also eligible to have been an
+  NR4 day four sessions earlier, but the two variants fire on different
+  days and are logged as independent trials, not assumed related until
+  scored.
+
+  Catalog lists this card's horizon as day only, so only day-split
+  experiments are queued for both variants; no week variant.
+
+  Needs `MIN_ROWS = SLOW + LOOKBACK` adjusted rows (50 + 4 = 54 for NR4,
+  50 + 7 = 57 for NR7): `SLOW=50` for the trend filter's slow SMA (T01's
+  own minimum), plus `LOOKBACK` more rows so the trailing true-range
+  window never includes the sliced tail's own row 0 (whose true range
+  uses a fabricated prior close, same reasoning T09's MIN_ROWS note gives)
+  - with this margin, every true-range value inside the NR<N> comparison
+  window is computed from two real, adjacent rows.
+default_params:
+  nr4_lookback: 4
+  nr7_lookback: 7
+  trend_fast: 20
+  trend_slow: 50
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Toby Crabel, Day Trading with Short-Term Price Patterns and Opening Range Breakout (1990)"
+link: ""
+prior_claim: "Range contraction precedes expansion"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay - same caveat every ported card here already carries."
+  - "The trend filter is this card's own substitution, not the catalog's: Crabel's actual rule trades the breakout of the NR day's own high/low (an intraday trigger this engine's once-before-the-open scoring cannot see at all - SPEC.md section 4), so this card tests the catalog's already-simplified 'pick in the trend filter's direction' reading, not Crabel's original intraday system. A refutation of this card refutes the simplification, not necessarily the original trade; worth noting in research/diagnostics/T10.md once scored, not conflating the two."
+  - "NR4 and NR7 overlap by construction (every NR7 day's own trailing 4 sessions are a subset of its trailing 7), so their pick overlap (SPEC.md section 6 gate 8, once either reaches the roster) is expected to be high and should not be read as evidence the two variants agree substantively - they are the same rule at two window lengths, not two independent ideas."
+  - "The argmin tie-break (today must be a STRICT new low, not merely tied with an earlier day in the window) is this card's own choice; real adjusted true-range values essentially never tie exactly, so this should almost never change which days fire, but it is untested against the alternative (<=) and flagged here rather than silently assumed equivalent."
+  - "Coverage and edge both need SPEC.md section 3's reporting once `engine/experiment_report.py` (state/engine-issues.md's open READY FOR WIRING entry) can score this card's picks - same blocker every ported card since A01 has hit; this card does not change that, it just joins the backlog."
+status: untested
