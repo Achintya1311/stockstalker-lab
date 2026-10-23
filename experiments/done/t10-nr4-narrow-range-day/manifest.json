@@ -1,0 +1,9 @@
+{
+  "id": "t10-nr4-narrow-range-day",
+  "strategy": "strategies.t10_nr4_narrow_range",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 76380,
+  "n_dates": 1429,
+  "pick_log_sha256": "d05ae1e9ae4ae4f74fd627af42375ff748fd6526cce7b3064f293720b5230347"
+}
