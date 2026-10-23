@@ -1,0 +1,9 @@
+{
+  "id": "t08-donchian-breakout-20-week",
+  "strategy": "strategies.t08_donchian_breakout_20",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 14861,
+  "n_dates": 309,
+  "pick_log_sha256": "25778e41c0ea20c1316cf0e36fe8018683202d35ff6b58d4c9df1186a88722d8"
+}
