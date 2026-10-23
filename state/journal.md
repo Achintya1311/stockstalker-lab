@@ -2477,3 +2477,60 @@ rule before carding; not previewed in this entry). `discover` remains open
 and untouched for several runs if a future run prefers it over more T0x
 indicator ports. `build` is still blocked on B3 alone — nothing changed
 there this run.
+
+## 2026-10-23T0216Z — Mode A (build blocked on B3 alone), lane: port
+
+**Hypothesis:** T06 (Bollinger %B mean reversion, 20-day SMA ± 2σ, catalog
+horizon "day" only) is the next untested `testable_now: yes` catalog row
+in plain order after T05 (C03 pre-holiday stays genuinely blocked — same
+confirmation every run since 18 Oct: `config/nse_holidays.txt` only
+covers 2026, not the train split). Unlike T01/T03/T05's always-on or
+cross-event shapes, T06's literal rule only takes a stance when the
+latest close sits outside the bands (same "abstain inside, fire at the
+extremes" shape T03's RSI thresholds already use), scored by %B
+(`(close - lower) / (upper - lower)`): `-pctB` when bullish, `1 - pctB`
+when bearish. Std uses the population convention (`ddof=0`) for
+consistency with A02/A05/A06/A07/A09's own rolling-window choice rather
+than pandas' sample-std default used elsewhere in this codebase.
+
+**What happened:** wrote `cards/T06.yml`, `strategies/t06_bollinger_pctb.py`
+(score + rules_fired), `strategies/t06_bollinger_pctb_audit.py` (cross-symbol
+causality proof, same shape as T01–T05's), and 12 new tests in
+`tests/test_t06_bollinger_pctb.py` — bullish/bearish firing checked against
+an independent numpy (`mean`/`std(ddof=0)`, not pandas' rolling machinery)
+reference, inside-the-bands abstain, flat-series (σ=0) abstain without a
+division error, insufficient-history abstain, empty-history, the
+`has_future` prefilter, both `rules_fired` message shapes, and the
+causality audit. Ran the new test file alone first (12 passed), then the
+full suite: 528 collected, 527 passed, 1 failed — only the pre-existing,
+already-documented `test_c01_day_of_week.py::test_causality_audit_passes`
+pandas-version flake (`state/engine-issues.md`'s WATCH entry), unrelated
+to this change, no regressions. `python3 -m strategies.t06_bollinger_pctb_audit`
+run standalone also passes (both AAA/CCC abstained on this seed — not
+guaranteed to fire, same caveat T05's audit module documents).
+
+Catalog horizon for T06 is "day" only (unlike T01/T03/T05's "both"), so
+only one experiment is queued: `experiments/pending/t06-bollinger-pctb-day.yml`.
+`cards/catalog.csv`'s T06 row now reads `queued`.
+
+**Still unresolved, unchanged this run:** `engine/experiment_report.py`
+(`state/engine-issues.md`) remains unwired — all 20 `port`ed cards now
+sitting in `experiments/done/` (A01–A09, C01/C02/C04 ×2, T01–T06, D01,
+D02 ×2) are replayed but zero-scored; the go-live track's P1 validation
+window opened as of today (Mon 26 Oct is 3 days out) and
+`config/live_source.json` is due Fri 30 Oct 12:00 UTC (7 days out).
+Confirmed this run that commit c416997 (T05, 00:20Z) already sent a push
+notification on this exact finding, on top of the two before it the
+20:11Z journal entry recorded — not sending a fourth notification on an
+unchanged finding, per the no-notification-fatigue judgment call, but
+recording explicitly: if the next run to read this journal entry sees
+`engine/experiment_report.py` still unwired AND today's date is on or
+after Mon 26 Oct, that *is* new information (the window the last three
+notifications warned about has now actually opened) and is worth a fresh,
+dated notification rather than silence.
+
+**Next:** continue plain catalog order for `port` — T07 (Bollinger squeeze
+breakout, week horizon) is the next untested `testable_now: yes` row after
+T06. `discover` remains open and untouched for several runs if a future
+run prefers it over more T0x indicator ports. `build` is still blocked on
+B3 alone — nothing changed there this run.

@@ -1,0 +1,77 @@
+source_url: ""
+author: "John Bollinger (2001) Bollinger on Bollinger Bands"
+license: "book, not code; summarised only (SPEC.md section 5)"
+published_on: "2001"
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "Close below the lower band bullish,
+  above the upper band bearish." `prior_claim`: "Mean reversion at band
+  extremes." `default_params`: "20, 2 sigma" - the textbook Bollinger Band
+  window and multiplier, tested literally here, not re-derived.
+horizon: day
+rules_plain: >
+  Bollinger Bands(20, 2) on the adjusted close series
+  (`scripts.adjustments.compute_adjustment_factors`, same as every other
+  `strategies/t0*` card):
+
+  - Middle band = 20-day SMA of adjusted close.
+  - Band width = 2 * (20-day standard deviation of adjusted close,
+    population convention `ddof=0` - same choice `strategies/a02_extreme_day_reversal.py`,
+    `a05_max_effect.py`, `a06_low_volatility.py`, `a07_high_volume_premium.py`
+    and `a09_gap_fade.py` already make for their own rolling windows,
+    kept consistent rather than picking pandas' sample-std default
+    (`ddof=1`) used elsewhere in this codebase for unrelated windows).
+  - Upper band = middle + band width. Lower band = middle - band width.
+  - %B = (close - lower band) / (upper band - lower band) - the standard
+    Bollinger %B normalisation (0 at the lower band, 1 at the upper band,
+    linear in between; can go below 0 or above 1 when price is outside
+    the bands, which is exactly the case this card fires on).
+
+  - **Bullish:** latest close strictly below the lower band (%B < 0).
+  - **Bearish:** latest close strictly above the upper band (%B > 1).
+  - Anything else (price inside the bands, %B in [0, 1]) abstains (NaN,
+    SPEC.md section 3) - same "only the extremes take a stance" shape
+    `cards/T03.yml`'s RSI thresholds already use, not an always-on spread
+    the way `cards/T01.yml`'s SMA crossover is.
+
+  Score is continuous within each firing case, same sign-gives-direction/
+  magnitude-gives-conviction convention every other card here uses:
+  `score = -pctB` when bullish (0 at the lower-band boundary, growing
+  positive the further below the lower band the close sits) and
+  `score = 1 - pctB` when bearish (0 at the upper-band boundary, growing
+  negative the further above). Both are the same linear expression
+  `-( pctB - {0 if bullish else 1} )`, so the sign always matches the
+  firing direction by construction.
+
+  A flat window (20-day std exactly 0, so upper band equals lower band)
+  abstains rather than dividing by zero - %B is undefined when the bands
+  collapse to a single price, not infinitely far outside them.
+
+  Catalog lists this card's horizon as "day" only (unlike T01/T03/T05's
+  "both"), so only a day-split experiment is queued; no week variant is
+  carded here since the catalog itself doesn't claim one.
+
+  `strategies/t06_bollinger_pctb.py` needs no pick-date knowledge - the
+  SMA, std and %B are computed purely from past adjusted closes already
+  inside whatever truncated `history` slice `engine.replay` hands this
+  module.
+
+  Minimum history: the 20-day SMA and std both need at least 20 rows
+  before they are stable values rather than pandas' own partial-window
+  reading - `MIN_ROWS = 20`. Unlike T05's cross-event cards, no extra
+  prior-bar row is needed since this card reads the latest bar's %B
+  directly, not a change in it.
+default_params:
+  window: 20
+  sigma: 2
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Bollinger (2001) Bollinger on Bollinger Bands"
+link: ""
+prior_claim: "Mean reversion at band extremes"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay - popularity of Bollinger Bands is not evidence of edge, same caveat every ported card here already carries."
+  - "Selective by construction (abstains inside the bands, which is most of the time for a mean-reverting price near a 20-day SMA): coverage (SPEC.md section 3) needs reporting alongside any accuracy figure once `engine/experiment_report.py` (state/engine-issues.md) can score this card's picks, same blocker every ported card since A01 has hit."
+  - "20-day window / 2-sigma multiplier are Bollinger's own stated defaults, not tuned on NSE data at all - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
+  - "This is a mean-reversion claim at price extremes, the same shape as `cards/A02.yml`'s extreme-day reversal and `cards/A06.yml`'s low-volatility framing but on a rolling band rather than a single-day or trailing-volatility measure - pick overlap with A02/A06 (SPEC.md section 6 gate 8) is worth checking directly once all three have real numbers, not assumed from the shared mean-reversion intuition."
+  - "ddof=0 (population std) was chosen for consistency with this codebase's other rolling-window cards (A02/A05/A06/A07/A09), not because Bollinger's original text mandates one convention over the other - worth flagging if a later card needs the ddof=1 (sample) variant for a direct textbook comparison."
+status: queued

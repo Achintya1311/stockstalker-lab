@@ -1,0 +1,11 @@
+# T06 (day horizon): Bollinger %B mean reversion (20, 2 sigma), train-split
+# replay (port lane, `state/queue.md`). See cards/T06.yml and
+# strategies/t06_bollinger_pctb.py. Catalog lists this card's horizon as
+# "day" only (unlike T01/T03/T05's "both"), so no week variant is queued.
+id: t06-bollinger-pctb-day
+strategy: strategies.t06_bollinger_pctb
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
