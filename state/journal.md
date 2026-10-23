@@ -2667,3 +2667,56 @@ due Fri 30 Oct 12:00 UTC, 6 days out - the provisional-strategy fallback
 10) still applies cleanly even with the scoring gap unresolved, so go-live
 itself isn't at risk, only the quality of what sits behind it until the
 gap is fixed.
+
+## 2026-10-23T08:18Z — port lane
+
+Hypothesis: `build` stays blocked on B3 alone (methodology blocker, needs
+a supervised session); `diagnose`/`tune` stay blocked on
+`engine/experiment_report.py` (`state/engine-issues.md`, still unwired,
+now 16+ landed experiments with zero of them scored). Go-live track
+P1/P2/P3 (consensus_v1, D1/D2 wiring) all need either that scoring gap
+or a supervised session. The highest-value unblocked unit of work is
+plain `port`-lane progress through `cards/catalog.csv` in SPEC order:
+T08 (Donchian/Turtle breakout) is the next `testable_now: yes` row after
+T07.
+
+Result: `cards/catalog.csv`'s own `default_params` names both 20 and 55
+as T08's stated windows (Faith's Turtle System 1 and System 2), so both
+are ported as independent trials sharing one core
+(`strategies/t08_donchian_breakout_core.py`,
+`strategies/t08_donchian_breakout_20.py`,
+`strategies/t08_donchian_breakout_55.py`), the same shared-core shape
+`cards/D02.yml` already used for its own two catalog-stated variants.
+Breakout is read against the PRIOR window's high/low (excluding today),
+not a window including today's own close, which would be self-referentially
+always-true - see `cards/T08.yml`'s rules_plain and red_flags for the full
+reasoning. `strategies/t08_donchian_breakout_audit.py` (shared causality
+proof, both windows), 26 new tests
+(`tests/test_t08_donchian_breakout.py`, parametrized over both variants):
+new-high/new-low fire correctly, a tie with the prior high/low does NOT
+count as a new breakout, inside-range/insufficient-history/empty-history/
+has_future-prefilter abstain correctly, `rules_fired` messages, causality
+audit at both window=20 and window=55. Queued both train-split
+experiments (`experiments/pending/t08-donchian-breakout-{20,55}-week.yml`,
+catalog lists this card's horizon as week only). `cards/catalog.csv`'s T08
+row now reads `queued`.
+
+Full suite: 582 passed, 1 failed (the pre-existing
+`tests/test_c01_day_of_week.py::test_causality_audit_passes` pandas-
+version flake `state/engine-issues.md`'s own WATCH entry already
+documents - unrelated to this change, and the new T08 tests are all
+among the 582 passing).
+
+**Next:** T09 (Supertrend) is next in plain catalog order. `diagnose`/
+`tune` stay blocked until a supervised session wires
+`engine/experiment_report.py` per `state/engine-issues.md` - worth that
+session's attention soon, since every `port` cycle since A01 (now 17
+cards: A01-A09, C01-C04, T01-T08, D01-D02) has landed train replays with
+zero of them actually scored, which also stalls the go-live track's P1
+rule (every positive-train-edge replay earns one validation query - none
+of their edges are computable yet). `build` is still blocked on B3 alone.
+Go-live track: `config/live_source.json` is due Fri 30 Oct 12:00 UTC, 7
+days out - the provisional-strategy fallback (champion v1 for any table
+with no qualifying candidate, SPEC.md section 10) still applies cleanly
+even with the scoring gap unresolved, so go-live itself isn't at risk,
+only the quality of what sits behind it until the gap is fixed.

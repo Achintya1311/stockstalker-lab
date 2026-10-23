@@ -1,0 +1,71 @@
+source_url: ""
+author: "Richard Dennis / William Eckhardt (Turtle Traders), as retold in Curtis Faith (2007) Way of the Turtle"
+license: "book, not code; summarised only (SPEC.md section 5)"
+published_on: "2007"
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "Close at a 20-day high bullish, at
+  a 20-day low bearish (55-day variant too)." `prior_claim`:
+  "Trend-following on futures; test on stock futures." `default_params`:
+  "20 and 55" - the Turtle System 1 (20-day) and System 2 (55-day)
+  breakout windows, both named explicitly in the catalog's own default,
+  tested here as two separate catalog-stated variants, not one default
+  and one unstated tune-lane alternative - the same shared-core shape
+  `cards/D02.yml` already uses for its own two catalog-stated variants.
+horizon: week
+rules_plain: >
+  Faith's own Turtle rule reads "price exceeds the highest high of the
+  preceding N days" - a breakout against the window BEFORE today, not
+  "today's close is the max of a window that includes itself." The
+  latter is true of every bar by construction (a value is always <= the
+  max of a set containing itself) and could never distinguish a real
+  breakout from an ordinary one.
+  `strategies/t08_donchian_breakout_core.py` reads the catalog's "close
+  at a 20-day high" the narrowest way consistent with that: today's
+  adjusted close strictly above the PRIOR `window` sessions' highest
+  close is bullish, strictly below the prior `window` sessions' lowest
+  close is bearish; a tie (close exactly equal to the prior high/low)
+  does not count as a new breakout and abstains, same as everything
+  else inside the range.
+
+  Both catalog-stated windows share this core (`core.score(history,
+  window=...)`), differing only in `window`:
+  `strategies/t08_donchian_breakout_20.py` (window=20, Turtle System 1)
+  and `strategies/t08_donchian_breakout_55.py` (window=55, Turtle
+  System 2) - two independent trials, neither assumed the "real" one
+  (SPEC.md section 5: no claim is assumed true).
+
+  Score is continuous, same sign-gives-direction/magnitude-gives-
+  conviction convention every other card here uses:
+  `(close - prior_high) / abs(prior_high)` when bullish,
+  `(close - prior_low) / abs(prior_low)` when bearish (already negative
+  since close < prior_low there) - both scaled by the breakout level
+  itself so the same point move reads as a larger conviction on a
+  cheaper stock, consistent with every other percentage-based card here
+  (T01, T02, T07).
+
+  Needs no pick-date knowledge - the rolling high/low is computed purely
+  from past adjusted closes already inside whatever truncated `history`
+  slice `engine.replay` hands this module. Minimum history:
+  `window + 1` rows (the `window` prior sessions plus today's own row);
+  only the trailing `window + 1` rows of adjusted close are ever used
+  per symbol, same fixed-size-tail convention T06/T07 already use
+  (`state/engine-issues.md`'s "Replay took 1h45m+" WATCH entry).
+
+  Catalog lists this card's horizon as week only, so only a week-split
+  experiment is queued for each variant.
+default_params:
+  window_system1: 20
+  window_system2: 55
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Faith (2007) Way of the Turtle"
+link: ""
+prior_claim: "Trend-following on futures; test on stock futures"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay - same caveat every ported card here already carries."
+  - "Reading \"close at a 20-day high\" against the PRIOR window (excluding today) rather than a window including today is an interpretation choice forced by the self-referential degeneracy of the literal-inclusion reading, not the only possible parse - flagged the same way T07's \"same-bar squeeze-and-break\" choice is, for the same reason (if this card shows no edge, worth re-checking before concluding the underlying claim is refuted)."
+  - "Faith's own system also carries a stop-loss, position-sizing (N-ATR) rule, and a System-1 entry that's skipped after a prior winning breakout (\"last trade was a winner\") - this card tests only the entry signal itself (the engine scores open-to-close per pick, not a held position with an exit rule), same \"the narrowest claim this interface can test\" scoping T04 and T07 already flag for their own simplifications."
+  - "Selective by construction (abstains unless today is a genuine new high/low over the window), likely with much lower coverage at window=55 than window=20 on the same history since a 55-day extreme is rarer by construction: coverage (SPEC.md section 3) needs reporting alongside any accuracy figure once engine/experiment_report.py (state/engine-issues.md) can score this card's picks, same blocker every ported card since A01 has hit."
+  - "Pick overlap between the 20-day and 55-day variants (SPEC.md section 6 gate 8) needs checking directly once both have real numbers - a 55-day new high is necessarily also inside a 20-day lookback's range much of the time, so the two variants' fires are not independent by construction, even though they can disagree on any given bar."
+  - "Shares the same trend-following intuition as T01's SMA crossover and T02's golden/death cross but reads price extremes directly rather than through a moving average - pick overlap with T01/T02 (SPEC.md section 6 gate 8) is worth checking directly once all three have real numbers, not assumed from the shared trend-following framing."
+status: untested
