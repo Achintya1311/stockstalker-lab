@@ -1,0 +1,9 @@
+{
+  "id": "t07-bollinger-squeeze-breakout-week",
+  "strategy": "strategies.t07_bollinger_squeeze_breakout",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 45,
+  "n_dates": 36,
+  "pick_log_sha256": "48fd2e72130873e1b9a48358f61e977c0c34b6d89b1be1b678c2157efed00aec"
+}
