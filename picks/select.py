@@ -14,6 +14,7 @@ from __future__ import annotations
 import pandas as pd
 
 from engine.replay import truncate
+from picks.chart import chart_for
 from engine.scoring import load_universe_config, universe_membership
 
 
@@ -52,7 +53,7 @@ def select_side(scores: pd.Series, side: int, eligible: set[str], n: int) -> pd.
 def pick_table(
     dataset: pd.DataFrame, strategy, strategy_id: str, session: str, side: int, asof: str, n: int | None = None
 ) -> list[dict]:
-    """One table's picks for `session`: `[{"symbol", "strategy", "reasoning"}, ...]`.
+    """One table's picks for `session`: `[{"symbol", "strategy", "reasoning", "chart"?}, ...]`.
 
     `strategy` must expose `score(history) -> pd.Series` and
     `rules_fired(history, symbol) -> str` (SPEC.md section 5). Both are
@@ -67,7 +68,11 @@ def pick_table(
     eligible = eligible_symbols(dataset, asof)
     scores = strategy.score(history)
     chosen = select_side(scores, side, eligible, n)
-    return [
-        {"symbol": symbol, "strategy": strategy_id, "reasoning": strategy.rules_fired(history, symbol)}
-        for symbol in chosen.index
-    ]
+    picks = []
+    for symbol in chosen.index:
+        pick = {"symbol": symbol, "strategy": strategy_id, "reasoning": strategy.rules_fired(history, symbol)}
+        chart = chart_for(history, symbol)
+        if chart:
+            pick["chart"] = chart
+        picks.append(pick)
+    return picks
