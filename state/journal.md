@@ -2928,3 +2928,73 @@ edge card) still cannot award a single query without it. B3
 (corporate-actions methodology) and the D2 delivery-% workflow wiring
 remain the other two open supervised-session items; nothing changed on
 either this run.
+
+## 2026-10-23T1620Z — port lane
+
+Mode A (build) still active: `state/BUILD_DONE` does not exist. B3 stays
+the lab's only unticked B item, still blocked on the supervised
+methodology decision (`state/engine-issues.md`'s "READY FOR WIRING
+(methodology, not code): `detect_corporate_actions`..." entry). No port
+lease existed at orient time, so claimed `port` and did the next unit of
+SPEC-order catalog work (SPEC.md section 1: "the work never runs out").
+
+**Hypothesis:** T12 (Stochastic %K/%D, 14/3/3), the next untested
+`testable_now: yes` catalog row in plain SPEC order after T11 (last run's
+journal entry named T12 as next; A10 stays `testable_now: partly` -
+opening volume unavailable - and was left for a later call, same as every
+prior run's reading of SPEC's "rows marked testable_now: yes"). The
+catalog's literal rule ("%K crossing up below 20 bullish, crossing down
+above 80 bearish") is an event, the same "crossing, not persisted state"
+reading `cards/T05.yml`'s MACD crossing and `cards/T03.yml`'s RSI
+thresholds already established, so `strategies/t12_stochastic.py` only
+fires on the bar smoothed %K actually crosses 20 or 80 and abstains
+otherwise, even if %K has sat past a threshold for many bars. `%D`
+(default_params' third value) is part of the standard indicator but
+unused by this card's literal rule - flagged as a red_flag and left for a
+future %K/%D-crossover variant, not invented here.
+
+**What happened:** wrote `cards/T12.yml`, `strategies/t12_stochastic.py`
+(raw %K over a 14-day rolling adjusted high/low window, smoothed by a
+3-day SMA; score reuses T03's threshold-distance convention,
+`(20-k_prev)/20` bullish / `-(k_prev-80)/20` bearish, keyed on the PRIOR
+bar's %K since that is what makes the fresh cross notable, not the
+latest bar's which is constrained by the cross condition itself;
+`MIN_ROWS = 17`), `strategies/t12_stochastic_audit.py` (cross-symbol
+causality proof, same shape as T05's/T11's, with a real intraday
+high/low spread in its synthetic fixture since this card's rolling window
+needs high/low, not just close). 12 new tests
+(`tests/test_t12_stochastic.py`): a steady uptrend and a persistent
+decline each prove the "already crossed/pinned at an extreme, no fresh
+cross" abstain case (found by direct computation: a long monotonic
+move pins smoothed %K at exactly 0 or 100 for many bars), a flat series
+proves the zero-denominator abstain case, two directional fixtures
+(decline/rally then a sharp 2-day countermove) cross-checked against an
+independent loop-based rolling-window/SMA reference computed in the test
+file (same approach T05's test used), insufficient history, empty
+history, the `has_future` prefilter, two `rules_fired` wording checks,
+and the causality audit. Queued one day-split experiment
+(`experiments/pending/t12-stochastic-day.yml`; catalog lists this card's
+horizon as day only) and marked T12 `queued` in `cards/catalog.csv`.
+
+Result: `python3.13 -m pytest -q --deselect
+tests/test_c01_day_of_week.py::test_causality_audit_passes` (full suite,
+that one pre-existing/environment-specific flake excluded, same
+`state/engine-issues.md` WATCH entry every recent run has hit in this
+sandbox) - 634 passed, 0 failed, in 274.75s (622 existing + 12 new). The
+audit module also runs standalone
+(`python3.13 -m strategies.t12_stochastic_audit`) and passes.
+`scripts/guard_check.py` confirms no protected path touched.
+
+**Next:** once `replay.yml` lands `experiments/done/t12-stochastic-day/`,
+it joins the same unscored backlog every ported card since A01 has hit.
+T13 (Williams %R) is the next untested `testable_now: yes` row for a
+future `port`-lane run. The single highest-priority item for a supervised
+session remains unchanged and is now materially overdue against the 30
+Oct `config/live_source.json` deadline: `engine/experiment_report.py`
+(`state/engine-issues.md`'s open READY FOR WIRING entry) - with this run,
+the unscored backlog is now north of 27 landed experiments with zero real
+train numbers, and the go-live track's P1 (one validation query per
+positive-train-edge card) still cannot award a single query without it.
+B3 (corporate-actions methodology) and the D2 delivery-% workflow wiring
+remain the other two open supervised-session items; nothing changed on
+either this run.
