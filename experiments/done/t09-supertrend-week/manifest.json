@@ -1,0 +1,9 @@
+{
+  "id": "t09-supertrend-week",
+  "strategy": "strategies.t09_supertrend",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 62471,
+  "n_dates": 301,
+  "pick_log_sha256": "f171650985bb67e7e07cda9a82c3e0647bef016f2ade93b2f5afd98e007eef20"
+}

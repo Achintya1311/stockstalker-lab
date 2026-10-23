@@ -1,0 +1,9 @@
+{
+  "id": "t09-supertrend-day",
+  "strategy": "strategies.t09_supertrend",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 296071,
+  "n_dates": 1426,
+  "pick_log_sha256": "551e3a1153cee0e1389f97be9c62fbff9b0e375970b3ba6f6ecbe06d10a3a292"
+}
