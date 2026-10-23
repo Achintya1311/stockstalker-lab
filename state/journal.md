@@ -3082,3 +3082,89 @@ for every table. B3 (corporate-actions methodology, blocked since 17 Oct)
 and the D2 delivery-% workflow wiring are the other two open
 supervised-session items; neither is on the go-live critical path the
 way this one now is.
+
+## 2026-10-23T2019Z port lane: T14 CCI(20) ported
+
+**Mode:** A (build) - B3 is still the only unticked B item and still
+blocked (supervised decision needed, see `state/engine-issues.md`), so
+this run did research during the build, same as every recent run.
+
+**Hypothesis/task:** T14 (CCI, Lambert 1980) was the next untested
+`testable_now: yes` row in plain catalog order after T13 (Williams %R).
+
+**What happened:** `cards/T14.yml`, `strategies/t14_cci.py` (CCI(20) =
+(TP - SMA_TP) / (0.015 * MeanDev), TP = (adj_high+adj_low+adj_close)/3,
+MeanDev = 20-bar mean *absolute* deviation from the current SMA_TP -
+Lambert's own definition, not the standard deviation T06/T07's Bollinger
+bands use). Catalog's own wording ("crossing above -100 bullish, below
++100 bearish") is read as an event like T05's MACD card, not a persisted
+state: fires only on the bar a threshold is actually crossed. Flagged
+in `cards/T14.yml`'s claim_as_stated/red_flags, not silently fixed: this
+exact threshold/sign pairing matches neither CCI convention I'm aware of
+(Lambert's own breakout rule is the mirror image - above +100 bullish,
+below -100 bearish). Tested literally as transcribed per SPEC.md section
+5 ("no claim is assumed true"); if it shows no edge or a strong
+opposite-sign edge, re-reading the source and testing the mirror rule as
+a separate card is the first `diagnose` move, before concluding CCI has
+no edge on NSE data at all.
+
+Only the trailing `MIN_ROWS=21` rows per symbol ever feed the rolling
+computation (`strategies/t07_bollinger_squeeze_breakout.py`'s fixed-tail
+pattern), not the full history a replay slice may carry by a given date -
+the same performance lesson `state/engine-issues.md`'s "Replay took
+1h45m+" WATCH entry already taught.
+
+11 new tests (`tests/test_t14_cci.py`): a flat baseline plus a one-bar
+spike and partial recovery proves both the bullish (cross up through
+-100) and bearish (cross down through +100) cases, cross-checked against
+an independent loop-based CCI reference computed in the test file itself
+(fixture constants tuned by hand-running the reference formula first,
+documented inline via the pre-assertions); an "already crossed, both
+bars deep past the same threshold" fixture proves the no-fresh-cross
+abstain case; a perfectly flat series proves the MeanDev=0 abstain (no
+division by zero); insufficient history, empty history, the
+`has_future` prefilter, `rules_fired` wording for both abstain and
+bullish cases, and the cross-symbol causality audit (same shape as every
+`t0*`/`t1*` card's audit). `strategies/t14_cci_audit.py` run standalone
+also passes. Catalog lists this card's horizon as "both" like T01/T03/
+T05's, so two experiments are queued: `experiments/pending/t14-cci-{day,week}.yml`.
+`cards/catalog.csv`'s T14 row now reads `queued`.
+
+**Result:** `python3.13 -m pytest -q --deselect
+tests/test_c01_day_of_week.py::test_causality_audit_passes` (full suite,
+that one pre-existing/environment-specific flake excluded, same
+`state/engine-issues.md` WATCH entry every recent run has hit in this
+sandbox) - 657 passed, 0 failed (646 existing + 11 new).
+`scripts/guard_check.py` confirms no protected path touched.
+
+**Still the single highest-risk item, now unaddressed for 6 days / at
+least 8 runs since 2026-10-18:** the `engine/experiment_report.py`
+scoring gap (`state/engine-issues.md`'s "READY FOR WIRING: no automated
+way to score a finished train replay" entry) means every one of the
+37+ landed `experiments/done/` directories (now 39 once this run's two
+land) still has zero real train edge/accuracy/directional-move numbers
+computed anywhere - nobody can tell which ported card has a positive
+train edge, so the go-live track's P1 rule in `state/queue.md` ("every
+train replay with a positive edge... gets one validation query... that
+is how a provisional candidate earns its place") cannot award a single
+query, and SPEC.md section 10's fallback provisional rule ("the
+strategy with the highest validation edge... among those with a
+positive train edge and a positive train directional move") cannot be
+evaluated for any table. Against the hard Fri 30 Oct 12:00 UTC
+`config/live_source.json` deadline (now 7 days from this run), this
+means every table would default to champion v1 - or a provisional pick
+made blind, without comparing a single real train number - unless a
+supervised session lands `engine/experiment_report.py` (proposed design
+already written out in full in `state/engine-issues.md`) before then.
+Flagging this to the user directly via notification this run, since
+journal entries alone have not produced supervised action on it across
+6 days and 8+ runs.
+
+**Next:** T15 is the next untested `testable_now: yes` row for a future
+`port`-lane run. But the real next action, ranked above any more
+porting per `state/queue.md`'s own go-live-track priority ("improving a
+provisional table ranks right after leak alarms and workflow failures"),
+is a supervised session landing `engine/experiment_report.py` - without
+it, every further `port` just adds to the same unscored backlog, and P1
+cannot spend a single validation query no matter how many more cards
+are ported.

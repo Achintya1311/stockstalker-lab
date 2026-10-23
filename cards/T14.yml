@@ -1,0 +1,86 @@
+source_url: ""
+author: "Donald Lambert (1980)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: "1980"
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "CCI crossing above -100 bullish,
+  below +100 bearish." `prior_claim`: "Oscillator." Taken literally and
+  exactly as transcribed, not "corrected" to either common CCI convention
+  this run is aware of (Lambert's own trend-following breakout reading is
+  the mirror image - cross above +100 bullish, below -100 bearish; a
+  mean-reversion reading would instead fade the extremes - bullish on a
+  bounce off -100, bearish on a fade from +100, which is closer to but
+  still not identical to the catalog's exact wording). SPEC.md section 5:
+  "No claim is assumed true" - the catalog's own transcription is what
+  gets tested here, flagged as a likely transcription slip in red_flags
+  below rather than silently fixed, so a `diagnose`-lane look at this
+  card's real numbers starts from what was actually tested.
+horizon: both
+rules_plain: >
+  Standard CCI(20) (Lambert 1980) on the adjusted high/low/close series
+  (`scripts.adjustments.compute_adjustment_factors`, same as every other
+  `strategies/t*` card):
+
+  - Typical price TP = (adj_high + adj_low + adj_close) / 3, per bar.
+  - SMA_TP = 20-bar simple moving average of TP.
+  - MeanDev = 20-bar mean *absolute* deviation of TP from the current
+    bar's own SMA_TP (Lambert's original definition - every TP in the
+    trailing 20-bar window compared against the one current SMA_TP value,
+    not each bar's own rolling SMA; this is not the standard deviation
+    T06/T07's Bollinger bands use).
+  - CCI = (TP - SMA_TP) / (0.015 * MeanDev).
+  - Like T05's MACD card, the catalog's own wording ("crossing above ...
+    below ...") is read as an event, not a persisted state the way T01's
+    always-on SMA spread reads - this card only fires on the bar the
+    threshold is actually crossed and abstains on every other bar,
+    including one where CCI already sits well past a threshold without a
+    fresh cross that day.
+  - **Bullish:** CCI was at or below -100 on the prior bar and is
+    strictly above -100 on the latest bar (a fresh cross up through
+    -100).
+  - **Bearish:** CCI was at or above +100 on the prior bar and is
+    strictly below +100 on the latest bar (a fresh cross down through
+    +100).
+  - Anything else (no fresh cross through either threshold this bar, or
+    MeanDev is exactly 0 so CCI is undefined) abstains (NaN, SPEC.md
+    section 3).
+
+  Score is continuous within each firing case, same sign-gives-direction/
+  magnitude-gives-conviction convention every other card here uses, scaled
+  by CCI's own 100-point threshold unit the way T05 scales by price:
+  `score = (CCI_latest - (-100)) / 100` on a bullish cross,
+  `score = (CCI_latest - 100) / 100` on a bearish cross. Sign always
+  matches the cross direction by construction (CCI_latest is just above
+  -100, hence a small positive numerator, right after a bullish cross;
+  just below +100, hence a small negative numerator, right after a
+  bearish cross) - this bounds the magnitude near 0 right at the crossing
+  bar itself, same observation T05's card makes about its own
+  just-crossed score.
+
+  Needs no pick-date knowledge - both SMA_TP and MeanDev are computed
+  purely from past adjusted high/low/close already inside whatever
+  truncated `history` slice `engine.replay` hands this module, so one
+  module serves both horizons, the same way T01/T03/T05 already do.
+
+  Minimum history: the 20-bar window needs 20 rows before SMA_TP/MeanDev
+  are stable values, plus one more row to have a prior-bar CCI to compare
+  against for the cross itself - `MIN_ROWS = 21`. Unlike the full-history
+  groupby in T01-T05, this card only ever reads the trailing `MIN_ROWS`
+  rows per symbol (`strategies/t07_bollinger_squeeze_breakout.py`'s own
+  fixed-tail pattern), since `state/engine-issues.md`'s "Replay took
+  1h45m+" WATCH entry already showed what an unbounded per-call
+  computation costs multiplied across thousands of real pick dates.
+default_params:
+  period: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Lambert (1980)"
+link: ""
+prior_claim: "Oscillator"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay - the rule's name recognition is not evidence of edge, same caveat every ported card here already carries."
+  - "The catalog's exact threshold/sign pairing ('above -100 bullish, below +100 bearish') does not match either CCI convention this run recognises (Lambert's own breakout rule is the mirror image: above +100 bullish, below -100 bearish; a mean-reversion fade would read closer to, but still not exactly, the catalog's wording) - plausibly a transcription slip when the catalog row was written. Tested literally as transcribed, per claim_as_stated above; if this card shows no edge (or a strong edge with the opposite sign), re-reading the catalog's source and testing the mirror-image rule as a separate card is the first thing a `diagnose`-lane look should try, before concluding CCI itself has no edge on NSE data."
+  - "Literal 'crossing' reading makes this card selective by construction, same shape as T05's crossing-only MACD card - expect low coverage, and coverage (SPEC.md section 3) needs reporting alongside any accuracy figure once `engine/experiment_report.py` (state/engine-issues.md, open since 18 Oct, still unresolved as of 23 Oct) can score this card's picks."
+  - "20-period is Lambert's stated default, not tuned on NSE data at all - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
+  - "CCI's mean-absolute-deviation-from-current-SMA definition is a genuinely different rolling statistic from the standard deviation T06/T07's Bollinger bands use - worth a unit test cross-check against an independent loop-based reference, not just trusting pandas' `.rolling().apply()` shape."
+status: queued
