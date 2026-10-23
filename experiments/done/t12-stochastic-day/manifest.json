@@ -1,0 +1,9 @@
+{
+  "id": "t12-stochastic-day",
+  "strategy": "strategies.t12_stochastic",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 21726,
+  "n_dates": 1469,
+  "pick_log_sha256": "289ca5834e427bea591ad5f54b094343017166b9190571dbc21df0a321a8adc2"
+}
