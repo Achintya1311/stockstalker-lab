@@ -1,0 +1,9 @@
+{
+  "id": "t11-inside-bar-day",
+  "strategy": "strategies.t11_inside_bar",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 47206,
+  "n_dates": 1431,
+  "pick_log_sha256": "0035acebce098e00a9da1eb2e27f1849400f0f53434add158048a0d24fbc72f7"
+}
