@@ -1,0 +1,9 @@
+{
+  "id": "t15-adx-regime-day",
+  "strategy": "strategies.t15_adx_regime",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 140297,
+  "n_dates": 1436,
+  "pick_log_sha256": "1f7d14f3f10fc5feb7bd5a7bc900e81180a901e4e7730e43c1224314a555381b"
+}

@@ -13,10 +13,12 @@ Train split only (2015 to 2020), the picks a table would publish. A **candidate*
 | t06-bollinger-pctb-day | day | bearish | 5509 | 58.07% | 54.94% | 3.35 | 4.39 | -0.03 | 100.00% |  |
 | a09-gap-fade-day | day | bearish | 4710 | 57.47% | 54.52% | 3.21 | 4.01 | 0.03 | 66.67% | candidate |
 | t01-sma-crossover-week | week | bearish | 1514 | 54.10% | 50.88% | 3.20 | 2.56 | -0.03 | 83.33% |  |
+| t15-adx-regime-week | week | bearish | 1456 | 53.71% | 50.87% | 2.95 | 2.20 | 0.02 | 83.33% | candidate |
 | t13-williams-r-day | day | bearish | 6967 | 57.90% | 54.70% | 2.89 | 4.71 | -0.02 | 100.00% |  |
 | a01-weekly-reversal-week | week | bearish | 1538 | 53.19% | 50.91% | 2.48 | 1.83 | 0.02 | 83.33% | candidate |
 | t04-connors-rsi2-day | day | bearish | 4264 | 57.55% | 54.82% | 2.32 | 2.65 | -0.01 | 83.33% |  |
 | c03-pre-holiday-day | day | bearish | 300 | 57.33% | 55.13% | 2.21 | 0.99 | 0.01 | 60.00% | candidate |
+| t15-adx-regime-day | day | bearish | 6880 | 56.63% | 54.50% | 2.20 | 3.75 | -0.06 | 100.00% |  |
 | t10-nr7-narrow-range-day | day | bullish | 5996 | 46.33% | 44.71% | 2.16 | 3.20 | -0.49 | 100.00% |  |
 | t02-golden-death-cross-week | week | bearish | 1355 | 52.99% | 50.93% | 2.05 | 1.50 | -0.21 | 66.67% |  |
 | t05-macd-crossover-week | week | bearish | 1008 | 53.27% | 51.11% | 2.02 | 1.19 | 0.22 | 66.67% | candidate |
@@ -51,10 +53,12 @@ Train split only (2015 to 2020), the picks a table would publish. A **candidate*
 | a04-52-week-high-week | week | bearish | 1300 | 50.46% | 50.96% | -0.50 | -0.36 | -0.34 | 40.00% |  |
 | t10-nr7-narrow-range-day | day | bearish | 5756 | 54.57% | 54.60% | -0.55 | -0.79 | -0.09 | 16.67% |  |
 | t14-cci-week | week | bullish | 962 | 46.78% | 48.51% | -0.63 | -0.36 | -0.50 | 50.00% |  |
+| t15-adx-regime-day | day | bullish | 6891 | 44.26% | 44.93% | -0.64 | -1.04 | -0.62 | 50.00% |  |
 | a07-high-volume-premium-week | week | bearish | 1510 | 50.00% | 50.84% | -0.84 | -0.74 | -0.14 | 50.00% |  |
 | t08-donchian-breakout-55-week | week | bearish | 905 | 50.50% | 50.95% | -0.90 | -0.48 | -0.44 | 50.00% |  |
 | a02-extreme-day-reversal-day | day | bullish | 3223 | 45.36% | 44.96% | -1.10 | -1.07 | -0.63 | 50.00% |  |
 | t03-rsi-thresholds-day | day | bullish | 4896 | 44.40% | 44.95% | -1.13 | -1.38 | -0.59 | 33.33% |  |
+| t15-adx-regime-week | week | bullish | 1452 | 47.59% | 48.57% | -1.15 | -0.87 | -0.98 | 33.33% |  |
 | c01-day-of-week-day | day | bearish | 6900 | 53.25% | 54.39% | -1.15 | -2.07 | -0.18 | 33.33% |  |
 | t14-cci-day | day | bearish | 5285 | 53.59% | 54.82% | -1.29 | -1.74 | -0.09 | 16.67% |  |
 | a07-high-volume-premium-week | week | bullish | 1510 | 47.55% | 48.97% | -1.42 | -1.06 | -0.69 | 33.33% |  |
