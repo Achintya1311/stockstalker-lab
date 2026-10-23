@@ -551,7 +551,22 @@ the full 2015-2026 history — likely a small number of symbol-days in
 absolute terms (splits/bonuses are rare events), but worth knowing the
 scale before judging it immaterial.
 
-## READY FOR WIRING: no automated way to score a finished train replay (blocks `diagnose` for every future `port`, not just A01)
+## WIRED 2026-10-24 (was READY FOR WIRING): no automated way to score a finished train replay
+
+**WIRED** (supervised, 24 Oct). Added `engine/experiment_report.py`, called from `engine/run_queue.py` on every replay. It differs from the proposal in three ways:
+
+- **Where results live:** next to each pick log, in `experiments/done/<id>/results.json` (machine-readable) and `results.md`, not in `research/diagnostics/<id>.md`. That keeps your diagnostics prose separate, and `replay.yml` already commits `experiments/`, so no `.github/` change was needed. Results are rescored when missing or when `SCORER_VERSION` changes. `reports/train_leaderboard.md` is rebuilt every run.
+- **Two selections per side:**
+  - `top`: the 5 largest absolute scores per date among in-universe stocks, the same rule as `picks/select.py`. This is what a table publishes, so the provisional rule and the gates read it.
+  - `all`: every positive or negative score, the `champion_report.py` convention. It dilutes a strong top-5 signal across about half the universe, so a strategy that looked flat there may not be flat in `top`.
+- **Metrics per side:** picks, coverage, accuracy, market line, edge, t of the per-date edge, directional move after costs, edge by year, share of positive years, and the leak alarm.
+- **Validation queries for any strategy (needed for the provisional rule):**
+  - Queue `experiments/pending/<id>.yml` with `split: validation`, `train_experiment: <scored train id>`, the same `horizon` and `strategy`, and `dates` inside 2021-01-01 to 2023-12-31.
+  - `run_queue` replays it and asks one Thresholdout query per side on the `top` edge. It logs to `ledger/holdout_queries.csv` (metric `edge_top`) and writes only the released values to `experiments/done/<id>/holdout.json`. No validation pick log is ever written.
+  - The experiment stays pending while this week's budget can't cover both sides. A query already in the ledger is never asked again.
+- **Other splits:** `test`, `exam` and anything else are refused, with `experiments/done/<id>/refused.json`.
+- **Next for you:** queue champion v1 as a train experiment for day and week (`strategies.champion_v1`). The fallback then has `top` numbers comparable with everything else.
+
 
 Needs a supervised session: the fix lives in `engine/`, which is protected
 (this run can describe it but not write it). Found while trying to do the

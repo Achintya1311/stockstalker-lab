@@ -13,6 +13,18 @@ authorised to run on, a horizon, and a date range. For each one this:
 4. Writes the pick log and its SHA-256 (taken before any outcome is looked
    at) to `experiments/done/<id>/`, then removes the pending file.
 
+Only `split: train` experiments get a public pick log. A `split: validation`
+experiment (which must name its scored `train_experiment`) is answered through
+the reusable holdout instead (`engine.experiment_report.answer_validation`):
+only released values reach `ledger/` and `experiments/done/<id>/holdout.json`,
+and it stays pending while the weekly budget cannot cover it. Any other split
+is refused with `experiments/done/<id>/refused.json` (test looks belong to the
+promotion job, the exam to `picks/`).
+
+After the queue, every train experiment without current results is scored
+(`results.json`/`results.md` next to its pick log) and
+`reports/train_leaderboard.md` is rebuilt.
+
 Whenever a dataset is loaded and it carries the columns B5's scoring needs,
 this also (re)writes `reports/market_line_train.md` (`engine.reports`) and
 `reports/selftest.md` (`engine.selftest`, B6), so a push that touches
@@ -30,7 +42,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from engine.champion_report import maybe_write_champion_report
+from engine.champion_report import REQUIRED_COLUMNS, maybe_write_champion_report
+from engine.experiment_report import LEADERBOARD, Context, answer_validation, score_done, write_leaderboard
 from engine.holdout_report import LEDGER_PATH as HOLDOUT_LEDGER, maybe_log_holdout_query
 from engine.replay import SplitViolation, hash_picks, load_splits, run_dates
 from engine.reports import maybe_write_market_line_report
@@ -94,6 +107,7 @@ def main() -> None:
     ap.add_argument("--selftest-report", default=str(SELFTEST_REPORT))
     ap.add_argument("--champion-report", default=str(CHAMPION_REPORT))
     ap.add_argument("--holdout-ledger", default=str(HOLDOUT_LEDGER))
+    ap.add_argument("--leaderboard", default=str(LEADERBOARD))
     args = ap.parse_args()
 
     pending_dir, done_dir = Path(args.pending), Path(args.done)
@@ -112,18 +126,28 @@ def main() -> None:
             print(f"wrote {args.holdout_ledger}")
 
     queue = sorted(pending_dir.glob("*.yml")) if pending_dir.exists() else []
-    if not queue:
-        print("no experiments queued")
-        return
-
     if dataset is None:
-        print(f"no dataset at {data_path}; leaving queue untouched")
+        print(f"no dataset at {data_path}; leaving queue untouched" if queue else "no experiments queued")
         return
     splits = load_splits()
+    experiments = [(path, load_experiment(path)) for path in queue]
+    if not queue:
+        print("no experiments queued")
 
-    for exp_path in queue:
-        exp = load_experiment(exp_path)
-        exp_id = exp.get("id", exp_path.stem)
+    validation = []
+    for exp_path, exp in experiments:
+        exp_id = exp.setdefault("id", exp_path.stem)
+        if exp.get("split") == "validation":
+            validation.append((exp_path, exp))
+            continue
+        if exp.get("split") != "train":
+            out_dir = done_dir / exp_id
+            out_dir.mkdir(parents=True, exist_ok=True)
+            reason = f"split {exp.get('split')!r} is not run from the queue; only train, or validation through the holdout"
+            (out_dir / "refused.json").write_text(json.dumps({"id": exp_id, "reason": reason}, indent=2) + "\n")
+            exp_path.unlink()
+            print(f"{exp_id}: refused - {reason}")
+            continue
         try:
             picks, pick_hash = run_experiment(dataset, exp, splits)
         except SplitViolation as e:
@@ -148,6 +172,24 @@ def main() -> None:
         (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
         exp_path.unlink()
         print(f"{exp_id}: {manifest['n_picks']} picks over {manifest['n_dates']} dates -> {out_dir}")
+
+    if not REQUIRED_COLUMNS.issubset(dataset.columns):
+        return
+    ctx = Context(dataset)
+    for exp_id in score_done(ctx, done_dir):
+        print(f"{exp_id}: scored -> {done_dir / exp_id / 'results.json'}")
+    print(f"{write_leaderboard(done_dir, Path(args.leaderboard))} rows -> {args.leaderboard}")
+
+    for exp_path, exp in validation:
+        try:
+            picks, _ = run_experiment(dataset, exp, splits)
+        except SplitViolation as e:
+            print(f"{exp['id']}: refused - {e}")
+            continue
+        status = answer_validation(picks, exp, ctx, done_dir, Path(args.holdout_ledger))
+        print(f"{exp['id']}: {status}")
+        if not status.startswith("waiting"):
+            exp_path.unlink()
 
 
 if __name__ == "__main__":
