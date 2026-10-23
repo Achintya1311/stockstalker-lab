@@ -1,0 +1,27 @@
+{
+  "id": "c04-expiry-week-week",
+  "strategy": "strategies.c04_expiry_week_week",
+  "split": "train",
+  "horizon": "week",
+  "pick_log_sha256": "3486f26525224c3ef92863b4505f32d5003758af0b69f69fa4b2804fe7022c15",
+  "scorer_version": 1,
+  "picks_per_table": 5,
+  "selections": {
+    "top": {
+      "bullish": {
+        "n_picks": 0
+      },
+      "bearish": {
+        "n_picks": 0
+      }
+    },
+    "all": {
+      "bullish": {
+        "n_picks": 0
+      },
+      "bearish": {
+        "n_picks": 0
+      }
+    }
+  }
+}

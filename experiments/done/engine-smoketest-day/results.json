@@ -1,0 +1,61 @@
+{
+  "id": "engine-smoketest-day",
+  "strategy": "strategies.engine_smoketest",
+  "split": "train",
+  "horizon": "day",
+  "pick_log_sha256": "b5c15f2d4e0519b43ce6659497032b57b3dc8a2f24558145079de1a650f38813",
+  "scorer_version": 1,
+  "picks_per_table": 5,
+  "selections": {
+    "top": {
+      "bullish": {
+        "n_picks": 10,
+        "n_dates": 2,
+        "coverage": 1.0,
+        "accuracy": 0.5,
+        "market_line": 0.42111801242236024,
+        "edge": 0.07888198757763978,
+        "edge_t": 0.4792452830188682,
+        "directional_move": -0.0027066952047864385,
+        "positive_year_share": 1.0,
+        "by_year": [
+          {
+            "year": 2015,
+            "n_picks": 10,
+            "accuracy": 0.5,
+            "edge": 0.07888198757763978
+          }
+        ],
+        "leak_alarm": false
+      },
+      "bearish": {
+        "n_picks": 0
+      }
+    },
+    "all": {
+      "bullish": {
+        "n_picks": 234,
+        "n_dates": 2,
+        "coverage": 1.0,
+        "accuracy": 0.4188034188034188,
+        "market_line": 0.42111801242236024,
+        "edge": 0.0,
+        "edge_t": null,
+        "directional_move": -0.005659529899441058,
+        "positive_year_share": 0.0,
+        "by_year": [
+          {
+            "year": 2015,
+            "n_picks": 234,
+            "accuracy": 0.4188034188034188,
+            "edge": 0.0
+          }
+        ],
+        "leak_alarm": false
+      },
+      "bearish": {
+        "n_picks": 0
+      }
+    }
+  }
+}
