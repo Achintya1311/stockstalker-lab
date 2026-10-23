@@ -1,0 +1,81 @@
+source_url: ""
+author: "Olivier Seban (Supertrend indicator)"
+license: "indicator formula, not code; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`'s own reading: "Close above the ATR-based
+  Supertrend line bullish, below bearish." `prior_claim`: "Popular on
+  Indian TradingView and Telegram." `default_params`: "ATR 10,
+  multiplier 3" - both taken as given, no catalog-stated alternative to
+  test separately (unlike T08's two named windows).
+horizon: both
+rules_plain: >
+  The classic recursive Supertrend construction (the same formula widely
+  reproduced in retail trading tutorials and libraries such as
+  pandas-ta): `basic_upper = (high+low)/2 + multiplier * ATR(period)`,
+  `basic_lower = (high+low)/2 - multiplier * ATR(period)`. Each final
+  band only ever moves toward price (it "ratchets"): `final_upper[i] =
+  basic_upper[i]` if `basic_upper[i] < final_upper[i-1]` or
+  `close[i-1] > final_upper[i-1]`, else it holds at `final_upper[i-1]`
+  (mirror image for `final_lower`, moving up toward price from below).
+  The Supertrend line itself sticks to whichever final band it was
+  already tracking until price closes through it: tracking the upper
+  band (downtrend/bearish) switches to the lower band (uptrend/bullish)
+  only once `close` closes above the upper band, and vice versa -
+  `strategies/t09_supertrend.py::_supertrend_line` implements exactly
+  this four-branch recursion. By construction, whenever the line is
+  tracking the lower band, the day's close sits at or above it
+  (bullish); whenever it tracks the upper band, close sits at or below
+  it (bearish) - so `close - line` already carries the correct sign for
+  both direction and conviction, the same sign-gives-direction,
+  magnitude-gives-conviction convention every other card here uses,
+  scaled by the line's own level: `(close - line) / abs(line)`.
+
+  ATR(10) reuses the same Wilder's-smoothing helper
+  (`_wilder_smooth`, copied from `strategies/t03_rsi_thresholds.py`,
+  itself copied from `strategies/champion_v1.py`) every Wilder-style
+  card here already uses, applied to the day's true range
+  (`max(high-low, |high-prev_close|, |low-prev_close|)`) instead of a
+  price delta - vectorised, not a per-row loop, for the ATR itself.
+
+  Unlike every `strategies/t0*` card before it, the band-ratchet and
+  line-switch step is NOT expressible as a single `ewm()` call: each
+  day's final band and line state depends on a comparison against the
+  PREVIOUS day's already-resolved final band/line (a path-dependent
+  "stays put unless price breaks through" rule, not a fixed-weight
+  decay), so `_supertrend_line` runs a plain Python loop - but only over
+  the fixed-size trailing `MIN_ROWS` window `score()` hands it per
+  symbol per call (same bounded-size-tail convention T06/T07/T08 use
+  to avoid `state/engine-issues.md`'s "Replay took 1h45m+" class of bug
+  - the loop's cost is O(MIN_ROWS) per symbol per pick date, not O(full
+  history), so it does not multiply the way a loop over the whole
+  dataset would).
+
+  Needs `MIN_ROWS = ATR_PERIOD + WARMUP` rows (10 + 50 = 60) of adjusted
+  high/low/close: `ATR_PERIOD` to seed the first ATR value (same "first
+  valid index = period" convention `_wilder_smooth` already fixes), then
+  `WARMUP` more days for the band-ratchet recursion to run far enough
+  that the arbitrary seed choice at the first valid bar (this
+  implementation starts tracking whichever band is on the same side as
+  the day's own midpoint, whatever) has long since washed out. `WARMUP
+  = 50` is this card's own design choice, not from the catalog (which
+  gives no guidance on recursion warmup length) - flagged in red_flags.
+
+  Needs no pick-date knowledge; one module serves both horizons per the
+  catalog's "both", same as T01/T03/T05.
+default_params:
+  atr_period: 10
+  multiplier: 3.0
+  warmup: 50
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Olivier Seban (Supertrend); very popular in Indian retail"
+link: ""
+prior_claim: "Popular on Indian TradingView and Telegram"
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): status moves to confirmed/refuted only after a real train (then validation/test) replay - same caveat every ported card here already carries."
+  - "The 50-day post-seed warmup length is this card's own choice (the catalog names only ATR period and multiplier, nothing about recursion warmup) - if this card shows no edge, worth re-checking whether a shorter or longer warmup changes which bars get scored, before concluding the underlying claim is refuted. This is a different kind of parameter than `default_params` (which the tune lane studies on train) - it is an implementation-stability knob, not a trading-rule parameter, so it should not itself be tuned against outcomes; a sensitivity check against the audit and a few more seeds is the right follow-up, not a grid search."
+  - "Always-on like T01/T02 (no neutral zone - every bar with enough history is either bullish or tracking the lower band, or bearish tracking the upper band), so expect near-100% coverage once scored, unlike T03/T04/T07's selective abstain behaviour."
+  - "Shares the same ATR building block T04 would need if Connors RSI-2's own trend filter were ATR-based (it isn't - T04 uses a 200-day SMA) and the same trend-following intuition as T01/T02/T08; pick overlap with T01/T02/T08 (SPEC.md section 6 gate 8) is worth checking directly once all have real numbers, not assumed from the shared trend-following framing."
+  - "Coverage and edge both need SPEC.md section 3's reporting once `engine/experiment_report.py` (state/engine-issues.md's open READY FOR WIRING entry) can score this card's picks - same blocker every ported card since A01 has hit; this card does not change that, it just joins the backlog."
+status: untested

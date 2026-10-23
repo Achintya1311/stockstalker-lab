@@ -2720,3 +2720,67 @@ days out - the provisional-strategy fallback (champion v1 for any table
 with no qualifying candidate, SPEC.md section 10) still applies cleanly
 even with the scoring gap unresolved, so go-live itself isn't at risk,
 only the quality of what sits behind it until the gap is fixed.
+
+## 2026-10-23T10:11Z — port lane
+
+Hypothesis: `build` stays blocked on B3 alone (methodology blocker,
+needs a supervised session); `diagnose`/`tune` stay blocked on
+`engine/experiment_report.py` (`state/engine-issues.md`, still unwired
+as of this run - 17 cards landed since A01 with zero scored). Go-live
+track P1/P2/P3 all need either that scoring gap or a supervised session.
+The highest-value unblocked unit of work is plain `port`-lane progress
+through `cards/catalog.csv` in SPEC order: T09 (Supertrend) is the next
+`testable_now: yes` row after T08.
+
+Result: ported T09, Olivier Seban's ATR(10) x 3 Supertrend
+(`cards/T09.yml`, `strategies/t09_supertrend.py`). Unlike every prior
+`t0*` card, the line's final-band ratchet and trend-switch step is a
+path-dependent recursion against the previous bar's own resolved state
+(not expressible as a single `ewm()` call), so `_supertrend_line` runs a
+plain Python loop - bounded to a fixed `MIN_ROWS = 60` trailing window
+per symbol per call (ATR_PERIOD=10 to seed the first ATR value, then a
+50-row warmup for the recursion to wash out its own arbitrary seed
+choice), the same bounded-tail cost shape T06/T07/T08 already use, not
+the full-history-loop shape that caused the "Replay took 1h45m+" issue.
+ATR itself reuses the existing vectorized Wilder-smoothing helper
+(copied from T03/champion_v1), applied to true range instead of a price
+delta. Score is `(close - line) / abs(line)`, always-on like T01/T02
+(no neutral zone). `strategies/t09_supertrend_audit.py` (cross-symbol
+causality proof over the full recursion, not just the final score - this
+card's recursive state makes a leak easier to introduce unnoticed than a
+one-shot rolling max/min). 12 new tests (`tests/test_t09_supertrend.py`):
+clean monotonic up/down trend fixtures (small noise and high/low spread
+relative to the drift) assert the resulting direction rather than a
+hand-derived exact value, since the band-ratchet recursion has no simple
+closed form; insufficient-history/empty-history/has_future-prefilter
+abstain correctly; a direct invariant check that the line's own output
+satisfies "close >= line on a bullish bar" by construction; the Wilder
+helper's known seed value; true-range arithmetic against hand-picked
+high/low/prevclose numbers; the causality audit. Catalog lists this
+card's horizon as "both", so both `experiments/pending/t09-supertrend-{day,week}.yml`
+are queued. `cards/catalog.csv`'s T09 row now reads `queued`.
+
+Full suite: 594 passed, 1 failed (the pre-existing
+`tests/test_c01_day_of_week.py::test_causality_audit_passes` pandas-
+version flake `state/engine-issues.md`'s own WATCH entry already
+documents - unrelated to this change, and all 12 new T09 tests are
+among the 594 passing).
+
+**Next:** T10 (NR7/NR4 narrow range) is next in plain catalog order.
+`diagnose`/`tune` stay blocked until a supervised session wires
+`engine/experiment_report.py` per `state/engine-issues.md` - this gap is
+now 5+ days old (first flagged 2026-10-18) and 18 cards deep (A01-A09,
+C01-C04, T01-T09, D01-D02) with zero of their train replays scored,
+which also stalls the go-live track's P1 rule (every positive-train-edge
+replay is supposed to earn one validation query - none of their edges
+are computable yet to tell which ones qualify). `build` is still blocked
+on B3 alone (methodology: `detect_corporate_actions` structurally cannot
+find real splits/bonuses in NSE's unrebased PREVCLOSE, per the READY FOR
+WIRING entry in `state/engine-issues.md` dated 17 Oct - needs a
+supervised decision on direction, not a routine-level fix). Go-live
+track: Mon 26 Oct (P1 holdout-query window opens) is 3 days out;
+`config/live_source.json` is due Fri 30 Oct 12:00 UTC, 7 days out - the
+provisional-strategy fallback (champion v1 for any table with no
+qualifying candidate, SPEC.md section 10) still applies cleanly even
+with the scoring gap unresolved, so go-live itself isn't at risk, only
+the quality of what sits behind it until the gap is fixed.

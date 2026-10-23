@@ -1,0 +1,11 @@
+# T09 (day horizon): Supertrend ATR(10) x 3, train-split replay (port
+# lane, `state/queue.md`). See cards/T09.yml and
+# strategies/t09_supertrend.py. Catalog lists this card's horizon as
+# "both", so a week variant is also queued.
+id: t09-supertrend-day
+strategy: strategies.t09_supertrend
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
