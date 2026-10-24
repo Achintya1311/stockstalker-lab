@@ -3367,3 +3367,53 @@ whether a persistent trend filter helps the week-bull cell O01's single-bar impu
 O03 lands, also worth splitting O02/D01's bearish numbers by early (2015-17) vs late (2018-20) train years
 against `state/data_manifest.json`'s per-year F&O universe size, to rule out "OI data matured" as the real
 driver of O02's 2018-2020 bearish improvement before trusting it as a regime or genuine-edge effect.
+
+## 2026-10-24T0419Z port lane: O03 (order block confirmed by T01 trend), order-block lane
+
+**Mode:** A (build) — B3 is still the only unticked B item, still `READY FOR WIRING` (methodology, not
+`WIRED`), so no B item unblocked this cycle. Checked `state/workflow_failures.md` (nothing unresolved)
+and `state/leases/` (empty, no lease held by another live run). No new leak alarms since the last entry.
+Claimed the `port` lane lease (`state/leases/port.json`, same commit as this one, since no lease existed
+this cycle) and remove it here.
+
+**Hypothesis/task:** port O03, the next step in the order-block lane's own ordering (`state/queue.md`:
+"Next ports, in order: O03, O04, O05") and the previous entry's own "Next" — does gating O01's retest by
+T01's SMA(20,50) trend filter help, worsen, or just subset O01's own picks? The catalog's claim
+(`cards/catalog.csv` O03 row): "tests whether order blocks are only a trend signal in disguise."
+
+**What happened:** `cards/O03.yml`, `strategies/o03_order_block_trend_confirmed.py` (imports
+`o01_order_block_retest` and `t01_sma_crossover` as libraries, does not copy either — same convention
+O02 already uses for O01/D01, so this stays bit-for-bit consistent with the already-scored O01 replay).
+Kept only when T01's spread for the symbol is non-NaN and its sign matches O01's side; abstains on any
+disagreement, including an exact-zero spread (T01's own docstring says that's not a real case once it
+has enough history). **Both horizons** (`cards/catalog.csv` lists O03 as `horizon=both`, unlike O02's
+day-only restriction): T01 serves day and week identically, so there's no missing-horizon gap to flag.
+`strategies/o03_order_block_trend_confirmed_audit.py` (cross-symbol causality, same shape as O02's own).
+8 new tests (`tests/test_o03_order_block_trend_confirmed.py`): building the fixtures surfaced the same
+kind of gotcha O02's own test file flagged for OI — a bare retest impulse on an otherwise-flat background
+already nudges T01's short SMA enough to agree with O01's side (confirmed numerically: +0.0016/-0.0017
+on the existing `test_o01_order_block.py` fixtures), so a naive fixture can't test disagreement at all.
+Built explicit 60-bar linear up/down-trend backgrounds (`_UP_BG`/`_DOWN_BG`) to force T01's sign
+independently of the local zone/impulse, verified all four bull/bear x agree/disagree combinations
+numerically before writing the test file. Flagged the same gotcha as a red flag in `cards/O03.yml`,
+since it means a real-data pick-overlap check between O01 and O03 (once both replay) matters more than
+usual — O03 could end up close to a near-subset of O01 rather than an independent filter.
+`experiments/pending/o03-trend-confirmed-{day,week}.yml` queued. `cards/catalog.csv`'s O03 row now reads
+`queued`. `state/queue.md`'s order-block lane section updated: O00/O01/O02's diagnosis summarised (was
+still describing them as "no finished replay yet", stale since the last entry's diagnosis), O03's port
+logged, O04/O05 left as the next ports.
+
+**Result:** `python3.13 -m pytest -q --deselect tests/test_c01_day_of_week.py::test_causality_audit_passes`
+(same pre-existing environment flake every recent run excludes; this sandbox was also missing `pytest`
+and `pyarrow` for the `python3.13` interpreter at the start of this run — both installed via `pip install
+--user`, a sandbox-only gap, not a repo issue) — 708 passed, 0 failed (700 existing + 8 new).
+`scripts/guard_check.py`: "0 changed path(s), none protected."
+
+**Do order blocks help?** Unchanged from the last entry's numbers (O03 has no replay yet): leaning no on
+bullish (O01 already loses to the market line there, and OI confirmation made it worse), genuinely open
+on bearish (a real two-gates-deep pattern so far, worth settling rather than calling).
+
+**Next:** once O03's replay lands in `experiments/done/`, diagnose it against O01 alone on both axes —
+does the trend gate reproduce O01's own bearish-helps/bullish-hurts split, and how much does it actually
+narrow O01's picks (the near-subset risk flagged above)? If still pending next run, port O04 (rank-average
+composite) per the lane's own ordering.
