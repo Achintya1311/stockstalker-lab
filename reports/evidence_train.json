@@ -91,6 +91,15 @@
     "n": 290,
     "coverage": 0.9385113268608414
    },
+   "o04-order-block-composite-week": {
+    "mean": -0.029486978086272826,
+    "lo": -0.05339597108737995,
+    "hi": -0.005626162022706335,
+    "p_le0": 0.9935,
+    "block": 1,
+    "n": 299,
+    "coverage": 0.9676375404530745
+   },
    "t01-sma-crossover-week": {
     "mean": -0.01810465451751887,
     "lo": -0.03930774586493508,
@@ -174,12 +183,12 @@
    }
   },
   "joint": {
-   "n_models": 19,
+   "n_models": 20,
    "block": 1,
    "spa": {
     "lower": 0.502,
     "consistent": 0.754,
-    "upper": 0.8275
+    "upper": 0.837
    },
    "stepm": [],
    "mcs": [
@@ -193,6 +202,7 @@
     "o00-placebo-week",
     "o01-retest-week",
     "o03-trend-confirmed-week",
+    "o04-order-block-composite-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
     "t03-rsi-thresholds-week",
@@ -314,6 +324,15 @@
     "n": 265,
     "coverage": 0.8576051779935275
    },
+   "o04-order-block-composite-week": {
+    "mean": -0.004371931128725106,
+    "lo": -0.03279788544302119,
+    "hi": 0.02222398938001631,
+    "p_le0": 0.6185,
+    "block": 2,
+    "n": 293,
+    "coverage": 0.948220064724919
+   },
    "t01-sma-crossover-week": {
     "mean": 0.03195233874864398,
     "lo": 0.009628759152997239,
@@ -397,12 +416,12 @@
    }
   },
   "joint": {
-   "n_models": 21,
+   "n_models": 22,
    "block": 1,
    "spa": {
-    "lower": 0.116,
-    "consistent": 0.1845,
-    "upper": 0.1845
+    "lower": 0.117,
+    "consistent": 0.185,
+    "upper": 0.185
    },
    "stepm": [],
    "mcs": [
@@ -418,6 +437,7 @@
     "o00-placebo-week",
     "o01-retest-week",
     "o03-trend-confirmed-week",
+    "o04-order-block-composite-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
     "t03-rsi-thresholds-week",
@@ -549,6 +569,15 @@
     "n": 1368,
     "coverage": 0.9325153374233128
    },
+   "o04-order-block-composite-day": {
+    "mean": -0.011603709188200398,
+    "lo": -0.023775594139839838,
+    "hi": 7.437095174988539e-05,
+    "p_le0": 0.974,
+    "block": 1,
+    "n": 1419,
+    "coverage": 0.967280163599182
+   },
    "t01-sma-crossover-day": {
     "mean": -0.014637170057179743,
     "lo": -0.026227766684470594,
@@ -668,7 +697,7 @@
    }
   },
   "joint": {
-   "n_models": 26,
+   "n_models": 27,
    "block": 1,
    "spa": {
     "lower": 0.0,
@@ -819,6 +848,15 @@
     "n": 1267,
     "coverage": 0.863667348329925
    },
+   "o04-order-block-composite-day": {
+    "mean": -0.00647721631345564,
+    "lo": -0.019985930584864326,
+    "hi": 0.007182903938378587,
+    "p_le0": 0.8235,
+    "block": 1,
+    "n": 1389,
+    "coverage": 0.9468302658486708
+   },
    "t01-sma-crossover-day": {
     "mean": 0.018917266894782424,
     "lo": 0.00801752118392275,
@@ -938,7 +976,7 @@
    }
   },
   "joint": {
-   "n_models": 27,
+   "n_models": 28,
    "block": 1,
    "spa": {
     "lower": 0.0,
