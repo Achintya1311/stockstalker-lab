@@ -1,0 +1,50 @@
+source_url: ''
+author: Smart-money / ICT order-block convention; the rank-average composite is StockStalker's own
+  reverse-engineering of the vendor's unpublished "conviction score"
+license: trading convention, not code or a paper; summarised only (SPEC.md section 5)
+published_on: ''
+horizon: both
+data_needed: ohlcv plus futures OI
+testable_now: 'yes'
+link: ''
+status: queued
+claim_as_stated: 'Rank-average across the universe of O01''s zone proximity, D01''s OI build-up and
+  A07''s volume z-score, signed by O01''s own side - the lab''s best guess at the vendor''s unpublished
+  conviction score (0-100, five dots) that sits beside every order-block tile
+  (docs/orderblock_hypotheses.md). Formula unpublished; this is a hypothesis, not a fact.'
+rules_plain: 'For every symbol O01 does not abstain on: side = sign(O01''s score). Align each of the
+  three ingredients to that side (O01''s own |score|; side times D01''s score; side times A07''s
+  volume z-score), take each ingredient''s cross-sectional percentile rank among the symbols O01 fired
+  on that session, and average whichever ranks are defined (D01 and A07 can abstain independently of
+  O01; a missing ingredient is left out of the average, not defaulted to neutral). Final score = side
+  times that average rank, so the sign always matches O01''s own side and only the magnitude - how well
+  this pick ranks against its order-block peers that day - depends on the other two ingredients. Any
+  symbol O01 abstains on abstains here too.'
+default_params:
+  weights: equal (1/3 each, or fewer when an ingredient abstains)
+  abstain: whenever O01 abstains
+source: docs/orderblock_hypotheses.md
+prior_claim: Closest guess to the vendor's ranked board; formula unpublished
+red_flags:
+- No claim is assumed true (SPEC.md section 5); the vendor publishes no formula at all for this field,
+  so every modelling choice below is ours, not theirs.
+- 'Rank-average composite: unlike every other O-series card, this strategy''s score for a given symbol
+  is NOT invariant to which other symbols are in that day''s universe - a peer symbol entering or leaving
+  the order-block group can shift every rank. That is the design, not a bug
+  (`o04_order_block_composite_audit.py`''s docstring spells out the narrower causality property that
+  does still hold: each symbol''s own pre-rank ingredient readings depend only on that symbol''s own
+  history).
+- 'Imports `strategies/o01_order_block_retest.py`, `strategies/d01_oi_buildup.py` and
+  `strategies/a07_high_volume_premium.py` as libraries rather than copying their logic, the same
+  convention O02/O03 already use for D01/T01: this card tests the vendor''s composite guess against the
+  bare retest it is built from, so it must stay bit-for-bit consistent with those three already-scored
+  strategies.'
+- 'The "rank-average... signed by the O01 side" wording in `state/queue.md`''s order-block lane entry
+  is this lab''s own paraphrase of the vendor''s screenshot, not the vendor''s own formula; a different,
+  equally defensible reading (e.g. ranking each ingredient''s raw signed value across the FULL universe
+  rather than only the O01-firing subset, or forcing the final sign to flip when the composite rank is
+  very low) was considered and rejected in favour of this one because it keeps every O-series card''s
+  comparison clean: O04 only ever changes an O01 pick''s magnitude, never which side it is reported on.'
+- Selective strategy (a strict subset of O01's own picks, like O02/O03); report coverage alongside accuracy.
+- Both horizons, same as O01/O03: none of O01, D01's day-only restriction (O04 does not require D01 to
+  be defined, only uses it as one of three optional ingredients) or A07 block week-horizon use.

@@ -3598,3 +3598,63 @@ expects correlated picks with A09 and it's the last un-diagnosed member of the g
 A01, A03-A07, C01-C04, D02 (both PCR variants), and the undiagnosed T-family rows in catalog order,
 unless the go-live track needs attention first (holdout queries for the order-block/confluence lane and
 for new P1 candidates — now including A09-bearish — open Mon 26 Oct).
+
+## 2026-10-24T1414Z port lane: O04 (order-block rank-average composite)
+
+**Mode:** A (build) — B3 still the only unticked B item, still `READY FOR WIRING` (methodology). No
+unresolved entries in `state/workflow_failures.md`. No `state/leases/` directory existed (all lanes
+free); claimed `port` (`state/leases/port.json`, pushed directly to main as its own commit per the
+lease protocol), removed below. Go-live track: `config/live_source.json` still doesn't exist (due Fri
+30 Oct 12:00 UTC); holdout queries for new P1 candidates (E2A, D01C, A09-bearish) open Mon 26 Oct, not
+yet. Order-block lane (ranks right after the go-live track's P1-P4): `state/queue.md` named O04
+(rank-average composite) as the next port after O00-O03.
+
+**Hypothesis/task:** O04 is the lab's reverse-engineering of the vendor's unpublished "conviction score"
+(`docs/orderblock_hypotheses.md`): does ranking O01's own proximity together with D01's OI build-up and
+A07's volume z-score - rather than reading O01 alone - produce a usefully different ordering of picks?
+The catalog gives no formula, only "equal weights; abstain when O01 abstains", so this run had to choose
+one: side = sign(O01's score); each of the three ingredients aligned to that side, ranked cross-
+sectionally (percentile rank) only among the symbols O01 fired on that session, then averaged (skipping
+an ingredient that itself abstains rather than defaulting it to neutral); final score = side times that
+average rank. The sign always matches O01's own side and never flips - only the magnitude moves, mirroring
+the vendor's screenshot having a separate zone-side field and a 0-100 conviction dial rather than one
+blended number. Flagged the rejected alternative (ranking across the whole universe, or letting the
+composite rank flip the final sign) in `cards/O04.yml`'s red flags, since the catalog is genuinely silent
+and a different implementer could reasonably choose differently.
+
+**What happened:** wrote `cards/O04.yml`, `strategies/o04_order_block_composite.py` (imports
+`o01_order_block_retest`, `d01_oi_buildup` and `a07_high_volume_premium` as libraries, does not copy any
+of them), `strategies/o04_order_block_composite_audit.py`. Unlike every prior O-series audit, this one
+cannot assert "a symbol's score is invariant to which other symbols are present" - that would contradict
+the entire point of a rank-average composite - so it instead asserts the narrower property that still has
+to hold: each symbol's own pre-rank ingredient readings (`_ingredients()`) depend only on that symbol's
+own history, not on a peer's trailing row count. Documented why in both the strategy module's docstring
+and the audit's own docstring, so a future reader doesn't mistake the missing invariance for a bug. 9
+tests (`tests/test_o04_order_block_composite.py`): sign never flips even when OI/volume strongly disagree
+with O01's side; full agreement on all three ingredients ranks above partial agreement; graceful fallback
+to O01-only ranking when D01 and A07 both abstain for everyone (plain OHLCV fixtures with no OI columns
+and constant volume); abstain propagates from O01; a symbol with no order block never appears regardless
+of who else is in the universe; one test makes the universe-dependence itself an explicit passing
+assertion (contrasting with O01/O02/O03's own "symbols don't leak into each other" tests, which would be
+the wrong property to assert here); `rules_fired` wording including the live ingredient count (e.g.
+"1/3" when D01/A07 abstain, "3/3" when all three fire); and the causality audit. Full local suite (`pip
+install arch==8.0.0`, needed for `scripts/evidence_stats.py`'s import chain, not preinstalled in this
+sandbox): 729 passed, 1 failed - `tests/test_c01_day_of_week.py::test_causality_audit_passes`, the same
+pre-existing flake the 23 Oct C03 journal entry already documents as unrelated (C01's own proxy-vs-
+wall-clock check, nothing this run touched). All 9 new O04 tests pass. Queued
+`experiments/pending/o04-order-block-composite-{day,week}.yml` (both horizons: O04 only ever treats D01
+as one of three *optional* ingredients, so D01's own day-only restriction - which forced O02 to day-only
+- doesn't apply here). `cards/catalog.csv`'s O04 row now reads `queued`. `state/queue.md`'s order-block
+lane section updated.
+
+**Do order blocks help?** No new replay result this run (O04's train replay is only queued, not yet
+scored) - running answer unchanged: O01 doesn't beat the market line on its own (O00/O01 diagnosis), OI
+confluence helps on the bearish day cell (O02 vs D01), trend confluence mostly just subsets O01's own
+picks rather than adding information (O03). O04 is the next real test of whether blending all three
+signals into one ranked composite beats reading O01 (or D01) alone - no number yet.
+
+**Next:** once O04's train replay lands in `experiments/done/`, diagnose it the same way O00-O03 were
+(`research/diagnostics/o04.md`): does O04 beat O01 alone, and does it beat D01 alone the way O02's
+bearish cell did? Then O05 (O01 on weekly-resampled bars) is the last order-block port before O06's
+intraday variant, which stays code-only until a supervised session wires the 5-minute cache into a
+replay. Diagnose backlog (A08 etc.) still waiting if the order-block lane is claimed by another run.
