@@ -27,6 +27,7 @@ from picks.exam import run_exam_backfill
 from picks.outcomes import mark_late, score_picks_file
 from picks.payload import build_tables, make_payload
 from picks.source import LIVE_SOURCE_PATH, load_live_source
+from picks.xray import build_xray
 from picks.summary import write_summary
 
 HORIZON_DIRS = ("day", "week")
@@ -66,7 +67,7 @@ def generate_next_sessions(dataset: pd.DataFrame, source: dict, out_dir: Path, g
     written = []
 
     day_tables, day_labels = build_tables(dataset, source, "day", session, asof)
-    day_payload = make_payload("day", session, asof, generated_at, day_labels, day_tables)
+    day_payload = make_payload("day", session, asof, generated_at, day_labels, day_tables, xray=build_xray(dataset, source, session, asof))
     if _write_if_absent(out_dir / "day" / f"{session}.json", day_payload):
         written.append(f"day/{session}.json")
 

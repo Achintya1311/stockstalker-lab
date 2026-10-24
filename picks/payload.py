@@ -53,8 +53,8 @@ def build_tables(dataset, source: dict, horizon: str, session: str, asof: str) -
     return {"bullish": bullish, "bearish": bearish}, {bullish_cfg["label"], bearish_cfg["label"]}
 
 
-def make_payload(horizon: str, session: str, asof: str, generated_at: str, labels: set[str], tables: dict) -> dict:
-    return {
+def make_payload(horizon: str, session: str, asof: str, generated_at: str, labels: set[str], tables: dict, xray: dict | None = None) -> dict:
+    payload = {
         "session": session,
         "horizon": horizon,
         "asof": asof,
@@ -63,3 +63,6 @@ def make_payload(horizon: str, session: str, asof: str, generated_at: str, label
         "disclaimer": disclaimer_for(labels),
         "tables": tables,
     }
+    if xray is not None:
+        payload["xray"] = xray
+    return payload
