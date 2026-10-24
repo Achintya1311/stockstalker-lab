@@ -1,0 +1,9 @@
+{
+  "id": "e2b-day",
+  "strategy": "strategies.e2b_a02_uncrowded",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 12173,
+  "n_dates": 1462,
+  "pick_log_sha256": "7033263b71fd0a91cf827757f1975237493d6b12ef672aafededaa96f206a3fd"
+}

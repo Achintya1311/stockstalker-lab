@@ -1,0 +1,9 @@
+{
+  "id": "e2a-day",
+  "strategy": "strategies.e2a_a02_crowded",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 9167,
+  "n_dates": 1216,
+  "pick_log_sha256": "fab4893d9bd72b54d4baec502b014e2c208f61912d94f03b7ae81958e5efd7ec"
+}

@@ -1,8 +1,0 @@
-# D01C (day horizon): see cards/D01C.yml. Train-split replay, port lane.
-id: d01c-day
-strategy: strategies.d01c_oi_fade
-split: train
-horizon: day
-dates:
-  start: 2015-01-01
-  end: 2020-12-31

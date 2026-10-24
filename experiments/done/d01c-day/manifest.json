@@ -1,0 +1,9 @@
+{
+  "id": "d01c-day",
+  "strategy": "strategies.d01c_oi_fade",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 267877,
+  "n_dates": 1485,
+  "pick_log_sha256": "a1d41080012efdde7eb2c77394c579c7d360e5f2240de05db6e9b7c93d916138"
+}
