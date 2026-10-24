@@ -4,3 +4,4 @@ numpy
 pytest
 pyyaml
 yfinance
+arch==8.0.0

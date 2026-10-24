@@ -1,0 +1,36 @@
+name: Evidence
+# Block-bootstrap intervals and data-snooping control (SPA, StepM, MCS) over every finished train
+# experiment. Extra evidence next to the leaderboard; it changes no gate. Reads the dataset from the
+# Actions cache only and commits two small report files.
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Replay"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: ['scripts/evidence_*.py']
+permissions:
+  contents: write
+concurrency: evidence
+jobs:
+  evidence:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+      - uses: actions/cache/restore@v4
+        with: {path: data, key: nse-dataset-none, restore-keys: nse-dataset-}
+      - name: Re-test every train experiment
+        run: set -o pipefail; python3 -m scripts.evidence_report --data data/dataset.parquet --done experiments/done --out reports/evidence_train 2>&1 | tee /tmp/evidence.log
+      - name: Commit the report only
+        run: |
+          bash .github/push.sh "evidence: $(date -u +%FT%H%MZ)" reports/evidence_train.md reports/evidence_train.json
+      - name: Report failure where the routine can read it
+        if: failure()
+        run: bash .github/report_failure.sh evidence /tmp/evidence.log
