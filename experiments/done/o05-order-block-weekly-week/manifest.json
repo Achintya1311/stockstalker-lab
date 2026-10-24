@@ -1,0 +1,9 @@
+{
+  "id": "o05-order-block-weekly-week",
+  "strategy": "strategies.o05_order_block_weekly",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 7899,
+  "n_dates": 254,
+  "pick_log_sha256": "186b856fa97a8ce723f8e7cacc4e29c47ec617802dcf257a54a921ff118e9d44"
+}
