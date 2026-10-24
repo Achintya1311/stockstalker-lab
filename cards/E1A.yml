@@ -1,0 +1,22 @@
+source_url: ''
+author: lab-original confluence test
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-24'
+horizon: day
+claim_as_stated: 'Pre-registered success: E1A edge minus A02 edge >= +1.0 pt AND E1A > E1B, with coverage reported.
+  A confluence that only raises hit rate by shrinking coverage is not a success.'
+rules_plain: A02 extreme-day reversal kept only where O01 finds a zone on the same side as A02's pick (supply zone
+  for a bearish pick); abstain otherwise.
+default_params:
+  base: A02
+data_needed: ohlcv, futures OI
+testable_now: 'yes'
+source: 'plan: StockStalker pick accuracy (24 Oct 2026)'
+link: ''
+prior_claim: Do order blocks add information to the family that already has edge
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- Every variant counts as a trial in ledger/trials.csv; five new trials added together on 24 Oct 2026 so the trial
+  count rises by 5 before any result is read.
+- Train split only until a frozen version exists.
+status: queued

@@ -58,6 +58,14 @@ Question to answer with numbers: **do order blocks help?** Read `docs/orderblock
 - **Intraday (O06):** 5-minute bars are archived daily by `intraday.yml` into the Actions cache (`intraday-5m-*`, never committed). `state/intraday_manifest.json` shows coverage. Reading the cache from a replay needs a workflow change: write the exact change in `state/engine-issues.md` for a supervised session. Until then, only write the O06 strategy code and its synthetic tests.
 - Public wording stays inside SPEC.md section 10: no entry, stop or target prices.
 
+## Confluence lane (added 24 Oct 2026 from the pick-accuracy plan; ranks with the order-block lane)
+
+Why: the lab's only signals with hit-rate edge are the day-bearish fade family (A02, T13, T06, A09), but their directional move after costs is about zero, so hit rate alone is not money. This lane asks whether a second condition adds information to the family that already works. Order blocks are one such condition; open interest is another.
+- **Queued 24 Oct (5 trials added together, before any result is read):** D01C (D01 faded), E1A and E1B (A02 with and without an agreeing order-block zone), E2A and E2B (A02 on crowded and on position-closing moves). Success rules are written into each card before the replay.
+- **Reading the results:** compare each arm with A02 alone on edge, `edge_t`, directional move after costs and coverage. Use `reports/evidence_train.md` (block-bootstrap intervals, SPA, StepM, MCS from `scripts/evidence_report.py`) for the data-snooping answer; it is the stricter evidence, not the leaderboard t.
+- **Do not** tune thresholds on these cards until the first replay lands. Stop rule: if no arm beats its base by 1 pt with an interval above 0, record it as a null in the journal and move on.
+- Next, only if an arm survives: sigma-scaled extreme day with a GARCH forecast (`arch`), then the meta-label stage with conformal abstention (MAPIE), both train-only, per the plan.
+
 ## Acceptance per item (a tick needs all of it; "the logic is written" is not enough)
 
 - **B3, first real run (17 Oct):** `reports/corporate_actions_check.md` lists 19,825 candidate events. Real splits and bonuses across the EQ series since 2015 should be in the low thousands at most, so the detector is mostly catching noise. Find out why before cross-checking. Likely causes: the previous row is not the previous trading day (the stock didn't trade, or was suspended), EQ/BE series switches, dividends or rights, or a tolerance that is too tight. Restrict to F&O-universe symbols if that is all the strategies use. Fix `scripts/adjustments.py`, delete the report so `dataset.yml` writes it again, and only then cross-check 10 events.

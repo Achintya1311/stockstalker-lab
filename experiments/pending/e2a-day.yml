@@ -1,0 +1,8 @@
+# E2A (day horizon): see cards/E2A.yml. Train-split replay, port lane.
+id: e2a-day
+strategy: strategies.e2a_a02_crowded
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

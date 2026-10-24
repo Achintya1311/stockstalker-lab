@@ -1,0 +1,20 @@
+source_url: ''
+author: lab-original confluence test
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-24'
+horizon: day
+claim_as_stated: Placebo direction for E1A. If E1B matches or beats E1A, order blocks add nothing to A02.
+rules_plain: A02 kept only where O01 has no zone or a zone on the other side. The placebo direction for E1A.
+default_params:
+  base: A02
+data_needed: ohlcv, futures OI
+testable_now: 'yes'
+source: 'plan: StockStalker pick accuracy (24 Oct 2026)'
+link: ''
+prior_claim: If E1A does not beat E1B and A02 alone, order blocks add nothing here
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- Every variant counts as a trial in ledger/trials.csv; five new trials added together on 24 Oct 2026 so the trial
+  count rises by 5 before any result is read.
+- Train split only until a frozen version exists.
+status: queued

@@ -1,0 +1,24 @@
+source_url: ''
+author: lab-original confluence test
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-24'
+horizon: day
+claim_as_stated: 'Pre-registered: D01C helps if its day edge (top-5) on either side is positive with the date-block
+  bootstrap interval above 0 (arch, scripts/evidence_report.py). It is the exact mirror of D01, so a large positive
+  edge is expected on at least one side if D01''s loss was a real sign error rather than noise; if D01C is not positive,
+  D01''s losses were not exploitable. Treat any gain as a lead needing validation, not a result.'
+rules_plain: 'D01''s classification with the sign flipped: long build-up bearish, short build-up bullish, unwinding/covering
+  fade at half strength. Pre-declared because D01 lost confidently in every train year (bullish t -8.15).'
+default_params:
+  base: D01
+data_needed: ohlcv, futures OI
+testable_now: 'yes'
+source: 'plan: StockStalker pick accuracy (24 Oct 2026)'
+link: ''
+prior_claim: Broker lore says continuation; the lab's own data says the opposite
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- Every variant counts as a trial in ledger/trials.csv; five new trials added together on 24 Oct 2026 so the trial
+  count rises by 5 before any result is read.
+- Train split only until a frozen version exists.
+status: queued

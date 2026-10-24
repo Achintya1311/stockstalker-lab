@@ -1,0 +1,8 @@
+# E1A (day horizon): see cards/E1A.yml. Train-split replay, port lane.
+id: e1a-day
+strategy: strategies.e1a_a02_with_ob
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

@@ -1,0 +1,22 @@
+source_url: ''
+author: lab-original confluence test
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-24'
+horizon: day
+claim_as_stated: 'Pre-registered hypothesis: crowded (OI rose) extreme days fade harder, so E2A edge > A02 edge.
+  Success needs +1.0 pt over A02 and E2A > E2B.'
+rules_plain: 'A02 kept only where near-month futures OI rose on the extreme day. Hypothesis fixed in advance: crowded
+  moves fade harder.'
+default_params:
+  base: A02
+data_needed: ohlcv, futures OI
+testable_now: 'yes'
+source: 'plan: StockStalker pick accuracy (24 Oct 2026)'
+link: ''
+prior_claim: Indian OI build-up lore, tested both ways
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- Every variant counts as a trial in ledger/trials.csv; five new trials added together on 24 Oct 2026 so the trial
+  count rises by 5 before any result is read.
+- Train split only until a frozen version exists.
+status: queued

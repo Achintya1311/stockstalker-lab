@@ -1,0 +1,14 @@
+"""E2B: A02 extreme-day reversal kept only where futures OI FELL or was flat on the extreme day (see `strategies/e2_a02_oi.py`)."""
+
+import pandas as pd
+
+from strategies import a02_extreme_day_reversal, e2_a02_oi as e2
+
+
+def score(history: pd.DataFrame) -> pd.Series:
+    return e2.uncrowded(history)
+
+
+def rules_fired(history: pd.DataFrame, symbol: str) -> str:
+    kept = e2.uncrowded(history[history["symbol"] == symbol]).get(symbol)
+    return "E2B: A02 pick on a position-closing move (OI fell). " + a02_extreme_day_reversal.rules_fired(history, symbol) if kept is not None else "E2B: no A02 pick or OI rose, abstain"

@@ -1,0 +1,8 @@
+# E2B (day horizon): see cards/E2B.yml. Train-split replay, port lane.
+id: e2b-day
+strategy: strategies.e2b_a02_uncrowded
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
