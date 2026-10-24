@@ -1,0 +1,9 @@
+{
+  "id": "o02-oi-confirmed-day",
+  "strategy": "strategies.o02_order_block_oi_confirmed",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 6367,
+  "n_dates": 1141,
+  "pick_log_sha256": "7f3b674170f30b93624df73b74f5cefea083b8aa97d6ffe7e05cef33365b068c"
+}

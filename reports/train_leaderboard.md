@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 82. Gate 2's bar at that count: t >= 4.15.
+Trials recorded: 84. Gate 2's bar at that count: t >= 4.16.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -42,6 +42,7 @@ Trials recorded: 82. Gate 2's bar at that count: t >= 4.15.
 | a06-low-volatility-week | week | bearish | 1469 | 50.99% | 50.72% | 0.15 | 0.12 |  | -0.02 | 50.00% |  |
 | a08-overnight-intraday-tug-day | day | bullish | 7315 | 44.99% | 44.96% | 0.04 | 0.07 |  | -0.51 | 16.67% |  |
 | d02-stock-pcr-confirmatory-week | week | bearish | 1246 | 49.76% | 50.75% | 0.04 | 0.03 |  | -0.39 | 50.00% |  |
+| o02-oi-confirmed-day | day | bearish | 1982 | 54.34% | 54.67% | 0.01 | 0.01 |  | -0.09 | 50.00% |  |
 | a01-weekly-reversal-week | week | bullish | 1545 | 48.87% | 48.89% | -0.03 | -0.02 |  | -0.51 | 50.00% |  |
 | t05-macd-crossover-day | day | bearish | 4871 | 54.18% | 54.68% | -0.06 | -0.07 |  | -0.04 | 50.00% |  |
 | t09-supertrend-week | week | bearish | 1504 | 50.66% | 50.76% | -0.11 | -0.08 |  | -0.14 | 50.00% |  |
@@ -85,6 +86,7 @@ Trials recorded: 82. Gate 2's bar at that count: t >= 4.15.
 | t05-macd-crossover-day | day | bullish | 4819 | 42.04% | 44.54% | -2.86 | -3.59 |  | -0.61 | 16.67% |  |
 | t09-supertrend-day | day | bullish | 7089 | 42.71% | 45.09% | -2.51 | -4.36 |  | -0.67 | 16.67% |  |
 | d01-oi-buildup-day | day | bearish | 7334 | 52.06% | 54.54% | -2.48 | -4.59 |  | -0.15 | 0.00% |  |
+| o02-oi-confirmed-day | day | bullish | 2421 | 39.98% | 44.54% | -5.15 | -4.60 |  | -0.68 | 16.67% |  |
 | t12-stochastic-day | day | bullish | 4153 | 42.43% | 44.85% | -4.53 | -5.23 |  | -0.66 | 0.00% |  |
 | d01-oi-buildup-day | day | bullish | 7304 | 40.32% | 44.93% | -4.61 | -8.15 |  | -0.75 | 0.00% |  |
 | c03-pre-holiday-day | day | bullish | 5 | 0.00% | 21.54% | -21.54 | n/a |  | -3.24 | 0.00% | too few picks |
