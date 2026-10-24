@@ -3259,3 +3259,59 @@ deadline is now 7 days out.
 - Added `intraday.yml` (daily 5-minute bar archive, Actions cache only, 212 stocks x 60 sessions from 29 Jul on first run) and `scripts/fetch_intraday.py`.
 - Ported O00 (placebo) and O01 (order-block retest) with `strategies/ob_core.py`; queued day and week train replays. Catalog rows O00-O06 added; queue.md has the order-block lane.
 - Next run: diagnose O00 vs O01 when the replays finish, then port O02 to O05 (see state/queue.md).
+
+## 2026-10-24T00:22Z port lane: O02 (order block + D01 OI build-up) ported and queued
+
+**Mode:** A (build) — B3 is still the only unticked B item, still `READY FOR WIRING` (not `WIRED`) in
+`state/engine-issues.md`, so no B item is unblocked. The go-live track's holdout queries open Mon 26
+Oct (today is Sat 24 Oct), so P1-P4 can only keep porting/diagnosing, not querying, right now. The
+order-block lane (ranks right after P1-P4 per `state/queue.md`) had the clearest next action: O00/O01's
+own train replays were still `in_progress` in Actions (started 23:20Z, ~1h in by this run, so not yet
+diagnosable), but the queue's own "Next ports, in order" line names O02 next regardless.
+
+**Hypothesis/task:** O02 — "is order-block-plus-OI-build-up better than either ingredient alone?" —
+the catalog's rule is literal: keep O01's side only when D01's OI build-up classification agrees (long
+build-up for bullish, short build-up for bearish), abstain otherwise.
+
+**What happened:** `cards/O02.yml`, `strategies/o02_order_block_oi_confirmed.py`. Reads the catalog's
+wording literally and narrowly: this gates on a *build-up* specifically (`oi_chg_futstk > 0` on the
+symbol's last visible session), not any "D01's score agrees in sign" reading — the two OI-down
+quadrants (unwinding, covering) abstain here even when their price-direction sign happens to match
+O01's side, since the catalog names build-up, not any agreeing direction. Flagged in `cards/O02.yml`'s
+red_flags as a real interpretation choice; a looser variant would need its own card if this literal one
+doesn't survive the train replay. Imports `strategies.o01_order_block_retest` and
+`strategies.d01_oi_buildup` as libraries rather than copying either (this card's whole point is testing
+the combination against each ingredient alone, so it has to stay bit-for-bit consistent with the
+already-queued O01 and D01 replays, not a close reimplementation that could drift). **Day horizon
+only**, departing from the catalog's listed `horizon=both`: D01 is day-only and has no weekly OI
+build-up reading to gate on (`cards/D01.yml`'s own red flag says there's no natural one to invent) —
+corrected the catalog row's horizon field to `day` rather than leaving a `both` that nothing can
+satisfy. `strategies/o02_order_block_oi_confirmed_audit.py` (cross-symbol causality, same shape as
+O01's/D01's own audits). 9 new tests (`tests/test_o02_order_block_oi_confirmed.py`): building the
+fixtures surfaced a real gotcha worth recording — O01's zone *side* and a retest fixture's own *last-bar*
+price direction are independent (a bullish zone can have its final retest bar close down from the prior
+close, since the zone side comes from the impulse bars further back, not the latest tick), so a naively
+reused `test_o01_order_block.py` fixture can accidentally make the last session's own price move disagree
+with O01's side regardless of OI — checked each fixture's actual last-row `close` vs `prevclose`
+directly before trusting it (see the test file's own comments), rather than assuming "a bullish-zone
+retest fixture" implies "the last session's price also rose". `experiments/pending/o02-oi-confirmed-day.yml`
+queued. In passing, fixed `cards/catalog.csv`'s O00 row, which still read `untested` despite already
+being queued by the 24 Oct supervised session (an oversight, not a new decision) — now `queued`.
+
+**Result:** `python3.13 -m pytest -q --deselect tests/test_c01_day_of_week.py::test_causality_audit_passes`
+(the same pre-existing environment flake every recent run excludes) — 700 passed, 0 failed (691 existing
++ 9 new). `scripts/guard_check.py`: "0 changed path(s), none protected." Claimed the `port` lane lease
+(`state/leases/port.json`, pushed separately as `b868ee8` before this run's own work, since no lease
+existed yet this cycle) and remove it in this commit.
+
+**Do order blocks help?** Still no finished replay for O00, O01 or O02 — all three sit in
+`experiments/pending/` (O00/O01's Replay run, triggered by the 23:20Z order-block-lane commit, was still
+`in_progress` ~1h in as of this run; O02's own Replay will trigger on this push). No numbers yet either
+way; the honest answer so far is "not yet measured."
+
+**Next:** once O00/O01/O02's replays land in `experiments/done/` (check via the public Actions API, same
+as this run did), diagnose O01 vs O00 vs the market line, and separately O02 vs D01 alone (`cards/D01.yml`
+train results, once that replay is also scored) — both are the comparisons `docs/orderblock_hypotheses.md`
+says matter, and each gets one line in the journal per the order-block lane's own rule. If those are
+still pending on the next run, port O03 (OB gated by T01 trend) next, in the same "import `ob_core`,
+never copy it" style as O00-O02.
