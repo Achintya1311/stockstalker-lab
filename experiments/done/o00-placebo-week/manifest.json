@@ -1,0 +1,9 @@
+{
+  "id": "o00-placebo-week",
+  "strategy": "strategies.o00_order_block_placebo",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 57746,
+  "n_dates": 301,
+  "pick_log_sha256": "1d10e19e5fb473a61abc0f3231d39362ae79bb00b8bc907da588dc19067c4d84"
+}

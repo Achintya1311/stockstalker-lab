@@ -1,8 +1,0 @@
-# O01 (day horizon): order-block retest, train-split replay (port lane). See cards/O01.yml and docs/orderblock_hypotheses.md.
-id: o01-retest-day
-strategy: strategies.o01_order_block_retest
-split: train
-horizon: day
-dates:
-  start: 2015-01-01
-  end: 2020-12-31

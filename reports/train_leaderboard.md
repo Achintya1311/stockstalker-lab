@@ -1,81 +1,90 @@
 # Train leaderboard (top picks per table)
 
-Train split only (2015 to 2020), the picks a table would publish. A **candidate** for the provisional rule (SPEC.md section 10) has positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
+Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-| Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Dir. move | Positive years | |
-|---|---|---|---|---|---|---|---|---|---|---|
-| c02-turn-of-month-week | week | bullish | 40 | 62.50% | 50.63% | 11.87 | 1.38 | 0.77 | 100.00% | candidate |
-| t07-bollinger-squeeze-breakout-week | week | bearish | 10 | 60.00% | 48.72% | 11.28 | 0.91 | -0.52 | 83.33% |  |
-| engine-smoketest-day | day | bullish | 10 | 50.00% | 42.11% | 7.89 | 0.48 | -0.27 | 100.00% |  |
-| a02-extreme-day-reversal-day | day | bearish | 4641 | 58.54% | 54.48% | 4.34 | 5.24 | -0.04 | 100.00% |  |
-| d02-stock-pcr-contrarian-week | week | bearish | 661 | 54.31% | 50.91% | 3.75 | 1.68 | 0.16 | 66.67% | candidate |
-| t04-connors-rsi2-day | day | bullish | 3952 | 48.61% | 45.17% | 3.37 | 3.69 | -0.41 | 100.00% |  |
-| t06-bollinger-pctb-day | day | bearish | 5509 | 58.07% | 54.94% | 3.35 | 4.39 | -0.03 | 100.00% |  |
-| a09-gap-fade-day | day | bearish | 4710 | 57.47% | 54.52% | 3.21 | 4.01 | 0.03 | 66.67% | candidate |
-| t01-sma-crossover-week | week | bearish | 1514 | 54.10% | 50.88% | 3.20 | 2.56 | -0.03 | 83.33% |  |
-| t15-adx-regime-week | week | bearish | 1456 | 53.71% | 50.87% | 2.95 | 2.20 | 0.02 | 83.33% | candidate |
-| t13-williams-r-day | day | bearish | 6967 | 57.90% | 54.70% | 2.89 | 4.71 | -0.02 | 100.00% |  |
-| a01-weekly-reversal-week | week | bearish | 1538 | 53.19% | 50.91% | 2.48 | 1.83 | 0.02 | 83.33% | candidate |
-| t04-connors-rsi2-day | day | bearish | 4264 | 57.55% | 54.82% | 2.32 | 2.65 | -0.01 | 83.33% |  |
-| c03-pre-holiday-day | day | bearish | 300 | 57.33% | 55.13% | 2.21 | 0.99 | 0.01 | 60.00% | candidate |
-| t15-adx-regime-day | day | bearish | 6880 | 56.63% | 54.50% | 2.20 | 3.75 | -0.06 | 100.00% |  |
-| t10-nr7-narrow-range-day | day | bullish | 5996 | 46.33% | 44.71% | 2.16 | 3.20 | -0.49 | 100.00% |  |
-| t02-golden-death-cross-week | week | bearish | 1355 | 52.99% | 50.93% | 2.05 | 1.50 | -0.21 | 66.67% |  |
-| t05-macd-crossover-week | week | bearish | 1008 | 53.27% | 51.11% | 2.02 | 1.19 | 0.22 | 66.67% | candidate |
-| a04-52-week-high-week | week | bullish | 1300 | 50.77% | 48.85% | 1.92 | 1.28 | -0.55 | 80.00% |  |
-| t01-sma-crossover-day | day | bearish | 7178 | 56.37% | 54.48% | 1.89 | 3.30 | -0.06 | 100.00% |  |
-| t07-bollinger-squeeze-breakout-week | week | bullish | 18 | 44.44% | 45.08% | 1.79 | 0.17 | -0.46 | 66.67% |  |
-| t03-rsi-thresholds-week | week | bearish | 1099 | 51.87% | 51.07% | 1.72 | 1.02 | -0.06 | 66.67% |  |
-| a06-low-volatility-week | week | bullish | 1458 | 50.55% | 49.10% | 1.55 | 1.24 | -0.50 | 66.67% |  |
-| t10-nr4-narrow-range-day | day | bullish | 6633 | 46.01% | 44.79% | 1.34 | 2.19 | -0.50 | 83.33% |  |
-| a08-overnight-intraday-tug-day | day | bearish | 7325 | 55.69% | 54.53% | 1.15 | 1.97 | -0.04 | 100.00% |  |
-| t02-golden-death-cross-week | week | bullish | 1355 | 49.96% | 48.87% | 1.09 | 0.77 | -0.54 | 50.00% |  |
-| t06-bollinger-pctb-day | day | bullish | 4239 | 46.71% | 44.76% | 1.04 | 1.14 | -0.63 | 66.67% |  |
-| t03-rsi-thresholds-day | day | bearish | 5109 | 56.12% | 54.88% | 0.89 | 1.12 | -0.04 | 83.33% |  |
-| a09-gap-fade-day | day | bullish | 3065 | 45.51% | 44.58% | 0.87 | 0.83 | -0.51 | 66.67% |  |
-| a03-momentum-12-1-week | week | bearish | 1275 | 51.45% | 50.60% | 0.85 | 0.61 | -0.26 | 40.00% |  |
-| t09-supertrend-day | day | bearish | 7127 | 54.72% | 54.40% | 0.32 | 0.53 | -0.05 | 50.00% |  |
-| a03-momentum-12-1-week | week | bullish | 1275 | 49.41% | 49.20% | 0.21 | 0.15 | -0.57 | 60.00% |  |
-| a06-low-volatility-week | week | bearish | 1469 | 50.99% | 50.72% | 0.15 | 0.12 | -0.02 | 50.00% |  |
-| d02-stock-pcr-confirmatory-week | week | bearish | 1246 | 49.76% | 50.75% | 0.04 | 0.03 | -0.39 | 50.00% |  |
-| a08-overnight-intraday-tug-day | day | bullish | 7315 | 44.99% | 44.96% | 0.04 | 0.07 | -0.51 | 16.67% |  |
-| a01-weekly-reversal-week | week | bullish | 1545 | 48.87% | 48.89% | -0.03 | -0.02 | -0.51 | 50.00% |  |
-| t05-macd-crossover-day | day | bearish | 4871 | 54.18% | 54.68% | -0.06 | -0.07 | -0.04 | 50.00% |  |
-| t11-inside-bar-day | day | bearish | 6054 | 54.38% | 54.62% | -0.08 | -0.12 | -0.11 | 66.67% |  |
-| t09-supertrend-week | week | bearish | 1504 | 50.66% | 50.76% | -0.11 | -0.08 | -0.14 | 50.00% |  |
-| t10-nr4-narrow-range-day | day | bearish | 6586 | 54.43% | 54.61% | -0.23 | -0.37 | -0.11 | 50.00% |  |
-| t13-williams-r-day | day | bullish | 7046 | 44.64% | 44.92% | -0.28 | -0.49 | -0.58 | 50.00% |  |
-| a05-max-effect-week | week | bearish | 1475 | 50.37% | 50.65% | -0.28 | -0.22 | -0.37 | 50.00% |  |
-| t12-stochastic-day | day | bearish | 4748 | 54.65% | 54.78% | -0.31 | -0.40 | -0.09 | 50.00% |  |
-| t03-rsi-thresholds-week | week | bullish | 1030 | 48.74% | 48.75% | -0.33 | -0.20 | -0.41 | 50.00% |  |
-| t11-inside-bar-day | day | bullish | 6231 | 44.97% | 44.90% | -0.37 | -0.56 | -0.54 | 16.67% |  |
-| d02-stock-pcr-contrarian-week | week | bullish | 1246 | 49.92% | 49.05% | -0.38 | -0.28 | -0.28 | 33.33% |  |
-| a04-52-week-high-week | week | bearish | 1300 | 50.46% | 50.96% | -0.50 | -0.36 | -0.34 | 40.00% |  |
-| t10-nr7-narrow-range-day | day | bearish | 5756 | 54.57% | 54.60% | -0.55 | -0.79 | -0.09 | 16.67% |  |
-| t14-cci-week | week | bullish | 962 | 46.78% | 48.51% | -0.63 | -0.36 | -0.50 | 50.00% |  |
-| t15-adx-regime-day | day | bullish | 6891 | 44.26% | 44.93% | -0.64 | -1.04 | -0.62 | 50.00% |  |
-| a07-high-volume-premium-week | week | bearish | 1510 | 50.00% | 50.84% | -0.84 | -0.74 | -0.14 | 50.00% |  |
-| t08-donchian-breakout-55-week | week | bearish | 905 | 50.50% | 50.95% | -0.90 | -0.48 | -0.44 | 50.00% |  |
-| a02-extreme-day-reversal-day | day | bullish | 3223 | 45.36% | 44.96% | -1.10 | -1.07 | -0.63 | 50.00% |  |
-| t03-rsi-thresholds-day | day | bullish | 4896 | 44.40% | 44.95% | -1.13 | -1.38 | -0.59 | 33.33% |  |
-| t15-adx-regime-week | week | bullish | 1452 | 47.59% | 48.57% | -1.15 | -0.87 | -0.98 | 33.33% |  |
-| c01-day-of-week-day | day | bearish | 6900 | 53.25% | 54.39% | -1.15 | -2.07 | -0.18 | 33.33% |  |
-| t14-cci-day | day | bearish | 5285 | 53.59% | 54.82% | -1.29 | -1.74 | -0.09 | 16.67% |  |
-| a07-high-volume-premium-week | week | bullish | 1510 | 47.55% | 48.97% | -1.42 | -1.06 | -0.69 | 33.33% |  |
-| t01-sma-crossover-day | day | bullish | 7114 | 43.59% | 44.99% | -1.46 | -2.48 | -0.67 | 0.00% |  |
-| t14-cci-week | week | bearish | 1109 | 49.86% | 51.75% | -1.61 | -0.91 | -0.15 | 16.67% |  |
-| t01-sma-crossover-week | week | bullish | 1499 | 47.10% | 48.80% | -1.81 | -1.45 | -1.09 | 33.33% |  |
-| t14-cci-day | day | bullish | 4552 | 43.41% | 45.02% | -2.44 | -3.02 | -0.56 | 0.00% |  |
-| d01-oi-buildup-day | day | bearish | 7334 | 52.06% | 54.54% | -2.48 | -4.59 | -0.15 | 0.00% |  |
-| t09-supertrend-day | day | bullish | 7089 | 42.71% | 45.09% | -2.51 | -4.36 | -0.67 | 16.67% |  |
-| t08-donchian-breakout-20-week | week | bearish | 1218 | 48.93% | 50.68% | -2.72 | -1.80 | -0.38 | 16.67% |  |
-| c02-turn-of-month-week | week | bearish | 885 | 49.15% | 51.87% | -2.72 | -1.74 | -0.45 | 25.00% |  |
-| t05-macd-crossover-day | day | bullish | 4819 | 42.04% | 44.54% | -2.86 | -3.59 | -0.61 | 16.67% |  |
-| t09-supertrend-week | week | bullish | 1498 | 45.99% | 49.05% | -3.18 | -2.39 | -0.67 | 16.67% |  |
-| t05-macd-crossover-week | week | bullish | 1028 | 46.60% | 49.08% | -3.90 | -2.39 | -0.90 | 16.67% |  |
-| t08-donchian-breakout-20-week | week | bullish | 1363 | 45.49% | 48.91% | -3.97 | -2.68 | -0.89 | 33.33% |  |
-| d02-stock-pcr-confirmatory-week | week | bullish | 661 | 45.54% | 48.88% | -3.99 | -1.76 | -0.83 | 16.67% |  |
-| t12-stochastic-day | day | bullish | 4153 | 42.43% | 44.85% | -4.53 | -5.23 | -0.66 | 0.00% |  |
-| d01-oi-buildup-day | day | bullish | 7304 | 40.32% | 44.93% | -4.61 | -8.15 | -0.75 | 0.00% |  |
-| t08-donchian-breakout-55-week | week | bullish | 1169 | 44.48% | 48.79% | -5.09 | -3.09 | -0.98 | 16.67% |  |
-| c03-pre-holiday-day | day | bullish | 5 | 0.00% | 21.54% | -21.54 | n/a | -3.24 | 0.00% |  |
+Trials recorded: 82. Gate 2's bar at that count: t >= 4.15.
+
+| Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| a02-extreme-day-reversal-day | day | bearish | 4641 | 58.54% | 54.48% | 4.34 | 5.24 | yes | -0.04 | 100.00% |  |
+| t13-williams-r-day | day | bearish | 6967 | 57.90% | 54.70% | 2.89 | 4.71 | yes | -0.02 | 100.00% |  |
+| t06-bollinger-pctb-day | day | bearish | 5509 | 58.07% | 54.94% | 3.35 | 4.39 | yes | -0.03 | 100.00% |  |
+| a09-gap-fade-day | day | bearish | 4710 | 57.47% | 54.52% | 3.21 | 4.01 |  | 0.03 | 66.67% | candidate |
+| t15-adx-regime-day | day | bearish | 6880 | 56.63% | 54.50% | 2.20 | 3.75 |  | -0.06 | 100.00% |  |
+| t04-connors-rsi2-day | day | bullish | 3952 | 48.61% | 45.17% | 3.37 | 3.69 |  | -0.41 | 100.00% |  |
+| t01-sma-crossover-day | day | bearish | 7178 | 56.37% | 54.48% | 1.89 | 3.30 |  | -0.06 | 100.00% |  |
+| t10-nr7-narrow-range-day | day | bullish | 5996 | 46.33% | 44.71% | 2.16 | 3.20 |  | -0.49 | 100.00% |  |
+| t04-connors-rsi2-day | day | bearish | 4264 | 57.55% | 54.82% | 2.32 | 2.65 |  | -0.01 | 83.33% |  |
+| t01-sma-crossover-week | week | bearish | 1514 | 54.10% | 50.88% | 3.20 | 2.56 |  | -0.03 | 83.33% |  |
+| t15-adx-regime-week | week | bearish | 1456 | 53.71% | 50.87% | 2.95 | 2.20 |  | 0.02 | 83.33% | candidate |
+| t10-nr4-narrow-range-day | day | bullish | 6633 | 46.01% | 44.79% | 1.34 | 2.19 |  | -0.50 | 83.33% |  |
+| a08-overnight-intraday-tug-day | day | bearish | 7325 | 55.69% | 54.53% | 1.15 | 1.97 |  | -0.04 | 100.00% |  |
+| a01-weekly-reversal-week | week | bearish | 1538 | 53.19% | 50.91% | 2.48 | 1.83 |  | 0.02 | 83.33% | candidate |
+| d02-stock-pcr-contrarian-week | week | bearish | 661 | 54.31% | 50.91% | 3.75 | 1.68 |  | 0.16 | 66.67% | candidate |
+| t02-golden-death-cross-week | week | bearish | 1355 | 52.99% | 50.93% | 2.05 | 1.50 |  | -0.21 | 66.67% |  |
+| c02-turn-of-month-week | week | bullish | 40 | 62.50% | 50.63% | 11.87 | 1.38 |  | 0.77 | 100.00% | too few picks |
+| a04-52-week-high-week | week | bullish | 1300 | 50.77% | 48.85% | 1.92 | 1.28 |  | -0.55 | 80.00% |  |
+| a06-low-volatility-week | week | bullish | 1458 | 50.55% | 49.10% | 1.55 | 1.24 |  | -0.50 | 66.67% |  |
+| t05-macd-crossover-week | week | bearish | 1008 | 53.27% | 51.11% | 2.02 | 1.19 |  | 0.22 | 66.67% | candidate |
+| t06-bollinger-pctb-day | day | bullish | 4239 | 46.71% | 44.76% | 1.04 | 1.14 |  | -0.63 | 66.67% |  |
+| t03-rsi-thresholds-day | day | bearish | 5109 | 56.12% | 54.88% | 0.89 | 1.12 |  | -0.04 | 83.33% |  |
+| t03-rsi-thresholds-week | week | bearish | 1099 | 51.87% | 51.07% | 1.72 | 1.02 |  | -0.06 | 66.67% |  |
+| c03-pre-holiday-day | day | bearish | 300 | 57.33% | 55.13% | 2.21 | 0.99 |  | 0.01 | 60.00% | too few picks |
+| o01-retest-day | day | bearish | 5641 | 54.85% | 54.31% | 0.66 | 0.95 |  | -0.12 | 50.00% |  |
+| t07-bollinger-squeeze-breakout-week | week | bearish | 10 | 60.00% | 48.72% | 11.28 | 0.91 |  | -0.52 | 83.33% | too few picks |
+| a09-gap-fade-day | day | bullish | 3065 | 45.51% | 44.58% | 0.87 | 0.83 |  | -0.51 | 66.67% |  |
+| t02-golden-death-cross-week | week | bullish | 1355 | 49.96% | 48.87% | 1.09 | 0.77 |  | -0.54 | 50.00% |  |
+| a03-momentum-12-1-week | week | bearish | 1275 | 51.45% | 50.60% | 0.85 | 0.61 |  | -0.26 | 40.00% |  |
+| t09-supertrend-day | day | bearish | 7127 | 54.72% | 54.40% | 0.32 | 0.53 |  | -0.05 | 50.00% |  |
+| t07-bollinger-squeeze-breakout-week | week | bullish | 18 | 44.44% | 45.08% | 1.79 | 0.17 |  | -0.46 | 66.67% | too few picks |
+| a03-momentum-12-1-week | week | bullish | 1275 | 49.41% | 49.20% | 0.21 | 0.15 |  | -0.57 | 60.00% |  |
+| o01-retest-week | week | bearish | 1183 | 51.65% | 50.92% | 0.18 | 0.12 |  | -0.11 | 50.00% |  |
+| a06-low-volatility-week | week | bearish | 1469 | 50.99% | 50.72% | 0.15 | 0.12 |  | -0.02 | 50.00% |  |
+| a08-overnight-intraday-tug-day | day | bullish | 7315 | 44.99% | 44.96% | 0.04 | 0.07 |  | -0.51 | 16.67% |  |
+| d02-stock-pcr-confirmatory-week | week | bearish | 1246 | 49.76% | 50.75% | 0.04 | 0.03 |  | -0.39 | 50.00% |  |
+| a01-weekly-reversal-week | week | bullish | 1545 | 48.87% | 48.89% | -0.03 | -0.02 |  | -0.51 | 50.00% |  |
+| t05-macd-crossover-day | day | bearish | 4871 | 54.18% | 54.68% | -0.06 | -0.07 |  | -0.04 | 50.00% |  |
+| t09-supertrend-week | week | bearish | 1504 | 50.66% | 50.76% | -0.11 | -0.08 |  | -0.14 | 50.00% |  |
+| t11-inside-bar-day | day | bearish | 6054 | 54.38% | 54.62% | -0.08 | -0.12 |  | -0.11 | 66.67% |  |
+| t03-rsi-thresholds-week | week | bullish | 1030 | 48.74% | 48.75% | -0.33 | -0.20 |  | -0.41 | 50.00% |  |
+| a05-max-effect-week | week | bearish | 1475 | 50.37% | 50.65% | -0.28 | -0.22 |  | -0.37 | 50.00% |  |
+| d02-stock-pcr-contrarian-week | week | bullish | 1246 | 49.92% | 49.05% | -0.38 | -0.28 |  | -0.28 | 33.33% |  |
+| a04-52-week-high-week | week | bearish | 1300 | 50.46% | 50.96% | -0.50 | -0.36 |  | -0.34 | 40.00% |  |
+| t14-cci-week | week | bullish | 962 | 46.78% | 48.51% | -0.63 | -0.36 |  | -0.50 | 50.00% |  |
+| t10-nr4-narrow-range-day | day | bearish | 6586 | 54.43% | 54.61% | -0.23 | -0.37 |  | -0.11 | 50.00% |  |
+| t12-stochastic-day | day | bearish | 4748 | 54.65% | 54.78% | -0.31 | -0.40 |  | -0.09 | 50.00% |  |
+| t08-donchian-breakout-55-week | week | bearish | 905 | 50.50% | 50.95% | -0.90 | -0.48 |  | -0.44 | 50.00% |  |
+| t13-williams-r-day | day | bullish | 7046 | 44.64% | 44.92% | -0.28 | -0.49 |  | -0.58 | 50.00% |  |
+| o00-placebo-week | week | bullish | 1505 | 48.44% | 49.05% | -0.61 | -0.55 |  | -0.51 | 50.00% |  |
+| t11-inside-bar-day | day | bullish | 6231 | 44.97% | 44.90% | -0.37 | -0.56 |  | -0.54 | 16.67% |  |
+| a07-high-volume-premium-week | week | bearish | 1510 | 50.00% | 50.84% | -0.84 | -0.74 |  | -0.14 | 50.00% |  |
+| t10-nr7-narrow-range-day | day | bearish | 5756 | 54.57% | 54.60% | -0.55 | -0.79 |  | -0.09 | 16.67% |  |
+| o01-retest-day | day | bullish | 6673 | 44.69% | 45.06% | -0.47 | -0.80 |  | -0.60 | 50.00% |  |
+| t15-adx-regime-week | week | bullish | 1452 | 47.59% | 48.57% | -1.15 | -0.87 |  | -0.98 | 33.33% |  |
+| t14-cci-week | week | bearish | 1109 | 49.86% | 51.75% | -1.61 | -0.91 |  | -0.15 | 16.67% |  |
+| t15-adx-regime-day | day | bullish | 6891 | 44.26% | 44.93% | -0.64 | -1.04 |  | -0.62 | 50.00% |  |
+| a07-high-volume-premium-week | week | bullish | 1510 | 47.55% | 48.97% | -1.42 | -1.06 |  | -0.69 | 33.33% |  |
+| a02-extreme-day-reversal-day | day | bullish | 3223 | 45.36% | 44.96% | -1.10 | -1.07 |  | -0.63 | 50.00% |  |
+| o00-placebo-day | day | bearish | 7125 | 53.73% | 54.40% | -0.65 | -1.20 |  | -0.16 | 16.67% |  |
+| o00-placebo-week | week | bearish | 1500 | 49.20% | 50.76% | -1.48 | -1.27 |  | -0.33 | 50.00% |  |
+| t03-rsi-thresholds-day | day | bullish | 4896 | 44.40% | 44.95% | -1.13 | -1.38 |  | -0.59 | 33.33% |  |
+| t01-sma-crossover-week | week | bullish | 1499 | 47.10% | 48.80% | -1.81 | -1.45 |  | -1.09 | 33.33% |  |
+| t14-cci-day | day | bearish | 5285 | 53.59% | 54.82% | -1.29 | -1.74 |  | -0.09 | 16.67% |  |
+| c02-turn-of-month-week | week | bearish | 885 | 49.15% | 51.87% | -2.72 | -1.74 |  | -0.45 | 25.00% |  |
+| o00-placebo-day | day | bullish | 7107 | 44.15% | 45.06% | -0.95 | -1.75 |  | -0.56 | 16.67% |  |
+| d02-stock-pcr-confirmatory-week | week | bullish | 661 | 45.54% | 48.88% | -3.99 | -1.76 |  | -0.83 | 16.67% |  |
+| t08-donchian-breakout-20-week | week | bearish | 1218 | 48.93% | 50.68% | -2.72 | -1.80 |  | -0.38 | 16.67% |  |
+| o01-retest-week | week | bullish | 1418 | 47.39% | 49.11% | -2.21 | -1.86 |  | -0.50 | 16.67% |  |
+| c01-day-of-week-day | day | bearish | 6900 | 53.25% | 54.39% | -1.15 | -2.07 |  | -0.18 | 33.33% |  |
+| t05-macd-crossover-week | week | bullish | 1028 | 46.60% | 49.08% | -3.90 | -2.39 |  | -0.90 | 16.67% |  |
+| t09-supertrend-week | week | bullish | 1498 | 45.99% | 49.05% | -3.18 | -2.39 |  | -0.67 | 16.67% |  |
+| t01-sma-crossover-day | day | bullish | 7114 | 43.59% | 44.99% | -1.46 | -2.48 |  | -0.67 | 0.00% |  |
+| t08-donchian-breakout-20-week | week | bullish | 1363 | 45.49% | 48.91% | -3.97 | -2.68 |  | -0.89 | 33.33% |  |
+| t14-cci-day | day | bullish | 4552 | 43.41% | 45.02% | -2.44 | -3.02 |  | -0.56 | 0.00% |  |
+| t08-donchian-breakout-55-week | week | bullish | 1169 | 44.48% | 48.79% | -5.09 | -3.09 |  | -0.98 | 16.67% |  |
+| t05-macd-crossover-day | day | bullish | 4819 | 42.04% | 44.54% | -2.86 | -3.59 |  | -0.61 | 16.67% |  |
+| t09-supertrend-day | day | bullish | 7089 | 42.71% | 45.09% | -2.51 | -4.36 |  | -0.67 | 16.67% |  |
+| d01-oi-buildup-day | day | bearish | 7334 | 52.06% | 54.54% | -2.48 | -4.59 |  | -0.15 | 0.00% |  |
+| t12-stochastic-day | day | bullish | 4153 | 42.43% | 44.85% | -4.53 | -5.23 |  | -0.66 | 0.00% |  |
+| d01-oi-buildup-day | day | bullish | 7304 | 40.32% | 44.93% | -4.61 | -8.15 |  | -0.75 | 0.00% |  |
+| c03-pre-holiday-day | day | bullish | 5 | 0.00% | 21.54% | -21.54 | n/a |  | -3.24 | 0.00% | too few picks |

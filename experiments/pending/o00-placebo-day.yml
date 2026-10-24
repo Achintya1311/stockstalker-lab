@@ -1,8 +1,0 @@
-# O00 (day horizon): order-block placebo, train-split replay (port lane). See cards/O00.yml and docs/orderblock_hypotheses.md.
-id: o00-placebo-day
-strategy: strategies.o00_order_block_placebo
-split: train
-horizon: day
-dates:
-  start: 2015-01-01
-  end: 2020-12-31

@@ -1,0 +1,9 @@
+{
+  "id": "o01-retest-day",
+  "strategy": "strategies.o01_order_block_retest",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 44442,
+  "n_dates": 1426,
+  "pick_log_sha256": "91543efa7162b4c9400633e65f177a43a35f84c5a3d74491024aa140ec629817"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "o01-retest-week",
+  "strategy": "strategies.o01_order_block_retest",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 9480,
+  "n_dates": 301,
+  "pick_log_sha256": "ded0db70cc2e911eee7cb6263afd6bc80533f1fddf67e5b6f08336d1c93f694c"
+}
