@@ -3555,3 +3555,46 @@ already implicitly referenced by name in `confluence.md`'s evidence tables witho
 catalog update or `research/diagnostics/a09.md`. After that: A01, A03-A08, C01-C04, D02, and the
 undiagnosed T-family rows, in that order, unless the go-live track or order-block/confluence lanes need
 attention first (holdout queries for those open Mon 26 Oct).
+
+## 2026-10-24T1211Z diagnose lane: A09 (gap fade, one-day-lagged)
+
+**Mode:** A (build) — B3 is still the only unticked B item, still `READY FOR WIRING` (methodology, not
+`WIRED`). Checked `state/workflow_failures.md` (nothing unresolved). Found the previous `diagnose` lease
+(claimed 10:09Z, expiry 11:49Z) expired, so claimed a fresh one (`state/leases/diagnose.json`), removed
+below. Go-live track: `config/live_source.json` still doesn't exist (not due until Fri 30 Oct 12:00 UTC);
+order-block/confluence-lane holdout queries open Mon 26 Oct, not yet. Continued the diagnose backlog the
+last run flagged, picking up A09 as it named next.
+
+**Hypothesis/task:** A09's train replay (`experiments/done/a09-gap-fade-day/results.json`) finished but
+the catalog row still read `queued` with no `research/diagnostics/a09.md` — same backlog gap A02 was
+pulled from last run. A09 is the other half of the confluence lane's "day-bearish fade family" (alongside
+A02) and its own card flags it as untestable in its literal same-day form (B4's truncation), tested here
+only as a one-day-lagged reinterpretation — worth writing up formally rather than leaving implicit in the
+confluence tables.
+
+**What happened:** pulled the by-year breakdown from `results.json` and the matching day/bullish and
+day/bearish rows from `reports/evidence_train.md`. Wrote `research/diagnostics/a09.md`. Updated
+`cards/catalog.csv`'s A09 row to a `train:` status. Updated `state/queue.md`'s diagnose-backlog note.
+
+**Result:** same asymmetric shape as A02 — bearish real (+3.21pts, t=4.01, 95% interval +1.64 to +4.67,
+4/6 years positive, StepM-superior), bullish not (+0.87pts, t=0.83, interval straddles zero). The one new
+thing: A09-bearish's directional move after costs is +0.03% — barely positive, not just flat like A02's
+-0.04% — so unlike A02, **A09-bearish clears the go-live provisional rule on its own**, no confluence
+filter needed. Flagged it as a P1 go-live candidate for day-bearish alongside E2A and D01C. Also flagged
+that A09's year-by-year pattern tracks A02's loosely (both strong 2015-2017, weak 2018-2019), suggesting
+the two picks will overlap a lot — worth checking at the roster gate (SPEC.md section 6 gate 8) rather
+than assuming independence.
+
+Research-only commit (catalog/queue/journal/research docs); `scripts/guard_check.py --base origin/main
+--head HEAD` reports 0 changed protected paths. No code changed, so the test suite was not re-run.
+
+**Do order blocks help?** No new order-block data point this run (A09 is a gap/fade card, not an
+order-block one) — running answer unchanged from the last order-block/confluence entries: order-block
+zone agreement doesn't move A02's day-bearish fade (E1A vs E1B); open interest does (E2A, D01C). Not yet
+shown that order blocks add anything on their own.
+
+**Next:** continue the diagnose backlog — A08 (overnight/intraday tug) next, since its own card already
+expects correlated picks with A09 and it's the last un-diagnosed member of the gap/overnight group; then
+A01, A03-A07, C01-C04, D02 (both PCR variants), and the undiagnosed T-family rows in catalog order,
+unless the go-live track needs attention first (holdout queries for the order-block/confluence lane and
+for new P1 candidates — now including A09-bearish — open Mon 26 Oct).
