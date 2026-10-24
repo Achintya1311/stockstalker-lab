@@ -1,0 +1,9 @@
+{
+  "id": "o04-order-block-composite-week",
+  "strategy": "strategies.o04_order_block_composite",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 9480,
+  "n_dates": 301,
+  "pick_log_sha256": "79b97e2b6d179417e7b4eefd7d0220d1b3032259c805f4a101494c0aebaf475d"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "o04-order-block-composite-day",
+  "strategy": "strategies.o04_order_block_composite",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 44442,
+  "n_dates": 1426,
+  "pick_log_sha256": "83f12a0e2e66470f02b530d8763cb588fe69415ef29440dd5ca7b6bd7061f148"
+}
