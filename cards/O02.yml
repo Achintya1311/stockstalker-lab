@@ -1,0 +1,44 @@
+source_url: ''
+author: Smart-money / ICT order-block convention plus Indian F&O desk OI convention (no single named source)
+license: trading convention, not code or a paper; summarised only (SPEC.md section 5)
+published_on: ''
+horizon: day
+data_needed: ohlcv plus near-month futures OI
+testable_now: 'yes (D01 already ported)'
+link: ''
+status: queued
+claim_as_stated: 'O01''s order-block side, kept only when D01''s OI build-up classification agrees
+  (long build-up for bullish, short build-up for bearish); abstain otherwise. Vendor (order-block.com)
+  shows an OI-state label beside every order block; unverified and unpublished.'
+rules_plain: 'Score = O01''s own signed proximity score, unchanged, for a symbol only when ALL of: (1)
+  O01 has a valid, unmitigated zone with price at it (O01''s own abstain rule otherwise applies first);
+  (2) D01''s classification of the symbol''s last visible session (`strategies/d01_oi_buildup.py`, imported
+  not copied) does not itself abstain; (3) that last session''s own `oi_chg_futstk > 0` -- i.e. it was a
+  build-up session specifically (long or short), not unwinding or covering, matching the catalog''s literal
+  wording ("long/short BUILD-UP", not any OI-agreeing direction); (4) the sign of D01''s score (which always
+  follows that session''s own price-move direction) matches O01''s side. Any other case abstains.'
+default_params:
+  ob: as O01 (ob_core.DEFAULTS, max_dist_atr 2.0)
+  oi: as D01 (weak_weight 0.5, unused here since only the weight=1.0 build-up quadrant is kept)
+source: docs/orderblock_hypotheses.md
+prior_claim: Vendor shows OI state beside every order block; conviction formula unpublished
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- 'Day horizon only, departing from this row''s catalog.csv listing of horizon="both": D01 is day-horizon
+  only and gives no natural weekly OI build-up reading (`cards/D01.yml`''s own red flag), so there is nothing
+  for a week-horizon O02 to gate on without inventing a rule the catalog never states. Ported honestly as
+  day-only rather than guessing a weekly OI proxy.'
+- 'The catalog''s wording names build-up specifically, not "D01''s score agrees in sign" -- a session where
+  price and O01''s side agree but OI fell (unwinding/covering, D01''s weight=0.5 quadrants) abstains here even
+  though D01 would still score it in the same direction. This is the literal reading of "long build-up for
+  bullish, short build-up for bearish"; a looser "any OI-agreeing direction" variant would need its own card
+  if the literal one does not survive the train replay.'
+- 'Imports `strategies/d01_oi_buildup.py` and `strategies/o01_order_block_retest.py` as libraries rather
+  than copying their logic, the same convention `strategies/o00_order_block_placebo.py`/`o01_order_block_retest.py`
+  already use for `strategies/ob_core.py`: this card''s whole point is testing OB+OI against each alone, so
+  it must stay bit-for-bit consistent with the already-queued O01 and D01 train replays, not a close
+  reimplementation that could silently drift.'
+- 'Inherits O01''s MIN_ROWS=60 floor and D01''s own abstain conditions (no active future, missing OI/price
+  fields, zero price move, non-positive prior OI) unchanged; this card adds only the build-up-and-agreement
+  gate on top.'
+- Selective strategy, and more so than O01 alone (a strict subset of O01''s own picks): report coverage.

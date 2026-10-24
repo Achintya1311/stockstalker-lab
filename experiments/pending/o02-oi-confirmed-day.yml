@@ -1,0 +1,10 @@
+# O02 (day horizon only): order-block retest confirmed by D01's OI build-up, train-split replay (port lane).
+# See cards/O02.yml and docs/orderblock_hypotheses.md. No week-horizon variant: D01 gives no weekly OI
+# build-up reading to gate on (cards/D01.yml's own red flag).
+id: o02-oi-confirmed-day
+strategy: strategies.o02_order_block_oi_confirmed
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
