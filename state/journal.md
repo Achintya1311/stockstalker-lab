@@ -3417,3 +3417,47 @@ on bearish (a real two-gates-deep pattern so far, worth settling rather than cal
 does the trend gate reproduce O01's own bearish-helps/bullish-hurts split, and how much does it actually
 narrow O01's picks (the near-subset risk flagged above)? If still pending next run, port O04 (rank-average
 composite) per the lane's own ordering.
+
+## 2026-10-24T0609Z diagnose lane: O03 vs O01 alone, order-block lane
+
+**Mode:** A (build) — B3 is still the only unticked B item, still `READY FOR WIRING` (methodology, not
+`WIRED`), so no B item unblocked this cycle. Checked `state/workflow_failures.md` (nothing new/unresolved)
+and `state/leases/` (empty, no lease held by another live run). No new leak alarms since the last entry.
+Claimed the `diagnose` lane lease (`state/leases/diagnose.json`) and remove it here.
+
+**Hypothesis/task:** the previous entry's own "Next" — now that O03's replay has landed in
+`experiments/done/o03-trend-confirmed-{day,week}/` (this run's very first `git log` check showed the
+replay commit `2bcd937` already on main), diagnose it against O01 alone per `state/queue.md`: does T01's
+trend gate help, hurt, or just subset O01's own picks?
+
+**What happened:** pulled `results.json`'s `top` selection for both O01 and O03, both horizons/sides, and
+computed an approximate daily top-5 pick overlap directly from `picks.json` (no universe/liquidity
+restriction available outside the Actions cache, so directional only, same limitation `o01.md`/`o02.md`
+already flagged for sector/weekday cuts). Wrote `research/diagnostics/o03.md`.
+
+**Result:** edge deltas vs O01: day-bull +0.11 (-0.47→-0.36), day-bear +0.23 (0.66→0.90, still |t|<2),
+week-bull +0.76 (-2.21→-1.45, still negative), week-bear **-1.08 (0.18→-0.91)** — the one cell that
+flips sign for the worse. This breaks the clean bearish-helps/bullish-hurts split O01→O02 showed (O02 had
+no week variant to test it on). Pick overlap (O03's daily top-5 also in O01's top-5 that day) is 69.9%
+(day-bull), 78.6% (day-bear), 69.2% (week-bull), 78.0% (week-bear) — high enough that O03 reads as mostly
+a trend-filtered subset of O01 rather than an independent filter, exactly the risk `cards/O03.yml`'s own
+red flag named before there were numbers to check it against. Coverage drops 3.4-8.6 points on every cell
+from the extra AND, the one unambiguous, consistent effect. `cards/catalog.csv`'s O03 row updated to
+`train: edge -0.36 day-bull / 0.90 day-bear / -1.45 week-bull / -0.91 week-bear`. `state/queue.md`'s
+order-block lane section updated with the diagnosis summary; "Next ports, in order" trimmed to O04/O05
+only (O03's own diagnose line is done, not a future step anymore).
+
+No code changed, so no test run needed; `scripts/guard_check.py` not applicable to a research-only commit
+(no tracked path outside `research/`, `cards/catalog.csv`, `state/`, `state/leases/` touched).
+
+**Do order blocks help?** Still no on bullish (every ablation step, placebo through trend-gated, loses to
+the market line). On bearish, weaker than the last entry claimed: the day-bearish edge is a small,
+insignificant nudge on top of O01 with heavy pick overlap, and week-bearish — previously the second-best
+cell — turns clearly negative once trend-gated. The two-gates-deep "something real, bearish-only" reading
+from `o02.md` does not survive a third gate on the week side.
+
+**Next:** port O04 (rank-average composite, continuous score rather than another hard AND gate — worth
+checking whether it avoids O02/O03's "small nudge plus heavy subsetting" shape). If O04 is already done
+by the time this is read, O05 (weekly bars) or a closer look at week-bearish's reversal (coarse split by
+T01 trend-spread magnitude, not just sign, on that one cell — `955` picks is the thinnest cell in this
+whole ablation, worth ruling out "just noisy" before "genuinely fights the signal").
