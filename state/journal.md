@@ -3461,3 +3461,50 @@ checking whether it avoids O02/O03's "small nudge plus heavy subsetting" shape).
 by the time this is read, O05 (weekly bars) or a closer look at week-bearish's reversal (coarse split by
 T01 trend-spread magnitude, not just sign, on that one cell — `955` picks is the thinnest cell in this
 whole ablation, worth ruling out "just noisy" before "genuinely fights the signal").
+
+## 2026-10-24T0813Z diagnose lane: confluence lane (D01C, E1A/E1B, E2A/E2B)
+
+**Mode:** A (build) — B3 is still the only unticked B item, still `READY FOR WIRING` (methodology, not
+`WIRED`). Checked `state/workflow_failures.md` (nothing new/unresolved) and `state/leases/` (empty before
+claiming). No new leak alarms. Claimed the `diagnose` lane lease (`state/leases/diagnose.json`), remove
+it here.
+
+**Hypothesis/task:** the confluence lane's 5 pre-registered trials (D01C, E1A, E1B, E2A, E2B — queued
+24 Oct in a supervised session, `77c54d2`) all have replays landed in `experiments/done/` but none had
+been read yet (`cards/catalog.csv` still said `queued` for all five, no `research/diagnostics/` entry).
+`state/queue.md`'s own "Reading the results" instructions name exactly what to do: compare each arm with
+its base on edge, `edge_t`, directional move after costs and coverage, using `reports/evidence_train.md`'s
+bootstrap intervals as the stricter evidence.
+
+**What happened:** pulled `top`-selection numbers from each experiment's `results.json` and the matching
+rows from `reports/evidence_train.md` (day/bullish, day/bearish tables) for all five arms plus their
+bases (A02 alone, D01 alone). Wrote `research/diagnostics/confluence.md` with the full comparison.
+Updated `cards/catalog.csv`'s five rows from `queued` to a `train: ...` status line each. Updated
+`state/queue.md`'s confluence-lane section with the diagnosis summary and the (non-null) next step.
+
+**Result:** the lane's own stop rule ("no arm beats its base by 1pt with an interval above 0 → null") is
+not triggered. E1A vs E1B (order-block zone agreement on A02's day-bearish picks) shows no real effect —
+E1B (placebo, 86% coverage) reproduces A02 almost exactly (+4.29 vs A02's +4.34); E1A's 17%-coverage
+sample has an interval straddling zero. **E2A** (A02 restricted to OI-rising/crowded moves) clears the
+bar outright: day-bearish edge +7.46 vs A02's +4.34 (delta +3.12, interval +5.27 to +9.67, entirely above
+0), and for the first time in this family the after-cost directional move turns positive (+0.127% vs
+A02's -0.044%). **D01C** (D01's own OI classification, sign-flipped — not an A02 filter) beats D01 by
+more than 7 points on both day cells with non-overlapping intervals (day-bull -4.61→+2.54, day-bear
+-2.48→+4.74), landing near A02 on bearish and clearly above it on bullish, with a positive bearish
+directional move too (+0.083%). E2B is the complementary half of E2A's finding (uncrowded moves dilute
+A02's edge, as expected once crowdedness is shown to matter), not an independent result.
+
+No code changed this run (catalog/queue/journal/research docs only), so the test suite was not re-run;
+`scripts/guard_check.py --base origin/main --head HEAD` reports "0 changed path(s), none protected."
+
+**Do order blocks help?** No change from the order-block lane's own running answer — this confluence
+check adds a second, independent confirmation: order-block zone agreement does not change A02's
+day-bearish fade (E1A vs E1B), consistent with O00-O03 never clearing the market line on their own. Open
+interest, not order blocks, is where this lane's real edge is (E2A, D01C).
+
+**Next:** D01C and E2A are go-live P1 candidates (positive train edge and positive train directional move
+on a table) — queue one validation query for each once holdout queries open for this lane (Mon 26 Oct per
+`state/queue.md`'s go-live track, not before). Per the confluence lane's own plan, since two arms
+survived: port the sigma-scaled extreme day with a GARCH forecast (`arch`) next, train-only, then the
+meta-label stage with conformal abstention (MAPIE). If that is already done by the time this is read,
+continue the order-block lane's own next port (O04, rank-average composite).
