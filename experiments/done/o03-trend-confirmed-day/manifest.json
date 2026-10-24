@@ -1,0 +1,9 @@
+{
+  "id": "o03-trend-confirmed-day",
+  "strategy": "strategies.o03_order_block_trend_confirmed",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 32861,
+  "n_dates": 1426,
+  "pick_log_sha256": "b7944a172004bba9cb53661bf0d57f8cf79620a77254151b26ec41819f60dfbb"
+}

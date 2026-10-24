@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 84. Gate 2's bar at that count: t >= 4.16.
+Trials recorded: 88. Gate 2's bar at that count: t >= 4.17.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -28,6 +28,7 @@ Trials recorded: 84. Gate 2's bar at that count: t >= 4.16.
 | t05-macd-crossover-week | week | bearish | 1008 | 53.27% | 51.11% | 2.02 | 1.19 |  | 0.22 | 66.67% | candidate |
 | t06-bollinger-pctb-day | day | bullish | 4239 | 46.71% | 44.76% | 1.04 | 1.14 |  | -0.63 | 66.67% |  |
 | t03-rsi-thresholds-day | day | bearish | 5109 | 56.12% | 54.88% | 0.89 | 1.12 |  | -0.04 | 83.33% |  |
+| o03-trend-confirmed-day | day | bearish | 4508 | 55.08% | 54.42% | 0.90 | 1.08 |  | -0.13 | 66.67% |  |
 | t03-rsi-thresholds-week | week | bearish | 1099 | 51.87% | 51.07% | 1.72 | 1.02 |  | -0.06 | 66.67% |  |
 | c03-pre-holiday-day | day | bearish | 300 | 57.33% | 55.13% | 2.21 | 0.99 |  | 0.01 | 60.00% | too few picks |
 | o01-retest-day | day | bearish | 5641 | 54.85% | 54.31% | 0.66 | 0.95 |  | -0.12 | 50.00% |  |
@@ -56,7 +57,9 @@ Trials recorded: 84. Gate 2's bar at that count: t >= 4.16.
 | t12-stochastic-day | day | bearish | 4748 | 54.65% | 54.78% | -0.31 | -0.40 |  | -0.09 | 50.00% |  |
 | t08-donchian-breakout-55-week | week | bearish | 905 | 50.50% | 50.95% | -0.90 | -0.48 |  | -0.44 | 50.00% |  |
 | t13-williams-r-day | day | bullish | 7046 | 44.64% | 44.92% | -0.28 | -0.49 |  | -0.58 | 50.00% |  |
+| o03-trend-confirmed-week | week | bearish | 955 | 50.99% | 51.40% | -0.91 | -0.52 |  | -0.19 | 33.33% |  |
 | o00-placebo-week | week | bullish | 1505 | 48.44% | 49.05% | -0.61 | -0.55 |  | -0.51 | 50.00% |  |
+| o03-trend-confirmed-day | day | bullish | 5975 | 44.45% | 44.97% | -0.36 | -0.55 |  | -0.59 | 16.67% |  |
 | t11-inside-bar-day | day | bullish | 6231 | 44.97% | 44.90% | -0.37 | -0.56 |  | -0.54 | 16.67% |  |
 | a07-high-volume-premium-week | week | bearish | 1510 | 50.00% | 50.84% | -0.84 | -0.74 |  | -0.14 | 50.00% |  |
 | t10-nr7-narrow-range-day | day | bearish | 5756 | 54.57% | 54.60% | -0.55 | -0.79 |  | -0.09 | 16.67% |  |
@@ -66,6 +69,7 @@ Trials recorded: 84. Gate 2's bar at that count: t >= 4.16.
 | t15-adx-regime-day | day | bullish | 6891 | 44.26% | 44.93% | -0.64 | -1.04 |  | -0.62 | 50.00% |  |
 | a07-high-volume-premium-week | week | bullish | 1510 | 47.55% | 48.97% | -1.42 | -1.06 |  | -0.69 | 33.33% |  |
 | a02-extreme-day-reversal-day | day | bullish | 3223 | 45.36% | 44.96% | -1.10 | -1.07 |  | -0.63 | 50.00% |  |
+| o03-trend-confirmed-week | week | bullish | 1270 | 47.80% | 48.79% | -1.45 | -1.11 |  | -0.55 | 33.33% |  |
 | o00-placebo-day | day | bearish | 7125 | 53.73% | 54.40% | -0.65 | -1.20 |  | -0.16 | 16.67% |  |
 | o00-placebo-week | week | bearish | 1500 | 49.20% | 50.76% | -1.48 | -1.27 |  | -0.33 | 50.00% |  |
 | t03-rsi-thresholds-day | day | bullish | 4896 | 44.40% | 44.95% | -1.13 | -1.38 |  | -0.59 | 33.33% |  |

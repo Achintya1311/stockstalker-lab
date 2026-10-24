@@ -1,0 +1,9 @@
+{
+  "id": "o03-trend-confirmed-week",
+  "strategy": "strategies.o03_order_block_trend_confirmed",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 6978,
+  "n_dates": 301,
+  "pick_log_sha256": "74b4e36ceb5e6540994ee57915229bbcd1f8675115115b386a5d0507999d70df"
+}
