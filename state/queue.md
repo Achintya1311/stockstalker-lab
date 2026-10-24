@@ -66,7 +66,23 @@ Question to answer with numbers: **do order blocks help?** Read `docs/orderblock
   which is a weaker claim than "the composite adds information." Cleanest negative result in the
   ablation so far.
 - **O05 ported and queued (24 Oct):** `cards/O05.yml`, `strategies/o05_order_block_weekly.py` (imports `strategies/ob_core.py` as a library; does not copy the detector). O01's exact detector and `DEFAULTS` run unchanged on weekly-resampled bars instead of daily ones — a new `ob_core.resample_weekly()` helper (open = the ISO week's first visible open, high/low = its extremes, close = its last visible close; the latest week may be a partial one, same "as far as we've seen" convention every other card's latest daily bar already has, so no leakage). Week horizon only, per `cards/catalog.csv`'s own row: a weekly-structure zone is a multi-week read with no sensible next-day table. Two MIN floors checked separately — `MIN_ROWS=60` daily rows (enough trading days to plausibly resample into a run of weekly bars) and `MIN_WEEKS=60` weekly bars (O01's own bar-count floor, at this card's own bar size) — a symbol with 70 daily rows spanning only 14 real five-day weeks still abstains on the second floor. `strategies/o05_order_block_weekly_audit.py` (cross-symbol causality, same shape as O01's). 11 tests (`tests/test_o05_order_block_weekly.py`): the resample arithmetic itself (open/high/low/close aggregation across a real multi-day ISO week, and the partial-final-week case) checked directly against hand-computed numbers, then O01's own zone-detection, retest, mitigation and bearish-mirror fixtures reused unchanged at week granularity (one trading day per ISO week, so each week's bar equals that single day's own OHLC — lets this card's tests reuse O01's exact assertions rather than re-deriving them), plus both MIN-floor abstain cases, no-leak-across-symbols, `rules_fired` wording and the causality audit. `experiments/pending/o05-order-block-weekly-week.yml` queued. `cards/catalog.csv`'s O05 row now reads `queued`.
-- **Next (order-block lane):** once O05's train replay lands in `experiments/done/`, diagnose it the same way O00-O04 were — does the weekly-bar rule hold up where the daily one didn't (O01's two positive-but-insignificant cells were day-bearish and week-bearish; O05 only reports a week-bearish/week-bullish pair, so the direct comparison is O05 vs O01's own week cells). After that, O06 stays code-only pending the intraday-cache wiring (`state/engine-issues.md`); the order-block lane's planned ablation is then fully ported, leaving only diagnosis and the "drop D01 from O04" follow-up (`state/journal.md`'s 2026-10-24T1812Z entry) as remaining units.
+- **O05 diagnosed (24 Oct, diagnose lane):** `research/diagnostics/o05.md`. Weekly-bar bullish reverses
+  O01's own week-bullish sign — O01 was clearly negative (edge -2.21, t -1.86, 1/6 positive years), O05
+  is positive (edge +1.90, t 1.47, 4/5 covered years positive, steadier year-to-year than O01's own
+  week-bullish ever was) — the first positive bullish cell anywhere in the lane (O00-O04 were all
+  negative or near-zero on bullish). Still short of gate 2 (t ≥ 3), not a result, but the lane's first
+  encouraging number. Bearish stays flat and insignificant on both bar sizes (O01 +0.18 (t 0.12) → O05
+  +0.32 (t 0.21)), with a worse after-cost directional move on weekly bars (-0.11 → -0.31). Week-by-week
+  top-5 overlap with O01 is only 1.6-2.4% (vs O02/O03's 69-79% "mostly a subset" and O04's 44-74%
+  re-ranking) — O05 is a structurally independent read, not a filter or confirmation of O01's own picks,
+  which is why its sign can move at all. Catalog row O05 updated to `train: edge 1.90 week-bull / 0.32
+  week-bear`.
+- **Order-block lane porting is done** (O00-O05; O06 stays code-only pending the intraday-cache wiring,
+  `state/engine-issues.md`). Remaining units: a cheap train-only follow-up on O05-bullish specifically
+  (does restricting to well-formed weekly zones sharpen the edge — see `o05.md`'s "what to try next"),
+  the "drop D01 from O04" follow-up (`state/journal.md`'s 2026-10-24T1812Z entry), and the diagnose
+  backlog (A08 and the rest of `state/queue.md`'s 24 Oct list) once nothing newer lands in
+  `experiments/done/`.
 - **Intraday (O06):** 5-minute bars are archived daily by `intraday.yml` into the Actions cache (`intraday-5m-*`, never committed). `state/intraday_manifest.json` shows coverage. Reading the cache from a replay needs a workflow change: write the exact change in `state/engine-issues.md` for a supervised session. Until then, only write the O06 strategy code and its synthetic tests.
 - Public wording stays inside SPEC.md section 10: no entry, stop or target prices.
 

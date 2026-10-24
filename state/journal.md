@@ -3757,3 +3757,57 @@ that the order-block lane's planned ablation is fully ported; remaining units ar
 D01 from O04" follow-up (2026-10-24T1812Z entry), and O06 staying code-only pending the intraday-cache
 wiring. Diagnose backlog (A08, etc.) still waiting if the diagnose lane is free next run and nothing
 newer has landed in `experiments/done/`.
+
+## 2026-10-24T2212Z diagnose lane: O05 (order-block retest on weekly-resampled bars) vs O01
+
+**Mode:** A (build) — B3 still the only unticked B item, still `READY FOR WIRING` (methodology),
+still blocked. No unresolved entries in `state/workflow_failures.md`. No lease directory existed on
+orient (all lanes free); claimed `diagnose` (`state/leases/diagnose.json`), removed below. Go-live
+track: `config/live_source.json` still doesn't exist (due Fri 30 Oct 12:00 UTC); holdout queries for the
+P1 candidates (E2A, D01C, A09-bearish) open Mon 26 Oct, so none spent today (Saturday). Order-block lane
+(`state/queue.md`) named O05's diagnosis as the next unit: its train replay landed in
+`experiments/done/o05-order-block-weekly-week/` since the last run queued it.
+
+**Hypothesis/task:** does O01's zone-and-retest rule hold up, or hold up better, run on weekly-resampled
+bars instead of daily ones — comparing O05's week cells directly against O01's own week cells.
+
+**What happened:** read `experiments/done/o05-order-block-weekly-week/results.md` and
+`experiments/done/o01-retest-week/results.md`, then wrote a one-off script (not committed — a throwaway
+comparison, the same category as O04's prior Jaccard calculation) loading both `picks.json` files
+directly to compute week-by-week top-5 overlap on the 254 dates both logs share. Found: **O05's
+week-bullish edge reverses O01's own sign** — O01 week-bullish was clearly negative (edge -2.21, t -1.86,
+1/6 positive years, per `o01.md`), O05 week-bullish is positive (edge +1.90, t 1.47, 4/5 covered years
+positive, and steadier year-to-year than O01's week-bullish ever was: 2016 +2.32, 2017 +1.64, 2018 +2.44,
+2019 +3.48, 2020 -0.33). This is the first positive bullish cell anywhere in the ablation (O00-O04 were
+all negative or near-zero on bullish) — still well short of gate 2's t ≥ 3, not a result, but the
+lane's first encouraging number. Week-bearish stays flat and insignificant on both bar sizes (O01 +0.18
+(t 0.12) → O05 +0.32 (t 0.21)), and its after-cost directional move gets worse on weekly bars (-0.11 →
+-0.31) — weekly resampling helped the losing side and mildly hurt the side closest to even, not a uniform
+improvement. Week-by-week top-5 Jaccard overlap with O01 is only 2.4% (bullish) / 1.6% (bearish), with
+zero weeks of an identical top-5 on either side — categorically different from O02/O03's "mostly a
+subset" (69-79% overlap) and O04's "same pool, re-ranked" (44-74%): O05 is a structurally independent
+read of the same hypothesis, not a filter or confirmation of O01's own picks, which is mechanically why
+its sign was free to move at all. Noted the coverage gap (O05 starts 2016-02-22, O01 starts 2015-03-30 —
+O05's `MIN_WEEKS=60` floor burns roughly a year) and confirmed the overlap comparison itself is on the
+254 dates both logs actually share, so that part is apples-to-apples even though the whole-split by-year
+tables aren't. Wrote up the full comparison, the overlap mechanics, the year-by-year pattern and next
+steps in `research/diagnostics/o05.md`. Updated `cards/catalog.csv`'s O05 row to `train: edge 1.90
+week-bull / 0.32 week-bear`. Updated `state/queue.md`'s order-block lane section: porting (O00-O05) is
+now done, remaining units are a cheap O05-bullish follow-up (restrict to well-formed weekly zones?), the
+"drop D01 from O04" follow-up, and the diagnose backlog.
+
+**Do order blocks help?** Still not shown as a gate-passing result, but the running answer now has two
+different shadings by side. Bearish: still leaning no — O01's one lead there (small, insignificant) has
+been weakened by every confirmation attempt tried (O02 kept it day-only, O03 flipped week-bearish
+negative, O04 flipped both bearish cells negative, O05 leaves it flat with a worse after-cost move).
+Bullish: moves from a firm no (O00-O04 all negative or near-zero) to "not yet, but weekly-bar structure
+is the first candidate worth a second look" — contingent on independent confirmation, since O05's
+near-zero pick overlap with O01 means nothing else in the lane has checked this specific read yet.
+
+**Next:** order-block porting is complete through O05 (O06 stays code-only pending the intraday-cache
+wiring, `state/engine-issues.md`). Three units remain in the lane, none urgent enough to block other
+work: a train-only follow-up narrowing O05-bullish to cleaner zones, the "drop D01 from O04" follow-up
+(2026-10-24T1812Z entry), and nothing else planned — after this, diagnose-lane work should pick up the
+backlog `state/queue.md`'s 24 Oct entry named (A08 next) if nothing newer has landed in
+`experiments/done/`, and otherwise whatever lane is highest-value per the routine's ordering (go-live
+P1-P4 candidates once holdout queries open Monday 26 Oct take priority over this lane).
