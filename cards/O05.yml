@@ -1,0 +1,45 @@
+source_url: ''
+author: Smart-money / ICT order-block convention (no single named source)
+license: trading convention, not code or a paper; summarised only (SPEC.md section 5)
+published_on: ''
+horizon: week
+data_needed: ohlcv (weekly resample)
+testable_now: 'yes'
+link: ''
+status: queued
+claim_as_stated: 'O01''s own order-block retest rule, unchanged, run on weekly bars instead of daily
+  ones. Horizon-sensitivity check, not a new confirmation signal: does the same zone-and-retest idea
+  hold up at a slower timeframe (docs/orderblock_hypotheses.md)?'
+rules_plain: 'Daily OHLC resampled to ISO-calendar weeks (open = the week''s first visible open,
+  high/low = the week''s extremes, close = the week''s last visible close; the most recent week may be
+  partial - whatever days of it are visible, never a future one). O01''s exact detector and defaults
+  (ATR(14, Wilder), impulse >= 1.5 ATR breaking the 10-week high/low, zone = last opposite week within
+  5 weeks before the impulse, mitigated on a later weekly close through the far side, pick within 2 ATR
+  of the zone) run on those weekly bars in place of daily ones. Week horizon only: a weekly-structure
+  zone is a multi-week read, so it has no sensible next-day table to report into.'
+default_params:
+  atr_period: 14
+  impulse_atr: 1.5
+  break_bars: 10
+  ob_lookback: 5
+  max_age: 20
+  max_dist_atr: 2.0
+  min_weeks: 60
+source: docs/orderblock_hypotheses.md
+prior_claim: Horizon sensitivity
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- 'Imports `strategies/ob_core.py` (detector and the new `resample_weekly` helper) rather than copying
+  either: this card tests the same rule at a different bar size, so it must stay bit-for-bit consistent
+  with O01''s own detector logic, with only the input bars changed.'
+- 'MIN_ROWS=60 is a daily-row floor (enough trading days to plausibly form a run of weekly bars);
+  MIN_WEEKS=60 is the separate floor on the resampled weekly-bar count itself, at the same bar count O01
+  uses on daily bars. Both must clear before scoring a symbol (tested separately in
+  `tests/test_o05_order_block_weekly.py`).'
+- 'The final weekly bar can be a partial week (however many days of the current week are visible) since
+  `score(history)` is only ever handed bars up to the pick date - no leakage, just the same "as far as
+  we''ve seen" latest-bar convention every other card already has at daily granularity.'
+- Selective strategy, same as O01: report coverage alongside accuracy.
+- 'ISO-calendar weeks (Mon-Fri) rather than NSE''s own trading calendar: a short trading week (holiday
+  Monday or Friday) still resamples cleanly since `resample_weekly` only ever aggregates whatever rows
+  are actually present that ISO week, not a fixed day count.'

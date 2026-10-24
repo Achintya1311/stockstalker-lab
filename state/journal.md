@@ -3705,3 +3705,55 @@ whether dropping D01 from O04's composite (O01 + volume z only) changes the resu
 the harm is specifically D01's bad ingredient or rank-averaging itself. Diagnose backlog (A08, and the
 cards/catalog.csv list `state/queue.md`'s 24 Oct entry named) still waiting if the diagnose lane is
 free next run and nothing newer has landed in `experiments/done/`.
+
+## 2026-10-24T2017Z port lane: O05 (order-block retest on weekly-resampled bars)
+
+**Mode:** A (build) — B3 still the only unticked B item, still `READY FOR WIRING` (methodology),
+still blocked. No unresolved entries in `state/workflow_failures.md`. No lease directory existed on
+orient (all lanes free); claimed `port` (`state/leases/port.json`), removed below. Go-live track:
+`config/live_source.json` still doesn't exist (due Fri 30 Oct 12:00 UTC); holdout queries for the P1
+candidates (E2A, D01C, A09-bearish) open Mon 26 Oct — today is Saturday 24 Oct, so none yet. Order-block
+lane (ranks right after the go-live track's P1-P4): `state/queue.md` named O05 (weekly bars) as the next
+port, the last planned port in the ablation before O06's intraday variant.
+
+**Hypothesis/task:** port O05 — O01's exact order-block retest rule, run on weekly-resampled bars
+instead of daily ones, to check horizon sensitivity (does the same zone-and-retest idea hold up at a
+slower timeframe, per `docs/orderblock_hypotheses.md`'s own framing of this card).
+
+**What happened:** wrote `cards/O05.yml`, added `ob_core.resample_weekly()` (open = the ISO week's
+first visible open, high/low = its extremes, close = its last visible close; causal — the latest week
+can be partial, using only whatever days are visible, the same convention every other card's latest
+daily bar already follows) to the shared `strategies/ob_core.py` detector module, and
+`strategies/o05_order_block_weekly.py` (imports `ob_core`, does not copy the detector), which resamples
+each symbol's adjusted daily bars to weekly, then runs O01's unchanged detector/`DEFAULTS` on the
+result. Week horizon only, per the catalog's own row. Two separate floors: `MIN_ROWS=60` daily rows and
+`MIN_WEEKS=60` weekly bars — needed both, since a symbol can clear the daily floor with real five-day
+weeks while still having too few weekly bars (tested directly: 70 daily rows / 14 weeks abstains).
+`strategies/o05_order_block_weekly_audit.py` (cross-symbol causality, same shape as O01's). 11 tests in
+`tests/test_o05_order_block_weekly.py`: the resample arithmetic checked against hand-computed numbers on
+a real multi-day ISO week (including a partial final week), then O01's own zone/retest/mitigation/
+bearish-mirror fixtures reused unchanged at week granularity (one trading day per ISO week makes each
+weekly bar equal that single day's own OHLC, so O01's existing assertions carry over exactly), plus both
+MIN-floor abstains, no-cross-symbol-leak, `rules_fired` wording and the causality audit — all pass
+(`python3.13 -m pytest tests/test_o05_order_block_weekly.py -q`: 11 passed). Ran the fuller local suite
+(`--ignore=tests/test_evidence_report.py --ignore=tests/test_evidence_stats.py`, both pre-existing
+`ModuleNotFoundError: No module named 'arch'` under this sandbox's python3.13, unrelated to this change)
+in the background to confirm no regression from the `ob_core.py` change (added a `pandas` import and
+`resample_weekly`, touched nothing else). `experiments/pending/o05-order-block-weekly-week.yml` queued
+for the next `Replay` run. `cards/catalog.csv`'s O05 row now reads `queued`. `state/queue.md`'s
+order-block lane section updated.
+
+**Do order blocks help?** No new replay result this run (O05 is only queued, not yet scored). Running
+answer unchanged from the O04 entry: four ablation steps deep (O00 placebo -> O01 retest -> O02
+OI-gated -> O03 trend-gated -> O04 rank-averaged), no cell has ever combined a positive train edge with
+a sign that survives the next confirmation attempt. O05 tests a different axis (timeframe, not a second
+confirming signal) — it could in principle still show the week-bearish/week-bullish cells hold up, or
+even improve, once the detector runs on weekly structure instead of daily noise, but that's a question
+for the diagnose lane once the replay lands, not an answer yet.
+
+**Next:** once O05's train replay lands in `experiments/done/`, diagnose it against O01's own week
+cells (O01's week-bearish was the one other positive-but-insignificant cell besides day-bearish). After
+that the order-block lane's planned ablation is fully ported; remaining units are diagnosis, the "drop
+D01 from O04" follow-up (2026-10-24T1812Z entry), and O06 staying code-only pending the intraday-cache
+wiring. Diagnose backlog (A08, etc.) still waiting if the diagnose lane is free next run and nothing
+newer has landed in `experiments/done/`.

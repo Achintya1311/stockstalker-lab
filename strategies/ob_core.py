@@ -14,6 +14,7 @@ a one-line change, not a copy of the logic.
 from __future__ import annotations
 
 import numpy as np
+import pandas as pd
 
 DEFAULTS = {
     "atr_period": 14,
@@ -74,6 +75,20 @@ def detect(open_, high, low, close, **overrides) -> dict | None:
         if best is not None:
             return best  # scanning newest first: the first valid impulse is the most recent
     return best
+
+
+def resample_weekly(date, open_, high, low, close) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Resample daily OHLC (oldest to newest, ISO calendar weeks Mon-Fri) into weekly bars:
+    open = the week's first visible open, high/low = the week's extremes, close = the week's
+    last visible close. `date` is ISO `YYYY-MM-DD` strings or datetimes, one per row, already
+    in order. The final bar may be a partial week (whatever days of it are visible) since the
+    caller only ever passes bars up to the pick date - no future day is ever used to complete it,
+    the same way the latest daily bar in the day-horizon cards is always "as far as we've seen"."""
+    iso = pd.DatetimeIndex(pd.to_datetime(date)).isocalendar()
+    key = iso["year"].to_numpy() * 100 + iso["week"].to_numpy()
+    df = pd.DataFrame({"key": key, "open": open_, "high": high, "low": low, "close": close})
+    g = df.groupby("key", sort=True)
+    return g["open"].first().to_numpy(float), g["high"].max().to_numpy(float), g["low"].min().to_numpy(float), g["close"].last().to_numpy(float)
 
 
 def proximity(zone: dict, last_close: float, max_dist_atr: float) -> float:
