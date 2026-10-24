@@ -100,6 +100,15 @@
     "n": 299,
     "coverage": 0.9676375404530745
    },
+   "o05-order-block-weekly-week": {
+    "mean": 0.01900616714972739,
+    "lo": -0.006082667948461219,
+    "hi": 0.04371111309483864,
+    "p_le0": 0.069,
+    "block": 1,
+    "n": 254,
+    "coverage": 0.8220064724919094
+   },
    "t01-sma-crossover-week": {
     "mean": -0.01810465451751887,
     "lo": -0.03930774586493508,
@@ -183,12 +192,12 @@
    }
   },
   "joint": {
-   "n_models": 20,
+   "n_models": 21,
    "block": 1,
    "spa": {
-    "lower": 0.502,
-    "consistent": 0.754,
-    "upper": 0.837
+    "lower": 0.531,
+    "consistent": 0.769,
+    "upper": 0.8445
    },
    "stepm": [],
    "mcs": [
@@ -203,6 +212,7 @@
     "o01-retest-week",
     "o03-trend-confirmed-week",
     "o04-order-block-composite-week",
+    "o05-order-block-weekly-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
     "t03-rsi-thresholds-week",
@@ -333,6 +343,15 @@
     "n": 293,
     "coverage": 0.948220064724919
    },
+   "o05-order-block-weekly-week": {
+    "mean": 0.0031561218720443872,
+    "lo": -0.024607394095662448,
+    "hi": 0.032785938752016526,
+    "p_le0": 0.417,
+    "block": 1,
+    "n": 241,
+    "coverage": 0.7799352750809061
+   },
    "t01-sma-crossover-week": {
     "mean": 0.03195233874864398,
     "lo": 0.009628759152997239,
@@ -416,12 +435,12 @@
    }
   },
   "joint": {
-   "n_models": 22,
+   "n_models": 23,
    "block": 1,
    "spa": {
-    "lower": 0.117,
-    "consistent": 0.185,
-    "upper": 0.185
+    "lower": 0.1215,
+    "consistent": 0.1895,
+    "upper": 0.1895
    },
    "stepm": [],
    "mcs": [
@@ -438,6 +457,7 @@
     "o01-retest-week",
     "o03-trend-confirmed-week",
     "o04-order-block-composite-week",
+    "o05-order-block-weekly-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
     "t03-rsi-thresholds-week",

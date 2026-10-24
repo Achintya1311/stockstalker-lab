@@ -71,9 +71,9 @@ SPA p-value (consistent): **0.003**  (lower 0.000, upper 0.004). StepM superior:
 | d01-oi-buildup-day | 1465 | 100% | -4.61 | -5.75 to -3.57 | 1.000 | 2 |
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 
-## week/bearish  (22 experiments, block 1)
+## week/bearish  (23 experiments, block 1)
 
-SPA p-value (consistent): **0.185**  (lower 0.117, upper 0.185). StepM superior: none. MCS size: 22 of 22.
+SPA p-value (consistent): **0.190**  (lower 0.121, upper 0.190). StepM superior: none. MCS size: 23 of 23.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -85,6 +85,7 @@ SPA p-value (consistent): **0.185**  (lower 0.117, upper 0.185). StepM superior:
 | t05-macd-crossover-week | 275 | 89% | +2.02 | -1.36 to +5.31 | 0.113 | 1 |
 | t03-rsi-thresholds-week | 268 | 87% | +1.72 | -1.64 to +5.19 | 0.147 | 2 |
 | a03-momentum-12-1-week | 255 | 83% | +0.85 | -1.79 to +3.60 | 0.285 | 1 |
+| o05-order-block-weekly-week | 241 | 78% | +0.32 | -2.46 to +3.28 | 0.417 | 1 |
 | o01-retest-week | 293 | 95% | +0.18 | -2.75 to +2.91 | 0.455 | 2 |
 | a06-low-volatility-week | 296 | 96% | +0.15 | -2.27 to +2.60 | 0.446 | 2 |
 | d02-stock-pcr-confirmatory-week | 302 | 98% | +0.04 | -2.62 to +2.66 | 0.488 | 2 |
@@ -100,13 +101,14 @@ SPA p-value (consistent): **0.185**  (lower 0.117, upper 0.185). StepM superior:
 | t08-donchian-breakout-20-week | 289 | 94% | -2.72 | -5.86 to +0.34 | 0.966 | 2 |
 | c02-turn-of-month-week | 177 | 57% | -2.72 | -5.80 to +0.23 | 0.964 | 1 |
 
-## week/bullish  (20 experiments, block 1)
+## week/bullish  (21 experiments, block 1)
 
-SPA p-value (consistent): **0.754**  (lower 0.502, upper 0.837). StepM superior: none. MCS size: 19 of 20.
+SPA p-value (consistent): **0.769**  (lower 0.531, upper 0.845). StepM superior: none. MCS size: 20 of 21.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
 | a04-52-week-high-week | 260 | 84% | +1.92 | -0.89 to +4.59 | 0.088 | 2 |
+| o05-order-block-weekly-week | 254 | 82% | +1.90 | -0.61 to +4.37 | 0.069 | 1 |
 | a06-low-volatility-week | 296 | 96% | +1.55 | -1.00 to +4.01 | 0.117 | 2 |
 | t02-golden-death-cross-week | 271 | 88% | +1.09 | -1.82 to +3.79 | 0.231 | 1 |
 | a03-momentum-12-1-week | 255 | 83% | +0.21 | -2.60 to +2.84 | 0.457 | 1 |
