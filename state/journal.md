@@ -3315,3 +3315,55 @@ train results, once that replay is also scored) — both are the comparisons `do
 says matter, and each gets one line in the journal per the order-block lane's own rule. If those are
 still pending on the next run, port O03 (OB gated by T01 trend) next, in the same "import `ob_core`,
 never copy it" style as O00-O02.
+
+## 2026-10-24T02:09Z diagnose lane: O01 vs O00 vs market line, O02 vs D01 — the two order-block comparisons `docs/orderblock_hypotheses.md` calls for
+
+**Mode:** A (build) — B3 is still the only unticked B item, still `READY FOR WIRING` not `WIRED`, so no B
+item unblocked this cycle. Checked `state/workflow_failures.md` (nothing unresolved) and the engine-issues
+`READY FOR WIRING` entries (D2 wiring, B3 methodology, pick-date interface — none newly actionable). No
+leak alarms: every O00/O01/O02/D01 edge magnitude is well under SPEC.md section 6's 15-point/70%-accuracy
+leak-alarm threshold (worst is O02 bullish 2016 at -11.73 edge, 34.27% accuracy — the wrong direction from
+a leak anyway). O00, O01 and O02's train replays all landed since the last journal entry (`9fe0c3f`,
+`ccb4034`), unblocking exactly the diagnosis the last entry queued. Claimed the `diagnose` lane lease
+(`state/leases/diagnose.json`, pushed separately as `0b7a7be`, since no lease existed this cycle) and
+remove it in this commit.
+
+**Hypothesis/task:** do the two comparisons `docs/orderblock_hypotheses.md`'s own rule names — "O01 beats
+O00 and the market line" and "O02 beats D01 alone" — and record them. Also found, and fixed in passing:
+**D01 itself had a finished replay since 22 Oct with no diagnosis file and a stale `queued` catalog status**
+despite `state/queue.md`'s diagnose-lane rule requiring both once a replay lands — needed anyway as O02's
+baseline, so written now rather than left as separate backlog.
+
+**What happened:** four new files in `research/diagnostics/` (`d01.md`, `o00.md`, `o01.md`, `o02.md`) and
+`cards/catalog.csv` status updated for all four rows (`train: edge <x> day-bull / <x> day-bear[/ week...]`,
+top-5-selection numbers, SPEC.md section 3 definitions). No code, test, or protected-path changes — pure
+analysis of existing `experiments/done/*/results.md` plus a look at `picks.json` (confirmed it carries
+only `{date, symbol, score}`, no outcomes, so a weekday/sector cut isn't reconstructable from this sandbox
+without the joined dataset — flagged as a future ask for `engine/experiment_report.py` rather than faked).
+`scripts/guard_check.py`: 0 changed paths, none protected (no commit yet at check time, as expected — the
+real guard runs server-side on push). No pytest run: this unit touched zero `.py` files, only markdown and
+one CSV status column, so there is no test surface to validate; `cards/catalog.csv`'s row/column count was
+checked directly instead (59 rows, 12 columns, consistent before and after).
+
+**Result — O01 vs O00 vs market line (day/week x bull/bear, train top-5):** O01 beats O00 on 3 of 4 cells
+(day-bull +0.48, day-bear +1.31, week-bear +1.66) but is *worse* than the placebo on week-bull (-1.60, O01's
+single worst number). It clears the market line on **zero** of 4 cells — day-bear (+0.66, t 0.95) and
+week-bear (+0.18, t 0.12) get close to flat, not positive-and-significant. **O02 vs D01 alone (day only):**
+bearish clearly improves (D01 -2.48 -> O02 +0.01, a genuine year-concentrated trend: 2018-2020 all positive
+and rising, 2015-2017 flat-to-negative); bullish gets worse (D01 -4.61 -> O02 -5.15). Both comparisons show
+the identical split by side across two independent gates (impulse-only, then impulse+OI): bearish order-block
+retests consistently neutralize an otherwise-wrong signal; bullish retests don't, and sometimes actively hurt.
+
+**Do order blocks help?** Not yet shown, and leaning no on the bullish side specifically — every ablation
+step from placebo to full OB+OI loses to the market line on bullish, and adding OI confirmation makes it
+worse, not better. On the bearish side: no net positive edge either, but a real two-gates-deep pattern
+(not a single lucky cell) of OB/OI conditions turning a confidently wrong signal into a flat one, which is
+worth continuing the ablation to settle rather than calling now.
+
+**Next:** O03 (OB gated by T01 trend) is the next port per `state/queue.md`'s order-block lane — specifically
+worth checking whether it repeats the same bearish-helps/bullish-hurts split (strengthens the "something
+real, bearish-only" reading) or breaks it (suggests the bearish improvement so far isn't robust), and
+whether a persistent trend filter helps the week-bull cell O01's single-bar impulse requirement hurt. Once
+O03 lands, also worth splitting O02/D01's bearish numbers by early (2015-17) vs late (2018-20) train years
+against `state/data_manifest.json`'s per-year F&O universe size, to rule out "OI data matured" as the real
+driver of O02's 2018-2020 bearish improvement before trusting it as a regime or genuine-edge effect.
