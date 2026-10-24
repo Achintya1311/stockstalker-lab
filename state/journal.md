@@ -3508,3 +3508,50 @@ on a table) — queue one validation query for each once holdout queries open fo
 survived: port the sigma-scaled extreme day with a GARCH forecast (`arch`) next, train-only, then the
 meta-label stage with conformal abstention (MAPIE). If that is already done by the time this is read,
 continue the order-block lane's own next port (O04, rank-average composite).
+
+## 2026-10-24T1009Z diagnose lane: A02 (extreme-day reversal), and backlog found
+
+**Mode:** A (build) — B3 is still the only unticked B item, still `READY FOR WIRING` (methodology, not
+`WIRED`). Checked `state/workflow_failures.md` (nothing unresolved) and `state/leases/` (directory didn't
+even exist — every lane free). Claimed the `diagnose` lane lease (`state/leases/diagnose.json`), remove
+it here. No new leak alarms. Go-live track: `config/live_source.json` still doesn't exist (not due until
+Fri 30 Oct 12:00 UTC); order-block/confluence-lane holdout queries open Mon 26 Oct, not yet — so the
+highest-value unit available today is the `diagnose` lane's own backlog.
+
+**Hypothesis/task:** scanning `cards/catalog.csv` against `experiments/done/`, a large set of cards have
+finished train replays but still read `queued` with no `train:` status and no `research/diagnostics/<id>.md`
+— A01, A03-A09, C01-C04, D02 (both PCR variants), and most of T01-T15. These numbers already exist
+(`reports/evidence_train.md` and the individual `results.json` files), they were just never written up
+and catalogued per-card. Started with **A02** (extreme-day reversal, day horizon): it's one of the two
+base strategies the confluence lane (`state/queue.md`) already built five derived trials from and named
+in its own "why" as part of "the lab's only signals with hit-rate edge... the day-bearish fade family", but
+A02 itself had never been formally diagnosed or catalogued.
+
+**What happened:** pulled `experiments/done/a02-extreme-day-reversal-day/results.json` (full by-year
+breakdown, both sides) and the matching day/bullish and day/bearish rows from `reports/evidence_train.md`
+(bootstrap interval, SPA/StepM/MCS membership). Wrote `research/diagnostics/a02.md`. Updated
+`cards/catalog.csv`'s A02 row from `queued` to a `train: ...` status line. Updated `state/queue.md`'s
+confluence-lane section with the A02 diagnosis and flagged the wider backlog for future `diagnose` runs.
+
+**Result:** confirms and formalises what the confluence lane already implied. **Bearish**: edge +4.34pts,
+t=5.24, 95% bootstrap interval +2.62 to +6.06 (clears zero with room), **6 of 6 train years individually
+positive** — the most consistent year record of any card diagnosed in this lab so far — but directional
+move after costs is ~flat (-0.04%), same "hit rate works, money doesn't" shape the confluence lane was
+built to chase. **Bullish**: edge -1.10pts, t=-1.07 (not distinguishable from zero), only 3 of 6 years
+positive, 2017/2020 clearly negative — the catalog's claimed symmetric reversal does not hold on this
+side. No leak alarm (58.5% long-sample accuracy, well under the 70%/15pt trigger). By the go-live
+provisional rule (SPEC.md section 10, positive train edge *and* positive train directional move), A02
+alone does not qualify day-bearish — its confluence descendant E2A does (already flagged as a P1
+candidate).
+
+Research-only commit (catalog/queue/journal/research docs); `scripts/guard_check.py --base origin/main
+--head HEAD` reports 0 changed paths (working-tree diff, not yet committed at check time), and none of
+`cards/`, `state/`, `research/` are in `PROTECTED.txt` regardless. No code changed, so the test suite was
+not re-run.
+
+**Next:** work through the rest of the diagnose backlog one card at a time. A09 (gap-fade) is next in
+priority — it's the other half of the confluence lane's own "day-bearish fade family" and, like A02, is
+already implicitly referenced by name in `confluence.md`'s evidence tables without ever getting its own
+catalog update or `research/diagnostics/a09.md`. After that: A01, A03-A08, C01-C04, D02, and the
+undiagnosed T-family rows, in that order, unless the go-live track or order-block/confluence lanes need
+attention first (holdout queries for those open Mon 26 Oct).
