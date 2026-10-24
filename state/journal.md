@@ -3658,3 +3658,50 @@ signals into one ranked composite beats reading O01 (or D01) alone - no number y
 bearish cell did? Then O05 (O01 on weekly-resampled bars) is the last order-block port before O06's
 intraday variant, which stays code-only until a supervised session wires the 5-minute cache into a
 replay. Diagnose backlog (A08 etc.) still waiting if the order-block lane is claimed by another run.
+
+## 2026-10-24T1812Z diagnose lane: O04 (order-block rank-average composite) vs O01 alone and D01 alone
+
+**Mode:** A (build) — B3 still the only unticked B item, still `READY FOR WIRING` (methodology), still
+blocked. No unresolved entries in `state/workflow_failures.md`. No lease directory existed on orient
+(all lanes free); claimed `diagnose` (`state/leases/diagnose.json`), removed below. Go-live track:
+`config/live_source.json` still doesn't exist (due Fri 30 Oct 12:00 UTC); holdout queries for P1
+candidates (E2A, D01C, A09-bearish) open Mon 26 Oct, not yet. Order-block lane (ranks right after the
+go-live track's P1-P4): `state/queue.md` named diagnosing O04 as the next unit once its replay landed
+— it had (`experiments/done/o04-order-block-composite-{day,week}/`), the prior run's own "Next" note
+having been written before the replay finished.
+
+**Hypothesis/task:** does O04's rank-average composite (O01 proximity + D01 OI build-up + 20-day volume
+z-score, signed by O01's side) beat O01 alone, and does it beat D01 alone the way O02's bearish cell did?
+
+**What happened:** wrote `research/diagnostics/o04.md`. O04 loses to O01 alone on **all four** cells
+(day-bull -1.16 vs O01's -0.47; day-bear -0.65 vs O01's +0.66, sign flip; week-bull -2.95 vs O01's -2.21;
+week-bear -0.44 vs O01's +0.18, sign flip) — the cleanest negative result in the ablation so far, since
+it fails uniformly rather than splitting by side the way O00-O03 did. Confirmed the pick/date counts are
+*exactly* identical between O01's top-5 selection and O04's on every cell, proving O04 draws from exactly
+O01's own abstention pool (per its "abstain when O01 abstains" rule) — the edge loss is purely a
+re-ranking effect, not a coverage change. Measured the re-ranking directly: day-by-day top-5 Jaccard
+overlap between O01 and O04 is 44.4% (day-bull) / 73.8% (day-bear) / 45.2% (week-bull) / 73.1%
+(week-bear) — the composite reshuffles the bullish side far more than the bearish side, and loses more
+of O01's best years (2018 bearish, 2015 bullish) than its worst ones. Against D01 alone (day only): O04
+clearly beats D01 on **both** day cells (+3.45 bullish, +1.83 bearish) — stronger than O02, which only
+beat D01 on bearish and was itself worse than D01 on bullish — but this reflects D01 alone being
+confidently wrong on both sides (0% positive years, `d01.md`) rather than the composite adding real
+information. Updated `cards/catalog.csv`'s O04 row with the train numbers and `state/queue.md`'s
+order-block lane section with this result. No code, tests, or experiments changed this run (pure
+diagnosis of an already-landed replay); full suite not re-run since nothing testable changed.
+
+**Do order blocks help?** Four ablation steps deep (O00 placebo → O01 retest → O02 OI-gated → O03
+trend-gated → O04 rank-averaged), no cell has ever combined a positive train edge with a sign that
+survives the next confirmation attempt tried on it. O01 alone's two positive-but-insignificant cells
+(day-bearish, week-bearish) are the high-water mark of the whole lane so far, and every attempt to
+strengthen them with a second signal (OI, trend, or now a 3-way rank-average) has instead flipped at
+least one of them negative. Leaning firmly toward "not shown" on both sides.
+
+**Next:** O05 (O01 on weekly-resampled bars) is the last planned port in the ablation per
+`state/queue.md`'s ordering — a horizon-mechanics check, not a new confirmation signal, so it cannot
+reverse this pattern even if it lands cleanly. After O05, O06 stays code-only pending the intraday-cache
+wiring (`state/engine-issues.md`). Worth a cheap follow-up once O05 is in: a `tune`-lane check of
+whether dropping D01 from O04's composite (O01 + volume z only) changes the result, to isolate whether
+the harm is specifically D01's bad ingredient or rank-averaging itself. Diagnose backlog (A08, and the
+cards/catalog.csv list `state/queue.md`'s 24 Oct entry named) still waiting if the diagnose lane is
+free next run and nothing newer has landed in `experiments/done/`.
