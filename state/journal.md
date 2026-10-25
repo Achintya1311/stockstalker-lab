@@ -4083,3 +4083,23 @@ suite 753 passed. This push re-runs `evidence.yml`. A05B's own numbers are for t
 **Do order blocks help?** No order-block work this unit. Running answer unchanged.
 
 **Next:** unit 2, diagnose A05B (replay landed in 7b402dd).
+
+## 2026-10-25T1815Z diagnose lane: A05B (MAX effect, cross-sectionally ranked)
+
+**Mode:** A (build), unit 2 of 5. Claimed `diagnose` (0a78f8d), lease removed in this commit.
+
+**Hypothesis/task:** with real centring, do the least lottery-like stocks (muted best day relative to
+own volatility) lead over the next week, the side A05 v1 could never test?
+
+**Result:** `research/diagnostics/a05b.md`. Bullish edge +2.23 (t 1.86), 5/6 positive years (-0.26,
++5.80, +0.20, +3.95, +1.75, +1.05), directional move after costs -0.50%: not a P1 candidate. Would rank
+first in the flat week-bullish cell (SPA p 0.769) ahead of A04 +1.92, O05 +1.90, A06 +1.55. Approximate
+top-5 overlap with A06's bullish picks 46% (a partial low-vol tilt), with A04's 0.3%. `all` selection flat
+(+0.32, t 1.26), so any effect sits in the extreme tail. Bearish identical to A05 v1 on all 295 dates.
+Catalog row and queue updated.
+
+**Do order blocks help?** No order-block work this unit. Running answer unchanged: bearish leans no,
+bullish "not yet, but O05's weekly-bar structure is the first candidate worth a second look".
+
+**Next:** unit 3, diagnose A06 (low volatility), next in the backlog; A05B/A06/A04 bullish noted as
+P2 `consensus_v1` inputs for week-bullish.
