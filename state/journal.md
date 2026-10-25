@@ -3962,3 +3962,46 @@ still read `queued` with a finished replay and no diagnosis. A04 is next in cata
 queries open Monday 26 Oct, the go-live track's P1 candidates (E2A, D01C, A09-bearish, A01-bearish-week)
 and the provisional-strategy deadline (Fri 30 Oct 12:00 UTC for `config/live_source.json`) take priority
 over further backlog diagnosis.
+
+## 2026-10-25T0540Z diagnose lane: A04 (52-week-high proximity) vs diagnose backlog
+
+**Mode:** A (build) — B3 still the only unticked B item, still `READY FOR WIRING` (methodology), still
+blocked. No unresolved entries in `state/workflow_failures.md`. No lease directory existed on orient
+(all lanes free); claimed `diagnose` (`state/leases/diagnose.json`), removed below. Go-live track:
+`config/live_source.json` still doesn't exist (due Fri 30 Oct 12:00 UTC); holdout queries open Mon 26
+Oct — today is Sunday 25 Oct, so none spent this run. No `experiments/pending/` files exist, so no
+port-lane work was blocked on a replay. `state/queue.md`'s diagnose-backlog note named A04 next.
+
+**Hypothesis/task:** score and write up A04 (George and Hwang 2004, 52-week-high proximity) from its
+already-finished train replay (`experiments/done/a04-52-week-high-week/`) — a per-symbol centred
+close-within-252-day-range score, testing whether a published several-months-to-a-year continuation
+effect shows up at NSE's one-week horizon, same transfer-horizon stress test as A03's.
+
+**Result:** `research/diagnostics/a04.md`. Bullish (near 52-week high) is the better side but still
+indistinguishable from zero (edge +1.92, t=1.28, 4/5 positive years: -1.67, +0.58, +3.95, +0.98, +5.67)
+and loses money after costs (-0.55%). Bearish (near 52-week low) is flatter and sign-unstable (edge
+-0.50, t=-0.36, 2/5 positive years), also losing after costs (-0.34%). The `all`-selection numbers
+(~18-20k picks/side, since this card never abstains) are smaller but tighter (bullish +0.92 t=1.63,
+bearish +0.84 t=1.97) and don't change the conclusion — same sign, same after-cost loss. Joint test
+context: bullish actually ranks 1st of 21 experiments in the week/bullish cell, with P(edge<=0)=0.088 —
+closest to the StepM 10% bar of anyone there — but that cell's own SPA p=0.769 is the single weakest of
+all four horizon/side cells, and StepM names zero strategies individually superior; being best of a
+field that collectively clears nothing is evidence the field is flat, not evidence of a real edge.
+Bearish sits in the lower third of its own cell (23 experiments, SPA p=0.190, StepM empty), unremarkable
+either way. Does not qualify as a go-live P1 candidate: bullish has the positive edge but fails the
+directional-move leg; bearish fails both. Second card in a row (after A03) where a published multi-month
+continuation effect shows no usable one-week signal on NSE — not a single unlucky card. Updated
+`cards/catalog.csv`'s A04 row to `train: edge 1.92 week-bull / -0.50 week-bear`. Updated
+`state/queue.md`'s diagnose-backlog note: A05 (max-effect / lottery-demand) is next in plain catalog
+order — its train replay is already in `experiments/done/a05-max-effect-week/`.
+
+**Do order blocks help?** No order-block work this run (diagnose backlog took priority per
+`state/queue.md`'s ordering). Running answer unchanged from the 2026-10-25T04:10Z entry: bearish leans
+no (every confirmation attempt has weakened O01's small, insignificant lead), bullish is "not yet, but
+O05's weekly-bar structure is the first candidate worth a second look" pending independent confirmation.
+
+**Next:** diagnose backlog continues — A05-A07, C01-C04, D02 (both PCR variants), and most of T01-T15
+still read `queued` with a finished replay and no diagnosis. A05 is next in catalog order. Once holdout
+queries open Monday 26 Oct, the go-live track's P1 candidates (E2A, D01C, A09-bearish, A01-bearish-week)
+and the provisional-strategy deadline (Fri 30 Oct 12:00 UTC for `config/live_source.json`) take priority
+over further backlog diagnosis.
