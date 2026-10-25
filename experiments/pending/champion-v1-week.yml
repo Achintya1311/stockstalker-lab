@@ -1,0 +1,13 @@
+# Champion v1 (the current StockStalker blended score, B7) as a plain train
+# experiment, week horizon. SPEC.md section 10 falls back to champion v1 for any
+# table with no provisional candidate, and both bullish tables have none
+# (research/notes/provisional_candidates.md), so the fallback needs the same
+# `top` numbers as every other strategy. Asked for in state/engine-issues.md
+# (WIRED 2026-10-24 entry, "Next for you"); never queued until now.
+id: champion-v1-week
+strategy: strategies.champion_v1
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

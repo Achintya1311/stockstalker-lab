@@ -1,0 +1,11 @@
+# Validation query for the go-live provisional rule (SPEC.md section 10): day-bearish.
+# Staged by scripts/provisional_candidates.py from the scored train experiment below; the queue
+# answers both sides through Thresholdout and logs them in ledger/holdout_queries.csv.
+id: consensus-db-v1-day-validation
+strategy: strategies.consensus_db_v1
+split: validation
+horizon: day
+train_experiment: consensus-db-v1-day
+dates:
+  start: 2021-01-01
+  end: 2023-12-31

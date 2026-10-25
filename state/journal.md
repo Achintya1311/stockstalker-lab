@@ -4332,3 +4332,28 @@ MACD cross in either direction lag the following week. T05 week-bearish joins th
 
 **Next:** unit 5: the eligibility scan as a tested script, and the validation batch staged for Monday UTC.
 Then port T05C (pre-declared flip of the up-cross).
+
+## 2026-10-25T2104Z evaluate prep: provisional-rule scan, staged validation batch, champion v1 queued (unit 5)
+
+**Mode:** A (build), unit 5 of 5. Lane `diagnose` (lease 3e2e4a4), removed in this commit. No holdout
+query was spent.
+
+**Hypothesis/task:** go-live track. Make sure no eligible reading is missed by hand (T05 was), and have
+Monday's validation batch ready so the queries count in the right budget week.
+
+**Result:** `scripts/provisional_candidates.py` (6 tests): applies the train half of SPEC.md section 10 to
+every scored train experiment and stages one `split: validation` experiment per eligible one, never one
+already answered or logged. Output: `research/notes/provisional_candidates.md`. Ten eligible (4
+day-bearish, 6 week-bearish), none bullish on either horizon. Staged in
+`research/notes/validation_batch_2026-10-26/` instead of queued: this run is Sunday in UTC, and the
+weekly budget counts UTC ISO weeks, so the batch waits for 00:00 UTC Monday. Champion v1 had no `top` train
+replay (asked for in engine-issues on 24 Oct, never queued); both bullish tables fall back to it, so
+`champion-v1-day` and `champion-v1-week` are queued now.
+
+**Do order blocks help?** No order-block reading meets the provisional letter on any table. Running
+answer unchanged: bearish leans no; bullish "not yet, but O05's weekly-bar structure is the first
+candidate worth a second look".
+
+**Next:** at or after 00:00 UTC Mon 26 Oct: `git mv research/notes/validation_batch_2026-10-26/*-validation.yml
+experiments/pending/` and push (evaluate lane). Then: diagnose champion v1 when it lands; port T05C (pre-declared
+up-cross flip, day and week); E2A-first/D01C-fallback card; O04-without-A07 ablation.
