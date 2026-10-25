@@ -7,7 +7,7 @@ scored bearish. Bearish table only.
 
 Members are the three day-bearish readings that clear the provisional rule's letter on train (positive
 edge and positive directional move after costs) and overlap each other least (daily top-5 Jaccard
-2.2-10.9%, `state/journal.md` 2026-10-25T1920Z):
+2.2-10.9%, `state/journal.md` 2026-10-25T1825Z):
 
 - `strategies.e2a_a02_crowded`: A02's extreme-day fade kept only where futures OI rose (confluence).
 - `strategies.d01c_oi_fade`: D01's price-and-OI classification, faded.

@@ -4006,7 +4006,7 @@ queries open Monday 26 Oct, the go-live track's P1 candidates (E2A, D01C, A09-be
 and the provisional-strategy deadline (Fri 30 Oct 12:00 UTC for `config/live_source.json`) take priority
 over further backlog diagnosis.
 
-## 2026-10-25T1610Z diagnose lane: A05 (MAX effect / lottery stocks) vs diagnose backlog
+## 2026-10-25T1606Z diagnose lane: A05 (MAX effect / lottery stocks) vs diagnose backlog
 
 **Mode:** A (build). B3 is still the only unticked B item and still blocked on its methodology entry in
 `state/engine-issues.md`. No unresolved entries in `state/workflow_failures.md`. All lanes free on
@@ -4039,7 +4039,7 @@ first candidate worth a second look" pending independent confirmation.
 by Fri 30 Oct 12:00 UTC. Otherwise: port A05 v2 with real centring (per-date cross-sectional rank of
 MAX/sigma preferred, realistic bullish fixture), then continue the diagnose backlog at A06.
 
-## 2026-10-25T1625Z port lane: A05B (A05 v2, cross-sectionally ranked MAX effect)
+## 2026-10-25T1617Z port lane: A05B (A05 v2, cross-sectionally ranked MAX effect)
 
 **Mode:** A (build). B3 still the only unticked B item, still blocked (supervised). No unresolved
 workflow failures. All lanes free on orient; claimed `port` (9669b13), lease removed in this commit.
@@ -4065,7 +4065,7 @@ bullish is "not yet, but O05's weekly-bar structure is the first candidate worth
 within `gates/budgets.py`, toward `config/live_source.json` by Fri 30 Oct 12:00 UTC. When A05B's replay
 lands in `experiments/done/`, diagnose it (bullish side is the new information). Otherwise diagnose A06.
 
-## 2026-10-25T1805Z build lane (workflow failure): evidence.yml crash on identical trials
+## 2026-10-25T1757Z build lane (workflow failure): evidence.yml crash on identical trials
 
 **Mode:** A (build), unit 1 of 5 in a manual 5x run (AB asked for the routines to run now). Claimed `build`
 (9ebd6b5). Unresolved workflow failure first: `evidence.yml` run 40214739477 failed at 17:06Z after
@@ -4084,7 +4084,7 @@ suite 753 passed. This push re-runs `evidence.yml`. A05B's own numbers are for t
 
 **Next:** unit 2, diagnose A05B (replay landed in 7b402dd).
 
-## 2026-10-25T1815Z diagnose lane: A05B (MAX effect, cross-sectionally ranked)
+## 2026-10-25T1758Z diagnose lane: A05B (MAX effect, cross-sectionally ranked)
 
 **Mode:** A (build), unit 2 of 5. Claimed `diagnose` (0a78f8d), lease removed in this commit.
 
@@ -4104,7 +4104,7 @@ bullish "not yet, but O05's weekly-bar structure is the first candidate worth a 
 **Next:** unit 3, diagnose A06 (low volatility), next in the backlog; A05B/A06/A04 bullish noted as
 P2 `consensus_v1` inputs for week-bullish.
 
-## 2026-10-25T1825Z diagnose lane: A06 (low volatility)
+## 2026-10-25T1759Z diagnose lane: A06 (low volatility)
 
 **Mode:** A (build), unit 3 of 5. Claimed `diagnose` (88ddd69), lease removed in this commit.
 
@@ -4120,7 +4120,7 @@ overlap with A05B's bullish picks. Catalog and queue updated.
 
 **Next:** unit 4, diagnose A07 (high-volume premium), next in the backlog.
 
-## 2026-10-25T1835Z diagnose lane: A07 (high-volume return premium)
+## 2026-10-25T1800Z diagnose lane: A07 (high-volume return premium)
 
 **Mode:** A (build), unit 4 of 5. Claimed `diagnose` (c3524bc), lease removed in this commit.
 
@@ -4138,7 +4138,7 @@ leans no, bullish "not yet, but O05's weekly-bar structure is the first candidat
 **Next:** unit 5. Diagnose backlog continues at C01; follow-ups queued in `state/queue.md`: A07C
 (flipped, pre-declared) and O04-without-A07.
 
-## 2026-10-25T1850Z port lane: A07C (sign-flipped A07)
+## 2026-10-25T1806Z port lane: A07C (sign-flipped A07)
 
 **Mode:** A (build), unit 5 of 5. Claimed `port` (3e005d0), lease removed in this commit.
 
@@ -4158,7 +4158,7 @@ bullish "not yet, but O05's weekly-bar structure is the first candidate worth a 
 within `gates/budgets.py`, toward `config/live_source.json` by Fri 30 Oct 12:00 UTC. Then diagnose A07C
 when it lands, the O04-without-A07 ablation, and the backlog from C01.
 
-## 2026-10-25T1825Z diagnose lane: calendar family C01-C04 (scheduled 5x run, unit 1)
+## 2026-10-25T1810Z diagnose lane: calendar family C01-C04 (scheduled 5x run, unit 1)
 
 **Mode:** A (build). Scheduled 18:07 run, unit 1 of 5. Claimed `diagnose` (dce2ac6), lease removed in this
 commit. No unresolved workflow failures (the evidence failure was resolved in d68333e and the re-run passed).
@@ -4178,7 +4178,7 @@ None is P1. Recommendation: calendar effects become centred P4 filter inputs, no
 
 **Next:** unit 2, D02 PCR (both variants).
 
-## 2026-10-25T1835Z diagnose lane: D02 stock put/call OI ratio (unit 2)
+## 2026-10-25T1811Z diagnose lane: D02 stock put/call OI ratio (unit 2)
 
 **Mode:** A (build), unit 2 of 5. Claimed `diagnose` (c11416c), lease removed in this commit.
 
@@ -4197,7 +4197,7 @@ legs: a **week-bearish P1 candidate**, stronger than A01-bearish. First in the w
 **Next:** P1 list for Mon 26 Oct validation queries is now E2A, D01C, A09-bearish (day) and
 D02-contrarian, A01-bearish (week). Unit 3 continues the backlog.
 
-## 2026-10-25T1850Z diagnose lane: T01 SMA crossover and T15 ADX regime (unit 3)
+## 2026-10-25T1812Z diagnose lane: T01 SMA crossover and T15 ADX regime (unit 3)
 
 **Mode:** A (build), unit 3 of 5. Claimed `diagnose` (6b187a5), lease removed in this commit.
 
@@ -4217,7 +4217,7 @@ D02c-A01 0.4%, D02c-T15 0.7%, A01-T15 6.8%, so D02-contrarian + A01 + T15 is a t
 **Next:** unit 4, port P2 `consensus_v1` for week-bearish (D02-contrarian, A01, T15) and queue its train
 replay, so it lands before Monday's validation decisions.
 
-## 2026-10-25T1905Z port lane: P2 consensus_wb_v1, week-bearish (unit 4)
+## 2026-10-25T1819Z port lane: P2 consensus_wb_v1, week-bearish (unit 4)
 
 **Mode:** A (build), unit 4 of 5. Claimed `port` (9382527), lease removed in this commit.
 
@@ -4234,7 +4234,7 @@ Full suite 767 passed. Queued `experiments/pending/consensus-wb-v1-week.yml`. No
 
 **Next:** unit 5. Then: diagnose consensus_wb_v1 and A07C when they land; Mon 26 Oct validation queries.
 
-## 2026-10-25T1920Z port lane: P2 consensus_db_v1, day-bearish (unit 5)
+## 2026-10-25T1825Z port lane: P2 consensus_db_v1, day-bearish (unit 5)
 
 **Mode:** A (build), unit 5 of 5. Claimed `port` (52fab0f), lease removed in this commit.
 
@@ -4254,3 +4254,6 @@ bullish "not yet, but O05's weekly-bar structure is the first candidate worth a 
 **Next:** Mon 26 Oct: validation queries for the P1 list (day: E2A, D01C, A09-bear; week: D02-contrarian,
 A01-bear, T15-bear thin), within `gates/budgets.py`. Diagnose consensus_wb_v1, consensus_db_v1 and A07C as
 they land. C04 zero-pick check needs the dataset (`research/diagnostics/c04.md`).
+
+Note (2026-10-25T1827Z): the entry headings from 1606Z to 1825Z above were first written with guessed
+times; they now carry each unit's actual commit time (`git log`). Content unchanged.
