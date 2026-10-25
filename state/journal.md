@@ -4119,3 +4119,21 @@ overlap with A05B's bullish picks. Catalog and queue updated.
 **Do order blocks help?** No order-block work this unit. Running answer unchanged.
 
 **Next:** unit 4, diagnose A07 (high-volume premium), next in the backlog.
+
+## 2026-10-25T1835Z diagnose lane: A07 (high-volume return premium)
+
+**Mode:** A (build), unit 4 of 5. Claimed `diagnose` (c3524bc), lease removed in this commit.
+
+**Hypothesis/task:** do NSE F&O stocks with an unusual volume spike last week (5-day vs prior 50-day
+z) lead over the next week, and volume droughts lag, as Gervais et al. (2001) found in the US?
+
+**Result:** `research/diagnostics/a07.md`. No, and if anything reversed: bullish -1.42 (t -1.06, 2/6
+years), bearish -0.84 (t -0.74, 3/6), `all` selection -0.52 (t -1.60) / -0.45 (t -1.52), directional
+move negative both sides. Not a P1 candidate. A07 is one of O04's three ranked ingredients, so its
+wrong-way sign plausibly contributes to O04 losing to O01 alone. Catalog and queue updated.
+
+**Do order blocks help?** Only indirectly (via O04's ingredients). Running answer unchanged: bearish
+leans no, bullish "not yet, but O05's weekly-bar structure is the first candidate worth a second look".
+
+**Next:** unit 5. Diagnose backlog continues at C01; follow-ups queued in `state/queue.md`: A07C
+(flipped, pre-declared) and O04-without-A07.
