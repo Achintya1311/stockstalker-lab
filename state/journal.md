@@ -4292,3 +4292,23 @@ lowest day-bearish priority. `research/diagnostics/consensus_db_v1.md`; catalog 
 **Do order blocks help?** Not tested this unit. Running answer unchanged.
 
 **Next:** unit 3, A07C. A pre-declared E2A-first, D01C-fallback card is a better P2 trial than another average.
+
+## 2026-10-25T2042Z diagnose lane: A07C, volume fade (unit 3)
+
+**Mode:** A (build), unit 3 of 5. Lane `diagnose` (lease 3e2e4a4, still current).
+
+**Hypothesis/task:** pre-declared: A07 was wrong-way on both sides; does `-A07` give a positive week edge
+with a bootstrap interval above 0 and a positive directional move on either side?
+
+**Result:** no. Bullish (volume drought) +0.90 (t 0.79), interval -1.35 to +3.08, dir -0.52%, 3/6 years.
+Bearish (volume spike) +1.34 (t 1.00), interval -1.32 to +3.80, dir +0.03%, 4/6 years. A clean mirror of
+A07 (-1.42 / -0.84), so the scoring is consistent and A07's loss was noise. Volume-z family closed.
+A07C-bearish still meets the provisional letter; last in the week-bearish batch. A scan of every
+`results.json` found T05 week-bearish (+2.02, dir +0.225%) also eligible but missing from the P1 list,
+and no bullish reading anywhere with 500+ picks and a positive directional move: both bullish tables have
+no P1 candidate. `research/diagnostics/a07c.md`; catalog and card updated.
+
+**Do order blocks help?** Not tested directly. For O04, the volume ingredient is noise in either sign,
+so the fair ablation drops it. Running answer unchanged.
+
+**Next:** unit 4, diagnose T05 week-bearish (P1 gap).

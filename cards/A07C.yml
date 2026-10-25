@@ -22,4 +22,4 @@ red_flags:
 - No claim is assumed true (SPEC.md section 5).
 - A sign flip chosen after seeing A07's train result is a researcher degree of freedom; it counts as its own trial in ledger/trials.csv, and only validation can confirm it.
 - Train split only until a frozen version exists.
-status: queued
+status: "train: week edge +0.90 bullish / +1.34 bearish, both bootstrap intervals straddle 0; pre-declared success rule not met; volume-z family closed. See research/diagnostics/a07c.md"
