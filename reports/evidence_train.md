@@ -71,9 +71,9 @@ SPA p-value (consistent): **0.003**  (lower 0.000, upper 0.004). StepM superior:
 | d01-oi-buildup-day | 1465 | 100% | -4.61 | -5.75 to -3.57 | 1.000 | 2 |
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 
-## week/bearish  (23 experiments, block 1)
+## week/bearish  (24 experiments, block 1)
 
-SPA p-value (consistent): **0.190**  (lower 0.121, upper 0.190). StepM superior: none. MCS size: 23 of 23.
+SPA p-value (consistent): **0.190**  (lower 0.121, upper 0.190). StepM superior: none. MCS size: 24 of 24. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -91,6 +91,7 @@ SPA p-value (consistent): **0.190**  (lower 0.121, upper 0.190). StepM superior:
 | d02-stock-pcr-confirmatory-week | 302 | 98% | +0.04 | -2.62 to +2.66 | 0.488 | 2 |
 | t09-supertrend-week | 301 | 97% | -0.11 | -2.56 to +2.47 | 0.532 | 1 |
 | a05-max-effect-week | 295 | 95% | -0.28 | -2.73 to +2.12 | 0.572 | 1 |
+| a05b-max-effect-ranked-week | 295 | 95% | -0.28 | -2.73 to +2.12 | 0.572 | 1 |
 | o04-order-block-composite-week | 293 | 95% | -0.44 | -3.28 to +2.22 | 0.619 | 2 |
 | a04-52-week-high-week | 260 | 84% | -0.50 | -3.17 to +2.23 | 0.626 | 2 |
 | a07-high-volume-premium-week | 302 | 98% | -0.84 | -3.04 to +1.42 | 0.776 | 1 |
@@ -101,12 +102,13 @@ SPA p-value (consistent): **0.190**  (lower 0.121, upper 0.190). StepM superior:
 | t08-donchian-breakout-20-week | 289 | 94% | -2.72 | -5.86 to +0.34 | 0.966 | 2 |
 | c02-turn-of-month-week | 177 | 57% | -2.72 | -5.80 to +0.23 | 0.964 | 1 |
 
-## week/bullish  (21 experiments, block 1)
+## week/bullish  (22 experiments, block 1)
 
-SPA p-value (consistent): **0.769**  (lower 0.531, upper 0.845). StepM superior: none. MCS size: 20 of 21.
+SPA p-value (consistent): **0.517**  (lower 0.300, upper 0.613). StepM superior: none. MCS size: 21 of 22.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
+| a05b-max-effect-ranked-week | 295 | 95% | +2.23 | -0.10 to +4.70 | 0.032 | 1 |
 | a04-52-week-high-week | 260 | 84% | +1.92 | -0.89 to +4.59 | 0.088 | 2 |
 | o05-order-block-weekly-week | 254 | 82% | +1.90 | -0.61 to +4.37 | 0.069 | 1 |
 | a06-low-volatility-week | 296 | 96% | +1.55 | -1.00 to +4.01 | 0.117 | 2 |
