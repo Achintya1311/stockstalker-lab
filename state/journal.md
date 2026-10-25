@@ -4216,3 +4216,20 @@ D02c-A01 0.4%, D02c-T15 0.7%, A01-T15 6.8%, so D02-contrarian + A01 + T15 is a t
 
 **Next:** unit 4, port P2 `consensus_v1` for week-bearish (D02-contrarian, A01, T15) and queue its train
 replay, so it lands before Monday's validation decisions.
+
+## 2026-10-25T1905Z port lane: P2 consensus_wb_v1, week-bearish (unit 4)
+
+**Mode:** A (build), unit 4 of 5. Claimed `port` (9382527), lease removed in this commit.
+
+**Hypothesis/task:** go-live P2: does a rank-average of three near-independent week-bearish readings
+(D02-contrarian, A01, T15) beat its best member? Built now so the replay lands before Monday's
+validation decisions.
+
+**Result:** `strategies/consensus_wb_v1.py` (imports the three members), `cards/CONSENSUS_WB_V1.yml` with
+the success rule fixed before the replay, audit, 7 tests (agreement ranks first, abstention as neutral with
+hand-computed ranks, bearish-only bounded output, end-to-end on synthetic prices, wording, causality).
+Full suite 767 passed. Queued `experiments/pending/consensus-wb-v1-week.yml`. No numbers yet.
+
+**Do order blocks help?** No order-block work this unit. Running answer unchanged.
+
+**Next:** unit 5. Then: diagnose consensus_wb_v1 and A07C when they land; Mon 26 Oct validation queries.

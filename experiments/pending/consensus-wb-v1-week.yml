@@ -1,0 +1,9 @@
+# consensus_wb_v1: week-bearish consensus of D02-contrarian, A01 and T15 (go-live P2), train-split replay.
+# See cards/CONSENSUS_WB_V1.yml and strategies/consensus_wb_v1.py. Week horizon only; bearish table only.
+id: consensus-wb-v1-week
+strategy: strategies.consensus_wb_v1
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

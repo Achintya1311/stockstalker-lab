@@ -1,0 +1,29 @@
+source_url: ''
+author: lab-original (go-live track P2, state/queue.md)
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-25'
+horizon: week
+claim_as_stated: 'Pre-registered before the replay: the week-bearish consensus helps if its top-5 week-bearish edge is
+  above the best single member''s (D02-contrarian, +3.75) or matches it with a larger directional move after costs
+  (above +0.16%), on more picks per date. If it does neither, unrelated weak signals did not add up here and the
+  table''s provisional choice stays with the best single member. Any gain is a lead needing validation, not a result.'
+rules_plain: 'Week-bearish only. Members: D02-contrarian (extreme-low put/call OI ratio), A01 (last week''s winners fade)
+  and T15 (strong ADX downtrend), chosen because each clears the provisional rule''s letter on week-bearish in train
+  and their daily top-5 picks overlap by only 0.4-6.8%. Each member''s bearish strength is ranked across the stocks it
+  read that date; an abstaining member counts as neutral (0.5). The consensus is the mean of the three ranks; stocks
+  with a mean above 0.5 are scored bearish in proportion to the excess. No bullish picks.'
+default_params:
+  members: [d02_stock_pcr_contrarian, a01_weekly_reversal, t15_adx_regime]
+  abstain_as: 0.5
+  weights: equal
+data_needed: ohlcv plus near-month options OI
+testable_now: 'yes'
+source: 'state/queue.md P2; research/diagnostics/d02.md, a01.md, t15.md'
+link: ''
+prior_claim: 'Rank-averaging weak, unrelated signals often beats each member alone (ensemble lore); untested here'
+red_flags:
+- Members were chosen after seeing their train results, a researcher degree of freedom; the consensus counts as its own trial and each member already is one. Only validation can confirm it.
+- Ranking depends on which stocks are present that date (same caveat as O04).
+- Treating abstention as neutral is a design choice made before the replay; skipping abstainers instead (O04's rule) is a different trial, not a tune of this one.
+- Train split only until a frozen version exists.
+status: queued
