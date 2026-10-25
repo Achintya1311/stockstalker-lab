@@ -1,0 +1,25 @@
+source_url: ''
+author: lab-original sign test of A07
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-25'
+horizon: week
+claim_as_stated: 'Pre-registered before the replay: A07C helps if its week edge (top-5) on either side is positive with the
+  date-block bootstrap interval above 0 (arch, scripts/evidence_report.py) and a positive directional move after costs.
+  It is the exact mirror of A07, whose train edges were -1.42 (bullish) and -0.84 (bearish) with the all-pick selection
+  at t -1.60 / -1.52, so only a small positive result is expected. If neither side clears that bar, A07''s loss was noise,
+  not an exploitable sign error, and the volume-z family is closed. Any gain is a lead needing validation, not a result.'
+rules_plain: 'A07''s volume z-score (last 5 sessions'' mean volume vs the prior 50 sessions'' mean and std) with the sign
+  flipped: an unusual volume spike is bearish, an unusual volume drought bullish. Imports A07, so abstentions and
+  magnitudes are identical; only the sign changes.'
+default_params:
+  base: A07
+data_needed: ohlcv
+testable_now: 'yes'
+source: 'Lab result: research/diagnostics/a07.md'
+link: ''
+prior_claim: 'Gervais, Kaniel and Mingelgrin (2001) find the opposite in the US (volume spikes lead); the lab''s NSE train data leans this way'
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- A sign flip chosen after seeing A07's train result is a researcher degree of freedom; it counts as its own trial in ledger/trials.csv, and only validation can confirm it.
+- Train split only until a frozen version exists.
+status: queued

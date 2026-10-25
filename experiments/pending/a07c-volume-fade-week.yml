@@ -1,0 +1,9 @@
+# A07C: sign-flipped A07 (volume spike bearish, drought bullish), train-split replay (port lane).
+# See cards/A07C.yml and strategies/a07c_volume_fade.py. Week horizon only, as A07.
+id: a07c-volume-fade-week
+strategy: strategies.a07c_volume_fade
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

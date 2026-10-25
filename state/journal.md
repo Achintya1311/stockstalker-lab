@@ -4137,3 +4137,23 @@ leans no, bullish "not yet, but O05's weekly-bar structure is the first candidat
 
 **Next:** unit 5. Diagnose backlog continues at C01; follow-ups queued in `state/queue.md`: A07C
 (flipped, pre-declared) and O04-without-A07.
+
+## 2026-10-25T1850Z port lane: A07C (sign-flipped A07)
+
+**Mode:** A (build), unit 5 of 5. Claimed `port` (3e005d0), lease removed in this commit.
+
+**Hypothesis/task:** A07 was wrong-way on both week sides in train (all-pick t -1.60 / -1.52). Test the
+mirror as its own pre-declared card, as D01C did for D01: volume spike bearish, drought bullish. Success
+rule fixed in `cards/A07C.yml` before any result: positive top-5 edge with a bootstrap interval above 0
+and a positive directional move after costs on either side; otherwise the volume-z family is closed.
+
+**Result:** `strategies/a07c_volume_fade.py` (= -A07, imports A07 so abstentions match bit for bit),
+audit, 7 tests (sign, exact negation including abstentions, wording, causality). Full suite 760 passed.
+Queued `experiments/pending/a07c-volume-fade-week.yml`; it replays in Actions on this push. No numbers yet.
+
+**Do order blocks help?** No order-block work this unit. Running answer unchanged: bearish leans no,
+bullish "not yet, but O05's weekly-bar structure is the first candidate worth a second look".
+
+**Next:** Mon 26 Oct: go-live P1 validation queries first (E2A, D01C, A09-bearish day; A01-bearish week)
+within `gates/budgets.py`, toward `config/live_source.json` by Fri 30 Oct 12:00 UTC. Then diagnose A07C
+when it lands, the O04-without-A07 ablation, and the backlog from C01.
