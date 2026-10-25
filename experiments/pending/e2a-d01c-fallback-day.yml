@@ -1,0 +1,9 @@
+# E2A_D01C_FB: E2A's day-bearish picks when it fires, D01C's otherwise, train-split replay (go-live track).
+# See cards/E2A_D01C_FB.yml (pre-declared success rule) and strategies/e2a_d01c_fallback.py.
+id: e2a-d01c-fallback-day
+strategy: strategies.e2a_d01c_fallback
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

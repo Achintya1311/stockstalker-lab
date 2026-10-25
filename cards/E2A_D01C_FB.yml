@@ -1,0 +1,29 @@
+source_url: ''
+author: lab-original (go-live track, research/diagnostics/consensus_db_v1.md)
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-25'
+horizon: day
+claim_as_stated: 'Pre-registered before the replay: the fallback helps if its top-5 day-bearish edge is at least +5.74
+  (D01C''s +4.74 plus 1 point), with a directional move after costs of at least D01C''s +0.08% and bearish picks on at
+  least 99% of train dates. That would make it a better day-bearish table than D01C (always on) without leaving E2A''s
+  table blank on about 36% of days. By construction it equals E2A on the dates E2A fires; the open question is how D01C
+  does on the dates E2A does not. If D01C were as good there as on average, the edge would be about +6.5. Otherwise the
+  table''s provisional choice is decided between the single members by validation. Any gain is a lead needing
+  validation, not a result.'
+rules_plain: 'Day-bearish only. Per date: if E2A (A02 extreme-day fade where futures OI rose) scores any stock bearish,
+  publish only E2A''s bearish scores; otherwise publish only D01C''s (D01 OI classification faded). Bullish scores of
+  both members are dropped. Not an average: each pick keeps its member''s own magnitude.'
+default_params:
+  first: e2a_a02_crowded
+  fallback: d01c_oi_fade
+  switch: E2A has at least one bearish score that date
+data_needed: ohlcv plus futures OI
+testable_now: 'yes'
+source: 'research/diagnostics/consensus_db_v1.md (What to try next)'
+link: ''
+prior_claim: 'A strong but intermittent reading backed by an always-on one should keep most of the strong one''s edge; untested here'
+red_flags:
+- Members and the switch were chosen after seeing their train results; the fallback is its own trial and each member already is one.
+- E2A fires about 3 stocks a date, so on E2A dates the table usually has fewer than 5 picks. Filling to 5 with D01C is a different trial.
+- Train split only until a frozen version exists.
+status: queued (train replay, day)

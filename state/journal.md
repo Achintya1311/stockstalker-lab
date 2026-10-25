@@ -4397,3 +4397,19 @@ already eligible).
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** diagnose T05C when it lands; E2A-first/D01C-fallback card; O04 ablations.
+
+## 2026-10-25T2226Z go-live track: E2A first, D01C fallback, day-bearish (unit 3)
+
+**Mode:** A (build), unit 3 of 5. Lane `diagnose` (lease 0b38b68). No holdout query was spent.
+
+**Hypothesis/task:** the rank-average consensus diluted E2A (+7.46) towards D01C (+4.74). Test the
+alternative the consensus diagnosis named: use E2A when it fires, D01C on the dates it does not.
+
+**Result:** `strategies/e2a_d01c_fallback.py` (per-date switch on any E2A bearish score; bullish dropped),
+member-causality audit, 7 tests, card `cards/E2A_D01C_FB.yml` with its success rule written before the
+replay (edge at least +5.74, directional move at least +0.08%, coverage at least 99%), catalog row, and
+`experiments/pending/e2a-d01c-fallback-day.yml` queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** O04 ablations (without A07, without D01).
