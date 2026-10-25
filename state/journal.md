@@ -4157,3 +4157,23 @@ bullish "not yet, but O05's weekly-bar structure is the first candidate worth a 
 **Next:** Mon 26 Oct: go-live P1 validation queries first (E2A, D01C, A09-bearish day; A01-bearish week)
 within `gates/budgets.py`, toward `config/live_source.json` by Fri 30 Oct 12:00 UTC. Then diagnose A07C
 when it lands, the O04-without-A07 ablation, and the backlog from C01.
+
+## 2026-10-25T1825Z diagnose lane: calendar family C01-C04 (scheduled 5x run, unit 1)
+
+**Mode:** A (build). Scheduled 18:07 run, unit 1 of 5. Claimed `diagnose` (dce2ac6), lease removed in this
+commit. No unresolved workflow failures (the evidence failure was resolved in d68333e and the re-run passed).
+
+**Hypothesis/task:** diagnose the four calendar cards whose replays have sat in `experiments/done/`.
+
+**Result:** `research/diagnostics/calendar.md`, `c01.md`-`c04.md`. The replays don't test the calendar
+claims. Each card scores every symbol identically on a date (verified: one score value per date on all
+C01/C02/C03 dates), so the engine's symbol-name tie-break makes the top five the alphabetically first
+in-universe names; and the uncentred bucket mean is almost always negative, so they fire bearish
+(C01 never bullish in 1,380 dates; C02 bullish 8/185; C03 1/61). Recorded numbers anyway (C01 bear -1.15,
+t -2.07; C02 bear -2.72, t -1.74; C03 bear +2.21, t 0.99, dir +0.01%). C04 produced zero picks on both
+horizons; likely `expiry_futstk` missing in the cached dataset (check written in `c04.md`, needs data).
+None is P1. Recommendation: calendar effects become centred P4 filter inputs, not stand-alone pickers.
+
+**Do order blocks help?** No order-block work this unit. Running answer unchanged.
+
+**Next:** unit 2, D02 PCR (both variants).
