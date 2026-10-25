@@ -4276,7 +4276,7 @@ letter, so it joins the validation batch. `research/diagnostics/consensus_wb_v1.
 
 **Next:** unit 2, consensus_db_v1.
 
-## 2026-10-25T2030Z diagnose lane: consensus_db_v1, day-bearish (unit 2)
+## 2026-10-25T2028Z diagnose lane: consensus_db_v1, day-bearish (unit 2)
 
 **Mode:** A (build), unit 2 of 5. Lane `diagnose` (lease 3e2e4a4, still current).
 
@@ -4293,7 +4293,7 @@ lowest day-bearish priority. `research/diagnostics/consensus_db_v1.md`; catalog 
 
 **Next:** unit 3, A07C. A pre-declared E2A-first, D01C-fallback card is a better P2 trial than another average.
 
-## 2026-10-25T2042Z diagnose lane: A07C, volume fade (unit 3)
+## 2026-10-25T2032Z diagnose lane: A07C, volume fade (unit 3)
 
 **Mode:** A (build), unit 3 of 5. Lane `diagnose` (lease 3e2e4a4, still current).
 
@@ -4313,7 +4313,7 @@ so the fair ablation drops it. Running answer unchanged.
 
 **Next:** unit 4, diagnose T05 week-bearish (P1 gap).
 
-## 2026-10-25T2052Z diagnose lane: T05 MACD crossover (unit 4)
+## 2026-10-25T2037Z diagnose lane: T05 MACD crossover (unit 4)
 
 **Mode:** A (build), unit 4 of 5. Lane `diagnose` (lease 3e2e4a4, still current).
 
@@ -4333,7 +4333,7 @@ MACD cross in either direction lag the following week. T05 week-bearish joins th
 **Next:** unit 5: the eligibility scan as a tested script, and the validation batch staged for Monday UTC.
 Then port T05C (pre-declared flip of the up-cross).
 
-## 2026-10-25T2104Z evaluate prep: provisional-rule scan, staged validation batch, champion v1 queued (unit 5)
+## 2026-10-25T2042Z evaluate prep: provisional-rule scan, staged validation batch, champion v1 queued (unit 5)
 
 **Mode:** A (build), unit 5 of 5. Lane `diagnose` (lease 3e2e4a4), removed in this commit. No holdout
 query was spent.
@@ -4357,3 +4357,6 @@ candidate worth a second look".
 **Next:** at or after 00:00 UTC Mon 26 Oct: `git mv research/notes/validation_batch_2026-10-26/*-validation.yml
 experiments/pending/` and push (evaluate lane). Then: diagnose champion v1 when it lands; port T05C (pre-declared
 up-cross flip, day and week); E2A-first/D01C-fallback card; O04-without-A07 ablation.
+
+Note (2026-10-25T2043Z): the five entry headings above (2018Z to 2042Z) first carried guessed times;
+they now carry each unit's commit time (`git log`). Content unchanged.

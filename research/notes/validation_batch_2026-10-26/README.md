@@ -1,4 +1,4 @@
-# Validation batch for the go-live provisional rule (staged 25 Oct 2026, 21:00 UTC)
+# Validation batch for the go-live provisional rule (staged 25 Oct 2026, 20:42 UTC)
 
 Ten `split: validation` experiments, one per train experiment that meets SPEC.md section 10's train letter
 (`research/notes/provisional_candidates.md`, written by `scripts/provisional_candidates.py`). Nothing here
