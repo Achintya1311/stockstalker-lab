@@ -1,0 +1,28 @@
+source_url: ''
+author: lab-original (go-live track P2, state/queue.md)
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-25'
+horizon: day
+claim_as_stated: 'Pre-registered before the replay: the day-bearish consensus helps if its top-5 day-bearish edge beats
+  the best single member''s (E2A, +7.46) or comes within 1 point of it with a larger directional move after costs (above
+  +0.13%) and higher date coverage (above E2A''s 79%). Otherwise the table''s provisional choice stays with the best
+  single member. Any gain is a lead needing validation, not a result.'
+rules_plain: 'Day-bearish only. Members: E2A (A02 extreme-day fade where futures OI rose), D01C (D01 OI classification
+  faded) and A09 (gap fade), the three day-bearish readings that clear the provisional rule''s letter in train, with
+  daily top-5 overlap of only 2.2-10.9%. Same combination rule as CONSENSUS_WB_V1 (imported): per-member bearish rank,
+  abstain = 0.5, mean of three, above 0.5 scored bearish. No bullish picks.'
+default_params:
+  members: [e2a_a02_crowded, d01c_oi_fade, a09_gap_fade]
+  abstain_as: 0.5
+  weights: equal
+data_needed: ohlcv plus futures OI
+testable_now: 'yes'
+source: 'state/queue.md P2; research/diagnostics/confluence.md, a09.md'
+link: ''
+prior_claim: 'Rank-averaging weak, unrelated signals often beats each member alone; untested here'
+red_flags:
+- Members were chosen after seeing their train results; the consensus is its own trial and each member already is one.
+- E2A and D01C both read futures OI, so they are not fully independent families even though their picks overlap only 11%.
+- Ranking depends on which stocks are present that date (same caveat as O04).
+- Train split only until a frozen version exists.
+status: queued

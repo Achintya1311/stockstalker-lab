@@ -4233,3 +4233,24 @@ Full suite 767 passed. Queued `experiments/pending/consensus-wb-v1-week.yml`. No
 **Do order blocks help?** No order-block work this unit. Running answer unchanged.
 
 **Next:** unit 5. Then: diagnose consensus_wb_v1 and A07C when they land; Mon 26 Oct validation queries.
+
+## 2026-10-25T1920Z port lane: P2 consensus_db_v1, day-bearish (unit 5)
+
+**Mode:** A (build), unit 5 of 5. Claimed `port` (52fab0f), lease removed in this commit.
+
+**Hypothesis/task:** go-live P2 for day-bearish: does a rank-average of E2A, D01C and A09 (the three
+day-bearish P1 readings) beat E2A alone? Daily top-5 overlap measured first: E2A-D01C 10.9%, E2A-A09 4.5%,
+D01C-A09 2.2% (A02, E2A's base, overlaps E2A 40.5%, so it is not a member).
+
+**Result:** `strategies/consensus_db_v1.py` (members imported; combination rule imported from
+`consensus_wb_v1`), `cards/CONSENSUS_DB_V1.yml` with the success rule fixed before the replay, audit on
+A09's deterministic gap fixture plus OI columns (so members really fire), 7 tests. Full suite 774 passed.
+Queued `experiments/pending/consensus-db-v1-day.yml`. Day-bullish and week-bullish get no consensus: no
+member clears the provisional letter on either.
+
+**Do order blocks help?** No order-block work this unit. Running answer unchanged: bearish leans no,
+bullish "not yet, but O05's weekly-bar structure is the first candidate worth a second look".
+
+**Next:** Mon 26 Oct: validation queries for the P1 list (day: E2A, D01C, A09-bear; week: D02-contrarian,
+A01-bear, T15-bear thin), within `gates/budgets.py`. Diagnose consensus_wb_v1, consensus_db_v1 and A07C as
+they land. C04 zero-pick check needs the dataset (`research/diagnostics/c04.md`).
