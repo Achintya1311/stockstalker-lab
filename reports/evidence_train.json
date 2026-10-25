@@ -28,6 +28,15 @@
     "n": 260,
     "coverage": 0.8414239482200647
    },
+   "a05b-max-effect-ranked-week": {
+    "mean": 0.02229204100569184,
+    "lo": -0.0009786774966548254,
+    "hi": 0.04697274427879216,
+    "p_le0": 0.0315,
+    "block": 1,
+    "n": 295,
+    "coverage": 0.9546925566343042
+   },
    "a06-low-volatility-week": {
     "mean": 0.015541873381491617,
     "lo": -0.009980813649415169,
@@ -192,18 +201,20 @@
    }
   },
   "joint": {
-   "n_models": 21,
+   "n_models": 22,
    "block": 1,
+   "twins": {},
    "spa": {
-    "lower": 0.531,
-    "consistent": 0.769,
-    "upper": 0.8445
+    "lower": 0.3,
+    "consistent": 0.517,
+    "upper": 0.613
    },
    "stepm": [],
    "mcs": [
     "a01-weekly-reversal-week",
     "a03-momentum-12-1-week",
     "a04-52-week-high-week",
+    "a05b-max-effect-ranked-week",
     "a06-low-volatility-week",
     "a07-high-volume-premium-week",
     "d02-stock-pcr-confirmatory-week",
@@ -254,6 +265,15 @@
     "coverage": 0.8414239482200647
    },
    "a05-max-effect-week": {
+    "mean": -0.002810960449526036,
+    "lo": -0.02728078229532414,
+    "hi": 0.0212434389852328,
+    "p_le0": 0.5715,
+    "block": 1,
+    "n": 295,
+    "coverage": 0.9546925566343042
+   },
+   "a05b-max-effect-ranked-week": {
     "mean": -0.002810960449526036,
     "lo": -0.02728078229532414,
     "hi": 0.0212434389852328,
@@ -435,8 +455,11 @@
    }
   },
   "joint": {
-   "n_models": 23,
+   "n_models": 24,
    "block": 1,
+   "twins": {
+    "a05b-max-effect-ranked-week": "a05-max-effect-week"
+   },
    "spa": {
     "lower": 0.1215,
     "consistent": 0.1895,
@@ -466,7 +489,8 @@
     "t08-donchian-breakout-55-week",
     "t09-supertrend-week",
     "t14-cci-week",
-    "t15-adx-regime-week"
+    "t15-adx-regime-week",
+    "a05b-max-effect-ranked-week"
    ]
   }
  },
@@ -719,6 +743,7 @@
   "joint": {
    "n_models": 27,
    "block": 1,
+   "twins": {},
    "spa": {
     "lower": 0.0,
     "consistent": 0.003,
@@ -998,6 +1023,7 @@
   "joint": {
    "n_models": 28,
    "block": 1,
+   "twins": {},
    "spa": {
     "lower": 0.0,
     "consistent": 0.0,
