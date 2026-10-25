@@ -4038,3 +4038,29 @@ first candidate worth a second look" pending independent confirmation.
 (E2A, D01C, A09-bearish day; A01-bearish week) within `gates/budgets.py`, toward `config/live_source.json`
 by Fri 30 Oct 12:00 UTC. Otherwise: port A05 v2 with real centring (per-date cross-sectional rank of
 MAX/sigma preferred, realistic bullish fixture), then continue the diagnose backlog at A06.
+
+## 2026-10-25T1625Z port lane: A05B (A05 v2, cross-sectionally ranked MAX effect)
+
+**Mode:** A (build). B3 still the only unticked B item, still blocked (supervised). No unresolved
+workflow failures. All lanes free on orient; claimed `port` (9669b13), lease removed in this commit.
+Go-live track: holdout queries open Mon 26 Oct, none spent today. Handoff `state/handoffs/2026-10-25.md`
+read (this IST day's file, written by the 16:10Z run).
+
+**Hypothesis/task:** the previous run found A05 v1's bullish side could never fire (`-MAX/sigma` is
+uncentred). Port a v2 that centres v1's own per-symbol reading cross-sectionally, as the paper does,
+so both sides of the MAX effect get a real one-week train test.
+
+**Result:** `strategies/a05b_max_effect_ranked.py`, `cards/A05B.yml`, audit, 11 tests, all on realistic
+mixed up-and-down months. Score = `1 - 2 * pct` with a mid-rank percentile `(rank - 0.5) / n`. The
+first draft used `rank(pct=True)`, which the tests showed puts the median stock at `-1/n` and tilts every
+field bearish; switched to the mid-rank form, which is symmetric (an even field's scores sum to 0; an odd
+field's median abstains; a lone stock abstains). Float-noise ties are ranked as ties after rounding `z`.
+Full suite: 752 passed. Queued `experiments/pending/a05b-max-effect-ranked-week.yml`; catalog row A05B
+`queued`. No numbers yet; the replay runs in Actions on this push.
+
+**Do order blocks help?** No order-block work this run. Running answer unchanged: bearish leans no,
+bullish is "not yet, but O05's weekly-bar structure is the first candidate worth a second look".
+
+**Next:** Mon 26 Oct: go-live P1 validation queries first (E2A, D01C, A09-bearish day; A01-bearish week),
+within `gates/budgets.py`, toward `config/live_source.json` by Fri 30 Oct 12:00 UTC. When A05B's replay
+lands in `experiments/done/`, diagnose it (bullish side is the new information). Otherwise diagnose A06.

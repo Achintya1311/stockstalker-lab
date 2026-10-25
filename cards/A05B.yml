@@ -1,0 +1,35 @@
+source_url: ""
+author: "Turan G. Bali; Nusret Cakici; Robert F. Whitelaw"
+license: "academic paper, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "2011"
+claim_as_stated: >
+  Same claim as cards/A05.yml: Bali, Cakici and Whitelaw (2011), "Maxing
+  Out: Stocks as Lotteries and the Cross-Section of Expected Returns", JFE,
+  find that stocks with a high maximum daily return over the past month
+  (MAX) underperform over the next month and low-MAX stocks outperform,
+  using a cross-sectional sort. This card tests the one-week version on NSE.
+horizon: week
+rules_plain: >
+  A new version of A05, not an edit (versions are immutable). A05 v1 scored
+  -MAX/sigma, which is almost never positive, so its bullish tables never
+  picked a stock (research/diagnostics/a05.md). This card keeps v1's own
+  per-symbol reading, z = MAX / sigma (MAX = largest daily return over the
+  trailing 21 sessions, sigma = standard deviation of daily returns over the
+  60 sessions before that), imported from strategies/a05_max_effect.py. It
+  then centres it the way the paper does, across stocks: on each pick date,
+  rank z across every symbol with a reading, turn the rank into a mid-rank
+  percentile pct = (rank - 0.5) / n, and score 1 - 2 * pct. The most
+  lottery-like stock that date is the most bearish, the least lottery-like
+  the most bullish, and the median stock of an odd-sized field scores 0 and
+  abstains.
+params:
+  max_window: 21
+  sigma_window: 60
+  centring: "cross-sectional mid-rank percentile, per pick date"
+red_flags:
+  - "The score depends on which other symbols are in the history that date. That is the point of a cross-sectional sort, not a leak, but it means this card's audit checks only that each symbol's own pre-rank z uses its own history (same shape as cards/O04.yml)."
+  - "Peers are every symbol with a v1 reading after the has_future prefilter, not only the liquid F&O universe the picks are later filtered to. A symbol that dropped out of the universe but still has recent rows can still shift peers' ranks. If v2 shows a usable edge, a v3 that ranks only within that date's universe is worth testing."
+  - "Published holding period (one month) is far longer than the one-week horizon tested here, same caveat as A03/A04/A05."
+  - "This card's bearish side picks almost the same stocks as A05 v1's bearish side (the highest z each date), so its bearish numbers should land close to v1's null (edge -0.28). The new information is the bullish side."
+  - "No claim is assumed true (SPEC.md section 5): status moves only after a real train replay."
+status: queued
