@@ -109,3 +109,7 @@ a07c-volume-fade-week-bullish,2026-10-25T18:38:06.411900+00:00,strategies.a07c_v
 a07c-volume-fade-week-bearish,2026-10-25T18:38:06.412029+00:00,strategies.a07c_volume_fade,,week,bearish,train,0.013425051848950278,1.004695758499461,n/a,"train, top selection; recorded by engine/experiment_report.py"
 consensus-db-v1-day-bearish,2026-10-25T19:46:48.510585+00:00,strategies.consensus_db_v1,,day,bearish,train,0.04605736502238802,8.317910997118666,n/a,"train, top selection; recorded by engine/experiment_report.py"
 consensus-wb-v1-week-bearish,2026-10-25T19:46:48.510786+00:00,strategies.consensus_wb_v1,,week,bearish,train,0.024839810087161785,2.0581370773176366,n/a,"train, top selection; recorded by engine/experiment_report.py"
+champion-v1-day-bullish,2026-10-25T22:06:45.201414+00:00,strategies.champion_v1,,day,bullish,train,-0.015478078034135766,-2.506954687613986,n/a,"train, top selection; recorded by engine/experiment_report.py"
+champion-v1-day-bearish,2026-10-25T22:06:45.201570+00:00,strategies.champion_v1,,day,bearish,train,0.013682819355320957,2.3691248767467408,n/a,"train, top selection; recorded by engine/experiment_report.py"
+champion-v1-week-bullish,2026-10-25T22:06:45.201763+00:00,strategies.champion_v1,,week,bullish,train,-0.02823810021919649,-2.0586079043740564,n/a,"train, top selection; recorded by engine/experiment_report.py"
+champion-v1-week-bearish,2026-10-25T22:06:45.201884+00:00,strategies.champion_v1,,week,bearish,train,0.004064549969766087,0.330997388551749,n/a,"train, top selection; recorded by engine/experiment_report.py"

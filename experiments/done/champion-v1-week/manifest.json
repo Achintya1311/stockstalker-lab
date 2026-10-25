@@ -1,0 +1,9 @@
+{
+  "id": "champion-v1-week",
+  "strategy": "strategies.champion_v1",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 62777,
+  "n_dates": 303,
+  "pick_log_sha256": "171ede3e9afe09bbda4e0236b7a2eaf421e8d5f02cfa5c14c5d8c40c127c373f"
+}

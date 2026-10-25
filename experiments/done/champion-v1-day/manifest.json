@@ -1,0 +1,9 @@
+{
+  "id": "champion-v1-day",
+  "strategy": "strategies.champion_v1",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 297601,
+  "n_dates": 1436,
+  "pick_log_sha256": "11ed78bacfb32d7b66d1b62e2272d49858547d252f35d503c68a0023f2de449a"
+}
