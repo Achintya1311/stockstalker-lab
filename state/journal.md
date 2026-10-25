@@ -4275,3 +4275,20 @@ letter, so it joins the validation batch. `research/diagnostics/consensus_wb_v1.
 **Do order blocks help?** Not tested this unit. Running answer unchanged.
 
 **Next:** unit 2, consensus_db_v1.
+
+## 2026-10-25T2030Z diagnose lane: consensus_db_v1, day-bearish (unit 2)
+
+**Mode:** A (build), unit 2 of 5. Lane `diagnose` (lease 3e2e4a4, still current).
+
+**Hypothesis/task:** the pre-declared P2 test: does the rank-average of E2A, D01C and A09 beat E2A's +7.46
+day-bearish edge, or come within 1 point with a directional move above +0.13% and coverage above 79%?
+
+**Result:** no. Edge +4.61 (t 8.32), directional move +0.07%, 7,335 picks, 6/6 years, interval +3.52 to
++5.70. It lands on D01C (+4.74, t 8.41, +0.08%): top-5 overlap 43% D01C, 34% A09, 29% E2A, 9% in no
+member's top five. Averaging dilutes E2A's stronger but sparser reading (picks on 64% of dates). It does
+smooth A09's negative 2018-2019. Meets the provisional letter, so it joins the validation batch at the
+lowest day-bearish priority. `research/diagnostics/consensus_db_v1.md`; catalog and card updated.
+
+**Do order blocks help?** Not tested this unit. Running answer unchanged.
+
+**Next:** unit 3, A07C. A pre-declared E2A-first, D01C-fallback card is a better P2 trial than another average.

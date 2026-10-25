@@ -25,4 +25,4 @@ red_flags:
 - E2A and D01C both read futures OI, so they are not fully independent families even though their picks overlap only 11%.
 - Ranking depends on which stocks are present that date (same caveat as O04).
 - Train split only until a frozen version exists.
-status: queued
+status: "train: day-bearish edge +4.61 (t 8.32), dir +0.07%; pre-declared success rule not met (E2A +7.46). Near-duplicate of D01C; P1-eligible, low priority; see research/diagnostics/consensus_db_v1.md"
