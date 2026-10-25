@@ -4431,3 +4431,25 @@ Running answer unchanged: bearish leans no; bullish "not yet, but O05's weekly-b
 first candidate worth a second look".
 
 **Next:** O04B (without D01).
+
+## 2026-10-25T2237Z order-block lane: O04B, O04 without D01 (unit 5)
+
+**Mode:** A (build), unit 5 of 5. Lane `diagnose` (lease 0b38b68), removed in this commit. No holdout
+query was spent.
+
+**Hypothesis/task:** the other half of the O04 ablation. D01 alone is confidently wrong on both sides, so
+it is the first suspect for O04 doing worse than O01 alone.
+
+**Result:** `strategies/o04b_no_d01.py` (O01 + volume z, via `strategies/o04_ablation_core.py`), audit,
+5 tests, card `cards/O04B.yml` with the same pre-declared rule as O04A, catalog row, and
+`experiments/pending/o04b-no-d01-{day,week}.yml` queued. Seven train replays are now pending (T05C x2,
+E2A_D01C_FB, O04A x2, O04B x2).
+
+**Do order blocks help?** Not answered yet: O04A and O04B together say which ingredient sank O04.
+Running answer unchanged: bearish leans no; bullish "not yet, but O05's weekly-bar structure is the
+first candidate worth a second look".
+
+**Next:** at or after 00:00 UTC Mon 26 Oct: `git mv research/notes/validation_batch_2026-10-26/*-validation.yml
+experiments/pending/` and push. Then diagnose the seven replays as they land, re-run
+`scripts/provisional_candidates.py --stage` for late eligibles (T05C week, E2A_D01C_FB), and keep the
+champion-v1 bullish question in front of AB before Fri 30 Oct 12:00 UTC.

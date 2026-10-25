@@ -1,0 +1,9 @@
+# O04B: O04 without D01's OI ingredient, train-split replay (order-block lane ablation).
+# See cards/O04B.yml (pre-declared rule) and strategies/o04b_no_d01.py.
+id: o04b-no-d01-week
+strategy: strategies.o04b_no_d01
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
