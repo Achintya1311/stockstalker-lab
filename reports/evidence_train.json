@@ -55,6 +55,15 @@
     "n": 302,
     "coverage": 0.9773462783171522
    },
+   "a07c-volume-fade-week": {
+    "mean": 0.009010094755098029,
+    "lo": -0.013466273766970302,
+    "hi": 0.030769260611322465,
+    "p_le0": 0.2065,
+    "block": 1,
+    "n": 302,
+    "coverage": 0.9773462783171522
+   },
    "d02-stock-pcr-confirmatory-week": {
     "mean": -0.03986094986987788,
     "lo": -0.08583032151157163,
@@ -201,13 +210,13 @@
    }
   },
   "joint": {
-   "n_models": 22,
+   "n_models": 23,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.3,
-    "consistent": 0.517,
-    "upper": 0.613
+    "lower": 0.3145,
+    "consistent": 0.5285,
+    "upper": 0.623
    },
    "stepm": [],
    "mcs": [
@@ -217,6 +226,7 @@
     "a05b-max-effect-ranked-week",
     "a06-low-volatility-week",
     "a07-high-volume-premium-week",
+    "a07c-volume-fade-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
     "o00-placebo-week",
@@ -296,6 +306,15 @@
     "lo": -0.030365570485482857,
     "hi": 0.01423366821293836,
     "p_le0": 0.7765,
+    "block": 1,
+    "n": 302,
+    "coverage": 0.9773462783171522
+   },
+   "a07c-volume-fade-week": {
+    "mean": 0.013425051848950278,
+    "lo": -0.013168612833530989,
+    "hi": 0.0379595608014586,
+    "p_le0": 0.1515,
     "block": 1,
     "n": 302,
     "coverage": 0.9773462783171522
@@ -455,15 +474,15 @@
    }
   },
   "joint": {
-   "n_models": 24,
+   "n_models": 25,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.1215,
-    "consistent": 0.1895,
-    "upper": 0.1895
+    "lower": 0.1275,
+    "consistent": 0.1945,
+    "upper": 0.1945
    },
    "stepm": [],
    "mcs": [
@@ -473,6 +492,7 @@
     "a05-max-effect-week",
     "a06-low-volatility-week",
     "a07-high-volume-premium-week",
+    "a07c-volume-fade-week",
     "c02-turn-of-month-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
