@@ -68,3 +68,32 @@ RESOLVED (supervised, 17 Oct, commit "ci: wire guard, live picks and safe pushes
 Commits in 8470946..8131980 changed protected paths outside a supervised session, so they are back as they were at 8470946. Describe the change you need in state/engine-issues.md instead, then add RESOLVED <commit> under this entry.
 - `engine/__init__.py`
 RESOLVED 8131980 (supervised): a deliberate live test of the guard. Nothing to redo.
+
+## 2026-10-25T17:06Z evidence failed
+Run: https://github.com/Achintya1311/stockstalker-lab/actions/runs/40214739477
+```
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/arch/bootstrap/multiple_comparison.py:220: RuntimeWarning: invalid value encountered in divide
+  std_loss_diffs = loss_diffs / np.sqrt(variances)
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/arch/bootstrap/multiple_comparison.py:221: RuntimeWarning: invalid value encountered in divide
+  std_bs_mean_losses = bootstrapped_mean_losses / np.sqrt(variances)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/stockstalker-lab/stockstalker-lab/scripts/evidence_report.py", line 102, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/runner/work/stockstalker-lab/stockstalker-lab/scripts/evidence_report.py", line 92, in main
+    res = build(Path(a.data), Path(a.done))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/stockstalker-lab/stockstalker-lab/scripts/evidence_report.py", line 61, in build
+    out[f"{horizon}/{SIDES[side]}"] = {"experiments": rows, "joint": multiple_testing(frame, size=0.10)}
+                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/stockstalker-lab/stockstalker-lab/scripts/evidence_stats.py", line 60, in multiple_testing
+    mcs.compute()
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/arch/bootstrap/multiple_comparison.py", line 189, in compute
+    self._compute_r()
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/arch/bootstrap/multiple_comparison.py", line 239, in _compute_r
+    i = loc.squeeze()[0]
+        ~~~~~~~~~~~~~^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+```
