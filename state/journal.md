@@ -4360,3 +4360,22 @@ up-cross flip, day and week); E2A-first/D01C-fallback card; O04-without-A07 abla
 
 Note (2026-10-25T2043Z): the five entry headings above (2018Z to 2042Z) first carried guessed times;
 they now carry each unit's commit time (`git log`). Content unchanged.
+
+## 2026-10-25T2215Z diagnose lane: champion v1 top selection, the bullish fallback (unit 1)
+
+**Mode:** A (build), unit 1 of 5. Lane `diagnose` (lease 0b38b68). No holdout query was spent.
+
+**Hypothesis/task:** both bullish tables fall back to champion v1 under SPEC.md section 10. Read its
+`top` train replays (landed 6c9a9c5) and say what the fallback means for go-live.
+
+**Result:** `research/diagnostics/champion_v1.md`. The fallback is significantly wrong-way at the top:
+day bullish -1.55 (t -2.51, interval -2.73 to -0.36), week bullish -2.82 (t -2.06, -5.51 to -0.36),
+negative every year from 2016, while its `all` selection is near zero. The rule cannot move the bullish
+tables off it: bullish picks carry the 0.415% delivery cost and no bullish reading in the lab has a
+positive directional move after costs (best day -0.41%, week -0.28%), though StepM names D01C, T04 and
+T10-NR7 day-bullish on edge. Queued as an AB decision in `state/queue.md` (Go-live track).
+
+**Do order blocks help?** Not tested here. Running answer unchanged, with the caveat that O05 week
+bullish (-0.40% after costs) also fails the directional-move test.
+
+**Next:** T05C port; E2A-first/D01C-fallback card; O04 ablations.
