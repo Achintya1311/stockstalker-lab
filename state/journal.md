@@ -3916,3 +3916,49 @@ still read `queued` with a finished replay and no diagnosis. A03 is next in cata
 queries open Monday 26 Oct, the go-live track's P1 candidates (E2A, D01C, A09-bearish, and now A01-
 bearish-week) and the provisional-strategy deadline (Fri 30 Oct 12:00 UTC for `config/live_source.json`)
 take priority over further backlog diagnosis.
+
+## 2026-10-25T0410Z diagnose lane: A03 (momentum 12-1) vs diagnose backlog
+
+**Mode:** A (build) — B3 still the only unticked B item, still `READY FOR WIRING` (methodology),
+still blocked. No unresolved entries in `state/workflow_failures.md`. No lease directory existed on
+orient (all lanes free); claimed `diagnose` (`state/leases/diagnose.json`), removed below. Go-live
+track: `config/live_source.json` still doesn't exist (due Fri 30 Oct 12:00 UTC); holdout queries open
+Mon 26 Oct — today is Sunday 25 Oct, so none spent this run. No `experiments/pending/` files exist, so
+no port-lane work was blocked on a replay. `state/queue.md`'s diagnose-backlog note named A03 next.
+
+**Hypothesis/task:** score and write up A03 (Jegadeesh & Titman 1993 momentum 12-1, tested at NSE's
+one-week horizon rather than the paper's own 3-12 months) against its already-landed train replay
+(`experiments/done/a03-momentum-12-1-week/`), and check whether it qualifies as a go-live P1 candidate.
+
+**What happened:** read `results.md`/`results.json` and `reports/evidence_train.md`'s week/bullish and
+week/bearish tables. Bullish (winners continue up): edge +0.21 (t 0.15), 3/5 positive years, directional
+move after costs -0.57% — noise. Bearish (losers continue down): edge +0.85 (t 0.61), 2/5 positive
+years, directional move -0.26% — also noise. Per-year edge swings sign repeatedly on both sides with no
+trend (bullish: -5.46, +0.20, +1.68, +5.21, -1.26; bearish: -0.03, -2.26, +1.85, +6.61, -2.05). Only 5
+covered years (2016-2020): the 252-day lookback plus 21-day skip consumes all of 2015. Checked the joint
+test: week/bearish (23 experiments) has SPA p=0.190 and StepM names zero strategies — A03 ranks 8th of
+23 at a marginal +0.85, well behind the cell's actual candidates (d02-contrarian +3.75, t01 +3.20, t15
++2.95, a01 +2.48). Week/bullish (21 experiments) is the weakest cell of all four (SPA p=0.769); A03's
++0.21 sits in the middle of a field that itself clears nothing.
+
+Does not qualify as a go-live P1 candidate: fails SPEC.md section 10's directional-move leg on both
+sides (-0.57%, -0.26%), regardless of the (already-insignificant) hit-rate edge. Framed the contrast with
+A01 explicitly: A01 (fade the trailing *week's* return) found a tendency worth watching on bearish;
+A03 (continue the trailing *year's* return, month-skipped) found nothing on either side. Same
+past-return-ranking ingredient, opposite horizon and opposite direction, opposite result — the
+published 3-12-month continuation effect does not telescope down to one week on NSE. Wrote
+`research/diagnostics/a03.md` with the full numbers, year-by-year tables, the joint-test ranking
+context, and the A01 contrast. Updated `cards/catalog.csv`'s A03 row to `train: edge 0.21 week-bull /
+0.85 week-bear`. Updated `state/queue.md`'s diagnose-backlog note: A04 (52-week-high proximity) is next
+in plain catalog order — its train replay is already in `experiments/done/a04-52-week-high-week/`.
+
+**Do order blocks help?** No order-block work this run (diagnose backlog took priority per
+`state/queue.md`'s ordering). Running answer unchanged from the 2026-10-25T02:09Z entry: bearish leans
+no (every confirmation attempt has weakened O01's small, insignificant lead), bullish is "not yet, but
+O05's weekly-bar structure is the first candidate worth a second look" pending independent confirmation.
+
+**Next:** diagnose backlog continues — A04-A07, C01-C04, D02 (both PCR variants), and most of T01-T15
+still read `queued` with a finished replay and no diagnosis. A04 is next in catalog order. Once holdout
+queries open Monday 26 Oct, the go-live track's P1 candidates (E2A, D01C, A09-bearish, A01-bearish-week)
+and the provisional-strategy deadline (Fri 30 Oct 12:00 UTC for `config/live_source.json`) take priority
+over further backlog diagnosis.
