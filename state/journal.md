@@ -4177,3 +4177,22 @@ None is P1. Recommendation: calendar effects become centred P4 filter inputs, no
 **Do order blocks help?** No order-block work this unit. Running answer unchanged.
 
 **Next:** unit 2, D02 PCR (both variants).
+
+## 2026-10-25T1835Z diagnose lane: D02 stock put/call OI ratio (unit 2)
+
+**Mode:** A (build), unit 2 of 5. Claimed `diagnose` (c11416c), lease removed in this commit.
+
+**Hypothesis/task:** does an extreme stock-level put/call OI ratio (|z| >= 2 vs own 20 sessions) predict
+the next week, and in which direction? Two pre-registered sign variants share one core.
+
+**Result:** `research/diagnostics/d02.md`. The variants mirror cleanly (+3.75 vs -3.99 on the same
+stocks). The signal is one-sided: extreme-low PCR (calls crowded) stocks lag. **D02-contrarian
+week-bearish: 661 picks, edge +3.75 (t 1.68), 4/6 years (-1.38, -2.14, +5.95, +3.52, +10.22, +5.52),
+directional move +0.16%; `all` selection agrees (+3.44, +0.26%).** Clears the provisional rule's three
+legs: a **week-bearish P1 candidate**, stronger than A01-bearish. First in the week/bearish evidence cell
+(P(edge<=0) 0.050), still not individually significant after snooping. Extreme-high PCR is noise both ways.
+
+**Do order blocks help?** No order-block work this unit. Running answer unchanged.
+
+**Next:** P1 list for Mon 26 Oct validation queries is now E2A, D01C, A09-bearish (day) and
+D02-contrarian, A01-bearish (week). Unit 3 continues the backlog.
