@@ -75,7 +75,8 @@ def render(res: dict) -> str:
         spa = j.get("spa", {})
         lines += [f"## {key}  ({j['n_models']} experiments, block {j['block']})", "",
                   f"SPA p-value (consistent): **{spa.get('consistent', float('nan')):.3f}**  (lower {spa.get('lower', float('nan')):.3f}, upper {spa.get('upper', float('nan')):.3f}). "
-                  f"StepM superior: {', '.join(j['stepm']) or 'none'}. MCS size: {len(j['mcs'])} of {j['n_models']}.", "",
+                  f"StepM superior: {', '.join(j['stepm']) or 'none'}. MCS size: {len(j['mcs'])} of {j['n_models']}."
+                  + ("".join(f" {c} repeats {o} exactly (same picks every date), so the joint tests ran on one copy." for c, o in j.get("twins", {}).items())), "",
                   "| Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |", "|---|---|---|---|---|---|---|"]
         for k, v in sorted(r["experiments"].items(), key=lambda kv: -kv[1]["mean"]):
             lines.append(f"| {k} | {v['n']} | {v['coverage'] * 100:.0f}% | {v['mean'] * 100:+.2f} | {v['lo'] * 100:+.2f} to {v['hi'] * 100:+.2f} | {v['p_le0']:.3f} | {v['block']} |")

@@ -36,3 +36,17 @@ def test_planted_edge_is_found_among_noise_and_pure_noise_is_not():
     assert "real" in out["stepm"] and out["spa"]["consistent"] < 0.05
     quiet = multiple_testing(noise, reps=600)
     assert quiet["stepm"] == [] and quiet["spa"]["consistent"] > 0.05
+
+
+def test_identical_trials_do_not_break_the_joint_tests_and_share_membership():
+    # Two trials with the same picks on every date give identical edge series; arch's MCS used to
+    # fail on the zero-variance difference (evidence run 40214739477, A05 vs A05B bearish).
+    planted = _noise(n_models=6)
+    planted["real"] = np.random.default_rng(9).normal(0.012, 0.05, len(planted))
+    planted["real_twin"] = planted["real"]
+    planted["s0_twin"] = planted["s0"]
+    out = multiple_testing(planted, reps=400)
+    assert out["n_models"] == 9
+    assert out["twins"] == {"real_twin": "real", "s0_twin": "s0"}
+    assert "real" in out["stepm"] and "real_twin" in out["stepm"]
+    assert ("s0" in out["mcs"]) == ("s0_twin" in out["mcs"])

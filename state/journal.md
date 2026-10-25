@@ -4064,3 +4064,22 @@ bullish is "not yet, but O05's weekly-bar structure is the first candidate worth
 **Next:** Mon 26 Oct: go-live P1 validation queries first (E2A, D01C, A09-bearish day; A01-bearish week),
 within `gates/budgets.py`, toward `config/live_source.json` by Fri 30 Oct 12:00 UTC. When A05B's replay
 lands in `experiments/done/`, diagnose it (bullish side is the new information). Otherwise diagnose A06.
+
+## 2026-10-25T1805Z build lane (workflow failure): evidence.yml crash on identical trials
+
+**Mode:** A (build), unit 1 of 5 in a manual 5x run (AB asked for the routines to run now). Claimed `build`
+(9ebd6b5). Unresolved workflow failure first: `evidence.yml` run 40214739477 failed at 17:06Z after
+A05B's replay landed (7b402dd).
+
+**Hypothesis/task:** A05B's bearish side ranks stocks by the same z as A05 v1 (a monotone re-scoring), so
+its top-5 bearish picks should match A05's exactly, giving two identical edge series that break arch's MCS.
+
+**Result:** confirmed: identical top-5 bearish picks on 295 of 295 dates. Reproduced the exact IndexError
+locally with two identical columns. Fix in `scripts/evidence_stats.py` (not a protected path): exact twin
+series are dropped before SPA/StepM/MCS and reported with their original's membership; `n_models` still
+counts every trial. `scripts/evidence_report.py` names twins in the markdown. New regression test; full
+suite 753 passed. This push re-runs `evidence.yml`. A05B's own numbers are for the diagnose unit.
+
+**Do order blocks help?** No order-block work this unit. Running answer unchanged.
+
+**Next:** unit 2, diagnose A05B (replay landed in 7b402dd).

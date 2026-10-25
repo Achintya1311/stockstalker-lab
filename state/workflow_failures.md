@@ -97,3 +97,5 @@ Traceback (most recent call last):
         ~~~~~~~~~~~~~^^^
 IndexError: index 0 is out of bounds for axis 0 with size 0
 ```
+
+RESOLVED in the commit that adds this line: A05B's bearish picks are identical to A05's on all 295 dates (A05B is a monotone re-scoring of A05's own z, so the five most lottery-like stocks are the same), which gave two identical edge series. Their loss difference has zero variance, and arch's MCS divided by it and found no model to eliminate (IndexError). `scripts/evidence_stats.multiple_testing` now runs the joint tests on one copy of each exact twin and reports the twin with its original's StepM and MCS membership (`twins` in the JSON, one sentence in the markdown). Reproduced locally first; regression test in `tests/test_evidence_stats.py`. The push to `scripts/evidence_*.py` re-runs `evidence.yml`.

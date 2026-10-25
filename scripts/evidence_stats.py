@@ -44,11 +44,38 @@ def boot_ci(x, reps: int = 2000, seed: int = 0, level: float = 0.95) -> dict:
             "p_le0": float((means <= 0).mean()), "block": b, "n": int(len(x))}
 
 
+def _twins(edges: pd.DataFrame) -> dict[str, str]:
+    """Map each column that repeats an earlier column exactly to that earlier column.
+
+    Two trials can pick the same stocks on every date (A05B's bearish side is a monotone
+    re-scoring of A05's), which gives identical edge series. Their loss difference then has zero
+    variance and arch's MCS divides by it and fails, so the joint tests run on one copy and each
+    twin is reported wherever its original is.
+    """
+    seen: dict[bytes, str] = {}
+    twins: dict[str, str] = {}
+    for c in edges.columns:
+        key = edges[c].to_numpy(float).tobytes()
+        if key in seen:
+            twins[c] = seen[key]
+        else:
+            seen[key] = c
+    return twins
+
+
 def multiple_testing(edges: pd.DataFrame, size: float = 0.10, reps: int = 2000, seed: int = 0) -> dict:
-    """SPA p-values, StepM superior set and MCS inclusion for a dates x strategies edge frame."""
+    """SPA p-values, StepM superior set and MCS inclusion for a dates x strategies edge frame.
+
+    `n_models` counts every trial, twins included. `twins` names the trials whose series exactly
+    repeat another's; they share that trial's StepM and MCS membership.
+    """
     edges = edges.fillna(0.0)
+    n_models = int(edges.shape[1])
+    twins = _twins(edges)
+    edges = edges.drop(columns=list(twins))
     if edges.shape[1] < 2 or len(edges) < 50:
-        return {"n_models": int(edges.shape[1]), "spa": {}, "stepm": [], "mcs": list(edges.columns), "block": 1}
+        return {"n_models": n_models, "spa": {}, "stepm": [], "block": 1, "twins": twins,
+                "mcs": list(edges.columns) + list(twins)}
     losses = -edges
     bench = pd.Series(0.0, index=edges.index) + 1e-12 * np.arange(len(edges)) / len(edges)  # non-degenerate
     b = int(np.median([block_size(edges[c].to_numpy()) for c in edges.columns]))
@@ -58,6 +85,8 @@ def multiple_testing(edges: pd.DataFrame, size: float = 0.10, reps: int = 2000, 
     step.compute()
     mcs = MCS(losses, size=size, block_size=b, reps=reps, seed=seed)
     mcs.compute()
-    return {"n_models": int(edges.shape[1]), "block": b,
+    stepm, included = list(step.superior_models), list(mcs.included)
+    return {"n_models": n_models, "block": b, "twins": twins,
             "spa": {k: float(v) for k, v in spa.pvalues.items()},
-            "stepm": list(step.superior_models), "mcs": list(mcs.included)}
+            "stepm": stepm + [c for c, o in twins.items() if o in stepm],
+            "mcs": included + [c for c, o in twins.items() if o in included]}
