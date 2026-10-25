@@ -3865,3 +3865,54 @@ T01-T15 still read `queued` with a finished replay and no diagnosis. A01 is next
 holdout queries open Monday 26 Oct, the go-live track's P1 candidates (E2A, D01C, A09-bearish) and the
 provisional-strategy deadline (Fri 30 Oct 12:00 UTC for `config/live_source.json`) take priority over
 further backlog diagnosis.
+
+## 2026-10-25T02:09Z diagnose lane: A01 (short-term weekly reversal) vs diagnose backlog
+
+**Mode:** A (build) — B3 still the only unticked B item, still `READY FOR WIRING` (methodology),
+still blocked. No unresolved entries in `state/workflow_failures.md`. No lease directory existed on
+orient (all lanes free); claimed `diagnose` (`state/leases/diagnose.json`), removed below. Go-live
+track: `config/live_source.json` still doesn't exist (due Fri 30 Oct 12:00 UTC); holdout queries open
+Mon 26 Oct — today is Sunday 25 Oct, so none spent this run. No `experiments/pending/` files exist (all
+queued work has landed in `experiments/done/`), so no port-lane work was blocked on a replay.
+`state/queue.md`'s diagnose-backlog note named A01 next.
+
+**Hypothesis/task:** score and write up A01 (Lehmann 1990 / Jegadeesh 1990 short-term weekly reversal —
+rank by trailing 5-day return, fade both legs) against its already-landed train replay
+(`experiments/done/a01-weekly-reversal-week/`), and check whether it qualifies as a go-live P1 candidate
+alongside the day-bearish trio already flagged (E2A, D01C, A09-bearish).
+
+**What happened:** read `results.md`/`results.json` and `reports/evidence_train.md`'s week/bullish and
+week/bearish tables. Bearish (fade last week's winners): edge +2.48 (t 1.83), 95% bootstrap interval -0.09
+to +5.31 (touches zero), `P(edge<=0)=0.031`, 5 of 6 years positive, directional move after costs +0.02%
+(barely positive). Bullish (bet on last week's losers): edge -0.03 (t -0.02), interval centred on zero,
+3 of 6 years positive, directional move -0.51% — no reversal-bounce effect survives here. Checked the
+joint test: `reports/evidence_train.md`'s week/bearish cell has SPA p=0.190 (not significant) and StepM
+names **zero** strategies individually superior for that cell — the only side/horizon cell in the whole
+report with an empty StepM list. A01-bearish is the best of a weak cohort, not a clean standout; flagged
+this explicitly as a caveat rather than treating the univariate P(edge<=0)=0.031 as settled.
+
+By the letter of SPEC.md section 10's provisional rule (≥500 train picks, positive train edge, positive
+train directional move, for that table's horizon/side) A01-bearish (week) clears all three: 1,538 top
+picks, edge +2.48, directional move +0.02%. That makes it the **first week-bearish P1 go-live candidate**
+— every P1 candidate named before this (E2A, D01C, A09-bearish) was day-bearish. Wrote up the significance
+caveat prominently alongside the qualification, since the rule as written doesn't test for SPA/StepM
+significance, only the three numbers it names.
+
+Wrote `research/diagnostics/a01.md` with the full numbers, year-by-year tables for both sides, the
+SPA/StepM caveat, and a comparison of A01-bearish's after-cost directional move (+0.02%) against the
+other fade-family cards' (A02 -0.04%, A08 -0.04%, A09 +0.03%) — only A01 and A09 clear zero, on different
+horizons and different mechanisms, so this isn't the same signal counted twice. Updated
+`cards/catalog.csv`'s A01 row to `train: edge -0.03 week-bull / 2.48 week-bear`. Updated
+`state/queue.md`'s diagnose-backlog note: A03 (momentum 12-1) is next in catalog order — a useful
+contrast with A01 since both are return-ranking cards on the week horizon with opposite signs.
+
+**Do order blocks help?** No order-block work this run (diagnose backlog took priority per
+`state/queue.md`'s ordering). Running answer unchanged from the 2026-10-25T00:09Z entry: bearish leans
+no (every confirmation attempt has weakened O01's small, insignificant lead), bullish is "not yet, but
+O05's weekly-bar structure is the first candidate worth a second look" pending independent confirmation.
+
+**Next:** diagnose backlog continues — A03-A07, C01-C04, D02 (both PCR variants), and most of T01-T15
+still read `queued` with a finished replay and no diagnosis. A03 is next in catalog order. Once holdout
+queries open Monday 26 Oct, the go-live track's P1 candidates (E2A, D01C, A09-bearish, and now A01-
+bearish-week) and the provisional-strategy deadline (Fri 30 Oct 12:00 UTC for `config/live_source.json`)
+take priority over further backlog diagnosis.
