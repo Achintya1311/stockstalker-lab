@@ -4103,3 +4103,19 @@ bullish "not yet, but O05's weekly-bar structure is the first candidate worth a 
 
 **Next:** unit 3, diagnose A06 (low volatility), next in the backlog; A05B/A06/A04 bullish noted as
 P2 `consensus_v1` inputs for week-bullish.
+
+## 2026-10-25T1825Z diagnose lane: A06 (low volatility)
+
+**Mode:** A (build), unit 3 of 5. Claimed `diagnose` (88ddd69), lease removed in this commit.
+
+**Hypothesis/task:** does a stock calmer than its own recent normal (20-day vs prior 60-day sigma) lead
+over the next week, and a more turbulent one lag? (Per-symbol simplification of Ang et al. 2006.)
+
+**Result:** `research/diagnostics/a06.md`. Bullish +1.55 (t 1.24), 4/6 positive years (+1.72, +4.26,
++3.27, -2.09, -2.48, +4.77; the bad years are the two weakest week market-line years), directional move
+-0.50%. Bearish +0.15 (t 0.12), -0.02%. `all` flat both sides. Not a P1 candidate. About 46% top-5
+overlap with A05B's bullish picks. Catalog and queue updated.
+
+**Do order blocks help?** No order-block work this unit. Running answer unchanged.
+
+**Next:** unit 4, diagnose A07 (high-volume premium), next in the backlog.
