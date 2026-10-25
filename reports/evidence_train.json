@@ -455,6 +455,15 @@
     "n": 275,
     "coverage": 0.889967637540453
    },
+   "t05c-upcross-fade-week": {
+    "mean": 0.04022991779091556,
+    "lo": 0.007896435208572784,
+    "hi": 0.07177996235668874,
+    "p_le0": 0.0075,
+    "block": 1,
+    "n": 276,
+    "coverage": 0.8932038834951457
+   },
    "t08-donchian-breakout-20-week": {
     "mean": -0.027160809995456264,
     "lo": -0.05857931464491436,
@@ -502,17 +511,19 @@
    }
   },
   "joint": {
-   "n_models": 27,
+   "n_models": 28,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.136,
-    "consistent": 0.2015,
-    "upper": 0.2015
+    "lower": 0.0695,
+    "consistent": 0.0985,
+    "upper": 0.0985
    },
-   "stepm": [],
+   "stepm": [
+    "t05c-upcross-fade-week"
+   ],
    "mcs": [
     "a01-weekly-reversal-week",
     "a03-momentum-12-1-week",
@@ -535,6 +546,7 @@
     "t02-golden-death-cross-week",
     "t03-rsi-thresholds-week",
     "t05-macd-crossover-week",
+    "t05c-upcross-fade-week",
     "t08-donchian-breakout-20-week",
     "t08-donchian-breakout-55-week",
     "t09-supertrend-week",
@@ -1015,6 +1027,15 @@
     "n": 1323,
     "coverage": 0.901840490797546
    },
+   "t05c-upcross-fade-day": {
+    "mean": 0.02697870002784548,
+    "lo": 0.010682915535340582,
+    "hi": 0.042652732765547936,
+    "p_le0": 0.0005,
+    "block": 1,
+    "n": 1300,
+    "coverage": 0.8861622358554874
+   },
    "t06-bollinger-pctb-day": {
     "mean": 0.033496758922454496,
     "lo": 0.01848584749507435,
@@ -1098,7 +1119,7 @@
    }
   },
   "joint": {
-   "n_models": 30,
+   "n_models": 31,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1116,6 +1137,7 @@
     "e2b-day",
     "t01-sma-crossover-day",
     "t04-connors-rsi2-day",
+    "t05c-upcross-fade-day",
     "t06-bollinger-pctb-day",
     "t13-williams-r-day",
     "t15-adx-regime-day"
@@ -1127,6 +1149,7 @@
     "d01c-day",
     "e1b-day",
     "e2a-day",
+    "t05c-upcross-fade-day",
     "t06-bollinger-pctb-day",
     "t13-williams-r-day"
    ]

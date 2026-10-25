@@ -2,9 +2,9 @@
 
 Edge is in points of hit rate over the market line, per pick date, `top` selection, as in `train_leaderboard.md`. The 95% interval and P(edge <= 0) come from a stationary bootstrap over dates (block length chosen per series), so serial correlation is respected. SPA is Hansen's test that NO strategy beats the market line across all trials of that horizon and side (small p = something real survives snooping). StepM names the strategies individually superior at the 10% level. MCS is the set statistically indistinguishable from the best at 10%. Dates with no pick count as edge 0 in the joint tests.
 
-## day/bearish  (30 experiments, block 1)
+## day/bearish  (31 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-day, e2b-day, t01-sma-crossover-day, t04-connors-rsi2-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day. MCS size: 8 of 30.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-day, e2b-day, t01-sma-crossover-day, t04-connors-rsi2-day, t05c-upcross-fade-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day. MCS size: 9 of 31.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -17,6 +17,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | t06-bollinger-pctb-day | 1329 | 91% | +3.35 | +1.85 to +4.80 | 0.000 | 1 |
 | a09-gap-fade-day | 1272 | 87% | +3.21 | +1.64 to +4.67 | 0.000 | 1 |
 | t13-williams-r-day | 1445 | 99% | +2.89 | +1.76 to +4.04 | 0.000 | 3 |
+| t05c-upcross-fade-day | 1300 | 89% | +2.70 | +1.07 to +4.27 | 0.001 | 1 |
 | e2b-day | 1074 | 73% | +2.34 | +0.29 to +4.37 | 0.013 | 1 |
 | t04-connors-rsi2-day | 1123 | 77% | +2.32 | +0.57 to +3.98 | 0.004 | 1 |
 | t15-adx-regime-day | 1404 | 96% | +2.20 | +1.09 to +3.33 | 0.000 | 2 |
@@ -74,12 +75,13 @@ SPA p-value (consistent): **0.003**  (lower 0.000, upper 0.004). StepM superior:
 | d01-oi-buildup-day | 1465 | 100% | -4.61 | -5.75 to -3.57 | 1.000 | 2 |
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 
-## week/bearish  (27 experiments, block 1)
+## week/bearish  (28 experiments, block 1)
 
-SPA p-value (consistent): **0.202**  (lower 0.136, upper 0.202). StepM superior: none. MCS size: 27 of 27. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.099**  (lower 0.070, upper 0.099). StepM superior: t05c-upcross-fade-week. MCS size: 28 of 28. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
+| t05c-upcross-fade-week | 276 | 89% | +4.02 | +0.79 to +7.18 | 0.007 | 1 |
 | d02-stock-pcr-contrarian-week | 225 | 73% | +3.75 | -0.64 to +8.36 | 0.050 | 1 |
 | t01-sma-crossover-week | 303 | 98% | +3.20 | +0.96 to +5.53 | 0.003 | 2 |
 | t15-adx-regime-week | 299 | 97% | +2.95 | +0.30 to +5.62 | 0.012 | 1 |
