@@ -4005,3 +4005,36 @@ still read `queued` with a finished replay and no diagnosis. A05 is next in cata
 queries open Monday 26 Oct, the go-live track's P1 candidates (E2A, D01C, A09-bearish, A01-bearish-week)
 and the provisional-strategy deadline (Fri 30 Oct 12:00 UTC for `config/live_source.json`) take priority
 over further backlog diagnosis.
+
+## 2026-10-25T1610Z diagnose lane: A05 (MAX effect / lottery stocks) vs diagnose backlog
+
+**Mode:** A (build). B3 is still the only unticked B item and still blocked on its methodology entry in
+`state/engine-issues.md`. No unresolved entries in `state/workflow_failures.md`. All lanes free on
+orient; claimed `diagnose` (d8324fa), lease removed in this commit. Go-live track: `config/live_source.json`
+still doesn't exist (due Fri 30 Oct 12:00 UTC); holdout queries open Mon 26 Oct, so none spent today.
+No `experiments/pending/` files. First run from the new account's scheduled task (handoff file
+`state/handoffs/2026-10-25.md` started this run).
+
+**Hypothesis/task:** score and write up A05 (Bali, Cakici and Whitelaw 2011, MAX effect) from its finished
+train replay (`experiments/done/a05-max-effect-week/`): do stocks with an outsized best day in the last
+21 sessions, relative to their own prior 60-session volatility, lag over the next week, and do muted ones lead?
+
+**Result:** `research/diagnostics/a05.md`. **The bullish side was never tested.** `z = MAX / sigma`
+rescales MAX but does not centre it, so `score = -z` was positive on only 12 of 61,270 scored
+symbol-dates (none in the F&O universe on its date); both bullish tables have zero picks. Median `z` is
+1.92, about the expected max of 21 normal draws (~1.89). The bullish unit test passed only because its
+fixture makes all 21 days of the month fall, which real data never does. Bearish (top 5 highest
+MAX/sigma, the paper's main claim) is a clean null: edge -0.28 (t -0.22), 3/6 positive years (-4.34,
+-1.78, -2.64, +0.71, +1.22, +3.72), directional move after costs -0.37%; mid-table in the week/bearish
+joint test (SPA p=0.190, StepM empty, P(edge<=0)=0.572). Not a P1 candidate. Third multi-week anomaly
+in a row (A03, A04, A05) with no usable one-week signal. Updated `cards/catalog.csv`'s A05 row and
+`state/queue.md`.
+
+**Do order blocks help?** No order-block work this run (diagnose backlog priority per `state/queue.md`).
+Running answer unchanged: bearish leans no, bullish is "not yet, but O05's weekly-bar structure is the
+first candidate worth a second look" pending independent confirmation.
+
+**Next:** from Mon 26 Oct the go-live track comes first: one validation query each for the P1 candidates
+(E2A, D01C, A09-bearish day; A01-bearish week) within `gates/budgets.py`, toward `config/live_source.json`
+by Fri 30 Oct 12:00 UTC. Otherwise: port A05 v2 with real centring (per-date cross-sectional rank of
+MAX/sigma preferred, realistic bullish fixture), then continue the diagnose backlog at A06.
