@@ -68,4 +68,4 @@ red_flags:
   - "12/26/9 is Appel's stated default, not tuned on NSE data at all - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
   - "A continuous 'MACD currently above/below signal' variant (same shape as T01's always-on spread, rather than only the crossing bar) is a plausible second card once this one has real numbers - not carded separately yet since the catalog's own wording is explicitly the crossing event, and no claim should be invented beyond what's stated."
   - "MACD's fast/slow EMAs ultimately read the same close series T01's SMA pair and T02's 50/200 pair already do, just with exponential rather than simple weighting - pick overlap with T01/T02 (SPEC.md section 6 gate 8) is worth checking directly once all three have real numbers."
-status: queued
+status: "train: week-bearish edge +2.02 (dir +0.23%, P1-eligible); bullish up-cross wrong-way on both horizons (week -3.90, day -2.86, intervals below 0). See research/diagnostics/t05.md"

@@ -4312,3 +4312,23 @@ no P1 candidate. `research/diagnostics/a07c.md`; catalog and card updated.
 so the fair ablation drops it. Running answer unchanged.
 
 **Next:** unit 4, diagnose T05 week-bearish (P1 gap).
+
+## 2026-10-25T2052Z diagnose lane: T05 MACD crossover (unit 4)
+
+**Mode:** A (build), unit 4 of 5. Lane `diagnose` (lease 3e2e4a4, still current).
+
+**Hypothesis/task:** backlog plus go-live gap. A scan of every `results.json` against SPEC.md section 10's
+letter (500+ train picks, positive `top` edge and directional move) listed T05 week-bearish, which was not
+on the P1 list. Does it hold up, and how does it relate to the other week-bearish readings?
+
+**Result:** week-bearish (fresh cross down) +2.02 (t 1.19), dir +0.23% (best of any week-bearish reading),
+interval -1.36 to +5.31, 4/6 years (first two negative). Near-zero overlap with A01 (0%), T15 (0.5%),
+D02c (2.1%). Bullish (fresh cross up) is significantly wrong-way: week -3.90 (interval below 0), day -2.86
+(interval below 0), negative every year from 2016. Day-bearish null (-0.06). Reading: stocks with a fresh
+MACD cross in either direction lag the following week. T05 week-bearish joins the validation batch.
+`research/diagnostics/t05.md`; catalog and card updated.
+
+**Do order blocks help?** Not tested this unit. Running answer unchanged.
+
+**Next:** unit 5: the eligibility scan as a tested script, and the validation batch staged for Monday UTC.
+Then port T05C (pre-declared flip of the up-cross).
