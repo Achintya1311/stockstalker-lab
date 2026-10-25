@@ -64,6 +64,15 @@
     "n": 302,
     "coverage": 0.9773462783171522
    },
+   "champion-v1-week": {
+    "mean": -0.02823810021919649,
+    "lo": -0.055135022052618096,
+    "hi": -0.0036371036791948896,
+    "p_le0": 0.9905,
+    "block": 3,
+    "n": 303,
+    "coverage": 0.9805825242718447
+   },
    "d02-stock-pcr-confirmatory-week": {
     "mean": -0.03986094986987788,
     "lo": -0.08583032151157163,
@@ -210,13 +219,13 @@
    }
   },
   "joint": {
-   "n_models": 23,
+   "n_models": 24,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.3145,
+    "lower": 0.315,
     "consistent": 0.5285,
-    "upper": 0.623
+    "upper": 0.6305
    },
    "stepm": [],
    "mcs": [
@@ -227,6 +236,7 @@
     "a06-low-volatility-week",
     "a07-high-volume-premium-week",
     "a07c-volume-fade-week",
+    "champion-v1-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
     "o00-placebo-week",
@@ -327,6 +337,15 @@
     "block": 1,
     "n": 177,
     "coverage": 0.5728155339805825
+   },
+   "champion-v1-week": {
+    "mean": 0.004064549969766087,
+    "lo": -0.01908705489005979,
+    "hi": 0.026960949193400578,
+    "p_le0": 0.359,
+    "block": 2,
+    "n": 303,
+    "coverage": 0.9805825242718447
    },
    "consensus-wb-v1-week": {
     "mean": 0.024839810087161785,
@@ -483,15 +502,15 @@
    }
   },
   "joint": {
-   "n_models": 26,
+   "n_models": 27,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.131,
-    "consistent": 0.1975,
-    "upper": 0.1975
+    "lower": 0.136,
+    "consistent": 0.2015,
+    "upper": 0.2015
    },
    "stepm": [],
    "mcs": [
@@ -503,6 +522,7 @@
     "a07-high-volume-premium-week",
     "a07c-volume-fade-week",
     "c02-turn-of-month-week",
+    "champion-v1-week",
     "consensus-wb-v1-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
@@ -552,6 +572,15 @@
     "block": 2,
     "n": 1076,
     "coverage": 0.7334696659850034
+   },
+   "champion-v1-day": {
+    "mean": -0.015478078034135766,
+    "lo": -0.027275830157714433,
+    "hi": -0.0035978596181826606,
+    "p_le0": 0.996,
+    "block": 3,
+    "n": 1435,
+    "coverage": 0.978186775732788
    },
    "d01-oi-buildup-day": {
     "mean": -0.04608672298324832,
@@ -771,7 +800,7 @@
    }
   },
   "joint": {
-   "n_models": 27,
+   "n_models": 28,
    "block": 1,
    "twins": {},
    "spa": {
@@ -832,6 +861,15 @@
     "block": 3,
     "n": 1380,
     "coverage": 0.9406952965235174
+   },
+   "champion-v1-day": {
+    "mean": 0.013682819355320957,
+    "lo": 0.0026065029338658767,
+    "hi": 0.024987096337162097,
+    "p_le0": 0.0085,
+    "block": 1,
+    "n": 1436,
+    "coverage": 0.9788684389911384
    },
    "consensus-db-v1-day": {
     "mean": 0.04605736502238802,
@@ -1060,7 +1098,7 @@
    }
   },
   "joint": {
-   "n_models": 29,
+   "n_models": 30,
    "block": 1,
    "twins": {},
    "spa": {

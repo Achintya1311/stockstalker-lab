@@ -2,9 +2,9 @@
 
 Edge is in points of hit rate over the market line, per pick date, `top` selection, as in `train_leaderboard.md`. The 95% interval and P(edge <= 0) come from a stationary bootstrap over dates (block length chosen per series), so serial correlation is respected. SPA is Hansen's test that NO strategy beats the market line across all trials of that horizon and side (small p = something real survives snooping). StepM names the strategies individually superior at the 10% level. MCS is the set statistically indistinguishable from the best at 10%. Dates with no pick count as edge 0 in the joint tests.
 
-## day/bearish  (29 experiments, block 1)
+## day/bearish  (30 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-day, e2b-day, t01-sma-crossover-day, t04-connors-rsi2-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day. MCS size: 8 of 29.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-day, e2b-day, t01-sma-crossover-day, t04-connors-rsi2-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day. MCS size: 8 of 30.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -21,6 +21,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | t04-connors-rsi2-day | 1123 | 77% | +2.32 | +0.57 to +3.98 | 0.004 | 1 |
 | t15-adx-regime-day | 1404 | 96% | +2.20 | +1.09 to +3.33 | 0.000 | 2 |
 | t01-sma-crossover-day | 1436 | 98% | +1.89 | +0.80 to +2.95 | 0.001 | 2 |
+| champion-v1-day | 1436 | 98% | +1.37 | +0.26 to +2.50 | 0.009 | 1 |
 | a08-overnight-intraday-tug-day | 1465 | 100% | +1.15 | -0.00 to +2.33 | 0.025 | 1 |
 | o03-trend-confirmed-day | 1267 | 86% | +0.90 | -0.72 to +2.48 | 0.135 | 1 |
 | t03-rsi-thresholds-day | 1259 | 86% | +0.89 | -0.70 to +2.44 | 0.128 | 1 |
@@ -38,9 +39,9 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | t14-cci-day | 1322 | 90% | -1.29 | -2.67 to +0.17 | 0.956 | 2 |
 | d01-oi-buildup-day | 1467 | 100% | -2.48 | -3.54 to -1.44 | 1.000 | 1 |
 
-## day/bullish  (27 experiments, block 1)
+## day/bullish  (28 experiments, block 1)
 
-SPA p-value (consistent): **0.003**  (lower 0.000, upper 0.004). StepM superior: d01c-day, t04-connors-rsi2-day, t10-nr7-narrow-range-day. MCS size: 7 of 27.
+SPA p-value (consistent): **0.003**  (lower 0.000, upper 0.004). StepM superior: d01c-day, t04-connors-rsi2-day, t10-nr7-narrow-range-day. MCS size: 7 of 28.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -64,6 +65,7 @@ SPA p-value (consistent): **0.003**  (lower 0.000, upper 0.004). StepM superior:
 | t03-rsi-thresholds-day | 1324 | 90% | -1.13 | -2.64 to +0.30 | 0.940 | 3 |
 | o04-order-block-composite-day | 1419 | 97% | -1.16 | -2.38 to +0.01 | 0.974 | 1 |
 | t01-sma-crossover-day | 1428 | 97% | -1.46 | -2.62 to -0.33 | 0.994 | 3 |
+| champion-v1-day | 1435 | 98% | -1.55 | -2.73 to -0.36 | 0.996 | 3 |
 | e2a-day | 808 | 55% | -1.58 | -4.00 to +0.87 | 0.899 | 1 |
 | t14-cci-day | 1274 | 87% | -2.44 | -4.10 to -0.78 | 0.998 | 1 |
 | t09-supertrend-day | 1426 | 97% | -2.51 | -3.62 to -1.39 | 1.000 | 1 |
@@ -72,9 +74,9 @@ SPA p-value (consistent): **0.003**  (lower 0.000, upper 0.004). StepM superior:
 | d01-oi-buildup-day | 1465 | 100% | -4.61 | -5.75 to -3.57 | 1.000 | 2 |
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 
-## week/bearish  (26 experiments, block 1)
+## week/bearish  (27 experiments, block 1)
 
-SPA p-value (consistent): **0.198**  (lower 0.131, upper 0.198). StepM superior: none. MCS size: 26 of 26. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.202**  (lower 0.136, upper 0.202). StepM superior: none. MCS size: 27 of 27. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -88,6 +90,7 @@ SPA p-value (consistent): **0.198**  (lower 0.131, upper 0.198). StepM superior:
 | t03-rsi-thresholds-week | 268 | 87% | +1.72 | -1.64 to +5.19 | 0.147 | 2 |
 | a07c-volume-fade-week | 302 | 98% | +1.34 | -1.32 to +3.80 | 0.151 | 1 |
 | a03-momentum-12-1-week | 255 | 83% | +0.85 | -1.79 to +3.60 | 0.285 | 1 |
+| champion-v1-week | 303 | 98% | +0.41 | -1.91 to +2.70 | 0.359 | 2 |
 | o05-order-block-weekly-week | 241 | 78% | +0.32 | -2.46 to +3.28 | 0.417 | 1 |
 | o01-retest-week | 293 | 95% | +0.18 | -2.75 to +2.91 | 0.455 | 2 |
 | a06-low-volatility-week | 296 | 96% | +0.15 | -2.27 to +2.60 | 0.446 | 2 |
@@ -105,9 +108,9 @@ SPA p-value (consistent): **0.198**  (lower 0.131, upper 0.198). StepM superior:
 | t08-donchian-breakout-20-week | 289 | 94% | -2.72 | -5.86 to +0.34 | 0.966 | 2 |
 | c02-turn-of-month-week | 177 | 57% | -2.72 | -5.80 to +0.23 | 0.964 | 1 |
 
-## week/bullish  (23 experiments, block 1)
+## week/bullish  (24 experiments, block 1)
 
-SPA p-value (consistent): **0.528**  (lower 0.315, upper 0.623). StepM superior: none. MCS size: 22 of 23.
+SPA p-value (consistent): **0.528**  (lower 0.315, upper 0.630). StepM superior: none. MCS size: 23 of 24.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -128,6 +131,7 @@ SPA p-value (consistent): **0.528**  (lower 0.315, upper 0.623). StepM superior:
 | o03-trend-confirmed-week | 290 | 94% | -1.45 | -3.97 to +1.10 | 0.866 | 1 |
 | t01-sma-crossover-week | 301 | 97% | -1.81 | -3.93 to +0.34 | 0.951 | 3 |
 | o01-retest-week | 299 | 97% | -2.21 | -4.47 to -0.12 | 0.981 | 2 |
+| champion-v1-week | 303 | 98% | -2.82 | -5.51 to -0.36 | 0.991 | 3 |
 | o04-order-block-composite-week | 299 | 97% | -2.95 | -5.34 to -0.56 | 0.994 | 1 |
 | t09-supertrend-week | 301 | 97% | -3.18 | -5.85 to -0.53 | 0.991 | 1 |
 | t05-macd-crossover-week | 276 | 89% | -3.90 | -7.04 to -0.68 | 0.991 | 1 |
