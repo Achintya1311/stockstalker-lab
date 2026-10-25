@@ -4413,3 +4413,21 @@ replay (edge at least +5.74, directional move at least +0.08%, coverage at least
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** O04 ablations (without A07, without D01).
+
+## 2026-10-25T2232Z order-block lane: O04A, O04 without volume (unit 4)
+
+**Mode:** A (build), unit 4 of 5. Lane `diagnose` (lease 0b38b68). No holdout query was spent.
+
+**Hypothesis/task:** O04 lost to O01 alone on all four cells. A07C closed the volume-z family (noise in
+either sign), so the fair ablation drops the volume ingredient rather than flipping it.
+
+**Result:** `strategies/o04_ablation_core.py` (O04's own `_ingredients()` readings, imported, with a
+chosen ingredient list) and `strategies/o04a_no_volume.py` (O01 + D01), audit, 5 tests, card
+`cards/O04A.yml` with its rule written before the replay, catalog row, and
+`experiments/pending/o04a-no-volume-{day,week}.yml` queued.
+
+**Do order blocks help?** Not answered yet: O04A tests whether the volume ingredient is what sank O04.
+Running answer unchanged: bearish leans no; bullish "not yet, but O05's weekly-bar structure is the
+first candidate worth a second look".
+
+**Next:** O04B (without D01).

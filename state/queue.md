@@ -87,6 +87,7 @@ Question to answer with numbers: **do order blocks help?** Read `docs/orderblock
   the "drop D01 from O04" follow-up (`state/journal.md`'s 2026-10-24T1812Z entry), and the diagnose
   backlog (A08 and the rest of `state/queue.md`'s 24 Oct list) once nothing newer lands in
   `experiments/done/`.
+- **O04A queued (25 Oct, ablation):** O04 without A07's volume z (`cards/O04A.yml`, `strategies/o04a_no_volume.py`, shared arithmetic in `strategies/o04_ablation_core.py`), day and week. Pre-declared: volume is named as O04's problem in a cell if O04A beats O04 there by at least 1 point; the composite helps only if O04A beats O01 alone by at least 1 point with a positive directional move after costs. Expected: neither (D01, the remaining ingredient, is confidently wrong).
 - **Intraday (O06):** 5-minute bars are archived daily by `intraday.yml` into the Actions cache (`intraday-5m-*`, never committed). `state/intraday_manifest.json` shows coverage. Reading the cache from a replay needs a workflow change: write the exact change in `state/engine-issues.md` for a supervised session. Until then, only write the O06 strategy code and its synthetic tests.
 - Public wording stays inside SPEC.md section 10: no entry, stop or target prices.
 
