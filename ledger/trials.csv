@@ -113,3 +113,5 @@ champion-v1-day-bullish,2026-10-25T22:06:45.201414+00:00,strategies.champion_v1,
 champion-v1-day-bearish,2026-10-25T22:06:45.201570+00:00,strategies.champion_v1,,day,bearish,train,0.013682819355320957,2.3691248767467408,n/a,"train, top selection; recorded by engine/experiment_report.py"
 champion-v1-week-bullish,2026-10-25T22:06:45.201763+00:00,strategies.champion_v1,,week,bullish,train,-0.02823810021919649,-2.0586079043740564,n/a,"train, top selection; recorded by engine/experiment_report.py"
 champion-v1-week-bearish,2026-10-25T22:06:45.201884+00:00,strategies.champion_v1,,week,bearish,train,0.004064549969766087,0.330997388551749,n/a,"train, top selection; recorded by engine/experiment_report.py"
+t05c-upcross-fade-day-bearish,2026-10-25T23:10:34.754308+00:00,strategies.t05c_upcross_fade,,day,bearish,train,0.02697870002784548,3.3880849469785663,n/a,"train, top selection; recorded by engine/experiment_report.py"
+t05c-upcross-fade-week-bearish,2026-10-25T23:10:34.754500+00:00,strategies.t05c_upcross_fade,,week,bearish,train,0.04022991779091556,2.451887484260266,n/a,"train, top selection; recorded by engine/experiment_report.py"

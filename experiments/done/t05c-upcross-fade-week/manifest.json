@@ -1,0 +1,9 @@
+{
+  "id": "t05c-upcross-fade-week",
+  "strategy": "strategies.t05c_upcross_fade",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 2611,
+  "n_dates": 297,
+  "pick_log_sha256": "2ecff5905b8fe973e0507f0c9275abf98d8dbddcd072805fbcbbecbef8ee4b55"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "t05c-upcross-fade-day",
+  "strategy": "strategies.t05c_upcross_fade",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 12107,
+  "n_dates": 1404,
+  "pick_log_sha256": "4c34b089e67dacef4bad3a8d518e4e750ec33f6eef1177f1a93689828f54c886"
+}
