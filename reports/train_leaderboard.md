@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 106. Gate 2's bar at that count: t >= 4.21.
+Trials recorded: 108. Gate 2's bar at that count: t >= 4.21.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -38,10 +38,12 @@ Trials recorded: 106. Gate 2's bar at that count: t >= 4.21.
 | t03-rsi-thresholds-day | day | bearish | 5109 | 56.12% | 54.88% | 0.89 | 1.12 |  | -0.04 | 83.33% |  |
 | o03-trend-confirmed-day | day | bearish | 4508 | 55.08% | 54.42% | 0.90 | 1.08 |  | -0.13 | 66.67% |  |
 | t03-rsi-thresholds-week | week | bearish | 1099 | 51.87% | 51.07% | 1.72 | 1.02 |  | -0.06 | 66.67% |  |
+| a07c-volume-fade-week | week | bearish | 1510 | 52.19% | 50.84% | 1.34 | 1.00 |  | 0.03 | 66.67% | candidate |
 | c03-pre-holiday-day | day | bearish | 300 | 57.33% | 55.13% | 2.21 | 0.99 |  | 0.01 | 60.00% | too few picks |
 | o01-retest-day | day | bearish | 5641 | 54.85% | 54.31% | 0.66 | 0.95 |  | -0.12 | 50.00% |  |
 | t07-bollinger-squeeze-breakout-week | week | bearish | 10 | 60.00% | 48.72% | 11.28 | 0.91 |  | -0.52 | 83.33% | too few picks |
 | a09-gap-fade-day | day | bullish | 3065 | 45.51% | 44.58% | 0.87 | 0.83 |  | -0.51 | 66.67% |  |
+| a07c-volume-fade-week | week | bullish | 1510 | 49.87% | 48.97% | 0.90 | 0.79 |  | -0.52 | 50.00% |  |
 | t02-golden-death-cross-week | week | bullish | 1355 | 49.96% | 48.87% | 1.09 | 0.77 |  | -0.54 | 50.00% |  |
 | e2b-day | day | bullish | 1853 | 47.71% | 44.91% | 0.88 | 0.65 |  | -0.41 | 50.00% |  |
 | a03-momentum-12-1-week | week | bearish | 1275 | 51.45% | 50.60% | 0.85 | 0.61 |  | -0.26 | 40.00% |  |

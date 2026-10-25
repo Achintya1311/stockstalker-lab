@@ -1,0 +1,9 @@
+{
+  "id": "a07c-volume-fade-week",
+  "strategy": "strategies.a07c_volume_fade",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 62624,
+  "n_dates": 302,
+  "pick_log_sha256": "1f30740d331db8c7e78c9b8c989fb51837692e52c3346e703283a107db618cc8"
+}
