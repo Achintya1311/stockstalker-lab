@@ -3811,3 +3811,57 @@ work: a train-only follow-up narrowing O05-bullish to cleaner zones, the "drop D
 backlog `state/queue.md`'s 24 Oct entry named (A08 next) if nothing newer has landed in
 `experiments/done/`, and otherwise whatever lane is highest-value per the routine's ordering (go-live
 P1-P4 candidates once holdout queries open Monday 26 Oct take priority over this lane).
+
+## 2026-10-25T00:09Z diagnose lane: A08 (overnight/intraday tug) vs A09/A02, diagnose backlog
+
+**Mode:** A (build) — B3 still the only unticked B item, still `READY FOR WIRING` (methodology),
+still blocked. No unresolved entries in `state/workflow_failures.md`. No lease directory existed on
+orient (all lanes free); claimed `diagnose` (`state/leases/diagnose.json`), removed below. Go-live
+track: `config/live_source.json` still doesn't exist (due Fri 30 Oct 12:00 UTC); holdout queries for the
+P1 candidates (E2A, D01C, A09-bearish) open Mon 26 Oct — today is Sunday 25 Oct, so none spent. No
+`experiments/pending/` files exist (all queued work has landed in `experiments/done/`), so no diagnosis
+or experiment was blocked on a replay. `state/queue.md`'s diagnose-backlog note (24 Oct) named A08 next.
+
+**Hypothesis/task:** score and write up A08 (Lou-Polk-Skouras 2019 overnight/intraday tug-of-war,
+`score = avg_intraday - avg_overnight` over a trailing 20-day window) against its already-landed train
+replay (`experiments/done/a08-overnight-intraday-tug-day/`), and check the card's own red flag that it
+would correlate heavily with A09 (gap fade) since both trade an overnight-vs-intraday split.
+
+**What happened:** read `results.md`/`results.json` and `reports/evidence_train.md`'s day/bearish and
+day/bullish tables. Bearish: weak and not significant (edge +1.15, t=1.97, 95% interval -0.00 to +2.33,
+P(edge<=0)=0.025 — not on StepM's "individually superior" list) but unusually consistent, all 6 train
+years individually positive and monotonically shrinking (2015 +1.75 down to 2020 +0.13). Directional
+move after costs is negative (-0.04%), so unlike A09 this does **not** clear the go-live provisional
+rule (needs both edge and directional move positive) — not a P1 candidate. Bullish is indistinguishable
+from zero (edge +0.04, t=0.07, P(edge<=0)=0.455), carried entirely by 2020 (+3.83) against five flat-to-
+negative years. No leak alarm either side.
+
+Checked the card's own red flag directly rather than leaving it as "worth checking": wrote a one-off
+script (not committed, same throwaway category as O04's prior Jaccard calculation) loading A08's and
+A09's `picks.json` pick logs and computing day-by-day top-5 Jaccard overlap on 1,449 shared dates. Result:
+mean overlap is only 2.1% (bearish) / 2.5% (bullish), zero dates with an identical top-5 list — the red
+flag's "could end up highly correlated" does not hold. For comparison, A08-bearish vs A02-bearish
+overlaps even lower, at 0.6%. So despite the catalog grouping A02/A08/A09 under a shared "overnight/gap/
+fade" mechanism story, the three pick almost entirely different stocks each day — useful ahead of SPEC.md
+section 6 gate 8's pairwise 50%-overlap check, and a reminder that a shared mechanism *name* in the
+catalog doesn't imply shared picks.
+
+Wrote `research/diagnostics/a08.md` with the full numbers, the year-by-year bearish table, the
+bullish-carried-by-one-year read, and the overlap check. Updated `cards/catalog.csv`'s A08 row to
+`train: edge 0.04 day-bull / 1.15 day-bear`. Updated `state/queue.md`'s diagnose-backlog note: A01
+(weekly reversal) is next in plain catalog order — it was the original card that motivated building
+`engine/experiment_report.py` (back when no automated way existed to score a finished replay) and has
+been scoreable since 24 Oct but was never revisited once the port lane moved on to A02.
+
+**Do order blocks help?** No order-block work this run (diagnose backlog took priority per
+`state/queue.md`'s ordering — the lane's own remaining units, O05-bullish zone-quality narrowing and
+"drop D01 from O04", are flagged "none urgent enough to block other work"). Running answer unchanged
+from the 2026-10-24T2212Z entry: bearish leans no (every confirmation attempt has weakened O01's small,
+insignificant lead), bullish is "not yet, but O05's weekly-bar structure is the first candidate worth a
+second look" pending independent confirmation.
+
+**Next:** diagnose backlog continues — A01, A03-A07, C01-C04, D02 (both PCR variants), and most of
+T01-T15 still read `queued` with a finished replay and no diagnosis. A01 is next in catalog order. Once
+holdout queries open Monday 26 Oct, the go-live track's P1 candidates (E2A, D01C, A09-bearish) and the
+provisional-strategy deadline (Fri 30 Oct 12:00 UTC for `config/live_source.json`) take priority over
+further backlog diagnosis.
