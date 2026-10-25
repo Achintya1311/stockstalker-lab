@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 104. Gate 2's bar at that count: t >= 4.21.
+Trials recorded: 106. Gate 2's bar at that count: t >= 4.21.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -24,6 +24,7 @@ Trials recorded: 104. Gate 2's bar at that count: t >= 4.21.
 | t15-adx-regime-week | week | bearish | 1456 | 53.71% | 50.87% | 2.95 | 2.20 |  | 0.02 | 83.33% | candidate |
 | t10-nr4-narrow-range-day | day | bullish | 6633 | 46.01% | 44.79% | 1.34 | 2.19 |  | -0.50 | 83.33% |  |
 | a08-overnight-intraday-tug-day | day | bearish | 7325 | 55.69% | 54.53% | 1.15 | 1.97 |  | -0.04 | 100.00% |  |
+| a05b-max-effect-ranked-week | week | bullish | 1475 | 51.39% | 49.16% | 2.23 | 1.86 |  | -0.50 | 83.33% |  |
 | a01-weekly-reversal-week | week | bearish | 1538 | 53.19% | 50.91% | 2.48 | 1.83 |  | 0.02 | 83.33% | candidate |
 | e1a-day | day | bearish | 406 | 56.90% | 52.80% | 4.31 | 1.68 |  | -0.10 | 83.33% | too few picks |
 | d02-stock-pcr-contrarian-week | week | bearish | 661 | 54.31% | 50.91% | 3.75 | 1.68 |  | 0.16 | 66.67% | candidate |
@@ -60,6 +61,7 @@ Trials recorded: 104. Gate 2's bar at that count: t >= 4.21.
 | t11-inside-bar-day | day | bearish | 6054 | 54.38% | 54.62% | -0.08 | -0.12 |  | -0.11 | 66.67% |  |
 | t03-rsi-thresholds-week | week | bullish | 1030 | 48.74% | 48.75% | -0.33 | -0.20 |  | -0.41 | 50.00% |  |
 | a05-max-effect-week | week | bearish | 1475 | 50.37% | 50.65% | -0.28 | -0.22 |  | -0.37 | 50.00% |  |
+| a05b-max-effect-ranked-week | week | bearish | 1475 | 50.37% | 50.65% | -0.28 | -0.22 |  | -0.37 | 50.00% |  |
 | d02-stock-pcr-contrarian-week | week | bullish | 1246 | 49.92% | 49.05% | -0.38 | -0.28 |  | -0.28 | 33.33% |  |
 | o04-order-block-composite-week | week | bearish | 1183 | 50.89% | 50.92% | -0.44 | -0.32 |  | -0.06 | 16.67% |  |
 | a04-52-week-high-week | week | bearish | 1300 | 50.46% | 50.96% | -0.50 | -0.36 |  | -0.34 | 40.00% |  |

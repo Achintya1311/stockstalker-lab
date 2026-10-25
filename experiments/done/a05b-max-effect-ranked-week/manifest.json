@@ -1,0 +1,9 @@
+{
+  "id": "a05b-max-effect-ranked-week",
+  "strategy": "strategies.a05b_max_effect_ranked",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 61100,
+  "n_dates": 295,
+  "pick_log_sha256": "942610331978d26dec7d021087f12c227f1608634f280237e8e35642e3132629"
+}
