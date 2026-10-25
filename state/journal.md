@@ -4379,3 +4379,21 @@ T10-NR7 day-bullish on edge. Queued as an AB decision in `state/queue.md` (Go-li
 bullish (-0.40% after costs) also fails the directional-move test.
 
 **Next:** T05C port; E2A-first/D01C-fallback card; O04 ablations.
+
+## 2026-10-25T2221Z port lane: T05C, MACD up-cross faded (unit 2)
+
+**Mode:** A (build), unit 2 of 5. Lane `diagnose` (lease 0b38b68), port work under the same lease. No
+holdout query was spent.
+
+**Hypothesis/task:** T05's fresh up-cross was significantly wrong-way on both horizons. Test the up-cross
+called bearish as its own pre-declared trial, keeping down-crosses out (T05's week-bearish reading is
+already eligible).
+
+**Result:** `strategies/t05c_upcross_fade.py` (score = -T05 where T05 > 0), audit, 6 tests, card
+`cards/T05C.yml` with its success rule written before the replay, catalog row, and
+`experiments/pending/t05c-upcross-fade-{day,week}.yml` queued. Expected by mirror arithmetic: edge near
++3.9 week / +2.9 day; directional move after the 0.25% futures cost about +0.24% week, -0.06% day.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** diagnose T05C when it lands; E2A-first/D01C-fallback card; O04 ablations.

@@ -1,0 +1,9 @@
+# T05C: T05's fresh MACD up-cross called bearish (down-crosses abstain), train-split replay (port lane).
+# See cards/T05C.yml (pre-declared success rule) and strategies/t05c_upcross_fade.py.
+id: t05c-upcross-fade-week
+strategy: strategies.t05c_upcross_fade
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

@@ -1,0 +1,29 @@
+source_url: ''
+author: lab-original sign test of T05's bullish side
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-25'
+horizon: both
+claim_as_stated: 'Pre-registered before the replay: T05C helps if, on either horizon, its top-5 bearish edge is positive
+  with the date-block bootstrap interval above 0 (arch, scripts/evidence_report.py) and a positive directional move after
+  costs. T05C picks the same stocks T05 called bullish, so by mirror arithmetic the edge is expected near +3.9 (week) and
+  +2.9 (day), and the interval near T05''s mirrored one; the open question is the directional move under the futures cost
+  (0.25%, not the 0.415% delivery cost T05''s bullish side carried): from T05''s numbers about +0.24% on the week and about
+  -0.06% on the day. So the expected outcome is week passes, day fails on the directional move. Any pass is a lead needing
+  validation, not a result.'
+rules_plain: 'T05''s MACD(12, 26, 9) event with only the up-cross kept and called the other way: a fresh cross of MACD above
+  its signal line is bearish, scored by T05''s magnitude. Fresh down-crosses and all other bars abstain. Imports T05, so
+  crosses and magnitudes are identical; only the up-cross sign changes.'
+default_params:
+  base: T05
+  side_kept: up-cross
+data_needed: ohlcv
+testable_now: 'yes'
+source: 'Lab result: research/diagnostics/t05.md'
+link: ''
+prior_claim: 'Appel''s MACD reads an up-cross as bullish; the lab''s NSE train data shows the opposite at one day to one week'
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- A sign flip chosen after seeing T05's train result is a researcher degree of freedom; it counts as its own trial in ledger/trials.csv, and only validation can confirm it.
+- Week bearish already has an eligible T05 reading (down-cross); T05C uses disjoint stocks on any date (up-crossers only).
+- Train split only until a frozen version exists.
+status: queued (train replay, day and week)
