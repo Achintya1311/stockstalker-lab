@@ -4196,3 +4196,23 @@ legs: a **week-bearish P1 candidate**, stronger than A01-bearish. First in the w
 
 **Next:** P1 list for Mon 26 Oct validation queries is now E2A, D01C, A09-bearish (day) and
 D02-contrarian, A01-bearish (week). Unit 3 continues the backlog.
+
+## 2026-10-25T1850Z diagnose lane: T01 SMA crossover and T15 ADX regime (unit 3)
+
+**Mode:** A (build), unit 3 of 5. Claimed `diagnose` (6b187a5), lease removed in this commit.
+
+**Hypothesis/task:** T01 and T15 are the 2nd and 3rd best week-bearish readings in the evidence report
+and both are StepM-superior on day-bearish, but neither was diagnosed. Do they clear the provisional rule,
+and are they independent of D02-contrarian and A01?
+
+**Result:** `research/diagnostics/t01.md`, `t15.md`. T01 and T15 share ~90% of bearish picks (one trend
+family). Bearish hit rate is real (day t 3.30 / 3.75, 6/6 years both; week +3.20 / +2.95, intervals above
+0), but the directional move after costs is ~0: T01 -0.06% day / -0.03% week (fails), T15 -0.06% day /
+**+0.02% week (passes the letter; thin P1 candidate)**. Bullish loses on both. Week-bearish pick overlap:
+D02c-A01 0.4%, D02c-T15 0.7%, A01-T15 6.8%, so D02-contrarian + A01 + T15 is a three-family
+`consensus_v1` candidate for week-bearish.
+
+**Do order blocks help?** No order-block work this unit. Running answer unchanged.
+
+**Next:** unit 4, port P2 `consensus_v1` for week-bearish (D02-contrarian, A01, T15) and queue its train
+replay, so it lands before Monday's validation decisions.
