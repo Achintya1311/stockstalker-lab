@@ -1,0 +1,9 @@
+{
+  "id": "consensus-db-v1-day",
+  "strategy": "strategies.consensus_db_v1",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 136595,
+  "n_dates": 1485,
+  "pick_log_sha256": "2883ce3307ea5cafabdbdaef420f5f3a27b11fef5edc67ba1dc2c4e26509ac36"
+}

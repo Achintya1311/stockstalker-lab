@@ -1,9 +1,0 @@
-# consensus_db_v1: day-bearish consensus of E2A, D01C and A09 (go-live P2), train-split replay.
-# See cards/CONSENSUS_DB_V1.yml and strategies/consensus_db_v1.py. Day horizon only; bearish table only.
-id: consensus-db-v1-day
-strategy: strategies.consensus_db_v1
-split: train
-horizon: day
-dates:
-  start: 2015-01-01
-  end: 2020-12-31
