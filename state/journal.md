@@ -4257,3 +4257,21 @@ they land. C04 zero-pick check needs the dataset (`research/diagnostics/c04.md`)
 
 Note (2026-10-25T1827Z): the entry headings from 1606Z to 1825Z above were first written with guessed
 times; they now carry each unit's actual commit time (`git log`). Content unchanged.
+
+## 2026-10-25T2018Z diagnose lane: consensus_wb_v1, week-bearish (unit 1)
+
+**Mode:** A (build), unit 1 of 5 (scheduled run, IST 26 Oct). Claimed `diagnose` (3e2e4a4).
+
+**Hypothesis/task:** the pre-declared P2 test: does the rank-average of D02-contrarian, A01 and T15 beat
+D02-contrarian's +3.75 week-bearish edge, or match it with a directional move above +0.16%?
+
+**Result:** no. Edge +2.48 (t 2.06), directional move +0.15%, 1,545 picks, 100% coverage, 4/6 years,
+interval +0.17 to +4.84. Approximate top-5 overlap with members 11% (D02c) / 28% (A01) / 35% (T15); 38% of
+its picks are in no member's top five. Abstain-as-neutral lets the dense members crowd out D02's rare
+reading. 2017 is -2.64 while all three members were positive. What it does gain: a full table every week,
+the only week-bearish interval above 0 with a clearly positive directional move. Meets the provisional
+letter, so it joins the validation batch. `research/diagnostics/consensus_wb_v1.md`; catalog and card updated.
+
+**Do order blocks help?** Not tested this unit. Running answer unchanged.
+
+**Next:** unit 2, consensus_db_v1.

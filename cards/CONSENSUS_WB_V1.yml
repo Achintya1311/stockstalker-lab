@@ -26,4 +26,4 @@ red_flags:
 - Ranking depends on which stocks are present that date (same caveat as O04).
 - Treating abstention as neutral is a design choice made before the replay; skipping abstainers instead (O04's rule) is a different trial, not a tune of this one.
 - Train split only until a frozen version exists.
-status: queued
+status: "train: week-bearish edge +2.48 (t 2.06), dir +0.15%; pre-declared success rule not met (below D02-contrarian +3.75). P1-eligible; see research/diagnostics/consensus_wb_v1.md"
