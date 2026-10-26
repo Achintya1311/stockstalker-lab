@@ -5143,3 +5143,8 @@ Unit 3: Q05 trend smoothness diagnosed (`research/diagnostics/q05.md`). Hypothes
 persist near I01's +2.04, steady risers near zero. Held: week bearish +2.01 (5/6 years, interval -0.55 to +4.42),
 bullish -0.33. Directional move -0.13% after costs, so the rule is not met. Trend-persistence family again (12-14%
 top-5 overlap with I01/T01/T15, 31% with Q03, 0.1% with A01).
+Unit 4: Q06 wick balance diagnosed (`research/diagnostics/q06.md`). Hypothesis (pre-declared): a long upper wick is
+a small bearish tell, a long lower wick noise. Result: both sides work on hit rate, bullish more: day bullish +2.58
+(t 4.61, interval +1.47 to +3.70, 6/6 years), day bearish +1.67 (t 2.98, 5/6); StepM superior in both cells, second
+in day bullish behind T04. Directional moves -0.42% / -0.05% after costs, so the rule is not met. Top fives are new
+stocks (0.3-2.8% overlap with every other day reading). Day bullish is eligible under AB's edge-only rule.
