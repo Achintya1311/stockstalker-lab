@@ -1,0 +1,28 @@
+source_url: ""
+author: "Floor-trader convention (no single author)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: open above the classic pivot bullish, below bearish,
+  with a bounce or break at S1/R1; pivot P = (H + L + C) / 3, R1 = 2P - L,
+  S1 = 2P - H from the previous session. `prior_claim`: widely watched
+  intraday levels. No published hit rate is cited.
+horizon: day
+rules_plain: >
+  Picks are made before the open, so the next open is not visible. The lab's
+  reading: P, R1 and S1 from the second-to-last adjusted bar; the last close
+  placed against them, score = (close - P) / (R1 - S1). Positive is bullish,
+  negative bearish; a close beyond R1 or S1 scores past +/-0.5, so breaks rank
+  above bounces. A bar with no range abstains. Only the last 20 rows are read.
+default_params:
+  window: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Floor-trader convention"
+link: ""
+prior_claim: "Widely watched intraday levels"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): the largest bullish scores are the day's biggest up-closes against the prior bar, the group A02 calls bearish (A02 day-bearish +4.34). Prediction: day-bullish top-5 edge negative; day-bearish near zero or negative, as A02's bullish side (-1.10). Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs. If bullish is significantly wrong-way, a flip would mostly re-test A02 and T20; check overlap before queuing one."
+  - "No claim is assumed true (SPEC.md section 5). The catalog's 'open above the pivot' needs the next open, which a pre-open pick cannot see; this card tests the closest causal reading, not the intraday rule."
+  - "Close vs the prior bar's typical price is close to a one-day return; expect heavy overlap with A02 and T20."
+status: "queued"

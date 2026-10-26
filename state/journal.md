@@ -5061,3 +5061,9 @@ T16 Parabolic SAR: day-bullish -1.88 (0/6 years), week-bullish -3.99, bearish si
 held, rule not met; 38% of its bullish top five are T09's. T19 OBV divergence week: bearish +1.79 (5/6 years) but
 dir -0.13%, bullish -1.20; rule not met; under 5% overlap with A01/A01_I01F, so a possible second-vote filter.
 `research/diagnostics/t16.md`, `t19.md`.
+
+Units 3-4 (port lane under the same lease): T18 Ichimoku cloud (week; close clear of the cloud with
+Tenkan/Kijun agreeing) and T24 classic pivots (day; last close vs the previous bar's P/R1/S1, since a pre-open
+pick cannot see the open). Both pre-declared: bullish negative (extended group / A02 mirror), helps only at
++2.0 with 4/6 years and positive dir. Replays queued. The 26 Oct dry-run files predate the draft (champion v1
+both sides, no shared stock); drop-from-both first runs on real data after tonight's dataset update.

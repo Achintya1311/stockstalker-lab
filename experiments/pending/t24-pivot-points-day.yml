@@ -1,0 +1,10 @@
+# T24 (day horizon only, per cards/T24.yml): classic floor-trader pivot, last
+# close vs the previous bar's P/R1/S1, train-split replay (port lane,
+# state/queue.md). See cards/T24.yml and strategies/t24_pivot_points.py.
+id: t24-pivot-points-day
+strategy: strategies.t24_pivot_points
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
