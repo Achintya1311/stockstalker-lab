@@ -5139,3 +5139,7 @@ Unit 2: Q03 up-day balance diagnosed (`research/diagnostics/q03.md`). Hypothesis
 the most up closes lag, as A01/A02's biggest winners do. Result: no; bullish is noise (day -0.52, week +0.69),
 bearish leans mildly positive (week +1.97, interval -0.46 to +4.38, one year +8.90 carries it; day +0.66). Every
 directional move negative; rule not met; no flip. Week-bearish top five 31% the same as Q05's.
+Unit 3: Q05 trend smoothness diagnosed (`research/diagnostics/q05.md`). Hypothesis (pre-declared): steady fallers
+persist near I01's +2.04, steady risers near zero. Held: week bearish +2.01 (5/6 years, interval -0.55 to +4.42),
+bullish -0.33. Directional move -0.13% after costs, so the rule is not met. Trend-persistence family again (12-14%
+top-5 overlap with I01/T01/T15, 31% with Q03, 0.1% with A01).
