@@ -1,0 +1,39 @@
+source_url: "https://www.niftyindices.com/docs/default-source/indices/nifty200-momentum-30/nifty200_momentum_30_index_whitepaper_sep_20.pdf"
+author: "NSE Indices Ltd (index whitepaper, Sep 2020)"
+license: "index methodology, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: "2020-09"
+claim_as_stated: >
+  NSE's whitepaper for the Nifty200 Momentum 30 index: each stock's
+  normalised momentum score is based on its 6- and 12-month price return,
+  adjusted for daily price volatility; the 30 highest scores are held, with
+  weights tied to the score. `prior_claim`: the index outperformed the
+  Nifty 200 in NSE's own backtest (2020 whitepaper). The whitepaper (read
+  26 Oct) does not give the windows, the volatility measure or the weights.
+horizon: week
+rules_plain: >
+  The lab's reading, declared before the replay. Per symbol, on the adjusted
+  close: r6 and r12 = return over the last 126 and 252 sessions (no month
+  skipped); sigma = population standard deviation of the last 252 daily log
+  returns, times sqrt(252); m6 = r6 / sigma, m12 = r12 / sigma. Per date,
+  z-score m6 and m12 across every symbol scored that date and average them.
+  Positive is bullish, negative bearish; the size is the conviction. NSE's
+  final mapping of the z to a weight multiplier is monotone with 0 at the
+  centre, so it changes neither sign nor ranking and is not applied.
+  A symbol abstains until it has 253 rows; only those rows are read.
+default_params:
+  short: 126
+  long: 252
+  vol_window: 252
+  weights: "equal (0.5 / 0.5)"
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "NSE Indices methodology"
+link: "https://www.niftyindices.com/docs/default-source/indices/nifty200-momentum-30/nifty200_momentum_30_index_whitepaper_sep_20.pdf"
+prior_claim: "Index outperformed Nifty 200 in NSE's backtest (2020 whitepaper)"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): the lab's short-horizon results say the most extended stocks lag the next week (T08, T09, champion v1 bullish all negative at the top; A03 12-1 momentum is +0.21 week-bullish). Prediction: week-bullish top-5 edge at or below zero. Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5). NSE's backtest is the index provider's own, long-only, rebalanced semi-annually, and a published index backtest is not out-of-sample evidence."
+  - "Windows, volatility measure and equal weights are the lab's reading, not NSE's published method; a mismatch would make this a test of the catalog's summary, not of the index."
+  - "Cross-sectional z-scores depend on which symbols are present on a date; the audit checks each symbol's own ratios and the ordering instead of full invariance."
+  - "Likely to overlap A03 (12-1 momentum) heavily; check top-5 overlap in diagnose before reading it as new evidence."
+status: "queued"

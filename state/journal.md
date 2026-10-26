@@ -4814,3 +4814,19 @@ costs). Week replay queued.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** I01 momentum score.
+
+## 2026-10-26T0840Z port lane: I01 Nifty200 Momentum 30 score (unit 2)
+
+**Mode:** A (build), unit 2 of 5. Lane `port` (lease 9a77cf0).
+
+**Hypothesis/task:** port I01. NSE's whitepaper (read 26 Oct) names the ingredients (6- and 12-month return,
+adjusted for daily volatility) but not the windows or weights, so the card declares the lab's reading:
+126/252-session returns divided by annualised 252-day sigma, z-scored across the date's symbols, averaged.
+
+**Result:** `strategies/i01_momentum_score.py`, audit (own ratios unaffected by another symbol's row; ordering
+kept), 10 tests, `cards/I01.yml`. Pre-declared prediction: week-bullish top five at or below zero, as every
+short-horizon "most extended" reading in the lab. Week replay queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T23 relative strength rating.
