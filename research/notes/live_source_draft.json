@@ -1,0 +1,25 @@
+{
+  "chosen_on": "DRAFT (commit to config/live_source.json only on Fri 30 Oct before 12:00 UTC)",
+  "tables": {
+    "day_bullish": {
+      "strategy": "champion_v1@v1",
+      "label": "provisional",
+      "why": "no strategy meets SPEC section 10's train letter for day-bullish (no positive directional move after costs); champion v1 fallback. AB decision pending."
+    },
+    "day_bearish": {
+      "strategy": "e2a_a02_crowded@v1",
+      "label": "provisional",
+      "why": "highest released validation edge among eligible day-bearish strategies: +6.72 (train +7.46); research/notes/validation_answers_2026-10-26.md"
+    },
+    "week_bullish": {
+      "strategy": "champion_v1@v1",
+      "label": "provisional",
+      "why": "no strategy meets SPEC section 10's train letter for week-bullish; champion v1 fallback. AB decision pending."
+    },
+    "week_bearish": {
+      "strategy": "a01_weekly_reversal@v1",
+      "label": "provisional",
+      "why": "highest released validation edge among eligible week-bearish strategies: +4.73 (train +2.48); research/notes/validation_answers_2026-10-26.md"
+    }
+  }
+}

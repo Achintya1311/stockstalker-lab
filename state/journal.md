@@ -4627,3 +4627,19 @@ the cost test.
 **Next:** read `experiments/done/*-validation/holdout.json` when the batch lands and rank each bearish
 table by released validation edge; draft `config/live_source.json` inputs (due Fri 30 Oct 12:00 UTC);
 bullish fallback still awaits AB.
+
+## 2026-10-26T0414Z evaluate lane: validation answers read, provisional choice drafted (unit 1)
+
+**Mode:** A (build), unit 1 of 5. Lane `evaluate` (lease d3a1b7f). Go-live track, SPEC.md section 10.
+
+**Hypothesis/task:** Monday's batch was answered (749239e: 19 queries). Apply the provisional rule.
+
+**Result:** `research/notes/validation_answers_2026-10-26.md`. Day-bearish: E2A released +6.72 (spent; train
++7.46), D01C/consensus/A09 released at train (validation within about 3 points). Week-bearish: A01 released
++4.73 (spent; train +2.48), T05C +4.02 (= train), D02c +3.86 (spent), T15 -0.19 (fails). Literal choice:
+day_bearish E2A, week_bearish A01, both bullish champion v1 (AB pending). D01C day-bullish failed validation
+(-1.05). Draft `research/notes/live_source_draft.json` (config only on Fri 30 Oct). Budget left 41 of 60.
+
+**Do order blocks help?** No order-block reading was eligible or asked. Running answer unchanged.
+
+**Next:** register E2A and A01 in `picks/source.py` and get a dry run of the draft on real data.
