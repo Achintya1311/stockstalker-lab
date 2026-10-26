@@ -1,0 +1,26 @@
+source_url: "https://github.com/microsoft/qlib"
+author: "Microsoft Qlib, Alpha158 feature set (MIT); feature list copied in third_party/qlib/loader.py"
+license: "MIT reference code; the feature is re-implemented, not copied (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: Alpha158's RSQR (R-squared of a linear fit to the last 20
+  closes), signed by BETA (the fitted slope). Alpha158 uses both as inputs to a
+  learned model; `prior_claim`: no stand-alone hit rate claimed.
+horizon: week
+rules_plain: >
+  On the log of the adjusted close over the last 20 sessions: fit a straight
+  line; score = sign(slope) x R-squared. Smooth rises score near +1 (bullish),
+  smooth falls near -1 (bearish), choppy windows near 0. A flat window abstains.
+  Only the last 20 rows are read.
+default_params:
+  window: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "microsoft/qlib Alpha158 (MIT)"
+link: "https://github.com/microsoft/qlib"
+prior_claim: "Feature in Qlib's Alpha158 benchmark set; no stand-alone hit rate claimed"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): the lab's slower trend readings persist mildly (T21 week-bullish +1.66, I01 week-bearish +2.04) while the most extended stocks lag (T09, T16, T18). A steady trend is not necessarily an extended one. Prediction: week-bearish (steady fallers) positive, near I01's +2.04; week-bullish near zero. Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5). Alpha158 features are model inputs, not rules."
+  - "Check overlap with I01 (bearish) and T21/T23 (bullish) in diagnose."
+status: "queued"

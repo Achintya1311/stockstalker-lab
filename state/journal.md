@@ -5109,3 +5109,5 @@ put it in `config/live_source.draft.json` and the notes; port Q03/Q05 after; liv
 Bullish validation replay (run 40352236427, d9fcf6c) still running since 16:15Z; answers pending.
 Unit 1: Q03 up-day balance (Alpha158 CNTD, 20 sessions, tie-break by move size), day and week replays
 queued. Pre-declared: bullish expected wrong-way (A01/A02 reversal), helps at +2.0 / 4 of 6 years / positive dir.
+Unit 2: Q05 trend smoothness (Alpha158 RSQR signed by BETA, 20 sessions), week replay queued. Pre-declared:
+week-bearish near I01's +2.04, bullish near zero.
