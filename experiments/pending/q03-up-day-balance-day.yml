@@ -1,0 +1,10 @@
+# Q03 (day horizon): Alpha158 CNTD up-day balance over 20 sessions, train-split
+# replay (port lane, state/queue.md). See cards/Q03.yml and
+# strategies/q03_up_day_balance.py.
+id: q03-up-day-balance-day
+strategy: strategies.q03_up_day_balance
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

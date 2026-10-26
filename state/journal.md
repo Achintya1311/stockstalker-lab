@@ -5103,3 +5103,9 @@ Bullish validation batch: Replay run 40352236427 started 16:15Z, still running a
 **Next:** read the 8 bullish answers; pick the highest released edge per bullish table (AB's edge-only rule),
 put it in `config/live_source.draft.json` and the notes; port Q03/Q05 after; live_source.json by Fri 30 Oct
 12:00 UTC.
+
+## 2026-10-26 18:40 UTC, run 14 (port lane, lease 6b0a28d)
+
+Bullish validation replay (run 40352236427, d9fcf6c) still running since 16:15Z; answers pending.
+Unit 1: Q03 up-day balance (Alpha158 CNTD, 20 sessions, tie-break by move size), day and week replays
+queued. Pre-declared: bullish expected wrong-way (A01/A02 reversal), helps at +2.0 / 4 of 6 years / positive dir.

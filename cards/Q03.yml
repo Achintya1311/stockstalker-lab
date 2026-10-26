@@ -1,0 +1,28 @@
+source_url: "https://github.com/microsoft/qlib"
+author: "Microsoft Qlib, Alpha158 feature set (MIT); feature list copied in third_party/qlib/loader.py"
+license: "MIT reference code; the feature is re-implemented, not copied (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: Alpha158's CNTD, the share of up closes minus the share of
+  down closes over 20 days. Alpha158 uses it as one input to a learned model;
+  `prior_claim`: no stand-alone hit rate claimed.
+horizon: both
+rules_plain: >
+  On the adjusted close, over the last 20 sessions: balance = (up closes - down
+  closes) / 20. Positive bullish, negative bearish, zero abstains. A tie-break
+  smaller than half a step, 0.02 x tanh(20-session log return / 0.2), orders
+  stocks with equal balance by the size of their move. Only the last 21 rows are
+  read.
+default_params:
+  window: 20
+  tie: 0.02
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "microsoft/qlib Alpha158 (MIT)"
+link: "https://github.com/microsoft/qlib"
+prior_claim: "Feature in Qlib's Alpha158 benchmark set; no stand-alone hit rate claimed"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): A01 (week) and A02 (day) find that the biggest recent winners reverse. Prediction: bullish top-5 edge negative on both horizons (the stocks that rose most often lag); bearish near zero. Helps if any side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs. If bullish is significantly wrong-way, check its overlap with A01's bearish side before any flip."
+  - "No claim is assumed true (SPEC.md section 5). Alpha158 features are model inputs, not rules."
+  - "The tie-break is the lab's choice; without it the top five would be decided by symbol order."
+status: "queued"
