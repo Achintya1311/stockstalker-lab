@@ -1,0 +1,13 @@
+# Validation query for the day-bullish table (AB's edge-only bullish rule, 26 Oct 2026).
+# Q06 day-bullish: 7,335 train picks, top-5 edge +2.58 (interval +1.47 to +3.70, 6/6 years),
+# StepM superior (research/diagnostics/q06.md). Replaces the draft's T04 (released +4.36)
+# only if its released edge is higher. The queue answers both sides through Thresholdout
+# and logs them in ledger/holdout_queries.csv; only bullish is used.
+id: q06-wick-balance-day-validation
+strategy: strategies.q06_wick_balance
+split: validation
+horizon: day
+train_experiment: q06-wick-balance-day
+dates:
+  start: 2021-01-01
+  end: 2023-12-31

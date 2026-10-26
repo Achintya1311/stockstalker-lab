@@ -5148,3 +5148,8 @@ a small bearish tell, a long lower wick noise. Result: both sides work on hit ra
 (t 4.61, interval +1.47 to +3.70, 6/6 years), day bearish +1.67 (t 2.98, 5/6); StepM superior in both cells, second
 in day bullish behind T04. Directional moves -0.42% / -0.05% after costs, so the rule is not met. Top fives are new
 stocks (0.3-2.8% overlap with every other day reading). Day bullish is eligible under AB's edge-only rule.
+Unit 5 (evaluate, lease 000cef0): Q06 day-bullish validation query queued
+(`experiments/pending/q06-wick-balance-day-validation.yml`), under AB's edge-only bullish rule (at least 500 train
+picks, positive top-5 edge). `gates/budgets.py` before the push: 37 used, 23 left this ISO week; this spends 2
+rows. Decision rule written down before the answer: Q06 replaces T04 (released +4.36) for day bullish only if its
+released edge is higher; otherwise the draft is unchanged.
