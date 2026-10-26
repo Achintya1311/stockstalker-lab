@@ -4778,3 +4778,22 @@ T01's own 20/50 filter is +1.89 day-bearish; keeping only inside-bar days remove
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T14.
+
+## 2026-10-26T0650Z diagnose lane: T14 CCI crossings (unit 5)
+
+**Mode:** A (build), unit 5 of 5. Lane `evaluate` (lease d4c4f91), removed in this commit.
+
+**Hypothesis/task:** T14 had no diagnosis.
+
+**Result:** `research/diagnostics/t14.md`. Both crossings wrong-way at the day horizon: up-cross from -100
+bullish -2.44 (t -3.02, 0/6 years), down-cross from +100 bearish -1.29. Same shape as T12, on different stocks
+(19% top-five overlap). T13 fading the overbought level is +2.89, T14 waiting for the turn is -1.29. A flipped
+bullish side would gross about +0.15% against the 0.25% futures cost; not queued. Every T01-T15 card now has a
+diagnosis file.
+
+**Do order blocks help?** Not tested here. Running answer unchanged: bearish leans no; bullish "not yet, but
+O05's weekly-bar structure is the first candidate worth a second look", and no order-block reading clears the
+cost test.
+
+**Next:** draft on real data after tonight's dataset update; AB decisions pending (bullish fallback,
+same-stock conflict, E2A coverage vs the fallback).
