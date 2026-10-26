@@ -4966,3 +4966,17 @@ cost test.
 
 **Next:** diagnose T17 and T20 when Replay (since 10:24Z) lands; draft on real data after tonight's dataset
 update; AB decisions pending (bullish fallback, same-stock conflict, E2A coverage vs fallback).
+
+## 2026-10-26T1230Z diagnose lane: T17 Keltner breakout (unit 1)
+
+**Mode:** A (build), unit 1 of 5. Lane `diagnose` (lease ced0cf4).
+
+**Hypothesis/task:** T17's week replay landed (84ed94c).
+
+**Result:** `research/diagnostics/t17.md`. Bullish -2.20 (1/6 years), bearish -1.18; rule not met; prediction
+(both negative) right. 38% of the bullish top five are T08-20's: the week-breakout family (T07, T08, T09, T17)
+is closed.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T20.

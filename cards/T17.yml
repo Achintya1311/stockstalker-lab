@@ -26,4 +26,4 @@ red_flags:
   - "Pre-declared before the replay (26 Oct): the lab's other week breakouts are wrong-way on the bullish side (T08 20-day -3.97, 55-day -5.09). Prediction: week-bullish top-5 edge negative; week-bearish (closes below the lower band) negative too, as T08's 20-day bearish (-2.72). Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs. If bullish is significantly wrong-way, a flip would mostly re-test A01 and T05C; check overlap before queuing one."
   - "No claim is assumed true (SPEC.md section 5)."
   - "ATR as a simple mean of true range (not Wilder's smoothing) and a 20-day ATR window are the lab's reading of the catalog's 'EMA 20, ATR 2x'."
-status: "queued"
+status: "train: edge -2.20 week-bull / -1.18 week-bear (week only); dir after costs negative; pre-declared rule not met. See research/diagnostics/t17.md"
