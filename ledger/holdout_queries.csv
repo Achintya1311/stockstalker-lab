@@ -20,3 +20,4 @@ t05c-upcross-fade-week-validation-bearish,2026-10-26T03:56:05.183635+00:00,edge_
 t15-adx-regime-week-validation-bullish,2026-10-26T04:02:15.336369+00:00,edge_top,week,bullish,0.03,0.01,-0.011458157220557375,-0.011458157220557375,False
 t15-adx-regime-week-validation-bearish,2026-10-26T04:02:15.336551+00:00,edge_top,week,bearish,0.03,0.01,0.02954953152349719,-0.0018784768804638102,True
 e2a-d01c-fallback-day-validation-bearish,2026-10-26T04:56:58.562442+00:00,edge_top,day,bearish,0.03,0.01,0.059741994421959925,0.059741994421959925,False
+a01-i01-filter-week-validation-bearish,2026-10-26T15:18:33.540573+00:00,edge_top,week,bearish,0.03,0.01,0.041672083110571516,0.041672083110571516,False
