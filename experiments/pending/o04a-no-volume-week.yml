@@ -1,9 +1,0 @@
-# O04A: O04 without A07's volume ingredient, train-split replay (order-block lane ablation).
-# See cards/O04A.yml (pre-declared rule) and strategies/o04a_no_volume.py.
-id: o04a-no-volume-week
-strategy: strategies.o04a_no_volume
-split: train
-horizon: week
-dates:
-  start: 2015-01-01
-  end: 2020-12-31

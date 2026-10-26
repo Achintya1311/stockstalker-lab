@@ -1,0 +1,9 @@
+{
+  "id": "o04a-no-volume-day",
+  "strategy": "strategies.o04a_no_volume",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 44442,
+  "n_dates": 1426,
+  "pick_log_sha256": "0c55e207b04c29ad7d47a46eaae33be58b7211d8e8d6e459eaa81429ba8f5f8b"
+}

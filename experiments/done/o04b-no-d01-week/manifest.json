@@ -1,0 +1,9 @@
+{
+  "id": "o04b-no-d01-week",
+  "strategy": "strategies.o04b_no_d01",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 9480,
+  "n_dates": 301,
+  "pick_log_sha256": "86884fb1e6f8008a902f778d5ec1752c39ca98b136e16e8fed9ea8431f019fa5"
+}
