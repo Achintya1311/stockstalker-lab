@@ -1,0 +1,9 @@
+{
+  "id": "q06-wick-balance-day",
+  "strategy": "strategies.q06_wick_balance",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 296132,
+  "n_dates": 1484,
+  "pick_log_sha256": "299ee3bf3f642403c9287a4d0ca2f28cbd06ff61b30ffc23cae959244bd7afaf"
+}

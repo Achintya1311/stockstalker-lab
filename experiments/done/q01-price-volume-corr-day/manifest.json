@@ -1,0 +1,9 @@
+{
+  "id": "q01-price-volume-corr-day",
+  "strategy": "strategies.q01_price_volume_corr",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 109691,
+  "n_dates": 1465,
+  "pick_log_sha256": "db78d02a68eee7682f00c943a33b970487b0b4a031b1a65fca3d6d5b05b751c6"
+}
