@@ -1,0 +1,17 @@
+{
+  "id": "o05-order-block-weekly-week-validation",
+  "strategy": "strategies.o05_order_block_weekly",
+  "horizon": "week",
+  "train_experiment": "o05-order-block-weekly-week",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.01900616714972739,
+      "released_edge": 0.01900616714972739
+    },
+    "bearish": {
+      "train_edge": 0.0031561218720443872,
+      "released_edge": 0.0031561218720443872
+    }
+  }
+}

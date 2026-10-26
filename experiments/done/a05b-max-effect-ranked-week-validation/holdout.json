@@ -1,0 +1,17 @@
+{
+  "id": "a05b-max-effect-ranked-week-validation",
+  "strategy": "strategies.a05b_max_effect_ranked",
+  "horizon": "week",
+  "train_experiment": "a05b-max-effect-ranked-week",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.02229204100569184,
+      "released_edge": 0.02229204100569184
+    },
+    "bearish": {
+      "train_edge": -0.002810960449526036,
+      "released_edge": -0.002810960449526036
+    }
+  }
+}
