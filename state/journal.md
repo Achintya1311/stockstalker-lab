@@ -4695,3 +4695,23 @@ the provisional disclaimer is present, no forbidden words. It also showed one st
 
 **Next:** fallback validation answer; first `picks/` push after tonight's dataset update to run the draft on
 real data.
+
+## 2026-10-26T0433Z diagnose lane: T08 Donchian breakout (unit 5)
+
+**Mode:** A (build), unit 5 of 5. Lane `evaluate` (lease d3a1b7f), removed in this commit. The fallback's
+validation query is still being answered (Replay run in progress since 04:02Z).
+
+**Hypothesis/task:** T08 had no diagnosis.
+
+**Result:** `research/diagnostics/t08.md`. Week breakouts wrong-way on both sides: 20-day bullish -3.97
+(t -2.68), 55-day bullish -5.09 (t -3.09), 20-day bearish -2.72; the `all` selection is as bad, so every
+breakout lags, not only the largest. 35% of T08-20's week-bullish top five are in A01's week-bearish top five.
+Not eligible.
+
+**Do order blocks help?** Not tested here. Running answer unchanged: bearish leans no; bullish "not yet, but
+O05's weekly-bar structure is the first candidate worth a second look", and no order-block reading clears the
+cost test.
+
+**Next:** read `experiments/done/e2a-d01c-fallback-day-validation/holdout.json`; after tonight's dataset
+update, push to `picks/` (or wait for one) so the draft runs on real data; AB decisions pending (bullish
+fallback, same-stock conflict).
