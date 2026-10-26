@@ -1,0 +1,29 @@
+source_url: ""
+author: "Chester Keltner (1960); ATR version popularised by Linda Raschke"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: "1960"
+claim_as_stated: >
+  `cards/catalog.csv`: close above the upper Keltner channel bullish, below
+  the lower bearish, with a 20-day EMA and a 2x ATR band. `prior_claim`:
+  breakout. No published hit rate is cited.
+horizon: week
+rules_plain: >
+  On the adjusted series: middle = 20-day EMA of the close; ATR = mean of the
+  last 20 true ranges; upper/lower = middle +/- 2 ATR. A close above the upper
+  channel is bullish, scored by how many ATRs it cleared the band by; a close
+  below the lower is bearish, scored the same way with a negative sign; a
+  close inside abstains. Only the trailing 200 rows are read.
+default_params:
+  ema_span: 20
+  atr_window: 20
+  mult: 2.0
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Keltner (1960); ATR version popularised by Raschke"
+link: ""
+prior_claim: "Breakout"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): the lab's other week breakouts are wrong-way on the bullish side (T08 20-day -3.97, 55-day -5.09). Prediction: week-bullish top-5 edge negative; week-bearish (closes below the lower band) negative too, as T08's 20-day bearish (-2.72). Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs. If bullish is significantly wrong-way, a flip would mostly re-test A01 and T05C; check overlap before queuing one."
+  - "No claim is assumed true (SPEC.md section 5)."
+  - "ATR as a simple mean of true range (not Wilder's smoothing) and a 20-day ATR window are the lab's reading of the catalog's 'EMA 20, ATR 2x'."
+status: "queued"

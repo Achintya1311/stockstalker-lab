@@ -4896,3 +4896,18 @@ filter on A01 or T05C week-bearish, as a new pre-declared card.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** I01, T23, T21, T25 when the Replay run in progress (since 08:41Z) lands.
+
+## 2026-10-26T1040Z port lane: T17 Keltner channel breakout (unit 2)
+
+**Mode:** A (build), unit 2 of 5. Lease `diagnose` (1c68bea) renewed; no new results to diagnose yet (Replay
+in progress since 08:41Z), so this unit ports.
+
+**Hypothesis/task:** port T17: close outside EMA20 +/- 2 ATR20, scored in ATRs past the band.
+
+**Result:** `strategies/t17_keltner_breakout.py` (trailing 200 rows), audit, 9 tests (flat series gives a known
+98-102 channel; jump scores checked against the formula), `cards/T17.yml`. Pre-declared prediction: both sides
+negative, as T08. Week replay queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T20 volume breakout; diagnose the batch when it lands.

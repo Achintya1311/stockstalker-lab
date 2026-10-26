@@ -1,0 +1,10 @@
+# T17 (week horizon only, per cards/T17.yml): Keltner channel breakout,
+# EMA20 +/- 2 ATR20, train-split replay (port lane, state/queue.md). See
+# cards/T17.yml and strategies/t17_keltner_breakout.py.
+id: t17-keltner-breakout-week
+strategy: strategies.t17_keltner_breakout
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
