@@ -1,0 +1,9 @@
+{
+  "id": "q03-up-day-balance-week",
+  "strategy": "strategies.q03_up_day_balance",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 53809,
+  "n_dates": 309,
+  "pick_log_sha256": "e888784bd405024d2ab02e2bfb0356b90d6eef0c63f1df99e3101958a523d56f"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "q05-trend-smoothness-week",
+  "strategy": "strategies.q05_trend_smoothness",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 63699,
+  "n_dates": 309,
+  "pick_log_sha256": "8bf09fdd9aaed4196a190193a4787e0c99574b116c9beae603a14eb70256c0ba"
+}
