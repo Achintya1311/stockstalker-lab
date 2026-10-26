@@ -4453,3 +4453,22 @@ first candidate worth a second look".
 experiments/pending/` and push. Then diagnose the seven replays as they land, re-run
 `scripts/provisional_candidates.py --stage` for late eligibles (T05C week, E2A_D01C_FB), and keep the
 champion-v1 bullish question in front of AB before Fri 30 Oct 12:00 UTC.
+
+## 2026-10-26T0013Z evaluate lane: Monday validation batch queued (unit 1)
+
+**Mode:** A (build), unit 1 of 5. Lane `evaluate` (lease c4e6d68). Go-live track, SPEC.md section 10.
+
+**Hypothesis/task:** holdout queries for the provisional rule open Mon 26 Oct. Queue every eligible
+reading's validation experiment, counted in this UTC ISO week.
+
+**Result:** re-ran `scripts/provisional_candidates.py --stage` first: T05C week-bearish landed overnight
+(+4.02, interval +0.79 to +7.18, dir +0.24%; StepM names it the one superior week-bearish reading, SPA
+p=0.099) and is now eligible, so the batch is eleven. `holdout_budget_remaining` = 60 before queueing;
+the batch asks up to 22. All eleven `*-validation.yml` moved into `experiments/pending/`. Day-bullish and
+week-bullish: none eligible, champion v1 fallback, AB decision pending (`state/queue.md`).
+
+**Do order blocks help?** No order-block reading is in the batch (none meets the letter). Running answer
+unchanged: bearish leans no; bullish "not yet, but O05's weekly-bar structure is the first candidate worth
+a second look".
+
+**Next:** read `experiments/done/*-validation/holdout.json` when the replay lands; diagnose T05C.

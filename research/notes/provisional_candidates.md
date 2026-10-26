@@ -23,6 +23,7 @@ None eligible: the table falls back to champion v1.
 
 | Experiment | Picks | Edge (pts) | t | Dir. move |
 |---|---|---|---|---|
+| t05c-upcross-fade-week | 1028 | +4.02 | 2.45 | +0.236% |
 | d02-stock-pcr-contrarian-week | 661 | +3.75 | 1.68 | +0.165% |
 | t15-adx-regime-week | 1456 | +2.95 | 2.20 | +0.022% |
 | a01-weekly-reversal-week | 1538 | +2.48 | 1.83 | +0.015% |
