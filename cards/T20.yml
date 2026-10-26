@@ -1,0 +1,31 @@
+source_url: ""
+author: "Practitioner rule; also a PKScreener scan (MIT, third_party/pkscreener)"
+license: "trading convention; summarised only, no code copied (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: close in the top 25% of the day's range on volume over
+  2x the 20-day average: bullish next day (mirror for bearish).
+  `prior_claim`: breakouts on volume continue. No published hit rate is cited.
+horizon: day
+rules_plain: >
+  On the last visible session: close location = (close - low) / (high -
+  low); volume ratio = that session's volume over the mean of the 20 sessions
+  before it. Bullish if the close location is at least 0.75 and the ratio is
+  over 2; bearish if the location is at most 0.25 and the ratio is over 2;
+  otherwise abstain. Score = the volume ratio, signed by side. Day only.
+default_params:
+  baseline: 20
+  vol_mult: 2.0
+  top: 0.75
+  bottom: 0.25
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Practitioner; in PKScreener"
+link: ""
+prior_claim: "Breakouts on volume continue"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): A02 (fade an extreme day) and its E2A variant are the lab's strongest day-bearish readings, and a close at the top of the range on heavy volume is often an extreme up day. Prediction: day-bullish top-5 edge negative (continuation fails); day-bearish (heavy-volume close at the low) negative too. Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs. If day-bullish is significantly wrong-way, check overlap with A02/E2A before any flip."
+  - "No claim is assumed true (SPEC.md section 5)."
+  - "Volume is not split-adjusted; a split or bonus inside the 20-day window inflates the ratio for that window."
+  - "Distinct from A07 (multi-day volume z-score, no price condition); check overlap in diagnose."
+status: "queued"

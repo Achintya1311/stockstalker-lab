@@ -4911,3 +4911,19 @@ negative, as T08. Week replay queued.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T20 volume breakout; diagnose the batch when it lands.
+
+## 2026-10-26T1050Z port lane: T20 volume breakout (unit 3)
+
+**Mode:** A (build), unit 3 of 5. Lease `diagnose` (1c68bea); the batch Replay is still running, so this unit
+ports.
+
+**Hypothesis/task:** port T20: close in the top (bottom) quarter of the day's range on over 2x the prior
+20-session volume, scored by the volume ratio.
+
+**Result:** `strategies/t20_volume_breakout.py`, audit, 10 tests (ratio, boundaries, the session excluded from
+its own baseline), `cards/T20.yml`. Pre-declared prediction: both day sides negative (A02/E2A fade extreme
+days). Day replay queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** diagnose the batch if it lands, else port T16.
