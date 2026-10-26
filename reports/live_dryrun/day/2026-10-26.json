@@ -291,7 +291,8 @@
             "high": 13.4,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "INFY",
@@ -570,7 +571,8 @@
               82.8
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "INDHOTEL",
@@ -856,7 +858,8 @@
             "high": 26.2,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "COFORGE",
@@ -1135,7 +1138,8 @@
               72.6
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "MPHASIS",
@@ -1414,7 +1418,8 @@
               79.0
             ]
           ]
-        }
+        },
+        "late": false
       }
     ],
     "bearish": [
@@ -1695,7 +1700,8 @@
               3.5
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "TIINDIA",
@@ -1981,7 +1987,8 @@
             "high": 45.4,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "YESBANK",
@@ -2267,7 +2274,8 @@
             "high": 64.1,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "FORTIS",
@@ -2553,7 +2561,8 @@
             "high": 86.0,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "SWIGGY",
@@ -2839,7 +2848,8 @@
             "high": 44.5,
             "retested": false
           }
-        }
+        },
+        "late": false
       }
     ]
   },
