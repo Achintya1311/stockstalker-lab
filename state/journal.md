@@ -4542,3 +4542,20 @@ O05's weekly-bar structure is the first candidate worth a second look".
 
 **Next:** read the validation answers when the batch lands (Replay is still running the 25 Oct ablations
 ahead of it); diagnose E2A_D01C_FB, O04A, O04B; diagnosis files for T06 and T13.
+
+## 2026-10-26T0214Z diagnose lane: E2A_D01C_FB fallback (unit 1)
+
+**Mode:** A (build), unit 1 of 5. Lane `diagnose` (lease 1c6f04e). One validation experiment queued
+(go-live track, up to 2 queries).
+
+**Hypothesis/task:** the fallback's replay landed (62f0bb0). Check its pre-declared rule.
+
+**Result:** `research/diagnostics/e2a_d01c_fb.md`. Edge +5.97 (t 7.44, interval +4.37 to +7.57, 6/6
+years) clears +5.74, but dir +0.06% (needs +0.08%) and coverage 94% (needs 99%): not met. D01C is weakest
+on the dates E2A abstains (implied edge about +2.9). About 80 dates are blank because the switch reads raw
+E2A scores, before the universe filter. Meets the provisional letter, so
+`experiments/pending/e2a-d01c-fallback-day-validation.yml` is queued (budget 60 before Monday's batch).
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** O04A/O04B ablation diagnosis.

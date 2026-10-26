@@ -11,6 +11,7 @@ None eligible: the table falls back to champion v1.
 | Experiment | Picks | Edge (pts) | t | Dir. move |
 |---|---|---|---|---|
 | e2a-day | 2767 | +7.46 | 6.92 | +0.127% |
+| e2a-d01c-fallback-day | 4996 | +5.97 | 7.44 | +0.057% |
 | d01c-day | 7304 | +4.74 | 8.41 | +0.083% |
 | consensus-db-v1-day | 7335 | +4.61 | 8.32 | +0.067% |
 | a09-gap-fade-day | 4710 | +3.21 | 4.01 | +0.025% |

@@ -26,4 +26,4 @@ red_flags:
 - Members and the switch were chosen after seeing their train results; the fallback is its own trial and each member already is one.
 - E2A fires about 3 stocks a date, so on E2A dates the table usually has fewer than 5 picks. Filling to 5 with D01C is a different trial.
 - Train split only until a frozen version exists.
-status: queued (train replay, day)
+status: "train: day-bearish +5.97 (t 7.44), dir +0.06%, coverage 94%; pre-declared rule not met on dir and coverage. P1-eligible; validation query queued 26 Oct. See research/diagnostics/e2a_d01c_fb.md"
