@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 165. Gate 2's bar at that count: t >= 4.31.
+Trials recorded: 166. Gate 2's bar at that count: t >= 4.31.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -24,6 +24,7 @@ Trials recorded: 165. Gate 2's bar at that count: t >= 4.31.
 | t10-nr7-narrow-range-day | day | bullish | 5996 | 46.33% | 44.71% | 2.16 | 3.20 |  | -0.49 | 100.00% |  |
 | q06-wick-balance-day | day | bearish | 7334 | 56.20% | 54.54% | 1.67 | 2.98 |  | -0.05 | 83.33% |  |
 | a01-i01-filter-week | week | bearish | 1274 | 55.34% | 50.76% | 4.17 | 2.89 |  | 0.15 | 100.00% | candidate |
+| q01c-thin-volume-fall-week | week | bearish | 1524 | 54.33% | 50.91% | 3.26 | 2.81 |  | 0.12 | 100.00% | candidate |
 | t04-connors-rsi2-day | day | bearish | 4264 | 57.55% | 54.82% | 2.32 | 2.65 |  | -0.01 | 83.33% |  |
 | t01-sma-crossover-week | week | bearish | 1514 | 54.10% | 50.88% | 3.20 | 2.56 |  | -0.03 | 83.33% |  |
 | t05c-upcross-fade-week | week | bearish | 1028 | 53.31% | 50.72% | 4.02 | 2.45 |  | 0.24 | 83.33% | candidate |

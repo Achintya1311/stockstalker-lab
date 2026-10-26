@@ -164,3 +164,4 @@ q01-price-volume-corr-week-bullish,2026-10-26T20:09:54.757231+00:00,strategies.q
 q01-price-volume-corr-week-bearish,2026-10-26T20:09:54.757352+00:00,strategies.q01_price_volume_corr,,week,bearish,train,-0.005831155323764925,-0.4387989534539308,n/a,"train, top selection; recorded by engine/experiment_report.py"
 q06-wick-balance-day-bullish,2026-10-26T20:09:54.757800+00:00,strategies.q06_wick_balance,,day,bullish,train,0.025834442604041885,4.607911353188051,n/a,"train, top selection; recorded by engine/experiment_report.py"
 q06-wick-balance-day-bearish,2026-10-26T20:09:54.757895+00:00,strategies.q06_wick_balance,,day,bearish,train,0.016677678587486863,2.9760146206662728,n/a,"train, top selection; recorded by engine/experiment_report.py"
+q01c-thin-volume-fall-week-bearish,2026-10-26T22:07:55.870732+00:00,strategies.q01c_thin_volume_fall,,week,bearish,train,0.032552862945845716,2.8095999796338638,n/a,"train, top selection; recorded by engine/experiment_report.py"

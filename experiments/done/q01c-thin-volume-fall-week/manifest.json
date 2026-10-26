@@ -1,0 +1,9 @@
+{
+  "id": "q01c-thin-volume-fall-week",
+  "strategy": "strategies.q01c_thin_volume_fall",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 14112,
+  "n_dates": 309,
+  "pick_log_sha256": "002c1b461be8c836cabce94d3cc9610c435cf7dbcc6768ca5fd5091921bfcf5e"
+}
