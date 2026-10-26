@@ -5111,3 +5111,6 @@ Unit 1: Q03 up-day balance (Alpha158 CNTD, 20 sessions, tie-break by move size),
 queued. Pre-declared: bullish expected wrong-way (A01/A02 reversal), helps at +2.0 / 4 of 6 years / positive dir.
 Unit 2: Q05 trend smoothness (Alpha158 RSQR signed by BETA, 20 sessions), week replay queued. Pre-declared:
 week-bearish near I01's +2.04, bullish near zero.
+Unit 3: Q01 price-volume divergence (Alpha158 CORR of close with log volume, read against the 20-session move:
+a move on thinning volume is faded), day and week queued; the catalog rule was corrected to that sign logic.
+Pre-declared: week-bearish at or below T19's +1.79, others within noise.

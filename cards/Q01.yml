@@ -1,0 +1,27 @@
+source_url: "https://github.com/microsoft/qlib"
+author: "Microsoft Qlib, Alpha158 feature set (MIT); feature list copied in third_party/qlib/loader.py"
+license: "MIT reference code; the feature is re-implemented, not copied (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: Alpha158's CORR, the correlation of the close with log
+  volume over 20 days, read as a price-volume divergence. Alpha158 uses it as an
+  input to a learned model; `prior_claim`: no stand-alone hit rate claimed.
+horizon: both
+rules_plain: >
+  On the adjusted close and raw volume over the last 20 sessions: rho =
+  correlation(close, log(volume + 1)); r20 = the 20-session log return. A rise
+  while volume thins (r20 > 0, rho < 0) is bearish; a fall while volume thins
+  (r20 < 0, rho > 0) is bullish; the score is rho in both cases. Volume that
+  grows with the move abstains. Only the last 21 rows are read.
+default_params:
+  window: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "microsoft/qlib Alpha158 (MIT)"
+link: "https://github.com/microsoft/qlib"
+prior_claim: "Feature in Qlib's Alpha158 benchmark set; no stand-alone hit rate claimed"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): T19 (OBV swing divergence) found week-bearish +1.79 but a negative directional move, and bullish -1.20. Prediction: week-bearish small positive, at or below T19's +1.79; bullish and day sides within noise of zero. Helps if any side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5). Alpha158 features are model inputs, not rules."
+  - "Correlates the close level, not returns, so a steady trend with steady volume change dominates the score; Q02 (return vs volume change) is the return form."
+status: "queued"

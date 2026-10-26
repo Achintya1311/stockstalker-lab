@@ -1,0 +1,10 @@
+# Q01 (day horizon): Alpha158 CORR read as price-volume divergence over 20
+# sessions, train-split replay (port lane, state/queue.md). See cards/Q01.yml
+# and strategies/q01_price_volume_corr.py.
+id: q01-price-volume-corr-day
+strategy: strategies.q01_price_volume_corr
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
