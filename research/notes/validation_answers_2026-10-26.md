@@ -2,7 +2,8 @@
 
 Monday's batch (queued 32ed1dc, answered by the Replay run that committed 749239e at 04:02 UTC): 11 validation
 experiments, 19 queries logged in `ledger/holdout_queries.csv` (bearish-only cards ask one side). Budget left
-this ISO week: 41 of 60 before the fallback's query (`e2a-d01c-fallback-day-validation`, still pending).
+this ISO week: 41 of 60 after the batch, 40 of 60 after the fallback's query (`e2a-d01c-fallback-day-validation`,
+answered by the Replay run that committed c59f8aa at 04:56 UTC).
 
 ## How to read a released value
 
@@ -23,7 +24,7 @@ a different one is a noisy look at validation itself.
 | D01C | +4.74 | +4.74 | no | validation within about 3 points of +4.74 |
 | consensus_db_v1 | +4.61 | +4.61 | no | as D01C |
 | A09 | +3.21 | +3.21 | no | within about 3 points |
-| E2A_D01C_FB | +5.97 | pending | | query queued 62758e4 |
+| E2A_D01C_FB | +5.97 | +5.97 | no | within about 3 points of +5.97; below E2A's +6.72, so E2A stays |
 
 ### Week / bearish
 
@@ -49,7 +50,7 @@ was one of its three day-bullish candidates), A09 day-bullish +0.49, the week-bu
 
 | Table | Provisional choice | Released edge | Runner-up | Note |
 |---|---|---|---|---|
-| day_bearish | **E2A** | +6.72 | D01C +4.74 (released = train) | E2A has picks on 64% of train dates, so the table is empty on about a third of days; the fallback's answer is still to come |
+| day_bearish | **E2A** | +6.72 | D01C +4.74 (released = train) | E2A has picks on 64% of train dates, so the table is empty on about a third of days; the fallback (released +5.97) would fill them but ranks below E2A |
 | week_bearish | **A01 weekly reversal** | +4.73 | T05C +4.02 (released = train) | A01's train edge was modest (+2.48, interval -0.09 to +5.31 in `evidence_train.md`); validation came out higher |
 | day_bullish | **champion v1** | n/a | none eligible | top-5 train edge -1.55; AB decision pending (`research/diagnostics/champion_v1.md`) |
 | week_bullish | **champion v1** | n/a | none eligible | top-5 train edge -2.82; AB decision pending |
@@ -57,12 +58,14 @@ was one of its three day-bullish candidates), A09 day-bullish +0.49, the week-bu
 Caveats the choice should carry:
 - A released value equal to train hides the validation value inside a band of about ±3 points, so T05C,
   D01C and the others are not known to be below A01 and E2A, only not shown to be above.
-- The fallback's answer (pending) could replace E2A only if its released edge is higher; with train +5.97 that
-  needs validation to beat train by 3 or more points.
+- The fallback's answer came back at its train value (+5.97, `budget_spent` False), below E2A's +6.72, so
+  under the literal rule E2A stays and the day-bearish table is empty on about a third of days. Choosing the
+  fallback for coverage instead would be a departure from "highest released edge wins": an AB call, not the
+  lab's. Queued with the other two decisions.
 - `config/live_source.json` is written only on Fri 30 Oct before 12:00 UTC (SPEC section 7). Until then this
   is a draft (`config/live_source.draft.json` (read by dry runs only)).
-- `picks/source.py`'s registry only knows champion v1, so E2A and A01 must be registered before Friday, or
-  the first live run would fail on an unknown strategy id.
+- E2A, A01 and the fallback are registered in `picks/source.py` (d158544), so a switch between them needs no
+  code change.
 
 ## Same stock in both tables (found 26 Oct, unit 4)
 

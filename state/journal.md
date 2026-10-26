@@ -4715,3 +4715,20 @@ cost test.
 **Next:** read `experiments/done/e2a-d01c-fallback-day-validation/holdout.json`; after tonight's dataset
 update, push to `picks/` (or wait for one) so the draft runs on real data; AB decisions pending (bullish
 fallback, same-stock conflict).
+
+## 2026-10-26T0620Z evaluate lane: fallback validation answer (unit 1)
+
+**Mode:** A (build), unit 1 of 5. Lane `evaluate` (lease d4c4f91).
+
+**Hypothesis/task:** read `experiments/done/e2a-d01c-fallback-day-validation/holdout.json` (Replay c59f8aa).
+
+**Result:** E2A_D01C_FB released +5.97, equal to its train edge (`budget_spent` False), so validation is within
+about 3 points of train. Below E2A's released +6.72: the literal SPEC 10 choice for day_bearish stays E2A and
+`config/live_source.draft.json` is unchanged. 40 of 60 validation queries left this ISO week. Queued for AB
+with the other two decisions: E2A leaves the table empty on about a third of days; the fallback fills most of
+them at a lower released edge. Also corrected the stale "registry only knows champion v1" caveat in
+`research/notes/validation_answers_2026-10-26.md`.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** diagnoses for T02, T03, T07, T11, T14 (none had a file).
