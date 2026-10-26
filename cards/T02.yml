@@ -34,4 +34,4 @@ red_flags:
   - "200-row minimum history means roughly the first trading year of any symbol's life (new listings, newly F&O-enabled names) abstains throughout - worth checking in diagnose whether that abstention rate materially shrinks the picked universe versus T01's 50-row minimum."
   - "Shares its SMA-crossover shape and fast/slow convention with `cards/T01.yml`; once both have train results, check pick overlap directly (SPEC.md section 6 gate 8) rather than assuming the slower window decorrelates them enough on its own."
   - "50/200 is the conventional pair reported in financial media, not tuned on NSE data - a `tune`-lane candidate once a real train edge exists worth tuning (SPEC.md section 8)."
-status: queued
+status: "train: edge n/a day-bull / n/a day-bear / 1.09 week-bull / 2.05 week-bear (week only); dir after costs negative both sides; not P1-eligible. Catalog status refreshed 26 Oct; no diagnosis file yet"

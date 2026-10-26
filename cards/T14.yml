@@ -83,4 +83,4 @@ red_flags:
   - "Literal 'crossing' reading makes this card selective by construction, same shape as T05's crossing-only MACD card - expect low coverage, and coverage (SPEC.md section 3) needs reporting alongside any accuracy figure once `engine/experiment_report.py` (state/engine-issues.md, open since 18 Oct, still unresolved as of 23 Oct) can score this card's picks."
   - "20-period is Lambert's stated default, not tuned on NSE data at all - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
   - "CCI's mean-absolute-deviation-from-current-SMA definition is a genuinely different rolling statistic from the standard deviation T06/T07's Bollinger bands use - worth a unit test cross-check against an independent loop-based reference, not just trusting pandas' `.rolling().apply()` shape."
-status: queued
+status: "train: edge -2.44 day-bull / -1.29 day-bear / -0.63 week-bull / -1.61 week-bear; no edge, all four negative. Catalog status refreshed 26 Oct; no diagnosis file yet"

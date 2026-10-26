@@ -74,4 +74,4 @@ red_flags:
   - "20-day window / 2-sigma multiplier are Bollinger's own stated defaults, not tuned on NSE data at all - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
   - "This is a mean-reversion claim at price extremes, the same shape as `cards/A02.yml`'s extreme-day reversal and `cards/A06.yml`'s low-volatility framing but on a rolling band rather than a single-day or trailing-volatility measure - pick overlap with A02/A06 (SPEC.md section 6 gate 8) is worth checking directly once all three have real numbers, not assumed from the shared mean-reversion intuition."
   - "ddof=0 (population std) was chosen for consistency with this codebase's other rolling-window cards (A02/A05/A06/A07/A09), not because Bollinger's original text mandates one convention over the other - worth flagging if a later card needs the ddof=1 (sample) variant for a direct textbook comparison."
-status: queued
+status: "train: edge 1.04 day-bull / 3.35 day-bear (day only); bear StepM superior but dir -0.03% after costs; not P1-eligible. Catalog status refreshed 26 Oct; no diagnosis file yet"

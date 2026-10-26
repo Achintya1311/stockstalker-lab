@@ -4523,3 +4523,22 @@ D01C 1.1%, so T04, D01C and NR7 are three nearly disjoint day-bullish readings. 
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** refresh stale catalog statuses for finished T-series replays.
+
+## 2026-10-26T0032Z diagnose lane: catalog statuses for finished T-series replays (unit 5)
+
+**Mode:** A (build), unit 5 of 5. Lane `evaluate` (lease c4e6d68), removed in this commit. No holdout
+query was spent by this unit.
+
+**Hypothesis/task:** ten T-series rows (T02, T03, T06-T09, T11-T14) still read `queued` or `untested`
+although their train replays finished days ago, so the catalog understated what has been tested.
+
+**Result:** statuses in `cards/catalog.csv` and each `cards/<id>.yml` now carry the top-5 train edge per
+cell from `results.json`. None is P1-eligible. T06 and T13 day-bearish are StepM superior (+3.35, +2.89)
+but miss the directional-move test by 0.03% and 0.02%; T07's +11.28 week-bearish is on 10 picks and means
+nothing. Queue note on the day-bullish candidates (T04, D01C, NR7) if AB allows edge-only selection.
+
+**Do order blocks help?** Not tested here. Running answer unchanged: bearish leans no; bullish "not yet, but
+O05's weekly-bar structure is the first candidate worth a second look".
+
+**Next:** read the validation answers when the batch lands (Replay is still running the 25 Oct ablations
+ahead of it); diagnose E2A_D01C_FB, O04A, O04B; diagnosis files for T06 and T13.
