@@ -4762,3 +4762,19 @@ third of their size; 30% of its top five are T13's. Every directional move after
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T07 and T11.
+
+## 2026-10-26T0642Z diagnose lane: T07 squeeze breakout and T11 inside bar (unit 4)
+
+**Mode:** A (build), unit 4 of 5. Lane `evaluate` (lease d4c4f91).
+
+**Hypothesis/task:** T07 and T11 had no diagnosis.
+
+**Result:** `research/diagnostics/t07.md`: 28 train picks in six years (18 bullish, 10 bearish), because the
+squeeze and the band break must fall on the same bar. Too few to read; not eligible (500 needed). A
+"squeeze in the last N bars" version is possible from the trailing history; not queued.
+`research/diagnostics/t11.md`: no edge either side (-0.37 bullish, -0.08 bearish, intervals straddle zero).
+T01's own 20/50 filter is +1.89 day-bearish; keeping only inside-bar days removes it.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T14.
