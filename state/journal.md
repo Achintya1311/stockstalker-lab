@@ -4506,3 +4506,20 @@ had been left at `queued`).
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T10 NR4/NR7 diagnosis (the other StepM day-bullish reading); refresh stale catalog statuses.
+
+## 2026-10-26T0028Z diagnose lane: T10 NR7 / NR4 narrow range (unit 4)
+
+**Mode:** A (build), unit 4 of 5. Lane `evaluate` (lease c4e6d68), diagnosis under the same lease. No
+holdout query was spent by this unit.
+
+**Hypothesis/task:** NR7 day-bullish is StepM superior and had no diagnosis; needed for the bullish
+fallback decision.
+
+**Result:** `research/diagnostics/t10.md`. NR7 bullish +2.16 (t 3.20, interval +0.86 to +3.46, 6/6 years,
+most of it 2017-2018), NR4 bullish +1.34 (5/6); bearish has no edge in either window. Gross move of the
+bullish picks about -0.07%, so -0.49% after the delivery cost: not P1-eligible. Top-5 overlap with T04 1.5%,
+D01C 1.1%, so T04, D01C and NR7 are three nearly disjoint day-bullish readings. Card and catalog updated.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** refresh stale catalog statuses for finished T-series replays.
