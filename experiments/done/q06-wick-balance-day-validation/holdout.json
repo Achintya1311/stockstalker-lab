@@ -1,0 +1,17 @@
+{
+  "id": "q06-wick-balance-day-validation",
+  "strategy": "strategies.q06_wick_balance",
+  "horizon": "day",
+  "train_experiment": "q06-wick-balance-day",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.025834442604041885,
+      "released_edge": 0.025834442604041885
+    },
+    "bearish": {
+      "train_edge": 0.016677678587486863,
+      "released_edge": 0.016677678587486863
+    }
+  }
+}
