@@ -4732,3 +4732,18 @@ them at a lower released edge. Also corrected the stale "registry only knows cha
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** diagnoses for T02, T03, T07, T11, T14 (none had a file).
+
+## 2026-10-26T0630Z diagnose lane: T02 golden/death cross (unit 2)
+
+**Mode:** A (build), unit 2 of 5. Lane `evaluate` (lease d4c4f91).
+
+**Hypothesis/task:** T02 had no diagnosis.
+
+**Result:** `research/diagnostics/t02.md`. The score is a 50/200 spread state, not a crossing. Top five:
+week-bullish +1.09, week-bearish +2.05, both inside noise; the whole universe shows a small steady persistence
+(about +1.2 to +1.3, t 2.6 and 3.1) that does not grow at the extremes. Both directional moves after costs are
+negative. Not eligible. Possible later use as a filter on a week-bearish card, not a signal.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T03.
