@@ -208,6 +208,15 @@
     "n": 241,
     "coverage": 0.7799352750809061
    },
+   "q01-price-volume-corr-week": {
+    "mean": -0.005831155323764925,
+    "lo": -0.03142329683621105,
+    "hi": 0.01978593582940675,
+    "p_le0": 0.6765,
+    "block": 1,
+    "n": 306,
+    "coverage": 0.9902912621359223
+   },
    "q03-up-day-balance-week": {
     "mean": 0.019661816559653697,
     "lo": -0.004554792838864788,
@@ -381,15 +390,15 @@
    }
   },
   "joint": {
-   "n_models": 42,
+   "n_models": 43,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.0875,
-    "consistent": 0.1255,
-    "upper": 0.1255
+    "lower": 0.088,
+    "consistent": 0.127,
+    "upper": 0.127
    },
    "stepm": [],
    "mcs": [
@@ -415,6 +424,7 @@
     "o04a-no-volume-week",
     "o04b-no-d01-week",
     "o05-order-block-weekly-week",
+    "q01-price-volume-corr-week",
     "q03-up-day-balance-week",
     "q05-trend-smoothness-week",
     "t01-sma-crossover-week",
@@ -611,6 +621,15 @@
     "n": 254,
     "coverage": 0.8220064724919094
    },
+   "q01-price-volume-corr-week": {
+    "mean": -0.03387179282591993,
+    "lo": -0.056903862865975985,
+    "hi": -0.012524211268451524,
+    "p_le0": 0.9995,
+    "block": 2,
+    "n": 309,
+    "coverage": 1.0
+   },
    "q03-up-day-balance-week": {
     "mean": 0.006850968770628072,
     "lo": -0.017263176598809243,
@@ -775,13 +794,13 @@
    }
   },
   "joint": {
-   "n_models": 37,
+   "n_models": 38,
    "block": 1,
    "twins": {},
    "spa": {
     "lower": 0.33,
     "consistent": 0.516,
-    "upper": 0.5805
+    "upper": 0.589
    },
    "stepm": [],
    "mcs": [
@@ -804,6 +823,7 @@
     "o04a-no-volume-week",
     "o04b-no-d01-week",
     "o05-order-block-weekly-week",
+    "q01-price-volume-corr-week",
     "q03-up-day-balance-week",
     "q05-trend-smoothness-week",
     "t01-sma-crossover-week",
@@ -977,6 +997,15 @@
     "n": 1419,
     "coverage": 0.967280163599182
    },
+   "q01-price-volume-corr-day": {
+    "mean": -0.01130042984066697,
+    "lo": -0.022104903982943177,
+    "hi": -0.0004798419264519097,
+    "p_le0": 0.9805,
+    "block": 1,
+    "n": 1462,
+    "coverage": 0.9965916837082481
+   },
    "q03-up-day-balance-day": {
     "mean": -0.005239114909005119,
     "lo": -0.016441835167709383,
@@ -985,6 +1014,15 @@
     "block": 1,
     "n": 1465,
     "coverage": 0.9986366734832992
+   },
+   "q06-wick-balance-day": {
+    "mean": 0.025834442604041885,
+    "lo": 0.014694003991464285,
+    "hi": 0.03699848901803959,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 1467,
+    "coverage": 1.0
    },
    "t01-sma-crossover-day": {
     "mean": -0.014637170057179743,
@@ -1141,16 +1179,17 @@
    }
   },
   "joint": {
-   "n_models": 35,
+   "n_models": 37,
    "block": 1,
    "twins": {},
    "spa": {
     "lower": 0.0005,
     "consistent": 0.0035,
-    "upper": 0.005
+    "upper": 0.004
    },
    "stepm": [
     "d01c-day",
+    "q06-wick-balance-day",
     "t04-connors-rsi2-day",
     "t10-nr7-narrow-range-day"
    ],
@@ -1158,6 +1197,7 @@
     "a09-gap-fade-day",
     "d01c-day",
     "e2b-day",
+    "q06-wick-balance-day",
     "t04-connors-rsi2-day",
     "t06-bollinger-pctb-day",
     "t10-nr4-narrow-range-day",
@@ -1348,6 +1388,15 @@
     "n": 1389,
     "coverage": 0.9468302658486708
    },
+   "q01-price-volume-corr-day": {
+    "mean": -0.015120157117927451,
+    "lo": -0.026460460621753425,
+    "hi": -0.0026496474473261603,
+    "p_le0": 0.9925,
+    "block": 2,
+    "n": 1453,
+    "coverage": 0.9904567143830948
+   },
    "q03-up-day-balance-day": {
     "mean": 0.0066317509226306946,
     "lo": -0.004060522985626671,
@@ -1356,6 +1405,15 @@
     "block": 2,
     "n": 1465,
     "coverage": 0.9986366734832992
+   },
+   "q06-wick-balance-day": {
+    "mean": 0.016677678587486863,
+    "lo": 0.005855215495418377,
+    "hi": 0.027543420471053324,
+    "p_le0": 0.001,
+    "block": 1,
+    "n": 1467,
+    "coverage": 1.0
    },
    "t01-sma-crossover-day": {
     "mean": 0.018917266894782424,
@@ -1521,7 +1579,7 @@
    }
   },
   "joint": {
-   "n_models": 39,
+   "n_models": 41,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1538,6 +1596,7 @@
     "e2a-d01c-fallback-day",
     "e2a-day",
     "e2b-day",
+    "q06-wick-balance-day",
     "t01-sma-crossover-day",
     "t04-connors-rsi2-day",
     "t05c-upcross-fade-day",
