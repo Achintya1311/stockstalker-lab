@@ -91,6 +91,15 @@
     "n": 302,
     "coverage": 0.9773462783171522
    },
+   "i02-low-vol-level-week": {
+    "mean": 0.018453577484145896,
+    "lo": -0.01223239631794064,
+    "hi": 0.051363879819674635,
+    "p_le0": 0.1275,
+    "block": 2,
+    "n": 260,
+    "coverage": 0.8414239482200647
+   },
    "o00-placebo-week": {
     "mean": -0.006128628404405852,
     "lo": -0.02741680051921056,
@@ -237,13 +246,13 @@
    }
   },
   "joint": {
-   "n_models": 26,
+   "n_models": 27,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.3165,
-    "consistent": 0.5405,
-    "upper": 0.64
+    "lower": 0.349,
+    "consistent": 0.5645,
+    "upper": 0.658
    },
    "stepm": [],
    "mcs": [
@@ -257,6 +266,7 @@
     "champion-v1-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
+    "i02-low-vol-level-week",
     "o00-placebo-week",
     "o01-retest-week",
     "o03-trend-confirmed-week",
@@ -393,6 +403,15 @@
     "block": 1,
     "n": 225,
     "coverage": 0.7281553398058253
+   },
+   "i02-low-vol-level-week": {
+    "mean": 0.01577294516724367,
+    "lo": -0.008821165896214912,
+    "hi": 0.0405711318490949,
+    "p_le0": 0.1145,
+    "block": 1,
+    "n": 260,
+    "coverage": 0.8414239482200647
    },
    "o00-placebo-week": {
     "mean": -0.01477254233394657,
@@ -549,15 +568,15 @@
    }
   },
   "joint": {
-   "n_models": 30,
+   "n_models": 31,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.071,
-    "consistent": 0.0995,
-    "upper": 0.0995
+    "lower": 0.072,
+    "consistent": 0.1,
+    "upper": 0.1
    },
    "stepm": [
     "t05c-upcross-fade-week"
@@ -575,6 +594,7 @@
     "consensus-wb-v1-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
+    "i02-low-vol-level-week",
     "o00-placebo-week",
     "o01-retest-week",
     "o03-trend-confirmed-week",
