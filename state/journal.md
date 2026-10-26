@@ -4592,3 +4592,18 @@ change the day-bearish table.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T13 diagnosis; validation answers.
+
+## 2026-10-26T0228Z diagnose lane: T13 Williams %R (unit 4)
+
+**Mode:** A (build), unit 4 of 5. Lane `diagnose` (lease 1c6f04e). No holdout query was spent by this unit.
+
+**Hypothesis/task:** T13 day-bearish is StepM superior and had no diagnosis.
+
+**Result:** `research/diagnostics/t13.md`. Bearish (%R above -20) top five +2.89 (t 4.71, interval +1.76 to
++4.04, 6/6 years), but the whole firing group (about 32 stocks a date) only +0.91: the edge is in the
+ranking. Dir -0.02% after costs, the third oscillator fade (with T04, T06) to miss the letter by a few
+basis points. Bullish no edge. Not eligible.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** validation answers when the batch lands.

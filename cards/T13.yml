@@ -68,4 +68,4 @@ red_flags:
   - "This card and T03's RSI thresholds are both always-fires-while-past-the-boundary oscillator reads over a similar-length window (14-day %R, 14-day RSI) - pick overlap worth checking directly once both have real numbers, same note T12's card already makes against T03."
   - "The 14-day window and -80/-20 thresholds are Williams' stated convention, not tuned on NSE data - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
   - "Selective by construction (abstains inside -80 to -20): coverage (SPEC.md section 3) needs reporting alongside any accuracy figure once `engine/experiment_report.py` (state/engine-issues.md) can score this card's picks, the same blocker every ported card since A01 has hit."
-status: "train: edge -0.28 day-bull / 2.89 day-bear (day only); bear StepM superior but dir -0.02% after costs; not P1-eligible. Catalog status refreshed 26 Oct; no diagnosis file yet"
+status: "train: edge -0.28 day-bull / 2.89 day-bear (day only); bear StepM superior but dir -0.02% after costs; not P1-eligible. See research/diagnostics/t13.md"
