@@ -5011,3 +5011,18 @@ it would need its own validation query (40 of 60 left this week) before Friday t
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** port T16 Parabolic SAR.
+
+## 2026-10-26T1315Z port lane: T16 Parabolic SAR (unit 4)
+
+**Mode:** A (build), unit 4 of 5. Lease `diagnose` (ced0cf4).
+
+**Hypothesis/task:** port T16: Wilder's SAR (0.02/0.2) on the adjusted high/low; score = distance of the close
+from SAR.
+
+**Result:** `strategies/t16_parabolic_sar.py` (trailing 120 rows), audit, 8 tests (hand-computed first steps,
+reversal at EP, AF cap), `cards/T16.yml`. Pre-declared prediction: bullish sides negative (most extended, as
+T09). Day and week replays queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T19 OBV divergence.

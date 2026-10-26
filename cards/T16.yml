@@ -1,0 +1,32 @@
+source_url: ""
+author: "J. Welles Wilder (1978), New Concepts in Technical Trading Systems"
+license: "book, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "1978"
+claim_as_stated: >
+  Wilder's Parabolic SAR is a trend-following stop-and-reverse level:
+  `cards/catalog.csv` reads it as price above SAR bullish, below bearish,
+  with step 0.02 and maximum 0.2. `prior_claim`: trend-following stop
+  system. No published hit rate is cited.
+horizon: both
+rules_plain: >
+  Standard Wilder recursion on the adjusted high/low (step 0.02, maximum
+  0.2, SAR capped at the two previous lows in an uptrend and highs in a
+  downtrend, reversal when the bar crosses it). Score = (close - SAR) /
+  close on the last visible bar: positive bullish, negative bearish, size
+  the distance from the stop level. Every symbol with 120 rows scores; only
+  those rows are read.
+default_params:
+  step: 0.02
+  max_af: 0.2
+  window: 120
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Wilder (1978)"
+link: ""
+prior_claim: "Trend-following stop system"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): the largest positive scores are stocks far above a trailing stop after a long run, the 'most extended' group T09 (supertrend) found wrong-way. Prediction: day- and week-bullish top-5 edges negative; bearish sides near zero. Helps if any side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5). Wilder used SAR as an exit, not as a ranking."
+  - "The recursion starts on the first of the 120 rows read; a stock with no reversal in that window keeps a seed-dependent SAR."
+  - "Likely to overlap T09 (supertrend, also a trailing stop); check in diagnose."
+status: "queued"
