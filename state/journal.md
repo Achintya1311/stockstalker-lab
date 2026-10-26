@@ -4472,3 +4472,19 @@ unchanged: bearish leans no; bullish "not yet, but O05's weekly-bar structure is
 a second look".
 
 **Next:** read `experiments/done/*-validation/holdout.json` when the replay lands; diagnose T05C.
+
+## 2026-10-26T0018Z diagnose lane: T05C, MACD up-cross faded (unit 2)
+
+**Mode:** A (build), unit 2 of 5. Lane `evaluate` (lease c4e6d68), diagnosis under the same lease. No
+holdout query was spent by this unit.
+
+**Hypothesis/task:** T05C's train replays landed (a32b299). Check its pre-declared rule.
+
+**Result:** `research/diagnostics/t05c.md`. Week-bearish +4.02 (t 2.45, interval +0.79 to +7.18, dir
++0.24%, positive 2016-2020): rule met. Day-bearish +2.70 (interval +1.07 to +4.27) but dir -0.06%: not
+met. Both match the card's prediction. The only StepM-superior week-bearish reading (SPA p 0.202 -> 0.099).
+Top-5 overlap with other week-bearish readings 0-10%. Card, catalog and queue updated.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** diagnose E2A_D01C_FB and the O04 ablations when they land; validation answers.
