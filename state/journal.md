@@ -5125,3 +5125,13 @@ Unit 5: Q06 wick balance (Alpha158 KLOW2 - KUP2 on the last bar), day queued. Pr
 **Next:** diagnose Q01, Q03, Q05, Q06 when the replay lands; after tonight's dataset update, push to `picks/`
 (or wait for a picks change) so the dry run exercises the new draft (T04 / E2A / A05B / A01) and drop-from-both
 on real data; commit `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
+
+## 2026-10-26 20:12 UTC (27 Oct IST), run 1 of the day (diagnose lane, lease fcfff25)
+
+All six Q replays landed (2617e65, a36d3db). Suite 977 passed.
+Unit 1: Q01 price-volume divergence diagnosed (`research/diagnostics/q01.md`). Hypothesis: a move on thinning
+volume fades. Result: backwards. Week bullish (fall on thin volume) -3.39 (t -2.92, 0/6 years), day bearish (rise
+on thin volume) -1.51 (t -2.51), day bullish -1.13, week bearish -0.58; every directional move negative.
+Pre-declared rule not met. Week-bullish top five are independent (1-6% overlap with A01, T19, Q05, I01, T05C,
+D02c). Mirror arithmetic: flipped to bearish they would earn about +0.12% after the futures cost.
+Next: pre-declared flip Q01C (week); diagnose Q03, Q05, Q06.
