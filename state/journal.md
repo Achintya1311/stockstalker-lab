@@ -4677,3 +4677,21 @@ most extended. Shares 25% of its top bullish picks with champion v1 and 36% with
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** read the Live dry run output for the draft source.
+
+## 2026-10-26T0428Z go-live track: end-to-end test of the draft source; same-stock conflict (unit 4)
+
+**Mode:** A (build), unit 4 of 5. Lane `evaluate` (lease d3a1b7f).
+
+**Hypothesis/task:** the Live dry run on d158544 (81719d7) only rescored the 26 Oct file, which already
+existed, so the draft source has not run on real data. Exercise it end to end another way.
+
+**Result:** `tests/test_picks_draft_source.py` runs `picks.run` in dry mode with the committed draft on
+synthetic data carrying OI columns: day and week files are written, each table names the draft's strategy,
+the provisional disclaimer is present, no forbidden words. It also showed one stock in both tables. On train
+`top` picks that happens on 69% of weeks (champion v1 week-bullish vs A01 week-bearish) and 23% of E2A days.
+`picks/` has no rule for it: queued as an AB decision with the bullish fallback.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** fallback validation answer; first `picks/` push after tonight's dataset update to run the draft on
+real data.

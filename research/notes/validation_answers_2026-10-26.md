@@ -64,6 +64,18 @@ Caveats the choice should carry:
 - `picks/source.py`'s registry only knows champion v1, so E2A and A01 must be registered before Friday, or
   the first live run would fail on an unknown strategy id.
 
+## Same stock in both tables (found 26 Oct, unit 4)
+
+The draft pairs champion v1 (bullish, most extended stocks) with two bearish readings that fade recent
+strength. On train `top` picks, the same stock appears in both tables of one page on **69% of weeks**
+(champion v1 week-bullish vs A01 week-bearish, 1.08 shared stocks a week on average) and on **23% of
+E2A's days** (champion v1 day-bullish vs E2A day-bearish). `picks/` publishes each table independently, so
+the public page would call one stock bullish and bearish at once. The synthetic end-to-end test
+(`tests/test_picks_draft_source.py`) shows the same thing. This is a presentation decision for AB, not
+something the rule settles: show both (each table is its own strategy's record), drop shared stocks from
+both tables, or choose the bullish fallback differently. It is one more reason the bullish-fallback
+question matters before Friday.
+
 ## Do order blocks help?
 
 No order-block reading was eligible, so none was asked. Running answer unchanged: bearish leans no; bullish
