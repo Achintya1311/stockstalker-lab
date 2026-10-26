@@ -82,9 +82,9 @@ SPA p-value (consistent): **0.002**  (lower 0.001, upper 0.003). StepM superior:
 | d01-oi-buildup-day | 1465 | 100% | -4.61 | -5.75 to -3.57 | 1.000 | 2 |
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 
-## week/bearish  (35 experiments, block 1)
+## week/bearish  (36 experiments, block 1)
 
-SPA p-value (consistent): **0.111**  (lower 0.076, upper 0.111). StepM superior: none. MCS size: 35 of 35. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.114**  (lower 0.076, upper 0.114). StepM superior: none. MCS size: 36 of 36. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -118,15 +118,16 @@ SPA p-value (consistent): **0.111**  (lower 0.076, upper 0.111). StepM superior:
 | t08-donchian-breakout-55-week | 255 | 83% | -0.90 | -5.08 to +3.38 | 0.662 | 2 |
 | o03-trend-confirmed-week | 265 | 86% | -0.91 | -4.25 to +2.58 | 0.695 | 2 |
 | o04b-no-d01-week | 293 | 95% | -1.12 | -4.08 to +1.62 | 0.778 | 2 |
+| t17-keltner-breakout-week | 247 | 80% | -1.18 | -4.79 to +2.22 | 0.761 | 1 |
 | o00-placebo-week | 301 | 97% | -1.48 | -4.07 to +1.04 | 0.875 | 3 |
 | t25-heikin-ashi-week | 270 | 87% | -1.49 | -4.50 to +1.58 | 0.839 | 2 |
 | t14-cci-week | 282 | 91% | -1.61 | -5.28 to +1.74 | 0.810 | 1 |
 | t08-donchian-breakout-20-week | 289 | 94% | -2.72 | -5.86 to +0.34 | 0.966 | 2 |
 | c02-turn-of-month-week | 177 | 57% | -2.72 | -5.80 to +0.23 | 0.964 | 1 |
 
-## week/bullish  (31 experiments, block 1)
+## week/bullish  (32 experiments, block 1)
 
-SPA p-value (consistent): **0.469**  (lower 0.303, upper 0.539). StepM superior: none. MCS size: 29 of 31.
+SPA p-value (consistent): **0.483**  (lower 0.303, upper 0.551). StepM superior: none. MCS size: 30 of 32.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -152,6 +153,7 @@ SPA p-value (consistent): **0.469**  (lower 0.303, upper 0.539). StepM superior:
 | o03-trend-confirmed-week | 290 | 94% | -1.45 | -3.97 to +1.10 | 0.866 | 1 |
 | o04b-no-d01-week | 299 | 97% | -1.68 | -3.94 to +0.51 | 0.934 | 2 |
 | t01-sma-crossover-week | 301 | 97% | -1.81 | -3.93 to +0.34 | 0.951 | 3 |
+| t17-keltner-breakout-week | 248 | 80% | -2.20 | -5.52 to +1.38 | 0.893 | 1 |
 | o01-retest-week | 299 | 97% | -2.21 | -4.47 to -0.12 | 0.981 | 2 |
 | champion-v1-week | 303 | 98% | -2.82 | -5.51 to -0.36 | 0.991 | 3 |
 | o04a-no-volume-week | 299 | 97% | -2.88 | -5.22 to -0.59 | 0.996 | 1 |

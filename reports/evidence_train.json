@@ -253,6 +253,15 @@
     "n": 298,
     "coverage": 0.9644012944983819
    },
+   "t17-keltner-breakout-week": {
+    "mean": -0.02197785218170989,
+    "lo": -0.0551629731926121,
+    "hi": 0.013847961478139685,
+    "p_le0": 0.8935,
+    "block": 1,
+    "n": 248,
+    "coverage": 0.8025889967637541
+   },
    "t21-minervini-template-week": {
     "mean": 0.016572809417811574,
     "lo": -0.01131010083692874,
@@ -282,13 +291,13 @@
    }
   },
   "joint": {
-   "n_models": 31,
+   "n_models": 32,
    "block": 1,
    "twins": {},
    "spa": {
     "lower": 0.303,
-    "consistent": 0.469,
-    "upper": 0.5395
+    "consistent": 0.4835,
+    "upper": 0.551
    },
    "stepm": [],
    "mcs": [
@@ -318,6 +327,7 @@
     "t09-supertrend-week",
     "t14-cci-week",
     "t15-adx-regime-week",
+    "t17-keltner-breakout-week",
     "t21-minervini-template-week",
     "t23-rs-rating-week",
     "t25-heikin-ashi-week"
@@ -614,6 +624,15 @@
     "n": 299,
     "coverage": 0.9676375404530745
    },
+   "t17-keltner-breakout-week": {
+    "mean": -0.011827196285626933,
+    "lo": -0.04789201297104686,
+    "hi": 0.022178786398442823,
+    "p_le0": 0.7615,
+    "block": 1,
+    "n": 247,
+    "coverage": 0.7993527508090615
+   },
    "t21-minervini-template-week": {
     "mean": -0.0005056269663320569,
     "lo": -0.028771311642601518,
@@ -643,15 +662,15 @@
    }
   },
   "joint": {
-   "n_models": 35,
+   "n_models": 36,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
     "lower": 0.076,
-    "consistent": 0.111,
-    "upper": 0.111
+    "consistent": 0.114,
+    "upper": 0.114
    },
    "stepm": [],
    "mcs": [
@@ -686,6 +705,7 @@
     "t09-supertrend-week",
     "t14-cci-week",
     "t15-adx-regime-week",
+    "t17-keltner-breakout-week",
     "t21-minervini-template-week",
     "t23-rs-rating-week",
     "t25-heikin-ashi-week",
