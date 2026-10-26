@@ -4980,3 +4980,18 @@ is closed.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T20.
+
+## 2026-10-26T1240Z diagnose lane: T20 volume breakout (unit 2)
+
+**Mode:** A (build), unit 2 of 5. Lane `diagnose` (lease ced0cf4).
+
+**Hypothesis/task:** T20's day replay landed (f77ae4f).
+
+**Result:** `research/diagnostics/t20.md`. Bullish -3.75 (t -4.02, interval -5.61 to -1.99, 0/6 years):
+"breakouts on volume continue" is wrong-way. 52% of its bullish top five are A02's day-bearish top five, so it
+is A02's reversal seen from the other side. Flip grosses about +0.20% against a 0.25% cost; not queued.
+Bearish +1.23 (4/6), inside noise. Rule not met.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** pre-declared filter card on A01 week-bearish (I01 below zero), then ports.

@@ -28,4 +28,4 @@ red_flags:
   - "No claim is assumed true (SPEC.md section 5)."
   - "Volume is not split-adjusted; a split or bonus inside the 20-day window inflates the ratio for that window."
   - "Distinct from A07 (multi-day volume z-score, no price condition); check overlap in diagnose."
-status: "queued"
+status: "train: edge -3.75 day-bull (0/6 years, interval -5.61 to -1.99) / 1.23 day-bear (day only); dir after costs negative; pre-declared rule not met. See research/diagnostics/t20.md"
