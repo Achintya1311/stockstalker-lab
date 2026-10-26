@@ -1,0 +1,9 @@
+{
+  "id": "i02-low-vol-level-week",
+  "strategy": "strategies.i02_low_vol_level",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 55125,
+  "n_dates": 260,
+  "pick_log_sha256": "39d64344ecbb5f7cacd3cfaf467660a48217311c96f000742334edc3995be88d"
+}

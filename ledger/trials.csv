@@ -124,3 +124,5 @@ o04b-no-d01-day-bullish,2026-10-26T00:49:01.284983+00:00,strategies.o04b_no_d01,
 o04b-no-d01-day-bearish,2026-10-26T00:49:01.285044+00:00,strategies.o04b_no_d01,,day,bearish,train,0.003314000389208147,0.4721938564342067,n/a,"train, top selection; recorded by engine/experiment_report.py"
 o04b-no-d01-week-bullish,2026-10-26T00:49:01.285165+00:00,strategies.o04b_no_d01,,week,bullish,train,-0.016777947985938374,-1.3501597836455956,n/a,"train, top selection; recorded by engine/experiment_report.py"
 o04b-no-d01-week-bearish,2026-10-26T00:49:01.285224+00:00,strategies.o04b_no_d01,,week,bearish,train,-0.011197869695278006,-0.8069274857093016,n/a,"train, top selection; recorded by engine/experiment_report.py"
+i02-low-vol-level-week-bullish,2026-10-26T09:07:42.431189+00:00,strategies.i02_low_vol_level,,week,bullish,train,0.018453577484145896,1.1695080591092217,n/a,"train, top selection; recorded by engine/experiment_report.py"
+i02-low-vol-level-week-bearish,2026-10-26T09:07:42.431381+00:00,strategies.i02_low_vol_level,,week,bearish,train,0.01577294516724367,1.2015512797919892,n/a,"train, top selection; recorded by engine/experiment_report.py"
