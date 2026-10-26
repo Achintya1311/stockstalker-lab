@@ -4662,3 +4662,18 @@ run on real data with the draft (E2A day-bearish, A01 week-bearish, champion v1 
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** check `reports/live_dryrun/` from the dry run; the fallback's validation answer.
+
+## 2026-10-26T0423Z diagnose lane: T09 Supertrend (unit 3)
+
+**Mode:** A (build), unit 3 of 5. Lane `evaluate` (lease d3a1b7f), diagnosis while the Live dry run works.
+
+**Hypothesis/task:** T09 had no diagnosis; its bullish side is significantly wrong-way on both horizons.
+
+**Result:** `research/diagnostics/t09.md`. Bullish top five -2.51 day (t -4.36) and -3.18 week (t -2.39),
+negative every year after 2015, while all ~73 bullish stocks a date are near zero: the loss is in picking the
+most extended. Shares 25% of its top bullish picks with champion v1 and 36% with T08-20 (week): one
+"most extended in an uptrend" family, which is the champion v1 fallback's problem too. Bearish no edge.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** read the Live dry run output for the draft source.
