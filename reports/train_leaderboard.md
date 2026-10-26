@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 137. Gate 2's bar at that count: t >= 4.27.
+Trials recorded: 139. Gate 2's bar at that count: t >= 4.27.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -98,6 +98,7 @@ Trials recorded: 137. Gate 2's bar at that count: t >= 4.27.
 | o03-trend-confirmed-day | day | bullish | 5975 | 44.45% | 44.97% | -0.36 | -0.55 |  | -0.59 | 16.67% |  |
 | t11-inside-bar-day | day | bullish | 6231 | 44.97% | 44.90% | -0.37 | -0.56 |  | -0.54 | 16.67% |  |
 | t25-heikin-ashi-day | day | bearish | 4997 | 54.31% | 54.26% | -0.44 | -0.57 |  | -0.07 | 50.00% |  |
+| t17-keltner-breakout-week | week | bearish | 919 | 50.71% | 51.66% | -1.18 | -0.68 |  | -0.14 | 50.00% |  |
 | a07-high-volume-premium-week | week | bearish | 1510 | 50.00% | 50.84% | -0.84 | -0.74 |  | -0.14 | 50.00% |  |
 | t10-nr7-narrow-range-day | day | bearish | 5756 | 54.57% | 54.60% | -0.55 | -0.79 |  | -0.09 | 16.67% |  |
 | o01-retest-day | day | bullish | 6673 | 44.69% | 45.06% | -0.47 | -0.80 |  | -0.60 | 50.00% |  |
@@ -113,6 +114,7 @@ Trials recorded: 137. Gate 2's bar at that count: t >= 4.27.
 | o03-trend-confirmed-week | week | bullish | 1270 | 47.80% | 48.79% | -1.45 | -1.11 |  | -0.55 | 33.33% |  |
 | o00-placebo-day | day | bearish | 7125 | 53.73% | 54.40% | -0.65 | -1.20 |  | -0.16 | 16.67% |  |
 | e2a-day | day | bullish | 2149 | 44.25% | 44.20% | -1.58 | -1.25 |  | -0.74 | 33.33% |  |
+| t17-keltner-breakout-week | week | bullish | 1054 | 46.77% | 48.47% | -2.20 | -1.25 |  | -0.91 | 16.67% |  |
 | o00-placebo-week | week | bearish | 1500 | 49.20% | 50.76% | -1.48 | -1.27 |  | -0.33 | 50.00% |  |
 | o04b-no-d01-week | week | bullish | 1418 | 47.95% | 49.11% | -1.68 | -1.35 |  | -0.48 | 16.67% |  |
 | t03-rsi-thresholds-day | day | bullish | 4896 | 44.40% | 44.95% | -1.13 | -1.38 |  | -0.59 | 33.33% |  |

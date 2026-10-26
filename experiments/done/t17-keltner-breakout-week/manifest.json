@@ -1,0 +1,9 @@
+{
+  "id": "t17-keltner-breakout-week",
+  "strategy": "strategies.t17_keltner_breakout",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 8765,
+  "n_dates": 271,
+  "pick_log_sha256": "4ffbe76b1756967ee9b2790e5e818fa5770f15fc2765abc4e7ae6b05a1bc45d8"
+}
