@@ -5114,3 +5114,8 @@ week-bearish near I01's +2.04, bullish near zero.
 Unit 3: Q01 price-volume divergence (Alpha158 CORR of close with log volume, read against the 20-session move:
 a move on thinning volume is faded), day and week queued; the catalog rule was corrected to that sign logic.
 Pre-declared: week-bearish at or below T19's +1.79, others within noise.
+Unit 4 (evaluate): bullish validation answered (18:44Z). Day bullish T04 released +4.36 (champion v1 +2.53);
+week bullish A05B +2.23 (O05 +1.90; T25 -7.02, A04 -2.49, I02 -2.55 failed out of sample). Draft updated to
+T04 and A05B under AB's edge-only rule, provisional. 37 of 60 holdout queries used this week.
+Do order blocks help? O05 is the first order-block reading to hold its edge on validation (+1.90), second for
+week bullish; still a negative directional move, so not yet a usable yes.

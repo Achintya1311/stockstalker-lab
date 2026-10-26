@@ -93,3 +93,36 @@ Released +4.17 (train value released). A01's released +4.73 stays highest, so we
 ## 26 Oct 15:45Z: bullish batch queued (AB's edge-only decision)
 
 Day T04, T10-NR7, T25; week T25, A05B, A04, O05, I02 (16 queries). Answers go here when they land.
+
+## 26 Oct 18:44Z: bullish batch answered (16 queries; 37 of 60 used this week, 23 left)
+
+| Table | Candidate | Train edge | Released edge |
+|---|---|---|---|
+| Day bullish | **T04 Connors RSI(2)** | +3.37 | **+4.36** |
+| Day bullish | T10-NR7 | +2.16 | +2.16 |
+| Day bullish | T25 Heikin-Ashi | +1.85 | +1.85 |
+| Day bullish | D01C (asked earlier) | +2.54 | -1.05 |
+| Day bullish | champion v1 (asked earlier) | -0.11 | +2.53 |
+| Week bullish | **A05B MAX effect, ranked** | +2.23 | **+2.23** |
+| Week bullish | O05 weekly order block | +1.90 | +1.90 |
+| Week bullish | A04 52-week high | +1.92 | -2.49 |
+| Week bullish | I02 low-vol level | +1.85 | -2.55 |
+| Week bullish | T25 Heikin-Ashi | +2.74 | -7.02 |
+
+A released value equal to the train value means validation agreed within Thresholdout's tolerance; a
+different value means it did not, and the noisy validation number was released instead.
+
+Under AB's edge-only rule for bullish tables: **day bullish T04** (+4.36, ahead of champion v1's +2.53 by
+1.83 points) and **week bullish A05B** (+2.23, ahead of O05's +1.90). Both go into the draft. Both keep the
+provisional label, and both still have negative directional moves after costs on train: they call direction
+more often than the market line, but not by enough to pay the delivery cost. A05B repeats A05's picks
+exactly (`reports/evidence_train.md`), so its record is A05's ranking under the A05B name.
+
+Week bullish's best train reading, T25, fell to -7.02 on validation, and A04 and I02 also turned negative:
+3 of 5 week-bullish candidates did not hold up out of sample.
+
+## Do order blocks help? (bullish)
+
+O05 held its train edge on validation (+1.90 released) and is second for week bullish, 0.33 points behind
+A05B. It is the first order-block reading to hold up out of sample, but it is not the best, and its
+directional move is negative.

@@ -2,9 +2,9 @@
   "chosen_on": "DRAFT (commit to config/live_source.json only on Fri 30 Oct before 12:00 UTC)",
   "tables": {
     "day_bullish": {
-      "strategy": "champion_v1@v1",
+      "strategy": "t04_connors_rsi2@v1",
       "label": "provisional",
-      "why": "no strategy meets SPEC section 10's train letter for day-bullish (no positive directional move after costs); champion v1 fallback. AB decision pending."
+      "why": "AB's edge-only rule for bullish tables (26 Oct 2026): highest released validation edge among day-bullish readings with at least 500 train picks and a positive train edge: +4.36 (train +3.37, 3,952 picks). Directional move after costs is negative. research/notes/validation_answers_2026-10-26.md"
     },
     "day_bearish": {
       "strategy": "e2a_a02_crowded@v1",
@@ -12,9 +12,9 @@
       "why": "highest released validation edge among eligible day-bearish strategies: +6.72 (train +7.46); research/notes/validation_answers_2026-10-26.md"
     },
     "week_bullish": {
-      "strategy": "champion_v1@v1",
+      "strategy": "a05b_max_effect_ranked@v1",
       "label": "provisional",
-      "why": "no strategy meets SPEC section 10's train letter for week-bullish; champion v1 fallback. AB decision pending."
+      "why": "AB's edge-only rule for bullish tables (26 Oct 2026): highest released validation edge among week-bullish readings with at least 500 train picks and a positive train edge: +2.23 (train value released, 1,475 picks). Directional move after costs is negative. research/notes/validation_answers_2026-10-26.md"
     },
     "week_bearish": {
       "strategy": "a01_weekly_reversal@v1",
