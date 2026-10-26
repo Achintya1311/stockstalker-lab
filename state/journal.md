@@ -4995,3 +4995,19 @@ Bearish +1.23 (4/6), inside noise. Rule not met.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** pre-declared filter card on A01 week-bearish (I01 below zero), then ports.
+
+## 2026-10-26T1300Z port lane: A01_I01F pre-declared filter (unit 3)
+
+**Mode:** A (build), unit 3 of 5. Lease `diagnose` (ced0cf4) renewed; no results pending, so this unit ports.
+
+**Hypothesis/task:** A01 holds the week-bearish draft choice. Does a one-week bounce fade better inside a weak
+longer trend? A01_I01F keeps A01's bearish scores only where I01's momentum z is below zero.
+
+**Result:** `strategies/a01_i01_filter.py` (imports A01 and I01 as libraries), audit, 6 tests, card with the rule
+written before the replay: helps if top-5 week-bearish edge at least +3.56 (A01's 2016-2020 average +2.56 plus 1;
+the filter has no 2015 picks), directional move at least +0.015%, at least 500 picks. Week replay queued. If met,
+it would need its own validation query (40 of 60 left this week) before Friday to be considered.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** port T16 Parabolic SAR.

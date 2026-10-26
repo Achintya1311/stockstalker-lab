@@ -1,0 +1,28 @@
+source_url: ''
+author: lab-original (research/diagnostics/i01.md, What to try next)
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-26'
+horizon: week
+claim_as_stated: 'Pre-registered before the replay: A01_I01F helps if its top-5 week-bearish edge is at least +3.56
+  (A01''s own 2016-2020 average of +2.56 plus 1 point; the filter has no 2015 picks), with a directional move after
+  costs of at least A01''s +0.015% and at least 500 train picks. Hypothesis: a one-week bounce inside a weak
+  volatility-adjusted 6/12-month trend fades more reliably than one inside a strong trend. If the rule is met it is
+  P1-eligible and needs its own validation query before it could replace A01 in the draft; any gain is a lead, not a
+  result.'
+rules_plain: 'Week-bearish only. Per date: take A01''s bearish scores (last week''s biggest winners) and keep only the
+  stocks whose I01 momentum score (volatility-adjusted 6- and 12-month return, z-scored across the date) is below
+  zero. A01''s own magnitude ranks the kept stocks. Bullish scores are dropped.'
+default_params:
+  base: a01_weekly_reversal
+  filter: i01_momentum_score below 0
+data_needed: ohlcv
+testable_now: 'yes'
+source: 'research/diagnostics/i01.md (What to try next)'
+link: ''
+prior_claim: 'Short-term reversal is reported to be stronger against the longer trend; untested here'
+red_flags:
+- The filter and its threshold were chosen after seeing A01's and I01's train results; this card is its own trial and both members already are trials.
+- Only 7% of I01's week-bearish top five are A01's, so the filter will drop many of A01's top picks and the table may hold fewer than five on some dates.
+- No 2015 picks (I01 needs 253 rows); compare against A01 on 2016-2020, not A01's full-split number.
+- Train split only until a frozen version exists.
+status: queued

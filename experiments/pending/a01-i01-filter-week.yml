@@ -1,0 +1,10 @@
+# A01_I01F (week horizon, bearish table only, per cards/A01_I01F.yml): A01's
+# week-bearish scores kept where I01 momentum is below zero, train-split
+# replay (pre-declared filter). See strategies/a01_i01_filter.py.
+id: a01-i01-filter-week
+strategy: strategies.a01_i01_filter
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
