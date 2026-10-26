@@ -208,6 +208,24 @@
     "n": 241,
     "coverage": 0.7799352750809061
    },
+   "q03-up-day-balance-week": {
+    "mean": 0.019661816559653697,
+    "lo": -0.004554792838864788,
+    "hi": 0.04383698365538366,
+    "p_le0": 0.061,
+    "block": 2,
+    "n": 309,
+    "coverage": 1.0
+   },
+   "q05-trend-smoothness-week": {
+    "mean": 0.020093316020279372,
+    "lo": -0.0055037601652925625,
+    "hi": 0.04423887490938755,
+    "p_le0": 0.058,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
    "t01-sma-crossover-week": {
     "mean": 0.03195233874864398,
     "lo": 0.009628759152997239,
@@ -363,15 +381,15 @@
    }
   },
   "joint": {
-   "n_models": 40,
+   "n_models": 42,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.083,
-    "consistent": 0.121,
-    "upper": 0.121
+    "lower": 0.0875,
+    "consistent": 0.1255,
+    "upper": 0.1255
    },
    "stepm": [],
    "mcs": [
@@ -397,6 +415,8 @@
     "o04a-no-volume-week",
     "o04b-no-d01-week",
     "o05-order-block-weekly-week",
+    "q03-up-day-balance-week",
+    "q05-trend-smoothness-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
     "t03-rsi-thresholds-week",
@@ -591,6 +611,24 @@
     "n": 254,
     "coverage": 0.8220064724919094
    },
+   "q03-up-day-balance-week": {
+    "mean": 0.006850968770628072,
+    "lo": -0.017263176598809243,
+    "hi": 0.030486582110539583,
+    "p_le0": 0.2945,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
+   "q05-trend-smoothness-week": {
+    "mean": -0.003289268554075271,
+    "lo": -0.028684445510751364,
+    "hi": 0.021755367842598468,
+    "p_le0": 0.615,
+    "block": 3,
+    "n": 309,
+    "coverage": 1.0
+   },
    "t01-sma-crossover-week": {
     "mean": -0.01810465451751887,
     "lo": -0.03930774586493508,
@@ -737,13 +775,13 @@
    }
   },
   "joint": {
-   "n_models": 35,
+   "n_models": 37,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.304,
-    "consistent": 0.4945,
-    "upper": 0.5655
+    "lower": 0.33,
+    "consistent": 0.516,
+    "upper": 0.5805
    },
    "stepm": [],
    "mcs": [
@@ -766,6 +804,8 @@
     "o04a-no-volume-week",
     "o04b-no-d01-week",
     "o05-order-block-weekly-week",
+    "q03-up-day-balance-week",
+    "q05-trend-smoothness-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
     "t03-rsi-thresholds-week",
@@ -937,6 +977,15 @@
     "n": 1419,
     "coverage": 0.967280163599182
    },
+   "q03-up-day-balance-day": {
+    "mean": -0.005239114909005119,
+    "lo": -0.016441835167709383,
+    "hi": 0.006400670873031936,
+    "p_le0": 0.8145,
+    "block": 1,
+    "n": 1465,
+    "coverage": 0.9986366734832992
+   },
    "t01-sma-crossover-day": {
     "mean": -0.014637170057179743,
     "lo": -0.026227766684470594,
@@ -1092,7 +1141,7 @@
    }
   },
   "joint": {
-   "n_models": 34,
+   "n_models": 35,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1299,6 +1348,15 @@
     "n": 1389,
     "coverage": 0.9468302658486708
    },
+   "q03-up-day-balance-day": {
+    "mean": 0.0066317509226306946,
+    "lo": -0.004060522985626671,
+    "hi": 0.016981924779653504,
+    "p_le0": 0.1155,
+    "block": 2,
+    "n": 1465,
+    "coverage": 0.9986366734832992
+   },
    "t01-sma-crossover-day": {
     "mean": 0.018917266894782424,
     "lo": 0.00801752118392275,
@@ -1463,7 +1521,7 @@
    }
   },
   "joint": {
-   "n_models": 38,
+   "n_models": 39,
    "block": 1,
    "twins": {},
    "spa": {
