@@ -34,4 +34,4 @@ red_flags:
   - "The book's eighth point (RS rating at least 70) is left out so the template is tested alone; T23 is the RS rating."
   - "The bearish mirror is the lab's construction, not Minervini's (the book is long-only)."
   - "Proximity scores tie at +1 for every stock at a new 52-week high; the order among tied stocks is arbitrary as far as the signal goes. Check in diagnose how often the top five are tied."
-status: "queued"
+status: "train: edge 1.66 week-bull / -0.05 week-bear (week only, 2016-2020); 71% of bullish top-five picks tied at +1; dir after costs negative; pre-declared rule not met. See research/diagnostics/t21.md"

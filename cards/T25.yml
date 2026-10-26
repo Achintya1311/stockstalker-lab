@@ -30,4 +30,4 @@ red_flags:
   - "No claim is assumed true (SPEC.md section 5)."
   - "Heikin-Ashi is a charting display; the catalog's three-candle rule is one common practitioner reading, not a published test."
   - "Week horizon reads daily candles at the week's pick date, not weekly candles; a weekly-bar version would be a new card."
-status: "queued"
+status: "train: edge 1.85 day-bull (interval +0.29 to +3.41, 5/6) / -0.44 day-bear / 2.74 week-bull / -1.49 week-bear; dir after costs negative all four; pre-declared rule not met. See research/diagnostics/t25.md"

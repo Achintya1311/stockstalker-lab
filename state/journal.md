@@ -4946,3 +4946,23 @@ at 31); SPA p 0.111.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T21 and T25.
+
+## 2026-10-26T1120Z diagnose lane: T21 Minervini template and T25 Heikin-Ashi (unit 5)
+
+**Mode:** A (build), unit 5 of 5. Lane `diagnose` (lease 1c68bea), removed in this commit.
+
+**Hypothesis/task:** diagnose T21 and T25 (Replay 77dd59a).
+
+**Result:** `research/diagnostics/t21.md`: bullish +1.66 (4/5 years), bearish -0.05; rule not met; prediction
+(bullish negative) wrong. 71% of the bullish top-five picks score exactly +1 and 43% of dates have more than
+five tied, so the bullish top five are mostly a tie-break. `research/diagnostics/t25.md`: day bullish +1.85
+(t 2.32, interval +0.29 to +3.41, 5/6 years) but gross move about -0.08% a day; week bullish +2.74 (3/6);
+bearish sides no edge. Rule not met; prediction (day bullish negative) wrong. Not StepM-superior with 31
+day-bullish trials.
+
+**Do order blocks help?** Not tested here. Running answer unchanged: bearish leans no; bullish "not yet, but
+O05's weekly-bar structure is the first candidate worth a second look", and no order-block reading clears the
+cost test.
+
+**Next:** diagnose T17 and T20 when Replay (since 10:24Z) lands; draft on real data after tonight's dataset
+update; AB decisions pending (bullish fallback, same-stock conflict, E2A coverage vs fallback).
