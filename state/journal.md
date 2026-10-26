@@ -5067,3 +5067,11 @@ Tenkan/Kijun agreeing) and T24 classic pivots (day; last close vs the previous b
 pick cannot see the open). Both pre-declared: bullish negative (extended group / A02 mirror), helps only at
 +2.0 with 4/6 years and positive dir. Replays queued. The 26 Oct dry-run files predate the draft (champion v1
 both sides, no shared stock); drop-from-both first runs on real data after tonight's dataset update.
+
+Unit 5 (port lane): T22 VCP (week, bullish only), PKScreener's validateVCPMarkMinervini checklist (MIT,
+attributed) re-implemented oldest-first with confirmed peaks only, so it cannot read bars past the pick date.
+Pre-declared: edge between T17's -2.20 and T21's +1.66; helps at +2.0, 4/6 years, 500 picks, positive dir.
+A01_I01F validation (queued ed494ac) has not answered yet; Replay still running at 15:00Z.
+
+**Next:** read the A01_I01F validation answer against A01 (+2.48 train) and T05C; diagnose T18, T22, T24 when
+they land; AB's call on bullish SPEC 10 is pending (decision card).

@@ -1,0 +1,38 @@
+source_url: "third_party/pkscreener/ScreeningStatistics.py (validateVCPMarkMinervini)"
+author: "Mark Minervini (Trade Like a Stock Market Wizard, 2013); checklist as implemented in PKScreener (MIT, Copyright (c) 2023 pkjmesra)"
+license: "MIT reference code, re-implemented with attribution (SPEC.md section 5); the book is summarised only"
+published_on: "2013"
+claim_as_stated: >
+  `cards/catalog.csv`: successively smaller pullbacks with falling volume
+  inside a trend template, bullish on the breakout, as in PKScreener's
+  validateVCPMarkMinervini. `prior_claim`: popular base-breakout pattern.
+  No published hit rate is cited.
+horizon: week
+rules_plain: >
+  On the adjusted series, all required: weekly EMA13 > EMA26 > SMA50; daily
+  close > SMA50 > SMA150 > SMA200; at least 3 confirmed swing highs (at least
+  the 10 bars before, above the 10 after, all visible) in the last 90 bars,
+  the last 4 kept; each pullback between consecutive peaks at most 70% of the
+  one before; mean volume between the last two peaks at most 70% of the mean
+  up-close volume of the last 10 bars; last bar's volume above 1.2x the prior
+  10-bar mean; close above 90% of the 20-bar high. Bullish only, scored by
+  first pullback over last pullback. Every other stock abstains. Only the
+  trailing 260 rows are read.
+default_params:
+  peak_order: 10
+  peak_lookback: 90
+  tighten: 0.70
+  dry_up: 0.70
+  lift: 1.2
+  near_high: 0.90
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Minervini; PKScreener implementation (MIT, third_party/pkscreener)"
+link: ""
+prior_claim: "Popular base-breakout pattern"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): VCP adds tightening and volume conditions to the T21 trend template (week-bullish +1.66, 71% of its top five tied) and lifts off near a recent high, the breakout group that lags in T08 and T17. Prediction: week-bullish top-5 edge between T17's -2.20 and T21's +1.66, and few picks. Helps if the top-5 edge is at least +2.0 with at least 4 of 6 positive years, at least 500 picks and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5)."
+  - "PKScreener's centred argrelextrema window reads bars after a peak that may lie past the pick date, and its newest-first indexing mixes ages; this port only counts peaks whose 10 later bars are visible, so it fires later than the screener would."
+  - "No 2015 picks: 260 rows are needed and the data starts on 2015-01-01."
+status: "queued"
