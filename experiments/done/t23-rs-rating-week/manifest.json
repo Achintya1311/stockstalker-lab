@@ -1,0 +1,9 @@
+{
+  "id": "t23-rs-rating-week",
+  "strategy": "strategies.t23_rs_rating",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 55125,
+  "n_dates": 260,
+  "pick_log_sha256": "137edfab573d74f22b2faed0ba9ffa925e65f29d897302f6d0e5ba9fd4e47950"
+}

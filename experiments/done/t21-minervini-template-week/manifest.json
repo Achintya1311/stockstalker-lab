@@ -1,0 +1,9 @@
+{
+  "id": "t21-minervini-template-week",
+  "strategy": "strategies.t21_minervini_template",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 19547,
+  "n_dates": 260,
+  "pick_log_sha256": "c014201b6ba5dce51cdfbb554631ba652f5ef9cb20a7949c5c9a131c7790062b"
+}
