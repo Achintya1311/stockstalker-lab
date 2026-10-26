@@ -29,4 +29,4 @@ red_flags:
 - Week bearish already has eligible readings (A01 in the draft, T05C, D02-contrarian); Q01C's source picks overlapped those by 0.4-1.4% on train (approximate, no universe filter).
 - Week horizon only. Q01's day cells give no usable flip after costs (about -0.06% day-bullish flipped).
 - Train split only until a frozen version exists.
-status: queued
+status: "train: week-bearish +3.26 (interval +1.10 to +5.51, 6/6 years, dir +0.12%), pre-declared rule met; validation query queued; see research/diagnostics/q01c.md"

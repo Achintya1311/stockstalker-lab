@@ -5170,3 +5170,7 @@ The 22:08Z run was cut off before doing any work; this run replaces it.
 Unit 1 (evaluate): Q06 day-bullish validation answered (0e833d1): released +2.58, equal to train, so validation
 agreed. Below T04's released +4.36, so the day-bullish draft stays T04 under AB's edge-only rule. 39 of 60 queries
 used this ISO week. Recorded in `research/notes/validation_answers_2026-10-26.md`.
+Unit 2 (diagnose): Q01C diagnosed (`research/diagnostics/q01c.md`). Hypothesis (pre-declared): Q01's thin-volume
+falls keep falling, so called bearish they give about +3.4 and +0.12% after the futures cost. Held: +3.26 (t 2.81,
+interval +1.10 to +5.51, 6/6 years, every year +2.4 to +4.1), dir +0.12%, full coverage. Rule met. 0.4% top-5
+overlap with A01. Eligible for week bearish under the full SPEC 10 rule.
