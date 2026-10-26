@@ -5163,3 +5163,10 @@ Leases removed.
 beats T04's +4.36; diagnose Q01C when it lands; then a pre-declared day-bullish consensus (T04, Q06, T10-NR7, 1-3%
 overlap) or the Q06 range-size filter; ports Q02/Q04. `config/live_source.json` from the draft on Fri 30 Oct
 before 12:00 UTC.
+
+## 2026-10-26 23:35 UTC (27 Oct IST), run 2 of the day (evaluate + diagnose, lease 77bda09)
+
+The 22:08Z run was cut off before doing any work; this run replaces it.
+Unit 1 (evaluate): Q06 day-bullish validation answered (0e833d1): released +2.58, equal to train, so validation
+agreed. Below T04's released +4.36, so the day-bullish draft stays T04 under AB's edge-only rule. 39 of 60 queries
+used this ISO week. Recorded in `research/notes/validation_answers_2026-10-26.md`.

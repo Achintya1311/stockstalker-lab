@@ -126,3 +126,16 @@ Week bullish's best train reading, T25, fell to -7.02 on validation, and A04 and
 O05 held its train edge on validation (+1.90 released) and is second for week bullish, 0.33 points behind
 A05B. It is the first order-block reading to hold up out of sample, but it is not the best, and its
 directional move is negative.
+
+## 26 Oct 21:21Z: Q06 day-bullish answered (2 queries; 39 of 60 used this week, 21 left)
+
+| Table | Candidate | Train edge | Released edge |
+|---|---|---|---|
+| Day bullish | Q06 wick balance (long lower wick) | +2.58 | +2.58 |
+| Day bullish | T04 Connors RSI(2) (draft) | +3.37 | +4.36 |
+
+Validation agreed with train within tolerance (released = train), so Q06's out-of-sample edge is at least
+consistent with +2.58. It is below T04's released +4.36, so under AB's edge-only rule the day-bullish draft stays
+T04. Q06 is now the second validated day-bullish reading, after T04, with full coverage (T04 fires on about 74% of
+train dates) and 1% top-5 overlap with T04. That makes the two good members for a day-bullish consensus. The
+bearish row (+1.67) was answered too but is not used: Q06's day-bearish directional move is negative.
