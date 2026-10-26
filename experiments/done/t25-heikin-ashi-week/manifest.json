@@ -1,0 +1,9 @@
+{
+  "id": "t25-heikin-ashi-week",
+  "strategy": "strategies.t25_heikin_ashi",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 8817,
+  "n_dates": 300,
+  "pick_log_sha256": "3b86b0ac246bfaf186cedbbe4ef40db3b3276529326838eb2058ca2116c5aeb5"
+}

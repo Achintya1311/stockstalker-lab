@@ -1,0 +1,9 @@
+{
+  "id": "i01-momentum-score-week",
+  "strategy": "strategies.i01_momentum_score",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 55125,
+  "n_dates": 260,
+  "pick_log_sha256": "c0930d295b52368f39a6e1d0bacffc5c9c192825eac7b13b2fc493b928ecd531"
+}
