@@ -25,4 +25,4 @@ red_flags:
   - "Pre-declared before the replay (26 Oct): the largest bullish scores are the day's biggest up-closes against the prior bar, the group A02 calls bearish (A02 day-bearish +4.34). Prediction: day-bullish top-5 edge negative; day-bearish near zero or negative, as A02's bullish side (-1.10). Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs. If bullish is significantly wrong-way, a flip would mostly re-test A02 and T20; check overlap before queuing one."
   - "No claim is assumed true (SPEC.md section 5). The catalog's 'open above the pivot' needs the next open, which a pre-open pick cannot see; this card tests the closest causal reading, not the intraday rule."
   - "Close vs the prior bar's typical price is close to a one-day return; expect heavy overlap with A02 and T20."
-status: "queued"
+status: "diagnosed: rule not met (research/diagnostics/t24.md)"

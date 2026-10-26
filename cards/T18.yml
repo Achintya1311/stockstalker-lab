@@ -31,4 +31,4 @@ red_flags:
   - "No claim is assumed true (SPEC.md section 5)."
   - "The 'Chikou span' (close plotted 26 bars back) is not used: on the last bar it compares the close with the close 26 bars earlier, which T23/I01 momentum already covers."
   - "Likely to overlap T16 and T09 on the bullish side; check in diagnose."
-status: "queued"
+status: "diagnosed: rule not met (research/diagnostics/t18.md)"

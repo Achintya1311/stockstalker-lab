@@ -5090,3 +5090,7 @@ left this week). A01_I01F validation released +4.17, below A01's +4.73, so week-
 Unit 1: registered the 7 bullish candidates of AB's edge-only batch in `picks/source.py` and added a drop-in
 test: each one placed on both bullish tables of the draft runs end to end on a noisy 60-symbol synthetic set,
 writes a non-empty table naming it, and no forbidden words. So the Friday swap is a one-line draft change.
+
+Units 2-4 (diagnose): T18 Ichimoku week-bullish -1.56, bearish +1.06 (2015-driven); T22 VCP +5.03 on only 52
+picks (t 0.70), short of 500; T24 pivots day-bullish -4.94 (t -8.51, 0/6 years; 50% A02-bearish overlap),
+bearish -1.47. All three pre-declared rules not met; none eligible, including under the edge-only bullish rule.

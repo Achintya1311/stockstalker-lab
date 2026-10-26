@@ -35,4 +35,4 @@ red_flags:
   - "No claim is assumed true (SPEC.md section 5)."
   - "PKScreener's centred argrelextrema window reads bars after a peak that may lie past the pick date, and its newest-first indexing mixes ages; this port only counts peaks whose 10 later bars are visible, so it fires later than the screener would."
   - "No 2015 picks: 260 rows are needed and the data starts on 2015-01-01."
-status: "queued"
+status: "diagnosed: rule not met (research/diagnostics/t22.md)"
