@@ -217,6 +217,15 @@
     "n": 306,
     "coverage": 0.9902912621359223
    },
+   "q01c-thin-volume-fall-week": {
+    "mean": 0.032552862945845716,
+    "lo": 0.011049305598519441,
+    "hi": 0.05506713355730365,
+    "p_le0": 0.0015,
+    "block": 2,
+    "n": 309,
+    "coverage": 1.0
+   },
    "q03-up-day-balance-week": {
     "mean": 0.019661816559653697,
     "lo": -0.004554792838864788,
@@ -390,7 +399,7 @@
    }
   },
   "joint": {
-   "n_models": 43,
+   "n_models": 44,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
@@ -425,6 +434,7 @@
     "o04b-no-d01-week",
     "o05-order-block-weekly-week",
     "q01-price-volume-corr-week",
+    "q01c-thin-volume-fall-week",
     "q03-up-day-balance-week",
     "q05-trend-smoothness-week",
     "t01-sma-crossover-week",
