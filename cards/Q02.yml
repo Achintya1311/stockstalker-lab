@@ -1,0 +1,29 @@
+source_url: "https://github.com/microsoft/qlib"
+author: "Microsoft Qlib, Alpha158 feature set (MIT); feature list copied in third_party/qlib/loader.py"
+license: "MIT reference code; the feature is re-implemented, not copied (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: Alpha158's CORD, the 20-day correlation of the daily close
+  ratio with the log volume change ratio, read as volume confirmation: a confirmed
+  up-move bullish, a confirmed down-move bearish. Alpha158 uses it as an input to a
+  learned model; `prior_claim`: no stand-alone hit rate claimed.
+horizon: both
+rules_plain: >
+  On the adjusted close and raw volume over the last 20 sessions: x = close /
+  previous close, y = log(volume / previous volume + 1), rho = correlation(x, y);
+  r20 = the 20-session log return. Score = rho x sign(r20): a rise whose up days
+  came on rising volume is bullish, a fall whose down days came on rising volume is
+  bearish, and an unconfirmed move scores the other way. No move or a flat series
+  abstains. Only the last 21 rows are read.
+default_params:
+  window: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "microsoft/qlib Alpha158 (MIT)"
+link: "https://github.com/microsoft/qlib"
+prior_claim: "Feature in Qlib's Alpha158 benchmark set; no stand-alone hit rate claimed"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): Q01 found thin-volume moves persist (week falls on thin volume -3.39 when called bullish), the opposite of the volume-confirmation story. Q02's unconfirmed side overlaps that idea: an unconfirmed fall scores bullish here, as Q01's did. Prediction: week-bullish wrong-way (negative, as Q01's), week-bearish small positive, day cells within noise. Helps if any side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs. If week-bullish is significantly wrong-way, check its top-5 overlap with Q01 week-bullish before any flip: a flip that repeats Q01C is not a new trial worth spending."
+  - "No claim is assumed true (SPEC.md section 5). Alpha158 features are model inputs, not rules."
+  - "A volume of zero on a session makes the volume ratio undefined; such a symbol abstains for 20 sessions."
+status: "queued"

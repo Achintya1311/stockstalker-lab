@@ -5182,3 +5182,12 @@ Unit 4 (port, P2): T04_Q06_FB ported and queued (`cards/T04_Q06_FB.yml`, `strate
 reads every day on nearly disjoint stocks, so a per-date fallback gives a full day-bullish table near T04's level.
 The switch counts only stocks that look in the universe on the last visible row (the E2A_D01C_FB defect).
 Pre-declared: helps at +3.0 or more, interval above 0, 4 of 6 years, 99% coverage; expected about +3.2.
+Unit 5 (port): Q02 return-volume change correlation (Alpha158 CORD, signed by the 20-session move) ported, day and
+week queued (`cards/Q02.yml`, `strategies/q02_return_volume_corr.py`, audit, 8 tests; suite 1000 passed).
+Pre-declared from Q01's result: week bullish wrong-way, week bearish small positive, day within noise; helps at
++2.0 / 4 of 6 years / positive directional move. Leases removed.
+
+**Next:** read the Q01C validation answer (replaces A01 in the week-bearish draft only if released > +4.73);
+diagnose T04_Q06_FB (pre-declared +3.0 and 99% coverage) and Q02 when they land; port Q04; a pre-declared Q01C+A01
+week-bearish consensus if Q01C validates. Draft today: T04 / E2A / A05B / A01. `config/live_source.json` from the
+draft on Fri 30 Oct before 12:00 UTC.
