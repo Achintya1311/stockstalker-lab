@@ -5135,3 +5135,7 @@ on thin volume) -1.51 (t -2.51), day bullish -1.13, week bearish -0.58; every di
 Pre-declared rule not met. Week-bullish top five are independent (1-6% overlap with A01, T19, Q05, I01, T05C,
 D02c). Mirror arithmetic: flipped to bearish they would earn about +0.12% after the futures cost.
 Next: pre-declared flip Q01C (week); diagnose Q03, Q05, Q06.
+Unit 2: Q03 up-day balance diagnosed (`research/diagnostics/q03.md`). Hypothesis (pre-declared): the stocks with
+the most up closes lag, as A01/A02's biggest winners do. Result: no; bullish is noise (day -0.52, week +0.69),
+bearish leans mildly positive (week +1.97, interval -0.46 to +4.38, one year +8.90 carries it; day +0.66). Every
+directional move negative; rule not met; no flip. Week-bearish top five 31% the same as Q05's.
