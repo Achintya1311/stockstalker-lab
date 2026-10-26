@@ -1,0 +1,10 @@
+# T18 (week horizon only, per cards/T18.yml): Ichimoku cloud 9/26/52, close
+# clear of the cloud with Tenkan/Kijun agreeing, train-split replay (port lane,
+# state/queue.md). See cards/T18.yml and strategies/t18_ichimoku_cloud.py.
+id: t18-ichimoku-cloud-week
+strategy: strategies.t18_ichimoku_cloud
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

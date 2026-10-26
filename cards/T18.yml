@@ -1,0 +1,34 @@
+source_url: ""
+author: "Goichi Hosoda (Ichimoku Kinko Hyo, published 1969)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: "1969"
+claim_as_stated: >
+  `cards/catalog.csv`: price above the cloud with Tenkan above Kijun bullish,
+  the reverse bearish, with the standard 9/26/52 periods. `prior_claim`:
+  popular trend system. No published hit rate is cited.
+horizon: week
+rules_plain: >
+  On the adjusted daily series: Tenkan = midpoint of the 9-day high and low,
+  Kijun = the 26-day midpoint; the cloud on the last bar is Senkou A
+  ((Tenkan + Kijun) / 2) and Senkou B (52-day midpoint), both as of 26 bars
+  earlier, so nothing ahead of the last bar is read. Close above the cloud
+  with Tenkan above Kijun is bullish, scored by the close's distance above the
+  cloud top over the close; close below the cloud with Tenkan below Kijun is
+  bearish, scored the same way from the cloud bottom with a negative sign.
+  Anything else abstains. Only the trailing 120 rows are read.
+default_params:
+  tenkan: 9
+  kijun: 26
+  senkou_b: 52
+  shift: 26
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Hosoda"
+link: ""
+prior_claim: "Popular trend system"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): the largest bullish scores are stocks furthest above a lagging trend level, the extended group that lags in T09, T16 and champion v1. Prediction: week-bullish top-5 edge negative; week-bearish near zero (T16's was +0.01). Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5)."
+  - "The 'Chikou span' (close plotted 26 bars back) is not used: on the last bar it compares the close with the close 26 bars earlier, which T23/I01 momentum already covers."
+  - "Likely to overlap T16 and T09 on the bullish side; check in diagnose."
+status: "queued"
