@@ -5084,3 +5084,9 @@ left this week). A01_I01F validation released +4.17, below A01's +4.73, so week-
 
 **Next:** when the bullish answers land, pick the highest released edge per bullish table, register it in
 `picks/source.py`, update the draft; diagnose T18, T22, T24; live_source.json by Fri 30 Oct 12:00 UTC.
+
+## 2026-10-26 16:30 UTC, run 13 (evaluate lane, lease 29e452b)
+
+Unit 1: registered the 7 bullish candidates of AB's edge-only batch in `picks/source.py` and added a drop-in
+test: each one placed on both bullish tables of the draft runs end to end on a noisy 60-symbol synthetic set,
+writes a non-empty table naming it, and no forbidden words. So the Friday swap is a one-line draft change.

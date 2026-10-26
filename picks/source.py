@@ -26,7 +26,9 @@ TABLE_KEYS = ("day_bullish", "day_bearish", "week_bullish", "week_bearish")
 # to `run.py`. Besides champion v1 (B7), it lists every strategy the
 # provisional rule (SPEC.md section 10) could choose on Fri 30 Oct
 # (`research/notes/validation_answers_2026-10-26.md`), so the first live
-# run cannot fail on an unknown id.
+# run cannot fail on an unknown id. The bullish block is AB's edge-only
+# batch (26 Oct 2026, `state/queue.md`): one of them replaces champion v1 on
+# each bullish table once its validation answer lands.
 _REGISTRY = {
     "champion_v1@v1": "strategies.champion_v1",
     "e2a_a02_crowded@v1": "strategies.e2a_a02_crowded",
@@ -34,6 +36,13 @@ _REGISTRY = {
     "d01c_oi_fade@v1": "strategies.d01c_oi_fade",
     "a01_weekly_reversal@v1": "strategies.a01_weekly_reversal",
     "t05c_upcross_fade@v1": "strategies.t05c_upcross_fade",
+    "t04_connors_rsi2@v1": "strategies.t04_connors_rsi2",
+    "t10_nr7_narrow_range@v1": "strategies.t10_nr7_narrow_range",
+    "t25_heikin_ashi@v1": "strategies.t25_heikin_ashi",
+    "a05b_max_effect_ranked@v1": "strategies.a05b_max_effect_ranked",
+    "a04_52_week_high@v1": "strategies.a04_52_week_high",
+    "o05_order_block_weekly@v1": "strategies.o05_order_block_weekly",
+    "i02_low_vol_level@v1": "strategies.i02_low_vol_level",
 }
 
 # The provisional fallback this contract names when no source file exists
