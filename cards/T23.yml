@@ -1,0 +1,33 @@
+source_url: ""
+author: "William J. O'Neil (CANSLIM RS rating; `cards/catalog.csv`'s own summary)"
+license: "book, not code; summarised and cited only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  O'Neil, How to Make Money in Stocks: the relative strength rating ranks a
+  stock's price performance over the last 12 months against all other
+  stocks, with the most recent quarter weighted most; leaders (high ratings)
+  keep leading. `cards/catalog.csv`: rank by weighted 3/6/9/12-month return
+  vs the universe, top bullish, bottom bearish.
+horizon: week
+rules_plain: >
+  The published formula is not public; the lab uses the common practitioner
+  reading, declared before the replay: perf = 0.4 x 3-month + 0.2 x 6-month
+  + 0.2 x 9-month + 0.2 x 12-month return (63/126/189/252 sessions on the
+  adjusted close, up to the last visible close). Per date, rank perf across
+  every symbol scored that date and map the rank symmetrically onto (-1, 1):
+  strongest bullish, weakest bearish. A symbol abstains until it has 253
+  rows; only those rows are read.
+default_params:
+  periods: [63, 126, 189, 252]
+  weights: [0.4, 0.2, 0.2, 0.2]
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "O'Neil, How to Make Money in Stocks (CANSLIM RS rating)"
+link: ""
+prior_claim: "Leaders keep leading"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): T23 weights the last quarter most, so its top five should sit closer to the lab's wrong-way 'most extended' readings (T08, T09) than A03 does. Prediction: week-bullish top-5 edge negative. Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5). O'Neil's use is as one filter among several (CANSLIM), held for months; this card tests the rank alone at one week."
+  - "The 40/20/20/20 weights are a practitioner reconstruction, not the published rating."
+  - "Rank scores depend on which symbols are present on a date; the audit checks each symbol's own reading and the ordering instead of full invariance. Expect heavy overlap with I01 and A03; check it in diagnose."
+status: "queued"

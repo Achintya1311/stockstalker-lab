@@ -4830,3 +4830,18 @@ short-horizon "most extended" reading in the lab. Week replay queued.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T23 relative strength rating.
+
+## 2026-10-26T0850Z port lane: T23 relative strength rating (unit 3)
+
+**Mode:** A (build), unit 3 of 5. Lane `port` (lease 9a77cf0).
+
+**Hypothesis/task:** port T23. perf = 0.4 x 3-month + 0.2 x each of 6/9/12-month return; per-date rank mapped
+onto (-1, 1).
+
+**Result:** `strategies/t23_rs_rating.py`, audit, 8 tests (including "same 12-month return, the one that
+gained in the last quarter rates higher"), `cards/T23.yml`. Pre-declared prediction: week-bullish top five
+negative, since the latest quarter weighs most. Week replay queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T21 Minervini trend template.
