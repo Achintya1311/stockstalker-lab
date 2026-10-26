@@ -21,6 +21,12 @@ def _write_parquet(tmp_path, dataset: pd.DataFrame) -> Path:
     return path
 
 
+def _no_source(tmp_path):
+    # A missing source in a temp dir (and no draft beside it), so dry runs here test the
+    # champion v1 fallback whatever the real config/ holds.
+    return tmp_path / "no-config" / "live_source.json"
+
+
 def test_run_writes_day_picks_for_the_next_session_across_a_real_holiday(tmp_path):
     # Monday 2026-10-19 -> Dussehra on Tuesday 2026-10-20 (config/nse_holidays.txt)
     # -> the real next trading session is Wednesday 2026-10-21.
@@ -29,7 +35,7 @@ def test_run_writes_day_picks_for_the_next_session_across_a_real_holiday(tmp_pat
     data_path = _write_parquet(tmp_path, dataset)
     out_dir = tmp_path / "out"
 
-    run(data_path, out_dir, mode="dry")
+    run(data_path, out_dir, mode="dry", source_path=_no_source(tmp_path))
 
     picks_path = out_dir / "day" / "2026-10-21.json"
     assert picks_path.exists()
@@ -49,7 +55,7 @@ def test_run_also_writes_week_picks_on_the_weeks_last_trading_day(tmp_path):
     data_path = _write_parquet(tmp_path, dataset)
     out_dir = tmp_path / "out"
 
-    run(data_path, out_dir, mode="dry")
+    run(data_path, out_dir, mode="dry", source_path=_no_source(tmp_path))
 
     assert (out_dir / "day" / "2026-10-19.json").exists()
     week_path = out_dir / "week" / "2026-10-19.json"
@@ -64,11 +70,11 @@ def test_run_is_idempotent_and_never_overwrites_an_existing_picks_file(tmp_path)
     data_path = _write_parquet(tmp_path, dataset)
     out_dir = tmp_path / "out"
 
-    run(data_path, out_dir, mode="dry")
+    run(data_path, out_dir, mode="dry", source_path=_no_source(tmp_path))
     picks_path = out_dir / "day" / "2026-10-21.json"
     first_content = picks_path.read_text()
 
-    run(data_path, out_dir, mode="dry")  # same dataset, same asof/session
+    run(data_path, out_dir, mode="dry", source_path=_no_source(tmp_path))  # same dataset, same asof/session
     assert picks_path.read_text() == first_content
 
 
@@ -78,13 +84,13 @@ def test_run_scores_an_earlier_days_picks_once_its_outcome_lands_in_the_dataset(
     data_path = _write_parquet(tmp_path, dataset)
     out_dir = tmp_path / "out"
 
-    run(data_path, out_dir, mode="dry")  # writes day/2026-10-21.json, unscored
+    run(data_path, out_dir, mode="dry", source_path=_no_source(tmp_path))  # writes day/2026-10-21.json, unscored
 
     # A later dry run, after the dataset has grown to include 2026-10-21's
     # own close (what a real `dataset.yml` update after that session would do).
     next_day = make_dataset({"UP": 0.01, "DOWN": -0.01}, dates + ["2026-10-21"])
     data_path_2 = _write_parquet(tmp_path, next_day)
-    run(data_path_2, out_dir, mode="dry")
+    run(data_path_2, out_dir, mode="dry", source_path=_no_source(tmp_path))
 
     scored = json.loads((out_dir / "day" / "2026-10-21.json").read_text())
     assert scored["tables"]["bullish"][0]["hit"] is True  # UP kept rising
@@ -148,7 +154,7 @@ def test_run_writes_a_summary_json(tmp_path):
     data_path = _write_parquet(tmp_path, dataset)
     out_dir = tmp_path / "out"
 
-    run(data_path, out_dir, mode="dry")
+    run(data_path, out_dir, mode="dry", source_path=_no_source(tmp_path))
 
     summary = json.loads((out_dir / "summary.json").read_text())
     assert "live" in summary and "exam" in summary
@@ -157,5 +163,5 @@ def test_run_writes_a_summary_json(tmp_path):
 
 def test_run_with_no_dataset_does_nothing(tmp_path):
     out_dir = tmp_path / "out"
-    run(tmp_path / "missing.parquet", out_dir, mode="dry")
+    run(tmp_path / "missing.parquet", out_dir, mode="dry", source_path=_no_source(tmp_path))
     assert not out_dir.exists()

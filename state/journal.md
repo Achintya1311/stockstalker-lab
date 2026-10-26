@@ -4643,3 +4643,22 @@ day_bearish E2A, week_bearish A01, both bullish champion v1 (AB pending). D01C d
 **Do order blocks help?** No order-block reading was eligible or asked. Running answer unchanged.
 
 **Next:** register E2A and A01 in `picks/source.py` and get a dry run of the draft on real data.
+
+## 2026-10-26T0419Z go-live track: register the candidate strategies; dry-run the draft source (unit 2)
+
+**Mode:** A (build), unit 2 of 5. Lane `evaluate` (lease d3a1b7f). B9 code (`picks/`), not protected.
+
+**Hypothesis/task:** `picks/source.py` resolved only champion v1, so Friday's `config/live_source.json`
+naming E2A or A01 would have failed the first live run. And nothing could exercise a non-champion source on
+real data before Friday.
+
+**Result:** registry now also resolves `e2a_a02_crowded@v1`, `e2a_d01c_fallback@v1`, `d01c_oi_fade@v1`,
+`a01_weekly_reversal@v1`, `t05c_upcross_fade@v1`. Dry mode reads `config/live_source.draft.json` (moved from
+`research/notes/`) when the real file is missing; live mode never reads it; the real file wins. `picks/run.py`
+looks for the draft beside its `source_path`, and the run tests now use a temp source path so they test the
+champion fallback whatever `config/` holds. 10 new tests (813 pass). This push to `picks/` triggers a Live dry
+run on real data with the draft (E2A day-bearish, A01 week-bearish, champion v1 bullish).
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** check `reports/live_dryrun/` from the dry run; the fallback's validation answer.

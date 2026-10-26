@@ -86,7 +86,7 @@ def run(data_path: Path, out_dir: Path, mode: str, source_path: Path = LIVE_SOUR
         return
     dataset = pd.read_parquet(data_path)
 
-    source = load_live_source(mode, source_path)
+    source = load_live_source(mode, source_path, source_path.with_name("live_source.draft.json"))
     if source is None:
         print("no config/live_source.json yet; live mode does nothing until it is committed")
         return

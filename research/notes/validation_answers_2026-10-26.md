@@ -60,7 +60,7 @@ Caveats the choice should carry:
 - The fallback's answer (pending) could replace E2A only if its released edge is higher; with train +5.97 that
   needs validation to beat train by 3 or more points.
 - `config/live_source.json` is written only on Fri 30 Oct before 12:00 UTC (SPEC section 7). Until then this
-  is a draft (`research/notes/live_source_draft.json`).
+  is a draft (`config/live_source.draft.json` (read by dry runs only)).
 - `picks/source.py`'s registry only knows champion v1, so E2A and A01 must be registered before Friday, or
   the first live run would fail on an unknown strategy id.
 
