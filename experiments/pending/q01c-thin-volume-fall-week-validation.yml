@@ -1,0 +1,13 @@
+# Validation query for the week-bearish table (SPEC.md section 10 provisional rule).
+# Q01C week-bearish: 1,524 train picks, top-5 edge +3.26 (interval +1.10 to +5.51, 6/6 years),
+# directional move +0.12% after costs (research/diagnostics/q01c.md). Replaces the draft's A01
+# (released +4.73) only if its released edge is higher. Q01C has no bullish side, so only the
+# bearish row is answered.
+id: q01c-thin-volume-fall-week-validation
+strategy: strategies.q01c_thin_volume_fall
+split: validation
+horizon: week
+train_experiment: q01c-thin-volume-fall-week
+dates:
+  start: 2021-01-01
+  end: 2023-12-31

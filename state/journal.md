@@ -5174,3 +5174,6 @@ Unit 2 (diagnose): Q01C diagnosed (`research/diagnostics/q01c.md`). Hypothesis (
 falls keep falling, so called bearish they give about +3.4 and +0.12% after the futures cost. Held: +3.26 (t 2.81,
 interval +1.10 to +5.51, 6/6 years, every year +2.4 to +4.1), dir +0.12%, full coverage. Rule met. 0.4% top-5
 overlap with A01. Eligible for week bearish under the full SPEC 10 rule.
+Unit 3 (evaluate): Q01C week-bearish validation query queued (`experiments/pending/q01c-thin-volume-fall-week-validation.yml`).
+`gates/budgets.py` first: 21 left this ISO week; a bearish-only card spends 1 row (as T05C's did). Decision rule
+before the answer: Q01C replaces A01 (released +4.73) in the week-bearish draft only if its released edge is higher.
