@@ -5094,3 +5094,12 @@ writes a non-empty table naming it, and no forbidden words. So the Friday swap i
 Units 2-4 (diagnose): T18 Ichimoku week-bullish -1.56, bearish +1.06 (2015-driven); T22 VCP +5.03 on only 52
 picks (t 0.70), short of 500; T24 pivots day-bullish -4.94 (t -8.51, 0/6 years; 50% A02-bearish overlap),
 bearish -1.47. All three pre-declared rules not met; none eligible, including under the edge-only bullish rule.
+
+Unit 5 (discover): six single-feature rows from Qlib's Alpha158 set (MIT, `third_party/qlib/loader.py`), in the
+lab's own words: Q01 price-volume correlation, Q02 return-volume-change correlation, Q03 up-day balance, Q04
+timing of the 60-day extremes, Q05 trend smoothness (R-squared signed by slope), Q06 candle wick balance.
+Bullish validation batch: Replay run 40352236427 started 16:15Z, still running at 16:55Z.
+
+**Next:** read the 8 bullish answers; pick the highest released edge per bullish table (AB's edge-only rule),
+put it in `config/live_source.draft.json` and the notes; port Q03/Q05 after; live_source.json by Fri 30 Oct
+12:00 UTC.
