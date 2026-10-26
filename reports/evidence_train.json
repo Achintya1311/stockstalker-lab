@@ -127,6 +127,24 @@
     "n": 299,
     "coverage": 0.9676375404530745
    },
+   "o04a-no-volume-week": {
+    "mean": -0.028818081765202588,
+    "lo": -0.05223369829375479,
+    "hi": -0.005898578016513848,
+    "p_le0": 0.996,
+    "block": 1,
+    "n": 299,
+    "coverage": 0.9676375404530745
+   },
+   "o04b-no-d01-week": {
+    "mean": -0.016777947985938374,
+    "lo": -0.039412640242398066,
+    "hi": 0.005130405373452798,
+    "p_le0": 0.9345,
+    "block": 2,
+    "n": 299,
+    "coverage": 0.9676375404530745
+   },
    "o05-order-block-weekly-week": {
     "mean": 0.01900616714972739,
     "lo": -0.006082667948461219,
@@ -219,13 +237,13 @@
    }
   },
   "joint": {
-   "n_models": 24,
+   "n_models": 26,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.315,
-    "consistent": 0.5285,
-    "upper": 0.6305
+    "lower": 0.3165,
+    "consistent": 0.5405,
+    "upper": 0.64
    },
    "stepm": [],
    "mcs": [
@@ -243,6 +261,8 @@
     "o01-retest-week",
     "o03-trend-confirmed-week",
     "o04-order-block-composite-week",
+    "o04a-no-volume-week",
+    "o04b-no-d01-week",
     "o05-order-block-weekly-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
@@ -410,6 +430,24 @@
     "n": 293,
     "coverage": 0.948220064724919
    },
+   "o04a-no-volume-week": {
+    "mean": -0.0002763679887933672,
+    "lo": -0.028489897533253927,
+    "hi": 0.026937571284166392,
+    "p_le0": 0.496,
+    "block": 2,
+    "n": 293,
+    "coverage": 0.948220064724919
+   },
+   "o04b-no-d01-week": {
+    "mean": -0.011197869695278006,
+    "lo": -0.040804445998096996,
+    "hi": 0.0161920454422364,
+    "p_le0": 0.778,
+    "block": 2,
+    "n": 293,
+    "coverage": 0.948220064724919
+   },
    "o05-order-block-weekly-week": {
     "mean": 0.0031561218720443872,
     "lo": -0.024607394095662448,
@@ -511,15 +549,15 @@
    }
   },
   "joint": {
-   "n_models": 28,
+   "n_models": 30,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.0695,
-    "consistent": 0.0985,
-    "upper": 0.0985
+    "lower": 0.071,
+    "consistent": 0.0995,
+    "upper": 0.0995
    },
    "stepm": [
     "t05c-upcross-fade-week"
@@ -541,6 +579,8 @@
     "o01-retest-week",
     "o03-trend-confirmed-week",
     "o04-order-block-composite-week",
+    "o04a-no-volume-week",
+    "o04b-no-d01-week",
     "o05-order-block-weekly-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
@@ -693,6 +733,24 @@
     "n": 1419,
     "coverage": 0.967280163599182
    },
+   "o04a-no-volume-day": {
+    "mean": -0.010758043226255367,
+    "lo": -0.02280508118162895,
+    "hi": 0.001217366586266239,
+    "p_le0": 0.958,
+    "block": 2,
+    "n": 1419,
+    "coverage": 0.967280163599182
+   },
+   "o04b-no-d01-day": {
+    "mean": 0.002349779183892626,
+    "lo": -0.009812145459869545,
+    "hi": 0.014747424989172841,
+    "p_le0": 0.345,
+    "block": 1,
+    "n": 1419,
+    "coverage": 0.967280163599182
+   },
    "t01-sma-crossover-day": {
     "mean": -0.014637170057179743,
     "lo": -0.026227766684470594,
@@ -812,7 +870,7 @@
    }
   },
   "joint": {
-   "n_models": 28,
+   "n_models": 30,
    "block": 1,
    "twins": {},
    "spa": {
@@ -928,6 +986,15 @@
     "n": 1264,
     "coverage": 0.8616223585548739
    },
+   "e2a-d01c-fallback-day": {
+    "mean": 0.059741994421959925,
+    "lo": 0.04366006350691783,
+    "hi": 0.0756686646549646,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 1386,
+    "coverage": 0.9447852760736196
+   },
    "e2a-day": {
     "mean": 0.07462446557489383,
     "lo": 0.05268232421401389,
@@ -987,6 +1054,24 @@
     "lo": -0.019985930584864326,
     "hi": 0.007182903938378587,
     "p_le0": 0.8235,
+    "block": 1,
+    "n": 1389,
+    "coverage": 0.9468302658486708
+   },
+   "o04a-no-volume-day": {
+    "mean": -0.0037414351759466435,
+    "lo": -0.01781933782460473,
+    "hi": 0.01026064003470269,
+    "p_le0": 0.687,
+    "block": 1,
+    "n": 1389,
+    "coverage": 0.9468302658486708
+   },
+   "o04b-no-d01-day": {
+    "mean": 0.003314000389208147,
+    "lo": -0.010154317165250937,
+    "hi": 0.01665696265493429,
+    "p_le0": 0.3185,
     "block": 1,
     "n": 1389,
     "coverage": 0.9468302658486708
@@ -1119,7 +1204,7 @@
    }
   },
   "joint": {
-   "n_models": 31,
+   "n_models": 34,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1133,6 +1218,7 @@
     "consensus-db-v1-day",
     "d01c-day",
     "e1b-day",
+    "e2a-d01c-fallback-day",
     "e2a-day",
     "e2b-day",
     "t01-sma-crossover-day",
@@ -1143,15 +1229,9 @@
     "t15-adx-regime-day"
    ],
    "mcs": [
-    "a02-extreme-day-reversal-day",
-    "a09-gap-fade-day",
     "consensus-db-v1-day",
     "d01c-day",
-    "e1b-day",
-    "e2a-day",
-    "t05c-upcross-fade-day",
-    "t06-bollinger-pctb-day",
-    "t13-williams-r-day"
+    "e2a-d01c-fallback-day"
    ]
   }
  }
