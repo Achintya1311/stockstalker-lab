@@ -1,0 +1,9 @@
+{
+  "id": "t20-volume-breakout-day",
+  "strategy": "strategies.t20_volume_breakout",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 15330,
+  "n_dates": 1465,
+  "pick_log_sha256": "4f6074731c7968166eac005fb2b7ac7a91254df38687c56c4688d68fe3534972"
+}

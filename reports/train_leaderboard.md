@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 139. Gate 2's bar at that count: t >= 4.27.
+Trials recorded: 141. Gate 2's bar at that count: t >= 4.27.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -44,6 +44,7 @@ Trials recorded: 139. Gate 2's bar at that count: t >= 4.27.
 | a06-low-volatility-week | week | bullish | 1458 | 50.55% | 49.10% | 1.55 | 1.24 |  | -0.50 | 66.67% |  |
 | i02-low-vol-level-week | week | bearish | 1300 | 52.54% | 50.96% | 1.58 | 1.20 |  | -0.02 | 80.00% |  |
 | t05-macd-crossover-week | week | bearish | 1008 | 53.27% | 51.11% | 2.02 | 1.19 |  | 0.22 | 66.67% | candidate |
+| t20-volume-breakout-day | day | bearish | 2985 | 55.75% | 54.54% | 1.23 | 1.17 |  | -0.06 | 66.67% |  |
 | i02-low-vol-level-week | week | bullish | 1300 | 50.69% | 48.85% | 1.85 | 1.17 |  | -0.33 | 60.00% |  |
 | t06-bollinger-pctb-day | day | bullish | 4239 | 46.71% | 44.76% | 1.04 | 1.14 |  | -0.63 | 66.67% |  |
 | t21-minervini-template-week | week | bullish | 1261 | 50.44% | 48.67% | 1.66 | 1.13 |  | -0.73 | 80.00% |  |
@@ -139,6 +140,7 @@ Trials recorded: 139. Gate 2's bar at that count: t >= 4.27.
 | t14-cci-day | day | bullish | 4552 | 43.41% | 45.02% | -2.44 | -3.02 |  | -0.56 | 0.00% |  |
 | t08-donchian-breakout-55-week | week | bullish | 1169 | 44.48% | 48.79% | -5.09 | -3.09 |  | -0.98 | 16.67% |  |
 | t05-macd-crossover-day | day | bullish | 4819 | 42.04% | 44.54% | -2.86 | -3.59 |  | -0.61 | 16.67% |  |
+| t20-volume-breakout-day | day | bullish | 3754 | 41.88% | 44.71% | -3.75 | -4.02 |  | -0.61 | 0.00% |  |
 | t09-supertrend-day | day | bullish | 7089 | 42.71% | 45.09% | -2.51 | -4.36 |  | -0.67 | 16.67% |  |
 | d01-oi-buildup-day | day | bearish | 7334 | 52.06% | 54.54% | -2.48 | -4.59 |  | -0.15 | 0.00% |  |
 | o02-oi-confirmed-day | day | bullish | 2421 | 39.98% | 44.54% | -5.15 | -4.60 |  | -0.68 | 16.67% |  |
