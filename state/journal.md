@@ -5177,3 +5177,8 @@ overlap with A01. Eligible for week bearish under the full SPEC 10 rule.
 Unit 3 (evaluate): Q01C week-bearish validation query queued (`experiments/pending/q01c-thin-volume-fall-week-validation.yml`).
 `gates/budgets.py` first: 21 left this ISO week; a bearish-only card spends 1 row (as T05C's did). Decision rule
 before the answer: Q01C replaces A01 (released +4.73) in the week-bearish draft only if its released edge is higher.
+Unit 4 (port, P2): T04_Q06_FB ported and queued (`cards/T04_Q06_FB.yml`, `strategies/t04_q06_fallback.py`, audit,
+9 tests; suite 992 passed). Hypothesis: T04 (released +4.36) is blank on about 26% of days; Q06 (released +2.58)
+reads every day on nearly disjoint stocks, so a per-date fallback gives a full day-bullish table near T04's level.
+The switch counts only stocks that look in the universe on the last visible row (the E2A_D01C_FB defect).
+Pre-declared: helps at +3.0 or more, interval above 0, 4 of 6 years, 99% coverage; expected about +3.2.

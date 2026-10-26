@@ -1,0 +1,31 @@
+source_url: ''
+author: lab-original (go-live track P2, research/diagnostics/q06.md)
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-27'
+horizon: day
+claim_as_stated: 'Pre-registered before the replay: the fallback helps if its top-5 day-bullish edge is at least +3.0,
+  with the date-block bootstrap interval above 0, at least 4 of 6 positive train years and bullish picks on at least 99%
+  of train dates. That would make a full-coverage day-bullish table close to T04''s level instead of a table left blank
+  on about a quarter of days. By construction it equals T04 on the dates T04 fires (about 74%); if Q06 does as well on
+  the other dates as on average, the edge is about 0.74 x 3.37 + 0.26 x 2.58 = +3.2. The directional move after costs
+  is reported but not required (AB''s edge-only rule for the bullish tables, 26 Oct 2026); it is expected to stay
+  negative, as both members'' are. Any gain is a lead needing validation, not a result.'
+rules_plain: 'Day-bullish only. Per date: if T04 (Connors RSI(2) inside the 200-day trend) scores any stock bullish that
+  looks in the universe on the last visible row (active future, 20-session median turnover at the floor), publish only
+  T04''s bullish scores; otherwise publish only Q06''s (long lower wick on the last bar). Bearish scores of both members
+  are dropped. Not an average: each pick keeps its member''s own magnitude.'
+default_params:
+  first: t04_connors_rsi2
+  fallback: q06_wick_balance
+  switch: T04 has at least one likely-in-universe bullish score that date
+data_needed: ohlcv
+testable_now: 'yes'
+source: 'research/diagnostics/q06.md (What to try next); research/diagnostics/e2a_d01c_fb.md (switch defect)'
+link: ''
+prior_claim: 'A strong but intermittent reading backed by an always-on, unrelated one should keep most of the strong one''s edge; untested here'
+red_flags:
+- Members and the switch were chosen after seeing their train and validation results; the fallback is its own trial and each member already is one.
+- The universe check uses the last visible row, not the pick date's own row the engine uses, so a stock can still drop out at the margin.
+- T04 often fires on fewer than 5 stocks, so on T04 dates the table can have fewer than 5 picks. Filling to 5 with Q06 is a different trial.
+- Train split only until a frozen version exists.
+status: queued

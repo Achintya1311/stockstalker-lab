@@ -1,0 +1,10 @@
+# T04_Q06_FB (day horizon): T04's bullish picks when it fires, Q06's otherwise, train-split
+# replay (go-live track P2, state/queue.md). Pre-declared rule in cards/T04_Q06_FB.yml; see
+# strategies/t04_q06_fallback.py.
+id: t04-q06-fallback-day
+strategy: strategies.t04_q06_fallback
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
