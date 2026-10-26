@@ -4747,3 +4747,18 @@ negative. Not eligible. Possible later use as a filter on a week-bearish card, n
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T03.
+
+## 2026-10-26T0636Z diagnose lane: T03 RSI 30/70 (unit 3)
+
+**Mode:** A (build), unit 3 of 5. Lane `evaluate` (lease d4c4f91).
+
+**Hypothesis/task:** T03 had no diagnosis.
+
+**Result:** `research/diagnostics/t03.md`. Oversold (RSI below 30) day-bullish -1.13, negative in 4 of 6 years,
+as T12's oversold up-cross. Overbought day-bearish +0.89 (5/6 years), the same direction as T06 and T13 at a
+third of their size; 30% of its top five are T13's. Every directional move after costs is negative (best
+-0.04%). Not eligible; 20/80 variant not queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T07 and T11.
