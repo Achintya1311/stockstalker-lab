@@ -1,0 +1,9 @@
+{
+  "id": "t24-pivot-points-day",
+  "strategy": "strategies.t24_pivot_points",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 299567,
+  "n_dates": 1466,
+  "pick_log_sha256": "06d06b2cf093f2d82de73d6a5d1f93640fbd8c6882669a5af3809ee9b888a1ef"
+}
