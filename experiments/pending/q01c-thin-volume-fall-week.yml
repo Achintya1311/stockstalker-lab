@@ -1,0 +1,10 @@
+# Q01C (week horizon): Q01's fall-on-thinning-volume side called bearish, train-split
+# replay (port lane, state/queue.md). Pre-declared rule in cards/Q01C.yml; see
+# strategies/q01c_thin_volume_fall.py and research/diagnostics/q01.md.
+id: q01c-thin-volume-fall-week
+strategy: strategies.q01c_thin_volume_fall
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

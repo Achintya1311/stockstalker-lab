@@ -5153,3 +5153,13 @@ Unit 5 (evaluate, lease 000cef0): Q06 day-bullish validation query queued
 picks, positive top-5 edge). `gates/budgets.py` before the push: 37 used, 23 left this ISO week; this spends 2
 rows. Decision rule written down before the answer: Q06 replaces T04 (released +4.36) for day bullish only if its
 released edge is higher; otherwise the draft is unchanged.
+Unit 6 (port): Q01C ported and queued (`cards/Q01C.yml`, `strategies/q01c_thin_volume_fall.py`, audit, 6 tests;
+suite 983 passed). Q01's week "fall on thinning volume" side called bearish, rises abstain; imports Q01. Pre-declared:
+helps at a week-bearish top-5 edge of at least +2.0 with the bootstrap interval above 0, 4 of 6 years and a
+positive directional move; expected about +3.4 and +0.12% after the futures cost. If met, one validation query.
+Leases removed.
+
+**Next:** read the Q06 day-bullish validation answer (Replay since 20:32Z on 679c5a8) and update the draft only if it
+beats T04's +4.36; diagnose Q01C when it lands; then a pre-declared day-bullish consensus (T04, Q06, T10-NR7, 1-3%
+overlap) or the Q06 range-size filter; ports Q02/Q04. `config/live_source.json` from the draft on Fri 30 Oct
+before 12:00 UTC.

@@ -1,0 +1,32 @@
+source_url: ''
+author: lab-original sign test of Q01's bullish side
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-10-27'
+horizon: week
+claim_as_stated: 'Pre-registered before the replay: Q01C helps if its week top-5 bearish edge is at least +2.0 with the
+  date-block bootstrap interval above 0 (arch, scripts/evidence_report.py), at least 4 of 6 positive train years and a
+  positive directional move after costs. Q01C picks the stocks Q01 called bullish (a 20-session fall on thinning volume),
+  so by mirror arithmetic the edge is expected near +3.4 (range +2.5 to +3.9; the bearish market line differs from the
+  bullish one) and the interval near the mirror of Q01 week-bullish''s -5.69 to -1.25. The open question is the
+  directional move under the futures cost (0.25%, not the 0.415% delivery cost Q01''s bullish side carried): from Q01''s
+  numbers about +0.12%. Any pass is a lead needing a validation query, not a result.'
+rules_plain: 'Q01''s reading with only the "fall on thinning volume" side kept and called the other way: a 20-session fall
+  whose close correlates positively with log volume (volume drying up as the price drops) is bearish, scored by Q01''s
+  correlation. Rises on thinning volume and volume-confirmed moves abstain. Imports Q01, so the correlation and the move
+  are identical; only the sign of that one side changes.'
+default_params:
+  base: Q01
+  side_kept: fall on thinning volume
+  window: 20
+data_needed: ohlcv
+testable_now: 'yes'
+source: 'Lab result: research/diagnostics/q01.md'
+link: ''
+prior_claim: 'The "volume does not confirm" reading expects a fall on thinning volume to reverse; the lab''s NSE train data shows it continues over the next week'
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- A sign flip chosen after seeing Q01's train result is a researcher degree of freedom; it counts as its own trial in ledger/trials.csv, and only validation can confirm it.
+- Week bearish already has eligible readings (A01 in the draft, T05C, D02-contrarian); Q01C's source picks overlapped those by 0.4-1.4% on train (approximate, no universe filter).
+- Week horizon only. Q01's day cells give no usable flip after costs (about -0.06% day-bullish flipped).
+- Train split only until a frozen version exists.
+status: queued
