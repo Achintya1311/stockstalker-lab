@@ -4577,3 +4577,18 @@ beats the bare order block by a point. Bearish leans no; bullish "not yet, but O
 is the first candidate worth a second look", and no order-block reading clears the cost test.
 
 **Next:** T06 and T13 diagnoses; validation answers when the batch lands.
+
+## 2026-10-26T0223Z diagnose lane: T06 Bollinger %B (unit 3)
+
+**Mode:** A (build), unit 3 of 5. Lane `diagnose` (lease 1c6f04e). No holdout query was spent by this unit.
+
+**Hypothesis/task:** T06 day-bearish is StepM superior and had no diagnosis.
+
+**Result:** `research/diagnostics/t06.md`. Bearish (close above upper band) +3.35 (t 4.39, interval +1.85
+to +4.80, 6/6 years), dir -0.03% after the futures cost: misses the letter by 0.03%, like T04 and T13
+bearish. Bullish +1.04, not significant. 35% of its bearish top five are also D01C's. Not eligible; does not
+change the day-bearish table.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T13 diagnosis; validation answers.
