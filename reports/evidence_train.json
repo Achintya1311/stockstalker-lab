@@ -91,6 +91,15 @@
     "n": 302,
     "coverage": 0.9773462783171522
    },
+   "i01-momentum-score-week": {
+    "mean": 0.012299731330299742,
+    "lo": -0.01570764131754872,
+    "hi": 0.03986397837661139,
+    "p_le0": 0.205,
+    "block": 1,
+    "n": 260,
+    "coverage": 0.8414239482200647
+   },
    "i02-low-vol-level-week": {
     "mean": 0.018453577484145896,
     "lo": -0.01223239631794064,
@@ -243,16 +252,43 @@
     "block": 3,
     "n": 298,
     "coverage": 0.9644012944983819
+   },
+   "t21-minervini-template-week": {
+    "mean": 0.016572809417811574,
+    "lo": -0.01131010083692874,
+    "hi": 0.04493900945491403,
+    "p_le0": 0.132,
+    "block": 1,
+    "n": 257,
+    "coverage": 0.8317152103559871
+   },
+   "t23-rs-rating-week": {
+    "mean": -0.006931037900469488,
+    "lo": -0.0328561956519639,
+    "hi": 0.019490666548547458,
+    "p_le0": 0.6875,
+    "block": 2,
+    "n": 260,
+    "coverage": 0.8414239482200647
+   },
+   "t25-heikin-ashi-week": {
+    "mean": 0.027384653530653735,
+    "lo": -0.005846127688426104,
+    "hi": 0.06086802139622614,
+    "p_le0": 0.0515,
+    "block": 1,
+    "n": 271,
+    "coverage": 0.8770226537216829
    }
   },
   "joint": {
-   "n_models": 27,
+   "n_models": 31,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.349,
-    "consistent": 0.5645,
-    "upper": 0.658
+    "lower": 0.303,
+    "consistent": 0.469,
+    "upper": 0.5395
    },
    "stepm": [],
    "mcs": [
@@ -266,6 +302,7 @@
     "champion-v1-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
+    "i01-momentum-score-week",
     "i02-low-vol-level-week",
     "o00-placebo-week",
     "o01-retest-week",
@@ -278,10 +315,12 @@
     "t02-golden-death-cross-week",
     "t03-rsi-thresholds-week",
     "t05-macd-crossover-week",
-    "t08-donchian-breakout-20-week",
     "t09-supertrend-week",
     "t14-cci-week",
-    "t15-adx-regime-week"
+    "t15-adx-regime-week",
+    "t21-minervini-template-week",
+    "t23-rs-rating-week",
+    "t25-heikin-ashi-week"
    ]
   }
  },
@@ -403,6 +442,15 @@
     "block": 1,
     "n": 225,
     "coverage": 0.7281553398058253
+   },
+   "i01-momentum-score-week": {
+    "mean": 0.020388329782628282,
+    "lo": -0.0035150328553094296,
+    "hi": 0.04415424284728995,
+    "p_le0": 0.0525,
+    "block": 4,
+    "n": 260,
+    "coverage": 0.8414239482200647
    },
    "i02-low-vol-level-week": {
     "mean": 0.01577294516724367,
@@ -565,22 +613,47 @@
     "block": 1,
     "n": 299,
     "coverage": 0.9676375404530745
+   },
+   "t21-minervini-template-week": {
+    "mean": -0.0005056269663320569,
+    "lo": -0.028771311642601518,
+    "hi": 0.028081852218418656,
+    "p_le0": 0.4985,
+    "block": 1,
+    "n": 253,
+    "coverage": 0.8187702265372169
+   },
+   "t23-rs-rating-week": {
+    "mean": 0.014234483628782126,
+    "lo": -0.011788730496636405,
+    "hi": 0.0400998101354643,
+    "p_le0": 0.159,
+    "block": 1,
+    "n": 260,
+    "coverage": 0.8414239482200647
+   },
+   "t25-heikin-ashi-week": {
+    "mean": -0.014930437101209835,
+    "lo": -0.04496429191209853,
+    "hi": 0.015792224861466773,
+    "p_le0": 0.8385,
+    "block": 2,
+    "n": 270,
+    "coverage": 0.8737864077669902
    }
   },
   "joint": {
-   "n_models": 31,
+   "n_models": 35,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.072,
-    "consistent": 0.1,
-    "upper": 0.1
+    "lower": 0.076,
+    "consistent": 0.111,
+    "upper": 0.111
    },
-   "stepm": [
-    "t05c-upcross-fade-week"
-   ],
+   "stepm": [],
    "mcs": [
     "a01-weekly-reversal-week",
     "a03-momentum-12-1-week",
@@ -594,6 +667,7 @@
     "consensus-wb-v1-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
+    "i01-momentum-score-week",
     "i02-low-vol-level-week",
     "o00-placebo-week",
     "o01-retest-week",
@@ -612,6 +686,9 @@
     "t09-supertrend-week",
     "t14-cci-week",
     "t15-adx-regime-week",
+    "t21-minervini-template-week",
+    "t23-rs-rating-week",
+    "t25-heikin-ashi-week",
     "a05b-max-effect-ranked-week"
    ]
   }
@@ -887,16 +964,25 @@
     "block": 4,
     "n": 1418,
     "coverage": 0.9665985003408316
+   },
+   "t25-heikin-ashi-day": {
+    "mean": 0.018478643137505066,
+    "lo": 0.0029239603135864565,
+    "hi": 0.034094322115509834,
+    "p_le0": 0.009,
+    "block": 2,
+    "n": 1250,
+    "coverage": 0.8520790729379687
    }
   },
   "joint": {
-   "n_models": 30,
-   "block": 1,
+   "n_models": 31,
+   "block": 2,
    "twins": {},
    "spa": {
-    "lower": 0.0,
-    "consistent": 0.003,
-    "upper": 0.0035
+    "lower": 0.0005,
+    "consistent": 0.002,
+    "upper": 0.0025
    },
    "stepm": [
     "d01c-day",
@@ -910,7 +996,8 @@
     "t04-connors-rsi2-day",
     "t06-bollinger-pctb-day",
     "t10-nr4-narrow-range-day",
-    "t10-nr7-narrow-range-day"
+    "t10-nr7-narrow-range-day",
+    "t25-heikin-ashi-day"
    ]
   }
  },
@@ -1221,10 +1308,19 @@
     "block": 2,
     "n": 1404,
     "coverage": 0.9570552147239264
+   },
+   "t25-heikin-ashi-day": {
+    "mean": -0.004427377668325435,
+    "lo": -0.018967911090170955,
+    "hi": 0.011445604020905796,
+    "p_le0": 0.6985,
+    "block": 1,
+    "n": 1284,
+    "coverage": 0.8752556237218814
    }
   },
   "joint": {
-   "n_models": 34,
+   "n_models": 35,
    "block": 1,
    "twins": {},
    "spa": {
