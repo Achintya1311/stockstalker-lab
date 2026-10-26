@@ -1,0 +1,10 @@
+# T21 (week horizon only, per cards/T21.yml): Minervini trend template with a
+# mirrored bearish side, train-split replay (port lane, state/queue.md). See
+# cards/T21.yml and strategies/t21_minervini_template.py.
+id: t21-minervini-template-week
+strategy: strategies.t21_minervini_template
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

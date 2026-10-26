@@ -1,0 +1,37 @@
+source_url: ""
+author: "Mark Minervini"
+license: "book, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "2013"
+claim_as_stated: >
+  Minervini (2013), Trade Like a Stock Market Wizard: stocks in a "stage 2"
+  uptrend pass a trend template (price above rising long moving averages
+  stacked in order, well off the 52-week low and near the 52-week high);
+  the book's big winners came from that stage. `prior_claim`: stage-2
+  uptrend filter. `cards/catalog.csv`: mirror conditions bearish.
+horizon: week
+rules_plain: >
+  Bullish, all required, on the adjusted close: close above SMA150 and
+  SMA200; SMA150 above SMA200; SMA200 above its value 21 sessions earlier;
+  SMA50 above SMA150 and SMA200; close above SMA50; close at least 30% above
+  the 252-session low; close at least 75% of the 252-session high. Bearish:
+  every inequality reversed, SMA200 falling, close at most high / 1.30 and at
+  most low / 0.75. A passing stock scores its proximity to the extreme it is
+  trending towards, in (0, 1] (bullish) or [-1, 0) (bearish); every other
+  stock abstains. Needs 252 rows; only those rows are read.
+default_params:
+  smas: [50, 150, 200]
+  sma200_rising_lag: 21
+  off_low: 1.30
+  near_high: 0.75
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Minervini (2013) Trade Like a Stock Market Wizard"
+link: ""
+prior_claim: "Stage-2 uptrend filter"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): the bullish template selects stocks at or near 52-week highs after a long rise, the group T08's 55-day breakout found wrong-way at one week (-5.09). Prediction: week-bullish top-5 edge negative, bearish small. Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5). The book reports winners it held for weeks to months and uses the template as a filter before a chart entry; this card tests the filter alone at one week."
+  - "The book's eighth point (RS rating at least 70) is left out so the template is tested alone; T23 is the RS rating."
+  - "The bearish mirror is the lab's construction, not Minervini's (the book is long-only)."
+  - "Proximity scores tie at +1 for every stock at a new 52-week high; the order among tied stocks is arbitrary as far as the signal goes. Check in diagnose how often the top five are tied."
+status: "queued"

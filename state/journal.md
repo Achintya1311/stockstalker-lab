@@ -4845,3 +4845,18 @@ negative, since the latest quarter weighs most. Week replay queued.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T21 Minervini trend template.
+
+## 2026-10-26T0900Z port lane: T21 Minervini trend template (unit 4)
+
+**Mode:** A (build), unit 4 of 5. Lane `port` (lease 9a77cf0).
+
+**Hypothesis/task:** port T21: the seven SMA and 52-week conditions (the RS-rating point left to T23), with a
+mirrored bearish side; a passing stock scores its proximity to the 52-week extreme.
+
+**Result:** `strategies/t21_minervini_template.py`, audit, 10 tests (each failing condition abstains, score
+formula checked), `cards/T21.yml`. Pre-declared prediction: week-bullish top five negative (T08's 55-day
+breakout is -5.09). Week replay queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** one more port (T24 or T25), then release the lease.
