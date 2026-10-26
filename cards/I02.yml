@@ -1,0 +1,38 @@
+source_url: ""
+author: "NSE Indices Ltd (index methodology; `cards/catalog.csv`'s own summary)"
+license: "index methodology, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: "Lowest 1-year daily volatility bullish, highest
+  bearish", after the Nifty Low Volatility 30 index, which holds the 30
+  stocks with the lowest volatility of daily price returns over the last
+  year. `prior_claim`: "Low-vol had the best risk-adjusted profile in one
+  Indian study." The index is a long-only, monthly-to-quarterly holding;
+  this card tests whether the level shows at a one-week horizon, and is the
+  lab's first test of the bearish (most volatile) side.
+horizon: week
+rules_plain: >
+  Per symbol, sigma = population standard deviation of the last 252 daily
+  log returns of the adjusted close. Score per date = median(log sigma over
+  every symbol scored that date) - log sigma: calmer than the median is
+  bullish, more volatile is bearish, and the gap in log sigma is the
+  conviction. A symbol abstains until it has 253 rows. Only the trailing
+  253 rows are read.
+
+  Distinct from `cards/A06.yml`, which scores the change in a stock's own
+  volatility (recent sigma against its own earlier sigma), not the level.
+default_params:
+  window: 252
+  centre: "cross-sectional median of log sigma"
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "NSE Indices methodology (Nifty Low Volatility 30)"
+link: ""
+prior_claim: "Low-vol had the best risk-adjusted profile in one Indian study"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): prediction is a small positive week-bullish edge (A06's change version is +1.55) but a negative directional move after the 0.415% delivery cost, since the calmest stocks move least; the most volatile five (bearish) are the open question. Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5): status moves only after a real train replay."
+  - "The score depends on which symbols are present on a date (median centre). The top five per side do not, as long as at least five symbols sit on each side; the `all` selection does. The audit checks the per-symbol sigma and the ordering instead of full invariance."
+  - "Total volatility, not the index's exact method (NSE's index document gives selection and weighting details this card does not copy, such as eligibility and capping); it is the catalog's reading."
+  - "Low-volatility effects are usually reported over months; a one-week horizon may be too short for the calm side to clear the delivery cost."
+status: "queued"

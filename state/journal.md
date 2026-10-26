@@ -4797,3 +4797,20 @@ cost test.
 
 **Next:** draft on real data after tonight's dataset update; AB decisions pending (bullish fallback,
 same-stock conflict, E2A coverage vs the fallback).
+
+## 2026-10-26T0830Z port lane: I02 Nifty Low Volatility 30 rule (unit 1)
+
+**Mode:** A (build), unit 1 of 5. Lane `port` (lease 9a77cf0).
+
+**Hypothesis/task:** every T01-T15 card is diagnosed; the next untested rows by SPEC section 5 order are the
+index-method ones. I02: lowest 1-year daily sigma bullish, highest bearish, as a cross-sectional level (A06
+tests the change in a stock's own sigma, not the level).
+
+**Result:** `strategies/i02_low_vol_level.py` (score = median log sigma - log sigma, trailing 253 rows only),
+causality audit (own sigma unaffected by another symbol's row; ordering kept), 9 tests, `cards/I02.yml` with a
+pre-declared rule (helps if a side's top-5 edge is at least +2.0, 4 of 6 years, positive directional move after
+costs). Week replay queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** I01 momentum score.
