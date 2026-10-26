@@ -1,0 +1,17 @@
+{
+  "id": "i02-low-vol-level-week-validation",
+  "strategy": "strategies.i02_low_vol_level",
+  "horizon": "week",
+  "train_experiment": "i02-low-vol-level-week",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.018453577484145896,
+      "released_edge": -0.02551312011023695
+    },
+    "bearish": {
+      "train_edge": 0.01577294516724367,
+      "released_edge": 0.01577294516724367
+    }
+  }
+}

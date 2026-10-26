@@ -1,0 +1,17 @@
+{
+  "id": "t25-heikin-ashi-day-validation",
+  "strategy": "strategies.t25_heikin_ashi",
+  "horizon": "day",
+  "train_experiment": "t25-heikin-ashi-day",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.018478643137505066,
+      "released_edge": 0.018478643137505066
+    },
+    "bearish": {
+      "train_edge": -0.004427377668325435,
+      "released_edge": 0.02329803558013633
+    }
+  }
+}

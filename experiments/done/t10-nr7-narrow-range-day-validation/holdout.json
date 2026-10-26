@@ -1,0 +1,17 @@
+{
+  "id": "t10-nr7-narrow-range-day-validation",
+  "strategy": "strategies.t10_nr7_narrow_range",
+  "horizon": "day",
+  "train_experiment": "t10-nr7-narrow-range-day",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.021619437389758894,
+      "released_edge": 0.021619437389758894
+    },
+    "bearish": {
+      "train_edge": -0.005454251376687235,
+      "released_edge": 0.0019803190050023834
+    }
+  }
+}

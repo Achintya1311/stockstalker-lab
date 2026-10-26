@@ -1,0 +1,17 @@
+{
+  "id": "t04-connors-rsi2-day-validation",
+  "strategy": "strategies.t04_connors_rsi2",
+  "horizon": "day",
+  "train_experiment": "t04-connors-rsi2-day",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.033702970318406154,
+      "released_edge": 0.04358968096593357
+    },
+    "bearish": {
+      "train_edge": 0.023160941016442175,
+      "released_edge": 0.02560650087798591
+    }
+  }
+}
