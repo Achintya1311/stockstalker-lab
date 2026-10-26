@@ -1,0 +1,9 @@
+{
+  "id": "t18-ichimoku-cloud-week",
+  "strategy": "strategies.t18_ichimoku_cloud",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 40638,
+  "n_dates": 288,
+  "pick_log_sha256": "ca50bb178c6d71c91b7b03af6e79f6959afc93a8fb383c38b22440c2145c4b35"
+}

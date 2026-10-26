@@ -1,0 +1,9 @@
+{
+  "id": "t22-vcp-week",
+  "strategy": "strategies.t22_vcp",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 61,
+  "n_dates": 53,
+  "pick_log_sha256": "478e9ce8c69cfbbe89b21a855754bb2b46383dba4983e342badb1e201980f8f1"
+}
