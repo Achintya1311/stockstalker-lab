@@ -1,0 +1,9 @@
+{
+  "id": "t16-parabolic-sar-week",
+  "strategy": "strategies.t16_parabolic_sar",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 59859,
+  "n_dates": 288,
+  "pick_log_sha256": "91575e4eb8bcb48c58067135e9b2dea0181698b81f571af60e2b57262135e459"
+}

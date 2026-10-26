@@ -1,0 +1,9 @@
+{
+  "id": "t19-obv-divergence-week",
+  "strategy": "strategies.t19_obv_divergence",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 12057,
+  "n_dates": 305,
+  "pick_log_sha256": "65540b46b0ed1471481697f598e0a16e53bac1a9f82863242baff2101f221d01"
+}
