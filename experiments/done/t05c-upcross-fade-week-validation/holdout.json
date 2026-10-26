@@ -1,0 +1,13 @@
+{
+  "id": "t05c-upcross-fade-week-validation",
+  "strategy": "strategies.t05c_upcross_fade",
+  "horizon": "week",
+  "train_experiment": "t05c-upcross-fade-week",
+  "selection": "top",
+  "released": {
+    "bearish": {
+      "train_edge": 0.04022991779091556,
+      "released_edge": 0.04022991779091556
+    }
+  }
+}

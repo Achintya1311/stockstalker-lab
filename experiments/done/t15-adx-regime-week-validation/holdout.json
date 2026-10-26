@@ -1,0 +1,17 @@
+{
+  "id": "t15-adx-regime-week-validation",
+  "strategy": "strategies.t15_adx_regime",
+  "horizon": "week",
+  "train_experiment": "t15-adx-regime-week",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": -0.011458157220557375,
+      "released_edge": -0.011458157220557375
+    },
+    "bearish": {
+      "train_edge": 0.02954953152349719,
+      "released_edge": -0.0018784768804638102
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "a07c-volume-fade-week-validation",
+  "strategy": "strategies.a07c_volume_fade",
+  "horizon": "week",
+  "train_experiment": "a07c-volume-fade-week",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.009010094755098029,
+      "released_edge": 0.009010094755098029
+    },
+    "bearish": {
+      "train_edge": 0.013425051848950278,
+      "released_edge": 0.013425051848950278
+    }
+  }
+}

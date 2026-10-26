@@ -1,0 +1,17 @@
+{
+  "id": "e2a-day-validation",
+  "strategy": "strategies.e2a_a02_crowded",
+  "horizon": "day",
+  "train_experiment": "e2a-day",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": -0.015789762056940458,
+      "released_edge": -0.06933406192799257
+    },
+    "bearish": {
+      "train_edge": 0.07462446557489383,
+      "released_edge": 0.0672488755362877
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "d01c-day-validation",
+  "strategy": "strategies.d01c_oi_fade",
+  "horizon": "day",
+  "train_experiment": "d01c-day",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.02539136148611414,
+      "released_edge": -0.010450520894048031
+    },
+    "bearish": {
+      "train_edge": 0.047354933800174054,
+      "released_edge": 0.047354933800174054
+    }
+  }
+}

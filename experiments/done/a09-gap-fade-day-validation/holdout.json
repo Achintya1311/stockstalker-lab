@@ -1,0 +1,17 @@
+{
+  "id": "a09-gap-fade-day-validation",
+  "strategy": "strategies.a09_gap_fade",
+  "horizon": "day",
+  "train_experiment": "a09-gap-fade-day",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.008678316489547831,
+      "released_edge": 0.0049183476443242745
+    },
+    "bearish": {
+      "train_edge": 0.03212431859313877,
+      "released_edge": 0.03212431859313877
+    }
+  }
+}

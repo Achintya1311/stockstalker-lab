@@ -1,0 +1,17 @@
+{
+  "id": "d02-stock-pcr-contrarian-week-validation",
+  "strategy": "strategies.d02_stock_pcr_contrarian",
+  "horizon": "week",
+  "train_experiment": "d02-stock-pcr-contrarian-week",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": -0.003764822200902616,
+      "released_edge": -0.003764822200902616
+    },
+    "bearish": {
+      "train_edge": 0.03748128942712244,
+      "released_edge": 0.038635975891962215
+    }
+  }
+}

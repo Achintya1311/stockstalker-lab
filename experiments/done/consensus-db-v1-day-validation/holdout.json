@@ -1,0 +1,13 @@
+{
+  "id": "consensus-db-v1-day-validation",
+  "strategy": "strategies.consensus_db_v1",
+  "horizon": "day",
+  "train_experiment": "consensus-db-v1-day",
+  "selection": "top",
+  "released": {
+    "bearish": {
+      "train_edge": 0.04605736502238802,
+      "released_edge": 0.04605736502238802
+    }
+  }
+}

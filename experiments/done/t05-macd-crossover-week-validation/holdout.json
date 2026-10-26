@@ -1,0 +1,17 @@
+{
+  "id": "t05-macd-crossover-week-validation",
+  "strategy": "strategies.t05_macd_crossover",
+  "horizon": "week",
+  "train_experiment": "t05-macd-crossover-week",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": -0.03896889027116024,
+      "released_edge": -0.03896889027116024
+    },
+    "bearish": {
+      "train_edge": 0.02017765630627839,
+      "released_edge": 0.02017765630627839
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "consensus-wb-v1-week-validation",
+  "strategy": "strategies.consensus_wb_v1",
+  "horizon": "week",
+  "train_experiment": "consensus-wb-v1-week",
+  "selection": "top",
+  "released": {
+    "bearish": {
+      "train_edge": 0.024839810087161785,
+      "released_edge": 0.024839810087161785
+    }
+  }
+}
