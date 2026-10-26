@@ -1,0 +1,9 @@
+{
+  "id": "a01-i01-filter-week",
+  "strategy": "strategies.a01_i01_filter",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 14488,
+  "n_dates": 260,
+  "pick_log_sha256": "704d4157bf87ae606df438fbcb93f8e882f7fe4b9f4e08c941115c1d93d689b3"
+}

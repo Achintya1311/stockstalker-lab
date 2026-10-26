@@ -140,3 +140,4 @@ t17-keltner-breakout-week-bullish,2026-10-26T11:10:45.472131+00:00,strategies.t1
 t17-keltner-breakout-week-bearish,2026-10-26T11:10:45.472302+00:00,strategies.t17_keltner_breakout,,week,bearish,train,-0.011827196285626933,-0.6759445719866456,n/a,"train, top selection; recorded by engine/experiment_report.py"
 t20-volume-breakout-day-bullish,2026-10-26T12:00:58.815397+00:00,strategies.t20_volume_breakout,,day,bullish,train,-0.03748010076962088,-4.017103532998921,n/a,"train, top selection; recorded by engine/experiment_report.py"
 t20-volume-breakout-day-bearish,2026-10-26T12:00:58.815562+00:00,strategies.t20_volume_breakout,,day,bearish,train,0.012255676670975735,1.1746928116729318,n/a,"train, top selection; recorded by engine/experiment_report.py"
+a01-i01-filter-week-bearish,2026-10-26T13:14:34.047670+00:00,strategies.a01_i01_filter,,week,bearish,train,0.041672083110571516,2.8872125838884566,n/a,"train, top selection; recorded by engine/experiment_report.py"
