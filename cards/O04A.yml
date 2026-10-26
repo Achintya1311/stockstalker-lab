@@ -26,4 +26,4 @@ red_flags:
 - The ablation was chosen after seeing O04's and A07's train results; it counts as its own trial in ledger/trials.csv.
 - Ranking depends on which stocks are present that date (same caveat as O04).
 - Train split only until a frozen version exists.
-status: queued (train replay, day and week)
+status: "train: see research/diagnostics/o04_ablation.md (pre-declared rule checked 26 Oct; composite family closed)"

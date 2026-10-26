@@ -4559,3 +4559,21 @@ E2A scores, before the universe filter. Meets the provisional letter, so
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** O04A/O04B ablation diagnosis.
+
+## 2026-10-26T0219Z order-block lane: O04A and O04B ablations diagnosed (unit 2)
+
+**Mode:** A (build), unit 2 of 5. Lane `diagnose` (lease 1c6f04e). No holdout query was spent by this unit.
+
+**Hypothesis/task:** which ingredient made O04 worse than O01 alone? Both ablations landed (62f0bb0).
+
+**Result:** `research/diagnostics/o04_ablation.md`. Top-5 edge, O01 / O04 / O04A / O04B: day bull -0.47 /
+-1.16 / -1.08 / +0.23; day bear +0.66 / -0.65 / -0.37 / +0.33; week bull -2.21 / -2.95 / -2.88 / -1.68;
+week bear +0.18 / -0.44 / -0.03 / -1.12. Volume never named (O04A within 0.4 of O04). D01 named on both
+bullish cells (O04B +1.39, +1.27 over O04). Neither ablation beats O01 by a point; every directional move
+negative. Composite family closed.
+
+**Do order blocks help?** Not through a composite: removing D01 explains O04's extra loss, but nothing
+beats the bare order block by a point. Bearish leans no; bullish "not yet, but O05's weekly-bar structure
+is the first candidate worth a second look", and no order-block reading clears the cost test.
+
+**Next:** T06 and T13 diagnoses; validation answers when the batch lands.
