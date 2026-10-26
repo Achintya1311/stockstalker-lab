@@ -4488,3 +4488,21 @@ Top-5 overlap with other week-bearish readings 0-10%. Card, catalog and queue up
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** diagnose E2A_D01C_FB and the O04 ablations when they land; validation answers.
+
+## 2026-10-26T0023Z diagnose lane: T04 Connors RSI-2 (unit 3)
+
+**Mode:** A (build), unit 3 of 5. Lane `evaluate` (lease c4e6d68), diagnosis under the same lease. No
+holdout query was spent by this unit.
+
+**Hypothesis/task:** T04 is the strongest day-bullish train reading and had no diagnosis; the bullish
+fallback decision needs it.
+
+**Result:** `research/diagnostics/t04.md`. Day-bullish +3.37 (t 3.69, interval +1.62 to +5.13, positive all
+six years, StepM superior), but its gross open-to-close move is about zero, so -0.415% after the delivery
+cost. Day-bearish +2.32 (5/6 years), -0.012% after the futures cost. Neither side is P1-eligible. If AB
+allows edge-only bullish selection, T04 leads the day-bullish candidates. Card and catalog updated (row
+had been left at `queued`).
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T10 NR4/NR7 diagnosis (the other StepM day-bullish reading); refresh stale catalog statuses.

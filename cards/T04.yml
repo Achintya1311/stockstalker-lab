@@ -60,4 +60,4 @@ red_flags:
   - "Asymmetric and doubly selective by construction (needs both the trend filter AND the RSI(2) extreme to agree): expect a much lower coverage than T03's single-oscillator gate, let alone T01/T02's always-on spread - coverage (SPEC.md section 3) needs reporting alongside any accuracy figure once `engine/experiment_report.py` (state/engine-issues.md) can score this card's picks, same blocker every ported card since A01 has hit."
   - "The 10/90 thresholds and the 200-day window are the book's stated defaults, not tuned on NSE data - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
   - "RSI(2) is a much faster, noisier oscillator than T03's RSI(14): on a 200-day-SMA-filtered day-horizon test, pick overlap with T03 (SPEC.md section 6 gate 8) is worth checking directly once both have real numbers, since both ultimately read the same close series through the same Wilder-smoothing shape at different periods."
-status: queued
+status: "train: day-bullish +3.37 (6/6 years, StepM superior) and day-bearish +2.32; neither side has a positive directional move after costs. See research/diagnostics/t04.md"
