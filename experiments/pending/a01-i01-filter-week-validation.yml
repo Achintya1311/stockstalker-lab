@@ -1,0 +1,11 @@
+# Validation query for the go-live provisional rule (SPEC.md section 10): week-bearish.
+# Staged by scripts/provisional_candidates.py from the scored train experiment below; the queue
+# answers both sides through Thresholdout and logs them in ledger/holdout_queries.csv.
+id: a01-i01-filter-week-validation
+strategy: strategies.a01_i01_filter
+split: validation
+horizon: week
+train_experiment: a01-i01-filter-week
+dates:
+  start: 2021-01-01
+  end: 2023-12-31

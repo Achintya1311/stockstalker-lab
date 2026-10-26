@@ -5042,3 +5042,15 @@ cost test.
 
 **Next:** diagnose A01_I01F first (go-live relevant), then T16 and T19; draft on real data after tonight's
 dataset update; AB decisions pending (bullish fallback, same-stock conflict, E2A coverage vs fallback).
+
+## 2026-10-26 14:40 UTC, run 10 (evaluate lane, lease 1bae7ff)
+
+AB answered two questions (14:03Z). Same-stock conflict: drop from both, each side refills from its next-ranked
+stock (`picks/select.py` `pick_both_sides`, 9d5dd89). Bullish fallback: "keep v1 only if still winning". v1 is
+not winning on edge (24th/33 day, 27th/34 week), but SPEC 10 lets only an eligible reading replace it, and no
+bullish reading has a positive directional move after costs, so v1 stays as SPEC's fallback unless AB amends
+SPEC 10. No bullish validation queries spent; AB asked. A01_I01F landed: week-bearish +4.17 (+1.38 to +6.93),
+dir +0.15%, 5/5 years, pre-declared rule met, best week-bearish train edge; validation query queued
+(`research/diagnostics/a01_i01f.md`).
+
+**Next:** read the A01_I01F validation answer against A01 and T05C; diagnose T16, T19; AB on bullish SPEC 10.
