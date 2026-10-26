@@ -1,0 +1,13 @@
+{
+  "id": "e2a-d01c-fallback-day-validation",
+  "strategy": "strategies.e2a_d01c_fallback",
+  "horizon": "day",
+  "train_experiment": "e2a-d01c-fallback-day",
+  "selection": "top",
+  "released": {
+    "bearish": {
+      "train_edge": 0.059741994421959925,
+      "released_edge": 0.059741994421959925
+    }
+  }
+}
