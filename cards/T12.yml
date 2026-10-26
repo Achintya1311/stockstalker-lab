@@ -82,4 +82,4 @@ red_flags:
   - "Selective by construction (fires only on the bar of a fresh threshold cross): expect low coverage, same as T05's MACD crossing and T03's RSI thresholds - coverage (SPEC.md section 3) needs reporting alongside any accuracy figure once `engine/experiment_report.py` (state/engine-issues.md) can score this card's picks, the same blocker every ported card since A01 has hit."
   - "14/3/3 and the 20/80 thresholds are Lane's stated convention, not tuned on NSE data at all - a `tune`-lane candidate once a real train edge exists (SPEC.md section 8)."
   - "Both this card and T03's RSI thresholds read as oscillator mean-reversion signals from different indicators over similar-length windows (14-day Stochastic, 14-day RSI) - pick overlap (SPEC.md section 6 gate 8) is worth checking directly once both have real numbers."
-status: "train: edge -4.53 day-bull / -0.31 day-bear (day only); bull significantly wrong-way. Catalog status refreshed 26 Oct; no diagnosis file yet"
+status: "train: edge -4.53 day-bull / -0.31 day-bear (day only); bull significantly wrong-way. See research/diagnostics/t12.md"

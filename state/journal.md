@@ -4607,3 +4607,23 @@ basis points. Bullish no edge. Not eligible.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** validation answers when the batch lands.
+
+## 2026-10-26T0233Z diagnose lane: T12 Stochastic (unit 5)
+
+**Mode:** A (build), unit 5 of 5. Lane `diagnose` (lease 1c6f04e), removed in this commit. No holdout
+query was spent by this unit. The validation batch (32ed1dc) has not landed: its Replay run has been in
+progress since 00:49Z; the fallback's query (62758e4) is queued behind it.
+
+**Hypothesis/task:** T12 had no diagnosis; its bullish side was the lab's largest significant loss.
+
+**Result:** `research/diagnostics/t12.md`. Oversold up-cross (%K through 20) bullish -4.53 (t -5.23,
+interval -6.20 to -2.86, negative all six years); bearish down-cross no edge. A bearish flip would mirror
+to about +4.5 but, by the cost arithmetic, about 0.00% after costs, so it is not queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged: bearish leans no; bullish "not yet, but
+O05's weekly-bar structure is the first candidate worth a second look", and no order-block reading clears
+the cost test.
+
+**Next:** read `experiments/done/*-validation/holdout.json` when the batch lands and rank each bearish
+table by released validation edge; draft `config/live_source.json` inputs (due Fri 30 Oct 12:00 UTC);
+bullish fallback still awaits AB.
