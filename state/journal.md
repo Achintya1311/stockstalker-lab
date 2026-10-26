@@ -5119,3 +5119,9 @@ week bullish A05B +2.23 (O05 +1.90; T25 -7.02, A04 -2.49, I02 -2.55 failed out o
 T04 and A05B under AB's edge-only rule, provisional. 37 of 60 holdout queries used this week.
 Do order blocks help? O05 is the first order-block reading to hold its edge on validation (+1.90), second for
 week bullish; still a negative directional move, so not yet a usable yes.
+Unit 5: Q06 wick balance (Alpha158 KLOW2 - KUP2 on the last bar), day queued. Pre-declared: long upper wick
+(bearish) small positive, bullish within noise.
+
+**Next:** diagnose Q01, Q03, Q05, Q06 when the replay lands; after tonight's dataset update, push to `picks/`
+(or wait for a picks change) so the dry run exercises the new draft (T04 / E2A / A05B / A01) and drop-from-both
+on real data; commit `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.

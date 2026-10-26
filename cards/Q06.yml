@@ -1,0 +1,27 @@
+source_url: "https://github.com/microsoft/qlib"
+author: "Microsoft Qlib, Alpha158 feature set (MIT); feature list copied in third_party/qlib/loader.py"
+license: "MIT reference code; the feature is re-implemented, not copied (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: Alpha158's KLOW2 and KUP2, the last bar's lower and upper
+  shadows as shares of its range, read as "a long lower wick is bullish, a long
+  upper wick bearish". Alpha158 uses them as model inputs; `prior_claim`: no
+  stand-alone hit rate claimed.
+horizon: day
+rules_plain: >
+  On the adjusted last bar: lower = (min(open, close) - low) / range, upper =
+  (high - max(open, close)) / range; score = lower - upper. Positive bullish,
+  negative bearish; no range or equal wicks abstains. Only the last 2 rows are
+  read.
+default_params:
+  rows: 2
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "microsoft/qlib Alpha158 (MIT)"
+link: "https://github.com/microsoft/qlib"
+prior_claim: "Feature in Qlib's Alpha158 benchmark set; no stand-alone hit rate claimed"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): a long upper wick is often a large intraday range day, and A02 finds big up days reverse; a long lower wick is the mirror. Prediction: day-bearish (long upper wick) small positive, day-bullish within noise of zero. Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5). Alpha158 features are model inputs, not rules."
+  - "Top fives will be mostly hammer and shooting-star bars on any range size; a tiny-range bar with long wicks scores the same as a wide one."
+status: "queued"
