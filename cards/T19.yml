@@ -1,0 +1,31 @@
+source_url: ""
+author: "Joseph Granville (1963), Granville's New Key to Stock Market Profits"
+license: "book, not code; summarised and cited only (SPEC.md section 5)"
+published_on: "1963"
+claim_as_stated: >
+  `cards/catalog.csv`: price making a lower low while on-balance volume makes
+  a higher low is bullish, and the reverse bearish, over a 20-day swing
+  window. `prior_claim`: volume confirms or diverges from price. No published
+  hit rate is cited.
+horizon: week
+rules_plain: >
+  Over the last 40 sessions, split into a prior and a recent 20: OBV built
+  from 0 (adjusted close for up/down days, raw volume). Bullish if the recent
+  lowest close is below the prior lowest close while the recent lowest OBV
+  is above the prior lowest OBV; bearish if the recent highest close is above
+  the prior highest while the recent highest OBV is below the prior highest.
+  Otherwise abstain. Score = the OBV gap between the two extremes over the
+  40 sessions' total volume, signed by side.
+default_params:
+  swing: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Granville (1963)"
+link: ""
+prior_claim: "Volume confirms or diverges from price"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): a bullish divergence is a stock at a new 20-day low, the oversold group T03 and T12 found lagging. Prediction: both week sides within noise of zero. Helps if either side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5)."
+  - "Two fixed 20-session windows are the lab's reading of a '20-day swing window'; a swing-point detector would be a different card."
+  - "Volume is not split-adjusted; a split inside the 40 sessions distorts OBV."
+status: "queued"

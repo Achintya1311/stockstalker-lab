@@ -5026,3 +5026,19 @@ T09). Day and week replays queued.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** T19 OBV divergence.
+
+## 2026-10-26T1330Z port lane: T19 OBV divergence (unit 5)
+
+**Mode:** A (build), unit 5 of 5. Lease `diagnose` (ced0cf4), removed in this commit.
+
+**Hypothesis/task:** port T19: price/OBV divergence between the prior and recent 20 sessions.
+
+**Result:** `strategies/t19_obv_divergence.py`, audit, 8 tests (score checked against a hand OBV), `cards/T19.yml`.
+Pre-declared prediction: both sides within noise. Week replay queued.
+
+**Do order blocks help?** Not tested here. Running answer unchanged: bearish leans no; bullish "not yet, but
+O05's weekly-bar structure is the first candidate worth a second look", and no order-block reading clears the
+cost test.
+
+**Next:** diagnose A01_I01F first (go-live relevant), then T16 and T19; draft on real data after tonight's
+dataset update; AB decisions pending (bullish fallback, same-stock conflict, E2A coverage vs fallback).
