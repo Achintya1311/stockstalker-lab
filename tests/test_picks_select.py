@@ -66,3 +66,63 @@ def test_pick_table_never_sees_the_session_date_itself():
 
     picks = pick_table(dataset, champion_v1, "champion_v1@v1", session=dates[-1], side=1, asof=dates[-2], n=5)
     assert picks == []
+
+
+class _Fixed:
+    """A stand-in strategy with fixed scores (the dataset is only used for dates and the universe)."""
+
+    def __init__(self, scores: dict):
+        self._scores = pd.Series(scores, dtype=float)
+
+    def score(self, history):
+        return self._scores
+
+    def rules_fired(self, history, symbol):
+        return f"fixed {self._scores[symbol]:+.2f}"
+
+
+def _universe(symbols):
+    dates = trading_dates(25)
+    return make_dataset({s: 0.0 for s in symbols}, dates), dates
+
+
+def test_select_side_skips_excluded_and_refills():
+    scores = pd.Series({"AAA": 0.9, "BBB": 0.8, "CCC": 0.7})
+    picked = select_side(scores, side=1, eligible={"AAA", "BBB", "CCC"}, n=2, exclude=frozenset({"AAA"}))
+    assert list(picked.index) == ["BBB", "CCC"]
+
+
+def test_a_stock_in_both_tables_is_dropped_from_both_and_refilled():
+    from picks.select import pick_both_sides
+
+    dataset, dates = _universe(["AAA", "BBB", "CCC", "DDD", "EEE"])
+    bull = _Fixed({"AAA": 0.9, "BBB": 0.8, "CCC": 0.1})
+    bear = _Fixed({"AAA": -0.9, "DDD": -0.8, "EEE": -0.1})
+    bullish, bearish, dropped = pick_both_sides(dataset, (bull, "b@v1"), (bear, "r@v1"), dates[-1], dates[-2], n=2)
+    assert dropped == ["AAA"]
+    assert [p["symbol"] for p in bullish] == ["BBB", "CCC"]
+    assert [p["symbol"] for p in bearish] == ["DDD", "EEE"]
+
+
+def test_refill_that_creates_a_new_shared_stock_is_also_dropped():
+    from picks.select import pick_both_sides
+
+    dataset, dates = _universe(["AAA", "BBB", "CCC", "DDD", "EEE"])
+    # Dropping AAA brings CCC into both top-2 lists; CCC must go too.
+    bull = _Fixed({"AAA": 0.9, "BBB": 0.8, "CCC": 0.7, "EEE": 0.1})
+    bear = _Fixed({"AAA": -0.9, "DDD": -0.8, "CCC": -0.7})
+    bullish, bearish, dropped = pick_both_sides(dataset, (bull, "b@v1"), (bear, "r@v1"), dates[-1], dates[-2], n=2)
+    assert dropped == ["AAA", "CCC"]
+    assert {p["symbol"] for p in bullish} & {p["symbol"] for p in bearish} == set()
+    assert [p["symbol"] for p in bullish] == ["BBB", "EEE"]
+    assert [p["symbol"] for p in bearish] == ["DDD"]
+
+
+def test_no_shared_stock_means_nothing_dropped():
+    from picks.select import pick_both_sides
+
+    dataset, dates = _universe(["AAA", "BBB"])
+    same = _Fixed({"AAA": 0.5, "BBB": -0.5})
+    bullish, bearish, dropped = pick_both_sides(dataset, (same, "s@v1"), (same, "s@v1"), dates[-1], dates[-2], n=5)
+    assert dropped == []
+    assert [p["symbol"] for p in bullish] == ["AAA"] and [p["symbol"] for p in bearish] == ["BBB"]

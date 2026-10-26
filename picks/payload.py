@@ -7,7 +7,7 @@ importing back the other way would be circular).
 
 from __future__ import annotations
 
-from picks.select import pick_table
+from picks.select import pick_both_sides
 from picks.source import resolve_strategy
 
 # SPEC.md section 10, word for word.
@@ -41,14 +41,17 @@ def disclaimer_for(labels: set[str]) -> str:
 def build_tables(dataset, source: dict, horizon: str, session: str, asof: str) -> tuple[dict, set[str]]:
     """`{"bullish": [...], "bearish": [...]}` for `horizon`, plus the set of
     labels (`{"provisional"}`, `{"gated"}`, or both) the two sides carry.
+    A stock that would be in both tables is dropped from both and each side
+    refills from its next-ranked stock (AB, 26 Oct 2026; `picks.select.pick_both_sides`).
     """
     bullish_cfg = source["tables"][f"{horizon}_bullish"]
     bearish_cfg = source["tables"][f"{horizon}_bearish"]
-    bullish = pick_table(
-        dataset, resolve_strategy(bullish_cfg["strategy"]), bullish_cfg["strategy"], session, 1, asof
-    )
-    bearish = pick_table(
-        dataset, resolve_strategy(bearish_cfg["strategy"]), bearish_cfg["strategy"], session, -1, asof
+    bullish, bearish, _dropped = pick_both_sides(
+        dataset,
+        (resolve_strategy(bullish_cfg["strategy"]), bullish_cfg["strategy"]),
+        (resolve_strategy(bearish_cfg["strategy"]), bearish_cfg["strategy"]),
+        session,
+        asof,
     )
     return {"bullish": bullish, "bearish": bearish}, {bullish_cfg["label"], bearish_cfg["label"]}
 

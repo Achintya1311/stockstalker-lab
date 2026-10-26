@@ -36,7 +36,9 @@ def eligible_symbols(dataset: pd.DataFrame, asof: str) -> set[str]:
     return set(universe.loc[(universe["date"] == asof) & universe["in_universe"], "symbol"])
 
 
-def select_side(scores: pd.Series, side: int, eligible: set[str], n: int) -> pd.Series:
+def select_side(
+    scores: pd.Series, side: int, eligible: set[str], n: int, exclude: frozenset[str] = frozenset()
+) -> pd.Series:
     """Up to `n` eligible symbols on `side`, ranked by score magnitude.
 
     `side` = +1 keeps positive (bullish) scores, -1 keeps negative
@@ -45,13 +47,20 @@ def select_side(scores: pd.Series, side: int, eligible: set[str], n: int) -> pd.
     `engine.selftest`). Abstaining symbols (dropped from `scores` already,
     per the strategy contract) and symbols outside `eligible` never appear.
     """
-    scores = scores[scores.index.isin(eligible)]
+    scores = scores[scores.index.isin(eligible) & ~scores.index.isin(exclude)]
     scores = scores[scores > 0] if side > 0 else scores[scores < 0]
     return scores.reindex(scores.abs().sort_values(ascending=False).index).head(n)
 
 
 def pick_table(
-    dataset: pd.DataFrame, strategy, strategy_id: str, session: str, side: int, asof: str, n: int | None = None
+    dataset: pd.DataFrame,
+    strategy,
+    strategy_id: str,
+    session: str,
+    side: int,
+    asof: str,
+    n: int | None = None,
+    exclude: frozenset[str] = frozenset(),
 ) -> list[dict]:
     """One table's picks for `session`: `[{"symbol", "strategy", "reasoning", "chart"?}, ...]`.
 
@@ -62,12 +71,17 @@ def pick_table(
     `strategy_id` (e.g. "champion_v1@v1") is written into each pick as-is -
     bullish and bearish sides of the same table can come from different
     strategies (`config/live_source.json` picks them independently).
+    Symbols in `exclude` are skipped and the next-ranked symbol takes the
+    place (see `pick_both_sides`).
     """
     n = picks_per_table() if n is None else n
     history = truncate(dataset, session)
     eligible = eligible_symbols(dataset, asof)
     scores = strategy.score(history)
-    chosen = select_side(scores, side, eligible, n)
+    return _picks(history, strategy, strategy_id, select_side(scores, side, eligible, n, exclude))
+
+
+def _picks(history: pd.DataFrame, strategy, strategy_id: str, chosen: pd.Series) -> list[dict]:
     picks = []
     for symbol in chosen.index:
         pick = {"symbol": symbol, "strategy": strategy_id, "reasoning": strategy.rules_fired(history, symbol)}
@@ -76,3 +90,43 @@ def pick_table(
             pick["chart"] = chart
         picks.append(pick)
     return picks
+
+
+def pick_both_sides(
+    dataset: pd.DataFrame,
+    bullish: tuple[object, str],
+    bearish: tuple[object, str],
+    session: str,
+    asof: str,
+    n: int | None = None,
+) -> tuple[list[dict], list[dict], list[str]]:
+    """Bullish and bearish tables for one horizon, with no stock in both.
+
+    AB's rule (26 Oct 2026, `state/queue.md`): a stock that lands in both
+    tables is dropped from both, since one stock cannot sensibly be called
+    both ways. Each side's next-ranked stock takes the freed place. Refilling
+    can bring in a stock that is also on the other side's list, so this
+    repeats until the two tables share nothing. `bullish` and `bearish` are
+    `(strategy, strategy_id)`. Returns the two pick lists and the sorted
+    dropped symbols.
+    """
+    n = picks_per_table() if n is None else n
+    history = truncate(dataset, session)
+    eligible = eligible_symbols(dataset, asof)
+    (bull_strategy, bull_id), (bear_strategy, bear_id) = bullish, bearish
+    bull_scores = bull_strategy.score(history)
+    bear_scores = bear_strategy.score(history)
+
+    dropped: set[str] = set()
+    while True:
+        bull = select_side(bull_scores, 1, eligible, n, frozenset(dropped))
+        bear = select_side(bear_scores, -1, eligible, n, frozenset(dropped))
+        shared = set(bull.index) & set(bear.index)
+        if not shared:
+            break
+        dropped |= shared
+    return (
+        _picks(history, bull_strategy, bull_id, bull),
+        _picks(history, bear_strategy, bear_id, bear),
+        sorted(dropped),
+    )
