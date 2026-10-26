@@ -29,4 +29,4 @@ red_flags:
   - "No claim is assumed true (SPEC.md section 5). Wilder used SAR as an exit, not as a ranking."
   - "The recursion starts on the first of the 120 rows read; a stock with no reversal in that window keeps a seed-dependent SAR."
   - "Likely to overlap T09 (supertrend, also a trailing stop); check in diagnose."
-status: "queued"
+status: "diagnosed: rule not met (research/diagnostics/t16.md)"

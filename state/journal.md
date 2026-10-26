@@ -5054,3 +5054,10 @@ dir +0.15%, 5/5 years, pre-declared rule met, best week-bearish train edge; vali
 (`research/diagnostics/a01_i01f.md`).
 
 **Next:** read the A01_I01F validation answer against A01 and T05C; diagnose T16, T19; AB on bullish SPEC 10.
+
+## 2026-10-26 14:50 UTC, run 11 (diagnose lane, lease 8dbb92b), units 1-2
+
+T16 Parabolic SAR: day-bullish -1.88 (0/6 years), week-bullish -3.99, bearish sides ~0; pre-declared prediction
+held, rule not met; 38% of its bullish top five are T09's. T19 OBV divergence week: bearish +1.79 (5/6 years) but
+dir -0.13%, bullish -1.20; rule not met; under 5% overlap with A01/A01_I01F, so a possible second-vote filter.
+`research/diagnostics/t16.md`, `t19.md`.

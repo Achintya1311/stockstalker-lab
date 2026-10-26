@@ -28,4 +28,4 @@ red_flags:
   - "No claim is assumed true (SPEC.md section 5)."
   - "Two fixed 20-session windows are the lab's reading of a '20-day swing window'; a swing-point detector would be a different card."
   - "Volume is not split-adjusted; a split inside the 40 sessions distorts OBV."
-status: "queued"
+status: "diagnosed: rule not met (research/diagnostics/t19.md)"
