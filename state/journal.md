@@ -4879,3 +4879,20 @@ cost test.
 
 **Next:** diagnose I02, I01, T23, T21, T25 when their results land; draft on real data after tonight's dataset
 update; AB decisions pending (bullish fallback, same-stock conflict, E2A coverage vs fallback).
+
+## 2026-10-26T1025Z diagnose lane: I02 low-volatility level (unit 1)
+
+**Mode:** A (build), unit 1 of 5. Lane `diagnose` (lease 1c68bea).
+
+**Hypothesis/task:** I02's week replay landed (a8c3719). Pre-declared: helps if a side's top-5 edge is at least
++2.0, 4 positive years, positive directional move after costs.
+
+**Result:** `research/diagnostics/i02.md`. Bullish (calmest five) +1.85 (t 1.17, 3/5 years, dir -0.33%);
+bearish (most volatile five) +1.58 (t 1.20, 4/5, dir -0.02%: gross +0.23% against the 0.25% futures cost).
+Whole universe +0.87 / +1.00, t about 2.4. Rule not met; not eligible. 2015 has no picks (253-row minimum,
+data starts 2015-01-01), so I01, T23 and T21 will also cover 2016-2020 only. Next idea: I02 as a volatility
+filter on A01 or T05C week-bearish, as a new pre-declared card.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** I01, T23, T21, T25 when the Replay run in progress (since 08:41Z) lands.

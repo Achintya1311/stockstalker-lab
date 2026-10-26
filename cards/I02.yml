@@ -35,4 +35,4 @@ red_flags:
   - "The score depends on which symbols are present on a date (median centre). The top five per side do not, as long as at least five symbols sit on each side; the `all` selection does. The audit checks the per-symbol sigma and the ordering instead of full invariance."
   - "Total volatility, not the index's exact method (NSE's index document gives selection and weighting details this card does not copy, such as eligibility and capping); it is the catalog's reading."
   - "Low-volatility effects are usually reported over months; a one-week horizon may be too short for the calm side to clear the delivery cost."
-status: "queued"
+status: "train: edge 1.85 week-bull / 1.58 week-bear (week only, 2016-2020); dir after costs negative both sides; pre-declared rule not met. See research/diagnostics/i02.md"
