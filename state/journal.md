@@ -4927,3 +4927,22 @@ days). Day replay queued.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** diagnose the batch if it lands, else port T16.
+
+## 2026-10-26T1105Z diagnose lane: I01 momentum score and T23 RS rating (unit 4)
+
+**Mode:** A (build), unit 4 of 5. Lane `diagnose` (lease 1c68bea, renewed).
+
+**Hypothesis/task:** Replay 77dd59a landed I01, T23, T21 and T25. Diagnose the two momentum cards together
+(58% of I01's bullish top five are T23's).
+
+**Result:** `research/diagnostics/i01.md`: bullish +1.23 (4/5 years), bearish +2.04 (5/5 years, interval -0.35
+to +4.42) but gross bearish move about +0.08% against the 0.25% cost; rule not met. Prediction (bullish at or
+below zero) wrong. `research/diagnostics/t23.md`: bullish -0.69, bearish +1.42; rule not met; prediction right
+in sign, weak. Same returns, with or without division by volatility: only the volatility-adjusted top five keep
+a positive edge. Whole-universe persistence about +1 point both sides for both, as T02 and I02.
+Joint test (f7e7862): with 35 week-bearish trials, StepM no longer names T05C individually superior (it did
+at 31); SPA p 0.111.
+
+**Do order blocks help?** Not tested here. Running answer unchanged.
+
+**Next:** T21 and T25.

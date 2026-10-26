@@ -30,4 +30,4 @@ red_flags:
   - "No claim is assumed true (SPEC.md section 5). O'Neil's use is as one filter among several (CANSLIM), held for months; this card tests the rank alone at one week."
   - "The 40/20/20/20 weights are a practitioner reconstruction, not the published rating."
   - "Rank scores depend on which symbols are present on a date; the audit checks each symbol's own reading and the ordering instead of full invariance. Expect heavy overlap with I01 and A03; check it in diagnose."
-status: "queued"
+status: "train: edge -0.69 week-bull / 1.42 week-bear (week only, 2016-2020); dir after costs negative both sides; pre-declared rule not met. See research/diagnostics/t23.md"

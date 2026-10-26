@@ -36,4 +36,4 @@ red_flags:
   - "Windows, volatility measure and equal weights are the lab's reading, not NSE's published method; a mismatch would make this a test of the catalog's summary, not of the index."
   - "Cross-sectional z-scores depend on which symbols are present on a date; the audit checks each symbol's own ratios and the ordering instead of full invariance."
   - "Likely to overlap A03 (12-1 momentum) heavily; check top-5 overlap in diagnose before reading it as new evidence."
-status: "queued"
+status: "train: edge 1.23 week-bull / 2.04 week-bear (week only, 2016-2020, 5/5 years bearish); dir after costs negative both sides; pre-declared rule not met. See research/diagnostics/i01.md"
