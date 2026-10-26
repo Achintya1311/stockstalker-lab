@@ -1,0 +1,12 @@
+# Validation query for the bullish tables (AB's decision, 26 Oct 2026): week-bullish.
+# AB chose to replace champion v1 on train edge alone, since no bullish reading has a
+# positive directional move after costs (state/queue.md). The queue answers both sides
+# through Thresholdout and logs them in ledger/holdout_queries.csv; only bullish is used.
+id: t25-heikin-ashi-week-validation
+strategy: strategies.t25_heikin_ashi
+split: validation
+horizon: week
+train_experiment: t25-heikin-ashi-week
+dates:
+  start: 2021-01-01
+  end: 2023-12-31

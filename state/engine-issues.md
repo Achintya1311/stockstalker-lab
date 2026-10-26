@@ -755,3 +755,12 @@ C04 (expiry-week) was already ported separately before this update (see
 `state/queue.md`'s build log) using the dataset's own FUTSTK expiry field,
 not a holiday calendar - the "may be more tractable" note above was
 borne out, and nothing about C04 needed revisiting here.
+
+## SPEC 10 wording for the bullish tables (AB's decision, 26 Oct 2026) - for a supervised session
+
+AB chose (decision card, 26 Oct 15:38Z) to replace champion v1 on the bullish tables by train edge alone,
+because no bullish reading has a positive train directional move after costs. Requested edit to SPEC.md
+section 10, "Going live without a gated strategy", first bullet: after "for that table's horizon and side.",
+add: "For the two bullish tables only (Achintya's decision, 26 Oct 2026), the directional-move condition is
+dropped: at least 500 train picks and a positive train edge suffice." The lab applies this from 26 Oct
+(`state/queue.md`); the bearish tables keep the full rule.

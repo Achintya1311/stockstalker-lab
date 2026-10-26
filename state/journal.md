@@ -5075,3 +5075,12 @@ A01_I01F validation (queued ed494ac) has not answered yet; Replay still running 
 
 **Next:** read the A01_I01F validation answer against A01 (+2.48 train) and T05C; diagnose T18, T22, T24 when
 they land; AB's call on bullish SPEC 10 is pending (decision card).
+
+## 2026-10-26 15:50 UTC, run 12 (evaluate lane, lease a95f90c)
+
+AB chose "swap on hit rate" (15:38Z): bullish tables drop SPEC 10's directional-move test (bearish keep it);
+SPEC wording requested in engine-issues. Queued 8 bullish validation queries (16 holdout queries, about 23 of 60
+left this week). A01_I01F validation released +4.17, below A01's +4.73, so week-bearish stays A01.
+
+**Next:** when the bullish answers land, pick the highest released edge per bullish table, register it in
+`picks/source.py`, update the draft; diagnose T18, T22, T24; live_source.json by Fri 30 Oct 12:00 UTC.

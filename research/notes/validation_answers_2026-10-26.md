@@ -84,3 +84,12 @@ question matters before Friday.
 No order-block reading was eligible, so none was asked. Running answer unchanged: bearish leans no; bullish
 "not yet, but O05's weekly-bar structure is the first candidate worth a second look", and no order-block
 reading clears the cost test.
+
+## 26 Oct 15:18Z: A01_I01F (week-bearish)
+
+Released +4.17 (train value released). A01's released +4.73 stays highest, so week-bearish stays
+`a01_weekly_reversal@v1`.
+
+## 26 Oct 15:45Z: bullish batch queued (AB's edge-only decision)
+
+Day T04, T10-NR7, T25; week T25, A05B, A04, O05, I02 (16 queries). Answers go here when they land.
