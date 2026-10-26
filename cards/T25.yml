@@ -1,0 +1,33 @@
+source_url: ""
+author: "Japanese candlestick tradition (no single named source; `cards/catalog.csv`'s own summary)"
+license: "trading convention, not code or a paper; summarised only (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: consecutive Heikin-Ashi candles with no lower (upper)
+  wick are bullish (bearish), over 3 candles. `prior_claim`: a smoothed
+  trend reading. No published hit rate is cited.
+horizon: both
+rules_plain: >
+  Heikin-Ashi candles on the adjusted OHLC: ha_close = (open + high + low +
+  close) / 4, ha_open = mean of the previous ha_open and ha_close, ha_high
+  and ha_low the extremes of the bar and those two. Bullish if the last 3
+  candles are green with ha_low equal to ha_open (no lower wick); bearish if
+  all red with ha_high equal to ha_open (no upper wick); otherwise abstain.
+  Score = the mean Heikin-Ashi body (|ha_close - ha_open| / ha_close) over
+  the 3 candles, signed by side. Only the trailing 63 rows are read; the
+  recursion is seeded on the first of them, whose weight is below 2^-60 by
+  the end.
+default_params:
+  run: 3
+  warmup: 60
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Japanese candlestick tradition"
+link: ""
+prior_claim: "Smoothed trend reading"
+red_flags:
+  - "Pre-declared before the replay (26 Oct): a wickless green run is a stock that has risen three sessions in a row, the short-horizon extension the lab keeps finding wrong-way (T09 supertrend, T01 day-bullish -1.46). Prediction: day-bullish top-5 edge negative, day-bearish slightly positive. Helps if any side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs."
+  - "No claim is assumed true (SPEC.md section 5)."
+  - "Heikin-Ashi is a charting display; the catalog's three-candle rule is one common practitioner reading, not a published test."
+  - "Week horizon reads daily candles at the week's pick date, not weekly candles; a weekly-bar version would be a new card."
+status: "queued"

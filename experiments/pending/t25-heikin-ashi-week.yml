@@ -1,0 +1,9 @@
+# T25 (week horizon): Heikin-Ashi wickless three-candle run, train-split replay
+# (port lane, state/queue.md). See cards/T25.yml and strategies/t25_heikin_ashi.py.
+id: t25-heikin-ashi-week
+strategy: strategies.t25_heikin_ashi
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

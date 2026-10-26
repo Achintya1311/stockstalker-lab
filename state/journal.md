@@ -4860,3 +4860,22 @@ breakout is -5.09). Week replay queued.
 **Do order blocks help?** Not tested here. Running answer unchanged.
 
 **Next:** one more port (T24 or T25), then release the lease.
+
+## 2026-10-26T0910Z port lane: T25 Heikin-Ashi trend (unit 5)
+
+**Mode:** A (build), unit 5 of 5. Lane `port` (lease 9a77cf0), removed in this commit.
+
+**Hypothesis/task:** port T25: the last 3 Heikin-Ashi candles green with no lower wick (bullish) or red with no
+upper wick (bearish); conviction = mean HA body. T24 (pivots) was skipped: its rule needs the pick day's
+open, which a day pick made at the open cannot see.
+
+**Result:** `strategies/t25_heikin_ashi.py` (trailing 63 rows, seed weight below 2^-60), audit, 11 tests,
+`cards/T25.yml`. Pre-declared prediction: day-bullish top five negative. Day and week replays queued.
+Replays: 8162391 (I02) in progress; the pending run will take I01, T23, T21 and T25.
+
+**Do order blocks help?** Not tested here. Running answer unchanged: bearish leans no; bullish "not yet, but
+O05's weekly-bar structure is the first candidate worth a second look", and no order-block reading clears the
+cost test.
+
+**Next:** diagnose I02, I01, T23, T21, T25 when their results land; draft on real data after tonight's dataset
+update; AB decisions pending (bullish fallback, same-stock conflict, E2A coverage vs fallback).
