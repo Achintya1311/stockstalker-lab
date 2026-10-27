@@ -1,0 +1,9 @@
+{
+  "id": "f06-trend-acceleration-week",
+  "strategy": "strategies.f06_trend_acceleration",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 63547,
+  "n_dates": 309,
+  "pick_log_sha256": "94c38437d4852b55dd1e63593b02cc4fe221ba47b95f517ac7ae7327686997d3"
+}
