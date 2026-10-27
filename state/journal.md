@@ -5201,3 +5201,8 @@ Unit 1 (port): Q04 timing of the range extremes (Alpha158 IMXD, 60 sessions, wee
 (pre-declared): its top bullish picks are fresh 60-session breakouts, the T08-55 stocks, so week bullish is
 wrong-way (about -2 to -5) and week bearish near zero; helps at +2.0 with interval above 0, 4 of 6 years and a
 positive directional move. Any flip needs an overlap check against A01 and T08-55 first.
+Unit 2 (port): Q06R (Q06's wick balance kept only on bars at least as wide as the 20-session median range) ported
+and queued for day (`cards/Q06R.yml`, `strategies/q06r_wide_bar_wick.py`, audit, 7 tests; suite 1015 passed).
+Hypothesis (pre-declared): bullish changes little (+2.4 to +3.4); wider bars carry bigger moves, so bearish's gross
+move rises toward the futures cost. Helps: bearish under the full SPEC 10 rule; bullish only at +3.1 or more with
+interval above 0 and 4 of 6 years, and only then a validation query against T04's released +4.36.

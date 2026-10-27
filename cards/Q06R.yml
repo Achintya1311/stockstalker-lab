@@ -1,0 +1,27 @@
+source_url: "https://github.com/microsoft/qlib"
+author: "Lab refinement of Q06 (Alpha158 KLOW2 - KUP2, MIT); see research/diagnostics/q06.md"
+license: "MIT reference code; the feature is re-implemented, not copied (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `research/diagnostics/q06.md`: Q06's wick balance treats a tiny-range bar the same
+  as a wide one. A long lower wick on a wide bar (a large intraday dip bought back)
+  should carry more information than the same shape on a quiet bar.
+horizon: day
+rules_plain: >
+  Q06's score (lower wick share minus upper wick share of the last adjusted bar),
+  kept only when the last bar's range (high - low) is at least the median range of
+  the 20 sessions before it; narrower bars abstain. Both day tables. Only the last
+  21 rows are read.
+default_params:
+  lookback: 20
+  min_range_ratio: 1.0
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Lab result: research/diagnostics/q06.md"
+link: ""
+prior_claim: "Untested here"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): Q06 train day bullish +2.58 (6/6, dir -0.42%), day bearish +1.67 (5/6, dir -0.05%, gross about +0.20% against the 0.25% futures cost). Prediction: the filter roughly halves the candidates but the top five already lean to wide bars, so day bullish moves only a little (about +2.4 to +3.4), and wider bars carry bigger moves, so day bearish's gross move rises (edge about +1.5 to +2.5, directional move near zero). Helps, bearish (full SPEC 10 rule): top-5 edge at least +2.0, interval above 0, 4 of 6 positive years and a positive directional move after costs. Helps, bullish (AB's edge-only rule): top-5 edge at least +3.1 (Q06 + 0.5) with the interval above 0 and 4 of 6 years; only then does it get a validation query against T04's released +4.36."
+  - "The filter and its threshold were chosen after seeing Q06's result; Q06R is its own trial and Q06 already is one."
+  - "Median of the 20 prior ranges, not including the last bar, so a single huge bar cannot raise its own bar."
+status: "queued"
