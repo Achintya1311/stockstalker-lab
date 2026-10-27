@@ -5294,3 +5294,7 @@ Unit 1 (diagnose): Q07 diagnosed (`research/diagnostics/q07.md`). Hypothesis (pr
 the reversal question again. All four predictions held: day bearish +2.66 (interval +1.55 to +3.79, 6/6), week
 bearish +2.16 (6/6, interval includes 0), bullish sides noise. Not eligible: day bearish's directional move is
 -0.02% after the futures cost. Overlaps F02, T06, T13 and A02 (17-25%); week bearish is 45% A01.
+Unit 2 (diagnose): F02 diagnosed (`research/diagnostics/f02.md`). Hypothesis (pre-declared): A02 with a volume
+sign, day bearish +2 to +4 with dir near zero, bullish -1 to +1. Held: bearish +3.26 (interval +2.15 to +4.33,
+6/6, dir +0.03%), rule met; bullish +0.46. 45% of its bearish picks are A02's and 19% E2A's. Eligible for day
+bearish but far below E2A (released +6.72), so no query is spent.
