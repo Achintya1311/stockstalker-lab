@@ -5251,3 +5251,13 @@ Unit 4 (diagnose): Q04 diagnosed (`research/diagnostics/q04.md`). Hypothesis (pr
 highs behave like T08-55 breakouts, so week bullish wrong-way (-2 to -5) and bearish near zero. Missed: bullish
 -0.42 (noise, only 30% overlap with T08-55), bearish +1.87 (5/6, dir -0.20%). Not eligible. Five slow-drift
 week-bearish readings (Q02, Q03, Q04, Q05, I01) now share one shape that never pays the futures cost.
+Unit 5 (diagnose): A10 diagnosed (`research/diagnostics/a10.md`). Hypothesis (pre-declared): a filtered subset of
+A09's bearish picks, so day bullish wrong-way (-1 to -3). Held, stronger: -5.41 (interval -8.80 to -1.99, 0/6
+years) on 38% of dates. On NSE a strong-volume gap up through resistance fades; it does not go. 57% overlap with
+A09 bearish; flipped it would be about +0.15% after the futures cost, but the flip was ruled out before the replay
+and is not queued. Leases removed.
+
+**Next:** read the T04_Q06_FB validation answer (replaces T04 only if released > +4.36; otherwise put the
+edge-versus-coverage choice to AB); diagnose F01 when it lands (its Replay has run for over 2 hours); port Q07 and
+F02; pre-declare E2A with a Q06R fallback for day bearish. Draft unchanged: T04 / E2A / A05B / A01. 19 holdout
+queries left this ISO week. `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
