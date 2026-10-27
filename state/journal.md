@@ -5305,3 +5305,10 @@ accelerating rise). Hypothesis (pre-declared): mostly A02's reversal, day bearis
 Unit 4 (port): F04 open-volume correlation (Alpha#6) ported and queued for day (`cards/F04.yml`,
 `strategies/f04_open_volume_corr.py`, audit, 7 tests). Hypothesis (pre-declared): with no move size in the score,
 both day sides within ±1.5 of zero and directional moves negative.
+Unit 5 (port): F05 change in close location (Alpha#53) ported and queued for day (`cards/F05.yml`,
+`strategies/f05_close_location_change.py`, audit, 7 tests; suite 1063 passed). Hypothesis (pre-declared): the
+paper's unbounded denominator turns it into a near-low detector; both sides within ±1.5 of zero. Leases removed.
+
+**Next:** diagnose F03, F04 and F05 when they land; port F06 (rescale its 0.25 threshold to returns, pre-declared)
+and F07. Draft unchanged: T04 / E2A / A05B / A01. 19 holdout queries left this ISO week. `config/live_source.json`
+from the draft on Fri 30 Oct before 12:00 UTC.

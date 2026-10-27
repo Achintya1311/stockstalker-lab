@@ -1,0 +1,10 @@
+# F05 (day horizon): 101 Formulaic Alphas, Alpha#53 minus the 9-session change in close
+# location, train-split replay (port lane, state/queue.md). See cards/F05.yml and
+# strategies/f05_close_location_change.py.
+id: f05-close-location-change-day
+strategy: strategies.f05_close_location_change
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

@@ -1,0 +1,27 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#53"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#53 = -1 x delta(((close - low) - (high - close)) /
+  (close - low), 9), a production WorldQuant alpha: a close that has moved down its
+  bar over 9 sessions is bullish, up its bar bearish. The paper reports no stand-alone
+  hit rate.
+horizon: day
+rules_plain: >
+  On the adjusted bars: loc = ((close - low) - (high - close)) / (close - low); score =
+  minus (loc today - loc 9 sessions ago). A close exactly at its low on either bar, or
+  no change, abstains. The paper's denominator (close - low) is kept, so loc is at most
+  1 and unbounded below. Only the last 10 rows are read.
+default_params:
+  lag: 9
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): because loc is unbounded below, the bullish top five are mostly stocks that closed within a hair of today's low, and the bearish top five stocks that closed near their low 9 sessions ago. F01 found a close near the low (bearish side) noise in the top five (+0.17), and Q06 found a long upper wick bearish. Prediction: both day sides within ±1.5 of zero, directional moves negative. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years."
+  - "The unbounded denominator makes the score a near-low detector rather than a smooth location change; a bounded form (divide by the range) would be a different trial."
+  - "Alpha#53 was designed for a cross-sectional long-short book on US stocks, not a top-5 table on NSE F&O stocks."
+status: "queued"
