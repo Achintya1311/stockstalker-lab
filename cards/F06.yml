@@ -1,0 +1,29 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#46"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#46 compares the last 10 sessions' average daily
+  change with the previous 10 sessions'. A trend that speeds up past a threshold is
+  faded (-1), one that slows down is read as turning (+1), and in between the last
+  day's change reverses. A production WorldQuant alpha; no stand-alone hit rate.
+horizon: both
+rules_plain: >
+  On the log adjusted close: x = (mean daily log return of the last 10 sessions) -
+  (mean of the 10 before). x above 0.00625 (the paper's 0.25 dollars on a $40 stock):
+  score -x, bearish. x below 0: score -x, bullish. Otherwise score = minus today's log
+  return. Zero abstains. The paper's constant +-1 is replaced by +-|x| so top fives are
+  not alphabetical ties. Only the last 21 rows are read.
+default_params:
+  half: 10
+  threshold: 0.00625
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): the top bearish picks are the sharpest recent spurts after a flat or falling stretch, the stocks A01 (week) and A02 (day) fade; the top bullish picks are sharp recent falls after a rise, which the lab's bullish reversals have not rewarded (A02 day bullish -1.10, A01 week bullish about 0). Prediction: day bearish +1.5 to +3.5, week bearish +1 to +3, both bullish sides -1.5 to +1. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years. Check overlap with A01, A02 and Q07 first."
+  - "The threshold rescale and the |x| sizing are the lab's choices, fixed before the replay; both are needed to use the formula on a top-5 table of NSE stocks."
+  - "Alpha#46 was designed for a cross-sectional long-short book on US stocks."
+status: "queued"

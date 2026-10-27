@@ -5325,3 +5325,7 @@ price-volume correlation readings (Q01, Q01C, Q02, F04) are closed for go-live.
 Unit 3 (diagnose): F05 diagnosed (`research/diagnostics/f05.md`). Hypothesis (pre-declared): the unbounded
 denominator makes it a near-low detector, both sides within ±1.5. Held: -0.66 / +0.23. `all` selection beats `top`
 on both sides (+0.51 / +0.74), so the ranking is what fails. Not eligible.
+Unit 4 (port): F06 trend acceleration (Alpha#46) ported, day and week queued (`cards/F06.yml`,
+`strategies/f06_trend_acceleration.py`, audit, 8 tests). Two pre-declared departures: threshold 0.25 dollars
+rescaled to 0.00625 in log returns, and the constant +-1 sized by |x| to avoid alphabetical ties. Hypothesis: the
+bearish side is A01/A02's fade of spurts (day +1.5 to +3.5, week +1 to +3); bullish sides -1.5 to +1.
