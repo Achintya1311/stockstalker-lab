@@ -1,0 +1,9 @@
+{
+  "id": "f07-high-push-fade-day",
+  "strategy": "strategies.f07_high_push_fade",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 152915,
+  "n_dates": 1466,
+  "pick_log_sha256": "671cbccb179e5487a572f63b3d76b1c0c513aa4b437ba6e8bdf89fcca994c154"
+}
