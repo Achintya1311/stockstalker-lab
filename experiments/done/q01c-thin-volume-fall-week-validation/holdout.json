@@ -1,0 +1,13 @@
+{
+  "id": "q01c-thin-volume-fall-week-validation",
+  "strategy": "strategies.q01c_thin_volume_fall",
+  "horizon": "week",
+  "train_experiment": "q01c-thin-volume-fall-week",
+  "selection": "top",
+  "released": {
+    "bearish": {
+      "train_edge": 0.032552862945845716,
+      "released_edge": 0.0027022157700968734
+    }
+  }
+}
