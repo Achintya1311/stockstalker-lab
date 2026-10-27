@@ -116,9 +116,9 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 | a10-gap-and-go-day | 558 | 38% | -5.41 | -8.80 to -1.99 | 1.000 | 1 |
 
-## week/bearish  (48 experiments, block 1)
+## week/bearish  (49 experiments, block 1)
 
-SPA p-value (consistent): **0.133**  (lower 0.094, upper 0.133). StepM superior: none. MCS size: 48 of 48. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.135**  (lower 0.096, upper 0.135). StepM superior: none. MCS size: 49 of 49. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -131,6 +131,7 @@ SPA p-value (consistent): **0.133**  (lower 0.094, upper 0.133). StepM superior:
 | t15-adx-regime-week | 299 | 97% | +2.95 | +0.30 to +5.62 | 0.012 | 1 |
 | a01-weekly-reversal-week | 309 | 100% | +2.48 | -0.09 to +5.31 | 0.031 | 1 |
 | consensus-wb-v1-week | 309 | 100% | +2.48 | +0.17 to +4.84 | 0.018 | 1 |
+| g05-residual-reversal-week | 299 | 97% | +2.40 | -0.37 to +5.11 | 0.043 | 1 |
 | q07-trend-residual-week | 309 | 100% | +2.16 | -0.42 to +4.77 | 0.057 | 1 |
 | t02-golden-death-cross-week | 271 | 88% | +2.05 | -0.60 to +4.71 | 0.065 | 1 |
 | i01-momentum-score-week | 260 | 84% | +2.04 | -0.35 to +4.42 | 0.052 | 4 |
@@ -171,9 +172,9 @@ SPA p-value (consistent): **0.133**  (lower 0.094, upper 0.133). StepM superior:
 | t08-donchian-breakout-20-week | 289 | 94% | -2.72 | -5.86 to +0.34 | 0.966 | 2 |
 | c02-turn-of-month-week | 177 | 57% | -2.72 | -5.80 to +0.23 | 0.964 | 1 |
 
-## week/bullish  (42 experiments, block 1)
+## week/bullish  (43 experiments, block 1)
 
-SPA p-value (consistent): **0.544**  (lower 0.348, upper 0.612). StepM superior: none. MCS size: 39 of 42.
+SPA p-value (consistent): **0.547**  (lower 0.351, upper 0.614). StepM superior: none. MCS size: 40 of 43.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -188,6 +189,7 @@ SPA p-value (consistent): **0.544**  (lower 0.348, upper 0.612). StepM superior:
 | t02-golden-death-cross-week | 271 | 88% | +1.09 | -1.82 to +3.79 | 0.231 | 1 |
 | a07c-volume-fade-week | 302 | 98% | +0.90 | -1.35 to +3.08 | 0.206 | 1 |
 | q03-up-day-balance-week | 309 | 100% | +0.69 | -1.73 to +3.05 | 0.294 | 1 |
+| g05-residual-reversal-week | 299 | 97% | +0.40 | -1.82 to +2.55 | 0.358 | 1 |
 | a03-momentum-12-1-week | 255 | 83% | +0.21 | -2.60 to +2.84 | 0.457 | 1 |
 | a01-weekly-reversal-week | 309 | 100% | -0.03 | -2.23 to +2.03 | 0.509 | 2 |
 | f06-trend-acceleration-week | 309 | 100% | -0.09 | -2.24 to +2.29 | 0.535 | 2 |

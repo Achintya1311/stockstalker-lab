@@ -136,6 +136,15 @@
     "n": 309,
     "coverage": 1.0
    },
+   "g05-residual-reversal-week": {
+    "mean": 0.023962629804178813,
+    "lo": -0.0037326597105849157,
+    "hi": 0.05111379534924591,
+    "p_le0": 0.0435,
+    "block": 1,
+    "n": 299,
+    "coverage": 0.9676375404530745
+   },
    "i01-momentum-score-week": {
     "mean": 0.020388329782628282,
     "lo": -0.0035150328553094296,
@@ -435,15 +444,15 @@
    }
   },
   "joint": {
-   "n_models": 48,
+   "n_models": 49,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.094,
-    "consistent": 0.133,
-    "upper": 0.133
+    "lower": 0.0955,
+    "consistent": 0.1345,
+    "upper": 0.1345
    },
    "stepm": [],
    "mcs": [
@@ -461,6 +470,7 @@
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
     "f06-trend-acceleration-week",
+    "g05-residual-reversal-week",
     "i01-momentum-score-week",
     "i02-low-vol-level-week",
     "o00-placebo-week",
@@ -598,6 +608,15 @@
     "block": 2,
     "n": 309,
     "coverage": 1.0
+   },
+   "g05-residual-reversal-week": {
+    "mean": 0.003953486463610203,
+    "lo": -0.018239984524457034,
+    "hi": 0.02549121634243546,
+    "p_le0": 0.3585,
+    "block": 1,
+    "n": 299,
+    "coverage": 0.9676375404530745
    },
    "i01-momentum-score-week": {
     "mean": 0.012299731330299742,
@@ -880,13 +899,13 @@
    }
   },
   "joint": {
-   "n_models": 42,
+   "n_models": 43,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.3485,
-    "consistent": 0.5445,
-    "upper": 0.6115
+    "lower": 0.3515,
+    "consistent": 0.547,
+    "upper": 0.6135
    },
    "stepm": [],
    "mcs": [
@@ -901,6 +920,7 @@
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
     "f06-trend-acceleration-week",
+    "g05-residual-reversal-week",
     "i01-momentum-score-week",
     "i02-low-vol-level-week",
     "o00-placebo-week",
