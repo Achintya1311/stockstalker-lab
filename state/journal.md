@@ -5312,3 +5312,10 @@ paper's unbounded denominator turns it into a near-low detector; both sides with
 **Next:** diagnose F03, F04 and F05 when they land; port F06 (rescale its 0.25 threshold to returns, pre-declared)
 and F07. Draft unchanged: T04 / E2A / A05B / A01. 19 holdout queries left this ISO week. `config/live_source.json`
 from the draft on Fri 30 Oct before 12:00 UTC.
+
+## 2026-10-27 08:10 UTC run (leases ef1c360: diagnose, port)
+
+F03 (07:05Z), F04 and F05 (08:01Z) landed; evidence at 6a731a2.
+Unit 1 (diagnose): F03 diagnosed (`research/diagnostics/f03.md`). Hypothesis (pre-declared): mostly A02's
+reversal, day bearish +2.5 to +4.5, bullish -1.5 to +0.5. Both held: bearish +3.54 (interval +2.45 to +4.64, 6/6)
+but dir -0.05% after the futures cost, so not eligible; bullish -0.77. 69% of its bearish picks are F02's.
