@@ -1,0 +1,9 @@
+{
+  "id": "g01-residual-momentum-week",
+  "strategy": "strategies.g01_residual_momentum",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 51701,
+  "n_dates": 255,
+  "pick_log_sha256": "2ddaa6c660fcd5e4bbf1e48c3c6a87c93963b72cd67dc6be33b4ef9a980eec0e"
+}

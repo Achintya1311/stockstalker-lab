@@ -1,0 +1,9 @@
+{
+  "id": "g02-betting-against-beta-week",
+  "strategy": "strategies.g02_betting_against_beta",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 52609,
+  "n_dates": 260,
+  "pick_log_sha256": "a15a2d3b8c4ddbcea82120ceb39464af81d5a395c6fb7a4b676bc7d5350d6879"
+}

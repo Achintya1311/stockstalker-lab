@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 200. Gate 2's bar at that count: t >= 4.35.
+Trials recorded: 206. Gate 2's bar at that count: t >= 4.36.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -33,6 +33,7 @@ Trials recorded: 200. Gate 2's bar at that count: t >= 4.35.
 | q06-wick-balance-day | day | bearish | 7334 | 56.20% | 54.54% | 1.67 | 2.98 |  | -0.05 | 83.33% |  |
 | a01-i01-filter-week | week | bearish | 1274 | 55.34% | 50.76% | 4.17 | 2.89 |  | 0.15 | 100.00% | candidate |
 | q01c-thin-volume-fall-week | week | bearish | 1524 | 54.33% | 50.91% | 3.26 | 2.81 |  | 0.12 | 100.00% | candidate |
+| g01-residual-momentum-week | week | bearish | 1275 | 54.82% | 50.60% | 4.22 | 2.78 |  | -0.05 | 100.00% |  |
 | t04-connors-rsi2-day | day | bearish | 4264 | 57.55% | 54.82% | 2.32 | 2.65 |  | -0.01 | 83.33% |  |
 | f06-trend-acceleration-week | week | bearish | 1543 | 54.05% | 50.91% | 3.15 | 2.64 |  | 0.04 | 83.33% | candidate |
 | t01-sma-crossover-week | week | bearish | 1514 | 54.10% | 50.88% | 3.20 | 2.56 |  | -0.03 | 83.33% |  |
@@ -44,7 +45,10 @@ Trials recorded: 200. Gate 2's bar at that count: t >= 4.35.
 | t15-adx-regime-week | week | bearish | 1456 | 53.71% | 50.87% | 2.95 | 2.20 |  | 0.02 | 83.33% | candidate |
 | t10-nr4-narrow-range-day | day | bullish | 6633 | 46.01% | 44.79% | 1.34 | 2.19 |  | -0.50 | 83.33% |  |
 | consensus-wb-v1-week | week | bearish | 1545 | 53.40% | 50.91% | 2.48 | 2.06 |  | 0.15 | 66.67% | candidate |
+| g03-frog-in-the-pan-week | week | bearish | 1275 | 53.41% | 50.60% | 2.81 | 1.97 |  | -0.44 | 80.00% |  |
 | a08-overnight-intraday-tug-day | day | bearish | 7325 | 55.69% | 54.53% | 1.15 | 1.97 |  | -0.04 | 100.00% |  |
+| g02-betting-against-beta-week | week | bullish | 1300 | 52.54% | 48.85% | 3.69 | 1.97 |  | -0.40 | 80.00% |  |
+| g02-betting-against-beta-week | week | bearish | 1300 | 53.62% | 50.96% | 2.65 | 1.96 |  | 0.01 | 60.00% | candidate |
 | a05b-max-effect-ranked-week | week | bullish | 1475 | 51.39% | 49.16% | 2.23 | 1.86 |  | -0.50 | 83.33% |  |
 | a01-weekly-reversal-week | week | bearish | 1538 | 53.19% | 50.91% | 2.48 | 1.83 |  | 0.02 | 83.33% | candidate |
 | g05-residual-reversal-week | week | bearish | 1495 | 53.38% | 50.98% | 2.40 | 1.79 |  | 0.11 | 66.67% | candidate |
@@ -55,6 +59,7 @@ Trials recorded: 200. Gate 2's bar at that count: t >= 4.35.
 | q02-return-volume-corr-week | week | bearish | 1545 | 52.69% | 50.91% | 1.77 | 1.62 |  | -0.14 | 83.33% |  |
 | t25-heikin-ashi-week | week | bullish | 1102 | 50.45% | 48.37% | 2.74 | 1.59 |  | -0.34 | 50.00% |  |
 | g04-realized-skewness-week | week | bearish | 1545 | 52.75% | 50.91% | 1.84 | 1.57 |  | -0.33 | 100.00% |  |
+| g01-residual-momentum-week | week | bullish | 1275 | 51.45% | 49.20% | 2.25 | 1.55 |  | -0.51 | 100.00% |  |
 | q04-range-extreme-timing-week | week | bearish | 1505 | 52.62% | 50.76% | 1.87 | 1.55 |  | -0.20 | 83.33% |  |
 | q07-trend-residual-day | day | bullish | 7324 | 45.78% | 44.95% | 0.87 | 1.52 |  | -0.56 | 50.00% |  |
 | q03-up-day-balance-week | week | bearish | 1545 | 52.88% | 50.91% | 1.97 | 1.51 |  | -0.09 | 66.67% |  |
@@ -75,6 +80,7 @@ Trials recorded: 200. Gate 2's bar at that count: t >= 4.35.
 | t21-minervini-template-week | week | bullish | 1261 | 50.44% | 48.67% | 1.66 | 1.13 |  | -0.73 | 80.00% |  |
 | t03-rsi-thresholds-day | day | bearish | 5109 | 56.12% | 54.88% | 0.89 | 1.12 |  | -0.04 | 83.33% |  |
 | o03-trend-confirmed-day | day | bearish | 4508 | 55.08% | 54.42% | 0.90 | 1.08 |  | -0.13 | 66.67% |  |
+| g03-frog-in-the-pan-week | week | bullish | 1275 | 50.67% | 49.20% | 1.47 | 1.03 |  | -0.48 | 60.00% |  |
 | t23-rs-rating-week | week | bearish | 1300 | 52.38% | 50.96% | 1.42 | 1.03 |  | -0.21 | 60.00% |  |
 | f07-high-push-fade-day | day | bullish | 6982 | 45.55% | 44.92% | 0.61 | 1.02 |  | -0.55 | 66.67% |  |
 | t03-rsi-thresholds-week | week | bearish | 1099 | 51.87% | 51.07% | 1.72 | 1.02 |  | -0.06 | 66.67% |  |

@@ -1,0 +1,9 @@
+{
+  "id": "g03-frog-in-the-pan-week",
+  "strategy": "strategies.g03_frog_in_the_pan",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 38803,
+  "n_dates": 255,
+  "pick_log_sha256": "bd63a3f469a1170d4582403aeeb2b65cdd899afd9fbfa06573d1ffb452869edd"
+}
