@@ -1,0 +1,9 @@
+{
+  "id": "f01-body-share-day",
+  "strategy": "strategies.f01_body_share",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 298937,
+  "n_dates": 1484,
+  "pick_log_sha256": "281d2bc1d059fa9aeaf0d21053cba7cd3fcb8fe6dfcb669c35db0095a26cc5d4"
+}

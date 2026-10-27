@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 176. Gate 2's bar at that count: t >= 4.32.
+Trials recorded: 178. Gate 2's bar at that count: t >= 4.33.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -82,6 +82,7 @@ Trials recorded: 176. Gate 2's bar at that count: t >= 4.32.
 | o04b-no-d01-day | day | bearish | 5641 | 54.44% | 54.31% | 0.33 | 0.47 |  | -0.16 | 50.00% |  |
 | o04b-no-d01-day | day | bullish | 6673 | 45.44% | 45.06% | 0.23 | 0.39 |  | -0.58 | 83.33% |  |
 | champion-v1-week | week | bearish | 1515 | 51.29% | 50.88% | 0.41 | 0.33 |  | -0.01 | 50.00% |  |
+| f01-body-share-day | day | bearish | 7331 | 54.69% | 54.54% | 0.17 | 0.30 |  | -0.07 | 50.00% |  |
 | o05-order-block-weekly-week | week | bearish | 1088 | 50.18% | 50.45% | 0.32 | 0.21 |  | -0.31 | 60.00% |  |
 | e1a-day | day | bullish | 335 | 48.06% | 44.28% | 0.59 | 0.20 |  | -0.47 | 33.33% | too few picks |
 | t07-bollinger-squeeze-breakout-week | week | bullish | 18 | 44.44% | 45.08% | 1.79 | 0.17 |  | -0.46 | 66.67% | too few picks |
@@ -178,6 +179,7 @@ Trials recorded: 176. Gate 2's bar at that count: t >= 4.32.
 | t09-supertrend-day | day | bullish | 7089 | 42.71% | 45.09% | -2.51 | -4.36 |  | -0.67 | 16.67% |  |
 | d01-oi-buildup-day | day | bearish | 7334 | 52.06% | 54.54% | -2.48 | -4.59 |  | -0.15 | 0.00% |  |
 | o02-oi-confirmed-day | day | bullish | 2421 | 39.98% | 44.54% | -5.15 | -4.60 |  | -0.68 | 16.67% |  |
+| f01-body-share-day | day | bullish | 7317 | 42.27% | 44.93% | -2.70 | -4.85 |  | -0.64 | 0.00% |  |
 | t12-stochastic-day | day | bullish | 4153 | 42.43% | 44.85% | -4.53 | -5.23 |  | -0.66 | 0.00% |  |
 | d01-oi-buildup-day | day | bullish | 7304 | 40.32% | 44.93% | -4.61 | -8.15 |  | -0.75 | 0.00% |  |
 | t24-pivot-points-day | day | bullish | 7306 | 39.95% | 44.91% | -4.94 | -8.51 |  | -0.73 | 0.00% |  |

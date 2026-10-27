@@ -175,3 +175,5 @@ q04-range-extreme-timing-week-bearish,2026-10-27T02:08:52.696561+00:00,strategie
 q06r-wide-bar-wick-day-bullish,2026-10-27T02:08:52.696905+00:00,strategies.q06r_wide_bar_wick,,day,bullish,train,0.018788188845261095,3.324357246515475,n/a,"train, top selection; recorded by engine/experiment_report.py"
 q06r-wide-bar-wick-day-bearish,2026-10-27T02:08:52.696996+00:00,strategies.q06r_wide_bar_wick,,day,bearish,train,0.027871796428887808,4.9816933093235285,n/a,"train, top selection; recorded by engine/experiment_report.py"
 t04-q06-fallback-day-bullish,2026-10-27T02:08:52.697667+00:00,strategies.t04_q06_fallback,,day,bullish,train,0.03847982194849278,5.119744689969776,n/a,"train, top selection; recorded by engine/experiment_report.py"
+f01-body-share-day-bullish,2026-10-27T02:57:32.914479+00:00,strategies.f01_body_share,,day,bullish,train,-0.026984117214955975,-4.854031811879566,n/a,"train, top selection; recorded by engine/experiment_report.py"
+f01-body-share-day-bearish,2026-10-27T02:57:32.914625+00:00,strategies.f01_body_share,,day,bearish,train,0.0016583647951669354,0.302803363886112,n/a,"train, top selection; recorded by engine/experiment_report.py"
