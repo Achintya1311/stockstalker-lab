@@ -1,0 +1,9 @@
+{
+  "id": "q07-trend-residual-week",
+  "strategy": "strategies.q07_trend_residual",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 63699,
+  "n_dates": 309,
+  "pick_log_sha256": "ea1feba09e6606abe1fa6ffe2bc50e18bdd1a49753f0923c1625265bb69e87dc"
+}
