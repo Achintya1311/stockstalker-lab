@@ -1031,6 +1031,15 @@
     "n": 1467,
     "coverage": 1.0
    },
+   "f03-conditional-reversal-day": {
+    "mean": -0.007737472869714077,
+    "lo": -0.018890185090634788,
+    "hi": 0.0030620304630962244,
+    "p_le0": 0.91,
+    "block": 1,
+    "n": 1467,
+    "coverage": 1.0
+   },
    "o00-placebo-day": {
     "mean": -0.009486008550722637,
     "lo": -0.020485220867857968,
@@ -1312,7 +1321,7 @@
    }
   },
   "joint": {
-   "n_models": 44,
+   "n_models": 45,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1470,6 +1479,15 @@
     "mean": 0.0325604325070506,
     "lo": 0.021500150921323503,
     "hi": 0.04333071444086873,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 1467,
+    "coverage": 1.0
+   },
+   "f03-conditional-reversal-day": {
+    "mean": 0.035355251866287137,
+    "lo": 0.024531707753676017,
+    "hi": 0.04642818207398736,
     "p_le0": 0.0,
     "block": 1,
     "n": 1467,
@@ -1756,7 +1774,7 @@
    }
   },
   "joint": {
-   "n_models": 46,
+   "n_models": 47,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1774,6 +1792,7 @@
     "e2a-day",
     "e2b-day",
     "f02-volume-signed-reversal-day",
+    "f03-conditional-reversal-day",
     "q06-wick-balance-day",
     "q06r-wide-bar-wick-day",
     "q07-trend-residual-day",
