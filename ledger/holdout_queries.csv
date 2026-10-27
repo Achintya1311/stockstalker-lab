@@ -40,3 +40,4 @@ t25-heikin-ashi-week-validation-bearish,2026-10-26T18:44:05.894577+00:00,edge_to
 q06-wick-balance-day-validation-bullish,2026-10-26T21:21:47.002550+00:00,edge_top,day,bullish,0.03,0.01,0.025834442604041885,0.025834442604041885,False
 q06-wick-balance-day-validation-bearish,2026-10-26T21:21:47.002737+00:00,edge_top,day,bearish,0.03,0.01,0.016677678587486863,0.016677678587486863,False
 q01c-thin-volume-fall-week-validation-bearish,2026-10-27T00:27:34.317822+00:00,edge_top,week,bearish,0.03,0.01,0.032552862945845716,0.0027022157700968734,True
+t04-q06-fallback-day-validation-bullish,2026-10-27T04:19:31.264533+00:00,edge_top,day,bullish,0.03,0.01,0.03847982194849278,-0.006045207108944758,True

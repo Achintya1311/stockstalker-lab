@@ -1,0 +1,13 @@
+{
+  "id": "t04-q06-fallback-day-validation",
+  "strategy": "strategies.t04_q06_fallback",
+  "horizon": "day",
+  "train_experiment": "t04-q06-fallback-day",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.03847982194849278,
+      "released_edge": -0.006045207108944758
+    }
+  }
+}
