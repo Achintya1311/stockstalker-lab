@@ -1,0 +1,9 @@
+{
+  "id": "g04-realized-skewness-week",
+  "strategy": "strategies.g04_realized_skewness",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 63698,
+  "n_dates": 309,
+  "pick_log_sha256": "c53626939acc45476b5211c13069c21e4f1a1edd861fd5a1fdc888bd500b5bc0"
+}

@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 198. Gate 2's bar at that count: t >= 4.35.
+Trials recorded: 200. Gate 2's bar at that count: t >= 4.35.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -54,6 +54,7 @@ Trials recorded: 198. Gate 2's bar at that count: t >= 4.35.
 | q07-trend-residual-week | week | bearish | 1544 | 53.04% | 50.91% | 2.16 | 1.64 |  | -0.09 | 100.00% |  |
 | q02-return-volume-corr-week | week | bearish | 1545 | 52.69% | 50.91% | 1.77 | 1.62 |  | -0.14 | 83.33% |  |
 | t25-heikin-ashi-week | week | bullish | 1102 | 50.45% | 48.37% | 2.74 | 1.59 |  | -0.34 | 50.00% |  |
+| g04-realized-skewness-week | week | bearish | 1545 | 52.75% | 50.91% | 1.84 | 1.57 |  | -0.33 | 100.00% |  |
 | q04-range-extreme-timing-week | week | bearish | 1505 | 52.62% | 50.76% | 1.87 | 1.55 |  | -0.20 | 83.33% |  |
 | q07-trend-residual-day | day | bullish | 7324 | 45.78% | 44.95% | 0.87 | 1.52 |  | -0.56 | 50.00% |  |
 | q03-up-day-balance-week | week | bearish | 1545 | 52.88% | 50.91% | 1.97 | 1.51 |  | -0.09 | 66.67% |  |
@@ -154,6 +155,7 @@ Trials recorded: 198. Gate 2's bar at that count: t >= 4.35.
 | t19-obv-divergence-week | week | bullish | 1503 | 47.84% | 48.87% | -1.20 | -1.03 |  | -0.72 | 50.00% |  |
 | t15-adx-regime-day | day | bullish | 6891 | 44.26% | 44.93% | -0.64 | -1.04 |  | -0.62 | 50.00% |  |
 | a07-high-volume-premium-week | week | bullish | 1510 | 47.55% | 48.97% | -1.42 | -1.06 |  | -0.69 | 33.33% |  |
+| g04-realized-skewness-week | week | bullish | 1545 | 47.70% | 48.89% | -1.19 | -1.06 |  | -0.63 | 16.67% |  |
 | a02-extreme-day-reversal-day | day | bullish | 3223 | 45.36% | 44.96% | -1.10 | -1.07 |  | -0.63 | 50.00% |  |
 | o03-trend-confirmed-week | week | bullish | 1270 | 47.80% | 48.79% | -1.45 | -1.11 |  | -0.55 | 33.33% |  |
 | t18-ichimoku-cloud-week | week | bullish | 1400 | 47.29% | 49.30% | -1.56 | -1.13 |  | -0.66 | 33.33% |  |
