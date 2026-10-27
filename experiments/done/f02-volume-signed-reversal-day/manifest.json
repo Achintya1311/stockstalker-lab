@@ -1,0 +1,9 @@
+{
+  "id": "f02-volume-signed-reversal-day",
+  "strategy": "strategies.f02_volume_signed_reversal",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 301543,
+  "n_dates": 1484,
+  "pick_log_sha256": "dcc23a8cb7527d34e24f0283c88ba8817e7b7f72cc57ad140dea6a9acde18062"
+}
