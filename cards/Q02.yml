@@ -26,4 +26,4 @@ red_flags:
   - "Pre-declared before the replay (27 Oct IST): Q01 found thin-volume moves persist (week falls on thin volume -3.39 when called bullish), the opposite of the volume-confirmation story. Q02's unconfirmed side overlaps that idea: an unconfirmed fall scores bullish here, as Q01's did. Prediction: week-bullish wrong-way (negative, as Q01's), week-bearish small positive, day cells within noise. Helps if any side's top-5 edge is at least +2.0 with at least 4 of 6 positive years and a positive directional move after costs. If week-bullish is significantly wrong-way, check its top-5 overlap with Q01 week-bullish before any flip: a flip that repeats Q01C is not a new trial worth spending."
   - "No claim is assumed true (SPEC.md section 5). Alpha158 features are model inputs, not rules."
   - "A volume of zero on a session makes the volume ratio undefined; such a symbol abstains for 20 sessions."
-status: "queued"
+status: "train: day -0.97 / +0.05, week -1.90 / +1.77 (bull / bear); every dir after costs negative; rule not met; see research/diagnostics/q02.md"

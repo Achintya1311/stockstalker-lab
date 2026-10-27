@@ -5243,3 +5243,7 @@ Unit 2 (diagnose): Q06R diagnosed (`research/diagnostics/q06r.md`). Hypothesis (
 bearish (+1.5 to +2.5, dir near zero) and leave bullish about level (+2.4 to +3.4). Bearish beat it: +2.79
 (interval +1.69 to +3.89, 6/6, dir +0.01%), rule met. Bullish missed low: +1.88. Eligible for day bearish, but far
 below E2A's released +6.72, so no query is spent. Next idea: Q06R as E2A's fallback (1.1% overlap), pre-declared.
+Unit 3 (diagnose): Q02 diagnosed (`research/diagnostics/q02.md`). Hypothesis (pre-declared): week bullish
+wrong-way, week bearish small positive, day noise. Held in sign everywhere but nothing significant: week bullish
+-1.90 (interval includes 0), week bearish +1.77 (5/6, dir -0.14%), day -0.97 / +0.05. Not eligible; no flip. The
+volume-correlation family (Q01, Q01C, Q02) is closed for go-live.
