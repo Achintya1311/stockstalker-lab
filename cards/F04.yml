@@ -1,0 +1,24 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#6"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#6 = -1 x correlation(open, volume, 10), a production
+  WorldQuant alpha: opens that rise on falling volume are bullish, opens that rise on
+  rising volume bearish. The paper reports no stand-alone hit rate.
+horizon: day
+rules_plain: >
+  Score = minus the correlation of the adjusted open with raw volume over the last 10
+  sessions. Negative correlation bullish, positive bearish; a flat series abstains. No
+  move size enters. Only the last 10 rows are read.
+default_params:
+  window: 10
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): the close-volume level correlation (Q01, 20 sessions) found thin-volume moves persist, which agrees with this alpha's bullish side on rising opens and disagrees on falling ones; the change form (Q02) was noise. With no move size in the score, the top five are the most perfectly correlated series, often small drifts. Prediction: both day sides within ±1.5 of zero, directional moves negative. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years."
+  - "Alpha#6 was designed for a cross-sectional long-short book on US stocks, not a top-5 table on NSE F&O stocks."
+status: "queued"

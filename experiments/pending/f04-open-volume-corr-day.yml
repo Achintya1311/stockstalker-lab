@@ -1,0 +1,10 @@
+# F04 (day horizon): 101 Formulaic Alphas, Alpha#6 minus the 10-session open-volume
+# correlation, train-split replay (port lane, state/queue.md). See cards/F04.yml and
+# strategies/f04_open_volume_corr.py.
+id: f04-open-volume-corr-day
+strategy: strategies.f04_open_volume_corr
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

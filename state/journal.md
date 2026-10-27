@@ -5302,3 +5302,6 @@ Unit 3 (port): F03 conditional one-day continuation (Alpha#9) ported and queued 
 `strategies/f03_conditional_reversal.py`, audit, 7 tests). Formulas for F03 to F07 checked against the paper's
 appendix first: F06's catalog row had Alpha#46's direction reversed and is corrected (the paper fades an
 accelerating rise). Hypothesis (pre-declared): mostly A02's reversal, day bearish +2.5 to +4.5, bullish -1.5 to +0.5.
+Unit 4 (port): F04 open-volume correlation (Alpha#6) ported and queued for day (`cards/F04.yml`,
+`strategies/f04_open_volume_corr.py`, audit, 7 tests). Hypothesis (pre-declared): with no move size in the score,
+both day sides within ±1.5 of zero and directional moves negative.
