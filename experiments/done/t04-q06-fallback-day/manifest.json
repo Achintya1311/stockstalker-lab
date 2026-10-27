@@ -1,0 +1,9 @@
+{
+  "id": "t04-q06-fallback-day",
+  "strategy": "strategies.t04_q06_fallback",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 40138,
+  "n_dates": 1484,
+  "pick_log_sha256": "66c1f0d697e972cce1dc7372ed9f622265d790240a7ffc31328d1f623ebf4fc7"
+}

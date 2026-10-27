@@ -1,0 +1,9 @@
+{
+  "id": "q02-return-volume-corr-week",
+  "strategy": "strategies.q02_return_volume_corr",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 63575,
+  "n_dates": 309,
+  "pick_log_sha256": "94e244d9455664bfa7836e02f98b09929244187cdeac77eca159ae372d438dc9"
+}

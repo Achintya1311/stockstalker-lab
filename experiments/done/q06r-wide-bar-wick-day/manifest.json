@@ -1,0 +1,9 @@
+{
+  "id": "q06r-wide-bar-wick-day",
+  "strategy": "strategies.q06r_wide_bar_wick",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 146811,
+  "n_dates": 1465,
+  "pick_log_sha256": "a940acd33a85c95e4d1a56777a5b8e5e34d44588db99a72e5370bea78fb3a5f0"
+}

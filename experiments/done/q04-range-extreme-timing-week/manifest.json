@@ -1,0 +1,9 @@
+{
+  "id": "q04-range-extreme-timing-week",
+  "strategy": "strategies.q04_range_extreme_timing",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 62423,
+  "n_dates": 301,
+  "pick_log_sha256": "284e1bed957f18e6ce7b7dc9e42f3ac24b84f6970647bfdb68059f5e1076da3f"
+}

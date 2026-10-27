@@ -1,0 +1,9 @@
+{
+  "id": "a10-gap-and-go-day",
+  "strategy": "strategies.a10_gap_and_go",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 1615,
+  "n_dates": 692,
+  "pick_log_sha256": "f9857c566682c1038c2a54d0b5ae49ca66a83a720555f4ac18308e37367a5723"
+}
