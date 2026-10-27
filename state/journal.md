@@ -5286,3 +5286,11 @@ it cannot pass E2A under the highest-released-edge rule. Leases removed.
 **Next:** diagnose Q07 (day, week) and F02 when they land; port F03 to F07 (check each formula against the
 paper first). Draft unchanged: T04 / E2A / A05B / A01. 19 holdout queries left this ISO week.
 `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
+
+## 2026-10-27 06:09 UTC run (leases e7739f0: diagnose, port)
+
+Q07 day and week (05:29Z) and F02 (05:57Z) landed; evidence at 7a9a18a.
+Unit 1 (diagnose): Q07 diagnosed (`research/diagnostics/q07.md`). Hypothesis (pre-declared): the stretched side is
+the reversal question again. All four predictions held: day bearish +2.66 (interval +1.55 to +3.79, 6/6), week
+bearish +2.16 (6/6, interval includes 0), bullish sides noise. Not eligible: day bearish's directional move is
+-0.02% after the futures cost. Overlaps F02, T06, T13 and A02 (17-25%); week bearish is 45% A01.

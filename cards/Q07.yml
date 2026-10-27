@@ -25,4 +25,4 @@ red_flags:
   - "Pre-declared before the replay (27 Oct IST): the stretched side is the lab's reversal question in another form. T06 (Bollinger %B) day bearish is +3.35 and day bullish +1.04; A01 week bearish +2.48 and week bullish about 0. Prediction: day bearish positive (+1.5 to +3.5) with a directional move near zero, day bullish small (0 to +2), week bearish +1 to +3, week bullish near zero. Helps, bearish (full SPEC 10 rule): top-5 edge at least +2.0, interval above 0, 4 of 6 positive years and a positive directional move after costs. Helps, bullish (AB's edge-only rule): at least +2.0 with the interval above 0 and 4 of 6 years. Check overlap with T06, A02 and A01 before reading any result as new."
   - "No claim is assumed true (SPEC.md section 5). Alpha158 features are model inputs, not rules."
   - "Unlike Q05 the trend's sign is ignored, so a pullback in a falling stock scores bullish; that is the feature's own definition."
-status: "queued"
+status: "train: day +0.87 / +2.66, week -1.19 / +2.16 (bull / bear); predictions held; no positive directional move, rule not met; see research/diagnostics/q07.md"
