@@ -1,0 +1,28 @@
+source_url: ""
+author: "Zhi Da, Umit G. Gurun and Mitch Warachka, Frog in the Pan: Continuous Information and Momentum, Review of Financial Studies 27(7), 2014"
+license: "Idea from the paper, summarised and re-implemented (SPEC.md section 5)"
+published_on: "2014"
+claim_as_stated: >
+  `cards/catalog.csv` (and the paper): momentum built from many small moves in the same
+  direction (continuous information) persists longer than momentum built from a few
+  large jumps (US stocks).
+horizon: week
+rules_plain: >
+  On adjusted closes, over the 252 daily log returns ending 21 sessions before the last
+  date (A03's 12-1 months): PRET = their sum; information discreteness ID = sign(PRET)
+  x (share of down days - share of up days). ID >= 0 (jump-driven) abstains; otherwise
+  score = PRET x (-ID). Continuous winners bullish, continuous losers bearish. The paper
+  double-sorts on PRET then ID; the lab folds both into one score.
+default_params:
+  lookback: 252
+  skip: 21
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Da, Gurun and Warachka (2014) Review of Financial Studies"
+link: ""
+prior_claim: "Continuous-information momentum persists longer than discrete-information momentum (US)"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): A03 (total 12-1 momentum) is weak on the week horizon, train bullish +0.21 and bearish +0.85, both with negative directional moves. Keeping only the smooth moves should help a little if the effect carries to India. Prediction: week bullish -1 to +2, week bearish -1 to +2, directional moves negative on both sides; top-5 bullish overlap with A03 bullish 30 to 60%. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; if met and the train edge is above A05B's +2.23, it gets one week-bullish validation query (2 rows, two-sided card). Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years and a positive directional move after costs; a query only if train is above A01's +2.48."
+  - "The paper's effect shows over 6-12 months of holding; the lab scores one week."
+  - "Abstains on jump-driven moves, so coverage will be lower than A03's."
+status: "queued"
