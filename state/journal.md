@@ -5247,3 +5247,7 @@ Unit 3 (diagnose): Q02 diagnosed (`research/diagnostics/q02.md`). Hypothesis (pr
 wrong-way, week bearish small positive, day noise. Held in sign everywhere but nothing significant: week bullish
 -1.90 (interval includes 0), week bearish +1.77 (5/6, dir -0.14%), day -0.97 / +0.05. Not eligible; no flip. The
 volume-correlation family (Q01, Q01C, Q02) is closed for go-live.
+Unit 4 (diagnose): Q04 diagnosed (`research/diagnostics/q04.md`). Hypothesis (pre-declared): fresh 60-session
+highs behave like T08-55 breakouts, so week bullish wrong-way (-2 to -5) and bearish near zero. Missed: bullish
+-0.42 (noise, only 30% overlap with T08-55), bearish +1.87 (5/6, dir -0.20%). Not eligible. Five slow-drift
+week-bearish readings (Q02, Q03, Q04, Q05, I01) now share one shape that never pays the futures cost.
