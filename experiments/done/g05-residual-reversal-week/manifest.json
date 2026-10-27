@@ -1,0 +1,9 @@
+{
+  "id": "g05-residual-reversal-week",
+  "strategy": "strategies.g05_residual_reversal",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 59228,
+  "n_dates": 299,
+  "pick_log_sha256": "e146e36ee48665105a80e2e8d14aa708e515c31b590f9d2466fc82d6de95a9e2"
+}
