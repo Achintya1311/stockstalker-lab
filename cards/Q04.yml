@@ -1,0 +1,31 @@
+source_url: "https://github.com/microsoft/qlib"
+author: "Microsoft Qlib, Alpha158 feature set (MIT); feature list copied in third_party/qlib/loader.py"
+license: "MIT reference code; the feature is re-implemented, not copied (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: Alpha158's IMXD, days since the 60-day low minus days since
+  the 60-day high, over 60. A recent high after an old low (a fresh breakout from a
+  base) bullish; a recent low after an old high bearish. Alpha158 uses it as an
+  input to a learned model; `prior_claim`: no stand-alone hit rate claimed.
+horizon: week
+rules_plain: >
+  On the adjusted high and low over the last 60 sessions including today: imxd =
+  (position of the 60-session high - position of the 60-session low) / 60, first
+  occurrence on a tie. Positive bullish, negative bearish, zero abstains. A
+  tie-break smaller than half a step, 0.008 x tanh(60-session log return / 0.3),
+  orders stocks with equal timing by the size of their move. Only the last 60 rows
+  are read.
+default_params:
+  window: 60
+  tie: 0.008
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "microsoft/qlib Alpha158 (MIT)"
+link: "https://github.com/microsoft/qlib"
+prior_claim: "Feature in Qlib's Alpha158 benchmark set; no stand-alone hit rate claimed"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): the top bullish picks (high today, low near 60 sessions back) are fresh 60-session breakouts, the stocks T08-55 picks; T08-55 week bullish was wrong-way (-5.09, 1/6 years) and A01 finds last week's winners reverse. Prediction: week-bullish negative (about -2 to -5), week-bearish near zero (T08-55 bearish -0.90). Helps if any side's top-5 edge is at least +2.0 with the bootstrap interval above 0, at least 4 of 6 positive years and a positive directional move after costs. If week-bullish is significantly wrong-way, check its top-5 overlap with A01 week-bearish and T08-55 week-bullish before any flip: a flip that mostly repeats A01 is not a new trial worth spending."
+  - "No claim is assumed true (SPEC.md section 5). Alpha158 features are model inputs, not rules."
+  - "Qlib's code comment calls a large IMXD downward momentum, but with IdxMax counted from the window start a positive value means the high is the more recent extreme; the lab follows the catalog row (positive bullish)."
+  - "The tie-break is the lab's choice; without it many top fives would be decided by symbol order (imxd = 59/60 for every straight 60-session riser)."
+status: "queued"

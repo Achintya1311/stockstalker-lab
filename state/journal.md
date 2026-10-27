@@ -5191,3 +5191,13 @@ Pre-declared from Q01's result: week bullish wrong-way, week bearish small posit
 diagnose T04_Q06_FB (pre-declared +3.0 and 99% coverage) and Q02 when they land; port Q04; a pre-declared Q01C+A01
 week-bearish consensus if Q01C validates. Draft today: T04 / E2A / A05B / A01. `config/live_source.json` from the
 draft on Fri 30 Oct before 12:00 UTC.
+
+## 2026-10-27 00:08 UTC run (port lease 09bcd4e)
+
+Nothing new to diagnose at the start: the Replay for 3bd38f0 (T04_Q06_FB, Q02 day and week, Q01C validation) was
+still running.
+Unit 1 (port): Q04 timing of the range extremes (Alpha158 IMXD, 60 sessions, week) ported and queued
+(`cards/Q04.yml`, `strategies/q04_range_extreme_timing.py`, audit, 8 tests; suite 1008 passed). Hypothesis
+(pre-declared): its top bullish picks are fresh 60-session breakouts, the T08-55 stocks, so week bullish is
+wrong-way (about -2 to -5) and week bearish near zero; helps at +2.0 with interval above 0, 4 of 6 years and a
+positive directional move. Any flip needs an overlap check against A01 and T08-55 first.

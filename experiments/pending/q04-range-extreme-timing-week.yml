@@ -1,0 +1,10 @@
+# Q04 (week horizon): Alpha158 IMXD, days since the 60-session low minus days since the
+# 60-session high, over 60, train-split replay (port lane, state/queue.md). See
+# cards/Q04.yml and strategies/q04_range_extreme_timing.py.
+id: q04-range-extreme-timing-week
+strategy: strategies.q04_range_extreme_timing
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
