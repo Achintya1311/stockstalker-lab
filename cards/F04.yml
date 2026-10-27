@@ -21,4 +21,4 @@ prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate
 red_flags:
   - "Pre-declared before the replay (27 Oct IST): the close-volume level correlation (Q01, 20 sessions) found thin-volume moves persist, which agrees with this alpha's bullish side on rising opens and disagrees on falling ones; the change form (Q02) was noise. With no move size in the score, the top five are the most perfectly correlated series, often small drifts. Prediction: both day sides within ±1.5 of zero, directional moves negative. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years."
   - "Alpha#6 was designed for a cross-sectional long-short book on US stocks, not a top-5 table on NSE F&O stocks."
-status: "queued"
+status: "train: day +0.63 bullish / +1.25 bearish (dir -0.03%); prediction held; rule not met; see research/diagnostics/f04.md"

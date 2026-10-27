@@ -5319,3 +5319,6 @@ F03 (07:05Z), F04 and F05 (08:01Z) landed; evidence at 6a731a2.
 Unit 1 (diagnose): F03 diagnosed (`research/diagnostics/f03.md`). Hypothesis (pre-declared): mostly A02's
 reversal, day bearish +2.5 to +4.5, bullish -1.5 to +0.5. Both held: bearish +3.54 (interval +2.45 to +4.64, 6/6)
 but dir -0.05% after the futures cost, so not eligible; bullish -0.77. 69% of its bearish picks are F02's.
+Unit 2 (diagnose): F04 diagnosed (`research/diagnostics/f04.md`). Hypothesis (pre-declared): both day sides within
+±1.5, dir negative. Held: +0.63 / +1.25 (bearish interval +0.22 to +2.32, dir -0.03%). Not eligible. The
+price-volume correlation readings (Q01, Q01C, Q02, F04) are closed for go-live.
