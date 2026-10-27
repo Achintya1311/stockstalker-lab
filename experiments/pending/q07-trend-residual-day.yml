@@ -1,0 +1,10 @@
+# Q07 (day horizon): Alpha158 RESI, distance of the last close below its 20-day trend line,
+# train-split replay (port lane, state/queue.md). See cards/Q07.yml and
+# strategies/q07_trend_residual.py.
+id: q07-trend-residual-day
+strategy: strategies.q07_trend_residual
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

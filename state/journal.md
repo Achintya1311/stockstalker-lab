@@ -5272,3 +5272,6 @@ edge-versus-coverage question for AB does not arise in a useful form. `gates/bud
 Unit 2 (diagnose): F01 diagnosed (`research/diagnostics/f01.md`). Hypothesis (pre-declared): both day sides
 wrong-way from the reversal family. Bullish held (-2.70, interval -3.84 to -1.63, 0/6); bearish was noise (+0.17).
 A flip of bullish would earn about -0.02% after the futures cost, so it fails the bearish table's rule; no flip.
+Unit 3 (port): Q07 distance from the 20-day trend line (Alpha158 RESI) ported, day and week queued (`cards/Q07.yml`,
+`strategies/q07_trend_residual.py`, audit, 7 tests). Hypothesis (pre-declared): the stretched side is the reversal
+question again, so day bearish +1.5 to +3.5 (like T06), week bearish +1 to +3 (like A01), bullish small.
