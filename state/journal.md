@@ -5338,3 +5338,12 @@ day bearish with a gross move of 0.20% to 0.28%, straddling the 0.25% futures co
 **Next:** diagnose F06 (day, week) and F07 when they land. The X03 rows are now all ported; next port candidates
 are the O06/D03/D04 rows if their data has arrived, else a discover batch from X04 (Quantpedia). Draft unchanged:
 T04 / E2A / A05B / A01. 19 holdout queries left. `config/live_source.json` on Fri 30 Oct before 12:00 UTC.
+
+## 2026-10-27 10:11 UTC run (leases 4dc17a1: diagnose, discover, port)
+
+F06 day and week (09:31Z) and F07 (09:57Z) landed; evidence at 0236d25.
+Unit 1 (diagnose): F06 diagnosed (`research/diagnostics/f06.md`). Hypothesis (pre-declared): bearish sides fade
+spurts (day +1.5 to +3.5, week +1 to +3), bullish noise. Week bearish beat the range: +3.15 (interval +0.81 to
++5.45, 5/6, dir +0.04%), so it meets the full SPEC 10 rule for week bearish. Day bearish +3.35 misses on dir
+(-0.01%). No query spent: four stronger week-bearish readings were queried this week and none beat A01 (+4.73);
+F06 is first in line if the budget allows after Thursday.

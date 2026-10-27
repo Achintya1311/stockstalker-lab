@@ -26,4 +26,4 @@ red_flags:
   - "Pre-declared before the replay (27 Oct IST): the top bearish picks are the sharpest recent spurts after a flat or falling stretch, the stocks A01 (week) and A02 (day) fade; the top bullish picks are sharp recent falls after a rise, which the lab's bullish reversals have not rewarded (A02 day bullish -1.10, A01 week bullish about 0). Prediction: day bearish +1.5 to +3.5, week bearish +1 to +3, both bullish sides -1.5 to +1. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years. Check overlap with A01, A02 and Q07 first."
   - "The threshold rescale and the |x| sizing are the lab's choices, fixed before the replay; both are needed to use the formula on a top-5 table of NSE stocks."
   - "Alpha#46 was designed for a cross-sectional long-short book on US stocks."
-status: "queued"
+status: "train: week-bearish +3.15 (interval +0.81 to +5.45, 5/6, dir +0.04%), rule met; day-bearish +3.35 (dir -0.01%); bullish noise; no validation query yet; see research/diagnostics/f06.md"
