@@ -5347,3 +5347,7 @@ spurts (day +1.5 to +3.5, week +1 to +3), bullish noise. Week bearish beat the r
 +5.45, 5/6, dir +0.04%), so it meets the full SPEC 10 rule for week bearish. Day bearish +3.35 misses on dir
 (-0.01%). No query spent: four stronger week-bearish readings were queried this week and none beat A01 (+4.73);
 F06 is first in line if the budget allows after Thursday.
+Unit 2 (diagnose): F07 diagnosed (`research/diagnostics/f07.md`). Hypothesis (pre-declared): another fade of short
+pushes, day bearish +1.5 to +3.5 with dir near zero. Held: +2.69 (interval +1.57 to +3.85, 6/6), dir +0.003%, so the
+rule is met at the letter; far below E2A, no query. The X03 batch is closed: F02 and F07 (day bearish) and F06 (week
+bearish) meet the bearish rule, all by fading short-term strength.

@@ -23,4 +23,4 @@ prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate
 red_flags:
   - "Pre-declared before the replay (27 Oct IST): the bearish top five are two-day pushes to a high above the 20-day mean, which the lab's day-bearish fades reward (A02 +4.34, F02 +3.26, F03 +3.54, all with directional moves within 0.1% of zero). Prediction: day bearish +1.5 to +3.5 with a directional move near zero; the bullish side is rare (a lower high still above the mean) and within ±2 of zero. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years. Check overlap with A02, F02 and Q07 first."
   - "Alpha#23 was designed for a cross-sectional long-short book on US stocks, not a top-5 table on NSE F&O stocks."
-status: "queued"
+status: "train: day-bearish +2.69 (interval +1.57 to +3.85, 6/6, dir +0.003%), rule met at the letter; no query (E2A +6.72); see research/diagnostics/f07.md"
