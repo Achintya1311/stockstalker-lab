@@ -226,6 +226,15 @@
     "n": 309,
     "coverage": 1.0
    },
+   "q02-return-volume-corr-week": {
+    "mean": 0.01772006898683817,
+    "lo": -0.003796461634071807,
+    "hi": 0.03960861063774289,
+    "p_le0": 0.0515,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
    "q03-up-day-balance-week": {
     "mean": 0.019661816559653697,
     "lo": -0.004554792838864788,
@@ -234,6 +243,15 @@
     "block": 2,
     "n": 309,
     "coverage": 1.0
+   },
+   "q04-range-extreme-timing-week": {
+    "mean": 0.018671532970593856,
+    "lo": -0.004095936687013248,
+    "hi": 0.041057781231938345,
+    "p_le0": 0.0565,
+    "block": 3,
+    "n": 301,
+    "coverage": 0.9741100323624595
    },
    "q05-trend-smoothness-week": {
     "mean": 0.020093316020279372,
@@ -399,15 +417,15 @@
    }
   },
   "joint": {
-   "n_models": 44,
+   "n_models": 46,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.088,
-    "consistent": 0.127,
-    "upper": 0.127
+    "lower": 0.0895,
+    "consistent": 0.1285,
+    "upper": 0.1285
    },
    "stepm": [],
    "mcs": [
@@ -435,7 +453,9 @@
     "o05-order-block-weekly-week",
     "q01-price-volume-corr-week",
     "q01c-thin-volume-fall-week",
+    "q02-return-volume-corr-week",
     "q03-up-day-balance-week",
+    "q04-range-extreme-timing-week",
     "q05-trend-smoothness-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
@@ -640,6 +660,15 @@
     "n": 309,
     "coverage": 1.0
    },
+   "q02-return-volume-corr-week": {
+    "mean": -0.019038998866912384,
+    "lo": -0.04158884050891613,
+    "hi": 0.0031560801194561094,
+    "p_le0": 0.955,
+    "block": 2,
+    "n": 309,
+    "coverage": 1.0
+   },
    "q03-up-day-balance-week": {
     "mean": 0.006850968770628072,
     "lo": -0.017263176598809243,
@@ -648,6 +677,15 @@
     "block": 1,
     "n": 309,
     "coverage": 1.0
+   },
+   "q04-range-extreme-timing-week": {
+    "mean": -0.0042460148938853635,
+    "lo": -0.03202398226459401,
+    "hi": 0.023573873599999663,
+    "p_le0": 0.6045,
+    "block": 1,
+    "n": 301,
+    "coverage": 0.9741100323624595
    },
    "q05-trend-smoothness-week": {
     "mean": -0.003289268554075271,
@@ -804,13 +842,13 @@
    }
   },
   "joint": {
-   "n_models": 38,
+   "n_models": 40,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.33,
-    "consistent": 0.516,
-    "upper": 0.589
+    "lower": 0.338,
+    "consistent": 0.5345,
+    "upper": 0.603
    },
    "stepm": [],
    "mcs": [
@@ -834,7 +872,9 @@
     "o04b-no-d01-week",
     "o05-order-block-weekly-week",
     "q01-price-volume-corr-week",
+    "q02-return-volume-corr-week",
     "q03-up-day-balance-week",
+    "q04-range-extreme-timing-week",
     "q05-trend-smoothness-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
@@ -880,6 +920,15 @@
     "block": 2,
     "n": 1076,
     "coverage": 0.7334696659850034
+   },
+   "a10-gap-and-go-day": {
+    "mean": -0.05413790149575453,
+    "lo": -0.08797849610298662,
+    "hi": -0.019884743128401865,
+    "p_le0": 1.0,
+    "block": 1,
+    "n": 558,
+    "coverage": 0.3803680981595092
    },
    "champion-v1-day": {
     "mean": -0.015478078034135766,
@@ -1016,6 +1065,15 @@
     "n": 1462,
     "coverage": 0.9965916837082481
    },
+   "q02-return-volume-corr-day": {
+    "mean": -0.009732857798652444,
+    "lo": -0.02028865980636979,
+    "hi": 0.0009473541718315094,
+    "p_le0": 0.9645,
+    "block": 1,
+    "n": 1465,
+    "coverage": 0.9986366734832992
+   },
    "q03-up-day-balance-day": {
     "mean": -0.005239114909005119,
     "lo": -0.016441835167709383,
@@ -1033,6 +1091,15 @@
     "block": 2,
     "n": 1467,
     "coverage": 1.0
+   },
+   "q06r-wide-bar-wick-day": {
+    "mean": 0.018788188845261095,
+    "lo": 0.00793826540916745,
+    "hi": 0.02945368844555203,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 1465,
+    "coverage": 0.9986366734832992
    },
    "t01-sma-crossover-day": {
     "mean": -0.014637170057179743,
@@ -1060,6 +1127,15 @@
     "block": 1,
     "n": 1087,
     "coverage": 0.7409679618268575
+   },
+   "t04-q06-fallback-day": {
+    "mean": 0.03847982194849278,
+    "lo": 0.023864486303854814,
+    "hi": 0.05346312826482521,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 1420,
+    "coverage": 0.9679618268575324
    },
    "t05-macd-crossover-day": {
     "mean": -0.028628576777161248,
@@ -1189,28 +1265,27 @@
    }
   },
   "joint": {
-   "n_models": 37,
+   "n_models": 41,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.0005,
-    "consistent": 0.0035,
-    "upper": 0.004
+    "lower": 0.0,
+    "consistent": 0.0,
+    "upper": 0.0
    },
    "stepm": [
     "d01c-day",
     "q06-wick-balance-day",
+    "q06r-wide-bar-wick-day",
     "t04-connors-rsi2-day",
+    "t04-q06-fallback-day",
     "t10-nr7-narrow-range-day"
    ],
    "mcs": [
-    "a09-gap-fade-day",
     "d01c-day",
-    "e2b-day",
     "q06-wick-balance-day",
-    "t04-connors-rsi2-day",
-    "t06-bollinger-pctb-day",
-    "t10-nr4-narrow-range-day",
+    "q06r-wide-bar-wick-day",
+    "t04-q06-fallback-day",
     "t10-nr7-narrow-range-day",
     "t25-heikin-ashi-day"
    ]
@@ -1407,6 +1482,15 @@
     "n": 1453,
     "coverage": 0.9904567143830948
    },
+   "q02-return-volume-corr-day": {
+    "mean": 0.0004884062127330849,
+    "lo": -0.01001423320173619,
+    "hi": 0.011039523496097573,
+    "p_le0": 0.46,
+    "block": 1,
+    "n": 1465,
+    "coverage": 0.9986366734832992
+   },
    "q03-up-day-balance-day": {
     "mean": 0.0066317509226306946,
     "lo": -0.004060522985626671,
@@ -1424,6 +1508,15 @@
     "block": 1,
     "n": 1467,
     "coverage": 1.0
+   },
+   "q06r-wide-bar-wick-day": {
+    "mean": 0.027871796428887808,
+    "lo": 0.01688761841916511,
+    "hi": 0.03888693894891501,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 1465,
+    "coverage": 0.9986366734832992
    },
    "t01-sma-crossover-day": {
     "mean": 0.018917266894782424,
@@ -1589,7 +1682,7 @@
    }
   },
   "joint": {
-   "n_models": 41,
+   "n_models": 43,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1607,6 +1700,7 @@
     "e2a-day",
     "e2b-day",
     "q06-wick-balance-day",
+    "q06r-wide-bar-wick-day",
     "t01-sma-crossover-day",
     "t04-connors-rsi2-day",
     "t05c-upcross-fade-day",
