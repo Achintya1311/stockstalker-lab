@@ -5322,3 +5322,6 @@ but dir -0.05% after the futures cost, so not eligible; bullish -0.77. 69% of it
 Unit 2 (diagnose): F04 diagnosed (`research/diagnostics/f04.md`). Hypothesis (pre-declared): both day sides within
 ±1.5, dir negative. Held: +0.63 / +1.25 (bearish interval +0.22 to +2.32, dir -0.03%). Not eligible. The
 price-volume correlation readings (Q01, Q01C, Q02, F04) are closed for go-live.
+Unit 3 (diagnose): F05 diagnosed (`research/diagnostics/f05.md`). Hypothesis (pre-declared): the unbounded
+denominator makes it a near-low detector, both sides within ±1.5. Held: -0.66 / +0.23. `all` selection beats `top`
+on both sides (+0.51 / +0.74), so the ranking is what fails. Not eligible.
