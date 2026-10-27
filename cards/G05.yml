@@ -26,4 +26,4 @@ red_flags:
   - "Pre-declared before the replay (27 Oct IST): A01 (raw weekly reversal) is the week-bearish draft, train +2.48 (interval -0.09 to +5.31), released +4.73, and its bullish side is about 0. Removing the market part should drop picks that rose only with the market. Prediction: week bearish +2.5 to +4.5 with a directional move near zero or slightly positive, week bullish -1 to +1.5; top-5 overlap with A01 bearish 40 to 70%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 positive years and a positive directional move after costs; if met and the train edge is above A01's +2.48, it gets one week-bearish validation query (2 rows, two-sided card). Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years."
   - "The market is the equal-weighted mean of the stocks visible that date, not the Nifty index; the universe shifts over time."
   - "Cross-sectional: each score depends on other stocks' past returns. The audit checks that no later row changes it."
-status: "queued"
+status: "train: 0.40 / 2.40 week; helps not met (interval reaches 0); no query, see research/diagnostics/g05.md"
