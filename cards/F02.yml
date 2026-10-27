@@ -1,0 +1,25 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#12"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#12 = sign(delta(volume, 1)) x (-1 x delta(close, 1)), a
+  production WorldQuant alpha: a move on rising volume reverses, a move on falling
+  volume continues. The paper reports no stand-alone hit rate.
+horizon: day
+rules_plain: >
+  On the last two bars: score = -sign(volume change) x one-day log return of the
+  adjusted close. A fall on rising volume or a rise on falling volume is bullish; a
+  rise on rising volume or a fall on falling volume is bearish. Unchanged volume or
+  close abstains. The log return replaces the paper's raw price change so stocks on
+  different price scales rank together. Only the last 2 rows are read.
+default_params: {}
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): the top five are the day's biggest moves, so this is A02 with a volume sign. A02 day bearish (big up days fade) is +4.34 and day bullish (big down days bounce) -1.10; Q01 found thin-volume rises keep rising the next day. F02's bearish side keeps A02's rises on rising volume and adds falls on falling volume; its bullish side keeps A02's falls on rising volume and adds rises on falling volume. Prediction: day bearish +2 to +4 with a directional move near zero, day bullish -1 to +1. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move after costs. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years. Check overlap with A02 and E2A before reading any result as new."
+  - "Alpha#12 was designed for a cross-sectional long-short book on US stocks, not a top-5 table on NSE F&O stocks."
+status: "queued"

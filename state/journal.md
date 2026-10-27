@@ -5275,3 +5275,6 @@ A flip of bullish would earn about -0.02% after the futures cost, so it fails th
 Unit 3 (port): Q07 distance from the 20-day trend line (Alpha158 RESI) ported, day and week queued (`cards/Q07.yml`,
 `strategies/q07_trend_residual.py`, audit, 7 tests). Hypothesis (pre-declared): the stretched side is the reversal
 question again, so day bearish +1.5 to +3.5 (like T06), week bearish +1 to +3 (like A01), bullish small.
+Unit 4 (port): F02 volume-signed one-day reversal (Alpha#12) ported and queued for day (`cards/F02.yml`,
+`strategies/f02_volume_signed_reversal.py`, audit, 6 tests). Hypothesis (pre-declared): it is A02 with a volume
+sign, so day bearish +2 to +4 with a directional move near zero and day bullish -1 to +1.
