@@ -5351,3 +5351,7 @@ Unit 2 (diagnose): F07 diagnosed (`research/diagnostics/f07.md`). Hypothesis (pr
 pushes, day bearish +1.5 to +3.5 with dir near zero. Held: +2.69 (interval +1.57 to +3.85, 6/6), dir +0.003%, so the
 rule is met at the letter; far below E2A, no query. The X03 batch is closed: F02 and F07 (day bearish) and F06 (week
 bearish) meet the bearish rule, all by fading short-term strength.
+Unit 3 (discover): five catalog rows from X04 Quantpedia and the papers it catalogues
+(`research/notes/discover_2026-10-27_x04.md`): G01 residual momentum, G02 betting against beta, G03 frog-in-the-pan
+momentum, G04 realized skewness, G05 market-residual short-term reversal. G01 and G02 confirmed on Quantpedia's
+strategy pages; G03 to G05 cited to their papers. Port G05 and G04 first (nearest to the A01 and A05B drafts).
