@@ -1,0 +1,9 @@
+{
+  "id": "f05-close-location-change-day",
+  "strategy": "strategies.f05_close_location_change",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 298030,
+  "n_dates": 1476,
+  "pick_log_sha256": "a796dd728f26ed9e5464942a2d499b94a75e27ad2e9731d644837c7f65345207"
+}

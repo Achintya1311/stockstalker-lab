@@ -1,0 +1,9 @@
+{
+  "id": "f04-open-volume-corr-day",
+  "strategy": "strategies.f04_open_volume_corr",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 303721,
+  "n_dates": 1476,
+  "pick_log_sha256": "8fece06e67d8938cfd4e37641c576c875549e4107cac9aa561fc82739d54d2da"
+}
