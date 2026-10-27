@@ -5269,3 +5269,6 @@ T04_Q06_FB validation answer (04:19Z) had landed.
 Unit 1 (evaluate): T04_Q06_FB day-bullish validation released -0.60 against train +3.85: validation did not
 agree. T04 (+4.36) stays in the day-bullish draft. The full-coverage option has a negative released edge, so the
 edge-versus-coverage question for AB does not arise in a useful form. `gates/budgets.py`: 41 of 60 used, 19 left.
+Unit 2 (diagnose): F01 diagnosed (`research/diagnostics/f01.md`). Hypothesis (pre-declared): both day sides
+wrong-way from the reversal family. Bullish held (-2.70, interval -3.84 to -1.63, 0/6); bearish was noise (+0.17).
+A flip of bullish would earn about -0.02% after the futures cost, so it fails the bearish table's rule; no flip.
