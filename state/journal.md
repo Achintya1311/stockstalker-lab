@@ -5261,3 +5261,11 @@ and is not queued. Leases removed.
 edge-versus-coverage choice to AB); diagnose F01 when it lands (its Replay has run for over 2 hours); port Q07 and
 F02; pre-declare E2A with a Q06R fallback for day bearish. Draft unchanged: T04 / E2A / A05B / A01. 19 holdout
 queries left this ISO week. `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
+
+## 2026-10-27 04:30 UTC run (leases 90f9e85: evaluate, diagnose, port)
+
+The 04:08Z run was cut off by an API error before doing any work; this run replaces it. F01 (02:57Z) and the
+T04_Q06_FB validation answer (04:19Z) had landed.
+Unit 1 (evaluate): T04_Q06_FB day-bullish validation released -0.60 against train +3.85: validation did not
+agree. T04 (+4.36) stays in the day-bullish draft. The full-coverage option has a negative released edge, so the
+edge-versus-coverage question for AB does not arise in a useful form. `gates/budgets.py`: 41 of 60 used, 19 left.

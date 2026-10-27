@@ -151,3 +151,19 @@ Validation did not agree with train: Thresholdout released the noisy validation 
 steady train record (6 of 6 years) did not carry into 2021-2022. Under the pre-declared rule it does not replace
 A01, so the week-bearish draft stays A01. The Q01C + A01 consensus named in `research/diagnostics/q01c.md` is
 dropped: it was conditional on Q01C validating.
+
+## 27 Oct 04:19Z: T04_Q06_FB day-bullish answered (1 query; `gates/budgets.py`: 41 of 60 used this ISO week, 19 left)
+
+| Table | Candidate | Train edge | Released edge |
+|---|---|---|---|
+| Day bullish | T04_Q06_FB (T04, Q06 on T04's silent days) | +3.85 | **-0.60** |
+| Day bullish | T04 Connors RSI(2) (draft) | +3.37 | +4.36 |
+| Day bullish | Q06 wick balance | +2.58 | +2.58 |
+
+Validation did not agree with train: Thresholdout released the noisy validation number, -0.60. Both members held
+up on their own (T04 +4.36 on its 74% of dates, Q06 +2.58 on every date), so the combination's validation edge
+came in below either member's. This is a noisy single number, not a measured split, but it does not support the
+train reading that Q06 does unusually well on T04's silent days (`research/diagnostics/t04_q06_fb.md`, about +5.4
+there on train). Under AB's edge-only rule the day-bullish draft stays T04. The edge-versus-coverage choice the
+diagnosis said would go to AB if the fallback came in lower does not arise in a useful form: the full-coverage
+option has a negative released edge, so it is not a reasonable alternative to T04.
