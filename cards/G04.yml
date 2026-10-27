@@ -1,0 +1,25 @@
+source_url: ""
+author: "Diego Amaya, Peter Christoffersen, Kris Jacobs and Aurelio Vasquez, Does realized skewness predict the cross-section of equity returns?, Journal of Financial Economics 118(1), 2015"
+license: "Idea from the paper, summarised and re-implemented (SPEC.md section 5)"
+published_on: "2015"
+claim_as_stated: >
+  `cards/catalog.csv` (X04 and the paper): stocks with the most negative realized
+  skewness of recent returns outperform the most positively skewed the following week
+  (US stocks; the paper measures skewness from intraday returns).
+horizon: week
+rules_plain: >
+  Skewness of the last 20 daily log returns of the adjusted close; score = minus the
+  skewness. Most negatively skewed bullish, most positively skewed (lottery-like)
+  bearish. A flat series abstains. Daily returns replace the paper's intraday ones,
+  which the dataset does not hold for 2015-2020. Only the last 21 rows are read.
+default_params:
+  window: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Amaya, Christoffersen, Jacobs and Vasquez (2015) J. Financial Economics; Quantpedia (X04)"
+link: ""
+prior_claim: "Stocks with low realized skewness outperform high-skewness stocks the following week (US)"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): A05B (MAX ranked by its own volatility) holds the week-bullish draft at train and released +2.23, and A05's bearish side (high MAX bearish) is -0.28. Skewness rewards the same low-lottery stocks with a smoother measure. Prediction: week bullish +0.5 to +2.5, week bearish -1.5 to +1; top-5 bullish overlap with A05B bullish under 30% (skew and MAX pick different stocks once one big day dominates). Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; if met and the train edge is above A05B's +2.23, it gets one week-bullish validation query (2 rows). Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move."
+  - "20 daily returns give a noisy skewness; one large day sets most of it, which pulls the reading toward A05's MAX."
+status: "queued"

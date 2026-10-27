@@ -5359,3 +5359,11 @@ Unit 4 (port): G05 market-residual weekly reversal (Da, Liu and Schaumburg 2014)
 (`cards/G05.yml`, `strategies/g05_residual_reversal.py`, audit, 7 tests). Hypothesis (pre-declared): removing the
 market part sharpens A01, week bearish +2.5 to +4.5 with dir near zero, 40-70% overlap with A01; one validation
 query if it meets the rule and beats A01's train +2.48.
+Unit 5 (port): G04 realized skewness (Amaya et al. 2015, from 20 daily returns) ported and queued for week
+(`cards/G04.yml`, `strategies/g04_realized_skewness.py`, audit, 7 tests). Hypothesis (pre-declared): week bullish
++0.5 to +2.5 near A05B, bearish -1.5 to +1; one week-bullish query if it meets the rule and beats A05B's +2.23.
+Also: G05's card no longer carries a DOI I could not verify. Leases removed.
+
+**Next:** diagnose G05 and G04 when they land; port G01, G02, G03. F06 week bearish is first in line for a
+week-bearish query if budget remains after Thursday. Draft unchanged: T04 / E2A / A05B / A01. 19 holdout queries
+left. `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
