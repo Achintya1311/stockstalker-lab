@@ -5278,3 +5278,11 @@ question again, so day bearish +1.5 to +3.5 (like T06), week bearish +1 to +3 (l
 Unit 4 (port): F02 volume-signed one-day reversal (Alpha#12) ported and queued for day (`cards/F02.yml`,
 `strategies/f02_volume_signed_reversal.py`, audit, 6 tests). Hypothesis (pre-declared): it is A02 with a volume
 sign, so day bearish +2 to +4 with a directional move near zero and day bullish -1 to +1.
+Unit 5 (discover): five more catalog rows from X03 (F03 Alpha#9, F04 #6, F05 #53, F06 #46, F07 #23), ohlcv only;
+`research/notes/discover_2026-10-27.md`. E2A with a Q06R fallback was considered and not built: fallbacks mix the
+draft with a weaker member (E2A_D01C_FB released +5.97, T04_Q06_FB -0.60, both below their stronger member), so
+it cannot pass E2A under the highest-released-edge rule. Leases removed.
+
+**Next:** diagnose Q07 (day, week) and F02 when they land; port F03 to F07 (check each formula against the
+paper first). Draft unchanged: T04 / E2A / A05B / A01. 19 holdout queries left this ISO week.
+`config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
