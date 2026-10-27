@@ -5212,3 +5212,8 @@ volume, closing above the prior 20-session high, called bullish. Hypothesis (pre
 of A09's bearish picks (+3.21), so day bullish is wrong-way (about -1 to -3) on low coverage. No flip planned (it
 would re-test A09). A day-bullish rank-average consensus of T04, Q06 and T10-NR7 was considered and not built:
 CONSENSUS_DB_V1 showed rank-averaging dilutes a sparse, strong member (E2A then, T04 here); T04_Q06_FB covers it.
+Unit 4 (discover, lease f3c35c5): three catalog rows added from the X02 and X03 collections
+(`research/notes/discover_2026-10-27.md`): Q07 (Alpha158 RESI20, distance from the 20-day trend line), F01
+(Alpha#101, bar body share) and F02 (Alpha#12, volume-signed one-day reversal). Chosen for ohlcv-only inputs and
+low expected overlap with tested readings; QTLU/QTLD, SUMx and VMA/VSTD left out as repeats of T06, T03 or
+directionless.
