@@ -5329,3 +5329,12 @@ Unit 4 (port): F06 trend acceleration (Alpha#46) ported, day and week queued (`c
 `strategies/f06_trend_acceleration.py`, audit, 8 tests). Two pre-declared departures: threshold 0.25 dollars
 rescaled to 0.00625 in log returns, and the constant +-1 sized by |x| to avoid alphabetical ties. Hypothesis: the
 bearish side is A01/A02's fade of spurts (day +1.5 to +3.5, week +1 to +3); bullish sides -1.5 to +1.
+Unit 5 (port): F07 fade of a high above its 20-day mean (Alpha#23) ported and queued for day (`cards/F07.yml`,
+`strategies/f07_high_push_fade.py`, audit, 7 tests). Hypothesis (pre-declared): another fade of short pushes, day
+bearish +1.5 to +3.5 with dir near zero; bullish rare and near zero. Leases removed.
+Pattern so far today: every one-day fade of a strong up move (A02, F02, F03, Q06R, Q07) lands at +2.7 to +3.6 on
+day bearish with a gross move of 0.20% to 0.28%, straddling the 0.25% futures cost. None beats E2A.
+
+**Next:** diagnose F06 (day, week) and F07 when they land. The X03 rows are now all ported; next port candidates
+are the O06/D03/D04 rows if their data has arrived, else a discover batch from X04 (Quantpedia). Draft unchanged:
+T04 / E2A / A05B / A01. 19 holdout queries left. `config/live_source.json` on Fri 30 Oct before 12:00 UTC.
