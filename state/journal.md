@@ -5206,3 +5206,9 @@ and queued for day (`cards/Q06R.yml`, `strategies/q06r_wide_bar_wick.py`, audit,
 Hypothesis (pre-declared): bullish changes little (+2.4 to +3.4); wider bars carry bigger moves, so bearish's gross
 move rises toward the futures cost. Helps: bearish under the full SPEC 10 rule; bullish only at +3.1 or more with
 interval above 0 and 4 of 6 years, and only then a validation query against T04's released +4.36.
+Unit 3 (port): A10 gap and go ported and queued for day (`cards/A10.yml`, `strategies/a10_gap_and_go.py`, audit,
+7 tests; suite 1022 passed). Lagged one day as A09 is: yesterday's gap of at least 2 sigma, on at least 1.5x median
+volume, closing above the prior 20-session high, called bullish. Hypothesis (pre-declared): it is a filtered subset
+of A09's bearish picks (+3.21), so day bullish is wrong-way (about -1 to -3) on low coverage. No flip planned (it
+would re-test A09). A day-bullish rank-average consensus of T04, Q06 and T10-NR7 was considered and not built:
+CONSENSUS_DB_V1 showed rank-averaging dilutes a sparse, strong member (E2A then, T04 here); T04_Q06_FB covers it.

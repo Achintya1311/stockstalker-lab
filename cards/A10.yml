@@ -1,0 +1,30 @@
+source_url: ""
+author: "Practitioner gap-trading folklore (no single canonical source)"
+license: "Rule re-implemented from the catalog row (SPEC.md section 5)"
+published_on: ""
+claim_as_stated: >
+  `cards/catalog.csv`: a gap up on strong volume above resistance is bullish for the
+  open-to-close move; the opposite bet to A09's gap fade, so whichever direction
+  holds on NSE is the finding.
+horizon: day
+rules_plain: >
+  As A09, the pick date's own open is withheld by the engine, so yesterday's bar is
+  read: yesterday's gap at least 2 sigma of the 20 gaps before it (A09's z),
+  yesterday's volume at least 1.5x the median of the 20 sessions before it, and
+  yesterday's adjusted close above the highest adjusted high of the 20 sessions
+  before it. All three met: score = z, bullish. Anything else abstains. Bullish
+  table only. Only the last 22 rows are read.
+default_params:
+  z_threshold: 2.0
+  volume_ratio: 1.5
+  lookback: 20
+data_needed: "ohlcv"
+testable_now: "partly (opening volume unavailable; the whole day's volume stands in)"
+source: "Practitioner"
+link: ""
+prior_claim: "Competes with A09; whichever direction holds on NSE is the finding"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): A09 found large gap ups fade the next day (day bearish +3.21, StepM superior), and T08 found fresh breakouts lag on the week. A10's picks are a subset of A09's bearish picks with two breakout filters added. Prediction: day bullish negative (about -1 to -3), directional move after the 0.415% delivery cost clearly negative; coverage well under 100% (all three conditions are rare together). Helps (AB's edge-only bullish rule) if top-5 bullish edge is at least +2.0 with the interval above 0, 4 of 6 positive years and at least 500 train picks; only then a validation query against T04's released +4.36. No flip is planned: flipped, it is A09's bearish side with filters, so it would re-test A09."
+  - "One-day-lagged reinterpretation of a same-day rule, as A09 (see `cards/A09.yml`)."
+  - "Thresholds 1.5x volume and 20-session resistance are the lab's reading of 'strong' and 'resistance'; the catalog names no numbers."
+status: "queued"

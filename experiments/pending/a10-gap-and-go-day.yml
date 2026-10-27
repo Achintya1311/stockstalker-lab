@@ -1,0 +1,10 @@
+# A10 (day horizon): yesterday's gap up of at least 2 sigma on at least 1.5x median volume,
+# closing above the prior 20-session high, called bullish; train-split replay (port lane,
+# state/queue.md). See cards/A10.yml and strategies/a10_gap_and_go.py.
+id: a10-gap-and-go-day
+strategy: strategies.a10_gap_and_go
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
