@@ -262,6 +262,15 @@
     "n": 309,
     "coverage": 1.0
    },
+   "q07-trend-residual-week": {
+    "mean": 0.021603564132469232,
+    "lo": -0.004150900762467833,
+    "hi": 0.04770751372306967,
+    "p_le0": 0.0565,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
    "t01-sma-crossover-week": {
     "mean": 0.03195233874864398,
     "lo": 0.009628759152997239,
@@ -417,15 +426,15 @@
    }
   },
   "joint": {
-   "n_models": 46,
+   "n_models": 47,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.0895,
-    "consistent": 0.1285,
-    "upper": 0.1285
+    "lower": 0.093,
+    "consistent": 0.132,
+    "upper": 0.132
    },
    "stepm": [],
    "mcs": [
@@ -457,6 +466,7 @@
     "q03-up-day-balance-week",
     "q04-range-extreme-timing-week",
     "q05-trend-smoothness-week",
+    "q07-trend-residual-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
     "t03-rsi-thresholds-week",
@@ -696,6 +706,15 @@
     "n": 309,
     "coverage": 1.0
    },
+   "q07-trend-residual-week": {
+    "mean": -0.01191925776658876,
+    "lo": -0.03687381057751074,
+    "hi": 0.011258003707378048,
+    "p_le0": 0.8375,
+    "block": 2,
+    "n": 309,
+    "coverage": 1.0
+   },
    "t01-sma-crossover-week": {
     "mean": -0.01810465451751887,
     "lo": -0.03930774586493508,
@@ -842,13 +861,13 @@
    }
   },
   "joint": {
-   "n_models": 40,
+   "n_models": 41,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.338,
-    "consistent": 0.5345,
-    "upper": 0.603
+    "lower": 0.3405,
+    "consistent": 0.5405,
+    "upper": 0.608
    },
    "stepm": [],
    "mcs": [
@@ -876,6 +895,7 @@
     "q03-up-day-balance-week",
     "q04-range-extreme-timing-week",
     "q05-trend-smoothness-week",
+    "q07-trend-residual-week",
     "t01-sma-crossover-week",
     "t02-golden-death-cross-week",
     "t03-rsi-thresholds-week",
@@ -1110,6 +1130,15 @@
     "n": 1465,
     "coverage": 0.9986366734832992
    },
+   "q07-trend-residual-day": {
+    "mean": 0.008666882018594736,
+    "lo": -0.0026150430098752222,
+    "hi": 0.019904185236242704,
+    "p_le0": 0.0665,
+    "block": 2,
+    "n": 1466,
+    "coverage": 0.9993183367416496
+   },
    "t01-sma-crossover-day": {
     "mean": -0.014637170057179743,
     "lo": -0.026227766684470594,
@@ -1274,7 +1303,7 @@
    }
   },
   "joint": {
-   "n_models": 42,
+   "n_models": 43,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1536,6 +1565,15 @@
     "n": 1465,
     "coverage": 0.9986366734832992
    },
+   "q07-trend-residual-day": {
+    "mean": 0.026576541125401223,
+    "lo": 0.015479463190628626,
+    "hi": 0.037935202935365286,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 1465,
+    "coverage": 0.9986366734832992
+   },
    "t01-sma-crossover-day": {
     "mean": 0.018917266894782424,
     "lo": 0.00801752118392275,
@@ -1700,7 +1738,7 @@
    }
   },
   "joint": {
-   "n_models": 44,
+   "n_models": 45,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1719,6 +1757,7 @@
     "e2b-day",
     "q06-wick-balance-day",
     "q06r-wide-bar-wick-day",
+    "q07-trend-residual-day",
     "t01-sma-crossover-day",
     "t04-connors-rsi2-day",
     "t05c-upcross-fade-day",
