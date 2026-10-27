@@ -2,9 +2,9 @@
 
 Edge is in points of hit rate over the market line, per pick date, `top` selection, as in `train_leaderboard.md`. The 95% interval and P(edge <= 0) come from a stationary bootstrap over dates (block length chosen per series), so serial correlation is respected. SPA is Hansen's test that NO strategy beats the market line across all trials of that horizon and side (small p = something real survives snooping). StepM names the strategies individually superior at the 10% level. MCS is the set statistically indistinguishable from the best at 10%. Dates with no pick count as edge 0 in the joint tests.
 
-## day/bearish  (43 experiments, block 1)
+## day/bearish  (44 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-d01c-fallback-day, e2a-day, e2b-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t01-sma-crossover-day, t04-connors-rsi2-day, t05c-upcross-fade-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day. MCS size: 3 of 43.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-d01c-fallback-day, e2a-day, e2b-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t01-sma-crossover-day, t04-connors-rsi2-day, t05c-upcross-fade-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day. MCS size: 3 of 44.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -34,6 +34,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | o01-retest-day | 1389 | 95% | +0.66 | -0.78 to +1.97 | 0.180 | 1 |
 | o04b-no-d01-day | 1389 | 95% | +0.33 | -1.02 to +1.67 | 0.319 | 1 |
 | t09-supertrend-day | 1426 | 97% | +0.32 | -0.80 to +1.46 | 0.292 | 2 |
+| f01-body-share-day | 1467 | 100% | +0.17 | -0.96 to +1.22 | 0.400 | 1 |
 | q02-return-volume-corr-day | 1465 | 100% | +0.05 | -1.00 to +1.10 | 0.460 | 1 |
 | o02-oi-confirmed-day | 802 | 55% | +0.01 | -2.38 to +2.36 | 0.486 | 2 |
 | t05-macd-crossover-day | 1323 | 90% | -0.06 | -1.56 to +1.44 | 0.522 | 2 |
@@ -52,9 +53,9 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | q01-price-volume-corr-day | 1453 | 99% | -1.51 | -2.65 to -0.26 | 0.993 | 2 |
 | d01-oi-buildup-day | 1467 | 100% | -2.48 | -3.54 to -1.44 | 1.000 | 1 |
 
-## day/bullish  (41 experiments, block 1)
+## day/bullish  (42 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: d01c-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-connors-rsi2-day, t04-q06-fallback-day, t10-nr7-narrow-range-day. MCS size: 6 of 41.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: d01c-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-connors-rsi2-day, t04-q06-fallback-day, t10-nr7-narrow-range-day. MCS size: 6 of 42.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -92,6 +93,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | t16-parabolic-sar-day | 1366 | 93% | -1.88 | -3.02 to -0.71 | 1.000 | 1 |
 | t14-cci-day | 1274 | 87% | -2.44 | -4.10 to -0.78 | 0.998 | 1 |
 | t09-supertrend-day | 1426 | 97% | -2.51 | -3.62 to -1.39 | 1.000 | 1 |
+| f01-body-share-day | 1466 | 100% | -2.70 | -3.84 to -1.63 | 1.000 | 1 |
 | t05-macd-crossover-day | 1300 | 89% | -2.86 | -4.47 to -1.25 | 1.000 | 1 |
 | t20-volume-breakout-day | 1252 | 85% | -3.75 | -5.61 to -1.99 | 1.000 | 1 |
 | t12-stochastic-day | 1229 | 84% | -4.53 | -6.20 to -2.86 | 1.000 | 1 |
