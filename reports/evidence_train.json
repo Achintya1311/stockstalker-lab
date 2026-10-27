@@ -1040,6 +1040,24 @@
     "n": 1467,
     "coverage": 1.0
    },
+   "f04-open-volume-corr-day": {
+    "mean": 0.006338873415221166,
+    "lo": -0.0037458962361010726,
+    "hi": 0.016606105998785387,
+    "p_le0": 0.124,
+    "block": 1,
+    "n": 1467,
+    "coverage": 1.0
+   },
+   "f05-close-location-change-day": {
+    "mean": -0.0066468116563534775,
+    "lo": -0.017347580232668382,
+    "hi": 0.003967082228913587,
+    "p_le0": 0.885,
+    "block": 1,
+    "n": 1467,
+    "coverage": 1.0
+   },
    "o00-placebo-day": {
     "mean": -0.009486008550722637,
     "lo": -0.020485220867857968,
@@ -1321,7 +1339,7 @@
    }
   },
   "joint": {
-   "n_models": 45,
+   "n_models": 47,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1490,6 +1508,24 @@
     "hi": 0.04642818207398736,
     "p_le0": 0.0,
     "block": 1,
+    "n": 1467,
+    "coverage": 1.0
+   },
+   "f04-open-volume-corr-day": {
+    "mean": 0.012519532711549576,
+    "lo": 0.0021527508773213286,
+    "hi": 0.02315604881295158,
+    "p_le0": 0.0105,
+    "block": 3,
+    "n": 1467,
+    "coverage": 1.0
+   },
+   "f05-close-location-change-day": {
+    "mean": 0.0022945838362939514,
+    "lo": -0.008718027525744017,
+    "hi": 0.012972647341313644,
+    "p_le0": 0.3455,
+    "block": 2,
     "n": 1467,
     "coverage": 1.0
    },
@@ -1774,7 +1810,7 @@
    }
   },
   "joint": {
-   "n_models": 47,
+   "n_models": 49,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1793,7 +1829,6 @@
     "e2b-day",
     "f02-volume-signed-reversal-day",
     "f03-conditional-reversal-day",
-    "q06-wick-balance-day",
     "q06r-wide-bar-wick-day",
     "q07-trend-residual-day",
     "t01-sma-crossover-day",
