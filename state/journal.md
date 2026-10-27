@@ -5239,3 +5239,7 @@ Unit 1 (diagnose + evaluate): T04_Q06_FB diagnosed (`research/diagnostics/t04_q0
 last-row universe check was wrong), so the rule is not met on coverage alone. Eligible under AB's edge-only rule;
 day-bullish validation queued (1 row; `gates/budgets.py` showed 20 left before it). Replaces T04 only if released
 > +4.36; if lower, the edge-versus-coverage choice goes to AB.
+Unit 2 (diagnose): Q06R diagnosed (`research/diagnostics/q06r.md`). Hypothesis (pre-declared): wide bars sharpen
+bearish (+1.5 to +2.5, dir near zero) and leave bullish about level (+2.4 to +3.4). Bearish beat it: +2.79
+(interval +1.69 to +3.89, 6/6, dir +0.01%), rule met. Bullish missed low: +1.88. Eligible for day bearish, but far
+below E2A's released +6.72, so no query is spent. Next idea: Q06R as E2A's fallback (1.1% overlap), pre-declared.
