@@ -5298,3 +5298,7 @@ Unit 2 (diagnose): F02 diagnosed (`research/diagnostics/f02.md`). Hypothesis (pr
 sign, day bearish +2 to +4 with dir near zero, bullish -1 to +1. Held: bearish +3.26 (interval +2.15 to +4.33,
 6/6, dir +0.03%), rule met; bullish +0.46. 45% of its bearish picks are A02's and 19% E2A's. Eligible for day
 bearish but far below E2A (released +6.72), so no query is spent.
+Unit 3 (port): F03 conditional one-day continuation (Alpha#9) ported and queued for day (`cards/F03.yml`,
+`strategies/f03_conditional_reversal.py`, audit, 7 tests). Formulas for F03 to F07 checked against the paper's
+appendix first: F06's catalog row had Alpha#46's direction reversed and is corrected (the paper fades an
+accelerating rise). Hypothesis (pre-declared): mostly A02's reversal, day bearish +2.5 to +4.5, bullish -1.5 to +0.5.

@@ -1,0 +1,26 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#9"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#9, a one-day reversal that switches to continuation
+  when the last 5 daily changes all share a sign. A production WorldQuant alpha; the
+  paper reports no stand-alone hit rate.
+horizon: day
+rules_plain: >
+  On the adjusted close: r = the last 5 daily log returns. If all 5 are above zero, or
+  all below, score = today's return (continuation); otherwise score = minus today's
+  return (reversal). A zero return abstains. Log returns replace the paper's raw
+  price changes so stocks on different price scales rank together. Only the last 6
+  rows are read.
+default_params:
+  run: 5
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): outside a 5-session run this is A02's fade of the day's biggest moves (A02 day bearish +4.34, day bullish -1.10; F02, its volume-signed relative, day bearish +3.26). Runs of five same-sign days are rare, so most top-five picks are reversals. Prediction: day bearish +2.5 to +4.5 with a directional move near zero, day bullish -1.5 to +0.5. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years. Check overlap with A02 and F02 first; a reading that repeats A02 adds a trial, not information."
+  - "Alpha#9 was designed for a cross-sectional long-short book on US stocks, not a top-5 table on NSE F&O stocks."
+status: "queued"
