@@ -127,6 +127,15 @@
     "n": 225,
     "coverage": 0.7281553398058253
    },
+   "f06-trend-acceleration-week": {
+    "mean": 0.03152805172685974,
+    "lo": 0.008103080189658773,
+    "hi": 0.05450886647889249,
+    "p_le0": 0.006,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
    "i01-momentum-score-week": {
     "mean": 0.020388329782628282,
     "lo": -0.0035150328553094296,
@@ -426,15 +435,15 @@
    }
   },
   "joint": {
-   "n_models": 47,
+   "n_models": 48,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.093,
-    "consistent": 0.132,
-    "upper": 0.132
+    "lower": 0.094,
+    "consistent": 0.133,
+    "upper": 0.133
    },
    "stepm": [],
    "mcs": [
@@ -451,6 +460,7 @@
     "consensus-wb-v1-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
+    "f06-trend-acceleration-week",
     "i01-momentum-score-week",
     "i02-low-vol-level-week",
     "o00-placebo-week",
@@ -579,6 +589,15 @@
     "block": 2,
     "n": 302,
     "coverage": 0.9773462783171522
+   },
+   "f06-trend-acceleration-week": {
+    "mean": -0.0009160215206340647,
+    "lo": -0.02237572694138427,
+    "hi": 0.022900569178416198,
+    "p_le0": 0.535,
+    "block": 2,
+    "n": 309,
+    "coverage": 1.0
    },
    "i01-momentum-score-week": {
     "mean": 0.012299731330299742,
@@ -861,13 +880,13 @@
    }
   },
   "joint": {
-   "n_models": 41,
+   "n_models": 42,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.3405,
-    "consistent": 0.5405,
-    "upper": 0.608
+    "lower": 0.3485,
+    "consistent": 0.5445,
+    "upper": 0.6115
    },
    "stepm": [],
    "mcs": [
@@ -881,6 +900,7 @@
     "champion-v1-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
+    "f06-trend-acceleration-week",
     "i01-momentum-score-week",
     "i02-low-vol-level-week",
     "o00-placebo-week",
@@ -1057,6 +1077,15 @@
     "block": 1,
     "n": 1467,
     "coverage": 1.0
+   },
+   "f06-trend-acceleration-day": {
+    "mean": -0.004954700802065414,
+    "lo": -0.01602977768227536,
+    "hi": 0.006372247776772488,
+    "p_le0": 0.8265,
+    "block": 1,
+    "n": 1465,
+    "coverage": 0.9986366734832992
    },
    "o00-placebo-day": {
     "mean": -0.009486008550722637,
@@ -1339,7 +1368,7 @@
    }
   },
   "joint": {
-   "n_models": 47,
+   "n_models": 48,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1528,6 +1557,15 @@
     "block": 2,
     "n": 1467,
     "coverage": 1.0
+   },
+   "f06-trend-acceleration-day": {
+    "mean": 0.033531772610419376,
+    "lo": 0.02220487694376453,
+    "hi": 0.04433070884846521,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 1464,
+    "coverage": 0.9979550102249489
    },
    "o00-placebo-day": {
     "mean": -0.006460407931581837,
@@ -1810,7 +1848,7 @@
    }
   },
   "joint": {
-   "n_models": 49,
+   "n_models": 50,
    "block": 1,
    "twins": {},
    "spa": {
@@ -1829,6 +1867,7 @@
     "e2b-day",
     "f02-volume-signed-reversal-day",
     "f03-conditional-reversal-day",
+    "f06-trend-acceleration-day",
     "q06r-wide-bar-wick-day",
     "q07-trend-residual-day",
     "t01-sma-crossover-day",
