@@ -139,3 +139,15 @@ consistent with +2.58. It is below T04's released +4.36, so under AB's edge-only
 T04. Q06 is now the second validated day-bullish reading, after T04, with full coverage (T04 fires on about 74% of
 train dates) and 1% top-5 overlap with T04. That makes the two good members for a day-bullish consensus. The
 bearish row (+1.67) was answered too but is not used: Q06's day-bearish directional move is negative.
+
+## 27 Oct 00:27Z: Q01C week-bearish answered (1 query; `gates/budgets.py`: 40 of 60 used this ISO week, 20 left)
+
+| Table | Candidate | Train edge | Released edge |
+|---|---|---|---|
+| Week bearish | Q01C thin-volume fall, called bearish | +3.26 | +0.27 |
+| Week bearish | A01 weekly reversal (draft) | | +4.73 |
+
+Validation did not agree with train: Thresholdout released the noisy validation number, +0.27. Q01C's
+steady train record (6 of 6 years) did not carry into 2021-2022. Under the pre-declared rule it does not replace
+A01, so the week-bearish draft stays A01. The Q01C + A01 consensus named in `research/diagnostics/q01c.md` is
+dropped: it was conditional on Q01C validating.

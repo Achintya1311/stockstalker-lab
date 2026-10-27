@@ -1,0 +1,25 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#101"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#101 = (close - open) / ((high - low) + 0.001), a
+  production WorldQuant alpha with a holding period of days; the paper reports no
+  stand-alone hit rate. Its sign reads a bar that closes near its high as bullish.
+horizon: day
+rules_plain: >
+  On the adjusted last bar: score = (close - open) / (high - low). Positive (closed
+  above the open, near the high) bullish, negative bearish. A zero-range bar or a
+  doji (close equal to open) abstains; the paper's +0.001 is dropped because
+  adjusted prices are not on one scale. Only the last 2 rows are read.
+default_params: {}
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): A02 and its family find that strong up days fade the next day and strong down days bounce (the lab's day-bearish fade cell is its strongest), and Q06 finds a long lower wick (a close well above the low) bullish. A full up body is a strong intraday up day, so the reversal family predicts F01 day bullish wrong-way (about -1 to -3) and day bearish wrong-way too. Helps, bullish (AB's edge-only rule): top-5 edge at least +2.0, interval above 0, 4 of 6 years; then a validation query against T04's released +4.36. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move after costs. If a side is significantly wrong-way, check its top-5 overlap with A02, E2A and Q06 before any flip."
+  - "Alpha#101 was designed for a cross-sectional long-short book on US stocks, not a top-5 table on NSE F&O stocks."
+  - "Scores of exactly +1 or -1 (open at one extreme, close at the other) tie; they are rarer than Q06's exact 1s but the alphabetical tie-break can decide some top fives. To be counted in the diagnosis."
+status: "queued"

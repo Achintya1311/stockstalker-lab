@@ -1,0 +1,9 @@
+# F01 (day horizon): 101 Formulaic Alphas, Alpha#101 bar body share, train-split replay
+# (port lane, state/queue.md). See cards/F01.yml and strategies/f01_body_share.py.
+id: f01-body-share-day
+strategy: strategies.f01_body_share
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

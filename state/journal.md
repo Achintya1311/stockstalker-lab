@@ -5217,3 +5217,14 @@ Unit 4 (discover, lease f3c35c5): three catalog rows added from the X02 and X03 
 (Alpha#101, bar body share) and F02 (Alpha#12, volume-signed one-day reversal). Chosen for ohlcv-only inputs and
 low expected overlap with tested readings; QTLU/QTLD, SUMx and VMA/VSTD left out as repeats of T06, T03 or
 directionless.
+Unit 5 (port): F01 bar body share (Alpha#101) ported and queued for day (`cards/F01.yml`,
+`strategies/f01_body_share.py`, audit, 7 tests; suite 1029 passed). Hypothesis (pre-declared): a full up body is a
+strong intraday up day, so the reversal family predicts both day sides wrong-way (about -1 to -3); overlap with
+A02, E2A and Q06 to be checked before any flip.
+Also recorded: the Q01C week-bearish validation answer landed mid-run (74bb318). Released +0.27 against train
++3.26, so validation did not agree; A01 (+4.73) stays in the week-bearish draft and the Q01C+A01 consensus is
+dropped. `gates/budgets.py`: 40 of 60 holdout queries used this ISO week, 20 left. Leases removed.
+
+**Next:** diagnose T04_Q06_FB (pre-declared +3.0, 99% coverage), Q02 day and week, Q04 week, Q06R day, A10 day and
+F01 day as their replays land (the Replay run for 22f9d9c is in progress; F01's starts with this push); port Q07 and
+F02. Draft unchanged: T04 / E2A / A05B / A01. `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
