@@ -1,0 +1,10 @@
+# G02 (week horizon): Frazzini and Pedersen (2014) betting against beta, 250-session
+# beta against the equal-weighted F&O mean, shrunk toward 1, train-split replay (port
+# lane, state/queue.md). See cards/G02.yml and strategies/g02_betting_against_beta.py.
+id: g02-betting-against-beta-week
+strategy: strategies.g02_betting_against_beta
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

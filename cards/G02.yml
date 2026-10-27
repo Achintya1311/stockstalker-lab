@@ -1,0 +1,28 @@
+source_url: "https://quantpedia.com/strategies/betting-against-beta-factor-in-stocks"
+author: "Andrea Frazzini and Lasse Heje Pedersen, Betting Against Beta, Journal of Financial Economics 111(1), 2014"
+license: "Idea from the paper, summarised and re-implemented (SPEC.md section 5)"
+published_on: "2014"
+claim_as_stated: >
+  `cards/catalog.csv` (X04 and the paper): low-beta assets earn higher risk-adjusted
+  returns than high-beta assets, across stock markets and asset classes.
+horizon: week
+rules_plain: >
+  On adjusted closes: m = equal-weighted mean daily log return of the F&O stocks
+  visible each date; beta of each stock against m over the last 250 sessions, shrunk
+  as 0.6 x beta + 0.4; score = 1 - shrunk beta. Below-market beta bullish, above-market
+  beta bearish. A gap in the window abstains. The paper's 5-year correlation and 1-year
+  volatility are folded into one 1-year beta, and its leverage-neutral long-short is
+  left out: the lab ranks, it does not size.
+default_params:
+  beta_window: 250
+  shrink: 0.6
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Frazzini and Pedersen (2014) J. Financial Economics; Quantpedia (X04)"
+link: "https://quantpedia.com/strategies/betting-against-beta-factor-in-stocks"
+prior_claim: "Low-beta assets earn higher risk-adjusted returns than high-beta assets across markets"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): the low-volatility pair is middling on the week horizon, A06 bullish +1.55 and I02 bullish +1.85, both with negative directional moves. Beta keeps the market part of volatility and drops the stock-specific part. The paper's claim is per unit of risk; the lab scores raw hit rate, where low beta should trail in rising weeks. Prediction: week bullish 0 to +2, week bearish -1 to +1.5, directional moves negative on both sides; top-5 bullish overlap with A06 bullish 20 to 50%. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; if met and the train edge is above A05B's +2.23, it gets one week-bullish validation query (2 rows, two-sided card). Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years and a positive directional move after costs; a query only if train is above A01's +2.48."
+  - "Beta moves slowly, so top-5 picks will repeat week after week; fewer distinct stocks than the pick count suggests."
+  - "Cross-sectional: each score depends on other stocks' past returns. The audit checks that no later row changes it."
+status: "queued"

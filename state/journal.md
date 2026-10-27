@@ -5367,3 +5367,29 @@ Also: G05's card no longer carries a DOI I could not verify. Leases removed.
 **Next:** diagnose G05 and G04 when they land; port G01, G02, G03. F06 week bearish is first in line for a
 week-bearish query if budget remains after Thursday. Draft unchanged: T04 / E2A / A05B / A01. 19 holdout queries
 left. `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
+
+## 2026-10-27 12:21 UTC run (leases 02c17db: diagnose, port)
+
+G05 (11:29Z) and G04 (12:02Z) landed; evidence at d3c04d3.
+Unit 1 (diagnose): G05 diagnosed (`research/diagnostics/g05.md`). Hypothesis (pre-declared): week bearish +2.5 to
++4.5, dir near zero or slightly positive, 40-70% overlap with A01. Came in at +2.40 (interval -0.37 to +5.11, 4/6,
+dir +0.11%) with 72.8% A01 overlap: mostly A01 again, a shade weaker. The helps rule is not met (interval reaches 0)
+and train is below A01's +2.48, so no query. Bullish +0.40, noise as predicted.
+Unit 2 (diagnose): G04 diagnosed (`research/diagnostics/g04.md`). Hypothesis (pre-declared): week bullish +0.5 to
++2.5, bearish -1.5 to +1. Wrong way round: bullish -1.19 (1/6), bearish +1.84 (6/6) but dir -0.33%. Not eligible.
+On 20 daily returns the most negative skew is one crash day, and those stocks kept falling (3.6% A05B overlap).
+Unit 3 (port): G01 residual momentum (Blitz, Huij and Martens 2011) ported and queued for week
+(`cards/G01.yml`, `strategies/g01_residual_momentum.py`, audit, 8 tests). 12-1 months, market residual scaled by
+its volatility. Hypothesis (pre-declared): both sides -1 to +1.5 with negative dir, 20-50% overlap with A03.
+Unit 4 (port): G03 frog-in-the-pan (Da, Gurun and Warachka 2014) ported and queued for week (`cards/G03.yml`,
+`strategies/g03_frog_in_the_pan.py`, audit, 8 tests). Score = PRET x (-ID), jump-driven moves abstain. Hypothesis
+(pre-declared): both sides -1 to +2, negative dir, 30-60% overlap with A03.
+Unit 5 (port): G02 betting against beta (Frazzini and Pedersen 2014) ported and queued for week (`cards/G02.yml`,
+`strategies/g02_betting_against_beta.py`, audit, 7 tests). 250-session beta vs the equal-weighted mean, shrunk
+0.6/0.4; score = 1 - shrunk beta. Hypothesis (pre-declared): bullish 0 to +2, bearish -1 to +1.5, 20-50% overlap
+with A06. Each G card gets a query only if its rule is met and train beats the draft (A05B +2.23 bullish, A01 +2.48
+bearish). Full pytest once for all five units (1115 tests). Leases removed.
+
+**Next:** diagnose G01, G02, G03 when they land. X04 batch then closed; next discover source after that. F06 week
+bearish stays first in line for a week-bearish query if budget remains after Thursday. Draft unchanged: T04 / E2A /
+A05B / A01. 19 holdout queries left. `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
