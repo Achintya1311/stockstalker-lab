@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 184. Gate 2's bar at that count: t >= 4.33.
+Trials recorded: 186. Gate 2's bar at that count: t >= 4.34.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -10,6 +10,7 @@ Trials recorded: 184. Gate 2's bar at that count: t >= 4.33.
 | consensus-db-v1-day | day | bearish | 7335 | 59.14% | 54.54% | 4.61 | 8.32 | yes | 0.07 | 100.00% | candidate |
 | e2a-d01c-fallback-day | day | bearish | 4996 | 58.97% | 54.43% | 5.97 | 7.44 | yes | 0.06 | 100.00% | candidate |
 | e2a-day | day | bearish | 2767 | 61.44% | 55.08% | 7.46 | 6.92 | yes | 0.13 | 100.00% | candidate |
+| f03-conditional-reversal-day | day | bearish | 7332 | 58.07% | 54.54% | 3.54 | 6.36 | yes | -0.05 | 100.00% |  |
 | f02-volume-signed-reversal-day | day | bearish | 7335 | 57.79% | 54.54% | 3.26 | 5.86 | yes | 0.03 | 100.00% | candidate |
 | a02-extreme-day-reversal-day | day | bearish | 4641 | 58.54% | 54.48% | 4.34 | 5.24 | yes | -0.04 | 100.00% |  |
 | e1b-day | day | bearish | 4547 | 58.52% | 54.55% | 4.29 | 5.13 | yes | -0.04 | 100.00% |  |
@@ -151,6 +152,7 @@ Trials recorded: 184. Gate 2's bar at that count: t >= 4.33.
 | o00-placebo-week | week | bearish | 1500 | 49.20% | 50.76% | -1.48 | -1.27 |  | -0.33 | 50.00% |  |
 | o04b-no-d01-week | week | bullish | 1418 | 47.95% | 49.11% | -1.68 | -1.35 |  | -0.48 | 16.67% |  |
 | t03-rsi-thresholds-day | day | bullish | 4896 | 44.40% | 44.95% | -1.13 | -1.38 |  | -0.59 | 33.33% |  |
+| f03-conditional-reversal-day | day | bullish | 7334 | 44.18% | 44.96% | -0.77 | -1.39 |  | -0.66 | 50.00% |  |
 | t01-sma-crossover-week | week | bullish | 1499 | 47.10% | 48.80% | -1.81 | -1.45 |  | -1.09 | 33.33% |  |
 | q02-return-volume-corr-week | week | bullish | 1545 | 46.99% | 48.89% | -1.90 | -1.58 |  | -0.51 | 33.33% |  |
 | t14-cci-day | day | bearish | 5285 | 53.59% | 54.82% | -1.29 | -1.74 |  | -0.09 | 16.67% |  |

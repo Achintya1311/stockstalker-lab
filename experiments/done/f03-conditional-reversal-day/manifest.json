@@ -1,0 +1,9 @@
+{
+  "id": "f03-conditional-reversal-day",
+  "strategy": "strategies.f03_conditional_reversal",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 300930,
+  "n_dates": 1480,
+  "pick_log_sha256": "edc325856f72072db2df7f9412612e24cf7f7759730827593e52755ec658cea1"
+}
