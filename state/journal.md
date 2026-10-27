@@ -5228,3 +5228,14 @@ dropped. `gates/budgets.py`: 40 of 60 holdout queries used this ISO week, 20 lef
 **Next:** diagnose T04_Q06_FB (pre-declared +3.0, 99% coverage), Q02 day and week, Q04 week, Q06R day, A10 day and
 F01 day as their replays land (the Replay run for 22f9d9c is in progress; F01's starts with this push); port Q07 and
 F02. Draft unchanged: T04 / E2A / A05B / A01. `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
+
+## 2026-10-27 02:09 UTC run (diagnose lease 0a9b403, evaluate lease 1860460)
+
+Six replays landed at 02:08Z (9cb54b5): T04_Q06_FB, Q02 day and week, Q04 week, Q06R day, A10 day. F01 is still
+running.
+Unit 1 (diagnose + evaluate): T04_Q06_FB diagnosed (`research/diagnostics/t04_q06_fb.md`). Hypothesis
+(pre-declared): Q06 fills T04's blank days for about +3.2 on 99% of dates. Result: +3.85 (t 5.12, interval +2.39 to
++5.35, 6/6 years), first in the day-bullish cell and StepM superior, but on 96.8% of dates (47 blanks where T04's
+last-row universe check was wrong), so the rule is not met on coverage alone. Eligible under AB's edge-only rule;
+day-bullish validation queued (1 row; `gates/budgets.py` showed 20 left before it). Replaces T04 only if released
+> +4.36; if lower, the edge-versus-coverage choice goes to AB.

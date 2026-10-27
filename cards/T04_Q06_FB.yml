@@ -28,4 +28,4 @@ red_flags:
 - The universe check uses the last visible row, not the pick date's own row the engine uses, so a stock can still drop out at the margin.
 - T04 often fires on fewer than 5 stocks, so on T04 dates the table can have fewer than 5 picks. Filling to 5 with Q06 is a different trial.
 - Train split only until a frozen version exists.
-status: queued
+status: "train: day-bullish +3.85 (interval +2.39 to +5.35, 6/6 years, 97% of dates), pre-declared rule not met on coverage; validation query queued; see research/diagnostics/t04_q06_fb.md"

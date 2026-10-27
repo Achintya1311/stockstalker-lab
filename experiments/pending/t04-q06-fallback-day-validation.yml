@@ -1,0 +1,12 @@
+# Validation query for the day-bullish table (SPEC.md section 10 provisional rule, AB's edge-only rule
+# for bullish tables). T04_Q06_FB: 5,621 train picks, top-5 edge +3.85 (interval +2.39 to +5.35, 6/6
+# years) on 97% of train dates (research/diagnostics/t04_q06_fb.md). Replaces the draft's T04 (released
+# +4.36) only if its released edge is higher. Bullish only, so only the bullish row is answered.
+id: t04-q06-fallback-day-validation
+strategy: strategies.t04_q06_fallback
+split: validation
+horizon: day
+train_experiment: t04-q06-fallback-day
+dates:
+  start: 2021-01-01
+  end: 2023-12-31
