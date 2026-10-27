@@ -1,0 +1,30 @@
+source_url: "https://quantpedia.com/strategies/residual-momentum-factor"
+author: "David Blitz, Joop Huij and Martin Martens, Residual momentum, Journal of Empirical Finance 18(3), 2011"
+license: "Idea from the paper, summarised and re-implemented (SPEC.md section 5)"
+published_on: "2011"
+claim_as_stated: >
+  `cards/catalog.csv` (X04 and the paper): momentum ranked on each stock's residual
+  return against the market, scaled by the residual's volatility, earns about the same
+  premium as total momentum with about half the volatility (US stocks, 1930-2009).
+horizon: week
+rules_plain: >
+  On adjusted closes: m = equal-weighted mean daily log return of the F&O stocks
+  visible each date; over the 252 sessions ending 21 sessions before the last date
+  (A03's 12-1 months), beta of each stock against m; residual e = stock log return -
+  beta x m; score = sum(e) / (std(e) x sqrt(252)). Highest bullish, lowest bearish.
+  A gap in the window abstains. The paper's 36-month three-factor regression is cut to
+  the 12-month window with the market factor only (no size or value data, and 36
+  months would leave 2015-2017 without picks).
+default_params:
+  lookback: 252
+  skip: 21
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Blitz, Huij and Martens (2011) J. Empirical Finance; Quantpedia (X04)"
+link: "https://quantpedia.com/strategies/residual-momentum-factor"
+prior_claim: "Residual momentum earns about the same premium as total momentum with about half the volatility (US, 1930-2009)"
+red_flags:
+  - "Pre-declared before the replay (27 Oct IST): A03 (total 12-1 momentum) is weak on the week horizon, train bullish +0.21 and bearish +0.85, both with negative directional moves. Removing the market part and scaling by residual volatility should favour steady climbers, which overlaps A06/I02's low-volatility picks. Prediction: week bullish -1 to +1.5, week bearish -1 to +1.5, directional moves negative on both sides; top-5 bullish overlap with A03 bullish 20 to 50%. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; if met and the train edge is above A05B's +2.23, it gets one week-bullish validation query (2 rows, two-sided card). Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years and a positive directional move after costs; a query only if train is above A01's +2.48."
+  - "Momentum is a monthly effect; the lab scores it over one week, so the horizon is far shorter than the paper's."
+  - "Cross-sectional: each score depends on other stocks' past returns. The audit checks that no later row changes it."
+status: "queued"
