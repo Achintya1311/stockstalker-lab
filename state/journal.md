@@ -5355,3 +5355,7 @@ Unit 3 (discover): five catalog rows from X04 Quantpedia and the papers it catal
 (`research/notes/discover_2026-10-27_x04.md`): G01 residual momentum, G02 betting against beta, G03 frog-in-the-pan
 momentum, G04 realized skewness, G05 market-residual short-term reversal. G01 and G02 confirmed on Quantpedia's
 strategy pages; G03 to G05 cited to their papers. Port G05 and G04 first (nearest to the A01 and A05B drafts).
+Unit 4 (port): G05 market-residual weekly reversal (Da, Liu and Schaumburg 2014) ported and queued for week
+(`cards/G05.yml`, `strategies/g05_residual_reversal.py`, audit, 7 tests). Hypothesis (pre-declared): removing the
+market part sharpens A01, week bearish +2.5 to +4.5 with dir near zero, 40-70% overlap with A01; one validation
+query if it meets the rule and beats A01's train +2.48.
