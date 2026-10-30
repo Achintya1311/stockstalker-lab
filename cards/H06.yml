@@ -24,4 +24,4 @@ red_flags:
   - "Pre-declared before the replay (30 Oct 2026): downside beta and full beta are highly correlated, and G02 found the opposite sign (low full beta bullish +3.69, high beta bearish +2.65, both carried by 2018-19). So H06 is expected to be wrong-way, roughly G02 mirrored. Prediction: week bullish -3.5 to 0, week bearish -3.0 to 0, directional moves negative; top-5 bullish overlap with G02 bearish (high beta) 40 to 80%. Helps (either side): +2.0, interval above 0, 4 of 6 years, plus a positive directional move for bearish; query bars as on H02 (bullish +3.23, bearish +5.73). If both sides are wrong-way as predicted, no flip is ported: G02 already holds that reading."
   - "A premium for bearing crash risk is earned mostly in the crash itself; a one-week hit rate scores the many calm weeks, where high-beta stocks simply track the market."
   - "Cross-sectional: the median and the market mean use every stock; the audit fixes the median and checks no later row moves other scores."
-status: "queued"
+status: "train: -2.69 week-bull / -0.73 week-bear; wrong-way as pre-declared, no flip (see research/diagnostics/h06.md)"

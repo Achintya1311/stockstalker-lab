@@ -5504,3 +5504,10 @@ passed. Leases removed.
 **Next:** diagnose H06 when it lands; pre-declare and queue H02 on day bearish; port H01, H05, H04. Tonight's dataset
 update triggers the first live run: check `live/` for the 2 Nov tables and the exam backfill. 19 holdout queries left
 this ISO week.
+
+## 2026-10-30 16:09 UTC run (leases 922707b: diagnose, port)
+
+H06 landed (15:04Z); evidence at 6a4979f.
+Unit 1 (diagnose): H06 downside beta (`research/diagnostics/h06.md`). Hypothesis (pre-declared): wrong-way, G02
+mirrored. Held: bullish -2.69 (interval -5.36 to -0.04, dir -0.87%), bearish -0.73, 59.7% overlap with G02's bearish
+picks; 2018-19 drive it as they drove G02. No flip (G02 holds it). Beta family closed.
