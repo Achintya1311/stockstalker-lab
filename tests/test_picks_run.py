@@ -6,7 +6,6 @@ from strategies import champion_v1
 from tests._picks_dataset import make_dataset
 
 from picks.run import run
-from picks.source import LIVE_SOURCE_PATH
 
 N_ROWS = champion_v1.MIN_ROWS + 15
 
@@ -101,18 +100,14 @@ def test_run_scores_an_earlier_days_picks_once_its_outcome_lands_in_the_dataset(
 
 
 def test_run_live_mode_does_nothing_when_live_source_is_missing(tmp_path):
-    # Relies on the real repo not yet carrying config/live_source.json
-    # (SPEC.md section 10: committed by Fri 30 Oct, not yet). Confirmed by
-    # the default LIVE_SOURCE_PATH itself, so this test stays honest if
-    # that file is ever added for real.
-    assert not LIVE_SOURCE_PATH.exists()
-
+    # The real config/live_source.json exists from 30 Oct 2026 (SPEC.md
+    # section 10), so point the run at a missing file in a temp dir.
     dates = _dates_ending("2026-10-19")
     dataset = make_dataset({"UP": 0.01}, dates)
     data_path = _write_parquet(tmp_path, dataset)
     out_dir = tmp_path / "out"
 
-    run(data_path, out_dir, mode="live")
+    run(data_path, out_dir, mode="live", source_path=_no_source(tmp_path))
 
     assert not out_dir.exists()
 

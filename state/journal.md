@@ -5393,3 +5393,13 @@ bearish). Full pytest once for all five units (1115 tests). Leases removed.
 **Next:** diagnose G01, G02, G03 when they land. X04 batch then closed; next discover source after that. F06 week
 bearish stays first in line for a week-bearish query if budget remains after Thursday. Draft unchanged: T04 / E2A /
 A05B / A01. 19 holdout queries left. `config/live_source.json` from the draft on Fri 30 Oct before 12:00 UTC.
+
+## 2026-10-30 04:07 UTC run (leases e910f05: evaluate, diagnose)
+
+No lab runs on 28-29 Oct (the scheduled task was paused); only dataset and intraday manifests landed. G01-G03 replays finished 27 Oct 13:30Z.
+Unit 1 (evaluate, roster day): committed `config/live_source.json`, the go-live deadline (Fri 30 Oct 12:00 UTC). Hypothesis: the draft
+is still each table's highest released validation edge. Checked against all 41 rows of `ledger/holdout_queries.csv`: day_bullish T04
++4.36 (next Q06 +2.58), day_bearish E2A +6.72 (E2A_D01C_FB +5.97), week_bullish A05B +2.23 (O05 +1.90), week_bearish A01 +4.73
+(A01_I01F +4.17). All four provisional; bullish under AB's edge-only rule (SPEC 10 wording change still pending a supervised session).
+No query spent (16 spent this ISO week). `tests/test_picks_run.py`'s live-mode test no longer relies on the real file being absent;
+new `tests/test_picks_live_source.py` runs the committed file end to end (every table fires, disclaimer present, no forbidden words).
