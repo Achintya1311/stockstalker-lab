@@ -5451,3 +5451,11 @@ signals about risk and trading activity should pick larger movers. No trials (no
 
 **Next:** diagnose G01B when it lands; port H02 and H03 (pre-declare each); after tonight's dataset update check
 `live/` for the 2 Nov tables and the exam backfill. 19 holdout queries left this ISO week.
+
+## 2026-10-30 10:10 UTC run (leases 35d84ee: diagnose, port)
+
+G01B landed (08:49Z); evidence at db1aa37.
+Unit 1 (diagnose): G01B (`research/diagnostics/g01b.md`). Hypothesis (pre-declared): +3.0 to +4.5, dir -0.05% to
++0.15%. Came in at +2.34 (interval -0.49 to +5.19, 3/5) with dir -0.28%, both worse than G01 (+4.22, -0.05%), at 66%
+G01 overlap. The swapped-out calm losers carried G01's edge; volatile losers rebound. Below +3.0, so the residual-
+momentum family closes per the card. No query.

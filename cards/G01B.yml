@@ -26,4 +26,4 @@ red_flags:
   - "Pre-declared before the replay (30 Oct 2026): restricting to volatile stocks raises the gross move but usually costs hit rate. Prediction: week bearish edge +3.0 to +4.5, directional move after costs -0.05% to +0.15%, top-5 bearish overlap with G01 40 to 70% and with A01 under 20%. Helps (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years and a positive directional move after costs. If met, it is eligible for week bearish, but under the committed config/live_source.json it replaces A01 only with a released validation edge of at least +5.73, so a query is spent only if train is at least +4.5. If the edge falls below +3.0 the residual-momentum family closes."
   - "One trial on a follow-up chosen after seeing G01's numbers; the median cut is fixed, not tuned, and no other cut is tried."
   - "Five train years after the 12-month warm-up."
-status: "queued"
+status: "train: 2.34 week-bear (dir -0.28%); not eligible, family closed (see research/diagnostics/g01b.md)"
