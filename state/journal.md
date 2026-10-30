@@ -5418,3 +5418,13 @@ passed. Leases removed.
 a new discover source. After tonight's dataset update, check `live/` for the 2 Nov day and week tables and the exam
 backfill. Tables now change only on a roster day for a released edge at least 1 point higher. 19 holdout queries left
 this ISO week.
+
+## 2026-10-30 06:15 UTC run (lease dc1bc7d: diagnose)
+
+Nothing new since the 04:07 run (no replays, no live run yet).
+Unit 1 (diagnose): G01 residual momentum (`research/diagnostics/g01.md`). Hypothesis (pre-declared): week bullish
+and bearish both -1 to +1.5, directional moves negative, 20-50% bullish overlap with A03. Bearish came in far higher:
++4.22 (interval +1.30 to +7.25, 5/5 years), the highest week-bearish train edge of the 53 readings, but dir -0.05%
+(gross about +0.20% against the 0.25% futures cost), so the full SPEC 10 rule is not met. Bullish +2.25 (interval
+-0.62 to +5.04, dir -0.51%). 7% bearish overlap with A01, 13% with A03. No query. Idea for later: G01B, the bearish
+side on high-residual-volatility stocks only, to lift the gross move over the cost.
