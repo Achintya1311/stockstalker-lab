@@ -5511,3 +5511,7 @@ H06 landed (15:04Z); evidence at 6a4979f.
 Unit 1 (diagnose): H06 downside beta (`research/diagnostics/h06.md`). Hypothesis (pre-declared): wrong-way, G02
 mirrored. Held: bullish -2.69 (interval -5.36 to -0.04, dir -0.87%), bearish -0.73, 59.7% overlap with G02's bearish
 picks; 2018-19 drive it as they drove G02. No flip (G02 holds it). Beta family closed.
+Unit 2 (port): H02 day horizon queued (`experiments/pending/h02-idiosyncratic-volatility-day.yml`), pre-declared in
+`cards/H02.yml`: day bearish +1.0 to +3.5 with a negative directional move, bullish -1.0 to +1.5; a query only if train
+is at least +7.72. Full pytest: 1150 passed. Leases removed (this commit).
+**Next:** diagnose H02 day; port H01, H05, H04; after tonight's dataset update check `live/` for 2 Nov tables + exam backfill.

@@ -1,0 +1,10 @@
+# H02 (day horizon): the same idiosyncratic-volatility score as the week replay,
+# tried on day picks after the week bearish result (pre-declared in cards/H02.yml),
+# train-split replay (port lane, state/queue.md).
+id: h02-idiosyncratic-volatility-day
+strategy: strategies.h02_idiosyncratic_volatility
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
