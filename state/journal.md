@@ -5488,3 +5488,10 @@ so and hold the median fixed. Full pytest: 1142 passed. Leases removed.
 **Next:** diagnose H03 when it lands; port H06 (downside beta); pre-declare H02 on day bearish. Tonight's dataset
 update triggers the first live run: check `live/` for the 2 Nov tables and the exam backfill. 19 holdout queries left
 this ISO week.
+
+## 2026-10-30 14:10 UTC run (leases f1587ba: diagnose, port)
+
+H03 landed (13:05Z); evidence at f08ddcc.
+Unit 1 (diagnose): H03 turnover variability (`research/diagnostics/h03.md`). Hypothesis (pre-declared): bearish +0.5 to
++3.0, bullish -1.0 to +1.5. Bearish held (+1.14, interval -1.09 to +3.37, dir +0.05%), bullish +1.65 (interval -0.89
+to +4.16, dir -0.34%). Both noise; 10.9% bearish overlap with H02. Not eligible, no query; turnover variability closed.

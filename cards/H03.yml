@@ -22,4 +22,4 @@ red_flags:
   - "Pre-declared before the replay (30 Oct 2026): erratic turnover marks news and event weeks, which H02 suggests lean bearish, but turnover spikes also follow results and index changes in both directions. Prediction: week bearish +0.5 to +3.0, week bullish -1.0 to +1.5, bullish directional move negative (delivery cost), bearish directional move -0.10% to +0.10%; top-5 bearish overlap with H02 20 to 50%, with A07C under 20%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years and a positive directional move; it ranks behind H02 for a week-bearish query unless its train edge beats H02's +3.84. Helps, bullish (edge-only rule): +2.0, interval above 0, 4 of 6 years; a query only if train is at least +3.23."
   - "F&O stocks are all heavily traded, which narrows the spread of CV the paper relied on."
   - "Cross-sectional only through the day's median; the audit fixes the median and checks no later row moves other scores."
-status: "queued"
+status: "train: 1.65 week-bull / 1.14 week-bear; noise, not eligible (see research/diagnostics/h03.md)"
