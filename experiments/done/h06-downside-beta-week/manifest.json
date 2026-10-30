@@ -1,0 +1,9 @@
+{
+  "id": "h06-downside-beta-week",
+  "strategy": "strategies.h06_downside_beta",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 52444,
+  "n_dates": 260,
+  "pick_log_sha256": "e6f3b02379ebc5691bcea1cecc176ea64fa489594cf21b9fb86f5850d441c4fd"
+}
