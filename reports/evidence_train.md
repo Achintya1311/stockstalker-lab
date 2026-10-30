@@ -2,9 +2,9 @@
 
 Edge is in points of hit rate over the market line, per pick date, `top` selection, as in `train_leaderboard.md`. The 95% interval and P(edge <= 0) come from a stationary bootstrap over dates (block length chosen per series), so serial correlation is respected. SPA is Hansen's test that NO strategy beats the market line across all trials of that horizon and side (small p = something real survives snooping). StepM names the strategies individually superior at the 10% level. MCS is the set statistically indistinguishable from the best at 10%. Dates with no pick count as edge 0 in the joint tests.
 
-## day/bearish  (51 experiments, block 1)
+## day/bearish  (52 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-d01c-fallback-day, e2a-day, e2b-day, f02-volume-signed-reversal-day, f03-conditional-reversal-day, f06-trend-acceleration-day, f07-high-push-fade-day, q06r-wide-bar-wick-day, q07-trend-residual-day, t01-sma-crossover-day, t04-connors-rsi2-day, t05c-upcross-fade-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day. MCS size: 3 of 51.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-d01c-fallback-day, e2a-day, e2b-day, f02-volume-signed-reversal-day, f03-conditional-reversal-day, f06-trend-acceleration-day, f07-high-push-fade-day, h02-idiosyncratic-volatility-day, q06r-wide-bar-wick-day, q07-trend-residual-day, t01-sma-crossover-day, t04-connors-rsi2-day, t05c-upcross-fade-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day. MCS size: 3 of 52.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -28,6 +28,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | e2b-day | 1074 | 73% | +2.34 | +0.29 to +4.37 | 0.013 | 1 |
 | t04-connors-rsi2-day | 1123 | 77% | +2.32 | +0.57 to +3.98 | 0.004 | 1 |
 | t15-adx-regime-day | 1404 | 96% | +2.20 | +1.09 to +3.33 | 0.000 | 2 |
+| h02-idiosyncratic-volatility-day | 1465 | 100% | +2.06 | +0.99 to +3.09 | 0.000 | 1 |
 | t01-sma-crossover-day | 1436 | 98% | +1.89 | +0.80 to +2.95 | 0.001 | 2 |
 | q06-wick-balance-day | 1467 | 100% | +1.67 | +0.59 to +2.75 | 0.001 | 1 |
 | champion-v1-day | 1436 | 98% | +1.37 | +0.26 to +2.50 | 0.009 | 1 |
@@ -60,9 +61,9 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | q01-price-volume-corr-day | 1453 | 99% | -1.51 | -2.65 to -0.26 | 0.993 | 2 |
 | d01-oi-buildup-day | 1467 | 100% | -2.48 | -3.54 to -1.44 | 1.000 | 1 |
 
-## day/bullish  (49 experiments, block 1)
+## day/bullish  (50 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: d01c-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-connors-rsi2-day, t04-q06-fallback-day, t10-nr7-narrow-range-day. MCS size: 6 of 49.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: d01c-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-connors-rsi2-day, t04-q06-fallback-day, t10-nr7-narrow-range-day. MCS size: 6 of 50.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -74,6 +75,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | q06r-wide-bar-wick-day | 1465 | 100% | +1.88 | +0.79 to +2.95 | 0.000 | 1 |
 | t25-heikin-ashi-day | 1250 | 85% | +1.85 | +0.29 to +3.41 | 0.009 | 2 |
 | t10-nr4-narrow-range-day | 1398 | 95% | +1.34 | +0.15 to +2.49 | 0.015 | 1 |
+| h02-idiosyncratic-volatility-day | 1465 | 100% | +1.18 | +0.09 to +2.25 | 0.016 | 4 |
 | t06-bollinger-pctb-day | 1217 | 83% | +1.04 | -0.73 to +2.90 | 0.124 | 1 |
 | e2b-day | 702 | 48% | +0.88 | -1.68 to +3.45 | 0.269 | 1 |
 | a09-gap-fade-day | 1076 | 73% | +0.87 | -1.20 to +2.94 | 0.204 | 2 |
