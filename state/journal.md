@@ -5403,3 +5403,18 @@ is still each table's highest released validation edge. Checked against all 41 r
 (A01_I01F +4.17). All four provisional; bullish under AB's edge-only rule (SPEC 10 wording change still pending a supervised session).
 No query spent (16 spent this ISO week). `tests/test_picks_run.py`'s live-mode test no longer relies on the real file being absent;
 new `tests/test_picks_live_source.py` runs the committed file end to end (every table fires, disclaimer present, no forbidden words).
+Live dry run on real data with the committed file (dispatched, run b71ddce 04:19Z): green. Day 30 Oct: E2A filled the
+day-bearish table (5 picks), T04 abstained on day-bullish (it is blank on about a quarter of days). Week tables are
+written once per week, so the first A05B/A01 week tables come from tonight's live run.
+Unit 2 (diagnose): G02 betting against beta (`research/diagnostics/g02.md`). Hypothesis (pre-declared): week bullish 0
+to +2, bearish -1 to +1.5, both directional moves negative, 20-50% bullish overlap with A06. Came in higher on both
+sides: bullish +3.69 (interval -0.04 to +7.21, 4/5, dir -0.40%), bearish +2.65 (interval +0.24 to +5.21, 3/5, dir
++0.01%). 2018-19 carry both sides; 32 distinct bullish stocks in 1,300 picks; 4.1% A06 and 3.5% A05B overlap. Helps
+rule not met on either side (bullish interval reaches -0.04; bearish 3 of 5 years), so no query. Catalog statuses for
+G01 (week-bear +4.22, dir -0.05%) and G03 refreshed from their replays; their diagnoses are next. Full pytest: 1117
+passed. Leases removed.
+
+**Next:** diagnose G01 (week-bear +4.22 with interval above 0 but dir -0.05%: another cost-wall reading) and G03; then
+a new discover source. After tonight's dataset update, check `live/` for the 2 Nov day and week tables and the exam
+backfill. Tables now change only on a roster day for a released edge at least 1 point higher. 44 holdout queries left
+this ISO week.
