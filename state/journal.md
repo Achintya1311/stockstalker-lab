@@ -5436,3 +5436,11 @@ no query. The X04 batch (G01-G05) is closed. Full pytest: 1117 passed. Lease rem
 **Next:** a new discover source aimed at week-horizon effects with larger moves (momentum keeps clearing hit rate but
 not the cost); optionally pre-declare and port G01B. After tonight's dataset update, check `live/` for the 2 Nov
 tables and the exam backfill. 19 holdout queries left this ISO week.
+
+## 2026-10-30 08:08 UTC run (leases 7292b8b: port, discover)
+
+Unit 1 (port): G01B, G01's bearish side on stocks with residual volatility at or above the day's median
+(`cards/G01B.yml`, `strategies/g01b_residual_momentum_volatile.py`, audit, 8 tests), week replay queued. Hypothesis
+(pre-declared): edge +3.0 to +4.5, dir -0.05% to +0.15%, 40-70% top-5 overlap with G01, under 20% with A01. Helps
+under the full SPEC 10 rule; a query only if train is at least +4.5 (it would need a released +5.73 to replace A01).
+Below +3.0 closes the residual-momentum family. G01's module is untouched; a test checks G01B's scores equal G01's.

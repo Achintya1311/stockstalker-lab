@@ -1,0 +1,29 @@
+source_url: "https://quantpedia.com/strategies/residual-momentum-factor"
+author: "Lab follow-up to G01 (Blitz, Huij and Martens, Residual Momentum, Journal of Empirical Finance 18(3), 2011)"
+license: "Idea from the paper, summarised and re-implemented (SPEC.md section 5)"
+published_on: "2011"
+claim_as_stated: >
+  The lab's own claim, from `research/diagnostics/g01.md`: G01's residual losers keep
+  falling over the next week (train week-bearish +4.22, positive every year) but by
+  about 0.20% gross, below the 0.25% futures cost. On stocks whose residual volatility
+  is above the median the same signal should come with larger moves.
+horizon: week
+rules_plain: >
+  G01's 12-1 month market residual, scaled by its volatility. Bearish only: score a
+  stock when its scaled residual is negative and its residual volatility is at or above
+  that date's median over every scored F&O stock; the score is G01's value. Everything
+  else abstains, including the whole bullish side.
+default_params:
+  lookback: 252
+  skip: 21
+  vol_cut: "median (fixed, not tuned)"
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "G01 diagnosis (research/diagnostics/g01.md); Blitz, Huij and Martens (2011)"
+link: "https://quantpedia.com/strategies/residual-momentum-factor"
+prior_claim: "G01 bearish +4.22 train edge, directional move -0.05% after cost"
+red_flags:
+  - "Pre-declared before the replay (30 Oct 2026): restricting to volatile stocks raises the gross move but usually costs hit rate. Prediction: week bearish edge +3.0 to +4.5, directional move after costs -0.05% to +0.15%, top-5 bearish overlap with G01 40 to 70% and with A01 under 20%. Helps (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years and a positive directional move after costs. If met, it is eligible for week bearish, but under the committed config/live_source.json it replaces A01 only with a released validation edge of at least +5.73, so a query is spent only if train is at least +4.5. If the edge falls below +3.0 the residual-momentum family closes."
+  - "One trial on a follow-up chosen after seeing G01's numbers; the median cut is fixed, not tuned, and no other cut is tried."
+  - "Five train years after the 12-month warm-up."
+status: "queued"
