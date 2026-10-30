@@ -116,9 +116,9 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 | a10-gap-and-go-day | 558 | 38% | -5.41 | -8.80 to -1.99 | 1.000 | 1 |
 
-## week/bearish  (56 experiments, block 1)
+## week/bearish  (57 experiments, block 1)
 
-SPA p-value (consistent): **0.082**  (lower 0.055, upper 0.082). StepM superior: h02-idiosyncratic-volatility-week. MCS size: 56 of 56. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.083**  (lower 0.055, upper 0.083). StepM superior: h02-idiosyncratic-volatility-week. MCS size: 57 of 57. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -168,6 +168,7 @@ SPA p-value (consistent): **0.082**  (lower 0.055, upper 0.082). StepM superior:
 | o04-order-block-composite-week | 293 | 95% | -0.44 | -3.28 to +2.22 | 0.619 | 2 |
 | a04-52-week-high-week | 260 | 84% | -0.50 | -3.17 to +2.23 | 0.626 | 2 |
 | q01-price-volume-corr-week | 306 | 99% | -0.58 | -3.14 to +1.98 | 0.676 | 1 |
+| h06-downside-beta-week | 260 | 84% | -0.73 | -3.61 to +2.32 | 0.672 | 1 |
 | a07-high-volume-premium-week | 302 | 98% | -0.84 | -3.04 to +1.42 | 0.776 | 1 |
 | t08-donchian-breakout-55-week | 255 | 83% | -0.90 | -5.08 to +3.38 | 0.662 | 2 |
 | o03-trend-confirmed-week | 265 | 86% | -0.91 | -4.25 to +2.58 | 0.695 | 2 |
@@ -179,9 +180,9 @@ SPA p-value (consistent): **0.082**  (lower 0.055, upper 0.082). StepM superior:
 | t08-donchian-breakout-20-week | 289 | 94% | -2.72 | -5.86 to +0.34 | 0.966 | 2 |
 | c02-turn-of-month-week | 177 | 57% | -2.72 | -5.80 to +0.23 | 0.964 | 1 |
 
-## week/bullish  (49 experiments, block 1)
+## week/bullish  (50 experiments, block 1)
 
-SPA p-value (consistent): **0.240**  (lower 0.141, upper 0.283). StepM superior: none. MCS size: 48 of 49.
+SPA p-value (consistent): **0.240**  (lower 0.141, upper 0.285). StepM superior: none. MCS size: 49 of 50.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -224,6 +225,7 @@ SPA p-value (consistent): **0.240**  (lower 0.141, upper 0.283). StepM superior:
 | q02-return-volume-corr-week | 309 | 100% | -1.90 | -4.16 to +0.32 | 0.955 | 2 |
 | t17-keltner-breakout-week | 248 | 80% | -2.20 | -5.52 to +1.38 | 0.893 | 1 |
 | o01-retest-week | 299 | 97% | -2.21 | -4.47 to -0.12 | 0.981 | 2 |
+| h06-downside-beta-week | 260 | 84% | -2.69 | -5.36 to -0.04 | 0.976 | 1 |
 | champion-v1-week | 303 | 98% | -2.82 | -5.51 to -0.36 | 0.991 | 3 |
 | o04a-no-volume-week | 299 | 97% | -2.88 | -5.22 to -0.59 | 0.996 | 1 |
 | o04-order-block-composite-week | 299 | 97% | -2.95 | -5.34 to -0.56 | 0.994 | 1 |

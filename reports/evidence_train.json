@@ -208,6 +208,15 @@
     "n": 301,
     "coverage": 0.9741100323624595
    },
+   "h06-downside-beta-week": {
+    "mean": -0.00730397790967941,
+    "lo": -0.036112307305443514,
+    "hi": 0.023224650463880656,
+    "p_le0": 0.6725,
+    "block": 1,
+    "n": 260,
+    "coverage": 0.8414239482200647
+   },
    "i01-momentum-score-week": {
     "mean": 0.020388329782628282,
     "lo": -0.0035150328553094296,
@@ -507,15 +516,15 @@
    }
   },
   "joint": {
-   "n_models": 56,
+   "n_models": 57,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
     "lower": 0.055,
-    "consistent": 0.0815,
-    "upper": 0.0815
+    "consistent": 0.0825,
+    "upper": 0.0825
    },
    "stepm": [
     "h02-idiosyncratic-volatility-week"
@@ -543,6 +552,7 @@
     "g05-residual-reversal-week",
     "h02-idiosyncratic-volatility-week",
     "h03-turnover-variability-week",
+    "h06-downside-beta-week",
     "i01-momentum-score-week",
     "i02-low-vol-level-week",
     "o00-placebo-week",
@@ -743,6 +753,15 @@
     "block": 1,
     "n": 301,
     "coverage": 0.9741100323624595
+   },
+   "h06-downside-beta-week": {
+    "mean": -0.026931037900469485,
+    "lo": -0.05356660317577234,
+    "hi": -0.0004034076397379337,
+    "p_le0": 0.9755,
+    "block": 1,
+    "n": 260,
+    "coverage": 0.8414239482200647
    },
    "i01-momentum-score-week": {
     "mean": 0.012299731330299742,
@@ -1025,13 +1044,13 @@
    }
   },
   "joint": {
-   "n_models": 49,
+   "n_models": 50,
    "block": 1,
    "twins": {},
    "spa": {
     "lower": 0.141,
     "consistent": 0.2405,
-    "upper": 0.2835
+    "upper": 0.2855
    },
    "stepm": [],
    "mcs": [
@@ -1053,6 +1072,7 @@
     "g05-residual-reversal-week",
     "h02-idiosyncratic-volatility-week",
     "h03-turnover-variability-week",
+    "h06-downside-beta-week",
     "i01-momentum-score-week",
     "i02-low-vol-level-week",
     "o00-placebo-week",
