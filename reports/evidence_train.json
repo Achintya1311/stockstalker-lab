@@ -145,6 +145,15 @@
     "n": 255,
     "coverage": 0.8252427184466019
    },
+   "g01b-residual-momentum-volatile-week": {
+    "mean": 0.023376410218605186,
+    "lo": -0.004949396920391772,
+    "hi": 0.051873877856585364,
+    "p_le0": 0.0585,
+    "block": 2,
+    "n": 255,
+    "coverage": 0.8252427184466019
+   },
    "g02-betting-against-beta-week": {
     "mean": 0.02654217593647444,
     "lo": 0.0024178614999078754,
@@ -480,15 +489,15 @@
    }
   },
   "joint": {
-   "n_models": 53,
+   "n_models": 54,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.1,
-    "consistent": 0.139,
-    "upper": 0.139
+    "lower": 0.101,
+    "consistent": 0.14,
+    "upper": 0.14
    },
    "stepm": [],
    "mcs": [
@@ -507,6 +516,7 @@
     "d02-stock-pcr-contrarian-week",
     "f06-trend-acceleration-week",
     "g01-residual-momentum-week",
+    "g01b-residual-momentum-volatile-week",
     "g02-betting-against-beta-week",
     "g03-frog-in-the-pan-week",
     "g04-realized-skewness-week",
