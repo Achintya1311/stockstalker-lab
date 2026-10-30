@@ -116,15 +116,16 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 | a10-gap-and-go-day | 558 | 38% | -5.41 | -8.80 to -1.99 | 1.000 | 1 |
 
-## week/bearish  (54 experiments, block 1)
+## week/bearish  (55 experiments, block 1)
 
-SPA p-value (consistent): **0.140**  (lower 0.101, upper 0.140). StepM superior: none. MCS size: 54 of 54. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.082**  (lower 0.055, upper 0.082). StepM superior: h02-idiosyncratic-volatility-week. MCS size: 55 of 55. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
 | g01-residual-momentum-week | 255 | 83% | +4.22 | +1.30 to +7.25 | 0.003 | 1 |
 | a01-i01-filter-week | 258 | 83% | +4.17 | +1.38 to +6.93 | 0.003 | 1 |
 | t05c-upcross-fade-week | 276 | 89% | +4.02 | +0.79 to +7.18 | 0.007 | 1 |
+| h02-idiosyncratic-volatility-week | 309 | 100% | +3.84 | +1.51 to +6.17 | 0.000 | 1 |
 | d02-stock-pcr-contrarian-week | 225 | 73% | +3.75 | -0.64 to +8.36 | 0.050 | 1 |
 | q01c-thin-volume-fall-week | 309 | 100% | +3.26 | +1.10 to +5.51 | 0.002 | 2 |
 | t01-sma-crossover-week | 303 | 98% | +3.20 | +0.96 to +5.53 | 0.003 | 2 |
@@ -177,9 +178,9 @@ SPA p-value (consistent): **0.140**  (lower 0.101, upper 0.140). StepM superior:
 | t08-donchian-breakout-20-week | 289 | 94% | -2.72 | -5.86 to +0.34 | 0.966 | 2 |
 | c02-turn-of-month-week | 177 | 57% | -2.72 | -5.80 to +0.23 | 0.964 | 1 |
 
-## week/bullish  (47 experiments, block 1)
+## week/bullish  (48 experiments, block 1)
 
-SPA p-value (consistent): **0.232**  (lower 0.131, upper 0.275). StepM superior: none. MCS size: 46 of 47.
+SPA p-value (consistent): **0.234**  (lower 0.135, upper 0.278). StepM superior: none. MCS size: 47 of 48.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -187,6 +188,7 @@ SPA p-value (consistent): **0.232**  (lower 0.131, upper 0.275). StepM superior:
 | t25-heikin-ashi-week | 271 | 88% | +2.74 | -0.58 to +6.09 | 0.051 | 1 |
 | g01-residual-momentum-week | 255 | 83% | +2.25 | -0.62 to +5.04 | 0.068 | 1 |
 | a05b-max-effect-ranked-week | 295 | 95% | +2.23 | -0.10 to +4.70 | 0.032 | 1 |
+| h02-idiosyncratic-volatility-week | 309 | 100% | +2.11 | -0.18 to +4.40 | 0.036 | 1 |
 | a04-52-week-high-week | 260 | 84% | +1.92 | -0.89 to +4.59 | 0.088 | 2 |
 | o05-order-block-weekly-week | 254 | 82% | +1.90 | -0.61 to +4.37 | 0.069 | 1 |
 | i02-low-vol-level-week | 260 | 84% | +1.85 | -1.22 to +5.14 | 0.128 | 2 |

@@ -190,6 +190,15 @@
     "n": 299,
     "coverage": 0.9676375404530745
    },
+   "h02-idiosyncratic-volatility-week": {
+    "mean": 0.038432043096870525,
+    "lo": 0.015123125110741917,
+    "hi": 0.06172256695838922,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
    "i01-momentum-score-week": {
     "mean": 0.020388329782628282,
     "lo": -0.0035150328553094296,
@@ -489,17 +498,19 @@
    }
   },
   "joint": {
-   "n_models": 54,
+   "n_models": 55,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.101,
-    "consistent": 0.14,
-    "upper": 0.14
+    "lower": 0.055,
+    "consistent": 0.0815,
+    "upper": 0.0815
    },
-   "stepm": [],
+   "stepm": [
+    "h02-idiosyncratic-volatility-week"
+   ],
    "mcs": [
     "a01-i01-filter-week",
     "a01-weekly-reversal-week",
@@ -521,6 +532,7 @@
     "g03-frog-in-the-pan-week",
     "g04-realized-skewness-week",
     "g05-residual-reversal-week",
+    "h02-idiosyncratic-volatility-week",
     "i01-momentum-score-week",
     "i02-low-vol-level-week",
     "o00-placebo-week",
@@ -703,6 +715,15 @@
     "block": 1,
     "n": 299,
     "coverage": 0.9676375404530745
+   },
+   "h02-idiosyncratic-volatility-week": {
+    "mean": 0.02109045097127532,
+    "lo": -0.0017878861002276663,
+    "hi": 0.044012999057979764,
+    "p_le0": 0.036,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
    },
    "i01-momentum-score-week": {
     "mean": 0.012299731330299742,
@@ -985,13 +1006,13 @@
    }
   },
   "joint": {
-   "n_models": 47,
+   "n_models": 48,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.131,
-    "consistent": 0.232,
-    "upper": 0.275
+    "lower": 0.1345,
+    "consistent": 0.2345,
+    "upper": 0.2775
    },
    "stepm": [],
    "mcs": [
@@ -1011,6 +1032,7 @@
     "g03-frog-in-the-pan-week",
     "g04-realized-skewness-week",
     "g05-residual-reversal-week",
+    "h02-idiosyncratic-volatility-week",
     "i01-momentum-score-week",
     "i02-low-vol-level-week",
     "o00-placebo-week",
