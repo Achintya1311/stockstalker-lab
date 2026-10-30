@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 213. Gate 2's bar at that count: t >= 4.37.
+Trials recorded: 215. Gate 2's bar at that count: t >= 4.37.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -26,6 +26,7 @@ Trials recorded: 213. Gate 2's bar at that count: t >= 4.37.
 | a09-gap-fade-day | day | bearish | 4710 | 57.47% | 54.52% | 3.21 | 4.01 |  | 0.03 | 66.67% | candidate |
 | t15-adx-regime-day | day | bearish | 6880 | 56.63% | 54.50% | 2.20 | 3.75 |  | -0.06 | 100.00% |  |
 | t04-connors-rsi2-day | day | bullish | 3952 | 48.61% | 45.17% | 3.37 | 3.69 |  | -0.41 | 100.00% |  |
+| h02-idiosyncratic-volatility-day | day | bearish | 7325 | 56.59% | 54.53% | 2.06 | 3.67 |  | 0.06 | 83.33% | candidate |
 | t05c-upcross-fade-day | day | bearish | 4819 | 57.19% | 54.95% | 2.70 | 3.39 |  | -0.06 | 83.33% |  |
 | q06r-wide-bar-wick-day | day | bullish | 7300 | 46.84% | 44.96% | 1.88 | 3.32 |  | -0.48 | 100.00% |  |
 | t01-sma-crossover-day | day | bearish | 7178 | 56.37% | 54.48% | 1.89 | 3.30 |  | -0.06 | 100.00% |  |
@@ -45,6 +46,7 @@ Trials recorded: 213. Gate 2's bar at that count: t >= 4.37.
 | e2b-day | day | bearish | 3143 | 56.12% | 54.36% | 2.34 | 2.25 |  | -0.17 | 83.33% |  |
 | t15-adx-regime-week | week | bearish | 1456 | 53.71% | 50.87% | 2.95 | 2.20 |  | 0.02 | 83.33% | candidate |
 | t10-nr4-narrow-range-day | day | bullish | 6633 | 46.01% | 44.79% | 1.34 | 2.19 |  | -0.50 | 83.33% |  |
+| h02-idiosyncratic-volatility-day | day | bullish | 7325 | 46.14% | 44.96% | 1.18 | 2.10 |  | -0.47 | 83.33% |  |
 | consensus-wb-v1-week | week | bearish | 1545 | 53.40% | 50.91% | 2.48 | 2.06 |  | 0.15 | 66.67% | candidate |
 | g03-frog-in-the-pan-week | week | bearish | 1275 | 53.41% | 50.60% | 2.81 | 1.97 |  | -0.44 | 80.00% |  |
 | a08-overnight-intraday-tug-day | day | bearish | 7325 | 55.69% | 54.53% | 1.15 | 1.97 |  | -0.04 | 100.00% |  |

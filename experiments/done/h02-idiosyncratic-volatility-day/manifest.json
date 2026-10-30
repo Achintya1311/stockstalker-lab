@@ -1,0 +1,9 @@
+{
+  "id": "h02-idiosyncratic-volatility-day",
+  "strategy": "strategies.h02_idiosyncratic_volatility",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 288058,
+  "n_dates": 1465,
+  "pick_log_sha256": "53777549c702abc05636e073a70636ff3d075349f7aa6532d2e3cc705d504d9f"
+}
