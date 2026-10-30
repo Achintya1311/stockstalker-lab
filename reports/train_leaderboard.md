@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 206. Gate 2's bar at that count: t >= 4.36.
+Trials recorded: 207. Gate 2's bar at that count: t >= 4.36.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -54,6 +54,7 @@ Trials recorded: 206. Gate 2's bar at that count: t >= 4.36.
 | g05-residual-reversal-week | week | bearish | 1495 | 53.38% | 50.98% | 2.40 | 1.79 |  | 0.11 | 66.67% | candidate |
 | e1a-day | day | bearish | 406 | 56.90% | 52.80% | 4.31 | 1.68 |  | -0.10 | 83.33% | too few picks |
 | d02-stock-pcr-contrarian-week | week | bearish | 661 | 54.31% | 50.91% | 3.75 | 1.68 |  | 0.16 | 66.67% | candidate |
+| g01b-residual-momentum-volatile-week | week | bearish | 1275 | 52.94% | 50.60% | 2.34 | 1.67 |  | -0.28 | 60.00% |  |
 | q05-trend-smoothness-week | week | bearish | 1543 | 52.95% | 50.91% | 2.01 | 1.64 |  | -0.13 | 83.33% |  |
 | q07-trend-residual-week | week | bearish | 1544 | 53.04% | 50.91% | 2.16 | 1.64 |  | -0.09 | 100.00% |  |
 | q02-return-volume-corr-week | week | bearish | 1545 | 52.69% | 50.91% | 1.77 | 1.62 |  | -0.14 | 83.33% |  |

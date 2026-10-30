@@ -1,0 +1,9 @@
+{
+  "id": "g01b-residual-momentum-volatile-week",
+  "strategy": "strategies.g01b_residual_momentum_volatile",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 13844,
+  "n_dates": 255,
+  "pick_log_sha256": "af8e1d0f6717e77c4a2e00a0a9bbe74c9cf8de88c77de8405c08d6f192ac299a"
+}
