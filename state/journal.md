@@ -5444,3 +5444,10 @@ Unit 1 (port): G01B, G01's bearish side on stocks with residual volatility at or
 (pre-declared): edge +3.0 to +4.5, dir -0.05% to +0.15%, 40-70% top-5 overlap with G01, under 20% with A01. Helps
 under the full SPEC 10 rule; a query only if train is at least +4.5 (it would need a released +5.73 to replace A01).
 Below +3.0 closes the residual-momentum family. G01's module is untouched; a test checks G01B's scores equal G01's.
+Unit 2 (discover): six rows H01-H06 from X05 (Open Source Asset Pricing, price and volume subset): Amihud illiquidity,
+idiosyncratic volatility, variability of turnover, same-month seasonality, intermediate (12-7) momentum, downside beta
+(`research/notes/discover_2026-10-30_x05.md`). Hypothesis: week momentum keeps clearing hit rate but not cost, so
+signals about risk and trading activity should pick larger movers. No trials (nothing replayed). Lease removed.
+
+**Next:** diagnose G01B when it lands; port H02 and H03 (pre-declare each); after tonight's dataset update check
+`live/` for the 2 Nov tables and the exam backfill. 19 holdout queries left this ISO week.
