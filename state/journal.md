@@ -5468,3 +5468,13 @@ the margin over the committed table (bullish +3.23, bearish +5.73). Full pytest:
 **Next:** diagnose H02 when it lands; port H03 (variability of turnover) and H06 (downside beta). Tonight's dataset
 update triggers the first live run: check `live/` for the 2 Nov day and week tables and the exam backfill.
 19 holdout queries left this ISO week.
+
+## 2026-10-30 12:12 UTC run (leases 781e324: diagnose, port)
+
+H02 landed (11:03Z); evidence at 22b58e2.
+Unit 1 (diagnose): H02 idiosyncratic volatility (`research/diagnostics/h02.md`). Hypothesis (pre-declared): bullish 0
+to +2.5, bearish -1.5 to +1.5, both directional moves negative. Bullish held (+2.11, interval -0.18 to +4.40, dir
+-0.46%). Bearish missed well high: +3.84 (t 3.27, interval +1.51 to +6.17, 6/6 years), dir +0.13% after cost, and the
+only StepM-superior week-bearish reading. It meets the full SPEC 10 rule; 12% A01 overlap, 46% A06 overlap (A06 bearish
+is +0.15). Below the card's +5.73 query bar, so no query, as pre-declared. Queue note: first in line for a week-bearish
+query before the next roster window. Idea: H02 on day bearish.
