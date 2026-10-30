@@ -5428,3 +5428,11 @@ and bearish both -1 to +1.5, directional moves negative, 20-50% bullish overlap 
 (gross about +0.20% against the 0.25% futures cost), so the full SPEC 10 rule is not met. Bullish +2.25 (interval
 -0.62 to +5.04, dir -0.51%). 7% bearish overlap with A01, 13% with A03. No query. Idea for later: G01B, the bearish
 side on high-residual-volatility stocks only, to lift the gross move over the cost.
+Unit 2 (diagnose): G03 frog-in-the-pan (`research/diagnostics/g03.md`). Hypothesis (pre-declared): both sides -1 to
++2, directional moves negative, 30-60% bullish overlap with A03. Bullish +1.47 held (interval -1.45 to +4.25, 3/5,
+2019 only); bearish +2.81 missed high (interval +0.01 to +5.60, 4/5) but dir -0.44%; A03 overlap 55%. Not eligible,
+no query. The X04 batch (G01-G05) is closed. Full pytest: 1117 passed. Lease removed.
+
+**Next:** a new discover source aimed at week-horizon effects with larger moves (momentum keeps clearing hit rate but
+not the cost); optionally pre-declare and port G01B. After tonight's dataset update, check `live/` for the 2 Nov
+tables and the exam backfill. 19 holdout queries left this ISO week.
