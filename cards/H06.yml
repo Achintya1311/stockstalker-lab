@@ -1,0 +1,27 @@
+source_url: "https://www.openassetpricing.com/"
+author: "Andrew Ang, Joseph Chen and Yuhang Xing, Downside Risk, Review of Financial Studies 19(4), 2006"
+license: "Idea from the paper, summarised and re-implemented (SPEC.md section 5)"
+published_on: "2006"
+claim_as_stated: >
+  `cards/catalog.csv` (X05 and the paper): stocks that covary most with the market
+  when the market falls earn a premium of about 6% a year (US).
+horizon: week
+rules_plain: >
+  On adjusted closes: m = equal-weighted mean daily log return of the F&O stocks visible
+  each date; over the last 250 daily returns, keep the days with m below its window
+  mean (at least 60) and compute each stock's beta on those days only. Score = downside
+  beta minus the day's median: high downside beta bullish, low bearish. A gap in the
+  window abstains.
+default_params:
+  window: 250
+  min_down_days: 60
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Ang, Chen and Xing (2006) Review of Financial Studies; Open Source Asset Pricing (X05)"
+link: "https://www.openassetpricing.com/"
+prior_claim: "High downside-beta stocks earn about 6% a year more (US)"
+red_flags:
+  - "Pre-declared before the replay (30 Oct 2026): downside beta and full beta are highly correlated, and G02 found the opposite sign (low full beta bullish +3.69, high beta bearish +2.65, both carried by 2018-19). So H06 is expected to be wrong-way, roughly G02 mirrored. Prediction: week bullish -3.5 to 0, week bearish -3.0 to 0, directional moves negative; top-5 bullish overlap with G02 bearish (high beta) 40 to 80%. Helps (either side): +2.0, interval above 0, 4 of 6 years, plus a positive directional move for bearish; query bars as on H02 (bullish +3.23, bearish +5.73). If both sides are wrong-way as predicted, no flip is ported: G02 already holds that reading."
+  - "A premium for bearing crash risk is earned mostly in the crash itself; a one-week hit rate scores the many calm weeks, where high-beta stocks simply track the market."
+  - "Cross-sectional: the median and the market mean use every stock; the audit fixes the median and checks no later row moves other scores."
+status: "queued"

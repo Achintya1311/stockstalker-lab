@@ -5495,3 +5495,12 @@ H03 landed (13:05Z); evidence at f08ddcc.
 Unit 1 (diagnose): H03 turnover variability (`research/diagnostics/h03.md`). Hypothesis (pre-declared): bearish +0.5 to
 +3.0, bullish -1.0 to +1.5. Bearish held (+1.14, interval -1.09 to +3.37, dir +0.05%), bullish +1.65 (interval -0.89
 to +4.16, dir -0.34%). Both noise; 10.9% bearish overlap with H02. Not eligible, no query; turnover variability closed.
+Unit 2 (port): H06 downside beta (Ang, Chen and Xing 2006), 250 sessions, below-mean market days only, score =
+downside beta minus the day's median, high bullish (`cards/H06.yml`, `strategies/h06_downside_beta.py`, audit, 8
+tests), week replay queued. Hypothesis (pre-declared): wrong-way, roughly G02 mirrored: bullish -3.5 to 0, bearish -3.0
+to 0, 40-80% bullish overlap with G02's high-beta bearish picks; no flip if so (G02 holds it). Full pytest: 1150
+passed. Leases removed.
+
+**Next:** diagnose H06 when it lands; pre-declare and queue H02 on day bearish; port H01, H05, H04. Tonight's dataset
+update triggers the first live run: check `live/` for the 2 Nov tables and the exam backfill. 19 holdout queries left
+this ISO week.
