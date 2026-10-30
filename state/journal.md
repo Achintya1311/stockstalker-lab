@@ -5459,3 +5459,12 @@ Unit 1 (diagnose): G01B (`research/diagnostics/g01b.md`). Hypothesis (pre-declar
 +0.15%. Came in at +2.34 (interval -0.49 to +5.19, 3/5) with dir -0.28%, both worse than G01 (+4.22, -0.05%), at 66%
 G01 overlap. The swapped-out calm losers carried G01's edge; volatile losers rebound. Below +3.0, so the residual-
 momentum family closes per the card. No query.
+Unit 2 (port): H02 idiosyncratic volatility (Ang, Hodrick, Xing and Zhang 2006), 20-session one-factor residual
+against the equal-weighted F&O mean, score = log(median ivol / ivol) (`cards/H02.yml`,
+`strategies/h02_idiosyncratic_volatility.py`, audit, 8 tests), week replay queued. Hypothesis (pre-declared): bullish 0
+to +2.5, bearish -1.5 to +1.5, directional moves negative, 20-50% bullish overlap with I02. Query only if train clears
+the margin over the committed table (bullish +3.23, bearish +5.73). Full pytest: 1133 passed. Leases removed.
+
+**Next:** diagnose H02 when it lands; port H03 (variability of turnover) and H06 (downside beta). Tonight's dataset
+update triggers the first live run: check `live/` for the 2 Nov day and week tables and the exam backfill.
+19 holdout queries left this ISO week.

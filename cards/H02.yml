@@ -1,0 +1,28 @@
+source_url: "https://www.openassetpricing.com/"
+author: "Andrew Ang, Robert J. Hodrick, Yuhang Xing and Xiaoyan Zhang, The Cross-Section of Volatility and Expected Returns, Journal of Finance 61(1), 2006"
+license: "Idea from the paper, summarised and re-implemented (SPEC.md section 5)"
+published_on: "2006"
+claim_as_stated: >
+  `cards/catalog.csv` (X05 and the paper): stocks with high idiosyncratic volatility
+  over the past month earn much lower subsequent returns than stocks with low
+  idiosyncratic volatility (US, monthly).
+horizon: week
+rules_plain: >
+  On adjusted closes: m = equal-weighted mean daily log return of the F&O stocks visible
+  each date; over the last 20 daily returns, regress each stock's return on m and take
+  the standard deviation of the residual (ivol). Score = log(median ivol that date) -
+  log(ivol): calmer than the median bullish, more volatile bearish. A gap in the window
+  abstains. The paper's three-factor residual becomes a one-factor residual (no size or
+  value data).
+default_params:
+  window: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Ang, Hodrick, Xing and Zhang (2006) J. Finance; Open Source Asset Pricing (X05)"
+link: "https://www.openassetpricing.com/"
+prior_claim: "High idiosyncratic volatility stocks earn much lower subsequent returns (US, monthly)"
+red_flags:
+  - "Pre-declared before the replay (30 Oct 2026): the lab's volatility readings are middling on the week horizon (A06 bullish +1.55, I02 bullish +1.85, both with negative directional moves), and G01B just showed that volatile losers rebound. Prediction: week bullish 0 to +2.5, week bearish -1.5 to +1.5, directional moves negative on both sides (bullish pays the 0.415% delivery cost); top-5 bullish overlap with I02 20 to 50%, with A06 10 to 40%. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; a query only if train is at least +3.23 (A05B's released +2.23 plus SPEC 10's 1-point margin). Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years and a positive directional move; a query only if train is at least +5.73."
+  - "US monthly anomaly tested over one week on large, liquid stocks; the published effect is concentrated in small, illiquid stocks the F&O universe does not hold."
+  - "Cross-sectional: each score depends on other stocks' returns and the day's median. The audit checks that no later row changes it."
+status: "queued"
