@@ -1,0 +1,9 @@
+{
+  "id": "h03-turnover-variability-week",
+  "strategy": "strategies.h03_turnover_variability",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 59442,
+  "n_dates": 301,
+  "pick_log_sha256": "fff4e20b64067ccf0977b1a62889edc6af32f92c5784985686b912be03b6a3bc"
+}

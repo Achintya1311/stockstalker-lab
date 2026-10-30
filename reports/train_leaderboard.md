@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 209. Gate 2's bar at that count: t >= 4.36.
+Trials recorded: 211. Gate 2's bar at that count: t >= 4.36.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -71,6 +71,7 @@ Trials recorded: 209. Gate 2's bar at that count: t >= 4.36.
 | t19-obv-divergence-week | week | bearish | 1407 | 53.23% | 50.91% | 1.79 | 1.39 |  | -0.13 | 83.33% |  |
 | c02-turn-of-month-week | week | bullish | 40 | 62.50% | 50.63% | 11.87 | 1.38 |  | 0.77 | 100.00% | too few picks |
 | i01-momentum-score-week | week | bearish | 1300 | 53.00% | 50.96% | 2.04 | 1.37 |  | -0.17 | 100.00% |  |
+| h03-turnover-variability-week | week | bullish | 1505 | 50.70% | 49.05% | 1.65 | 1.29 |  | -0.34 | 83.33% |  |
 | a04-52-week-high-week | week | bullish | 1300 | 50.77% | 48.85% | 1.92 | 1.28 |  | -0.55 | 80.00% |  |
 | a06-low-volatility-week | week | bullish | 1458 | 50.55% | 49.10% | 1.55 | 1.24 |  | -0.50 | 66.67% |  |
 | i02-low-vol-level-week | week | bearish | 1300 | 52.54% | 50.96% | 1.58 | 1.20 |  | -0.02 | 80.00% |  |
@@ -89,6 +90,7 @@ Trials recorded: 209. Gate 2's bar at that count: t >= 4.36.
 | t03-rsi-thresholds-week | week | bearish | 1099 | 51.87% | 51.07% | 1.72 | 1.02 |  | -0.06 | 66.67% |  |
 | a07c-volume-fade-week | week | bearish | 1510 | 52.19% | 50.84% | 1.34 | 1.00 |  | 0.03 | 66.67% | candidate |
 | c03-pre-holiday-day | day | bearish | 300 | 57.33% | 55.13% | 2.21 | 0.99 |  | 0.01 | 60.00% | too few picks |
+| h03-turnover-variability-week | week | bearish | 1505 | 51.89% | 50.76% | 1.14 | 0.97 |  | 0.05 | 66.67% | candidate |
 | o01-retest-day | day | bearish | 5641 | 54.85% | 54.31% | 0.66 | 0.95 |  | -0.12 | 50.00% |  |
 | t07-bollinger-squeeze-breakout-week | week | bearish | 10 | 60.00% | 48.72% | 11.28 | 0.91 |  | -0.52 | 83.33% | too few picks |
 | i01-momentum-score-week | week | bullish | 1300 | 50.08% | 48.85% | 1.23 | 0.85 |  | -0.62 | 80.00% |  |
