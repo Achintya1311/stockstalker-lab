@@ -5401,7 +5401,7 @@ Unit 1 (evaluate, roster day): committed `config/live_source.json`, the go-live 
 is still each table's highest released validation edge. Checked against all 41 rows of `ledger/holdout_queries.csv`: day_bullish T04
 +4.36 (next Q06 +2.58), day_bearish E2A +6.72 (E2A_D01C_FB +5.97), week_bullish A05B +2.23 (O05 +1.90), week_bearish A01 +4.73
 (A01_I01F +4.17). All four provisional; bullish under AB's edge-only rule (SPEC 10 wording change still pending a supervised session).
-No query spent (16 spent this ISO week). `tests/test_picks_run.py`'s live-mode test no longer relies on the real file being absent;
+No query spent (41 of 60 used this ISO week, 19 left per `gates/budgets.py`). `tests/test_picks_run.py`'s live-mode test no longer relies on the real file being absent;
 new `tests/test_picks_live_source.py` runs the committed file end to end (every table fires, disclaimer present, no forbidden words).
 Live dry run on real data with the committed file (dispatched, run b71ddce 04:19Z): green. Day 30 Oct: E2A filled the
 day-bearish table (5 picks), T04 abstained on day-bullish (it is blank on about a quarter of days). Week tables are
@@ -5416,5 +5416,5 @@ passed. Leases removed.
 
 **Next:** diagnose G01 (week-bear +4.22 with interval above 0 but dir -0.05%: another cost-wall reading) and G03; then
 a new discover source. After tonight's dataset update, check `live/` for the 2 Nov day and week tables and the exam
-backfill. Tables now change only on a roster day for a released edge at least 1 point higher. 44 holdout queries left
+backfill. Tables now change only on a roster day for a released edge at least 1 point higher. 19 holdout queries left
 this ISO week.
