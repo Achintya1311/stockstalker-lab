@@ -292,7 +292,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 1760.5,
+        "close": 1795.0,
+        "move_pct": 1.9596705481397247,
+        "move_rs": 34.5,
+        "hit": true
       },
       {
         "symbol": "INFY",
@@ -572,7 +577,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 1115.0,
+        "close": 1166.0,
+        "move_pct": 4.573991031390134,
+        "move_rs": 51.0,
+        "hit": true
       },
       {
         "symbol": "INDHOTEL",
@@ -859,7 +869,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 779.1,
+        "close": 795.5,
+        "move_pct": 2.1049929405724477,
+        "move_rs": 16.399999999999977,
+        "hit": true
       },
       {
         "symbol": "COFORGE",
@@ -1139,7 +1154,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 1844.2,
+        "close": 1993.0,
+        "move_pct": 8.068539203990888,
+        "move_rs": 148.79999999999995,
+        "hit": true
       },
       {
         "symbol": "MPHASIS",
@@ -1419,7 +1439,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 2435.0,
+        "close": 2557.6,
+        "move_pct": 5.034907597535931,
+        "move_rs": 122.59999999999991,
+        "hit": true
       }
     ],
     "bearish": [
@@ -1701,7 +1726,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 235.75,
+        "close": 241.1,
+        "move_pct": 2.269353128313889,
+        "move_rs": 5.349999999999994,
+        "hit": false
       },
       {
         "symbol": "TIINDIA",
@@ -1988,7 +2018,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 2081.7,
+        "close": 2085.2,
+        "move_pct": 0.16813181534323096,
+        "move_rs": 3.5,
+        "hit": false
       },
       {
         "symbol": "YESBANK",
@@ -2275,7 +2310,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 15.8,
+        "close": 15.86,
+        "move_pct": 0.37974683544304,
+        "move_rs": 0.05999999999999872,
+        "hit": false
       },
       {
         "symbol": "FORTIS",
@@ -2562,7 +2602,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 714.0,
+        "close": 734.7,
+        "move_pct": 2.899159663865558,
+        "move_rs": 20.700000000000045,
+        "hit": false
       },
       {
         "symbol": "SWIGGY",
@@ -2849,7 +2894,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 176.0,
+        "close": 185.75,
+        "move_pct": 5.539772727272729,
+        "move_rs": 9.75,
+        "hit": false
       }
     ]
   },

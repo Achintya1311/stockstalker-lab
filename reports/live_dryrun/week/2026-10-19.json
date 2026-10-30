@@ -11,31 +11,56 @@
         "symbol": "TECHM",
         "strategy": "champion_v1@v1",
         "reasoning": "champion v1 (StockStalker blended score): trend -0.179, momentum +0.756, volume +0.739 -> blended +0.378 (bullish)",
-        "late": false
+        "late": false,
+        "open": 1795.2,
+        "close": 1790.0,
+        "move_pct": -0.2896613190730868,
+        "move_rs": -5.2000000000000455,
+        "hit": false
       },
       {
         "symbol": "KOTAKBANK",
         "strategy": "champion_v1@v1",
         "reasoning": "champion v1 (StockStalker blended score): trend +0.240, momentum +0.445, volume +0.141 -> blended +0.287 (bullish)",
-        "late": false
+        "late": false,
+        "open": 444.45,
+        "close": 430.5,
+        "move_pct": -3.1387107661154157,
+        "move_rs": -13.949999999999989,
+        "hit": false
       },
       {
         "symbol": "ANGELONE",
         "strategy": "champion_v1@v1",
         "reasoning": "champion v1 (StockStalker blended score): trend +0.009, momentum +0.414, volume +0.545 -> blended +0.285 (bullish)",
-        "late": false
+        "late": false,
+        "open": 302.9,
+        "close": 279.0,
+        "move_pct": -7.890392868933638,
+        "move_rs": -23.899999999999977,
+        "hit": false
       },
       {
         "symbol": "INDHOTEL",
         "strategy": "champion_v1@v1",
         "reasoning": "champion v1 (StockStalker blended score): trend +0.046, momentum +0.408, volume +0.432 -> blended +0.269 (bullish)",
-        "late": false
+        "late": false,
+        "open": 760.3,
+        "close": 781.75,
+        "move_pct": 2.8212547678547972,
+        "move_rs": 21.450000000000045,
+        "hit": true
       },
       {
         "symbol": "ICICIGI",
         "strategy": "champion_v1@v1",
         "reasoning": "champion v1 (StockStalker blended score): trend +0.095, momentum +0.567, volume +0.111 -> blended +0.265 (bullish)",
-        "late": false
+        "late": false,
+        "open": 1655.0,
+        "close": 1592.0,
+        "move_pct": -3.8066465256797577,
+        "move_rs": -63.0,
+        "hit": false
       }
     ],
     "bearish": [
@@ -43,31 +68,56 @@
         "symbol": "TIINDIA",
         "strategy": "champion_v1@v1",
         "reasoning": "champion v1 (StockStalker blended score): trend -0.881, momentum -0.420, volume -0.075 -> blended -0.518 (bearish)",
-        "late": false
+        "late": false,
+        "open": 2177.3,
+        "close": 2080.0,
+        "move_pct": -4.468837551095406,
+        "move_rs": -97.30000000000018,
+        "hit": true
       },
       {
         "symbol": "FORTIS",
         "strategy": "champion_v1@v1",
         "reasoning": "champion v1 (StockStalker blended score): trend -0.742, momentum -0.435, volume -0.273 -> blended -0.517 (bearish)",
-        "late": false
+        "late": false,
+        "open": 735.0,
+        "close": 712.9,
+        "move_pct": -3.006802721088442,
+        "move_rs": -22.100000000000023,
+        "hit": true
       },
       {
         "symbol": "MAXHEALTH",
         "strategy": "champion_v1@v1",
         "reasoning": "champion v1 (StockStalker blended score): trend -0.438, momentum -0.755, volume -0.158 -> blended -0.479 (bearish)",
-        "late": false
+        "late": false,
+        "open": 835.5,
+        "close": 815.0,
+        "move_pct": -2.4536205864751692,
+        "move_rs": -20.5,
+        "hit": true
       },
       {
         "symbol": "SWIGGY",
         "strategy": "champion_v1@v1",
         "reasoning": "champion v1 (StockStalker blended score): trend -0.651, momentum -0.398, volume -0.286 -> blended -0.471 (bearish)",
-        "late": false
+        "late": false,
+        "open": 230.0,
+        "close": 176.0,
+        "move_pct": -23.478260869565215,
+        "move_rs": -54.0,
+        "hit": true
       },
       {
         "symbol": "YESBANK",
         "strategy": "champion_v1@v1",
         "reasoning": "champion v1 (StockStalker blended score): trend -0.416, momentum -0.775, volume +0.016 -> blended -0.434 (bearish)",
-        "late": false
+        "late": false,
+        "open": 16.95,
+        "close": 15.8,
+        "move_pct": -6.784660766961648,
+        "move_rs": -1.1499999999999986,
+        "hit": true
       }
     ]
   }
