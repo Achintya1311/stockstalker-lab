@@ -2,7 +2,10 @@
 
 Cross-sectional (the market mean and the median use every stock), so a row dated after
 every other stock's last row must not change their scores. `BBB` gets one extra
-trailing row; the other stocks' scores must be unchanged.
+trailing row; the other stocks' scores must be unchanged. `BBB` is the most volatile
+stock with or without that row, so the day's median is fixed: in the replay every
+stock ends at the same previous close, so the median is a same-date quantity
+(see `strategies/h03_turnover_variability_audit.py`).
 """
 
 from __future__ import annotations

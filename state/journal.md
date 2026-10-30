@@ -5478,3 +5478,13 @@ to +2.5, bearish -1.5 to +1.5, both directional moves negative. Bullish held (+2
 only StepM-superior week-bearish reading. It meets the full SPEC 10 rule; 12% A01 overlap, 46% A06 overlap (A06 bearish
 is +0.15). Below the card's +5.73 query bar, so no query, as pre-declared. Queue note: first in line for a week-bearish
 query before the next roster window. Idea: H02 on day bearish.
+Unit 2 (port): H03 variability of turnover (Chordia, Subrahmanyam and Anshuman 2001), 60-session coefficient of
+variation of daily traded value, score = log(median CV / CV) (`cards/H03.yml`, `strategies/h03_turnover_variability.py`,
+audit, 9 tests), week replay queued. Hypothesis (pre-declared): bearish +0.5 to +3.0 with dir -0.10% to +0.10%, bullish
+-1.0 to +1.5, 20-50% bearish overlap with H02. Audit note: a median-based score can move when a later row changes the
+median, which cannot happen in the replay (every stock ends at the same previous close); H03's and H02's audits now say
+so and hold the median fixed. Full pytest: 1142 passed. Leases removed.
+
+**Next:** diagnose H03 when it lands; port H06 (downside beta); pre-declare H02 on day bearish. Tonight's dataset
+update triggers the first live run: check `live/` for the 2 Nov tables and the exam backfill. 19 holdout queries left
+this ISO week.
