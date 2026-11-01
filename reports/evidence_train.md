@@ -118,9 +118,9 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 | a10-gap-and-go-day | 558 | 38% | -5.41 | -8.80 to -1.99 | 1.000 | 1 |
 
-## week/bearish  (57 experiments, block 1)
+## week/bearish  (58 experiments, block 1)
 
-SPA p-value (consistent): **0.083**  (lower 0.055, upper 0.083). StepM superior: h02-idiosyncratic-volatility-week. MCS size: 57 of 57. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.085**  (lower 0.055, upper 0.085). StepM superior: h02-idiosyncratic-volatility-week. MCS size: 58 of 58. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -179,12 +179,13 @@ SPA p-value (consistent): **0.083**  (lower 0.055, upper 0.083). StepM superior:
 | o00-placebo-week | 301 | 97% | -1.48 | -4.07 to +1.04 | 0.875 | 3 |
 | t25-heikin-ashi-week | 270 | 87% | -1.49 | -4.50 to +1.58 | 0.839 | 2 |
 | t14-cci-week | 282 | 91% | -1.61 | -5.28 to +1.74 | 0.810 | 1 |
+| h01-amihud-illiquidity-week | 309 | 100% | -2.31 | -5.04 to +0.31 | 0.954 | 1 |
 | t08-donchian-breakout-20-week | 289 | 94% | -2.72 | -5.86 to +0.34 | 0.966 | 2 |
 | c02-turn-of-month-week | 177 | 57% | -2.72 | -5.80 to +0.23 | 0.964 | 1 |
 
-## week/bullish  (50 experiments, block 1)
+## week/bullish  (51 experiments, block 1)
 
-SPA p-value (consistent): **0.240**  (lower 0.141, upper 0.285). StepM superior: none. MCS size: 49 of 50.
+SPA p-value (consistent): **0.243**  (lower 0.141, upper 0.288). StepM superior: none. MCS size: 50 of 51.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -212,6 +213,7 @@ SPA p-value (consistent): **0.240**  (lower 0.141, upper 0.285). StepM superior:
 | q05-trend-smoothness-week | 309 | 100% | -0.33 | -2.87 to +2.18 | 0.615 | 3 |
 | d02-stock-pcr-contrarian-week | 302 | 98% | -0.38 | -3.17 to +2.33 | 0.597 | 2 |
 | q04-range-extreme-timing-week | 301 | 97% | -0.42 | -3.20 to +2.36 | 0.605 | 1 |
+| h01-amihud-illiquidity-week | 309 | 100% | -0.54 | -2.74 to +1.72 | 0.677 | 2 |
 | o00-placebo-week | 301 | 97% | -0.61 | -2.74 to +1.62 | 0.705 | 1 |
 | t14-cci-week | 267 | 86% | -0.63 | -4.16 to +3.01 | 0.639 | 1 |
 | t23-rs-rating-week | 260 | 84% | -0.69 | -3.29 to +1.95 | 0.688 | 2 |

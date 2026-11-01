@@ -190,6 +190,15 @@
     "n": 299,
     "coverage": 0.9676375404530745
    },
+   "h01-amihud-illiquidity-week": {
+    "mean": -0.023056630042288046,
+    "lo": -0.05035007043091179,
+    "hi": 0.003141165611157825,
+    "p_le0": 0.9535,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
    "h02-idiosyncratic-volatility-week": {
     "mean": 0.038432043096870525,
     "lo": 0.015123125110741917,
@@ -516,15 +525,15 @@
    }
   },
   "joint": {
-   "n_models": 57,
+   "n_models": 58,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
     "lower": 0.055,
-    "consistent": 0.0825,
-    "upper": 0.0825
+    "consistent": 0.085,
+    "upper": 0.085
    },
    "stepm": [
     "h02-idiosyncratic-volatility-week"
@@ -550,6 +559,7 @@
     "g03-frog-in-the-pan-week",
     "g04-realized-skewness-week",
     "g05-residual-reversal-week",
+    "h01-amihud-illiquidity-week",
     "h02-idiosyncratic-volatility-week",
     "h03-turnover-variability-week",
     "h06-downside-beta-week",
@@ -735,6 +745,15 @@
     "block": 1,
     "n": 299,
     "coverage": 0.9676375404530745
+   },
+   "h01-amihud-illiquidity-week": {
+    "mean": -0.005446765857203646,
+    "lo": -0.027392135722986505,
+    "hi": 0.017166052421159372,
+    "p_le0": 0.677,
+    "block": 2,
+    "n": 309,
+    "coverage": 1.0
    },
    "h02-idiosyncratic-volatility-week": {
     "mean": 0.02109045097127532,
@@ -1044,13 +1063,13 @@
    }
   },
   "joint": {
-   "n_models": 50,
+   "n_models": 51,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.141,
-    "consistent": 0.2405,
-    "upper": 0.2855
+    "lower": 0.1415,
+    "consistent": 0.2435,
+    "upper": 0.2885
    },
    "stepm": [],
    "mcs": [
@@ -1070,6 +1089,7 @@
     "g03-frog-in-the-pan-week",
     "g04-realized-skewness-week",
     "g05-residual-reversal-week",
+    "h01-amihud-illiquidity-week",
     "h02-idiosyncratic-volatility-week",
     "h03-turnover-variability-week",
     "h06-downside-beta-week",
