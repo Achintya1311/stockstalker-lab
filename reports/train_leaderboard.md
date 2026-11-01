@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 217. Gate 2's bar at that count: t >= 4.37.
+Trials recorded: 221. Gate 2's bar at that count: t >= 4.37.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -118,12 +118,15 @@ Trials recorded: 217. Gate 2's bar at that count: t >= 4.37.
 | a03-momentum-12-1-week | week | bullish | 1275 | 49.41% | 49.20% | 0.21 | 0.15 |  | -0.57 | 60.00% |  |
 | o01-retest-week | week | bearish | 1183 | 51.65% | 50.92% | 0.18 | 0.12 |  | -0.11 | 50.00% |  |
 | a06-low-volatility-week | week | bearish | 1469 | 50.99% | 50.72% | 0.15 | 0.12 |  | -0.02 | 50.00% |  |
+| h05-intermediate-momentum-week | week | bullish | 1300 | 49.00% | 48.85% | 0.15 | 0.12 |  | -0.49 | 60.00% |  |
 | q02-return-volume-corr-day | day | bearish | 7325 | 54.58% | 54.53% | 0.05 | 0.09 |  | -0.07 | 50.00% |  |
+| h05-intermediate-momentum-week | week | bearish | 1300 | 51.08% | 50.96% | 0.12 | 0.09 |  | -0.31 | 40.00% |  |
 | a08-overnight-intraday-tug-day | day | bullish | 7315 | 44.99% | 44.96% | 0.04 | 0.07 |  | -0.51 | 16.67% |  |
 | d02-stock-pcr-confirmatory-week | week | bearish | 1246 | 49.76% | 50.75% | 0.04 | 0.03 |  | -0.39 | 50.00% |  |
 | t16-parabolic-sar-week | week | bearish | 1440 | 50.69% | 50.68% | 0.01 | 0.01 |  | -0.26 | 33.33% |  |
 | o02-oi-confirmed-day | day | bearish | 1982 | 54.34% | 54.67% | 0.01 | 0.01 |  | -0.09 | 50.00% |  |
 | o04a-no-volume-week | week | bearish | 1183 | 51.39% | 50.92% | -0.03 | -0.02 |  | -0.07 | 16.67% |  |
+| h04-return-seasonality-week | week | bearish | 1020 | 51.57% | 51.60% | -0.03 | -0.02 |  | -0.16 | 50.00% |  |
 | a01-weekly-reversal-week | week | bullish | 1545 | 48.87% | 48.89% | -0.03 | -0.02 |  | -0.51 | 50.00% |  |
 | t21-minervini-template-week | week | bearish | 1235 | 51.82% | 51.34% | -0.05 | -0.03 |  | -0.17 | 80.00% |  |
 | t05-macd-crossover-day | day | bearish | 4871 | 54.18% | 54.68% | -0.06 | -0.07 |  | -0.04 | 50.00% |  |
@@ -159,6 +162,7 @@ Trials recorded: 217. Gate 2's bar at that count: t >= 4.37.
 | t10-nr7-narrow-range-day | day | bearish | 5756 | 54.57% | 54.60% | -0.55 | -0.79 |  | -0.09 | 16.67% |  |
 | o01-retest-day | day | bullish | 6673 | 44.69% | 45.06% | -0.47 | -0.80 |  | -0.60 | 50.00% |  |
 | o04b-no-d01-week | week | bearish | 1183 | 50.04% | 50.92% | -1.12 | -0.81 |  | -0.10 | 16.67% |  |
+| h04-return-seasonality-week | week | bullish | 1020 | 46.96% | 48.20% | -1.24 | -0.84 |  | -0.44 | 25.00% |  |
 | t15-adx-regime-week | week | bullish | 1452 | 47.59% | 48.57% | -1.15 | -0.87 |  | -0.98 | 33.33% |  |
 | e1b-day | day | bullish | 3123 | 45.44% | 45.03% | -0.91 | -0.87 |  | -0.63 | 50.00% |  |
 | f06-trend-acceleration-day | day | bullish | 7320 | 44.49% | 44.96% | -0.50 | -0.89 |  | -0.63 | 66.67% |  |

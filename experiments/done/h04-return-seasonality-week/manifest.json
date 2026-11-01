@@ -1,0 +1,9 @@
+{
+  "id": "h04-return-seasonality-week",
+  "strategy": "strategies.h04_return_seasonality",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 44299,
+  "n_dates": 204,
+  "pick_log_sha256": "5119a8756b1a8b29925cd39624c52be4928b6aa11f66b75553de31b789ab414f"
+}

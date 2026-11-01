@@ -1,0 +1,9 @@
+{
+  "id": "h05-intermediate-momentum-week",
+  "strategy": "strategies.h05_intermediate_momentum",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 54949,
+  "n_dates": 260,
+  "pick_log_sha256": "f8f1c45096cbfab6c0c7759776cbbca9dc145d7a5fe692bf872ba28d3833ad65"
+}
