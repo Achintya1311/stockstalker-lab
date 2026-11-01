@@ -1,0 +1,26 @@
+source_url: "https://www.openassetpricing.com/"
+author: "Steven Heston and Ronnie Sadka, Seasonality in the cross-section of stock returns, Journal of Financial Economics 87(2), 2008"
+license: "Idea from the paper, summarised and re-implemented (SPEC.md section 5)"
+published_on: "2008"
+claim_as_stated: >
+  `cards/catalog.csv` (X05 and the paper): stocks with high past returns in a given
+  calendar month tend to outperform in that month in later years (US).
+horizon: week
+rules_plain: >
+  Target month = month of the next Monday after the last visible date. Score = mean
+  month-end-to-month-end return (adjusted closes) in that calendar month over every
+  earlier complete year in the data. At least 2 earlier years; otherwise abstain
+  (2015 and 2016 are warm-up on train, so about a third of train dates have no picks).
+  Highest bullish, lowest bearish.
+default_params:
+  min_years: 2
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Heston and Sadka (2008) J. Financial Economics; Open Source Asset Pricing (X05)"
+link: "https://www.openassetpricing.com/"
+prior_claim: "Stocks that did well in a calendar month in earlier years do well again (US, monthly)"
+red_flags:
+  - "Pre-declared before the replay (1 Nov 2026): with at most four earlier years on train the mean is noisy, and calendar-month means mostly measure past market-wide months. Prediction: week bullish -1.5 to +1.5, week bearish -1.5 to +1.5, both directional moves negative; coverage about 62% of train dates (warm-up through end 2016). Helps by the usual rules (+2.0, interval above 0, 4 of 6 years; bearish also a positive directional move), but with 4 usable years that bar needs 4 of 4 covered years; I expect it to fail."
+  - "Four years of history per calendar month cannot separate stock-specific seasonality from the market's own calendar; the score is not market-neutral."
+  - "Each score depends only on the stock's own rows (other than the target month, set by the last visible date); the audit checks other stocks are unaffected by one stock's extra row."
+status: "queued 1 Nov 2026 (week); not yet replayed"

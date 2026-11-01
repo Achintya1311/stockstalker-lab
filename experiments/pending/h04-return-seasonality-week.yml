@@ -1,0 +1,10 @@
+# H04 (week horizon): Heston and Sadka (2008) same-calendar-month return seasonality,
+# train-split replay (port lane, state/queue.md). See cards/H04.yml and
+# strategies/h04_return_seasonality.py.
+id: h04-return-seasonality-week
+strategy: strategies.h04_return_seasonality
+split: train
+horizon: week
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

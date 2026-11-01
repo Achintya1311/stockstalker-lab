@@ -5527,3 +5527,11 @@ Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells,
 **Next:** port H01, H05, H04; confluence H02-high-ivol x A02 (pre-declare first); week-bearish query for H02 in the next roster window (Fri 6 Nov before 12:00 UTC) needs a new pre-declared decision; check `live/` for the 2 Nov tables after the dataset update.
 Unit 2 (port): H01 Amihud illiquidity (`cards/H01.yml`, `strategies/h01_amihud_illiquidity.py`, audit, 10 tests), week replay queued (`experiments/pending/h01-amihud-illiquidity-week.yml`). Pre-declared: bullish -2.5 to +1.5, bearish -1.0 to +3.0, bearish dir -0.10% to +0.15%; helps by the usual rule; ranks behind H02 for a week-bearish query unless train beats +3.84. Full pytest: 1160 passed. Lease removed.
 **Next (update):** diagnose H01 week when it lands; port H05, H04; H02 x A02 confluence.
+
+## 2026-11-01 15:50 UTC run (manual firing, lease port)
+
+Freeze 30 Oct-3 Nov respected: no roster, `config/live_source.json` or picks changes. H01 replay still running at start; nothing new to diagnose.
+Unit 1 (port): H05 intermediate momentum 12-7 months (Novy-Marx 2012; `cards/H05.yml`, `strategies/h05_intermediate_momentum.py`, audit, 7 tests), week replay queued (f10f87e). Pre-declared: bullish -2.0 to +1.5, bearish -1.5 to +2.0, top-5 overlap with A03 20-60%.
+Unit 2 (port): H04 same-calendar-month seasonality (Heston and Sadka 2008; `cards/H04.yml`, `strategies/h04_return_seasonality.py`, audit, 8 tests), week replay queued. Pre-declared: both sides -1.5 to +1.5, coverage about 62% of train dates; expected to fail the bar. Full pytest below in handoff. Lease removed.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+**Next:** diagnose H01, H05, H04 as they land; H02 x A02 confluence (pre-declare first); Fri 6 Nov roster window: H02 week-bearish query decision; check `live/` for 2 Nov tables once the dataset update runs.
