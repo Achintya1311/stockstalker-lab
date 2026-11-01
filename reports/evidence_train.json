@@ -217,6 +217,24 @@
     "n": 301,
     "coverage": 0.9741100323624595
    },
+   "h04-return-seasonality-week": {
+    "mean": -0.00032229208840660626,
+    "lo": -0.029034376691388447,
+    "hi": 0.028615089813990358,
+    "p_le0": 0.503,
+    "block": 1,
+    "n": 204,
+    "coverage": 0.6601941747572816
+   },
+   "h05-intermediate-momentum-week": {
+    "mean": 0.001157560551859051,
+    "lo": -0.02326860139205777,
+    "hi": 0.027009131662606194,
+    "p_le0": 0.4515,
+    "block": 1,
+    "n": 260,
+    "coverage": 0.8414239482200647
+   },
    "h06-downside-beta-week": {
     "mean": -0.00730397790967941,
     "lo": -0.036112307305443514,
@@ -525,7 +543,7 @@
    }
   },
   "joint": {
-   "n_models": 58,
+   "n_models": 60,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
@@ -562,6 +580,8 @@
     "h01-amihud-illiquidity-week",
     "h02-idiosyncratic-volatility-week",
     "h03-turnover-variability-week",
+    "h04-return-seasonality-week",
+    "h05-intermediate-momentum-week",
     "h06-downside-beta-week",
     "i01-momentum-score-week",
     "i02-low-vol-level-week",
@@ -772,6 +792,24 @@
     "block": 1,
     "n": 301,
     "coverage": 0.9741100323624595
+   },
+   "h04-return-seasonality-week": {
+    "mean": -0.012359576655124781,
+    "lo": -0.0399770623567762,
+    "hi": 0.016160323019465732,
+    "p_le0": 0.794,
+    "block": 1,
+    "n": 204,
+    "coverage": 0.6601941747572816
+   },
+   "h05-intermediate-momentum-week": {
+    "mean": 0.0015305005610689695,
+    "lo": -0.022697329782557507,
+    "hi": 0.026742962754959985,
+    "p_le0": 0.4555,
+    "block": 1,
+    "n": 260,
+    "coverage": 0.8414239482200647
    },
    "h06-downside-beta-week": {
     "mean": -0.026931037900469485,
@@ -1063,13 +1101,13 @@
    }
   },
   "joint": {
-   "n_models": 51,
+   "n_models": 53,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.1415,
-    "consistent": 0.2435,
-    "upper": 0.2885
+    "lower": 0.142,
+    "consistent": 0.245,
+    "upper": 0.29
    },
    "stepm": [],
    "mcs": [
@@ -1092,6 +1130,8 @@
     "h01-amihud-illiquidity-week",
     "h02-idiosyncratic-volatility-week",
     "h03-turnover-variability-week",
+    "h04-return-seasonality-week",
+    "h05-intermediate-momentum-week",
     "h06-downside-beta-week",
     "i01-momentum-score-week",
     "i02-low-vol-level-week",

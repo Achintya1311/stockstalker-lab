@@ -118,9 +118,9 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 | a10-gap-and-go-day | 558 | 38% | -5.41 | -8.80 to -1.99 | 1.000 | 1 |
 
-## week/bearish  (58 experiments, block 1)
+## week/bearish  (60 experiments, block 1)
 
-SPA p-value (consistent): **0.085**  (lower 0.055, upper 0.085). StepM superior: h02-idiosyncratic-volatility-week. MCS size: 58 of 58. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.085**  (lower 0.055, upper 0.085). StepM superior: h02-idiosyncratic-volatility-week. MCS size: 60 of 60. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -160,9 +160,11 @@ SPA p-value (consistent): **0.085**  (lower 0.055, upper 0.085). StepM superior:
 | o05-order-block-weekly-week | 241 | 78% | +0.32 | -2.46 to +3.28 | 0.417 | 1 |
 | o01-retest-week | 293 | 95% | +0.18 | -2.75 to +2.91 | 0.455 | 2 |
 | a06-low-volatility-week | 296 | 96% | +0.15 | -2.27 to +2.60 | 0.446 | 2 |
+| h05-intermediate-momentum-week | 260 | 84% | +0.12 | -2.33 to +2.70 | 0.452 | 1 |
 | d02-stock-pcr-confirmatory-week | 302 | 98% | +0.04 | -2.62 to +2.66 | 0.488 | 2 |
 | t16-parabolic-sar-week | 288 | 93% | +0.01 | -2.31 to +2.12 | 0.514 | 1 |
 | o04a-no-volume-week | 293 | 95% | -0.03 | -2.85 to +2.69 | 0.496 | 2 |
+| h04-return-seasonality-week | 204 | 66% | -0.03 | -2.90 to +2.86 | 0.503 | 1 |
 | t21-minervini-template-week | 253 | 82% | -0.05 | -2.88 to +2.81 | 0.498 | 1 |
 | t09-supertrend-week | 301 | 97% | -0.11 | -2.56 to +2.47 | 0.532 | 1 |
 | a05-max-effect-week | 295 | 95% | -0.28 | -2.73 to +2.12 | 0.572 | 1 |
@@ -183,9 +185,9 @@ SPA p-value (consistent): **0.085**  (lower 0.055, upper 0.085). StepM superior:
 | t08-donchian-breakout-20-week | 289 | 94% | -2.72 | -5.86 to +0.34 | 0.966 | 2 |
 | c02-turn-of-month-week | 177 | 57% | -2.72 | -5.80 to +0.23 | 0.964 | 1 |
 
-## week/bullish  (51 experiments, block 1)
+## week/bullish  (53 experiments, block 1)
 
-SPA p-value (consistent): **0.243**  (lower 0.141, upper 0.288). StepM superior: none. MCS size: 50 of 51.
+SPA p-value (consistent): **0.245**  (lower 0.142, upper 0.290). StepM superior: none. MCS size: 52 of 53.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -207,6 +209,7 @@ SPA p-value (consistent): **0.243**  (lower 0.141, upper 0.288). StepM superior:
 | q03-up-day-balance-week | 309 | 100% | +0.69 | -1.73 to +3.05 | 0.294 | 1 |
 | g05-residual-reversal-week | 299 | 97% | +0.40 | -1.82 to +2.55 | 0.358 | 1 |
 | a03-momentum-12-1-week | 255 | 83% | +0.21 | -2.60 to +2.84 | 0.457 | 1 |
+| h05-intermediate-momentum-week | 260 | 84% | +0.15 | -2.27 to +2.67 | 0.456 | 1 |
 | a01-weekly-reversal-week | 309 | 100% | -0.03 | -2.23 to +2.03 | 0.509 | 2 |
 | f06-trend-acceleration-week | 309 | 100% | -0.09 | -2.24 to +2.29 | 0.535 | 2 |
 | t03-rsi-thresholds-week | 279 | 90% | -0.33 | -3.67 to +2.75 | 0.592 | 1 |
@@ -221,6 +224,7 @@ SPA p-value (consistent): **0.243**  (lower 0.141, upper 0.288). StepM superior:
 | g04-realized-skewness-week | 309 | 100% | -1.19 | -3.32 to +0.82 | 0.876 | 3 |
 | q07-trend-residual-week | 309 | 100% | -1.19 | -3.69 to +1.13 | 0.838 | 2 |
 | t19-obv-divergence-week | 305 | 99% | -1.20 | -3.29 to +1.01 | 0.853 | 1 |
+| h04-return-seasonality-week | 204 | 66% | -1.24 | -4.00 to +1.62 | 0.794 | 1 |
 | a07-high-volume-premium-week | 302 | 98% | -1.42 | -3.86 to +1.25 | 0.854 | 1 |
 | o03-trend-confirmed-week | 290 | 94% | -1.45 | -3.97 to +1.10 | 0.866 | 1 |
 | t18-ichimoku-cloud-week | 284 | 92% | -1.56 | -3.75 to +0.68 | 0.922 | 4 |
