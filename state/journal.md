@@ -5515,3 +5515,13 @@ Unit 2 (port): H02 day horizon queued (`experiments/pending/h02-idiosyncratic-vo
 `cards/H02.yml`: day bearish +1.0 to +3.5 with a negative directional move, bullish -1.0 to +1.5; a query only if train
 is at least +7.72. Full pytest: 1150 passed. Leases removed (this commit).
 **Next:** diagnose H02 day; port H01, H05, H04; after tonight's dataset update check `live/` for 2 Nov tables + exam backfill.
+
+## 2026-11-01 15:30 UTC run (lease diagnose)
+
+Sunday; no live lane. H02 day replay (landed 30 Oct 16:46Z) was undiagnosed.
+Unit 1 (diagnose): H02 day (`research/diagnostics/h02_day.md`). Pre-declared +1.0 to +3.5 held: bearish +2.06
+(interval +0.99 to +3.09, 5/6, dir +0.06%, positive against the prediction), bullish +1.18 (dir -0.47%). Full SPEC 10
+rule met on day bearish by a hair; far below the +7.72 query bar, so no query. Top-5 overlap with E2A 1.8%, A02 2.6%.
+Not StepM superior at day. Full pytest: 1150 passed.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+**Next:** port H01, H05, H04; confluence H02-high-ivol x A02 (pre-declare first); week-bearish query for H02 in the next roster window (Fri 6 Nov before 12:00 UTC) needs a new pre-declared decision; check `live/` for the 2 Nov tables after the dataset update.
