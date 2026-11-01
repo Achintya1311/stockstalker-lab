@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 215. Gate 2's bar at that count: t >= 4.37.
+Trials recorded: 217. Gate 2's bar at that count: t >= 4.37.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -143,6 +143,7 @@ Trials recorded: 215. Gate 2's bar at that count: t >= 4.37.
 | t12-stochastic-day | day | bearish | 4748 | 54.65% | 54.78% | -0.31 | -0.40 |  | -0.09 | 50.00% |  |
 | t16-parabolic-sar-day | day | bearish | 6830 | 54.20% | 54.44% | -0.23 | -0.40 |  | -0.11 | 50.00% |  |
 | q01-price-volume-corr-week | week | bearish | 1478 | 50.20% | 50.95% | -0.58 | -0.44 |  | -0.23 | 16.67% |  |
+| h01-amihud-illiquidity-week | week | bullish | 1545 | 48.35% | 48.89% | -0.54 | -0.47 |  | -0.40 | 50.00% |  |
 | h06-downside-beta-week | week | bearish | 1300 | 50.23% | 50.96% | -0.73 | -0.48 |  | -0.15 | 40.00% |  |
 | t08-donchian-breakout-55-week | week | bearish | 905 | 50.50% | 50.95% | -0.90 | -0.48 |  | -0.44 | 50.00% |  |
 | t23-rs-rating-week | week | bullish | 1300 | 48.15% | 48.85% | -0.69 | -0.49 |  | -0.76 | 40.00% |  |
@@ -183,6 +184,7 @@ Trials recorded: 215. Gate 2's bar at that count: t >= 4.37.
 | f03-conditional-reversal-day | day | bullish | 7334 | 44.18% | 44.96% | -0.77 | -1.39 |  | -0.66 | 50.00% |  |
 | t01-sma-crossover-week | week | bullish | 1499 | 47.10% | 48.80% | -1.81 | -1.45 |  | -1.09 | 33.33% |  |
 | q02-return-volume-corr-week | week | bullish | 1545 | 46.99% | 48.89% | -1.90 | -1.58 |  | -0.51 | 33.33% |  |
+| h01-amihud-illiquidity-week | week | bearish | 1545 | 48.61% | 50.91% | -2.31 | -1.70 |  | -0.27 | 33.33% |  |
 | t14-cci-day | day | bearish | 5285 | 53.59% | 54.82% | -1.29 | -1.74 |  | -0.09 | 16.67% |  |
 | c02-turn-of-month-week | week | bearish | 885 | 49.15% | 51.87% | -2.72 | -1.74 |  | -0.45 | 25.00% |  |
 | o00-placebo-day | day | bullish | 7107 | 44.15% | 45.06% | -0.95 | -1.75 |  | -0.56 | 16.67% |  |

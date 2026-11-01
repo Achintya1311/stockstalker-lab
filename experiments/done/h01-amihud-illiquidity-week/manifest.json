@@ -1,0 +1,9 @@
+{
+  "id": "h01-amihud-illiquidity-week",
+  "strategy": "strategies.h01_amihud_illiquidity",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 60756,
+  "n_dates": 309,
+  "pick_log_sha256": "78dc420c80545ea9c2040356f74097af25aa9559ece83a1c2532d25fa00b414b"
+}
