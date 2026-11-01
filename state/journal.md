@@ -5525,3 +5525,5 @@ rule met on day bearish by a hair; far below the +7.72 query bar, so no query. T
 Not StepM superior at day. Full pytest: 1150 passed.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
 **Next:** port H01, H05, H04; confluence H02-high-ivol x A02 (pre-declare first); week-bearish query for H02 in the next roster window (Fri 6 Nov before 12:00 UTC) needs a new pre-declared decision; check `live/` for the 2 Nov tables after the dataset update.
+Unit 2 (port): H01 Amihud illiquidity (`cards/H01.yml`, `strategies/h01_amihud_illiquidity.py`, audit, 10 tests), week replay queued (`experiments/pending/h01-amihud-illiquidity-week.yml`). Pre-declared: bullish -2.5 to +1.5, bearish -1.0 to +3.0, bearish dir -0.10% to +0.15%; helps by the usual rule; ranks behind H02 for a week-bearish query unless train beats +3.84. Full pytest: 1160 passed. Lease removed.
+**Next (update):** diagnose H01 week when it lands; port H05, H04; H02 x A02 confluence.

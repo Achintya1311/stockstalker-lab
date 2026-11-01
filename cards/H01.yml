@@ -1,0 +1,25 @@
+source_url: "https://www.openassetpricing.com/"
+author: "Yakov Amihud, Illiquidity and stock returns: cross-section and time-series effects, Journal of Financial Markets 5(1), 2002"
+license: "Idea from the paper, summarised and re-implemented (SPEC.md section 5)"
+published_on: "2002"
+claim_as_stated: >
+  `cards/catalog.csv` (X05 and the paper): illiquid stocks earn higher expected
+  returns than liquid ones (US, monthly).
+horizon: week
+rules_plain: >
+  Mean over the last 20 sessions of |daily log return| (adjusted closes) divided by
+  daily traded value in rupees. Score = log(own ratio) - log(median that date): less
+  liquid than the median bullish, more liquid bearish. A gap in the window or a zero
+  traded value abstains. The paper's yearly average becomes 20 sessions.
+default_params:
+  window: 20
+data_needed: "ohlcv (turnover)"
+testable_now: "yes"
+source: "Amihud (2002) J. Financial Markets; Open Source Asset Pricing (X05)"
+link: "https://www.openassetpricing.com/"
+prior_claim: "Illiquid stocks earn higher expected returns (US, monthly)"
+red_flags:
+  - "Pre-declared before the replay (1 Nov 2026): the ratio is mostly a volatility-over-size proxy, and H02 found high stock-specific volatility bearish. The two pull against each other. Prediction: week bullish -2.5 to +1.5 (the paper's sign is probably swamped by the volatility part), week bearish -1.0 to +3.0; directional moves negative on bullish (0.415% delivery cost) and -0.10% to +0.15% on bearish; top-5 bullish overlap with H02's bearish picks 20 to 55%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years and a positive directional move; it ranks behind H02 for a week-bearish query unless its train edge beats +3.84. Helps, bullish (edge-only rule): +2.0, interval above 0, 4 of 6 years."
+  - "Large-cap F&O names are all liquid, so the ratio ranks within a narrow band; the published effect is concentrated in small stocks."
+  - "Cross-sectional only through the day's median; the audit fixes the median and checks no later row moves other scores."
+status: "queued 1 Nov 2026 (week); not yet replayed"
