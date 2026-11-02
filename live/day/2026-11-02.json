@@ -292,7 +292,13 @@
             "high": 32.2,
             "retested": false
           }
-        }
+        },
+        "open": 1250.0,
+        "close": 1240.5,
+        "move_pct": -0.7600000000000051,
+        "move_rs": -9.5,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "ABCAPITAL",
@@ -571,7 +577,13 @@
               54.6
             ]
           ]
-        }
+        },
+        "open": 369.0,
+        "close": 378.3,
+        "move_pct": 2.5203252032520274,
+        "move_rs": 9.300000000000011,
+        "hit": false,
+        "late": false
       }
     ]
   },

@@ -284,7 +284,8 @@
               15.6
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "TORNTPHARM",
@@ -563,7 +564,8 @@
               22.0
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "LTF",
@@ -842,7 +844,8 @@
               15.8
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "DIXON",
@@ -1121,7 +1124,8 @@
               1.9
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "MFSL",
@@ -1400,7 +1404,8 @@
               7.0
             ]
           ]
-        }
+        },
+        "late": false
       }
     ],
     "bearish": [
@@ -1688,7 +1693,8 @@
             "high": 23.4,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "LAURUSLABS",
@@ -1974,7 +1980,8 @@
             "high": 35.7,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "SONACOMS",
@@ -2260,7 +2267,8 @@
             "high": 14.5,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "SYRMA",
@@ -2539,7 +2547,8 @@
               62.1
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "NAVINFLUOR",
@@ -2818,7 +2827,8 @@
               85.8
             ]
           ]
-        }
+        },
+        "late": false
       }
     ]
   }
