@@ -292,7 +292,13 @@
             "high": 26.4,
             "retested": false
           }
-        }
+        },
+        "open": 76.96,
+        "close": 75.26,
+        "move_pct": -2.2089397089396945,
+        "move_rs": -1.6999999999999886,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "ONGC",
@@ -578,7 +584,13 @@
             "high": 24.9,
             "retested": false
           }
-        }
+        },
+        "open": 233.66,
+        "close": 232.17,
+        "move_pct": -0.6376786784216382,
+        "move_rs": -1.490000000000009,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "TATASTEEL",
@@ -864,7 +876,13 @@
             "high": 19.7,
             "retested": false
           }
-        }
+        },
+        "open": 179.0,
+        "close": 176.5,
+        "move_pct": -1.3966480446927387,
+        "move_rs": -2.5,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "NAM-INDIA",
@@ -1150,7 +1168,13 @@
             "high": 51.3,
             "retested": false
           }
-        }
+        },
+        "open": 961.95,
+        "close": 984.0,
+        "move_pct": 2.292218930297829,
+        "move_rs": 22.049999999999955,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "HYUNDAI",
@@ -1429,7 +1453,13 @@
               44.8
             ]
           ]
-        }
+        },
+        "open": 1986.0,
+        "close": 2030.0,
+        "move_pct": 2.2155085599194324,
+        "move_rs": 44.0,
+        "hit": false,
+        "late": false
       }
     ]
   },
