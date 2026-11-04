@@ -284,7 +284,13 @@
               14.1
             ]
           ]
-        }
+        },
+        "open": 332.95,
+        "close": 335.2,
+        "move_pct": 0.6757771437152726,
+        "move_rs": 2.25,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "KARURVYSYA",
@@ -563,7 +569,13 @@
               23.2
             ]
           ]
-        }
+        },
+        "open": 340.0,
+        "close": 343.9,
+        "move_pct": 1.1470588235294121,
+        "move_rs": 3.8999999999999773,
+        "hit": true,
+        "late": false
       }
     ],
     "bearish": [
@@ -851,7 +863,13 @@
             "high": 48.5,
             "retested": false
           }
-        }
+        },
+        "open": 3400.0,
+        "close": 3315.0,
+        "move_pct": -2.500000000000002,
+        "move_rs": -85.0,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "COROMANDEL",
@@ -1130,7 +1148,13 @@
               44.3
             ]
           ]
-        }
+        },
+        "open": 1800.0,
+        "close": 1837.0,
+        "move_pct": 2.055555555555566,
+        "move_rs": 37.0,
+        "hit": false,
+        "late": false
       }
     ]
   },
