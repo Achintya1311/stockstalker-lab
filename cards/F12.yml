@@ -1,0 +1,30 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#52"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#52 = (delay(ts_min(low, 5), 5) - ts_min(low, 5)) x
+  rank((sum(returns, 240) - sum(returns, 20)) / 220) x ts_rank(volume, 5). A production
+  WorldQuant alpha: a fresh lower low in a stock with a strong 11-month trend, on heavy
+  volume, scores high. The paper reports no stand-alone hit rate.
+horizon: week
+rules_plain: >
+  On adjusted prices: drop = (lowest low of the 5 sessions ending 5 sessions ago - lowest
+  low of the last 5) / last close; trend = percentile rank among the stocks scored that date
+  of (240-session minus 20-session summed daily return) / 220; vol = rank of the last
+  volume among the last 5, over 5. Score = drop x trend x vol. A pullback low inside a
+  strong trend on heavy volume bullish; rising lows bearish. Unchanged lows abstain. Needs
+  241 rows, so 2015 is warm-up.
+default_params:
+  low_window: 5
+  long_window: 240
+  skip_window: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (5 Nov 2026): the drop term is a price move scaled by the close and varies far more across stocks than the two ranks, so the top five on each side are mostly the largest recent falls (bullish) and the largest recent rises (bearish): close to A01's weekly reversal (week bearish +2.48 train, released +4.73; week bullish -0.03). Prediction: week bearish +0.5 to +3.0 with dir -0.10% to +0.20%; week bullish -2.0 to +1.5 with a negative dir (0.415% delivery cost); top-5 bearish overlap with A01 20 to 50%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 5 years, positive dir; replaces A01 only with a released edge at least 1 point above +4.73. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 5 years."
+  - "Mixes a 5-session price pattern with an 11-month momentum rank, two horizons that both differ from the one-week holding period."
+status: "queued 5 Nov 2026 (week); not yet replayed"

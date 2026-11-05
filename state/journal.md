@@ -5565,3 +5565,6 @@ to +0.10%), bullish -1.5 to +1.5, 15-45% bearish overlap with F02. Leases extend
 Unit 8 (port): F11 Alpha#38 range-top fade, median-centred (`cards/F11.yml`, `strategies/f11_range_top_fade.py`, audit,
 6 tests), day replay queued. Pre-declared: bearish +1.5 to +4.0 (dir -0.10% to +0.10%), bullish -0.5 to +3.0 (dir
 negative), 20-50% bearish overlap with F07, 15-45% bullish overlap with T04. Full pytest: 1202 passed.
+Unit 9 (port): F12 Alpha#52 pullback low inside the 11-month trend (`cards/F12.yml`, `strategies/f12_trend_pullback_low.py`,
+audit, 7 tests), week replay queued. Pre-declared: bearish +0.5 to +3.0 (dir -0.10% to +0.20%), bullish -2.0 to +1.5 (dir
+negative), 20-50% bearish overlap with A01 (the drop term dominates the ranks). Full pytest: 1209 passed. F08-F12 all queued.
