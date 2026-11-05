@@ -5605,3 +5605,7 @@ the +7.72 bar to query against E2A, so no query and no table change. Bullish +0.
 (held), T04 bullish 9.8% (missed low), D01C 17%, E2A 32%. Next: a pre-declared E2A -> F11 fallback card must beat
 E2A_D01C_FB's +5.97 train. Full pytest: 1319 passed, 4 skipped.
 Do order blocks help? Not tested here; unchanged.
+Unit 5 (diagnose): F09 Alpha#43 volume-backed fall (`research/diagnostics/f09.md`). Day bullish +0.96 (interval -0.12 to
++2.01, dir -0.54%) and bearish -0.48 (2/6): both inside the pre-declared ranges; T04 overlap 8.3% (missed low). Volume
+does not confirm the oversold reading on this universe; closed, no query. Full pytest: 1319 passed, 4 skipped.
+Do order blocks help? Not tested here; unchanged.
