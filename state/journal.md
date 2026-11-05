@@ -5535,3 +5535,11 @@ Unit 1 (port): H05 intermediate momentum 12-7 months (Novy-Marx 2012; `cards/H05
 Unit 2 (port): H04 same-calendar-month seasonality (Heston and Sadka 2008; `cards/H04.yml`, `strategies/h04_return_seasonality.py`, audit, 8 tests), week replay queued. Pre-declared: both sides -1.5 to +1.5, coverage about 62% of train dates; expected to fail the bar. Full pytest below in handoff. Lease removed.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
 **Next:** diagnose H01, H05, H04 as they land; H02 x A02 confluence (pre-declare first); Fri 6 Nov roster window: H02 week-bearish query decision; check `live/` for 2 Nov tables once the dataset update runs.
+
+## 2026-11-05 17:50 UTC run (manual, AB's 5x request; leases 0e3e5f7: diagnose, port, discover)
+
+Live tables running since 2 Nov (live runs 2-4 Nov green); no leak alarm, no open workflow failure. Thursday: no roster window.
+Unit 1 (diagnose): H01 Amihud illiquidity (`research/diagnostics/h01.md`). Pre-declared bullish -2.5 to +1.5 held (-0.54,
+dir -0.40%); bearish -1.0 to +3.0 missed low: -2.31 (interval -5.04 to +0.31, 2/6, dir -0.27%), wrong-way 2016-19 when large
+caps led. Only 8.3% overlap with H02; on F&O names the ratio ranks by size. Not eligible, no query; illiquidity closed.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
