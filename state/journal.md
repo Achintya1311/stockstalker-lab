@@ -5559,3 +5559,6 @@ Unit 6 (port): F08 Alpha#19 seven-session reversal weighted by the yearly-return
 `strategies/f08_weighted_reversal.py`, audit, 6 tests), week replay queued. Pre-declared: bearish -1.0 to +3.0 (dir -0.15%
 to +0.15%), bullish -2.0 to +2.0 (dir negative), 10-35% bearish overlap with A01; replaces A01 only above released +5.73.
 Full pytest: 1189 passed.
+Unit 7 (port): F10 Alpha#34 volatility ratio plus one-day reversal, centred (`cards/F10.yml`,
+`strategies/f10_vol_ratio_reversal.py`, audit, 7 tests), day replay queued. Pre-declared: bearish +1.0 to +3.5 (dir -0.10%
+to +0.10%), bullish -1.5 to +1.5, 15-45% bearish overlap with F02. Leases extended. Full pytest: 1196 passed.
