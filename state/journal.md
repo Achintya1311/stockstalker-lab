@@ -5568,3 +5568,11 @@ negative), 20-50% bearish overlap with F07, 15-45% bullish overlap with T04. Ful
 Unit 9 (port): F12 Alpha#52 pullback low inside the 11-month trend (`cards/F12.yml`, `strategies/f12_trend_pullback_low.py`,
 audit, 7 tests), week replay queued. Pre-declared: bearish +0.5 to +3.0 (dir -0.10% to +0.20%), bullish -2.0 to +1.5 (dir
 negative), 20-50% bearish overlap with A01 (the drop term dominates the ranks). Full pytest: 1209 passed. F08-F12 all queued.
+Unit 10 (port, confluence lane): E3A/E3B, A02 split by H02's idiosyncratic-volatility median (`cards/E3A.yml`, `cards/E3B.yml`,
+`strategies/e3_a02_ivol.py`, audit, 6 tests), day replays queued. Pre-declared: E3A day bearish +3.5 to +5.5 on 75-95% of
+A02's bearish pick-dates; helps only at +5.34 or more (A02 +1), interval above 0, positive dir and above E3B, else a null.
+Full pytest: 1215 passed. Leases removed. No roster, `config/live_source.json` or picks changes (Thursday, no window).
+Do order blocks help? Not tested this run; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+**Next:** diagnose F09, F08, F10, F11, F12, E3A/E3B as they land (7 replays queued); Fri 6 Nov before 12:00 UTC roster window:
+evaluate lane decides the H02 week-bearish query (needs released at least +5.73 to replace A01) and checks every table
+against released edges; the F batch's day-bearish readers cannot change E2A unless train beats +7.72.

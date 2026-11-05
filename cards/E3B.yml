@@ -1,0 +1,27 @@
+source_url: ''
+author: lab-original confluence test (A02 x H02)
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-11-05'
+horizon: day
+claim_as_stated: 'Pre-registered hypothesis (5 Nov 2026, from research/diagnostics/h02_day.md): extreme days on stocks
+  with high stock-specific volatility fade harder, so E3A edge > A02 edge and E3A > E3B.'
+rules_plain: 'A02 (extreme-day reversal, |z| >= 2 against 20-day sigma) kept only where H02''s 20-session one-factor
+  residual volatility is below the median of the stocks H02 scores that date. Both signs kept; A02''s own score.'
+default_params:
+  base: A02
+  filter: H02 score sign (low_ivol)
+data_needed: ohlcv
+testable_now: 'yes'
+source: 'research/diagnostics/h02_day.md (confluence idea); members A02 and H02'
+link: ''
+prior_claim: none (lab hypothesis)
+red_flags:
+- 'Pre-declared before the replay (5 Nov 2026): an extreme day raises the stock''s own residual volatility, so most A02
+  picks fall in E3A and E3B is thin. Prediction: E3A day bearish +3.5 to +5.5 on 75 to 95% of A02''s bearish pick-dates,
+  day bullish -2.5 to 0; E3B day bearish -1.0 to +5.0 on 10 to 40% of A02''s bearish pick-dates. The confluence helps only
+  if E3A day bearish is at least +5.34 (A02 +4.34 plus 1), with interval above 0, a positive directional move after costs,
+  and above E3B. Stop rule as the 24 Oct confluence lane: if not, record a null and close A02 x H02. E3A would challenge
+  the day-bearish table (E2A) only above +7.72 train, which is not expected.'
+- No claim is assumed true (SPEC.md section 5). Both arms are trials in ledger/trials.csv, added together before any
+  result is read.
+status: queued 5 Nov 2026 (day); not yet replayed
