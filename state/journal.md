@@ -5562,3 +5562,6 @@ Full pytest: 1189 passed.
 Unit 7 (port): F10 Alpha#34 volatility ratio plus one-day reversal, centred (`cards/F10.yml`,
 `strategies/f10_vol_ratio_reversal.py`, audit, 7 tests), day replay queued. Pre-declared: bearish +1.0 to +3.5 (dir -0.10%
 to +0.10%), bullish -1.5 to +1.5, 15-45% bearish overlap with F02. Leases extended. Full pytest: 1196 passed.
+Unit 8 (port): F11 Alpha#38 range-top fade, median-centred (`cards/F11.yml`, `strategies/f11_range_top_fade.py`, audit,
+6 tests), day replay queued. Pre-declared: bearish +1.5 to +4.0 (dir -0.10% to +0.10%), bullish -0.5 to +3.0 (dir
+negative), 20-50% bearish overlap with F07, 15-45% bullish overlap with T04. Full pytest: 1202 passed.

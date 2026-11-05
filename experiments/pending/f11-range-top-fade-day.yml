@@ -1,0 +1,10 @@
+# F11 (day horizon): Alpha#38 close near its 10-session high on an up bar,
+# faded and median-centred, train-split replay (port lane, state/queue.md).
+# See cards/F11.yml and strategies/f11_range_top_fade.py.
+id: f11-range-top-fade-day
+strategy: strategies.f11_range_top_fade
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
