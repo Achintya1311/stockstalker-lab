@@ -1,0 +1,10 @@
+# F09 (day horizon): Alpha#43 volume-backed seven-session fall, median-centred,
+# train-split replay (port lane, state/queue.md).
+# See cards/F09.yml and strategies/f09_volume_backed_fall.py.
+id: f09-volume-backed-fall-day
+strategy: strategies.f09_volume_backed_fall
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

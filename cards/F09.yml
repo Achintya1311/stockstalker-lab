@@ -1,0 +1,29 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#43"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#43 = ts_rank(volume / adv20, 20) x ts_rank(-delta(close, 7), 8).
+  A production WorldQuant alpha: a heavy session after a seven-session fall scores high.
+  The paper reports no stand-alone hit rate.
+horizon: day
+rules_plain: >
+  Volume factor: today's traded value over its 20-session mean (today's included), ranked
+  among the last 20 such ratios. Price factor: minus the 7-session log change of the
+  adjusted close, ranked among its last 8 values. Each rank is divided by its window, so
+  both lie in (0, 1]. Score = product minus the median product of the stocks scored that
+  date: high bullish, low bearish. A zero traded value in the window abstains.
+default_params:
+  volume_window: 20
+  price_lag: 7
+  price_rank_window: 8
+data_needed: "ohlcv (turnover stands in for volume / adv20)"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (5 Nov 2026): the bullish top five are stocks at the bottom of an 8-session price range with their heaviest relative turnover in 20 sessions, a volume-confirmed version of T04's oversold reading (day bullish +3.37). Prediction: day bullish 0 to +3.0 with a negative directional move after the 0.415% delivery cost; day bearish (light turnover after a rise, a median-centred tail) -1.5 to +2.0; top-5 bullish overlap with T04 10 to 40%. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; it challenges T04 only with a train edge above +3.37. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move."
+  - "The paper's product is one-signed; the bearish side exists only through the lab's median centring, so it is the lab's construction, not the paper's claim."
+  - "Many ties in the rank factors (a rank can only take 20 or 8 values), so the top five are often a tie-break on the other factor."
+status: "queued 5 Nov 2026 (day); not yet replayed"

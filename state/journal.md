@@ -5552,3 +5552,6 @@ reading. Not eligible, no query.
 Unit 4 (discover): five Alpha101 rows F08-F12 (#19, #43, #34, #38, #52), formulas checked against the paper's appendix
 (`research/notes/discover_2026-11-05_x03.md`). Chosen for day-bullish (F09) and week (F08, F12) gaps; #4, #20, #54, #13/#16
 rejected as repeats or unusable. Every other catalog row is tested; X01-X06 are collections that spawn rows.
+Unit 5 (port): F09 Alpha#43 volume-backed 7-session fall, median-centred (`cards/F09.yml`,
+`strategies/f09_volume_backed_fall.py`, audit, 8 tests), day replay queued. Pre-declared: bullish 0 to +3.0 with a negative
+dir, bearish -1.5 to +2.0, 10-40% bullish overlap with T04; challenges T04 only above +3.37. Full pytest: 1183 passed.
