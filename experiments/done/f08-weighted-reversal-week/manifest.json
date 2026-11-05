@@ -1,0 +1,9 @@
+{
+  "id": "f08-weighted-reversal-week",
+  "strategy": "strategies.f08_weighted_reversal",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 54896,
+  "n_dates": 260,
+  "pick_log_sha256": "dd1a0e622996b31451956af61c67a99facdd898a8ed5636213b5eca8e8c94120"
+}

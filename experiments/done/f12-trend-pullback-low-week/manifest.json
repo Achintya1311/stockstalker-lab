@@ -1,0 +1,9 @@
+{
+  "id": "f12-trend-pullback-low-week",
+  "strategy": "strategies.f12_trend_pullback_low",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 55127,
+  "n_dates": 262,
+  "pick_log_sha256": "f6b59fb6e01b9704c042bc8545d673c1c9b825fb47fecf190bd0d74327966e00"
+}

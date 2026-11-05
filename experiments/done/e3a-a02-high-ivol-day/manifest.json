@@ -1,0 +1,9 @@
+{
+  "id": "e3a-a02-high-ivol-day",
+  "strategy": "strategies.e3a_a02_high_ivol",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 11150,
+  "n_dates": 1427,
+  "pick_log_sha256": "5a9f00f25392f6b810e92ca9c25bdf7d68ea6a4b89bfa1d8d2d818a6748c3e1b"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "e3b-a02-low-ivol-day",
+  "strategy": "strategies.e3b_a02_low_ivol",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 11393,
+  "n_dates": 1411,
+  "pick_log_sha256": "27fbe40115cb4cedfc6ccfe1531908e99f956a1afa6ac04944dcfecabcafd4cf"
+}

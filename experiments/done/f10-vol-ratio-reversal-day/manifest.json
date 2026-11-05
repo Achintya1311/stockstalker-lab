@@ -1,0 +1,9 @@
+{
+  "id": "f10-vol-ratio-reversal-day",
+  "strategy": "strategies.f10_vol_ratio_reversal",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 302290,
+  "n_dates": 1480,
+  "pick_log_sha256": "15b24e68888ae0f2c3d19352c530067dcedcc7c40d492f63a02b29574ade4976"
+}

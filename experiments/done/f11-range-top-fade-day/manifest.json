@@ -1,0 +1,9 @@
+{
+  "id": "f11-range-top-fade-day",
+  "strategy": "strategies.f11_range_top_fade",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 303157,
+  "n_dates": 1476,
+  "pick_log_sha256": "b15401e9b1da6b0cc220d64097c3a3765fa82e52b06cabe7312df8cb4e81d6ab"
+}
