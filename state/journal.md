@@ -5599,3 +5599,9 @@ overlap with T04. Neither helps rule met (bull short of +2.0, bear dir negative)
 RANBAXY rows scoring in the pick logs through 2020 (engine's universe filter keeps them out of results); logged as a WATCH
 in `state/engine-issues.md`, and E3's overlap figures corrected (A02 75% / 59%). Full pytest: 1319 passed, 4 skipped.
 Do order blocks help? Not tested here; unchanged.
+Unit 4 (diagnose): F11 Alpha#38 range-top fade (`research/diagnostics/f11.md`). Day bearish +4.47 (interval +3.36 to
++5.53, 6/6, dir +0.05%): above the pre-declared +1.5 to +4.0, dir held; meets the full SPEC 10 helps rule, but far below
+the +7.72 bar to query against E2A, so no query and no table change. Bullish +0.77 (dir -0.56%) held. Overlaps F07 29%
+(held), T04 bullish 9.8% (missed low), D01C 17%, E2A 32%. Next: a pre-declared E2A -> F11 fallback card must beat
+E2A_D01C_FB's +5.97 train. Full pytest: 1319 passed, 4 skipped.
+Do order blocks help? Not tested here; unchanged.
