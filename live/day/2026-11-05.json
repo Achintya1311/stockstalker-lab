@@ -291,7 +291,13 @@
             "high": 26.4,
             "retested": false
           }
-        }
+        },
+        "open": 2479.0,
+        "close": 2495.7,
+        "move_pct": 0.6736587333602273,
+        "move_rs": 16.699999999999818,
+        "hit": true,
+        "late": false
       }
     ],
     "bearish": [
@@ -579,7 +585,13 @@
             "high": 47.8,
             "retested": false
           }
-        }
+        },
+        "open": 1220.0,
+        "close": 1335.0,
+        "move_pct": 9.426229508196716,
+        "move_rs": 115.0,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "MFSL",
@@ -858,7 +870,13 @@
               19.8
             ]
           ]
-        }
+        },
+        "open": 1255.0,
+        "close": 1273.5,
+        "move_pct": 1.4741035856573603,
+        "move_rs": 18.5,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "TITAN",
@@ -1144,7 +1162,13 @@
             "high": 29.4,
             "retested": false
           }
-        }
+        },
+        "open": 4800.0,
+        "close": 4834.6,
+        "move_pct": 0.7208333333333483,
+        "move_rs": 34.600000000000364,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "BDL",
@@ -1423,7 +1447,13 @@
               29.9
             ]
           ]
-        }
+        },
+        "open": 1097.35,
+        "close": 1075.0,
+        "move_pct": -2.036724837107573,
+        "move_rs": -22.34999999999991,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "HINDZINC",
@@ -1702,7 +1732,13 @@
               45.0
             ]
           ]
-        }
+        },
+        "open": 560.9,
+        "close": 570.75,
+        "move_pct": 1.7561062577999609,
+        "move_rs": 9.850000000000023,
+        "hit": false,
+        "late": false
       }
     ]
   },
