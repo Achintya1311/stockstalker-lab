@@ -775,3 +775,6 @@ dead symbol in the cross-section, a small bias for rank-based strategies (F-seri
 read `picks.json` must drop it. Suggested check in `scripts/build_dataset.py` or `engine/`: drop symbol rows whose
 close and volume are unchanged (or volume zero) for 20+ sessions, or keep only rows on dates the symbol has an active
 future. The lab's own overlap scripts now drop RANBAXY by hand.
+Update (5 Nov, F12 diagnosis): not only RANBAXY. SKSMICRO (renamed 2016), ABIRLANUVO (merged 2017), AMTEKAUTO and CAPF
+also keep scoring through 2020-12 in F12's week log (SKSMICRO and ABIRLANUVO each about 13% of a raw top five). A
+generic stale-row rule in the dataset build is the right fix; the lab's overlap scripts drop these five by name.

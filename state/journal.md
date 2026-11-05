@@ -5609,3 +5609,12 @@ Unit 5 (diagnose): F09 Alpha#43 volume-backed fall (`research/diagnostics/f09.md
 +2.01, dir -0.54%) and bearish -0.48 (2/6): both inside the pre-declared ranges; T04 overlap 8.3% (missed low). Volume
 does not confirm the oversold reading on this universe; closed, no query. Full pytest: 1319 passed, 4 skipped.
 Do order blocks help? Not tested here; unchanged.
+Unit 6 (diagnose): F12 Alpha#52 trend pullback low (`research/diagnostics/f12.md`). Week bearish +0.97 (interval -1.49 to
++3.42, 3/5, dir -0.10%) and bullish -1.12: inside the pre-declared ranges; bearish overlap with A01 8.9% (missed low).
+Edge only in 2016 and 2020; closed, no query. More stale symbols found in the raw week log (SKSMICRO, ABIRLANUVO,
+AMTEKAUTO, CAPF); WATCH entry updated. Leases removed. No roster, `config/live_source.json` or picks-selection changes.
+Full pytest: 1319 passed, 4 skipped.
+Do order blocks help? Not tested this run; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+**Next:** diagnose F08 (week replay landed, undiagnosed); Fri 6 Nov before 12:00 UTC roster window: evaluate lane decides the
+H02 week-bearish query and checks every table against released edges; pre-declare an E2A -> F11 fallback (must beat
+E2A_D01C_FB +5.97 train); confirm tonight's live run shows the W109 reasoning wording; stale-row fix needs a supervised session.
