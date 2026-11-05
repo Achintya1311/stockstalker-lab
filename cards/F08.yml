@@ -1,0 +1,27 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#19"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#19 = -sign(7-day close change) x (1 + rank(1 + 250-day summed
+  return)). A production WorldQuant alpha: a 7-day reversal, weighted towards last year's winners.
+  The paper reports no stand-alone hit rate.
+horizon: week
+rules_plain: >
+  On adjusted closes: score = minus the sign of the 7-session change, times (1 + the stock's
+  percentile rank, among the stocks scored that date, of its summed daily return over 250
+  sessions). A 7-session fall is bullish, a rise bearish; the weight grows with the yearly
+  rank. Unchanged over 7 sessions abstains. Needs 251 rows, so 2015 is warm-up.
+default_params:
+  lag: 7
+  long_window: 250
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (5 Nov 2026): the |score| that picks the top five is set only by the yearly rank, so the bearish top five are last year's best performers that rose over 7 sessions and the bullish top five are last year's best that fell. The 7-session sign is A01's reversal (week bearish +2.48 train, released +4.73); the ranking is A03's momentum (near zero both sides). Prediction: week bearish -1.0 to +3.0 with dir -0.15% to +0.15%; week bullish -2.0 to +2.0 with a negative dir (0.415% delivery cost); top-5 bearish overlap with A01 10 to 35%, top-5 bullish overlap with A03's bullish picks 25 to 60%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 5 years, positive dir; replaces A01 only with a released edge at least 1 point above +4.73. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 5 years."
+  - "Seven sessions is a week and a half; the week table holds for five, so the reversal window and the holding period differ."
+  - "Only two signs times a rank: about half the universe ties in sign, and the top five on each side are the five best yearly performers with that sign."
+status: "queued 5 Nov 2026 (week); not yet replayed"

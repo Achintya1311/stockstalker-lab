@@ -5555,3 +5555,7 @@ rejected as repeats or unusable. Every other catalog row is tested; X01-X06 are 
 Unit 5 (port): F09 Alpha#43 volume-backed 7-session fall, median-centred (`cards/F09.yml`,
 `strategies/f09_volume_backed_fall.py`, audit, 8 tests), day replay queued. Pre-declared: bullish 0 to +3.0 with a negative
 dir, bearish -1.5 to +2.0, 10-40% bullish overlap with T04; challenges T04 only above +3.37. Full pytest: 1183 passed.
+Unit 6 (port): F08 Alpha#19 seven-session reversal weighted by the yearly-return rank (`cards/F08.yml`,
+`strategies/f08_weighted_reversal.py`, audit, 6 tests), week replay queued. Pre-declared: bearish -1.0 to +3.0 (dir -0.15%
+to +0.15%), bullish -2.0 to +2.0 (dir negative), 10-35% bearish overlap with A01; replaces A01 only above released +5.73.
+Full pytest: 1189 passed.
