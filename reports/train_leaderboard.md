@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 221. Gate 2's bar at that count: t >= 4.37.
+Trials recorded: 223. Gate 2's bar at that count: t >= 4.38.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -56,6 +56,7 @@ Trials recorded: 221. Gate 2's bar at that count: t >= 4.37.
 | a01-weekly-reversal-week | week | bearish | 1538 | 53.19% | 50.91% | 2.48 | 1.83 |  | 0.02 | 83.33% | candidate |
 | g05-residual-reversal-week | week | bearish | 1495 | 53.38% | 50.98% | 2.40 | 1.79 |  | 0.11 | 66.67% | candidate |
 | h02-idiosyncratic-volatility-week | week | bullish | 1545 | 51.00% | 48.89% | 2.11 | 1.77 |  | -0.46 | 100.00% |  |
+| f09-volume-backed-fall-day | day | bullish | 7235 | 45.96% | 44.99% | 0.96 | 1.75 |  | -0.54 | 83.33% |  |
 | e1a-day | day | bearish | 406 | 56.90% | 52.80% | 4.31 | 1.68 |  | -0.10 | 83.33% | too few picks |
 | d02-stock-pcr-contrarian-week | week | bearish | 661 | 54.31% | 50.91% | 3.75 | 1.68 |  | 0.16 | 66.67% | candidate |
 | g01b-residual-momentum-volatile-week | week | bearish | 1275 | 52.94% | 50.60% | 2.34 | 1.67 |  | -0.28 | 60.00% |  |
@@ -165,6 +166,7 @@ Trials recorded: 221. Gate 2's bar at that count: t >= 4.37.
 | h04-return-seasonality-week | week | bullish | 1020 | 46.96% | 48.20% | -1.24 | -0.84 |  | -0.44 | 25.00% |  |
 | t15-adx-regime-week | week | bullish | 1452 | 47.59% | 48.57% | -1.15 | -0.87 |  | -0.98 | 33.33% |  |
 | e1b-day | day | bullish | 3123 | 45.44% | 45.03% | -0.91 | -0.87 |  | -0.63 | 50.00% |  |
+| f09-volume-backed-fall-day | day | bearish | 7235 | 54.02% | 54.50% | -0.48 | -0.87 |  | -0.13 | 33.33% |  |
 | f06-trend-acceleration-day | day | bullish | 7320 | 44.49% | 44.96% | -0.50 | -0.89 |  | -0.63 | 66.67% |  |
 | q03-up-day-balance-day | day | bullish | 7314 | 44.44% | 44.96% | -0.52 | -0.90 |  | -0.60 | 33.33% |  |
 | t14-cci-week | week | bearish | 1109 | 49.86% | 51.75% | -1.61 | -0.91 |  | -0.15 | 16.67% |  |

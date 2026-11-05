@@ -1,0 +1,9 @@
+{
+  "id": "f09-volume-backed-fall-day",
+  "strategy": "strategies.f09_volume_backed_fall",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 290614,
+  "n_dates": 1447,
+  "pick_log_sha256": "d3ef0b885f664a7969f12c6f095ca0d418a9778054975a0c8e7b1020467ad543"
+}
