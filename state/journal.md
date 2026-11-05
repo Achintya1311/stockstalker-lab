@@ -5549,3 +5549,6 @@ horizons closed at the week horizon. Not eligible, no query.
 Unit 3 (diagnose): H04 calendar-month seasonality (`research/diagnostics/h04.md`). Pre-declared failure held: bullish -1.24
 (1/4 years, dir -0.44%), bearish -0.03, coverage 66%; only 2017 positive. H batch complete: only H02 carries an eligible
 reading. Not eligible, no query.
+Unit 4 (discover): five Alpha101 rows F08-F12 (#19, #43, #34, #38, #52), formulas checked against the paper's appendix
+(`research/notes/discover_2026-11-05_x03.md`). Chosen for day-bullish (F09) and week (F08, F12) gaps; #4, #20, #54, #13/#16
+rejected as repeats or unusable. Every other catalog row is tested; X01-X06 are collections that spawn rows.
