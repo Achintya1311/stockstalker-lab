@@ -5546,3 +5546,6 @@ Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells,
 Unit 2 (diagnose): H05 intermediate momentum 12-7 (`research/diagnostics/h05.md`). Every pre-declared range held: bullish
 +0.15 (interval -2.27 to +2.67, dir -0.49%), bearish +0.12 (dir -0.31%), 40-53% top-5 overlap with A03. Noise; momentum
 horizons closed at the week horizon. Not eligible, no query.
+Unit 3 (diagnose): H04 calendar-month seasonality (`research/diagnostics/h04.md`). Pre-declared failure held: bullish -1.24
+(1/4 years, dir -0.44%), bearish -0.03, coverage 66%; only 2017 positive. H batch complete: only H02 carries an eligible
+reading. Not eligible, no query.

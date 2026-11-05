@@ -23,4 +23,4 @@ red_flags:
   - "Pre-declared before the replay (1 Nov 2026): with at most four earlier years on train the mean is noisy, and calendar-month means mostly measure past market-wide months. Prediction: week bullish -1.5 to +1.5, week bearish -1.5 to +1.5, both directional moves negative; coverage about 62% of train dates (warm-up through end 2016). Helps by the usual rules (+2.0, interval above 0, 4 of 6 years; bearish also a positive directional move), but with 4 usable years that bar needs 4 of 4 covered years; I expect it to fail."
   - "Four years of history per calendar month cannot separate stock-specific seasonality from the market's own calendar; the score is not market-neutral."
   - "Each score depends only on the stock's own rows (other than the target month, set by the last visible date); the audit checks other stocks are unaffected by one stock's extra row."
-status: "queued 1 Nov 2026 (week); not yet replayed"
+status: "refuted on train (5 Nov 2026): week bullish -1.24, week bearish -0.03, both intervals straddle 0; research/diagnostics/h04.md"
