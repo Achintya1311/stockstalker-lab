@@ -5576,3 +5576,13 @@ Do order blocks help? Not tested this run; unchanged: O01 beats O00 on 3 of 4 ce
 **Next:** diagnose F09, F08, F10, F11, F12, E3A/E3B as they land (7 replays queued); Fri 6 Nov before 12:00 UTC roster window:
 evaluate lane decides the H02 week-bearish query (needs released at least +5.73 to replace A01) and checks every table
 against released edges; the F batch's day-bearish readers cannot change E2A unless train beats +7.72.
+
+## 2026-11-05 20:46 UTC run (manual, AB's 3x request; leases 4168efc: diagnose, picks)
+
+All 7 queued replays landed (43f87dd, 4e19e17). Thursday: no roster window; no leak alarm, no open workflow failure.
+Unit 1 (diagnose): E3A/E3B, A02 split by H02's ivol median (`research/diagnostics/e3.md`). E3A day bearish +3.97 (interval
++1.92 to +6.11, 6/6, dir -0.06%) on 90% of A02's dates: inside its pre-declared +3.5 to +5.5 but below the +5.34 helps bar
+and below E3B. Null by the stop rule; A02 x high-ivol closed. The control arm E3B (calm names) reads +5.30 (interval +3.16
+to +7.33, 6/6 years all >= +3.39, dir -0.02%), above its range: the hypothesis came out backwards. A02's bearish signals
+split about evenly between the arms. Below E2A +7.46 and the +7.72 query bar: no table change. Full pytest: 1215 passed.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
