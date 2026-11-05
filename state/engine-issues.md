@@ -764,3 +764,14 @@ section 10, "Going live without a gated strategy", first bullet: after "for that
 add: "For the two bullish tables only (Achintya's decision, 26 Oct 2026), the directional-move condition is
 dropped: at least 500 train picks and a positive train edge suffice." The lab applies this from 26 Oct
 (`state/queue.md`); the bearish tables keep the full rule.
+
+## WATCH: stale RANBAXY rows score in the pick logs (found 5 Nov 2026, F11 diagnosis) - for a supervised session
+
+RANBAXY (merged into SUNPHARMA, March 2015) still gets a score on almost every train date up to 2020-12-31 in the
+pick logs: it is in F11's raw bearish top five on 1,248 of 1,476 dates, and appears in A02's and F10's logs too. The
+engine's universe filter (`has_future` plus turnover) keeps it out of the scored picks (every result shows 5 picks per
+date), so no published edge is affected. Two side effects: (1) cross-sectional ranks and medians are computed with a
+dead symbol in the cross-section, a small bias for rank-based strategies (F-series, H02, E3); (2) overlap studies that
+read `picks.json` must drop it. Suggested check in `scripts/build_dataset.py` or `engine/`: drop symbol rows whose
+close and volume are unchanged (or volume zero) for 20+ sessions, or keep only rows on dates the symbol has an active
+future. The lab's own overlap scripts now drop RANBAXY by hand.

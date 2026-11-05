@@ -5592,3 +5592,10 @@ T08 core, T17, T18, T24). Each now states the relation only ("close above its 20
 Tenkan above Kijun", "close at 35% of its 252-day range"); scores unchanged. New `tests/test_reasoning_no_price_levels.py`
 runs every strategy's `rules_fired` on stocks priced near 50,000 and fails on any five-digit number (fails on the old
 code for all eight, passes now). Full pytest: 1319 passed, 4 skipped. Leases extended to 23:25Z.
+Unit 3 (diagnose): F10 Alpha#34 volatility ratio plus one-day reversal (`research/diagnostics/f10.md`). Day bearish +3.64
+(interval +2.51 to +4.74, 6/6, dir -0.02%) and bullish +1.70 (interval +0.68 to +2.77, 4/6, dir -0.54%): both a little
+above their pre-declared ranges, overlaps held (F02 28%, A02 31%). StepM superior on both day sides; bullish only 4.9%
+overlap with T04. Neither helps rule met (bull short of +2.0, bear dir negative); no table change, no query. Found stale
+RANBAXY rows scoring in the pick logs through 2020 (engine's universe filter keeps them out of results); logged as a WATCH
+in `state/engine-issues.md`, and E3's overlap figures corrected (A02 75% / 59%). Full pytest: 1319 passed, 4 skipped.
+Do order blocks help? Not tested here; unchanged.
