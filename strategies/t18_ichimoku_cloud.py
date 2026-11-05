@@ -93,7 +93,9 @@ def rules_fired(history: pd.DataFrame, symbol: str) -> str:
     frame = compute_adjustment_factors(sub)
     close, tenkan, kijun, top, bottom = lines(frame)
     value = _cloud_score(frame)
-    detail = f"close {close:.2f}, cloud {bottom:.2f}-{top:.2f}, Tenkan {tenkan:.2f} vs Kijun {kijun:.2f}"
+    cloud = "above" if close > top else "below" if close < bottom else "inside"
+    cross = "above" if tenkan > kijun else "below" if tenkan < kijun else "level with"
+    detail = f"close {cloud} the cloud, Tenkan {cross} Kijun"
     if np.isnan(value):
         return f"T18 Ichimoku: {detail}, abstain"
     side = "bullish (above cloud, Tenkan above Kijun)" if value > 0 else "bearish (below cloud, Tenkan below Kijun)"

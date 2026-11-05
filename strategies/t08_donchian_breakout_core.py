@@ -87,11 +87,10 @@ def reasoning(history: pd.DataFrame, symbol: str, window: int, label: str) -> st
     adjusted = compute_adjustment_factors(sub)
     close = adjusted["adj_close"].tail(min_rows)
     value = _breakout_score(close, window)
-    prior = close.iloc[:-1]
     if pd.isna(value):
         return (
-            f"T08 Donchian breakout ({label}-day): close {float(close.iloc[-1]):.4f} "
-            f"within prior {label}-day range [{float(prior.min()):.4f}, {float(prior.max()):.4f}], abstain"
+            f"T08 Donchian breakout ({label}-day): close within the prior {label}-day range "
+            f"(no new high or low), abstain"
         )
     direction = "bullish (new prior-window high)" if value > 0 else "bearish (new prior-window low)"
     return f"T08 Donchian breakout ({label}-day): score {value:+.4f} ({direction})"

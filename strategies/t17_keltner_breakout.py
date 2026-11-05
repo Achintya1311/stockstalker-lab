@@ -90,6 +90,6 @@ def rules_fired(history: pd.DataFrame, symbol: str) -> str:
     close, upper, lower, atr = channel(frame)
     value = _breakout_score(frame)
     if np.isnan(value):
-        return f"T17 Keltner breakout: close {close:.2f} inside {lower:.2f}-{upper:.2f}, abstain"
+        return "T17 Keltner breakout: close inside the Keltner channel, abstain"
     side = "bullish (above upper)" if value > 0 else "bearish (below lower)"
-    return f"T17 Keltner breakout: close {close:.2f}, channel {lower:.2f}-{upper:.2f}, {side} by {abs(value):.2f} ATR"
+    return f"T17 Keltner breakout: close outside the Keltner channel, {side} by {abs(value):.2f} ATR"

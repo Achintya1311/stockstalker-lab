@@ -134,7 +134,8 @@ def test_rules_fired_reports_abstain_with_range(module):
     closes = _ranging_then(module.WINDOW, breakout_close=100.0)
     history = _rows_from_closes("AAA", closes)
     reasoning = module.rules_fired(history, "AAA")
-    assert "within prior" in reasoning
+    assert "within the prior" in reasoning
+    assert "[" not in reasoning  # no range levels (W109)
     assert "abstain" in reasoning
 
 

@@ -5586,3 +5586,9 @@ and below E3B. Null by the stop rule; A02 x high-ivol closed. The control arm E3
 to +7.33, 6/6 years all >= +3.39, dir -0.02%), above its range: the hypothesis came out backwards. A02's bearish signals
 split about evenly between the arms. Below E2A +7.46 and the +7.72 query bar: no table change. Full pytest: 1215 passed.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 2 (picks, W109 / hub requests-supervised #5): pick reasoning printed price levels ("close above SMA200=2407.84" on the
+live T04 table). Root cause in `rules_fired` text, not in `picks/`: eight strategies printed levels (T04, T01, T02, A04,
+T08 core, T17, T18, T24). Each now states the relation only ("close above its 200-day average", "close above the cloud,
+Tenkan above Kijun", "close at 35% of its 252-day range"); scores unchanged. New `tests/test_reasoning_no_price_levels.py`
+runs every strategy's `rules_fired` on stocks priced near 50,000 and fails on any five-digit number (fails on the old
+code for all eight, passes now). Full pytest: 1319 passed, 4 skipped. Leases extended to 23:25Z.

@@ -133,11 +133,11 @@ def rules_fired(history: pd.DataFrame, symbol: str) -> str:
     trend = "above" if close_latest > sma_latest else "below" if close_latest < sma_latest else "at"
     if pd.isna(value):
         return (
-            f"T04 Connors RSI-2: close {trend} SMA{TREND_WINDOW}={sma_latest:.2f}, "
+            f"T04 Connors RSI-2: close {trend} its {TREND_WINDOW}-day average, "
             f"RSI(2)={rsi2_latest:.2f} -> no agreed setup, abstain"
         )
     direction = "bullish (oversold in uptrend)" if value > 0 else "bearish (overbought in downtrend)"
     return (
-        f"T04 Connors RSI-2: close {trend} SMA{TREND_WINDOW}={sma_latest:.2f}, "
+        f"T04 Connors RSI-2: close {trend} its {TREND_WINDOW}-day average, "
         f"RSI(2)={rsi2_latest:.2f} -> score {value:+.4f} ({direction})"
     )

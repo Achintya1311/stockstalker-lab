@@ -77,7 +77,8 @@ def rules_fired(history: pd.DataFrame, symbol: str) -> str:
     close, pivot, r1, s1 = levels(frame)
     value = _pivot_score(frame)
     if np.isnan(value) or value == 0.0:
-        return f"T24 pivot points: close {close:.2f} at pivot {pivot:.2f} or no range, abstain"
+        return "T24 pivot points: close at the pivot or no range, abstain"
     where = "beyond R1" if close > r1 else "beyond S1" if close < s1 else "between S1 and R1"
     side = "bullish (above pivot)" if value > 0 else "bearish (below pivot)"
-    return f"T24 pivot points: close {close:.2f} vs pivot {pivot:.2f} (S1 {s1:.2f}, R1 {r1:.2f}), {where}, {side}"
+    rel = "above" if close > pivot else "below"
+    return f"T24 pivot points: close {rel} the pivot, {where}, {side}"

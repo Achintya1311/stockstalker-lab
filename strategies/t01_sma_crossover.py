@@ -83,6 +83,11 @@ def score(history: pd.DataFrame) -> pd.Series:
     return pd.Series(out, dtype=float)
 
 
+def _relation(a: float, b: float) -> str:
+    """Relation words only: reasoning never shows a price level (W109, SPEC.md section 10)."""
+    return "above" if a > b else "below" if a < b else "level with"
+
+
 def rules_fired(history: pd.DataFrame, symbol: str) -> str:
     sub = history[history["symbol"] == symbol].sort_values("date")
     if len(sub) < MIN_ROWS:
@@ -96,6 +101,6 @@ def rules_fired(history: pd.DataFrame, symbol: str) -> str:
     direction = "bullish" if spread > 0 else "bearish" if spread < 0 else "neutral"
     return (
         f"T01 SMA crossover ({FAST}/{SLOW}): "
-        f"SMA{FAST}={fast_latest:.2f} vs SMA{SLOW}={slow_latest:.2f} -> "
+        f"{FAST}-day average {_relation(fast_latest, slow_latest)} the {SLOW}-day average -> "
         f"spread {spread:+.4f} ({direction})"
     )

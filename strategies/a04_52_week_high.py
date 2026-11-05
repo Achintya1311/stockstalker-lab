@@ -85,6 +85,11 @@ def score(history: pd.DataFrame) -> pd.Series:
     return pd.Series(out, dtype=float)
 
 
+def _position(last: float, low: float, high: float) -> str:
+    """Where the close sits in the range, as a share: reasoning never shows a price level (W109)."""
+    return "n/a" if high <= low else f"{(last - low) / (high - low):.0%}"
+
+
 def rules_fired(history: pd.DataFrame, symbol: str) -> str:
     sub = history[history["symbol"] == symbol].sort_values("date")
     if len(sub) < MIN_ROWS:
@@ -97,6 +102,6 @@ def rules_fired(history: pd.DataFrame, symbol: str) -> str:
     direction = "bullish" if rscore > 0 else "bearish" if rscore < 0 else "neutral"
     return (
         "A04 52-week-high proximity (George and Hwang 2004): "
-        f"close {last:.2f} within trailing {WINDOW_DAYS}-day range [{low:.2f}, {high:.2f}] "
+        f"close at {_position(last, low, high)} of its trailing {WINDOW_DAYS}-day range (0% = low, 100% = high) "
         f"-> range score {rscore:+.4f} ({direction})"
     )
