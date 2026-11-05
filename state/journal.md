@@ -5543,3 +5543,6 @@ Unit 1 (diagnose): H01 Amihud illiquidity (`research/diagnostics/h01.md`). Pre-d
 dir -0.40%); bearish -1.0 to +3.0 missed low: -2.31 (interval -5.04 to +0.31, 2/6, dir -0.27%), wrong-way 2016-19 when large
 caps led. Only 8.3% overlap with H02; on F&O names the ratio ranks by size. Not eligible, no query; illiquidity closed.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 2 (diagnose): H05 intermediate momentum 12-7 (`research/diagnostics/h05.md`). Every pre-declared range held: bullish
++0.15 (interval -2.27 to +2.67, dir -0.49%), bearish +0.12 (dir -0.31%), 40-53% top-5 overlap with A03. Noise; momentum
+horizons closed at the week horizon. Not eligible, no query.

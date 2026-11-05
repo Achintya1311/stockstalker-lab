@@ -21,4 +21,4 @@ red_flags:
   - "Pre-declared before the replay (1 Nov 2026): the lab's momentum readings are weak (A03 12-1 and I01 near zero or wrong-way on bullish; reversal readings carry the week tables). Prediction: week bullish -2.0 to +1.5, week bearish -1.5 to +2.0, both directional moves negative or about zero; 2015 is warm-up (needs 253 sessions) so about 250 fewer dates. Top-5 overlap with A03 20 to 60%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive directional move. Helps, bullish (edge-only rule): +2.0, interval above 0, 4 of 6 years."
   - "Momentum over a one-week horizon on 200 large caps; the published effect is monthly and strongest in small stocks."
   - "Each score depends only on the stock's own rows; the audit checks other stocks are unaffected by one stock's extra row."
-status: "queued 1 Nov 2026 (week); not yet replayed"
+status: "refuted on train (5 Nov 2026): week bullish +0.15, week bearish +0.12, both intervals straddle 0; research/diagnostics/h05.md"
