@@ -1,9 +1,0 @@
-# F11 tune grid (day horizon): Alpha#38 range-top fade with a 6-session window,
-# train only (tune lane, SPEC.md section 8). See strategies/f11_window_grid.py.
-id: f11-w06-day
-strategy: strategies.f11_w06
-split: train
-horizon: day
-dates:
-  start: 2015-01-01
-  end: 2020-12-31

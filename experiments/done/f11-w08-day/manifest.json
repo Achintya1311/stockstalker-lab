@@ -1,0 +1,9 @@
+{
+  "id": "f11-w08-day",
+  "strategy": "strategies.f11_w08",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 303462,
+  "n_dates": 1478,
+  "pick_log_sha256": "a36af09be9e6956049825f1225738be7336986aeb69a1ee02700e3a73e2dfe56"
+}

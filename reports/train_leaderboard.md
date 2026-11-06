@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 246. Gate 2's bar at that count: t >= 4.40.
+Trials recorded: 254. Gate 2's bar at that count: t >= 4.40.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -10,9 +10,13 @@ Trials recorded: 246. Gate 2's bar at that count: t >= 4.40.
 | d01c-day | day | bearish | 7304 | 59.30% | 54.56% | 4.74 | 8.41 | yes | 0.08 | 100.00% | candidate |
 | e2a-f11-fallback-day | day | bearish | 5442 | 59.78% | 54.54% | 6.38 | 8.34 | yes | 0.06 | 100.00% | candidate |
 | consensus-db-v1-day | day | bearish | 7335 | 59.14% | 54.54% | 4.61 | 8.32 | yes | 0.07 | 100.00% | candidate |
+| f11-w08-day | day | bearish | 7335 | 59.09% | 54.54% | 4.55 | 8.04 | yes | 0.04 | 100.00% | candidate |
 | f11-range-top-fade-day | day | bearish | 7335 | 59.00% | 54.54% | 4.47 | 7.84 | yes | 0.05 | 100.00% | candidate |
+| f11-w12-day | day | bearish | 7335 | 58.88% | 54.54% | 4.35 | 7.69 | yes | 0.04 | 100.00% | candidate |
 | e2a-d01c-fallback-day | day | bearish | 4996 | 58.97% | 54.43% | 5.97 | 7.44 | yes | 0.06 | 100.00% | candidate |
+| f11-w15-day | day | bearish | 7335 | 58.61% | 54.54% | 4.07 | 7.21 | yes | 0.02 | 100.00% | candidate |
 | e2a-day | day | bearish | 2767 | 61.44% | 55.08% | 7.46 | 6.92 | yes | 0.13 | 100.00% | candidate |
+| f11-w06-day | day | bearish | 7335 | 58.34% | 54.54% | 3.80 | 6.70 | yes | 0.03 | 100.00% | candidate |
 | f03-conditional-reversal-day | day | bearish | 7332 | 58.07% | 54.54% | 3.54 | 6.36 | yes | -0.05 | 100.00% |  |
 | f10-vol-ratio-reversal-day | day | bearish | 7335 | 58.17% | 54.54% | 3.64 | 6.32 | yes | -0.02 | 100.00% |  |
 | f06-trend-acceleration-day | day | bearish | 7292 | 57.97% | 54.54% | 3.35 | 5.96 | yes | -0.01 | 100.00% |  |
@@ -56,6 +60,7 @@ Trials recorded: 246. Gate 2's bar at that count: t >= 4.40.
 | f17-close-location-recency-day | day | bearish | 7335 | 55.79% | 54.54% | 1.25 | 2.28 |  | -0.08 | 66.67% |  |
 | e2b-day | day | bearish | 3143 | 56.12% | 54.36% | 2.34 | 2.25 |  | -0.17 | 83.33% |  |
 | t15-adx-regime-week | week | bearish | 1456 | 53.71% | 50.87% | 2.95 | 2.20 |  | 0.02 | 83.33% | candidate |
+| f11-w15-day | day | bullish | 7335 | 46.20% | 44.96% | 1.25 | 2.20 |  | -0.55 | 83.33% |  |
 | t10-nr4-narrow-range-day | day | bullish | 6633 | 46.01% | 44.79% | 1.34 | 2.19 |  | -0.50 | 83.33% |  |
 | h02-idiosyncratic-volatility-day | day | bullish | 7325 | 46.14% | 44.96% | 1.18 | 2.10 |  | -0.47 | 83.33% |  |
 | consensus-wb-v1-week | week | bearish | 1545 | 53.40% | 50.91% | 2.48 | 2.06 |  | 0.15 | 66.67% | candidate |
@@ -75,6 +80,7 @@ Trials recorded: 246. Gate 2's bar at that count: t >= 4.40.
 | q05-trend-smoothness-week | week | bearish | 1543 | 52.95% | 50.91% | 2.01 | 1.64 |  | -0.13 | 83.33% |  |
 | q07-trend-residual-week | week | bearish | 1544 | 53.04% | 50.91% | 2.16 | 1.64 |  | -0.09 | 100.00% |  |
 | q02-return-volume-corr-week | week | bearish | 1545 | 52.69% | 50.91% | 1.77 | 1.62 |  | -0.14 | 83.33% |  |
+| f11-w08-day | day | bullish | 7335 | 45.85% | 44.96% | 0.89 | 1.61 |  | -0.55 | 83.33% |  |
 | t25-heikin-ashi-week | week | bullish | 1102 | 50.45% | 48.37% | 2.74 | 1.59 |  | -0.34 | 50.00% |  |
 | f16-position-turnover-corr-day | day | bearish | 7335 | 55.39% | 54.54% | 0.86 | 1.58 |  | -0.09 | 66.67% |  |
 | g04-realized-skewness-week | week | bearish | 1545 | 52.75% | 50.91% | 1.84 | 1.57 |  | -0.33 | 100.00% |  |
@@ -85,10 +91,12 @@ Trials recorded: 246. Gate 2's bar at that count: t >= 4.40.
 | t02-golden-death-cross-week | week | bearish | 1355 | 52.99% | 50.93% | 2.05 | 1.50 |  | -0.21 | 66.67% |  |
 | f08-weighted-reversal-week | week | bullish | 1296 | 51.00% | 48.85% | 2.04 | 1.49 |  | -0.23 | 60.00% |  |
 | o05-order-block-weekly-week | week | bullish | 1210 | 50.99% | 49.12% | 1.90 | 1.47 |  | -0.39 | 80.00% |  |
+| f11-w12-day | day | bullish | 7335 | 45.77% | 44.96% | 0.81 | 1.46 |  | -0.56 | 83.33% |  |
 | t19-obv-divergence-week | week | bearish | 1407 | 53.23% | 50.91% | 1.79 | 1.39 |  | -0.13 | 83.33% |  |
 | f11-range-top-fade-day | day | bullish | 7335 | 45.73% | 44.96% | 0.77 | 1.38 |  | -0.56 | 83.33% |  |
 | c02-turn-of-month-week | week | bullish | 40 | 62.50% | 50.63% | 11.87 | 1.38 |  | 0.77 | 100.00% | too few picks |
 | i01-momentum-score-week | week | bearish | 1300 | 53.00% | 50.96% | 2.04 | 1.37 |  | -0.17 | 100.00% |  |
+| f11-w06-day | day | bullish | 7335 | 45.69% | 44.96% | 0.73 | 1.30 |  | -0.54 | 83.33% |  |
 | h03-turnover-variability-week | week | bullish | 1505 | 50.70% | 49.05% | 1.65 | 1.29 |  | -0.34 | 83.33% |  |
 | a04-52-week-high-week | week | bullish | 1300 | 50.77% | 48.85% | 1.92 | 1.28 |  | -0.55 | 80.00% |  |
 | a06-low-volatility-week | week | bullish | 1458 | 50.55% | 49.10% | 1.55 | 1.24 |  | -0.50 | 66.67% |  |
