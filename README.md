@@ -4,7 +4,7 @@ An autonomous research lab that builds, tunes and tests rule-based strategies pi
 
 Read [SPEC.md](SPEC.md) first. It defines the market, how picks are scored, the train/validation/test splits, the gates a strategy must pass, and how the lab runs.
 
-**Status:** building. The engine and its guardrails come first; the autonomous loop starts only once they pass their own tests.
+**Status:** testing phase, live from 2 Nov 2026. Picks are published before each session in [`live/`](live/), end-of-day data. Every table is still provisional: no strategy has passed the gates in SPEC section 6 yet. Evidence so far: [train evidence report](reports/evidence_train.md), [train leaderboard](reports/train_leaderboard.md), [market base rate](reports/market_line_train.md).
 
 > Model research in testing. Not investment advice or a recommendation. The author is not a SEBI-registered research analyst. Every pick is shown, including misses.
 

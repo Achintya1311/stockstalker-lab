@@ -68,6 +68,29 @@ def resolve_strategy(strategy_id: str):
     return importlib.import_module(module_path)
 
 
+EXPERIMENTS_DONE = Path(__file__).resolve().parent.parent / "experiments" / "done"
+
+
+def experiment_id(strategy_id: str, horizon: str, done_dir: Path = EXPERIMENTS_DONE) -> str | None:
+    """The train-split replay (`experiments/done/<id>/`) behind a live
+    strategy, so the desk can link a pick's strategy to its evidence
+    without guessing from the name (requests-supervised row 3). None when
+    no single train experiment matches the strategy's module and horizon.
+    """
+    module_path = _REGISTRY.get(strategy_id)
+    if module_path is None or not done_dir.exists():
+        return None
+    found = []
+    for manifest in sorted(done_dir.glob("*/manifest.json")):
+        try:
+            m = json.loads(manifest.read_text())
+        except (OSError, ValueError):
+            continue
+        if m.get("strategy") == module_path and m.get("split") == "train" and m.get("horizon") == horizon:
+            found.append(m.get("id") or manifest.parent.name)
+    return found[0] if len(found) == 1 else None
+
+
 def load_live_source(mode: str, path: Path = LIVE_SOURCE_PATH, draft_path: Path = DRAFT_SOURCE_PATH) -> dict | None:
     """Returns the parsed source config, or `None` meaning "do nothing" (live
     mode only, when the file does not exist yet - `run.py` must exit 0, not

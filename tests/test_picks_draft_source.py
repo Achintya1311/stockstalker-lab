@@ -44,7 +44,7 @@ def test_draft_source_runs_day_and_week_tables(tmp_path):
 
     for horizon in ("day", "week"):
         payload = json.loads((out_dir / horizon / "2026-10-19.json").read_text())
-        assert "Provisional strategy: it has not passed the lab's tests. No proven edge yet." in payload["disclaimer"]
+        assert "Provisional strategy: it has not yet passed the lab's validation and test gates (SPEC section 6); train-year results alone do not count. No proven edge yet." in payload["disclaimer"]
         for side in ("bullish", "bearish"):
             expected = draft[f"{horizon}_{side}"]["strategy"]
             for pick in payload["tables"][side]:

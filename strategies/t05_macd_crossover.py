@@ -112,6 +112,13 @@ def score(history: pd.DataFrame) -> pd.Series:
     return pd.Series(out, dtype=float)
 
 
+def _relation(macd_latest: float, signal_latest: float, macd_prev: float, signal_prev: float) -> str:
+    """MACD against its signal line in words: MACD and signal are price-scaled, so their values are never printed (W109)."""
+    def side(m: float, s: float) -> str:
+        return "above" if m > s else "below" if m < s else "level with"
+    return f"MACD {side(macd_latest, signal_latest)} its signal line (prior bar {side(macd_prev, signal_prev)})"
+
+
 def rules_fired(history: pd.DataFrame, symbol: str) -> str:
     sub = history[history["symbol"] == symbol].sort_values("date")
     if len(sub) < MIN_ROWS:
@@ -125,12 +132,6 @@ def rules_fired(history: pd.DataFrame, symbol: str) -> str:
     signal_latest, signal_prev = float(signal_line.iloc[-1]), float(signal_line.iloc[-2])
     value = _macd_score(close_latest, macd_latest, macd_prev, signal_latest, signal_prev)
     if pd.isna(value):
-        return (
-            f"T05 MACD crossover: MACD={macd_latest:.4f}, signal={signal_latest:.4f} "
-            f"(prior bar MACD={macd_prev:.4f}, signal={signal_prev:.4f}) -> no fresh cross, abstain"
-        )
+        return f"T05 MACD crossover: {_relation(macd_latest, signal_latest, macd_prev, signal_prev)} -> no fresh cross, abstain"
     direction = "bullish (crossed up)" if value > 0 else "bearish (crossed down)"
-    return (
-        f"T05 MACD crossover: MACD={macd_latest:.4f}, signal={signal_latest:.4f} "
-        f"(prior bar MACD={macd_prev:.4f}, signal={signal_prev:.4f}) -> score {value:+.4f} ({direction})"
-    )
+    return f"T05 MACD crossover: {_relation(macd_latest, signal_latest, macd_prev, signal_prev)} -> score {value:+.4f} ({direction})"
