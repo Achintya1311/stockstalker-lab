@@ -778,3 +778,5 @@ future. The lab's own overlap scripts now drop RANBAXY by hand.
 Update (5 Nov, F12 diagnosis): not only RANBAXY. SKSMICRO (renamed 2016), ABIRLANUVO (merged 2017), AMTEKAUTO and CAPF
 also keep scoring through 2020-12 in F12's week log (SKSMICRO and ABIRLANUVO each about 13% of a raw top five). A
 generic stale-row rule in the dataset build is the right fix; the lab's overlap scripts drop these five by name.
+Update (6 Nov, F08 diagnosis): CAIRN (Cairn India, merged into Vedanta in 2017) scores on every week through 2020-12
+in F08's log and sits in its raw bullish top five on 150 of 260 dates. Six names now dropped by hand in overlap work.

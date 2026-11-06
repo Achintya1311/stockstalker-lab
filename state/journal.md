@@ -5618,3 +5618,16 @@ Do order blocks help? Not tested this run; unchanged: O01 beats O00 on 3 of 4 ce
 **Next:** diagnose F08 (week replay landed, undiagnosed); Fri 6 Nov before 12:00 UTC roster window: evaluate lane decides the
 H02 week-bearish query and checks every table against released edges; pre-declare an E2A -> F11 fallback (must beat
 E2A_D01C_FB +5.97 train); confirm tonight's live run shows the W109 reasoning wording; stale-row fix needs a supervised session.
+
+## 2026-11-06 14:15 UTC run (manual, AB's 5x request; leases c89788e: diagnose, port, discover)
+
+Friday after 12:00 UTC: the roster window has closed, so no roster or `config/live_source.json` change this run. No leak
+alarm, no open workflow failure (last Actions runs green, 9afb42c). Live tables for 6 Nov were written at 20:50Z on 5 Nov,
+before the W109 fix landed (21:45Z); the first tables with the new wording will be tonight's.
+Unit 1 (diagnose): F08 Alpha#19 seven-session reversal weighted by the yearly move (`research/diagnostics/f08.md`). Week
+bullish +2.04 (interval -0.81 to +4.63, 3/5, dir -0.23%), 0.04 above its pre-declared range; +7.90 in 2019 carries it
+(other years average +0.56), 44% of its picks are A03 momentum names. Week bearish +0.58 (dir +0.08%) held; A01 overlap
+10.1% (at the floor). Neither helps rule met; no query, closed. New stale symbol CAIRN (150 of 260 raw bullish top-five
+dates) added to the WATCH entry. Also: catalog A01_I01F status brought up to date (released +4.17 on 26 Oct), and
+F08-F12 card statuses copied from the catalog.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
