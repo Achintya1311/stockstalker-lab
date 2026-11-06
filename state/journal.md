@@ -5646,3 +5646,6 @@ Unit 4 (port): F13 Alpha#17 accelerating range top on a turnover surge (`cards/F
 audit, 9 tests; shared helpers `strategies/alpha101_common.py`), day replay queued. Pre-declared: bearish +2.5 to +5.0
 (dir -0.05% to +0.10%), bullish -1.0 to +2.0 (dir negative), 25-55% bearish overlap with F11; improves on F11 only at
 +5.47 or more. Leases extended to 17:30Z. Full pytest: 1340 passed, 4 skipped.
+Unit 5 (port): F16 Alpha#55 range position versus turnover correlation (`cards/F16.yml`,
+`strategies/f16_position_turnover_corr.py`, audit, 9 tests), day replay queued. Pre-declared: bearish -0.5 to +2.0
+(dir -0.10% to +0.05%), bullish -1.0 to +1.5 (dir negative), top-5 bearish overlap with T13 below 15%. Full pytest: 1353 passed, 4 skipped.

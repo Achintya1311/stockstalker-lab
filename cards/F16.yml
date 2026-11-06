@@ -1,0 +1,29 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#55"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#55 = -correlation(rank((close - ts_min(low, 12)) /
+  (ts_max(high, 12) - ts_min(low, 12))), rank(volume), 6). A production WorldQuant alpha: stocks
+  whose trading rises with their place in the 12-day range are faded. The paper reports no
+  stand-alone hit rate.
+horizon: day
+rules_plain: >
+  On each of the last 6 dates, percentile-rank (among the stocks with a future on the last date
+  and all 17 sessions in the slice) the close's place in its 12-session adjusted high-low range,
+  and turnover. Score = minus the Pearson correlation of the two rank series over the 6 dates.
+  Turnover rising with the range position bearish; turnover rising as the position falls bullish.
+  Constant rank series abstain.
+default_params:
+  range: 12
+  corr: 6
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (6 Nov 2026): the lab's price-volume correlation readings are weak on day (Q02 -0.97 bullish / +0.05 bearish, F04 +0.63 / +1.25, all dirs negative or near zero), and a six-point correlation is noisy: the top five on each side are stocks with a correlation near +1 or -1, a large set on most dates, so the top five are close to a random draw from it. Prediction: day bearish -0.5 to +2.0 with dir -0.10% to +0.05%; day bullish -1.0 to +1.5 with a negative dir; top-5 bearish overlap with T13 (Williams %R, the same range position without turnover) below 15%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive dir; challenges E2A only above +7.72 train. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; challenges T04 only above +3.37."
+  - "Score saturates at -1 and +1: ties at the extremes are broken by the engine's ordering, not by the signal."
+  - "Share volume replaced by turnover (as F09), so the volume rank is not led by low-priced stocks."
+status: "queued 6 Nov 2026 (day); not yet replayed"
