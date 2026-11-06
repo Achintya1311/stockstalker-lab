@@ -285,7 +285,13 @@
               21.2
             ]
           ]
-        }
+        },
+        "open": 2475.0,
+        "close": 2408.6,
+        "move_pct": -2.682828282828287,
+        "move_rs": -66.40000000000009,
+        "hit": true,
+        "late": true
       },
       {
         "symbol": "KOTAKBANK",
@@ -571,7 +577,13 @@
             "high": 77.3,
             "retested": false
           }
-        }
+        },
+        "open": 459.2,
+        "close": 461.6,
+        "move_pct": 0.5226480836237002,
+        "move_rs": 2.400000000000034,
+        "hit": false,
+        "late": true
       },
       {
         "symbol": "BANKBARODA",
@@ -850,7 +862,13 @@
               50.1
             ]
           ]
-        }
+        },
+        "open": 241.5,
+        "close": 238.6,
+        "move_pct": -1.200828157349898,
+        "move_rs": -2.9000000000000057,
+        "hit": true,
+        "late": true
       },
       {
         "symbol": "DLF",
@@ -1136,7 +1154,13 @@
             "high": 70.9,
             "retested": false
           }
-        }
+        },
+        "open": 696.0,
+        "close": 691.55,
+        "move_pct": -0.6393678160919625,
+        "move_rs": -4.4500000000000455,
+        "hit": true,
+        "late": true
       },
       {
         "symbol": "SYRMA",
@@ -1415,7 +1439,13 @@
               72.5
             ]
           ]
-        }
+        },
+        "open": 1675.0,
+        "close": 1625.3,
+        "move_pct": -2.9671641791044756,
+        "move_rs": -49.700000000000045,
+        "hit": true,
+        "late": true
       }
     ]
   },
