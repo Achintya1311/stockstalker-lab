@@ -1,0 +1,10 @@
+# E2A_F11_FB (day horizon): E2A first, F11 range-top fade on dates E2A has no tradable
+# bearish pick; train-split replay (go-live track, state/queue.md).
+# See cards/E2A_F11_FB.yml and strategies/e2a_f11_fallback.py.
+id: e2a-f11-fallback-day
+strategy: strategies.e2a_f11_fallback
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

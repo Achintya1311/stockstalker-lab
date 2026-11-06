@@ -1,0 +1,36 @@
+source_url: ''
+author: lab-original (go-live track, research/diagnostics/f11.md and research/diagnostics/e2a_d01c_fb.md)
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-11-06'
+horizon: day
+claim_as_stated: 'Pre-registered on 6 Nov 2026 before the replay. E2A fires a raw bearish score on 1,015 of 1,476
+  train dates and has an in-universe pick on about 936; F11 reads every date. Prediction: day-bearish edge +5.3 to
+  +6.6, directional move after costs +0.04% to +0.12%, bearish picks on at least 99% of train dates, switching to F11
+  on 33 to 40% of dates. Helps only if all of: edge at least +5.97 (E2A_D01C_FB, the fallback it competes with),
+  95% interval above 0, at least 5 of 6 years positive, directional move at least +0.06%, coverage at least 99%.
+  Otherwise a null, and F11 on E2A''s quiet dates is closed. Even if it helps, the day-bearish table moves off E2A
+  only with a released validation edge of at least +7.72 (E2A''s released +6.72 plus 1, SPEC.md section 10), which a
+  blend of E2A with a weaker member is not expected to reach; the case for it is coverage, which the letter of SPEC 10
+  does not reward, so it would be noted for a supervised decision, not queried.'
+rules_plain: 'Day-bearish only. Per date: if E2A (A02 extreme-day fade where futures OI rose) scores bearish at
+  least one stock that was in the universe at the last close (active stock future that session, 20-session median
+  turnover at or above the floor, a row on that date), publish only E2A''s bearish scores; otherwise publish only
+  F11''s (Alpha#38 range-top fade). Bullish scores of both members are dropped. Each pick keeps its member''s own
+  magnitude.'
+default_params:
+  first: e2a_a02_crowded
+  fallback: f11_range_top_fade
+  switch: E2A has a bearish score on a stock in the universe at the last close
+  turnover_window: 20
+data_needed: ohlcv plus futures OI
+testable_now: 'yes'
+source: 'research/diagnostics/f11.md (What to try next); research/diagnostics/e2a_d01c_fb.md (coverage gap)'
+link: ''
+prior_claim: 'A strong but intermittent reading backed by an always-on reading of a different kind should keep more of the strong one''s edge than a fallback that is weak on the same quiet dates; untested here'
+red_flags:
+- Members chosen after seeing their train results (E2A +7.46, F11 +4.47); the fallback is its own trial and each member already is one.
+- Two changes against E2A_D01C_FB at once (fallback member and the tradable-pick switch), so a difference cannot be split between them from this replay alone.
+- The switch uses the previous session's universe flags; the engine's filter uses the pick date's, so a few dates can still differ.
+- E2A fires about 3 stocks a date, so on E2A dates the table usually has fewer than 5 picks.
+- Train split only until a frozen version exists.
+status: 'queued 6 Nov 2026 (day); not yet replayed'

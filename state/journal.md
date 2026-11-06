@@ -5631,3 +5631,9 @@ bullish +2.04 (interval -0.81 to +4.63, 3/5, dir -0.23%), 0.04 above its pre-dec
 dates) added to the WATCH entry. Also: catalog A01_I01F status brought up to date (released +4.17 on 26 Oct), and
 F08-F12 card statuses copied from the catalog.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 2 (port, go-live track): E2A_F11_FB, the pre-declared E2A -> F11 fallback (`cards/E2A_F11_FB.yml`,
+`strategies/e2a_f11_fallback.py`, audit, 10 tests), day replay queued. Two stated changes from E2A_D01C_FB: F11 instead
+of D01C on E2A's quiet dates, and the switch counts only E2A picks in the universe at the last close (closes the ~80
+empty-table dates found in `research/diagnostics/e2a_d01c_fb.md`). Pre-declared: edge +5.3 to +6.6, dir +0.04% to
++0.12%, coverage at least 99%; helps only at +5.97 or more with interval above 0, 5/6 years, dir at least +0.06% and
+coverage at least 99%. Even then the table moves off E2A only at a released +7.72, so a pass is a note, not a query. Full pytest: 1330 passed, 4 skipped.
