@@ -88,3 +88,14 @@ def test_build_summary_separates_exam_from_live_totals(tmp_path):
     assert summary["exam"]["day_bullish"]["n_picks"] == 1
     assert summary["live"]["day_bullish"]["n_hits"] == 1
     assert summary["exam"]["day_bullish"]["n_hits"] == 0
+
+
+def test_build_summary_describes_the_exam_block(tmp_path):
+    from picks.summary import EXAM_DESCRIPTION, build_summary
+    for rel, session in (("exam/day/2026-08-03.json", "2026-08-03"), ("day/2026-11-02.json", "2026-11-02"), ("day/2026-11-03.json", "2026-11-03")):
+        path = tmp_path / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({"session": session, "horizon": "day", "tables": {"bullish": [], "bearish": []}}))
+    summary = build_summary(tmp_path)
+    assert summary["exam"]["description"] == EXAM_DESCRIPTION
+    assert summary["exam"]["frozen_before"] == "2026-11-02"

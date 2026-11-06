@@ -81,3 +81,22 @@ def test_committed_draft_names_only_registered_strategies():
     assert set(draft["tables"]) == set(TABLE_KEYS)
     for cfg in draft["tables"].values():
         assert cfg["strategy"] in _REGISTRY and cfg["label"] in ("provisional", "gated")
+
+
+def test_experiment_id_finds_the_single_train_replay_for_a_strategy(tmp_path):
+    import json
+    from picks.source import experiment_id
+    for eid, split, horizon in (("e2a-day", "train", "day"), ("e2a-day-validation", "validation", "day")):
+        (tmp_path / eid).mkdir()
+        (tmp_path / eid / "manifest.json").write_text(json.dumps({"id": eid, "strategy": "strategies.e2a_a02_crowded", "split": split, "horizon": horizon}))
+    assert experiment_id("e2a_a02_crowded@v1", "day", tmp_path) == "e2a-day"
+    assert experiment_id("e2a_a02_crowded@v1", "week", tmp_path) is None
+    assert experiment_id("not_registered@v1", "day", tmp_path) is None
+
+
+def test_live_source_strategies_each_map_to_one_train_experiment():
+    import json
+    from picks.source import LIVE_SOURCE_PATH, experiment_id
+    source = json.loads(LIVE_SOURCE_PATH.read_text())
+    for key, cfg in source["tables"].items():
+        assert experiment_id(cfg["strategy"], key.split("_")[0]) is not None, key

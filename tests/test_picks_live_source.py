@@ -14,7 +14,7 @@ from picks.run import run
 from picks.source import LIVE_SOURCE_PATH, TABLE_KEYS
 from tests.test_picks_draft_source import FORBIDDEN, _noisy_dataset
 
-PROVISIONAL = "Provisional strategy: it has not passed the lab's tests. No proven edge yet."
+PROVISIONAL = "Provisional strategy: it has not yet passed the lab's validation and test gates (SPEC section 6); train-year results alone do not count. No proven edge yet."
 
 
 @pytest.mark.skipif(not LIVE_SOURCE_PATH.exists(), reason="no live source committed")

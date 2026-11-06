@@ -8,14 +8,14 @@ importing back the other way would be circular).
 from __future__ import annotations
 
 from picks.select import pick_both_sides
-from picks.source import resolve_strategy
+from picks.source import experiment_id, resolve_strategy
 
 # SPEC.md section 10, word for word.
 BASE_DISCLAIMER = (
     "Model output in testing. Not investment advice or a recommendation. "
     "Not a SEBI-registered research analyst. Every pick is shown, including misses."
 )
-PROVISIONAL_DISCLAIMER = "Provisional strategy: it has not passed the lab's tests. No proven edge yet."
+PROVISIONAL_DISCLAIMER = "Provisional strategy: it has not yet passed the lab's validation and test gates (SPEC section 6); train-year results alone do not count. No proven edge yet."
 
 
 def table_label(labels: set[str]) -> str:
@@ -56,7 +56,12 @@ def build_tables(dataset, source: dict, horizon: str, session: str, asof: str) -
     return {"bullish": bullish, "bearish": bearish}, {bullish_cfg["label"], bearish_cfg["label"]}
 
 
-def make_payload(horizon: str, session: str, asof: str, generated_at: str, labels: set[str], tables: dict, xray: dict | None = None) -> dict:
+def table_experiments(source: dict, horizon: str) -> dict:
+    """`{"bullish": <experiment id or None>, "bearish": ...}` for `horizon`."""
+    return {side: experiment_id(source["tables"][f"{horizon}_{side}"]["strategy"], horizon) for side in ("bullish", "bearish")}
+
+
+def make_payload(horizon: str, session: str, asof: str, generated_at: str, labels: set[str], tables: dict, xray: dict | None = None, experiments: dict | None = None) -> dict:
     payload = {
         "session": session,
         "horizon": horizon,
@@ -66,6 +71,8 @@ def make_payload(horizon: str, session: str, asof: str, generated_at: str, label
         "disclaimer": disclaimer_for(labels),
         "tables": tables,
     }
+    if experiments is not None:
+        payload["experiments"] = experiments
     if xray is not None:
         payload["xray"] = xray
     return payload

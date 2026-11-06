@@ -23,6 +23,14 @@ from engine.scoring import market_line, moves_for_horizon, universe_membership
 TABLE_SIDE = {"bullish": 1, "bearish": -1}
 SECTIONS = ("exam", "live")
 
+# What the exam block is (requests-supervised row 4, W106), for readers of summary.json.
+EXAM_DESCRIPTION = (
+    "Exam: the go-live strategies replayed once, in the first live run, on every session from "
+    "3 Aug 2026 up to go-live, using only data available before each session, then scored the same way "
+    "as live picks. It was written after those sessions, so it is a back-test, not a live record. "
+    "The live record starts on frozen_before."
+)
+
 
 def _picks_files(section_dir: Path) -> list[dict]:
     out = []
@@ -111,6 +119,9 @@ def build_summary(out_dir: Path, dataset: pd.DataFrame | None = None) -> dict:
             horizon, side_name = key.split("_", 1)
             bucket["market_line"] = _market_line_for(dataset, horizon, TABLE_SIDE[side_name], sessions_by_table[key])
         summary[section] = tables
+    live_sessions = sorted(d["session"] for d in _picks_files(out_dir))
+    summary["exam"]["description"] = EXAM_DESCRIPTION
+    summary["exam"]["frozen_before"] = live_sessions[0] if live_sessions else None
     return summary
 
 
