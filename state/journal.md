@@ -5665,3 +5665,15 @@ quiet dates where D01C read +2.9; the tradable switch filled the 84 dates E2A_D0
 MCS (3 of 58). No query (pre-declared; replacing E2A needs a released +7.72); the coverage trade is written up as a
 decision for AB in `state/engine-issues.md` and noted in `state/queue.md`. Full pytest: 1380 passed, 4 skipped.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 10 (tune): F11 ts-rank window grid, train only (`strategies/f11_window_grid.py`, grid modules `strategies/f11_w06/08/12/15.py`,
+8 tests including an exact reproduction of F11 at window 10 and a causality check). Four day replays queued
+(`experiments/pending/f11-w*-day.yml`), each a trial. Pre-declared: stable if every window from 8 to 12 keeps day
+bearish at least +3.5 with dir at least 0; choose the middle of the widest stable run; 10 stays otherwise. F11 is the
+fallback inside E2A_F11_FB, so a narrow optimum there would matter for that card too. Full pytest: 1392 passed, 4 skipped. Leases removed.
+Do order blocks help? Not tested this run; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+No roster, `config/live_source.json` or picks changes (window closed at 12:00 UTC). No holdout query: H02 week bearish
+(+3.84 train) stays below its card's +5.73 query bar. W109: the 14:31Z dry run on real data shows no price levels
+(day bullish empty that session, so T04's new wording is not yet visible on real data).
+**Next:** diagnose F13-F17 (replay running since 15:30Z) and read the F11 window grid; AB decision on E2A_F11_FB's
+full-coverage table (`state/engine-issues.md`); check tonight's live tables for the W109 wording when T04 fires;
+next roster window Fri 13 Nov before 12:00 UTC.
