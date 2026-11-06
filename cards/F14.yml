@@ -1,0 +1,30 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#24"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#24 = if the 100-day mean's change over 100 days, over the close
+  100 days ago, is at most 0.05: -(close - ts_min(close, 100)); else -delta(close, 3). A production
+  WorldQuant alpha: fade the rise off the low in a flat trend, fade the 3-day move in a rising one.
+  The paper reports no stand-alone hit rate.
+horizon: day
+rules_plain: >
+  On adjusted closes: g = (100-session mean now - 100-session mean 100 sessions ago) / close 100
+  sessions ago. If g <= 5%: score = -(close - 100-session low) / close. Else: score = -(close - close
+  3 sessions ago) / close. Raw, not centred. In flat or falling trends only bearish (more for names
+  far above their low); in rising trends a 3-session fall bullish and a rise bearish. 200 sessions
+  of warm-up.
+default_params:
+  mean: 100
+  lag: 3
+  threshold: 0.05
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (6 Nov 2026): the two branches are on different scales (distance above a 100-session low is often 20-60%, a 3-session change a few %), so the bearish five come almost only from the flat branch: names that rallied far off their low without lifting their 100-session mean. The bullish five are rising-trend names with the largest 3-session falls, an oversold-in-uptrend reading like T04 (+3.37 day bullish). Prediction: day bearish 0.0 to +3.0 with dir -0.10% to +0.10%; day bullish +0.5 to +3.5 with a negative dir; top-5 bullish overlap with T04 10 to 40%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive dir; challenges E2A only above +7.72 train. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; challenges T04 only above +3.37."
+  - "A 5% threshold on a 100-session mean change is the paper's fixed number, not tuned here; the train years 2015-2016 are dominated by warm-up and the 2015-16 fall (flat branch)."
+  - "Price-unit terms divided by the close."
+status: "queued 6 Nov 2026 (day); not yet replayed"
