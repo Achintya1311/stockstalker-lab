@@ -1,5 +1,8 @@
 {
-  "exam": {},
+  "exam": {
+    "description": "Exam: the go-live strategies replayed once, in the first live run, on every session from 3 Aug 2026 up to go-live, using only data available before each session, then scored the same way as live picks. It was written after those sessions, so it is a back-test, not a live record. The live record starts on frozen_before.",
+    "frozen_before": "2026-10-19"
+  },
   "live": {
     "day_bullish": {
       "n_picks": 10,
@@ -21,10 +24,10 @@
           "n_hits": 5
         }
       },
-      "market_line": 0.7971698113207547
+      "market_line": 0.5575710807755847
     },
     "day_bearish": {
-      "n_picks": 15,
+      "n_picks": 20,
       "n_scored": 5,
       "n_hits": 0,
       "by_week": {
@@ -35,20 +38,28 @@
         "2026-W44": {
           "n_picks": 10,
           "n_hits": 0
+        },
+        "2026-W45": {
+          "n_picks": 5,
+          "n_hits": 0
         }
       },
       "by_month": {
         "2026-10": {
           "n_picks": 15,
           "n_hits": 0
+        },
+        "2026-11": {
+          "n_picks": 5,
+          "n_hits": 0
         }
       },
-      "market_line": 0.2028301886792453
+      "market_line": 0.4424289192244153
     },
     "week_bullish": {
       "n_picks": 10,
-      "n_scored": 5,
-      "n_hits": 1,
+      "n_scored": 10,
+      "n_hits": 6,
       "by_week": {
         "2026-W43": {
           "n_picks": 5,
@@ -56,21 +67,21 @@
         },
         "2026-W44": {
           "n_picks": 5,
-          "n_hits": 0
+          "n_hits": 5
         }
       },
       "by_month": {
         "2026-10": {
           "n_picks": 10,
-          "n_hits": 1
+          "n_hits": 6
         }
       },
-      "market_line": 0.8820754716981132
+      "market_line": 0.75
     },
     "week_bearish": {
       "n_picks": 10,
-      "n_scored": 5,
-      "n_hits": 5,
+      "n_scored": 10,
+      "n_hits": 6,
       "by_week": {
         "2026-W43": {
           "n_picks": 5,
@@ -78,16 +89,16 @@
         },
         "2026-W44": {
           "n_picks": 5,
-          "n_hits": 0
+          "n_hits": 1
         }
       },
       "by_month": {
         "2026-10": {
           "n_picks": 10,
-          "n_hits": 5
+          "n_hits": 6
         }
       },
-      "market_line": 0.1179245283018868
+      "market_line": 0.24528301886792453
     }
   }
 }
