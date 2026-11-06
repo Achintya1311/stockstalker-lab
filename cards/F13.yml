@@ -1,0 +1,30 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#17"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#17 = -rank(ts_rank(close, 10)) x rank(delta(delta(close, 1), 1))
+  x rank(ts_rank(volume / adv20, 5)). A production WorldQuant alpha: an accelerating close at the
+  top of its 10-day range on a volume surge is faded. The paper reports no stand-alone hit rate.
+horizon: day
+rules_plain: >
+  Three factors per stock: the time-series rank of the last adjusted close among its last 10, the
+  second difference of the log adjusted close (the last move minus the one before), and the
+  time-series rank over 5 sessions of turnover over its 20-session mean. Each is percentile-ranked
+  among the stocks with a future on the last date; p = their product; score = median(p) - p. An
+  accelerating range top on surging turnover bearish; a decelerating range bottom on light turnover
+  bullish. The bullish side comes from the lab's median centring.
+default_params:
+  window: 10
+  vol_mean: 20
+  vol_rank: 5
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (6 Nov 2026): the first factor is F11's (day bearish +4.47 train, interval +3.36 to +5.53, dir +0.05%). The question is whether adding acceleration and a turnover surge concentrates F11's fade. Prediction: day bearish +2.5 to +5.0 with dir -0.05% to +0.10%; day bullish -1.0 to +2.0 with a negative dir; top-5 bearish overlap with F11 25 to 55%. Improves on F11 only if bearish edge is at least +5.47 (F11 + 1) with interval above 0 and dir at least F11's +0.05%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive dir; challenges E2A only above +7.72 train. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; challenges T04 only above +3.37."
+  - "Three-way products of ranks crowd the extremes: the top five need all three factors high, so most dates' bearish five are the few stocks that closed at a 10-session high on their heaviest day."
+  - "Price-unit second difference replaced by the log second difference; volume and adv20 replaced by turnover (as F09)."
+status: "queued 6 Nov 2026 (day); not yet replayed"

@@ -5642,3 +5642,7 @@ paper's appendix A.1: F13 Alpha#17 (accelerating range top on a turnover surge, 
 day), F15 Alpha#30 (three-session streak on recent volume, week), F16 Alpha#55 (range position vs turnover correlation,
 day), F17 Alpha#60 (volume-weighted close location vs 10-session high recency, day). New port convention: cross-section
 = stocks with a future on the slice's last date, so stale names leave the ranks. Full pytest: 1330 passed, 4 skipped.
+Unit 4 (port): F13 Alpha#17 accelerating range top on a turnover surge (`cards/F13.yml`, `strategies/f13_accel_range_top.py`,
+audit, 9 tests; shared helpers `strategies/alpha101_common.py`), day replay queued. Pre-declared: bearish +2.5 to +5.0
+(dir -0.05% to +0.10%), bullish -1.0 to +2.0 (dir negative), 25-55% bearish overlap with F11; improves on F11 only at
++5.47 or more. Leases extended to 17:30Z. Full pytest: 1340 passed, 4 skipped.

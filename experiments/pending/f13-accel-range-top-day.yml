@@ -1,0 +1,10 @@
+# F13 (day horizon): Alpha#17 accelerating range top on a turnover surge, faded and
+# median-centred, train-split replay (port lane, state/queue.md).
+# See cards/F13.yml and strategies/f13_accel_range_top.py.
+id: f13-accel-range-top-day
+strategy: strategies.f13_accel_range_top
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31
