@@ -1846,6 +1846,15 @@
     "n": 936,
     "coverage": 0.6380368098159509
    },
+   "e2a-f11-fallback-day": {
+    "mean": 0.06380333184810945,
+    "lo": 0.048373098608613684,
+    "hi": 0.0787727510572847,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 1467,
+    "coverage": 1.0
+   },
    "e2b-day": {
     "mean": 0.023382862848359873,
     "lo": 0.002949591580838228,
@@ -2253,7 +2262,7 @@
    }
   },
   "joint": {
-   "n_models": 57,
+   "n_models": 58,
    "block": 1,
    "twins": {},
    "spa": {
@@ -2269,6 +2278,7 @@
     "e1b-day",
     "e2a-d01c-fallback-day",
     "e2a-day",
+    "e2a-f11-fallback-day",
     "e2b-day",
     "e3a-a02-high-ivol-day",
     "e3b-a02-low-ivol-day",
@@ -2289,21 +2299,9 @@
     "t15-adx-regime-day"
    ],
    "mcs": [
-    "a02-extreme-day-reversal-day",
-    "a09-gap-fade-day",
-    "consensus-db-v1-day",
     "d01c-day",
-    "e1b-day",
     "e2a-d01c-fallback-day",
-    "e2a-day",
-    "e3a-a02-high-ivol-day",
-    "e3b-a02-low-ivol-day",
-    "f02-volume-signed-reversal-day",
-    "f03-conditional-reversal-day",
-    "f06-trend-acceleration-day",
-    "f10-vol-ratio-reversal-day",
-    "f11-range-top-fade-day",
-    "t06-bollinger-pctb-day"
+    "e2a-f11-fallback-day"
    ]
   }
  }
