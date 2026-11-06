@@ -1,0 +1,29 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#60"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#60 = -(2 x scale(rank(close location value x volume)) -
+  scale(rank(ts_argmax(close, 10)))). A production WorldQuant alpha: closes near the bar's high on
+  heavy volume are faded, closes after a recent 10-day high favoured. The paper reports no
+  stand-alone hit rate.
+horizon: day
+rules_plain: >
+  Last bar's close location value ((close - low) - (high - close)) / (high - low) times its
+  turnover, and the position (1 oldest to 10 last) of the highest adjusted close in the last 10
+  sessions. Each is percentile-ranked among the stocks with a future on the last date and scaled to
+  sum to one; raw = scaled high-position rank - 2 x scaled flow rank; score = raw - median. A close
+  at the bar's high on heavy turnover with an old 10-session high bearish; a close at the bar's low
+  with a fresh high bullish. A bar with high = low abstains.
+default_params:
+  window: 10
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (6 Nov 2026): the flow term has twice the weight, so the bearish five are mostly the heaviest-turnover closes at the bar's high, a one-day fade like A02/F11's bearish side; the bullish five are heavy-turnover closes at the bar's low after a fresh 10-session high, a pullback inside a short rise, close to Q06's lower-wick reading (+2.58 day bullish). Turnover in the flow term tilts both sides to large, liquid names. Prediction: day bearish +0.5 to +3.0 with dir -0.10% to +0.05%; day bullish -1.0 to +2.0 with a negative dir; top-5 bullish overlap with Q06 10 to 35%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive dir; challenges E2A only above +7.72 train. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; challenges T04 only above +3.37."
+  - "Close location uses the raw bar (same session); the 10-session high uses adjusted closes; ts_argmax read as 1 oldest to 10 last, first occurrence on ties."
+  - "Share volume replaced by turnover (as F09)."
+status: "queued 6 Nov 2026 (day); not yet replayed"

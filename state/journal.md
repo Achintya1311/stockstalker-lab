@@ -5649,3 +5649,6 @@ audit, 9 tests; shared helpers `strategies/alpha101_common.py`), day replay queu
 Unit 5 (port): F16 Alpha#55 range position versus turnover correlation (`cards/F16.yml`,
 `strategies/f16_position_turnover_corr.py`, audit, 9 tests), day replay queued. Pre-declared: bearish -0.5 to +2.0
 (dir -0.10% to +0.05%), bullish -1.0 to +1.5 (dir negative), top-5 bearish overlap with T13 below 15%. Full pytest: 1353 passed, 4 skipped.
+Unit 6 (port): F17 Alpha#60 volume-weighted close location versus 10-session high recency (`cards/F17.yml`,
+`strategies/f17_close_location_recency.py`, audit, 8 tests), day replay queued. Pre-declared: bearish +0.5 to +3.0 (dir
+-0.10% to +0.05%), bullish -1.0 to +2.0 (dir negative), top-5 bullish overlap with Q06 10-35%. Full pytest: 1362 passed, 4 skipped.
