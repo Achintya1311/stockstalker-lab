@@ -1,0 +1,9 @@
+{
+  "id": "f17-close-location-recency-day",
+  "strategy": "strategies.f17_close_location_recency",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 256885,
+  "n_dates": 1476,
+  "pick_log_sha256": "16c8c31dfb140555e808261b9809db72cb271a898ca3163f037d456b0a05c4e2"
+}

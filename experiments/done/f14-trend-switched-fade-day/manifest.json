@@ -1,0 +1,9 @@
+{
+  "id": "f14-trend-switched-fade-day",
+  "strategy": "strategies.f14_trend_switched_fade",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 219625,
+  "n_dates": 1286,
+  "pick_log_sha256": "999a1349b71d47ebdd3d783ef9d9b46eb14f34ae7a67fb5ccc826d18f45b49cb"
+}
