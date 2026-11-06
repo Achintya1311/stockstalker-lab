@@ -5658,3 +5658,10 @@ negative), top-5 bullish overlap with T04 10-40%. Full pytest: 1372 passed, 4 sk
 Unit 8 (port): F15 Alpha#30 three-session streak reversal on recent volume (`cards/F15.yml`,
 `strategies/f15_streak_volume_reversal.py`, audit, 7 tests), week replay queued. Pre-declared: bearish -0.5 to +2.5 (dir
 -0.15% to +0.15%), bullish -2.0 to +2.0 (dir negative), top-5 bearish overlap with A01 below 20%. F13-F17 all queued. Full pytest: 1380 passed, 4 skipped.
+Unit 9 (diagnose): E2A_F11_FB (`research/diagnostics/e2a_f11_fb.md`). Day bearish +6.38 (interval +4.84 to +7.88, t
+8.34, 6/6, dir +0.062%) with picks on 100% of scored dates: every part of the pre-declared rule met (edge >= +5.97,
+dir >= +0.06% by a hair, coverage >= 99%), predictions held (F11 on 37% of dates). F11 reads about +4.5 on E2A's
+quiet dates where D01C read +2.9; the tradable switch filled the 84 dates E2A_D01C_FB left empty. In the day-bearish
+MCS (3 of 58). No query (pre-declared; replacing E2A needs a released +7.72); the coverage trade is written up as a
+decision for AB in `state/engine-issues.md` and noted in `state/queue.md`. Full pytest: 1380 passed, 4 skipped.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.

@@ -33,4 +33,4 @@ red_flags:
 - The switch uses the previous session's universe flags; the engine's filter uses the pick date's, so a few dates can still differ.
 - E2A fires about 3 stocks a date, so on E2A dates the table usually has fewer than 5 picks.
 - Train split only until a frozen version exists.
-status: 'queued 6 Nov 2026 (day); not yet replayed'
+status: 'train: day-bearish +6.38 (interval +4.84 to +7.88, 6/6, dir +0.06%), coverage 100%; helps rule met; no query (needs a released +7.72 to replace E2A); see research/diagnostics/e2a_f11_fb.md'

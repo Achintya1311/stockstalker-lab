@@ -780,3 +780,13 @@ also keep scoring through 2020-12 in F12's week log (SKSMICRO and ABIRLANUVO eac
 generic stale-row rule in the dataset build is the right fix; the lab's overlap scripts drop these five by name.
 Update (6 Nov, F08 diagnosis): CAIRN (Cairn India, merged into Vedanta in 2017) scores on every week through 2020-12
 in F08's log and sits in its raw bullish top five on 150 of 260 dates. Six names now dropped by hand in overlap work.
+
+## DECISION FOR AB: a full-coverage day-bearish table (E2A_F11_FB), 6 Nov 2026 - for a supervised session
+
+The live day-bearish table (E2A, released +6.72) is empty on dates E2A does not fire (about a third of train dates)
+and has had 2 to 5 picks a day since 2 Nov. `cards/E2A_F11_FB.yml` (E2A first, F11 range-top fade otherwise) has
+picks on every train date at +6.38 (interval +4.84 to +7.88, 6/6, dir +0.06%), in the day-bearish MCS, and met its
+pre-declared rule (`research/diagnostics/e2a_f11_fb.md`). SPEC 10 replaces E2A only with a released edge at least
+1 point higher (+7.72), which this blend is not expected to reach, so the lab spent no query. If AB prefers a full
+table for about 1.1 points of train edge, that is a SPEC 10 wording decision; the next step would be one validation
+query for E2A_F11_FB, then a change on a roster window (the week's last trading day before 12:00 UTC).
