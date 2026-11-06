@@ -1,0 +1,9 @@
+{
+  "id": "f13-accel-range-top-day",
+  "strategy": "strategies.f13_accel_range_top",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 255066,
+  "n_dates": 1462,
+  "pick_log_sha256": "f0794afdb9824cf92af3e59e305675076cf362ac625360431866e74cb9358687"
+}

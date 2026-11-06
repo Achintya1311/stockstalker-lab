@@ -1,0 +1,9 @@
+{
+  "id": "f15-streak-volume-reversal-week",
+  "strategy": "strategies.f15_streak_volume_reversal",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 53912,
+  "n_dates": 309,
+  "pick_log_sha256": "2c156cee064634eb439884a18914b7ec89d259c355b3e4b0d5ff94e1a67802f3"
+}

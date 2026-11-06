@@ -1,9 +1,0 @@
-# F14 (day horizon): Alpha#24 trend-switched fade, train-split replay (port lane,
-# state/queue.md). See cards/F14.yml and strategies/f14_trend_switched_fade.py.
-id: f14-trend-switched-fade-day
-strategy: strategies.f14_trend_switched_fade
-split: train
-horizon: day
-dates:
-  start: 2015-01-01
-  end: 2020-12-31

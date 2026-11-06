@@ -1,0 +1,9 @@
+{
+  "id": "f16-position-turnover-corr-day",
+  "strategy": "strategies.f16_position_turnover_corr",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 256581,
+  "n_dates": 1469,
+  "pick_log_sha256": "689b85470b9cf3ac6644107bbfde9d8817d662523538d6f94e0570e5f70e6981"
+}
