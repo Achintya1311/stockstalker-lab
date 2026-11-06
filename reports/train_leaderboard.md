@@ -2,11 +2,12 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 235. Gate 2's bar at that count: t >= 4.39.
+Trials recorded: 236. Gate 2's bar at that count: t >= 4.39.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | d01c-day | day | bearish | 7304 | 59.30% | 54.56% | 4.74 | 8.41 | yes | 0.08 | 100.00% | candidate |
+| e2a-f11-fallback-day | day | bearish | 5442 | 59.78% | 54.54% | 6.38 | 8.34 | yes | 0.06 | 100.00% | candidate |
 | consensus-db-v1-day | day | bearish | 7335 | 59.14% | 54.54% | 4.61 | 8.32 | yes | 0.07 | 100.00% | candidate |
 | f11-range-top-fade-day | day | bearish | 7335 | 59.00% | 54.54% | 4.47 | 7.84 | yes | 0.05 | 100.00% | candidate |
 | e2a-d01c-fallback-day | day | bearish | 4996 | 58.97% | 54.43% | 5.97 | 7.44 | yes | 0.06 | 100.00% | candidate |

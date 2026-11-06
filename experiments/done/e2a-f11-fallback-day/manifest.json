@@ -1,0 +1,9 @@
+{
+  "id": "e2a-f11-fallback-day",
+  "strategy": "strategies.e2a_f11_fallback",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 59990,
+  "n_dates": 1476,
+  "pick_log_sha256": "ab97c69915d52e4105a7d5fe8508da9b5f8e96cf4296ef78e65bfef60a16746b"
+}
