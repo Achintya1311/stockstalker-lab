@@ -5655,3 +5655,6 @@ Unit 6 (port): F17 Alpha#60 volume-weighted close location versus 10-session hig
 Unit 7 (port): F14 Alpha#24 trend-switched fade (`cards/F14.yml`, `strategies/f14_trend_switched_fade.py`, audit, 9
 tests), day replay queued. Pre-declared: bearish 0.0 to +3.0 (dir -0.10% to +0.10%), bullish +0.5 to +3.5 (dir
 negative), top-5 bullish overlap with T04 10-40%. Full pytest: 1372 passed, 4 skipped.
+Unit 8 (port): F15 Alpha#30 three-session streak reversal on recent volume (`cards/F15.yml`,
+`strategies/f15_streak_volume_reversal.py`, audit, 7 tests), week replay queued. Pre-declared: bearish -0.5 to +2.5 (dir
+-0.15% to +0.15%), bullish -2.0 to +2.0 (dir negative), top-5 bearish overlap with A01 below 20%. F13-F17 all queued. Full pytest: 1380 passed, 4 skipped.

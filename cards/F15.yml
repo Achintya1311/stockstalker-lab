@@ -1,0 +1,28 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#30"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#30 = (1 - rank(sign(d1) + sign(d2) + sign(d3))) x sum(volume, 5)
+  / sum(volume, 20), with d1..d3 the last three daily close changes. A production WorldQuant alpha:
+  a run of down closes on heavy recent volume is favoured. The paper reports no stand-alone hit rate.
+horizon: week
+rules_plain: >
+  On adjusted closes, sum the signs of the last three daily changes (-3 to +3) and percentile-rank
+  it among the stocks with a future on the last date; p = (1 - that rank) x last 5 sessions'
+  turnover / last 20 sessions'; score = p - median(p). Three down closes on heavy recent turnover
+  bullish; three up closes on light turnover bearish. Scored on Friday's close for the next week.
+default_params:
+  streak: 3
+  short: 5
+  long: 20
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (6 Nov 2026): the streak takes only seven values, so the turnover ratio decides the top five within the extreme streaks. The bearish five are three-up-close names on light recent turnover, a quiet drift up, which is not what A01 fades (A01's bearish five are last week's biggest risers, usually on heavy trading). Prediction: week bearish -0.5 to +2.5 with dir -0.15% to +0.15%; week bullish -2.0 to +2.0 with a negative dir (0.415% delivery cost); top-5 bearish overlap with A01 below 20%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive dir; replaces A01 only with a released edge at least 1 point above +4.73. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; replaces A05B only with a released edge above +3.23."
+  - "Three daily signs at the end of a week say little about a five-session holding period; the paper's alpha was a daily one."
+  - "Share volume replaced by turnover (as F09)."
+status: "queued 6 Nov 2026 (week); not yet replayed"
