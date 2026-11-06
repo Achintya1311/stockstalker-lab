@@ -5637,3 +5637,8 @@ of D01C on E2A's quiet dates, and the switch counts only E2A picks in the univer
 empty-table dates found in `research/diagnostics/e2a_d01c_fb.md`). Pre-declared: edge +5.3 to +6.6, dir +0.04% to
 +0.12%, coverage at least 99%; helps only at +5.97 or more with interval above 0, 5/6 years, dir at least +0.06% and
 coverage at least 99%. Even then the table moves off E2A only at a released +7.72, so a pass is a note, not a query. Full pytest: 1330 passed, 4 skipped.
+Unit 3 (discover): X03 fourth batch, F13-F17 (`research/notes/discover_2026-11-06_x03.md`), formulas checked against the
+paper's appendix A.1: F13 Alpha#17 (accelerating range top on a turnover surge, day), F14 Alpha#24 (trend-switched fade,
+day), F15 Alpha#30 (three-session streak on recent volume, week), F16 Alpha#55 (range position vs turnover correlation,
+day), F17 Alpha#60 (volume-weighted close location vs 10-session high recency, day). New port convention: cross-section
+= stocks with a future on the slice's last date, so stale names leave the ranks. Full pytest: 1330 passed, 4 skipped.
