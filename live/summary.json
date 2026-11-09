@@ -72,7 +72,7 @@
           "n_hits": 25
         }
       },
-      "market_line": 0.44275283081709077
+      "market_line": 0.44275283081709066
     },
     "day_bearish": {
       "n_picks": 133,
@@ -220,7 +220,7 @@
           "n_hits": 8
         }
       },
-      "market_line": 0.38078186194030084
+      "market_line": 0.3807818619403009
     },
     "week_bearish": {
       "n_picks": 65,
@@ -316,38 +316,38 @@
           "n_hits": 3
         }
       },
-      "market_line": 0.6967741935483871
+      "market_line": 0.6789554531490015
     },
     "day_bearish": {
-      "n_picks": 20,
-      "n_scored": 19,
-      "n_hits": 6,
+      "n_picks": 23,
+      "n_scored": 20,
+      "n_hits": 7,
       "by_week": {
         "2026-W45": {
           "n_picks": 19,
           "n_hits": 6
         },
         "2026-W46": {
-          "n_picks": 1,
-          "n_hits": 0
+          "n_picks": 4,
+          "n_hits": 1
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 20,
-          "n_hits": 6
+          "n_picks": 23,
+          "n_hits": 7
         }
       },
-      "market_line": 0.29308755760368665
+      "market_line": 0.3118279569892473
     },
     "week_bullish": {
       "n_picks": 10,
-      "n_scored": 0,
-      "n_hits": 0,
+      "n_scored": 5,
+      "n_hits": 4,
       "by_week": {
         "2026-W45": {
           "n_picks": 5,
-          "n_hits": 0
+          "n_hits": 4
         },
         "2026-W46": {
           "n_picks": 5,
@@ -357,19 +357,19 @@
       "by_month": {
         "2026-11": {
           "n_picks": 10,
-          "n_hits": 0
+          "n_hits": 4
         }
       },
-      "market_line": 0.8894009216589862
+      "market_line": 0.7442396313364055
     },
     "week_bearish": {
       "n_picks": 10,
-      "n_scored": 0,
-      "n_hits": 0,
+      "n_scored": 5,
+      "n_hits": 2,
       "by_week": {
         "2026-W45": {
           "n_picks": 5,
-          "n_hits": 0
+          "n_hits": 2
         },
         "2026-W46": {
           "n_picks": 5,
@@ -379,10 +379,10 @@
       "by_month": {
         "2026-11": {
           "n_picks": 10,
-          "n_hits": 0
+          "n_hits": 2
         }
       },
-      "market_line": 0.10138248847926268
+      "market_line": 0.2534562211981567
     }
   }
 }

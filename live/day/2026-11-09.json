@@ -292,7 +292,13 @@
             "high": 51.8,
             "retested": false
           }
-        }
+        },
+        "open": 566.25,
+        "close": 565.4,
+        "move_pct": -0.15011037527594695,
+        "move_rs": -0.8500000000000227,
+        "hit": true,
+        "late": false
       }
     ]
   },

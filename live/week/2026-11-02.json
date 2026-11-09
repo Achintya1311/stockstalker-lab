@@ -285,7 +285,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 450.0,
+        "close": 444.5,
+        "move_pct": -1.2222222222222245,
+        "move_rs": -5.5,
+        "hit": false
       },
       {
         "symbol": "TORNTPHARM",
@@ -565,7 +570,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 4636.5,
+        "close": 4773.0,
+        "move_pct": 2.944031057910057,
+        "move_rs": 136.5,
+        "hit": true
       },
       {
         "symbol": "LTF",
@@ -845,7 +855,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 246.01,
+        "close": 272.27,
+        "move_pct": 10.674362830779227,
+        "move_rs": 26.25999999999999,
+        "hit": true
       },
       {
         "symbol": "DIXON",
@@ -1125,7 +1140,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 11080.0,
+        "close": 12604.0,
+        "move_pct": 13.754512635379058,
+        "move_rs": 1524.0,
+        "hit": true
       },
       {
         "symbol": "MFSL",
@@ -1405,7 +1425,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 1210.0,
+        "close": 1282.0,
+        "move_pct": 5.950413223140494,
+        "move_rs": 72.0,
+        "hit": true
       }
     ],
     "bearish": [
@@ -1694,7 +1719,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 1767.8,
+        "close": 1822.9,
+        "move_pct": 3.1168684240298727,
+        "move_rs": 55.100000000000136,
+        "hit": false
       },
       {
         "symbol": "LAURUSLABS",
@@ -1981,7 +2011,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 2406.0,
+        "close": 2370.0,
+        "move_pct": -1.4962593516209433,
+        "move_rs": -36.0,
+        "hit": true
       },
       {
         "symbol": "SONACOMS",
@@ -2268,7 +2303,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 900.0,
+        "close": 908.5,
+        "move_pct": 0.9444444444444366,
+        "move_rs": 8.5,
+        "hit": false
       },
       {
         "symbol": "SYRMA",
@@ -2548,7 +2588,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 1635.0,
+        "close": 1505.0,
+        "move_pct": -7.9510703363914415,
+        "move_rs": -130.0,
+        "hit": true
       },
       {
         "symbol": "NAVINFLUOR",
@@ -2828,7 +2873,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 8600.0,
+        "close": 9065.0,
+        "move_pct": 5.406976744186043,
+        "move_rs": 465.0,
+        "hit": false
       }
     ]
   }

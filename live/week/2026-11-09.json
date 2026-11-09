@@ -284,7 +284,8 @@
               17.1
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "POLICYBZR",
@@ -563,7 +564,8 @@
               5.2
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "TORNTPHARM",
@@ -842,7 +844,8 @@
               42.4
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "SOLARINDS",
@@ -1121,7 +1124,8 @@
               20.1
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "KAYNES",
@@ -1400,7 +1404,8 @@
               12.7
             ]
           ]
-        }
+        },
+        "late": false
       }
     ],
     "bearish": [
@@ -1688,7 +1693,8 @@
             "high": 38.8,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "MUTHOOTFIN",
@@ -1974,7 +1980,8 @@
             "high": 27.6,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "ASHOKLEY",
@@ -2253,7 +2260,8 @@
               91.2
             ]
           ]
-        }
+        },
+        "late": false
       },
       {
         "symbol": "KALYANKJIL",
@@ -2539,7 +2547,8 @@
             "high": 24.1,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "NAM-INDIA",
@@ -2818,7 +2827,8 @@
               65.9
             ]
           ]
-        }
+        },
+        "late": false
       }
     ]
   },
