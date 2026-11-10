@@ -37,5 +37,9 @@ red_flags:
 - D01C (+2.54 train) left out because its validation answer was -1.05.
 - Ranking depends on which stocks are present that date (same caveat as O04).
 - Every bullish reading in the lab has a negative directional move after the delivery cost.
+- 'Added 10 Nov 2026 after queuing, before any result: the imported rule ranks each member across every stock it read,
+  so an asymmetric member distorts the vote. F14 reads about 31 stocks bullish and 140 bearish a date, so its mildest
+  bearish readings rank above 0.5 and count as bullish votes. CONSENSUS_WB_V2 uses side-anchored ranks to avoid this;
+  if this card lands near Q06 alone, that is the likely reason.'
 - Train split only until a frozen version exists.
 status: 'queued 10 Nov 2026 (day); not yet replayed'

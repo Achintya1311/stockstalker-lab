@@ -1,0 +1,40 @@
+source_url: ''
+author: lab-original (go-live track P2, state/queue.md; research/diagnostics/f15.md)
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-11-10'
+horizon: week
+claim_as_stated: 'Pre-registered on 10 Nov 2026 before the replay. Four week-bearish readings that each meet the full
+  SPEC 10 helps rule on train and barely share names (H02 +3.84, T05C +4.02, F15 +3.65, Q01C +3.26; pairwise top-5
+  overlap 1.6-5.6%). With side-anchored ranks, a stock bearish on three members (usually H02, F15 and Q01C, which read
+  the most stocks) outranks a lone top T05C reading, so the top five should be the stocks several members agree on.
+  Prediction: week-bearish top-5 edge +2.5 to +4.5, directional move after costs +0.10% to +0.25%, picks on every
+  train week, top-5 overlap with H02, F15 and Q01C each 10 to 40%, with T05C below 15%. Helps only if: edge at least
+  +4.02 (T05C, the best member), 95% interval above 0, at least 5 of 6 years positive, directional move at least
+  +0.13% (H02''s). A validation query is spent only if train edge is at least +5.73, since the week-bearish table
+  moves off A01 (released +4.73) only on a released edge at least 1 point higher (SPEC.md section 10). Otherwise
+  the result is recorded and the week-bearish consensus closes unless it beats every member.'
+rules_plain: 'Week-bearish only. Members: H02 (highest stock-specific volatility), T05C (fresh MACD up-cross faded),
+  F15 (three up closes on light recent turnover) and Q01C (a fall on thinning volume). Per member, bearish readings
+  are ranked among that member''s bearish readings and mapped to (0.5, 1]; bullish readings among its bullish readings,
+  mapped to [0, 0.5); zero or abstain = 0.5. Mean over the four; stocks above 0.5 scored -2 x (mean - 0.5). No
+  bullish picks.'
+default_params:
+  members: [h02_idiosyncratic_volatility, t05c_upcross_fade, f15_streak_volume_reversal, q01c_thin_volume_fall]
+  ranks: side-anchored
+  abstain_as: 0.5
+  weights: equal
+data_needed: ohlcv
+testable_now: 'yes'
+source: 'state/queue.md P2; research/diagnostics/f15.md (What to try next)'
+link: ''
+prior_claim: 'Rank-averaging weak, unrelated signals often beats each member alone; CONSENSUS_WB_V1 (+2.48) did not'
+red_flags:
+- Members chosen after seeing their train results; the consensus is its own trial and each member already is one.
+- 'The combination rule differs from CONSENSUS_WB_V1 and CONSENSUS_DB_V1 (side-anchored ranks), so a difference from v1
+  mixes the members with the rule. The change fixes a defect found while writing this card: under v1''s rule a
+  one-sided member''s weakest bearish reading ranks below 0.5 and counts against bearish (T05C reads about 9 stocks a
+  week, all bearish; Q01C about 46).'
+- H02 and F15 are cross-sectional themselves; ranking depends on which stocks are present that week.
+- F15's edge was about +5.5 in 2015-17 and +1.9 in 2018-20.
+- Train split only until a frozen version exists.
+status: 'queued 10 Nov 2026 (week); not yet replayed'

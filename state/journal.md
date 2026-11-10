@@ -5719,3 +5719,11 @@ queued. Pre-declared: edge +1.5 to +3.5, dir -0.40% to -0.55%, coverage >= 99%, 
 T04 < 15%. Helps at >= +3.37 (T04) with interval above 0 and 5/6 years; coverage case noted at >= +2.37; query only at
 >= +5.36 train. Leases extended to 2026-11-10T07:40:23Z. Full pytest: 1402 passed, 4 skipped.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 8 (port, P2): CONSENSUS_WB_V2, week-bearish consensus of H02, T05C, F15 and Q01C (`cards/CONSENSUS_WB_V2.yml`,
+`strategies/consensus_wb_v2.py`, audit, 9 tests), week replay queued. New side-anchored ranks: v1's rule ranks a member
+across every stock it read, so a one-sided member's weakest bearish reading (T05C reads ~9 stocks a week, Q01C ~46, all
+bearish) fell below 0.5 and voted against bearish; here bearish readings map to (0.5, 1], bullish to [0, 0.5). The same
+defect touches CONSENSUS_DBU_V1 through F14 (31 bullish vs 140 bearish readings a date); noted in its card before any
+result. Pre-declared: edge +2.5 to +4.5, dir +0.10% to +0.25%, overlap with H02/F15/Q01C 10-40%, T05C < 15%; helps at
+>= +4.02 with interval above 0, 5/6 years, dir >= +0.13%; query only at >= +5.73 train. Full pytest: 1412 passed, 4 skipped.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
