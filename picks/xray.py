@@ -5,7 +5,9 @@ the names the day-bullish strategy scores bullish, `d` the same for the day-bear
 each null when that strategy does not score the stock. `breadth` counts the previous session's open-to-close
 moves across the eligible universe in fixed bins; `m` is that same move for each stock, in percent to two
 decimals (null when the stock has no bar), so a page can show a board of the market. Built from the same
-truncated history the picks use.
+truncated history the picks use. `p` is the stock's cumulative percent move over the last `PATH_SESSIONS`
+sessions, one value per session (close against the exchange's adjusted previous close, so splits do not
+show as moves), null when the stock has fewer bars; `path_dates` names those sessions.
 """
 
 from __future__ import annotations
@@ -17,6 +19,7 @@ from engine.replay import truncate
 from picks.select import eligible_symbols
 from picks.source import resolve_strategy
 
+PATH_SESSIONS = 20
 BIN_EDGES = [-4.0, -3.0, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0]  # percent; outer bins are open-ended
 
 
@@ -35,6 +38,23 @@ def last_moves(history: pd.DataFrame, eligible: set[str]) -> pd.Series:
     return ((last["close"] / last["open"] - 1.0) * 100).set_axis(last["symbol"].to_numpy()).dropna()
 
 
+def recent_paths(history: pd.DataFrame, eligible: set[str], n: int = PATH_SESSIONS) -> tuple[list[str], dict[str, list[float]]]:
+    """Cumulative percent move per eligible stock over the market's last `n` sessions (percent only, no prices)."""
+    h = history[history["symbol"].isin(eligible)]
+    dates = sorted(h["date"].astype(str).unique())[-n:]
+    if len(dates) < n:
+        return dates, {}
+    h = h[h["date"].astype(str).isin(dates)].sort_values("date")
+    out = {}
+    for sym, g in h.groupby("symbol"):
+        if len(g) != n or not (g["prevclose"] > 0).all():
+            continue   # a stock missing a session would draw a path that skips a day
+        cum = (g["close"] / g["prevclose"]).cumprod().to_numpy()
+        if np.isfinite(cum).all():
+            out[sym] = [round(float((c - 1.0) * 100), 1) for c in cum]
+    return dates, out
+
+
 def breadth(history: pd.DataFrame, eligible: set[str]) -> dict:
     moves = last_moves(history, eligible).to_numpy()
     edges = [-np.inf, *BIN_EDGES, np.inf]
@@ -49,6 +69,7 @@ def build_xray(dataset: pd.DataFrame, source: dict, session: str, asof: str) -> 
     bull = _percentiles(resolve_strategy(bull_cfg["strategy"]).score(history), eligible, 1)
     bear = _percentiles(resolve_strategy(bear_cfg["strategy"]).score(history), eligible, -1)
     moves = {sym: round(float(v), 2) for sym, v in last_moves(history, eligible).items() if np.isfinite(v)}
-    stocks = [{"s": sym, "b": bull.get(sym), "d": bear.get(sym), "m": moves.get(sym)} for sym in sorted(eligible)]
-    return {"asof": asof, "bullish_strategy": bull_cfg["strategy"], "bearish_strategy": bear_cfg["strategy"],
+    dates, paths = recent_paths(history, eligible)
+    stocks = [{"s": sym, "b": bull.get(sym), "d": bear.get(sym), "m": moves.get(sym), "p": paths.get(sym)} for sym in sorted(eligible)]
+    return {"asof": asof, "path_dates": dates, "bullish_strategy": bull_cfg["strategy"], "bearish_strategy": bear_cfg["strategy"],
             "n": len(stocks), "stocks": stocks, "breadth": breadth(history, eligible)}
