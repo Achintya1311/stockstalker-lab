@@ -5699,3 +5699,7 @@ Unit 3 (diagnose): F15 Alpha#30 streak reversal on recent volume (`research/diag
 A01 overlap 4.4% (held). Helps rule met; below A01's +5.73 replacement bar, no query (as H02). 2015-17 ~+5.5, 2018-20
 ~+1.9. Next: pre-declared week-bearish consensus v2 of H02, T05C, F15, Q01C (pairwise overlap 1.6-5.6%). Docs only.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 4 (diagnose): F16 Alpha#55 range position vs turnover correlation (`research/diagnostics/f16.md`). Day bullish +0.89,
+bearish +0.86 (both intervals include 0, dirs negative). All ranges held, T13 overlap 4.3%; the saturation premise did
+not (bearish top-5 median |score| 0.94). Not eligible, closed; third price-volume correlation null on day (Q02, F04, F16).
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
