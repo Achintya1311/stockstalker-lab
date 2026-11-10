@@ -5694,3 +5694,8 @@ Unit 2 (diagnose): F14 Alpha#24 trend-switched fade (`research/diagnostics/f14.m
 and E2A's +7.72, no query. Bullish = largest 3-session falls in a rising 100-session trend; 2-19% overlap with T04, Q06,
 T10-NR7. Next: pre-declared day-bullish consensus of T04, Q06, F14, T10-NR7. Docs only; suite unchanged (1392 passed).
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 3 (diagnose): F15 Alpha#30 streak reversal on recent volume (`research/diagnostics/f15.md`). Week bearish +3.65
+(interval +1.19 to +6.02, 6/6, dir +0.232%, second highest week-bearish dir), above its pre-declared range; bullish -0.42.
+A01 overlap 4.4% (held). Helps rule met; below A01's +5.73 replacement bar, no query (as H02). 2015-17 ~+5.5, 2018-20
+~+1.9. Next: pre-declared week-bearish consensus v2 of H02, T05C, F15, Q01C (pairwise overlap 1.6-5.6%). Docs only.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
