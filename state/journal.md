@@ -5703,3 +5703,8 @@ Unit 4 (diagnose): F16 Alpha#55 range position vs turnover correlation (`researc
 bearish +0.86 (both intervals include 0, dirs negative). All ranges held, T13 overlap 4.3%; the saturation premise did
 not (bearish top-5 median |score| 0.94). Not eligible, closed; third price-volume correlation null on day (Q02, F04, F16).
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 5 (diagnose): F17 Alpha#60 (`research/diagnostics/f17.md`). Day bullish wrong-way -2.39 (interval -3.45 to -1.27,
+1/6), below its range; Q06 overlap 0.1% (missed low: the turnover weight picks the heaviest closes at the bar's low, not
+lower wicks). Bearish +1.25 (interval +0.21 to +2.37, 4/6, dir -0.08%), not eligible. Flip would be about +2.4 edge and
++0.04% dir by mirror arithmetic, too thin to queue. Closed. F13-F17 all diagnosed.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
