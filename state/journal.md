@@ -5727,3 +5727,9 @@ defect touches CONSENSUS_DBU_V1 through F14 (31 bullish vs 140 bearish readings 
 result. Pre-declared: edge +2.5 to +4.5, dir +0.10% to +0.25%, overlap with H02/F15/Q01C 10-40%, T05C < 15%; helps at
 >= +4.02 with interval above 0, 5/6 years, dir >= +0.13%; query only at >= +5.73 train. Full pytest: 1412 passed, 4 skipped.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 9 (discover): X03 fifth batch, F18-F22 (`research/notes/discover_2026-11-10_x03.md`), formulas checked against the
+paper's appendix A.1: F18 Alpha#1 (timing of the recent downside-volatility or price peak, day), F19 Alpha#18 (intraday
+body volatility plus body, faded, day), F20 Alpha#35 (heavy trading, low bar level, weak returns over 16-32 sessions,
+week), F21 Alpha#37 (body reversal tilted by a 200-session body-to-close correlation, day), F22 Alpha#26 (turnover
+tracking new highs, faded, day; kept to close the price-volume correlation family). Not added: #2, #3, #22, #45, VWAP.
+Docs and catalog only.
