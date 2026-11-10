@@ -5708,3 +5708,8 @@ Unit 5 (diagnose): F17 Alpha#60 (`research/diagnostics/f17.md`). Day bullish wro
 lower wicks). Bearish +1.25 (interval +0.21 to +2.37, 4/6, dir -0.08%), not eligible. Flip would be about +2.4 edge and
 +0.04% dir by mirror arithmetic, too thin to queue. Closed. F13-F17 all diagnosed.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 6 (tune readout): F11 ts-rank window grid, train only (`research/diagnostics/f11.md`, "Tune grid result"). Day bearish
+by window 6/8/10/12/15: +3.80/+4.55/+4.47/+4.35/+4.07, dirs +0.027/+0.042/+0.047/+0.038/+0.019%, all 6/6. Pre-declared
+stability rule met across the whole grid; middle is 10, so F11 is unchanged. Flat plateau 8-12; E2A_F11_FB's fallback
+does not sit on a narrow optimum. Bullish flat at every window. 8 trials already recorded by the engine. Docs only.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
