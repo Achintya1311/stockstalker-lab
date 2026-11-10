@@ -109,6 +109,15 @@
     "n": 309,
     "coverage": 1.0
    },
+   "consensus-wb-v2-week": {
+    "mean": 0.023545311705284764,
+    "lo": 0.0006487290254061345,
+    "hi": 0.04541349780262203,
+    "p_le0": 0.02,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
    "d02-stock-pcr-confirmatory-week": {
     "mean": 0.0004047441295540966,
     "lo": -0.026164242603863696,
@@ -570,15 +579,15 @@
    }
   },
   "joint": {
-   "n_models": 63,
+   "n_models": 64,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week"
    },
    "spa": {
-    "lower": 0.056,
-    "consistent": 0.086,
-    "upper": 0.086
+    "lower": 0.057,
+    "consistent": 0.087,
+    "upper": 0.087
    },
    "stepm": [
     "h02-idiosyncratic-volatility-week"
@@ -595,6 +604,7 @@
     "c02-turn-of-month-week",
     "champion-v1-week",
     "consensus-wb-v1-week",
+    "consensus-wb-v2-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
     "f06-trend-acceleration-week",
@@ -1516,6 +1526,15 @@
     "n": 1467,
     "coverage": 1.0
    },
+   "f19-body-volatility-fade-day": {
+    "mean": -0.0042950734150446835,
+    "lo": -0.014962214897719133,
+    "hi": 0.0070434071716562845,
+    "p_le0": 0.7705,
+    "block": 1,
+    "n": 1467,
+    "coverage": 1.0
+   },
    "h02-idiosyncratic-volatility-day": {
     "mean": 0.011837108071654726,
     "lo": 0.0008833850015573249,
@@ -1806,7 +1825,7 @@
    }
   },
   "joint": {
-   "n_models": 64,
+   "n_models": 65,
    "block": 1,
    "twins": {},
    "spa": {
@@ -2152,6 +2171,15 @@
     "n": 1467,
     "coverage": 1.0
    },
+   "f19-body-volatility-fade-day": {
+    "mean": 0.0385590691805339,
+    "lo": 0.027277091492861963,
+    "hi": 0.04980475376391333,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 1467,
+    "coverage": 1.0
+   },
    "h02-idiosyncratic-volatility-day": {
     "mean": 0.020556665598398617,
     "lo": 0.009916690503897032,
@@ -2442,7 +2470,7 @@
    }
   },
   "joint": {
-   "n_models": 66,
+   "n_models": 67,
    "block": 1,
    "twins": {},
    "spa": {
@@ -2474,6 +2502,7 @@
     "f11-w15-day",
     "f13-accel-range-top-day",
     "f14-trend-switched-fade-day",
+    "f19-body-volatility-fade-day",
     "h02-idiosyncratic-volatility-day",
     "q06r-wide-bar-wick-day",
     "q07-trend-residual-day",
