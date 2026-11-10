@@ -1,0 +1,9 @@
+{
+  "id": "f19-body-volatility-fade-day",
+  "strategy": "strategies.f19_body_volatility_fade",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 257212,
+  "n_dates": 1476,
+  "pick_log_sha256": "23c37a1c7ad4b696e921c24251b5ca43313055ef4b58e41c6dd3f98d42a907aa"
+}

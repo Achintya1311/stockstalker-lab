@@ -1,7 +1,0 @@
-id: consensus-wb-v2-week
-strategy: strategies.consensus_wb_v2
-split: train
-horizon: week
-dates:
-  start: 2015-01-01
-  end: 2020-12-31

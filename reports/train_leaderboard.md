@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 255. Gate 2's bar at that count: t >= 4.40.
+Trials recorded: 258. Gate 2's bar at that count: t >= 4.41.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -16,6 +16,7 @@ Trials recorded: 255. Gate 2's bar at that count: t >= 4.40.
 | e2a-d01c-fallback-day | day | bearish | 4996 | 58.97% | 54.43% | 5.97 | 7.44 | yes | 0.06 | 100.00% | candidate |
 | f11-w15-day | day | bearish | 7335 | 58.61% | 54.54% | 4.07 | 7.21 | yes | 0.02 | 100.00% | candidate |
 | e2a-day | day | bearish | 2767 | 61.44% | 55.08% | 7.46 | 6.92 | yes | 0.13 | 100.00% | candidate |
+| f19-body-volatility-fade-day | day | bearish | 7335 | 58.39% | 54.54% | 3.86 | 6.71 | yes | 0.02 | 100.00% | candidate |
 | f11-w06-day | day | bearish | 7335 | 58.34% | 54.54% | 3.80 | 6.70 | yes | 0.03 | 100.00% | candidate |
 | f03-conditional-reversal-day | day | bearish | 7332 | 58.07% | 54.54% | 3.54 | 6.36 | yes | -0.05 | 100.00% |  |
 | f10-vol-ratio-reversal-day | day | bearish | 7335 | 58.17% | 54.54% | 3.64 | 6.32 | yes | -0.02 | 100.00% |  |
@@ -65,6 +66,7 @@ Trials recorded: 255. Gate 2's bar at that count: t >= 4.40.
 | t10-nr4-narrow-range-day | day | bullish | 6633 | 46.01% | 44.79% | 1.34 | 2.19 |  | -0.50 | 83.33% |  |
 | h02-idiosyncratic-volatility-day | day | bullish | 7325 | 46.14% | 44.96% | 1.18 | 2.10 |  | -0.47 | 83.33% |  |
 | consensus-wb-v1-week | week | bearish | 1545 | 53.40% | 50.91% | 2.48 | 2.06 |  | 0.15 | 66.67% | candidate |
+| consensus-wb-v2-week | week | bearish | 1545 | 53.27% | 50.91% | 2.35 | 2.06 |  | 0.15 | 83.33% | candidate |
 | g03-frog-in-the-pan-week | week | bearish | 1275 | 53.41% | 50.60% | 2.81 | 1.97 |  | -0.44 | 80.00% |  |
 | a08-overnight-intraday-tug-day | day | bearish | 7325 | 55.69% | 54.53% | 1.15 | 1.97 |  | -0.04 | 100.00% |  |
 | g02-betting-against-beta-week | week | bullish | 1300 | 52.54% | 48.85% | 3.69 | 1.97 |  | -0.40 | 80.00% |  |
@@ -190,6 +192,7 @@ Trials recorded: 255. Gate 2's bar at that count: t >= 4.40.
 | t17-keltner-breakout-week | week | bearish | 919 | 50.71% | 51.66% | -1.18 | -0.68 |  | -0.14 | 50.00% |  |
 | a07-high-volume-premium-week | week | bearish | 1510 | 50.00% | 50.84% | -0.84 | -0.74 |  | -0.14 | 50.00% |  |
 | t10-nr7-narrow-range-day | day | bearish | 5756 | 54.57% | 54.60% | -0.55 | -0.79 |  | -0.09 | 16.67% |  |
+| f19-body-volatility-fade-day | day | bullish | 7335 | 44.53% | 44.96% | -0.43 | -0.79 |  | -0.62 | 50.00% |  |
 | o01-retest-day | day | bullish | 6673 | 44.69% | 45.06% | -0.47 | -0.80 |  | -0.60 | 50.00% |  |
 | o04b-no-d01-week | week | bearish | 1183 | 50.04% | 50.92% | -1.12 | -0.81 |  | -0.10 | 16.67% |  |
 | h04-return-seasonality-week | week | bullish | 1020 | 46.96% | 48.20% | -1.24 | -0.84 |  | -0.44 | 25.00% |  |

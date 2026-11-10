@@ -1,0 +1,9 @@
+{
+  "id": "consensus-wb-v2-week",
+  "strategy": "strategies.consensus_wb_v2",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 34372,
+  "n_dates": 309,
+  "pick_log_sha256": "3f974e151e2d6c35c75414f58e43fd409f9e080374f4293a2366be4bcc605b88"
+}
