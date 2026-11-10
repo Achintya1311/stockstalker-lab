@@ -75,14 +75,15 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | q01-price-volume-corr-day | 1453 | 99% | -1.51 | -2.65 to -0.26 | 0.993 | 2 |
 | d01-oi-buildup-day | 1467 | 100% | -2.48 | -3.54 to -1.44 | 1.000 | 1 |
 
-## day/bullish  (63 experiments, block 1)
+## day/bullish  (64 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: d01c-day, f10-vol-ratio-reversal-day, f14-trend-switched-fade-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-connors-rsi2-day, t04-q06-fallback-day, t10-nr7-narrow-range-day. MCS size: 14 of 63.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: consensus-dbu-v1-day, d01c-day, f10-vol-ratio-reversal-day, f14-trend-switched-fade-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-connors-rsi2-day, t04-q06-fallback-day, t10-nr7-narrow-range-day. MCS size: 15 of 64.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
 | t04-q06-fallback-day | 1420 | 97% | +3.85 | +2.39 to +5.35 | 0.000 | 1 |
 | t04-connors-rsi2-day | 1087 | 74% | +3.37 | +1.62 to +5.13 | 0.001 | 1 |
+| consensus-dbu-v1-day | 1467 | 100% | +3.20 | +2.15 to +4.27 | 0.000 | 1 |
 | q06-wick-balance-day | 1467 | 100% | +2.58 | +1.47 to +3.70 | 0.000 | 2 |
 | d01c-day | 1467 | 100% | +2.54 | +1.48 to +3.60 | 0.000 | 1 |
 | f14-trend-switched-fade-day | 1277 | 87% | +2.38 | +1.16 to +3.56 | 0.001 | 2 |
