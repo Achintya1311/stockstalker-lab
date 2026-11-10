@@ -292,7 +292,8 @@
             "high": 72.5,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "INDIANB",
@@ -578,7 +579,8 @@
             "high": 81.3,
             "retested": false
           }
-        }
+        },
+        "late": false
       },
       {
         "symbol": "BANKINDIA",
@@ -864,7 +866,8 @@
             "high": 62.1,
             "retested": false
           }
-        }
+        },
+        "late": false
       }
     ]
   },
