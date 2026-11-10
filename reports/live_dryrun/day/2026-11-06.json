@@ -285,7 +285,13 @@
               82.2
             ]
           ]
-        }
+        },
+        "open": 168.75,
+        "close": 172.09,
+        "move_pct": 1.9792592592592584,
+        "move_rs": 3.3400000000000034,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "SUNPHARMA",
@@ -564,7 +570,13 @@
               41.2
             ]
           ]
-        }
+        },
+        "open": 1823.0,
+        "close": 1860.0,
+        "move_pct": 2.0296215030169984,
+        "move_rs": 37.0,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "MAHABANK",
@@ -843,7 +855,13 @@
               80.1
             ]
           ]
-        }
+        },
+        "open": 84.69,
+        "close": 86.91,
+        "move_pct": 2.621324831739291,
+        "move_rs": 2.219999999999999,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "360ONE",
@@ -1129,7 +1147,13 @@
             "high": 24.5,
             "retested": false
           }
-        }
+        },
+        "open": 1125.0,
+        "close": 1145.0,
+        "move_pct": 1.777777777777767,
+        "move_rs": 20.0,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "ASIANPAINT",
@@ -1408,7 +1432,13 @@
               77.3
             ]
           ]
-        }
+        },
+        "open": 2488.0,
+        "close": 2546.0,
+        "move_pct": 2.331189710610926,
+        "move_rs": 58.0,
+        "hit": false,
+        "late": false
       }
     ]
   },

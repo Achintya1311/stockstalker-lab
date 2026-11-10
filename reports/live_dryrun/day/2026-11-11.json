@@ -1,0 +1,2223 @@
+{
+  "session": "2026-11-11",
+  "horizon": "day",
+  "asof": "2026-11-09",
+  "generated_at": "2026-11-10T10:34:54.608398+00:00",
+  "label": "provisional",
+  "disclaimer": "Model output in testing. Not investment advice or a recommendation. Not a SEBI-registered research analyst. Every pick is shown, including misses. Provisional strategy: it has not yet passed the lab's validation and test gates (SPEC section 6); train-year results alone do not count. No proven edge yet.",
+  "tables": {
+    "bullish": [],
+    "bearish": [
+      {
+        "symbol": "BANKBARODA",
+        "strategy": "e2a_a02_crowded@v1",
+        "reasoning": "E2A: A02 pick on a crowded move (OI rose). A02 extreme-day reversal (microstructure liquidity-overreaction literature): yesterday's move +2.61 sigma -> reversal score -2.6102 (bearish)",
+        "chart": {
+          "bars": [
+            [
+              55.9,
+              67.7,
+              50.7,
+              67.6
+            ],
+            [
+              68.7,
+              76.9,
+              64.3,
+              65.2
+            ],
+            [
+              71.2,
+              71.2,
+              60.6,
+              60.6
+            ],
+            [
+              63.8,
+              66.6,
+              48.7,
+              54.3
+            ],
+            [
+              53.7,
+              56.5,
+              46.6,
+              53.1
+            ],
+            [
+              53.2,
+              54.8,
+              45.0,
+              45.2
+            ],
+            [
+              48.0,
+              62.1,
+              47.5,
+              56.3
+            ],
+            [
+              49.1,
+              57.9,
+              45.8,
+              57.9
+            ],
+            [
+              57.9,
+              59.1,
+              40.0,
+              40.8
+            ],
+            [
+              42.5,
+              48.9,
+              39.6,
+              48.0
+            ],
+            [
+              43.6,
+              52.6,
+              38.9,
+              39.5
+            ],
+            [
+              43.5,
+              47.8,
+              38.3,
+              47.8
+            ],
+            [
+              44.9,
+              46.5,
+              40.2,
+              43.7
+            ],
+            [
+              43.7,
+              47.7,
+              40.8,
+              46.0
+            ],
+            [
+              42.3,
+              56.5,
+              42.3,
+              53.9
+            ],
+            [
+              46.4,
+              51.9,
+              44.1,
+              45.8
+            ],
+            [
+              46.6,
+              51.3,
+              45.2,
+              48.8
+            ],
+            [
+              48.0,
+              48.0,
+              24.4,
+              24.4
+            ],
+            [
+              24.4,
+              34.1,
+              12.8,
+              25.0
+            ],
+            [
+              33.5,
+              50.2,
+              33.2,
+              34.0
+            ],
+            [
+              32.3,
+              44.8,
+              30.8,
+              34.8
+            ],
+            [
+              42.1,
+              55.3,
+              38.3,
+              41.1
+            ],
+            [
+              41.8,
+              47.4,
+              37.9,
+              40.9
+            ],
+            [
+              37.9,
+              52.4,
+              32.8,
+              46.6
+            ],
+            [
+              46.6,
+              61.9,
+              41.9,
+              44.9
+            ],
+            [
+              47.3,
+              58.3,
+              46.6,
+              50.5
+            ],
+            [
+              56.7,
+              57.1,
+              42.9,
+              49.3
+            ],
+            [
+              47.2,
+              58.8,
+              44.1,
+              58.8
+            ],
+            [
+              50.9,
+              50.9,
+              28.5,
+              29.1
+            ],
+            [
+              29.4,
+              33.4,
+              17.1,
+              26.0
+            ],
+            [
+              28.8,
+              33.8,
+              24.7,
+              33.5
+            ],
+            [
+              29.4,
+              42.0,
+              24.2,
+              31.0
+            ],
+            [
+              28.1,
+              29.8,
+              6.1,
+              11.3
+            ],
+            [
+              5.5,
+              14.6,
+              0.0,
+              14.6
+            ],
+            [
+              11.3,
+              22.0,
+              11.3,
+              20.5
+            ],
+            [
+              12.9,
+              18.0,
+              10.7,
+              14.1
+            ],
+            [
+              14.1,
+              43.9,
+              14.1,
+              43.0
+            ],
+            [
+              43.6,
+              47.7,
+              33.9,
+              34.7
+            ],
+            [
+              48.2,
+              72.2,
+              48.2,
+              54.7
+            ],
+            [
+              60.3,
+              62.8,
+              45.3,
+              49.1
+            ],
+            [
+              49.1,
+              57.3,
+              44.1,
+              55.4
+            ],
+            [
+              66.4,
+              73.6,
+              57.9,
+              68.5
+            ],
+            [
+              57.8,
+              70.4,
+              53.8,
+              70.4
+            ],
+            [
+              70.0,
+              72.5,
+              64.9,
+              66.1
+            ],
+            [
+              66.1,
+              100.0,
+              64.2,
+              100.0
+            ]
+          ],
+          "zone": {
+            "side": "demand",
+            "from": 44,
+            "low": 64.9,
+            "high": 72.5,
+            "retested": false
+          }
+        }
+      },
+      {
+        "symbol": "INDIANB",
+        "strategy": "e2a_a02_crowded@v1",
+        "reasoning": "E2A: A02 pick on a crowded move (OI rose). A02 extreme-day reversal (microstructure liquidity-overreaction literature): yesterday's move +2.22 sigma -> reversal score -2.2169 (bearish)",
+        "chart": {
+          "bars": [
+            [
+              59.6,
+              66.0,
+              53.5,
+              62.2
+            ],
+            [
+              64.7,
+              81.1,
+              64.7,
+              68.9
+            ],
+            [
+              65.1,
+              71.4,
+              62.4,
+              62.8
+            ],
+            [
+              62.8,
+              65.4,
+              53.1,
+              55.8
+            ],
+            [
+              55.2,
+              55.5,
+              46.2,
+              49.4
+            ],
+            [
+              48.8,
+              54.0,
+              43.1,
+              47.2
+            ],
+            [
+              49.1,
+              56.1,
+              43.1,
+              47.1
+            ],
+            [
+              42.0,
+              49.3,
+              32.6,
+              45.1
+            ],
+            [
+              45.6,
+              49.1,
+              31.8,
+              33.8
+            ],
+            [
+              35.9,
+              42.6,
+              32.4,
+              35.9
+            ],
+            [
+              37.3,
+              47.0,
+              35.3,
+              36.3
+            ],
+            [
+              39.3,
+              41.9,
+              32.6,
+              35.8
+            ],
+            [
+              37.6,
+              42.4,
+              34.9,
+              36.6
+            ],
+            [
+              39.3,
+              43.3,
+              32.9,
+              36.5
+            ],
+            [
+              36.6,
+              43.9,
+              35.2,
+              37.3
+            ],
+            [
+              33.4,
+              36.1,
+              25.2,
+              29.2
+            ],
+            [
+              29.1,
+              33.1,
+              26.0,
+              30.5
+            ],
+            [
+              29.2,
+              30.8,
+              9.6,
+              10.6
+            ],
+            [
+              10.6,
+              14.8,
+              5.3,
+              5.7
+            ],
+            [
+              8.9,
+              18.8,
+              8.4,
+              12.9
+            ],
+            [
+              12.9,
+              16.0,
+              0.0,
+              4.3
+            ],
+            [
+              10.1,
+              21.0,
+              10.1,
+              15.7
+            ],
+            [
+              17.0,
+              21.7,
+              14.1,
+              17.7
+            ],
+            [
+              14.7,
+              32.6,
+              9.8,
+              28.0
+            ],
+            [
+              29.8,
+              30.5,
+              14.2,
+              14.2
+            ],
+            [
+              19.7,
+              30.2,
+              14.3,
+              29.0
+            ],
+            [
+              29.3,
+              32.4,
+              18.4,
+              18.4
+            ],
+            [
+              20.4,
+              37.0,
+              20.4,
+              37.0
+            ],
+            [
+              35.8,
+              43.0,
+              28.1,
+              42.3
+            ],
+            [
+              43.7,
+              46.8,
+              20.3,
+              32.6
+            ],
+            [
+              34.6,
+              54.0,
+              31.5,
+              45.5
+            ],
+            [
+              49.5,
+              60.6,
+              41.9,
+              48.8
+            ],
+            [
+              47.4,
+              48.4,
+              30.1,
+              34.0
+            ],
+            [
+              30.8,
+              33.4,
+              21.9,
+              29.2
+            ],
+            [
+              31.0,
+              38.0,
+              29.2,
+              35.9
+            ],
+            [
+              32.6,
+              36.3,
+              30.4,
+              35.8
+            ],
+            [
+              35.5,
+              53.9,
+              32.7,
+              52.2
+            ],
+            [
+              53.5,
+              60.0,
+              48.1,
+              53.2
+            ],
+            [
+              55.5,
+              59.0,
+              44.1,
+              53.0
+            ],
+            [
+              56.2,
+              56.2,
+              39.1,
+              42.5
+            ],
+            [
+              42.7,
+              49.1,
+              39.7,
+              45.4
+            ],
+            [
+              54.9,
+              77.1,
+              51.0,
+              71.2
+            ],
+            [
+              69.4,
+              77.9,
+              63.7,
+              77.9
+            ],
+            [
+              81.3,
+              81.3,
+              70.3,
+              73.0
+            ],
+            [
+              75.4,
+              100.0,
+              74.5,
+              99.3
+            ]
+          ],
+          "zone": {
+            "side": "demand",
+            "from": 44,
+            "low": 70.3,
+            "high": 81.3,
+            "retested": false
+          }
+        }
+      },
+      {
+        "symbol": "BANKINDIA",
+        "strategy": "e2a_a02_crowded@v1",
+        "reasoning": "E2A: A02 pick on a crowded move (OI rose). A02 extreme-day reversal (microstructure liquidity-overreaction literature): yesterday's move +2.13 sigma -> reversal score -2.1308 (bearish)",
+        "chart": {
+          "bars": [
+            [
+              81.3,
+              88.8,
+              76.2,
+              87.7
+            ],
+            [
+              91.0,
+              100.0,
+              85.3,
+              95.4
+            ],
+            [
+              94.6,
+              98.6,
+              91.8,
+              95.4
+            ],
+            [
+              95.4,
+              97.4,
+              81.1,
+              83.4
+            ],
+            [
+              83.5,
+              84.9,
+              74.2,
+              78.7
+            ],
+            [
+              76.8,
+              85.1,
+              74.5,
+              79.5
+            ],
+            [
+              80.5,
+              86.2,
+              75.3,
+              79.3
+            ],
+            [
+              75.3,
+              75.7,
+              64.3,
+              75.3
+            ],
+            [
+              75.3,
+              76.9,
+              63.2,
+              65.7
+            ],
+            [
+              67.3,
+              72.7,
+              62.6,
+              66.5
+            ],
+            [
+              66.9,
+              79.8,
+              66.9,
+              67.9
+            ],
+            [
+              70.4,
+              75.3,
+              67.3,
+              75.3
+            ],
+            [
+              72.2,
+              73.7,
+              68.1,
+              69.8
+            ],
+            [
+              69.3,
+              70.9,
+              63.3,
+              63.3
+            ],
+            [
+              66.2,
+              74.2,
+              65.2,
+              73.9
+            ],
+            [
+              68.3,
+              70.3,
+              63.7,
+              66.3
+            ],
+            [
+              65.6,
+              68.5,
+              63.7,
+              67.0
+            ],
+            [
+              65.2,
+              65.2,
+              32.3,
+              35.1
+            ],
+            [
+              35.1,
+              42.5,
+              29.3,
+              35.6
+            ],
+            [
+              38.7,
+              46.1,
+              36.1,
+              36.1
+            ],
+            [
+              35.1,
+              39.6,
+              22.0,
+              33.0
+            ],
+            [
+              43.5,
+              60.3,
+              43.1,
+              49.2
+            ],
+            [
+              48.8,
+              50.1,
+              41.6,
+              43.8
+            ],
+            [
+              45.5,
+              56.0,
+              36.2,
+              49.4
+            ],
+            [
+              51.2,
+              57.2,
+              42.7,
+              44.6
+            ],
+            [
+              47.2,
+              54.8,
+              43.5,
+              53.0
+            ],
+            [
+              55.0,
+              57.4,
+              43.6,
+              48.8
+            ],
+            [
+              45.6,
+              56.5,
+              43.3,
+              52.5
+            ],
+            [
+              51.6,
+              59.6,
+              48.0,
+              53.1
+            ],
+            [
+              53.1,
+              54.3,
+              29.8,
+              36.7
+            ],
+            [
+              39.9,
+              46.1,
+              38.1,
+              44.6
+            ],
+            [
+              47.0,
+              59.0,
+              40.3,
+              49.5
+            ],
+            [
+              49.5,
+              51.5,
+              26.0,
+              29.0
+            ],
+            [
+              0.1,
+              24.0,
+              0.0,
+              10.6
+            ],
+            [
+              13.2,
+              33.0,
+              12.8,
+              33.0
+            ],
+            [
+              32.4,
+              38.3,
+              24.5,
+              36.5
+            ],
+            [
+              36.5,
+              49.8,
+              34.9,
+              47.5
+            ],
+            [
+              45.1,
+              50.4,
+              32.2,
+              36.3
+            ],
+            [
+              36.5,
+              47.3,
+              36.5,
+              42.4
+            ],
+            [
+              45.1,
+              46.7,
+              32.9,
+              37.6
+            ],
+            [
+              39.3,
+              45.9,
+              36.1,
+              40.4
+            ],
+            [
+              52.0,
+              60.5,
+              48.5,
+              60.5
+            ],
+            [
+              56.6,
+              59.2,
+              47.1,
+              58.8
+            ],
+            [
+              60.5,
+              62.1,
+              57.5,
+              59.4
+            ],
+            [
+              60.5,
+              84.2,
+              59.5,
+              84.2
+            ]
+          ],
+          "zone": {
+            "side": "demand",
+            "from": 44,
+            "low": 57.5,
+            "high": 62.1,
+            "retested": false
+          }
+        }
+      }
+    ]
+  },
+  "experiments": {
+    "bullish": "t04-connors-rsi2-day",
+    "bearish": "e2a-day"
+  },
+  "xray": {
+    "asof": "2026-11-09",
+    "bullish_strategy": "t04_connors_rsi2@v1",
+    "bearish_strategy": "e2a_a02_crowded@v1",
+    "n": 217,
+    "stocks": [
+      {
+        "s": "360ONE",
+        "b": null,
+        "d": null,
+        "m": 0.22
+      },
+      {
+        "s": "ABB",
+        "b": null,
+        "d": null,
+        "m": 0.77
+      },
+      {
+        "s": "ABCAPITAL",
+        "b": null,
+        "d": null,
+        "m": 0.66
+      },
+      {
+        "s": "ADANIENSOL",
+        "b": null,
+        "d": null,
+        "m": -0.74
+      },
+      {
+        "s": "ADANIENT",
+        "b": null,
+        "d": null,
+        "m": -1.3
+      },
+      {
+        "s": "ADANIGREEN",
+        "b": null,
+        "d": null,
+        "m": 2.26
+      },
+      {
+        "s": "ADANIPORTS",
+        "b": null,
+        "d": null,
+        "m": 0.04
+      },
+      {
+        "s": "ADANIPOWER",
+        "b": null,
+        "d": null,
+        "m": 0.49
+      },
+      {
+        "s": "ALKEM",
+        "b": null,
+        "d": null,
+        "m": 1.49
+      },
+      {
+        "s": "AMBER",
+        "b": null,
+        "d": null,
+        "m": -1.74
+      },
+      {
+        "s": "AMBUJACEM",
+        "b": null,
+        "d": null,
+        "m": -1.55
+      },
+      {
+        "s": "ANANDRATHI",
+        "b": null,
+        "d": null,
+        "m": -0.68
+      },
+      {
+        "s": "ANGELONE",
+        "b": null,
+        "d": null,
+        "m": 1.55
+      },
+      {
+        "s": "APLAPOLLO",
+        "b": null,
+        "d": null,
+        "m": -0.26
+      },
+      {
+        "s": "APOLLOHOSP",
+        "b": null,
+        "d": null,
+        "m": 0.59
+      },
+      {
+        "s": "ASHOKLEY",
+        "b": null,
+        "d": null,
+        "m": -1.76
+      },
+      {
+        "s": "ASIANPAINT",
+        "b": null,
+        "d": null,
+        "m": -0.78
+      },
+      {
+        "s": "ASTRAL",
+        "b": null,
+        "d": null,
+        "m": 0.89
+      },
+      {
+        "s": "ATHERENERG",
+        "b": null,
+        "d": null,
+        "m": 2.07
+      },
+      {
+        "s": "AUBANK",
+        "b": null,
+        "d": null,
+        "m": 0.42
+      },
+      {
+        "s": "AUROPHARMA",
+        "b": null,
+        "d": null,
+        "m": 2.84
+      },
+      {
+        "s": "AXISBANK",
+        "b": null,
+        "d": null,
+        "m": -0.33
+      },
+      {
+        "s": "BAJAJ-AUTO",
+        "b": null,
+        "d": null,
+        "m": 0.62
+      },
+      {
+        "s": "BAJAJFINSV",
+        "b": null,
+        "d": null,
+        "m": -1.03
+      },
+      {
+        "s": "BAJFINANCE",
+        "b": null,
+        "d": null,
+        "m": -1.97
+      },
+      {
+        "s": "BANDHANBNK",
+        "b": null,
+        "d": null,
+        "m": 1.79
+      },
+      {
+        "s": "BANKBARODA",
+        "b": null,
+        "d": 100,
+        "m": 4.46
+      },
+      {
+        "s": "BANKINDIA",
+        "b": null,
+        "d": 33,
+        "m": 4.32
+      },
+      {
+        "s": "BDL",
+        "b": null,
+        "d": null,
+        "m": 3.8
+      },
+      {
+        "s": "BEL",
+        "b": null,
+        "d": null,
+        "m": -0.99
+      },
+      {
+        "s": "BHARATFORG",
+        "b": null,
+        "d": null,
+        "m": -0.78
+      },
+      {
+        "s": "BHARTIARTL",
+        "b": null,
+        "d": null,
+        "m": -0.67
+      },
+      {
+        "s": "BHEL",
+        "b": null,
+        "d": null,
+        "m": 0.58
+      },
+      {
+        "s": "BIOCON",
+        "b": null,
+        "d": null,
+        "m": 0.89
+      },
+      {
+        "s": "BLUESTARCO",
+        "b": null,
+        "d": null,
+        "m": 0.35
+      },
+      {
+        "s": "BOSCHLTD",
+        "b": null,
+        "d": null,
+        "m": -2.81
+      },
+      {
+        "s": "BPCL",
+        "b": null,
+        "d": null,
+        "m": -0.54
+      },
+      {
+        "s": "BRITANNIA",
+        "b": null,
+        "d": null,
+        "m": 0.25
+      },
+      {
+        "s": "BSE",
+        "b": null,
+        "d": null,
+        "m": 0.44
+      },
+      {
+        "s": "CAMS",
+        "b": null,
+        "d": null,
+        "m": -0.68
+      },
+      {
+        "s": "CANBK",
+        "b": null,
+        "d": null,
+        "m": 3.72
+      },
+      {
+        "s": "CDSL",
+        "b": null,
+        "d": null,
+        "m": 0.63
+      },
+      {
+        "s": "CGPOWER",
+        "b": null,
+        "d": null,
+        "m": 1.65
+      },
+      {
+        "s": "CHOLAFIN",
+        "b": null,
+        "d": null,
+        "m": 0.6
+      },
+      {
+        "s": "CIPLA",
+        "b": null,
+        "d": null,
+        "m": -0.3
+      },
+      {
+        "s": "COALINDIA",
+        "b": null,
+        "d": null,
+        "m": -0.37
+      },
+      {
+        "s": "COCHINSHIP",
+        "b": null,
+        "d": null,
+        "m": 3.91
+      },
+      {
+        "s": "COFORGE",
+        "b": null,
+        "d": null,
+        "m": -0.73
+      },
+      {
+        "s": "COLPAL",
+        "b": null,
+        "d": null,
+        "m": 0.13
+      },
+      {
+        "s": "CONCOR",
+        "b": null,
+        "d": null,
+        "m": 0.35
+      },
+      {
+        "s": "COROMANDEL",
+        "b": null,
+        "d": null,
+        "m": 2.69
+      },
+      {
+        "s": "CROMPTON",
+        "b": null,
+        "d": null,
+        "m": 0.41
+      },
+      {
+        "s": "CUB",
+        "b": null,
+        "d": null,
+        "m": 1.95
+      },
+      {
+        "s": "CUMMINSIND",
+        "b": null,
+        "d": null,
+        "m": 0.49
+      },
+      {
+        "s": "DABUR",
+        "b": null,
+        "d": null,
+        "m": -1.39
+      },
+      {
+        "s": "DATAPATTNS",
+        "b": null,
+        "d": null,
+        "m": 9.97
+      },
+      {
+        "s": "DELHIVERY",
+        "b": null,
+        "d": null,
+        "m": 1.09
+      },
+      {
+        "s": "DIVISLAB",
+        "b": null,
+        "d": null,
+        "m": 4.22
+      },
+      {
+        "s": "DIXON",
+        "b": null,
+        "d": null,
+        "m": -0.21
+      },
+      {
+        "s": "DLF",
+        "b": null,
+        "d": null,
+        "m": 0.8
+      },
+      {
+        "s": "DMART",
+        "b": null,
+        "d": null,
+        "m": 0.93
+      },
+      {
+        "s": "DRREDDY",
+        "b": null,
+        "d": null,
+        "m": 0.73
+      },
+      {
+        "s": "EICHERMOT",
+        "b": null,
+        "d": null,
+        "m": -0.29
+      },
+      {
+        "s": "ENRIN",
+        "b": null,
+        "d": null,
+        "m": -0.64
+      },
+      {
+        "s": "ETERNAL",
+        "b": null,
+        "d": null,
+        "m": -0.56
+      },
+      {
+        "s": "FEDERALBNK",
+        "b": null,
+        "d": null,
+        "m": 2.2
+      },
+      {
+        "s": "FORCEMOT",
+        "b": null,
+        "d": null,
+        "m": -0.85
+      },
+      {
+        "s": "FORTIS",
+        "b": null,
+        "d": null,
+        "m": 0.38
+      },
+      {
+        "s": "GAIL",
+        "b": null,
+        "d": null,
+        "m": 1.78
+      },
+      {
+        "s": "GLENMARK",
+        "b": null,
+        "d": null,
+        "m": 3.13
+      },
+      {
+        "s": "GMRAIRPORT",
+        "b": null,
+        "d": null,
+        "m": 0.71
+      },
+      {
+        "s": "GODFRYPHLP",
+        "b": null,
+        "d": null,
+        "m": -1.94
+      },
+      {
+        "s": "GODREJCP",
+        "b": null,
+        "d": null,
+        "m": -0.25
+      },
+      {
+        "s": "GODREJPROP",
+        "b": null,
+        "d": null,
+        "m": 0.59
+      },
+      {
+        "s": "GRASIM",
+        "b": null,
+        "d": null,
+        "m": -1.07
+      },
+      {
+        "s": "GVT&D",
+        "b": null,
+        "d": null,
+        "m": 0.89
+      },
+      {
+        "s": "HAL",
+        "b": null,
+        "d": null,
+        "m": 0.28
+      },
+      {
+        "s": "HAVELLS",
+        "b": null,
+        "d": null,
+        "m": 2.79
+      },
+      {
+        "s": "HCLTECH",
+        "b": null,
+        "d": null,
+        "m": -1.75
+      },
+      {
+        "s": "HDFCAMC",
+        "b": null,
+        "d": null,
+        "m": -0.92
+      },
+      {
+        "s": "HDFCBANK",
+        "b": null,
+        "d": null,
+        "m": 0.14
+      },
+      {
+        "s": "HDFCLIFE",
+        "b": null,
+        "d": null,
+        "m": -0.15
+      },
+      {
+        "s": "HEROMOTOCO",
+        "b": null,
+        "d": null,
+        "m": -0.96
+      },
+      {
+        "s": "HINDALCO",
+        "b": null,
+        "d": null,
+        "m": 1.28
+      },
+      {
+        "s": "HINDPETRO",
+        "b": null,
+        "d": null,
+        "m": -0.06
+      },
+      {
+        "s": "HINDUNILVR",
+        "b": null,
+        "d": null,
+        "m": -0.49
+      },
+      {
+        "s": "HINDZINC",
+        "b": null,
+        "d": null,
+        "m": 0.87
+      },
+      {
+        "s": "HYUNDAI",
+        "b": null,
+        "d": null,
+        "m": -1.22
+      },
+      {
+        "s": "ICICIBANK",
+        "b": null,
+        "d": null,
+        "m": 0.76
+      },
+      {
+        "s": "ICICIGI",
+        "b": null,
+        "d": null,
+        "m": 0.86
+      },
+      {
+        "s": "IDEA",
+        "b": null,
+        "d": null,
+        "m": -1.09
+      },
+      {
+        "s": "IDFCFIRSTB",
+        "b": null,
+        "d": null,
+        "m": 1.13
+      },
+      {
+        "s": "IEX",
+        "b": null,
+        "d": null,
+        "m": 1.57
+      },
+      {
+        "s": "INDHOTEL",
+        "b": null,
+        "d": null,
+        "m": 0.3
+      },
+      {
+        "s": "INDIANB",
+        "b": null,
+        "d": 67,
+        "m": 3.93
+      },
+      {
+        "s": "INDIGO",
+        "b": null,
+        "d": null,
+        "m": 0.24
+      },
+      {
+        "s": "INDUSINDBK",
+        "b": null,
+        "d": null,
+        "m": -0.89
+      },
+      {
+        "s": "INDUSTOWER",
+        "b": null,
+        "d": null,
+        "m": -0.05
+      },
+      {
+        "s": "INFY",
+        "b": null,
+        "d": null,
+        "m": -1.18
+      },
+      {
+        "s": "INOXWIND",
+        "b": null,
+        "d": null,
+        "m": 1.82
+      },
+      {
+        "s": "IOC",
+        "b": null,
+        "d": null,
+        "m": 0.85
+      },
+      {
+        "s": "IREDA",
+        "b": null,
+        "d": null,
+        "m": 7.19
+      },
+      {
+        "s": "IRFC",
+        "b": null,
+        "d": null,
+        "m": 4.0
+      },
+      {
+        "s": "ITC",
+        "b": null,
+        "d": null,
+        "m": -1.64
+      },
+      {
+        "s": "JINDALSTEL",
+        "b": null,
+        "d": null,
+        "m": -1.38
+      },
+      {
+        "s": "JIOFIN",
+        "b": null,
+        "d": null,
+        "m": 0.0
+      },
+      {
+        "s": "JSWENERGY",
+        "b": null,
+        "d": null,
+        "m": -0.68
+      },
+      {
+        "s": "JSWSTEEL",
+        "b": null,
+        "d": null,
+        "m": -0.3
+      },
+      {
+        "s": "JUBLFOOD",
+        "b": null,
+        "d": null,
+        "m": -5.62
+      },
+      {
+        "s": "KALYANKJIL",
+        "b": null,
+        "d": null,
+        "m": 2.69
+      },
+      {
+        "s": "KARURVYSYA",
+        "b": null,
+        "d": null,
+        "m": 0.53
+      },
+      {
+        "s": "KAYNES",
+        "b": null,
+        "d": null,
+        "m": 1.13
+      },
+      {
+        "s": "KEI",
+        "b": null,
+        "d": null,
+        "m": -0.97
+      },
+      {
+        "s": "KFINTECH",
+        "b": null,
+        "d": null,
+        "m": -0.05
+      },
+      {
+        "s": "KOTAKBANK",
+        "b": null,
+        "d": null,
+        "m": -0.59
+      },
+      {
+        "s": "KPITTECH",
+        "b": null,
+        "d": null,
+        "m": -0.28
+      },
+      {
+        "s": "LAURUSLABS",
+        "b": null,
+        "d": null,
+        "m": 4.36
+      },
+      {
+        "s": "LICHSGFIN",
+        "b": null,
+        "d": null,
+        "m": 2.07
+      },
+      {
+        "s": "LICI",
+        "b": null,
+        "d": null,
+        "m": 0.54
+      },
+      {
+        "s": "LODHA",
+        "b": null,
+        "d": null,
+        "m": 1.93
+      },
+      {
+        "s": "LT",
+        "b": null,
+        "d": null,
+        "m": 0.97
+      },
+      {
+        "s": "LTF",
+        "b": null,
+        "d": null,
+        "m": -0.04
+      },
+      {
+        "s": "LTM",
+        "b": null,
+        "d": null,
+        "m": -0.73
+      },
+      {
+        "s": "LUPIN",
+        "b": null,
+        "d": null,
+        "m": 1.38
+      },
+      {
+        "s": "M&M",
+        "b": null,
+        "d": null,
+        "m": 0.38
+      },
+      {
+        "s": "MAHABANK",
+        "b": null,
+        "d": null,
+        "m": 1.95
+      },
+      {
+        "s": "MANAPPURAM",
+        "b": null,
+        "d": null,
+        "m": -0.69
+      },
+      {
+        "s": "MANKIND",
+        "b": null,
+        "d": null,
+        "m": 2.63
+      },
+      {
+        "s": "MARICO",
+        "b": null,
+        "d": null,
+        "m": 0.51
+      },
+      {
+        "s": "MARUTI",
+        "b": null,
+        "d": null,
+        "m": 0.88
+      },
+      {
+        "s": "MAXHEALTH",
+        "b": null,
+        "d": null,
+        "m": -1.76
+      },
+      {
+        "s": "MAZDOCK",
+        "b": null,
+        "d": null,
+        "m": 0.7
+      },
+      {
+        "s": "MCX",
+        "b": null,
+        "d": null,
+        "m": -0.34
+      },
+      {
+        "s": "MFSL",
+        "b": null,
+        "d": null,
+        "m": -2.14
+      },
+      {
+        "s": "MOTHERSON",
+        "b": null,
+        "d": null,
+        "m": 1.19
+      },
+      {
+        "s": "MOTILALOFS",
+        "b": null,
+        "d": null,
+        "m": 0.28
+      },
+      {
+        "s": "MPHASIS",
+        "b": null,
+        "d": null,
+        "m": -2.2
+      },
+      {
+        "s": "MUTHOOTFIN",
+        "b": null,
+        "d": null,
+        "m": 0.99
+      },
+      {
+        "s": "NAM-INDIA",
+        "b": null,
+        "d": null,
+        "m": -0.19
+      },
+      {
+        "s": "NATIONALUM",
+        "b": null,
+        "d": null,
+        "m": 0.3
+      },
+      {
+        "s": "NAUKRI",
+        "b": null,
+        "d": null,
+        "m": 0.68
+      },
+      {
+        "s": "NAVINFLUOR",
+        "b": null,
+        "d": null,
+        "m": 0.55
+      },
+      {
+        "s": "NBCC",
+        "b": null,
+        "d": null,
+        "m": 2.42
+      },
+      {
+        "s": "NESTLEIND",
+        "b": null,
+        "d": null,
+        "m": 1.91
+      },
+      {
+        "s": "NHPC",
+        "b": null,
+        "d": null,
+        "m": -1.12
+      },
+      {
+        "s": "NMDC",
+        "b": null,
+        "d": null,
+        "m": 0.49
+      },
+      {
+        "s": "NTPC",
+        "b": null,
+        "d": null,
+        "m": 1.75
+      },
+      {
+        "s": "NYKAA",
+        "b": null,
+        "d": null,
+        "m": 2.48
+      },
+      {
+        "s": "OBEROIRLTY",
+        "b": null,
+        "d": null,
+        "m": 2.6
+      },
+      {
+        "s": "OFSS",
+        "b": null,
+        "d": null,
+        "m": -1.0
+      },
+      {
+        "s": "OIL",
+        "b": null,
+        "d": null,
+        "m": -0.97
+      },
+      {
+        "s": "ONGC",
+        "b": null,
+        "d": null,
+        "m": -1.06
+      },
+      {
+        "s": "PAGEIND",
+        "b": null,
+        "d": null,
+        "m": 1.73
+      },
+      {
+        "s": "PATANJALI",
+        "b": null,
+        "d": null,
+        "m": 3.37
+      },
+      {
+        "s": "PAYTM",
+        "b": null,
+        "d": null,
+        "m": -0.72
+      },
+      {
+        "s": "PERSISTENT",
+        "b": null,
+        "d": null,
+        "m": 0.67
+      },
+      {
+        "s": "PETRONET",
+        "b": null,
+        "d": null,
+        "m": 2.05
+      },
+      {
+        "s": "PFC",
+        "b": null,
+        "d": null,
+        "m": 1.88
+      },
+      {
+        "s": "PGEL",
+        "b": null,
+        "d": null,
+        "m": 3.19
+      },
+      {
+        "s": "PHOENIXLTD",
+        "b": null,
+        "d": null,
+        "m": 0.69
+      },
+      {
+        "s": "PIDILITIND",
+        "b": null,
+        "d": null,
+        "m": 0.67
+      },
+      {
+        "s": "PIIND",
+        "b": null,
+        "d": null,
+        "m": -1.61
+      },
+      {
+        "s": "PNB",
+        "b": null,
+        "d": null,
+        "m": 4.91
+      },
+      {
+        "s": "PNBHOUSING",
+        "b": null,
+        "d": null,
+        "m": 1.37
+      },
+      {
+        "s": "POLICYBZR",
+        "b": null,
+        "d": null,
+        "m": -1.6
+      },
+      {
+        "s": "POLYCAB",
+        "b": null,
+        "d": null,
+        "m": -0.22
+      },
+      {
+        "s": "POWERGRID",
+        "b": null,
+        "d": null,
+        "m": -1.17
+      },
+      {
+        "s": "POWERINDIA",
+        "b": null,
+        "d": null,
+        "m": 0.61
+      },
+      {
+        "s": "PREMIERENE",
+        "b": null,
+        "d": null,
+        "m": -0.05
+      },
+      {
+        "s": "PRESTIGE",
+        "b": null,
+        "d": null,
+        "m": -0.4
+      },
+      {
+        "s": "RADICO",
+        "b": null,
+        "d": null,
+        "m": 2.12
+      },
+      {
+        "s": "RBLBANK",
+        "b": null,
+        "d": null,
+        "m": 0.32
+      },
+      {
+        "s": "RECLTD",
+        "b": null,
+        "d": null,
+        "m": 1.77
+      },
+      {
+        "s": "RELIANCE",
+        "b": null,
+        "d": null,
+        "m": 0.56
+      },
+      {
+        "s": "RVNL",
+        "b": null,
+        "d": null,
+        "m": 3.44
+      },
+      {
+        "s": "SAGILITY",
+        "b": null,
+        "d": null,
+        "m": 1.82
+      },
+      {
+        "s": "SAIL",
+        "b": null,
+        "d": null,
+        "m": -1.52
+      },
+      {
+        "s": "SBICARD",
+        "b": null,
+        "d": null,
+        "m": 1.23
+      },
+      {
+        "s": "SBILIFE",
+        "b": null,
+        "d": null,
+        "m": -0.85
+      },
+      {
+        "s": "SBIN",
+        "b": null,
+        "d": null,
+        "m": 1.17
+      },
+      {
+        "s": "SHREECEM",
+        "b": null,
+        "d": null,
+        "m": -1.11
+      },
+      {
+        "s": "SHRIRAMFIN",
+        "b": null,
+        "d": null,
+        "m": -0.41
+      },
+      {
+        "s": "SIEMENS",
+        "b": null,
+        "d": null,
+        "m": 0.46
+      },
+      {
+        "s": "SOLARINDS",
+        "b": null,
+        "d": null,
+        "m": 2.18
+      },
+      {
+        "s": "SONACOMS",
+        "b": null,
+        "d": null,
+        "m": 1.66
+      },
+      {
+        "s": "SRF",
+        "b": null,
+        "d": null,
+        "m": -0.42
+      },
+      {
+        "s": "SUNPHARMA",
+        "b": null,
+        "d": null,
+        "m": -0.55
+      },
+      {
+        "s": "SUPREMEIND",
+        "b": null,
+        "d": null,
+        "m": 3.34
+      },
+      {
+        "s": "SUZLON",
+        "b": null,
+        "d": null,
+        "m": -0.36
+      },
+      {
+        "s": "SWIGGY",
+        "b": null,
+        "d": null,
+        "m": -2.6
+      },
+      {
+        "s": "SYRMA",
+        "b": null,
+        "d": null,
+        "m": -1.88
+      },
+      {
+        "s": "TATACONSUM",
+        "b": null,
+        "d": null,
+        "m": -0.55
+      },
+      {
+        "s": "TATAELXSI",
+        "b": null,
+        "d": null,
+        "m": 0.51
+      },
+      {
+        "s": "TATAPOWER",
+        "b": null,
+        "d": null,
+        "m": 1.42
+      },
+      {
+        "s": "TATASTEEL",
+        "b": null,
+        "d": null,
+        "m": -3.97
+      },
+      {
+        "s": "TCS",
+        "b": null,
+        "d": null,
+        "m": -0.55
+      },
+      {
+        "s": "TECHM",
+        "b": null,
+        "d": null,
+        "m": -0.82
+      },
+      {
+        "s": "TIINDIA",
+        "b": null,
+        "d": null,
+        "m": 1.87
+      },
+      {
+        "s": "TITAN",
+        "b": null,
+        "d": null,
+        "m": 0.09
+      },
+      {
+        "s": "TMPV",
+        "b": null,
+        "d": null,
+        "m": -0.2
+      },
+      {
+        "s": "TORNTPHARM",
+        "b": null,
+        "d": null,
+        "m": -0.68
+      },
+      {
+        "s": "TRENT",
+        "b": null,
+        "d": null,
+        "m": 1.11
+      },
+      {
+        "s": "TVSMOTOR",
+        "b": null,
+        "d": null,
+        "m": 0.59
+      },
+      {
+        "s": "UJJIVANSFB",
+        "b": null,
+        "d": null,
+        "m": 0.48
+      },
+      {
+        "s": "ULTRACEMCO",
+        "b": null,
+        "d": null,
+        "m": -1.66
+      },
+      {
+        "s": "UNIONBANK",
+        "b": null,
+        "d": null,
+        "m": 5.35
+      },
+      {
+        "s": "UNITDSPR",
+        "b": null,
+        "d": null,
+        "m": 1.44
+      },
+      {
+        "s": "UNOMINDA",
+        "b": null,
+        "d": null,
+        "m": 3.11
+      },
+      {
+        "s": "UPL",
+        "b": null,
+        "d": null,
+        "m": 1.44
+      },
+      {
+        "s": "VBL",
+        "b": null,
+        "d": null,
+        "m": -0.68
+      },
+      {
+        "s": "VEDL",
+        "b": null,
+        "d": null,
+        "m": -0.38
+      },
+      {
+        "s": "VMM",
+        "b": null,
+        "d": null,
+        "m": -1.36
+      },
+      {
+        "s": "VOLTAS",
+        "b": null,
+        "d": null,
+        "m": 2.84
+      },
+      {
+        "s": "WAAREEENER",
+        "b": null,
+        "d": null,
+        "m": 0.21
+      },
+      {
+        "s": "WIPRO",
+        "b": null,
+        "d": null,
+        "m": 1.02
+      },
+      {
+        "s": "YESBANK",
+        "b": null,
+        "d": null,
+        "m": -1.96
+      },
+      {
+        "s": "ZYDUSLIFE",
+        "b": null,
+        "d": null,
+        "m": 1.32
+      }
+    ],
+    "breadth": {
+      "edges_pct": [
+        -4.0,
+        -3.0,
+        -2.0,
+        -1.5,
+        -1.0,
+        -0.5,
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        3.0,
+        4.0
+      ],
+      "counts": [
+        1,
+        1,
+        4,
+        14,
+        13,
+        30,
+        25,
+        26,
+        35,
+        16,
+        17,
+        16,
+        11,
+        8
+      ],
+      "up": 128,
+      "down": 88,
+      "n": 217
+    },
+    "bullish_experiment": "t04-connors-rsi2-day",
+    "bearish_experiment": "e2a-day"
+  }
+}
