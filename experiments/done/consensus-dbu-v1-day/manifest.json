@@ -1,0 +1,9 @@
+{
+  "id": "consensus-dbu-v1-day",
+  "strategy": "strategies.consensus_dbu_v1",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 151355,
+  "n_dates": 1484,
+  "pick_log_sha256": "b739cef1cc9973d02f165d2ed90bfdd1e07a14793f64edfe6a1fadd98c1dd502"
+}

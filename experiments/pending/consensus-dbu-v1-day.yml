@@ -1,7 +1,0 @@
-id: consensus-dbu-v1-day
-strategy: strategies.consensus_dbu_v1
-split: train
-horizon: day
-dates:
-  start: 2015-01-01
-  end: 2020-12-31

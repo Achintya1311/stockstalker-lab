@@ -253,3 +253,4 @@ f11-w12-day-bullish,2026-11-06T17:22:10.542127+00:00,strategies.f11_w12,,day,bul
 f11-w12-day-bearish,2026-11-06T17:22:10.542219+00:00,strategies.f11_w12,,day,bearish,train,0.0434670446406566,7.6898390111840484,n/a,"train, top selection; recorded by engine/experiment_report.py"
 f11-w15-day-bullish,2026-11-06T17:22:10.542398+00:00,strategies.f11_w15,,day,bullish,train,0.012473842740374538,2.200386580166925,n/a,"train, top selection; recorded by engine/experiment_report.py"
 f11-w15-day-bearish,2026-11-06T17:22:10.542487+00:00,strategies.f11_w15,,day,bearish,train,0.040740391607255094,7.2089923176257615,n/a,"train, top selection; recorded by engine/experiment_report.py"
+consensus-dbu-v1-day-bullish,2026-11-10T07:24:33.909590+00:00,strategies.consensus_dbu_v1,,day,bullish,train,0.031969411929195266,5.797380803806853,n/a,"train, top selection; recorded by engine/experiment_report.py"

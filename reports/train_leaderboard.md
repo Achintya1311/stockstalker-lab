@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 254. Gate 2's bar at that count: t >= 4.40.
+Trials recorded: 255. Gate 2's bar at that count: t >= 4.40.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -21,6 +21,7 @@ Trials recorded: 254. Gate 2's bar at that count: t >= 4.40.
 | f10-vol-ratio-reversal-day | day | bearish | 7335 | 58.17% | 54.54% | 3.64 | 6.32 | yes | -0.02 | 100.00% |  |
 | f06-trend-acceleration-day | day | bearish | 7292 | 57.97% | 54.54% | 3.35 | 5.96 | yes | -0.01 | 100.00% |  |
 | f02-volume-signed-reversal-day | day | bearish | 7335 | 57.79% | 54.54% | 3.26 | 5.86 | yes | 0.03 | 100.00% | candidate |
+| consensus-dbu-v1-day | day | bullish | 7335 | 48.15% | 44.96% | 3.20 | 5.80 | yes | -0.41 | 100.00% |  |
 | a02-extreme-day-reversal-day | day | bearish | 4641 | 58.54% | 54.48% | 4.34 | 5.24 | yes | -0.04 | 100.00% |  |
 | e1b-day | day | bearish | 4547 | 58.52% | 54.55% | 4.29 | 5.13 | yes | -0.04 | 100.00% |  |
 | t04-q06-fallback-day | day | bullish | 5621 | 48.87% | 44.94% | 3.85 | 5.12 | yes | -0.42 | 100.00% |  |
