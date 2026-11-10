@@ -5688,3 +5688,9 @@ dir +0.094%), bullish +0.16 (dir -0.60%). Every prediction held (F11 overlap 50.
 (+5.47) not met. Steadier than F11 (lowest year +4.10 vs +2.81, 2017 its best year) and twice F11's dir: the highest dir
 of any full-coverage day-bearish reading. No query (E2A bar +7.72). Next idea: E2A_F13_FB. Full pytest: 1392 passed, 4 skipped.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 2 (diagnose): F14 Alpha#24 trend-switched fade (`research/diagnostics/f14.md`). Day bullish +2.38 (interval +1.16 to
++3.56, 6/6, dir -0.52%, StepM superior), bearish +2.34 (interval +1.21 to +3.40, 5/6, dir +0.014%). All predictions held
+(T04 bullish overlap 19%; bearish five are the flat branch, median |score| 0.35). Both helps rules met; below T04's +3.37
+and E2A's +7.72, no query. Bullish = largest 3-session falls in a rising 100-session trend; 2-19% overlap with T04, Q06,
+T10-NR7. Next: pre-declared day-bullish consensus of T04, Q06, F14, T10-NR7. Docs only; suite unchanged (1392 passed).
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
