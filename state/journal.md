@@ -5677,3 +5677,14 @@ No roster, `config/live_source.json` or picks changes (window closed at 12:00 UT
 **Next:** diagnose F13-F17 (replay running since 15:30Z) and read the F11 window grid; AB decision on E2A_F11_FB's
 full-coverage table (`state/engine-issues.md`); check tonight's live tables for the W109 wording when T04 fires;
 next roster window Fri 13 Nov before 12:00 UTC.
+
+## 2026-11-10 05:43 UTC run (manual, AB's 5x request, up to 10 units; leases 22c1f56: diagnose, tune, discover, port)
+
+Mode A (B3 open, no BUILD_DONE), research during the build, train only. No leak alarms; no unresolved workflow
+failures (Live, Build dataset and Archive 5-minute bars green on 9 Nov). Tuesday: no roster or `config/live_source.json`
+change. E2A_F11_FB stays an open question for AB; E2A stays on day bearish.
+Unit 1 (diagnose): F13 Alpha#17 (`research/diagnostics/f13.md`). Day bearish +4.72 (interval +3.66 to +5.80, t 8.51, 6/6,
+dir +0.094%), bullish +0.16 (dir -0.60%). Every prediction held (F11 overlap 50.1%); helps rule met, improves-on-F11 bar
+(+5.47) not met. Steadier than F11 (lowest year +4.10 vs +2.81, 2017 its best year) and twice F11's dir: the highest dir
+of any full-coverage day-bearish reading. No query (E2A bar +7.72). Next idea: E2A_F13_FB. Full pytest: 1392 passed, 4 skipped.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
