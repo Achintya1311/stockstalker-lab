@@ -3,7 +3,9 @@
 Published as ranks and counts only, never prices (SPEC.md section 10): `b` is the stock's percentile among
 the names the day-bullish strategy scores bullish, `d` the same for the day-bearish strategy's bearish names,
 each null when that strategy does not score the stock. `breadth` counts the previous session's open-to-close
-moves across the eligible universe in fixed bins. Built from the same truncated history the picks use.
+moves across the eligible universe in fixed bins; `m` is that same move for each stock, in percent to two
+decimals (null when the stock has no bar), so a page can show a board of the market. Built from the same
+truncated history the picks use.
 """
 
 from __future__ import annotations
@@ -27,9 +29,14 @@ def _percentiles(scores: pd.Series, eligible: set[str], side: int) -> dict[str, 
     return {sym: int(round(v)) for sym, v in pct.items()}
 
 
-def breadth(history: pd.DataFrame, eligible: set[str]) -> dict:
+def last_moves(history: pd.DataFrame, eligible: set[str]) -> pd.Series:
+    """Each eligible stock's open-to-close move on its last bar, in percent, indexed by symbol."""
     last = history[history["symbol"].isin(eligible)].sort_values("date").groupby("symbol").tail(1)
-    moves = ((last["close"] / last["open"] - 1.0) * 100).dropna().to_numpy()
+    return ((last["close"] / last["open"] - 1.0) * 100).set_axis(last["symbol"].to_numpy()).dropna()
+
+
+def breadth(history: pd.DataFrame, eligible: set[str]) -> dict:
+    moves = last_moves(history, eligible).to_numpy()
     edges = [-np.inf, *BIN_EDGES, np.inf]
     counts, _ = np.histogram(moves, bins=edges)
     return {"edges_pct": BIN_EDGES, "counts": [int(c) for c in counts], "up": int((moves > 0).sum()), "down": int((moves < 0).sum()), "n": int(len(moves))}
@@ -41,6 +48,7 @@ def build_xray(dataset: pd.DataFrame, source: dict, session: str, asof: str) -> 
     bull_cfg, bear_cfg = source["tables"]["day_bullish"], source["tables"]["day_bearish"]
     bull = _percentiles(resolve_strategy(bull_cfg["strategy"]).score(history), eligible, 1)
     bear = _percentiles(resolve_strategy(bear_cfg["strategy"]).score(history), eligible, -1)
-    stocks = [{"s": sym, "b": bull.get(sym), "d": bear.get(sym)} for sym in sorted(eligible)]
+    moves = {sym: round(float(v), 2) for sym, v in last_moves(history, eligible).items() if np.isfinite(v)}
+    stocks = [{"s": sym, "b": bull.get(sym), "d": bear.get(sym), "m": moves.get(sym)} for sym in sorted(eligible)]
     return {"asof": asof, "bullish_strategy": bull_cfg["strategy"], "bearish_strategy": bear_cfg["strategy"],
             "n": len(stocks), "stocks": stocks, "breadth": breadth(history, eligible)}

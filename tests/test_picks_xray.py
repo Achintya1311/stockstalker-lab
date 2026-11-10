@@ -20,7 +20,18 @@ def test_xray_ranks_each_side_among_its_own_names_and_publishes_no_prices():
     assert set(by) == {"UP", "UP2", "DOWN", "FLAT"} and x["n"] == 4
     assert by["UP2"]["b"] == 100 and by["UP"]["b"] < by["UP2"]["b"]      # stronger trend ranks higher among bullish names
     assert by["DOWN"]["d"] == 100 and by["DOWN"]["b"] is None            # bearish name has no bullish rank
-    assert all(set(r) == {"s", "b", "d"} for r in x["stocks"])           # ranks only: no price fields
+    assert all(set(r) == {"s", "b", "d", "m"} for r in x["stocks"])      # ranks and a percent move only: no price fields
+
+
+def test_xray_move_is_the_last_open_to_close_percent_and_agrees_with_breadth():
+    ds, asof, session = _setup()
+    x = build_xray(ds, SOURCE, session, asof)
+    hist = ds[ds["date"] < session]
+    for r in x["stocks"]:
+        last = hist[hist["symbol"] == r["s"]].sort_values("date").iloc[-1]
+        assert r["m"] == round((last["close"] / last["open"] - 1.0) * 100, 2)
+    ms = [r["m"] for r in x["stocks"] if r["m"] is not None]
+    assert sum(m > 0 for m in ms) == x["breadth"]["up"] and sum(m < 0 for m in ms) == x["breadth"]["down"]
 
 
 def test_breadth_counts_every_eligible_stock_once_and_matches_up_down():
