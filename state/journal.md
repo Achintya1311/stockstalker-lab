@@ -5713,3 +5713,9 @@ by window 6/8/10/12/15: +3.80/+4.55/+4.47/+4.35/+4.07, dirs +0.027/+0.042/+0.047
 stability rule met across the whole grid; middle is 10, so F11 is unchanged. Flat plateau 8-12; E2A_F11_FB's fallback
 does not sit on a narrow optimum. Bullish flat at every window. 8 trials already recorded by the engine. Docs only.
 Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+Unit 7 (port, P2): CONSENSUS_DBU_V1, day-bullish consensus of T04, Q06, F14 and T10-NR7 (`cards/CONSENSUS_DBU_V1.yml`,
+`strategies/consensus_dbu_v1.py` using consensus_wb_v1's combine on negated readings, audit, 9 tests), day replay
+queued. Pre-declared: edge +1.5 to +3.5, dir -0.40% to -0.55%, coverage >= 99%, top-5 overlap with Q06 and F14 15-40%,
+T04 < 15%. Helps at >= +3.37 (T04) with interval above 0 and 5/6 years; coverage case noted at >= +2.37; query only at
+>= +5.36 train. Leases extended to 2026-11-10T07:40:23Z. Full pytest: 1402 passed, 4 skipped.
+Do order blocks help? Not tested here; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.

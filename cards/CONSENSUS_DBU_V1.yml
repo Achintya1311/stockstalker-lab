@@ -1,0 +1,41 @@
+source_url: ''
+author: lab-original (go-live track P2, state/queue.md; research/diagnostics/f14.md)
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-11-10'
+horizon: day
+claim_as_stated: 'Pre-registered on 10 Nov 2026 before the replay. Q06 and F14 read nearly every stock each date,
+  T04 and T10-NR7 only a few, so with abstention as neutral the top five should be stocks ranked high by both dense
+  members, nudged by the sparse ones. Prediction: day-bullish top-5 edge +1.5 to +3.5, directional move after costs
+  -0.40% to -0.55% (the 0.415% delivery cost), picks on at least 99% of train dates, top-5 overlap with Q06 and with
+  F14 each 15 to 40%, with T04 below 15%. Helps only if: edge at least +3.37 (T04, the best single member), 95%
+  interval above 0, at least 5 of 6 years positive. A coverage case is noted (not queried) if the edge is at least
+  +2.37 (T04 - 1) with interval above 0, 5 of 6 years and coverage at least 99%. A validation query is spent only if
+  train edge is at least +5.36, since the day-bullish table moves off T04 (released +4.36) only on a released edge
+  at least 1 point higher (SPEC.md section 10, AB''s edge-only bullish rule). Otherwise a null, and the day-bullish
+  consensus closes.'
+rules_plain: 'Day-bullish only. Members: T04 (RSI-2 oversold above the 200-day mean), Q06 (lower wick against upper
+  wick), F14 (largest 3-session fall in a rising 100-session trend) and T10-NR7 (narrowest range of 7 days with the
+  20/50 trend), the four day-bullish readings with interval above 0 and at least 4 of 6 years, 2-19% pairwise top-5
+  overlap. Per member, bullish strength percentile-ranked across the stocks it read that date; abstain = 0.5; mean
+  of four; stocks above 0.5 scored +2 x (mean - 0.5). Same rule as CONSENSUS_WB_V1 (imported) on negated readings.
+  No bearish picks.'
+default_params:
+  members: [t04_connors_rsi2, q06_wick_balance, f14_trend_switched_fade, t10_nr7_narrow_range]
+  abstain_as: 0.5
+  weights: equal
+data_needed: ohlcv
+testable_now: 'yes'
+source: 'state/queue.md P2; research/diagnostics/f14.md (What to try next)'
+link: ''
+prior_claim: 'Rank-averaging weak, unrelated signals often beats each member alone; the two earlier lab consensus
+  cards (week bearish, day bearish) did not beat their best member'
+red_flags:
+- Members chosen after seeing their train results; the consensus is its own trial and each member already is one.
+- Both earlier consensus cards landed below their best member, diluted by abstain-as-neutral; the same rule is kept
+  here so the three are comparable, not because it is expected to win.
+- T04_Q06_FB (+3.85 train) released -0.60 on validation; two of its members are here.
+- D01C (+2.54 train) left out because its validation answer was -1.05.
+- Ranking depends on which stocks are present that date (same caveat as O04).
+- Every bullish reading in the lab has a negative directional move after the delivery cost.
+- Train split only until a frozen version exists.
+status: 'queued 10 Nov 2026 (day); not yet replayed'
