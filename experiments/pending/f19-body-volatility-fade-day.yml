@@ -1,0 +1,7 @@
+id: f19-body-volatility-fade-day
+strategy: strategies.f19_body_volatility_fade
+split: train
+horizon: day
+dates:
+  start: 2015-01-01
+  end: 2020-12-31

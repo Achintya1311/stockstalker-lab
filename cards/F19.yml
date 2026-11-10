@@ -1,0 +1,27 @@
+source_url: "https://arxiv.org/abs/1601.00991"
+author: "Zura Kakushadze, 101 Formulaic Alphas (Wilmott 84, 2016), Alpha#18"
+license: "Formula re-implemented from the paper's text; no code copied (SPEC.md section 5)"
+published_on: "2016"
+claim_as_stated: >
+  `cards/catalog.csv` (X03): Alpha#18 = -rank((stddev(abs(close - open), 5) + (close - open)) +
+  correlation(close, open, 10)). A production WorldQuant alpha: a large up body after volatile bars,
+  with closes tracking opens, is faded. The paper reports no stand-alone hit rate.
+horizon: day
+rules_plain: >
+  Body = (close - open) of the raw bar in percent of its close. raw = 5-session std of |body| + the
+  last body + the 10-session correlation of the adjusted close with the adjusted open. Ranked among
+  the stocks with a future on the last date; score = median(rank) - rank. A large up body on top of
+  volatile bars bearish; a large down body after calm bars bullish.
+default_params:
+  vol: 5
+  corr: 10
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Kakushadze (2016) 101 Formulaic Alphas, Wilmott (X03)"
+link: "https://arxiv.org/abs/1601.00991"
+prior_claim: "WorldQuant production alpha; paper reports no stand-alone hit rate"
+red_flags:
+  - "Pre-declared before the replay (10 Nov 2026): in percent units the last body (often several %) dominates the sum, the body volatility adds up to about 1-2 and the correlation (mostly 0.7 to 1) shifts little, so this is close to an open-to-close one-day reversal. F01 (close near the bar's high read bullish) was wrong-way at -2.70 day bullish, so fading big up bodies should work on the bearish side; F01's bearish side (+0.17) suggests big down bodies do not bounce. Prediction: day bearish +1.0 to +4.0 with dir -0.10% to +0.10%; day bullish -1.5 to +1.5 with a negative dir; top-5 bearish overlap with A02 (close-to-close extreme day) 15 to 45% and with F11 10 to 35%. Helps, bearish (full SPEC 10 rule): +2.0, interval above 0, 4 of 6 years, positive dir; challenges E2A only above +7.72 train. Helps, bullish (AB's edge-only rule): +2.0, interval above 0, 4 of 6 years; challenges T04 only above +5.36 train (T04 released +4.36 plus 1)."
+  - "Unit choice: the paper's price units make a typical body about 1 for a large US stock; percent-of-close keeps that balance across NSE price levels. A different scaling would change which term leads."
+  - "The body is open-to-close of the last visible session, never the pick day's (the engine gives only up to the previous close)."
+status: "queued 10 Nov 2026 (day): see cards/F19.yml"

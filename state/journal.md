@@ -5733,3 +5733,12 @@ body volatility plus body, faded, day), F20 Alpha#35 (heavy trading, low bar lev
 week), F21 Alpha#37 (body reversal tilted by a 200-session body-to-close correlation, day), F22 Alpha#26 (turnover
 tracking new highs, faded, day; kept to close the price-volume correlation family). Not added: #2, #3, #22, #45, VWAP.
 Docs and catalog only.
+Unit 10 (port): F19 Alpha#18 intraday body volatility plus body, faded (`cards/F19.yml`,
+`strategies/f19_body_volatility_fade.py`, audit, 9 tests), day replay queued. Body in percent of the close so it sits on
+the correlation term's scale. Pre-declared: bearish +1.0 to +4.0 (dir -0.10% to +0.10%), bullish -1.5 to +1.5 (dir
+negative), top-5 bearish overlap with A02 15-45% and F11 10-35%. Full pytest: 1422 passed, 4 skipped. Leases removed.
+Do order blocks help? Not tested this run; unchanged: O01 beats O00 on 3 of 4 cells, clears the market line on none; O05 weekly bullish +1.90 is the only encouraging cell.
+No roster, `config/live_source.json` or picks changes (Tuesday). No holdout query (none of F13-F15 reaches its table's
+bar). Replay for CONSENSUS_DBU_V1 was in progress at 06:00Z; CONSENSUS_WB_V2 and F19 follow.
+**Next:** diagnose CONSENSUS_DBU_V1, CONSENSUS_WB_V2 and F19 as they land; port F18, F21, F20, F22; AB decision on
+E2A_F11_FB still open (`state/engine-issues.md`); next roster window Fri 13 Nov before 12:00 UTC.
