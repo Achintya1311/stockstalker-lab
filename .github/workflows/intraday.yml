@@ -2,6 +2,8 @@ name: Archive 5-minute bars
 # Yahoo keeps only the last 60 days of 5-minute bars, so this archives them daily. The bars live in the
 # Actions cache only (never committed or published, like the NSE files); only a coverage manifest is
 # committed. Running daily also keeps the cache entry from expiring (GitHub drops entries unused for 7 days).
+# The flow step turns the archive into percent-only per-stock paths for the desk (reports/flow); it may
+# fail without failing the archive.
 on:
   workflow_dispatch:
   schedule:
@@ -24,9 +26,12 @@ jobs:
         run: set -o pipefail; python3 scripts/fetch_intraday.py --store intraday/5m.parquet --manifest state/intraday_manifest.json 2>&1 | tee /tmp/intraday.log
       - uses: actions/cache/save@v4
         with: {path: intraday, key: 'intraday-5m-${{ github.run_id }}'}
-      - name: Commit the manifest only
+      - name: Build flow lines
+        continue-on-error: true
+        run: python3 scripts/build_flow.py --store intraday/5m.parquet --out reports/flow --keep 20 --sessions 3
+      - name: Commit the manifest and flow lines
         run: |
-          bash .github/push.sh "data: intraday manifest $(date -u +%F)" state/intraday_manifest.json
+          bash .github/push.sh "data: intraday manifest $(date -u +%F)" state/intraday_manifest.json reports/flow
       - name: Report failure where the routine can read it
         if: failure()
         run: bash .github/report_failure.sh intraday /tmp/intraday.log
