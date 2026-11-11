@@ -293,7 +293,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 264.4,
+        "close": 275.0,
+        "move_pct": 4.009077155824525,
+        "move_rs": 10.600000000000023,
+        "hit": false
       },
       {
         "symbol": "INDIANB",
@@ -580,7 +585,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 940.0,
+        "close": 935.4,
+        "move_pct": -0.4893617021276664,
+        "move_rs": -4.600000000000023,
+        "hit": true
       },
       {
         "symbol": "BANKINDIA",
@@ -867,7 +877,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 146.1,
+        "close": 150.6,
+        "move_pct": 3.0800821355236208,
+        "move_rs": 4.5,
+        "hit": false
       }
     ]
   },
