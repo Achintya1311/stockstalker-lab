@@ -15,6 +15,7 @@ import pandas as pd
 
 from engine.replay import truncate
 from picks.chart import chart_for
+from picks.tech import tech_for
 from engine.scoring import load_universe_config, universe_membership
 
 
@@ -62,7 +63,7 @@ def pick_table(
     n: int | None = None,
     exclude: frozenset[str] = frozenset(),
 ) -> list[dict]:
-    """One table's picks for `session`: `[{"symbol", "strategy", "reasoning", "chart"?}, ...]`.
+    """One table's picks for `session`: `[{"symbol", "strategy", "reasoning", "chart"?, "tech"?}, ...]`.
 
     `strategy` must expose `score(history) -> pd.Series` and
     `rules_fired(history, symbol) -> str` (SPEC.md section 5). Both are
@@ -88,6 +89,9 @@ def _picks(history: pd.DataFrame, strategy, strategy_id: str, chosen: pd.Series)
         chart = chart_for(history, symbol)
         if chart:
             pick["chart"] = chart
+        tech = tech_for(history, symbol)
+        if tech:
+            pick["tech"] = tech
         picks.append(pick)
     return picks
 
