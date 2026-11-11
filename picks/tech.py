@@ -13,6 +13,9 @@ Keys (any one is left out when the history is too short for it):
 - `ob_dist`: distance from the last close to the nearest edge of the order-block zone `strategies/ob_core.py`
   finds (the same zone the chart draws), as a share of the 20-session range; 0 when the close is inside it.
   `ob_side` says whether that zone is "demand" or "supply". Both are absent when there is no zone.
+
+Picks files are write-once, so `tech` appears from the next file written; the rehearsal file for
+2026-11-11 was deleted and rewritten by the Live dry run to carry it.
 """
 
 from __future__ import annotations
