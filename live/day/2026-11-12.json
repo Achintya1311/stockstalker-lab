@@ -318,7 +318,13 @@
           "range20": 68.9,
           "ob_dist": 0.07,
           "ob_side": "demand"
-        }
+        },
+        "open": 2017.5,
+        "close": 2034.0,
+        "move_pct": 0.8178438661710086,
+        "move_rs": 16.5,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "MPHASIS",
@@ -627,7 +633,13 @@
           "rsi_band": "neutral",
           "vol_x20": 0.8,
           "range20": 31.2
-        }
+        },
+        "open": 2380.0,
+        "close": 2410.0,
+        "move_pct": 1.2605042016806678,
+        "move_rs": 30.0,
+        "hit": true,
+        "late": false
       }
     ],
     "bearish": [
@@ -937,7 +949,13 @@
           "range20": 87.3,
           "ob_dist": 0.3,
           "ob_side": "demand"
-        }
+        },
+        "open": 675.0,
+        "close": 710.9,
+        "move_pct": 5.318518518518522,
+        "move_rs": 35.89999999999998,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "COROMANDEL",
@@ -1250,7 +1268,13 @@
           "range20": 84.2,
           "ob_dist": 0.36,
           "ob_side": "demand"
-        }
+        },
+        "open": 1990.0,
+        "close": 1992.0,
+        "move_pct": 0.10050251256281673,
+        "move_rs": 2.0,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "FORCEMOT",
@@ -1558,7 +1582,13 @@
           "range20": 94.7,
           "ob_dist": 0.19,
           "ob_side": "demand"
-        }
+        },
+        "open": 20000.0,
+        "close": 19836.0,
+        "move_pct": -0.8199999999999985,
+        "move_rs": -164.0,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "M&M",
@@ -1866,7 +1896,13 @@
           "range20": 100.0,
           "ob_dist": 0.23,
           "ob_side": "demand"
-        }
+        },
+        "open": 3425.0,
+        "close": 3399.0,
+        "move_pct": -0.7591240875912453,
+        "move_rs": -26.0,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "INDUSTOWER",
@@ -2170,7 +2206,13 @@
           "rsi_band": "firm",
           "vol_x20": 1.0,
           "range20": 93.2
-        }
+        },
+        "open": 398.0,
+        "close": 386.95,
+        "move_pct": -2.7763819095477427,
+        "move_rs": -11.050000000000011,
+        "hit": true,
+        "late": false
       }
     ]
   },

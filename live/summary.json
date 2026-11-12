@@ -301,48 +301,48 @@
   },
   "live": {
     "day_bullish": {
-      "n_picks": 5,
-      "n_scored": 3,
-      "n_hits": 3,
+      "n_picks": 10,
+      "n_scored": 5,
+      "n_hits": 5,
       "by_week": {
         "2026-W45": {
           "n_picks": 3,
           "n_hits": 3
         },
         "2026-W46": {
-          "n_picks": 2,
-          "n_hits": 0
+          "n_picks": 7,
+          "n_hits": 2
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 5,
-          "n_hits": 3
+          "n_picks": 10,
+          "n_hits": 5
         }
       },
-      "market_line": 0.6576695194206714
+      "market_line": 0.6428571428571428
     },
     "day_bearish": {
-      "n_picks": 28,
-      "n_scored": 23,
-      "n_hits": 8,
+      "n_picks": 33,
+      "n_scored": 28,
+      "n_hits": 11,
       "by_week": {
         "2026-W45": {
           "n_picks": 19,
           "n_hits": 6
         },
         "2026-W46": {
-          "n_picks": 9,
-          "n_hits": 2
+          "n_picks": 14,
+          "n_hits": 5
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 28,
-          "n_hits": 8
+          "n_picks": 33,
+          "n_hits": 11
         }
       },
-      "market_line": 0.33311389071757735
+      "market_line": 0.34850230414746547
     },
     "week_bullish": {
       "n_picks": 10,
@@ -364,7 +364,7 @@
           "n_hits": 4
         }
       },
-      "market_line": 0.8064516129032258
+      "market_line": 0.8179723502304148
     },
     "week_bearish": {
       "n_picks": 10,
@@ -386,7 +386,7 @@
           "n_hits": 2
         }
       },
-      "market_line": 0.1935483870967742
+      "market_line": 0.18202764976958524
     }
   }
 }
