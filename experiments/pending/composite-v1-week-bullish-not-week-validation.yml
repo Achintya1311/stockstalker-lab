@@ -1,0 +1,6 @@
+id: composite-v1-week-bullish-not-week-validation
+strategy: strategies.composite_v1_week_bullish_not
+split: validation
+horizon: week
+dates: {start: '2021-01-01', end: '2023-12-31'}
+train_experiment: composite-v1-week-bullish-not-week
