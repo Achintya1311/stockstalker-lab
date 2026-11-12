@@ -334,6 +334,48 @@
       "qualifies": false
     },
     {
+      "cell": "G_E2A_G10",
+      "complement": "G_E2A_G10_NOT",
+      "trigger": "E2A",
+      "gate": "G10",
+      "gate_name": "market trend switch (equal-weight universe index on the pick's side of its 200-day average)",
+      "batch": 2,
+      "status": "results",
+      "trigger_edge_pts": 7.46,
+      "keep_edge_pts": 9.07,
+      "complement_edge_pts": 6.73,
+      "keep_t": 5.4,
+      "keep_n_picks": 1048,
+      "complement_n_picks": 1457,
+      "date_share": 0.411,
+      "keep_directional_move_pct": 0.169,
+      "keep_years_positive": 6,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -1.73,
+        "2016": -2.31,
+        "2017": 25.31,
+        "2018": 1.68,
+        "2019": -1.79,
+        "2020": 12.58
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2016": -3.76,
+        "2017": 25.86,
+        "2018": 8.06,
+        "2019": -10.42,
+        "2020": 18.31
+      },
+      "years_keep_gt_trigger": 3,
+      "years_keep_gt_complement": 3,
+      "years_compared_complement": 5,
+      "sign_test_p_keep_gt_complement": 0.5,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
+      "qualifies": false
+    },
+    {
       "cell": "G_T04_G3",
       "complement": "G_T04_G3_NOT",
       "trigger": "T04",
@@ -586,6 +628,87 @@
       "crit_a_interval_substitute": false,
       "crit_b_positive_years": false,
       "crit_c_beats_complement": false,
+      "qualifies": false
+    },
+    {
+      "cell": "G_T04_G9",
+      "complement": "G_T04_G9_NOT",
+      "trigger": "T04",
+      "gate": "G9",
+      "gate_name": "pullback in a leader (63-day rank top 30% and within 15% of the 252-day high)",
+      "batch": 2,
+      "status": "results",
+      "trigger_edge_pts": 3.37,
+      "keep_edge_pts": 5.12,
+      "complement_edge_pts": 2.61,
+      "keep_t": 4.09,
+      "keep_n_picks": 2075,
+      "complement_n_picks": 3152,
+      "date_share": 0.718,
+      "keep_directional_move_pct": -0.351,
+      "keep_years_positive": 5,
+      "keep_minus_trigger_by_year_pts": {
+        "2016": 1.13,
+        "2017": 1.79,
+        "2018": 1.87,
+        "2019": 3.31,
+        "2020": 0.68
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2016": 1.88,
+        "2017": 1.58,
+        "2018": 3.43,
+        "2019": 4.59,
+        "2020": 0.27
+      },
+      "years_keep_gt_trigger": 5,
+      "years_keep_gt_complement": 5,
+      "years_compared_complement": 5,
+      "sign_test_p_keep_gt_complement": 0.031,
+      "difference_interval": null,
+      "crit_a_interval_substitute": true,
+      "crit_b_positive_years": true,
+      "crit_c_beats_complement": true,
+      "qualifies": true
+    },
+    {
+      "cell": "G_T04_G10",
+      "complement": "G_T04_G10_NOT",
+      "trigger": "T04",
+      "gate": "G10",
+      "gate_name": "market trend switch (equal-weight universe index on the pick's side of its 200-day average)",
+      "batch": 2,
+      "status": "results",
+      "trigger_edge_pts": 3.37,
+      "keep_edge_pts": 3.42,
+      "complement_edge_pts": 3.32,
+      "keep_t": 2.7,
+      "keep_n_picks": 2013,
+      "complement_n_picks": 1939,
+      "date_share": 0.502,
+      "keep_directional_move_pct": -0.419,
+      "keep_years_positive": 5,
+      "keep_minus_trigger_by_year_pts": {
+        "2016": -2.05,
+        "2017": 0.0,
+        "2018": 3.88,
+        "2019": 9.94,
+        "2020": -0.78
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2016": -4.85,
+        "2018": 4.66,
+        "2019": 11.95,
+        "2020": -2.67
+      },
+      "years_keep_gt_trigger": 2,
+      "years_keep_gt_complement": 2,
+      "years_compared_complement": 4,
+      "sign_test_p_keep_gt_complement": 0.688,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
       "qualifies": false
     },
     {
@@ -885,6 +1008,88 @@
       "crit_a_interval_substitute": false,
       "crit_b_positive_years": false,
       "crit_c_beats_complement": false,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A05B_G9",
+      "complement": "G_A05B_G9_NOT",
+      "trigger": "A05B",
+      "gate": "G9",
+      "gate_name": "pullback in a leader (63-day rank top 30% and within 15% of the 252-day high)",
+      "batch": 2,
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "keep_edge_pts": 1.86,
+      "complement_edge_pts": 1.54,
+      "keep_t": 1.26,
+      "keep_n_picks": 1268,
+      "complement_n_picks": 1300,
+      "date_share": 0.875,
+      "keep_directional_move_pct": -0.524,
+      "keep_years_positive": 4,
+      "keep_minus_trigger_by_year_pts": {
+        "2016": -2.96,
+        "2017": -2.69,
+        "2018": 1.51,
+        "2019": -1.54,
+        "2020": 2.22
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2016": -1.76,
+        "2017": -1.92,
+        "2018": 3.4,
+        "2019": 0.38,
+        "2020": 1.45
+      },
+      "years_keep_gt_trigger": 2,
+      "years_keep_gt_complement": 3,
+      "years_compared_complement": 5,
+      "sign_test_p_keep_gt_complement": 0.5,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A05B_G10",
+      "complement": "G_A05B_G10_NOT",
+      "trigger": "A05B",
+      "gate": "G10",
+      "gate_name": "market trend switch (equal-weight universe index on the pick's side of its 200-day average)",
+      "batch": 2,
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "keep_edge_pts": 2.9,
+      "complement_edge_pts": 2.0,
+      "keep_t": 1.63,
+      "keep_n_picks": 635,
+      "complement_n_picks": 720,
+      "date_share": 0.431,
+      "keep_directional_move_pct": -0.349,
+      "keep_years_positive": 4,
+      "keep_minus_trigger_by_year_pts": {
+        "2016": 0.95,
+        "2017": -0.07,
+        "2018": 15.74,
+        "2019": 4.2,
+        "2020": -2.01
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2016": 1.89,
+        "2017": -3.77,
+        "2018": 18.54,
+        "2019": 5.2,
+        "2020": -5.22
+      },
+      "years_keep_gt_trigger": 3,
+      "years_keep_gt_complement": 3,
+      "years_compared_complement": 5,
+      "sign_test_p_keep_gt_complement": 0.5,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
       "qualifies": false
     },
     {
@@ -1228,58 +1433,51 @@
       "crit_b_positive_years": true,
       "crit_c_beats_complement": true,
       "qualifies": true
-    }
-  ],
-  "pending": [
-    {
-      "cell": "G_E2A_G10",
-      "batch": 2,
-      "missing": [
-        "g-e2a-g10-day",
-        "g-e2a-g10-not-day"
-      ]
-    },
-    {
-      "cell": "G_T04_G9",
-      "batch": 2,
-      "missing": [
-        "g-t04-g9-day",
-        "g-t04-g9-not-day"
-      ]
-    },
-    {
-      "cell": "G_T04_G10",
-      "batch": 2,
-      "missing": [
-        "g-t04-g10-day",
-        "g-t04-g10-not-day"
-      ]
-    },
-    {
-      "cell": "G_A05B_G9",
-      "batch": 2,
-      "missing": [
-        "g-a05b-g9-week",
-        "g-a05b-g9-not-week"
-      ]
-    },
-    {
-      "cell": "G_A05B_G10",
-      "batch": 2,
-      "missing": [
-        "g-a05b-g10-week",
-        "g-a05b-g10-not-week"
-      ]
     },
     {
       "cell": "G_A01_G10",
+      "complement": "G_A01_G10_NOT",
+      "trigger": "A01",
+      "gate": "G10",
+      "gate_name": "market trend switch (equal-weight universe index on the pick's side of its 200-day average)",
       "batch": 2,
-      "missing": [
-        "g-a01-g10-week",
-        "g-a01-g10-not-week"
-      ]
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "keep_edge_pts": 3.22,
+      "complement_edge_pts": 1.36,
+      "keep_t": 1.66,
+      "keep_n_picks": 713,
+      "complement_n_picks": 635,
+      "date_share": 0.466,
+      "keep_directional_move_pct": 0.365,
+      "keep_years_positive": 4,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -4.92,
+        "2016": 4.9,
+        "2017": 13.75,
+        "2018": -0.8,
+        "2019": -0.52,
+        "2020": 7.81
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2016": 9.79,
+        "2017": 14.02,
+        "2018": -5.31,
+        "2019": -2.69,
+        "2020": 12.69
+      },
+      "years_keep_gt_trigger": 3,
+      "years_keep_gt_complement": 3,
+      "years_compared_complement": 5,
+      "sign_test_p_keep_gt_complement": 0.5,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
+      "qualifies": false
     }
   ],
+  "pending": [],
   "skipped": [
     {
       "cell": "G_E2A_G7",
