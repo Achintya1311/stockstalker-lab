@@ -190,6 +190,24 @@
     "n": 269,
     "coverage": 0.8705501618122977
    },
+   "g-a01-g10-not-week": {
+    "mean": 0.013631290380682339,
+    "lo": -0.029825120940498502,
+    "hi": 0.05602165367257351,
+    "p_le0": 0.2845,
+    "block": 1,
+    "n": 127,
+    "coverage": 0.4110032362459547
+   },
+   "g-a01-g10-week": {
+    "mean": 0.032195716834401825,
+    "lo": -0.006291050076437788,
+    "hi": 0.06949899889086773,
+    "p_le0": 0.0485,
+    "block": 1,
+    "n": 144,
+    "coverage": 0.46601941747572817
+   },
    "g-a01-g2-not-week": {
     "mean": -0.0018295770481101944,
     "lo": -0.029829546910173307,
@@ -723,7 +741,7 @@
    }
   },
   "joint": {
-   "n_models": 80,
+   "n_models": 82,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week",
@@ -756,6 +774,8 @@
     "f15-streak-volume-reversal-week",
     "g-a01-g1-not-week",
     "g-a01-g1-week",
+    "g-a01-g10-not-week",
+    "g-a01-g10-week",
     "g-a01-g2-not-week",
     "g-a01-g2-week",
     "g-a01-g3-not-week",
@@ -965,6 +985,24 @@
     "n": 271,
     "coverage": 0.8770226537216829
    },
+   "g-a05b-g10-not-week": {
+    "mean": 0.020004003658347216,
+    "lo": -0.013448248136831388,
+    "hi": 0.05247526311763344,
+    "p_le0": 0.112,
+    "block": 2,
+    "n": 144,
+    "coverage": 0.46601941747572817
+   },
+   "g-a05b-g10-week": {
+    "mean": 0.02897783848670401,
+    "lo": -0.005854999077794985,
+    "hi": 0.06523957611831284,
+    "p_le0": 0.051,
+    "block": 1,
+    "n": 127,
+    "coverage": 0.4110032362459547
+   },
    "g-a05b-g2-not-week": {
     "mean": 0.015932200797819356,
     "lo": -0.0043428082831117164,
@@ -1072,6 +1110,24 @@
     "block": 4,
     "n": 291,
     "coverage": 0.941747572815534
+   },
+   "g-a05b-g9-not-week": {
+    "mean": 0.015376654407222821,
+    "lo": -0.008193245943753863,
+    "hi": 0.03942498893425835,
+    "p_le0": 0.0975,
+    "block": 3,
+    "n": 260,
+    "coverage": 0.8414239482200647
+   },
+   "g-a05b-g9-week": {
+    "mean": 0.01855777843354505,
+    "lo": -0.011188923754561002,
+    "hi": 0.04704279453499333,
+    "p_le0": 0.107,
+    "block": 1,
+    "n": 258,
+    "coverage": 0.8349514563106796
    },
    "g01-residual-momentum-week": {
     "mean": 0.022501612876929273,
@@ -1453,13 +1509,13 @@
    }
   },
   "joint": {
-   "n_models": 70,
+   "n_models": 74,
    "block": 1,
    "twins": {},
    "spa": {
-    "lower": 0.206,
-    "consistent": 0.301,
-    "upper": 0.343
+    "lower": 0.207,
+    "consistent": 0.302,
+    "upper": 0.344
    },
    "stepm": [],
    "mcs": [
@@ -1479,6 +1535,8 @@
     "f15-streak-volume-reversal-week",
     "g-a05b-g1-not-week",
     "g-a05b-g1-week",
+    "g-a05b-g10-not-week",
+    "g-a05b-g10-week",
     "g-a05b-g2-not-week",
     "g-a05b-g2-week",
     "g-a05b-g4-not-week",
@@ -1491,6 +1549,8 @@
     "g-a05b-g7-week",
     "g-a05b-g8-not-week",
     "g-a05b-g8-week",
+    "g-a05b-g9-not-week",
+    "g-a05b-g9-week",
     "g01-residual-momentum-week",
     "g02-betting-against-beta-week",
     "g03-frog-in-the-pan-week",
@@ -1834,6 +1894,24 @@
     "n": 1467,
     "coverage": 1.0
    },
+   "g-t04-g10-day": {
+    "mean": 0.034183790503941824,
+    "lo": 0.008759064169279492,
+    "hi": 0.05924707160262858,
+    "p_le0": 0.0055,
+    "block": 2,
+    "n": 546,
+    "coverage": 0.3721881390593047
+   },
+   "g-t04-g10-not-day": {
+    "mean": 0.03321770632339233,
+    "lo": 0.011623108755059973,
+    "hi": 0.0550310254319335,
+    "p_le0": 0.001,
+    "block": 4,
+    "n": 541,
+    "coverage": 0.36877982276755283
+   },
    "g-t04-g3-day": {
     "mean": 0.0371229455417618,
     "lo": 0.018916377699040546,
@@ -1941,6 +2019,24 @@
     "block": 2,
     "n": 1048,
     "coverage": 0.7143830947511929
+   },
+   "g-t04-g9-day": {
+    "mean": 0.051161558196274444,
+    "lo": 0.02681091714678535,
+    "hi": 0.07534276726442803,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 781,
+    "coverage": 0.5323790047716428
+   },
+   "g-t04-g9-not-day": {
+    "mean": 0.026133964053299055,
+    "lo": 0.007036884382584209,
+    "hi": 0.04477015047305442,
+    "p_le0": 0.005,
+    "block": 1,
+    "n": 944,
+    "coverage": 0.643490115882754
    },
    "h02-idiosyncratic-volatility-day": {
     "mean": 0.011837108071654726,
@@ -2232,7 +2328,7 @@
    }
   },
   "joint": {
-   "n_models": 77,
+   "n_models": 81,
    "block": 1,
    "twins": {},
    "spa": {
@@ -2249,6 +2345,7 @@
     "g-t04-g6-not-day",
     "g-t04-g7-day",
     "g-t04-g8-not-day",
+    "g-t04-g9-day",
     "q06-wick-balance-day",
     "q06r-wide-bar-wick-day",
     "t04-connors-rsi2-day",
@@ -2260,16 +2357,21 @@
     "consensus-dbu-v1-day",
     "d01c-day",
     "e3b-a02-low-ivol-day",
+    "f09-volume-backed-fall-day",
     "f10-vol-ratio-reversal-day",
     "f11-w15-day",
     "f14-trend-switched-fade-day",
+    "f16-position-turnover-corr-day",
     "g-t04-g3-day",
     "g-t04-g4-day",
+    "g-t04-g6-day",
     "g-t04-g6-not-day",
     "g-t04-g8-not-day",
+    "g-t04-g9-day",
     "h02-idiosyncratic-volatility-day",
     "q06-wick-balance-day",
     "q06r-wide-bar-wick-day",
+    "q07-trend-residual-day",
     "t04-q06-fallback-day",
     "t06-bollinger-pctb-day",
     "t10-nr4-narrow-range-day",
@@ -2612,6 +2714,24 @@
     "block": 1,
     "n": 728,
     "coverage": 0.49625085207907293
+   },
+   "g-e2a-g10-day": {
+    "mean": 0.09069887422933398,
+    "lo": 0.05702343847246201,
+    "hi": 0.12357798542240367,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 385,
+    "coverage": 0.26244035446489433
+   },
+   "g-e2a-g10-not-day": {
+    "mean": 0.06730589865342053,
+    "lo": 0.03700701181669962,
+    "hi": 0.09868230435741304,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 448,
+    "coverage": 0.305385139740968
    },
    "g-e2a-g2-day": {
     "mean": 0.08305342354592146,
@@ -3002,7 +3122,7 @@
    }
   },
   "joint": {
-   "n_models": 80,
+   "n_models": 82,
    "block": 1,
    "twins": {},
    "spa": {
@@ -3037,6 +3157,8 @@
     "f19-body-volatility-fade-day",
     "g-e2a-g1-day",
     "g-e2a-g1-not-day",
+    "g-e2a-g10-day",
+    "g-e2a-g10-not-day",
     "g-e2a-g2-day",
     "g-e2a-g2-not-day",
     "g-e2a-g3-day",
