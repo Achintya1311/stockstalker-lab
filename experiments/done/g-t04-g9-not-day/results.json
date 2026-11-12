@@ -1,0 +1,109 @@
+{
+  "id": "g-t04-g9-not-day",
+  "strategy": "strategies.g_t04_g9_not",
+  "split": "train",
+  "horizon": "day",
+  "pick_log_sha256": "083be57913eb8234ac21bf74b309c1e92f1b1beeef4ef36c67a096523c3ff4f7",
+  "scorer_version": 1,
+  "picks_per_table": 5,
+  "selections": {
+    "top": {
+      "bullish": {
+        "n_picks": 3152,
+        "n_dates": 944,
+        "coverage": 1.0,
+        "accuracy": 0.4825507614213198,
+        "market_line": 0.45126716589020377,
+        "edge": 0.026133964053299055,
+        "edge_t": 2.586924188712697,
+        "directional_move": -0.004494538329655989,
+        "positive_year_share": 1.0,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 591,
+            "accuracy": 0.49238578680203043,
+            "edge": 0.01815073593931412
+          },
+          {
+            "year": 2017,
+            "n_picks": 762,
+            "accuracy": 0.4868766404199475,
+            "edge": 0.043752515675785066
+          },
+          {
+            "year": 2018,
+            "n_picks": 570,
+            "accuracy": 0.4807017543859649,
+            "edge": 0.025934320988861788
+          },
+          {
+            "year": 2019,
+            "n_picks": 656,
+            "accuracy": 0.4725609756097561,
+            "edge": 0.020713511266124997
+          },
+          {
+            "year": 2020,
+            "n_picks": 573,
+            "accuracy": 0.4799301919720768,
+            "edge": 0.020056696910605017
+          }
+        ],
+        "leak_alarm": false
+      },
+      "bearish": {
+        "n_picks": 0
+      }
+    },
+    "all": {
+      "bullish": {
+        "n_picks": 5311,
+        "n_dates": 944,
+        "coverage": 1.0,
+        "accuracy": 0.49312747128601014,
+        "market_line": 0.45126716589020377,
+        "edge": 0.023236219979171285,
+        "edge_t": 2.3802704376689543,
+        "directional_move": -0.004294980044089975,
+        "positive_year_share": 1.0,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 990,
+            "accuracy": 0.502020202020202,
+            "edge": 0.009634834973778837
+          },
+          {
+            "year": 2017,
+            "n_picks": 1586,
+            "accuracy": 0.47225725094577553,
+            "edge": 0.04237517184887525
+          },
+          {
+            "year": 2018,
+            "n_picks": 885,
+            "accuracy": 0.5028248587570622,
+            "edge": 0.023280062688690383
+          },
+          {
+            "year": 2019,
+            "n_picks": 888,
+            "accuracy": 0.4864864864864865,
+            "edge": 0.02383751778818977
+          },
+          {
+            "year": 2020,
+            "n_picks": 962,
+            "accuracy": 0.5155925155925156,
+            "edge": 0.013681801398902921
+          }
+        ],
+        "leak_alarm": false
+      },
+      "bearish": {
+        "n_picks": 0
+      }
+    }
+  }
+}

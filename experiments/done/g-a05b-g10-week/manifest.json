@@ -1,0 +1,9 @@
+{
+  "id": "g-a05b-g10-week",
+  "strategy": "strategies.g_a05b_g10",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 13403,
+  "n_dates": 127,
+  "pick_log_sha256": "a71815b56c96cd4f215d02004884bc2faa38dc5f5c8ff1e41c6a1cfb6375f3f6"
+}
