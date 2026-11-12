@@ -1,0 +1,5 @@
+id: g-a05b-g4-not-week
+strategy: strategies.g_a05b_g4_not
+split: train
+horizon: week
+dates: {start: '2015-01-01', end: '2020-12-31'}

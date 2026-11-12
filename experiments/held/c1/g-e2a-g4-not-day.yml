@@ -1,0 +1,5 @@
+id: g-e2a-g4-not-day
+strategy: strategies.g_e2a_g4_not
+split: train
+horizon: day
+dates: {start: '2015-01-01', end: '2020-12-31'}

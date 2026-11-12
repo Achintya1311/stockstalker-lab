@@ -1,0 +1,5 @@
+id: g-a05b-g2-week
+strategy: strategies.g_a05b_g2
+split: train
+horizon: week
+dates: {start: '2015-01-01', end: '2020-12-31'}

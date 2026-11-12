@@ -1,0 +1,277 @@
+source_url: ''
+author: lab-original ingredient test (C1); literature per gate in RESEARCH.md section 2
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-11-12'
+horizon: day and week (each cell uses its trigger's horizon)
+claim_as_stated: 'Pre-registered hypothesis, fixed before any replay: each gate improves its trigger''s train edge. Judged
+  per cell against the trigger alone and against the cell''s complement (trigger AND NOT gate). C2 rule (RESEARCH.md section
+  5): a gate qualifies only if its edge difference against the trigger has an interval above zero, is positive in at least
+  4 of 6 train years, and it beats its own complement.'
+rules_plain: 'Eight keep-only gates G1-G8 (trend side, not fading a leader, stock-specific move, no-news gap proxy, market
+  stress, order-block location, OI state, volume surge) applied to the four live triggers'' own table side: E2A day bearish,
+  T04 day bullish, A05B week bullish, A01 week bearish. Exact rules per trigger in the docstring of strategies/g_gates.py.
+  Thresholds are the round numbers in RESEARCH.md section 4; none is tuned.'
+default_params:
+  g1: 200-day average
+  g2: 63-day rank top/bottom 30% and 200-day average
+  g3: equal-weight universe return, same window; E2A residual z >= 1.0
+  g4: gap over 1 sigma of the prior 20 gaps
+  g5: 20-day universe volatility above its 250-day median
+  g6: ob_core.detect defaults, last 60 bars
+  g7: D01C sign
+  g8: volume over 1.5x the prior 20-day mean
+data_needed: ohlcv, futures OI
+testable_now: 'yes'
+source: finance-portfolio-hub projects/combined-strategy/RESEARCH.md sections 4-5 (12 Nov 2026)
+link: ''
+prior_claim: Da, Liu and Schaumburg (2014); Nagel (2012); Connors RSI-2 practice; trend-template checklists; lab results E2A,
+  D01C, E1A
+cells:
+- id: G_E2A_G1
+  complement: G_E2A_G1_NOT
+  trigger: E2A
+  gate: G1
+  table: day bearish
+  replays:
+  - g-e2a-g1-day
+  - g-e2a-g1-not-day
+- id: G_E2A_G2
+  complement: G_E2A_G2_NOT
+  trigger: E2A
+  gate: G2
+  table: day bearish
+  replays:
+  - g-e2a-g2-day
+  - g-e2a-g2-not-day
+- id: G_E2A_G3
+  complement: G_E2A_G3_NOT
+  trigger: E2A
+  gate: G3
+  table: day bearish
+  replays:
+  - g-e2a-g3-day
+  - g-e2a-g3-not-day
+- id: G_E2A_G4
+  complement: G_E2A_G4_NOT
+  trigger: E2A
+  gate: G4
+  table: day bearish
+  replays:
+  - g-e2a-g4-day
+  - g-e2a-g4-not-day
+- id: G_E2A_G5
+  complement: G_E2A_G5_NOT
+  trigger: E2A
+  gate: G5
+  table: day bearish
+  replays:
+  - g-e2a-g5-day
+  - g-e2a-g5-not-day
+- id: G_E2A_G6
+  complement: G_E2A_G6_NOT
+  trigger: E2A
+  gate: G6
+  table: day bearish
+  replays:
+  - g-e2a-g6-day
+  - g-e2a-g6-not-day
+- id: G_E2A_G8
+  complement: G_E2A_G8_NOT
+  trigger: E2A
+  gate: G8
+  table: day bearish
+  replays:
+  - g-e2a-g8-day
+  - g-e2a-g8-not-day
+- id: G_T04_G3
+  complement: G_T04_G3_NOT
+  trigger: T04
+  gate: G3
+  table: day bullish
+  replays:
+  - g-t04-g3-day
+  - g-t04-g3-not-day
+- id: G_T04_G4
+  complement: G_T04_G4_NOT
+  trigger: T04
+  gate: G4
+  table: day bullish
+  replays:
+  - g-t04-g4-day
+  - g-t04-g4-not-day
+- id: G_T04_G5
+  complement: G_T04_G5_NOT
+  trigger: T04
+  gate: G5
+  table: day bullish
+  replays:
+  - g-t04-g5-day
+  - g-t04-g5-not-day
+- id: G_T04_G6
+  complement: G_T04_G6_NOT
+  trigger: T04
+  gate: G6
+  table: day bullish
+  replays:
+  - g-t04-g6-day
+  - g-t04-g6-not-day
+- id: G_T04_G7
+  complement: G_T04_G7_NOT
+  trigger: T04
+  gate: G7
+  table: day bullish
+  replays:
+  - g-t04-g7-day
+  - g-t04-g7-not-day
+- id: G_T04_G8
+  complement: G_T04_G8_NOT
+  trigger: T04
+  gate: G8
+  table: day bullish
+  replays:
+  - g-t04-g8-day
+  - g-t04-g8-not-day
+- id: G_A05B_G1
+  complement: G_A05B_G1_NOT
+  trigger: A05B
+  gate: G1
+  table: week bullish
+  replays:
+  - g-a05b-g1-week
+  - g-a05b-g1-not-week
+- id: G_A05B_G2
+  complement: G_A05B_G2_NOT
+  trigger: A05B
+  gate: G2
+  table: week bullish
+  replays:
+  - g-a05b-g2-week
+  - g-a05b-g2-not-week
+- id: G_A05B_G4
+  complement: G_A05B_G4_NOT
+  trigger: A05B
+  gate: G4
+  table: week bullish
+  replays:
+  - g-a05b-g4-week
+  - g-a05b-g4-not-week
+- id: G_A05B_G5
+  complement: G_A05B_G5_NOT
+  trigger: A05B
+  gate: G5
+  table: week bullish
+  replays:
+  - g-a05b-g5-week
+  - g-a05b-g5-not-week
+- id: G_A05B_G6
+  complement: G_A05B_G6_NOT
+  trigger: A05B
+  gate: G6
+  table: week bullish
+  replays:
+  - g-a05b-g6-week
+  - g-a05b-g6-not-week
+- id: G_A05B_G7
+  complement: G_A05B_G7_NOT
+  trigger: A05B
+  gate: G7
+  table: week bullish
+  replays:
+  - g-a05b-g7-week
+  - g-a05b-g7-not-week
+- id: G_A05B_G8
+  complement: G_A05B_G8_NOT
+  trigger: A05B
+  gate: G8
+  table: week bullish
+  replays:
+  - g-a05b-g8-week
+  - g-a05b-g8-not-week
+- id: G_A01_G1
+  complement: G_A01_G1_NOT
+  trigger: A01
+  gate: G1
+  table: week bearish
+  replays:
+  - g-a01-g1-week
+  - g-a01-g1-not-week
+- id: G_A01_G2
+  complement: G_A01_G2_NOT
+  trigger: A01
+  gate: G2
+  table: week bearish
+  replays:
+  - g-a01-g2-week
+  - g-a01-g2-not-week
+- id: G_A01_G3
+  complement: G_A01_G3_NOT
+  trigger: A01
+  gate: G3
+  table: week bearish
+  replays:
+  - g-a01-g3-week
+  - g-a01-g3-not-week
+- id: G_A01_G4
+  complement: G_A01_G4_NOT
+  trigger: A01
+  gate: G4
+  table: week bearish
+  replays:
+  - g-a01-g4-week
+  - g-a01-g4-not-week
+- id: G_A01_G5
+  complement: G_A01_G5_NOT
+  trigger: A01
+  gate: G5
+  table: week bearish
+  replays:
+  - g-a01-g5-week
+  - g-a01-g5-not-week
+- id: G_A01_G6
+  complement: G_A01_G6_NOT
+  trigger: A01
+  gate: G6
+  table: week bearish
+  replays:
+  - g-a01-g6-week
+  - g-a01-g6-not-week
+- id: G_A01_G7
+  complement: G_A01_G7_NOT
+  trigger: A01
+  gate: G7
+  table: week bearish
+  replays:
+  - g-a01-g7-week
+  - g-a01-g7-not-week
+- id: G_A01_G8
+  complement: G_A01_G8_NOT
+  trigger: A01
+  gate: G8
+  table: week bearish
+  replays:
+  - g-a01-g8-week
+  - g-a01-g8-not-week
+skipped_cells:
+- trigger: E2A
+  gate: G7
+  why: 'identity: E2A already contains the OI condition (RESEARCH.md section 4)'
+- trigger: T04
+  gate: G1
+  why: 'identity: T04 already requires close above the 200-day average (RESEARCH.md section 4)'
+- trigger: T04
+  gate: G2
+  why: 'identity: G2 only drops a bullish pick below its 200-day average, where T04 never picks'
+- trigger: A05B
+  gate: G3
+  why: 'not applicable: A05B is a cross-sectional rank with no single move to market-adjust'
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- 28 cells and their 28 complements are queued together on 12 Nov 2026; the engine records every scored train replay in ledger/trials.csv
+  (one row per side), so the trial count rises before any result is read.
+- Complement cells are placebos for the gate, not hypotheses; a gate that only shrinks coverage is not a success.
+- For A01 and A05B (continuous scores) a cell's top-5 is the strongest trigger readings that pass the gate, not the trigger's
+  own top-5 then gated; the all-picks selection is the trigger's side, gated.
+- G5 gives one verdict per date for every pick, so its cells are a date filter; coverage is read next to edge.
+- G4 is a gap proxy for news; there is no earnings calendar in the dataset.
+- Train split only until a composite is frozen (C2).
+status: queued
