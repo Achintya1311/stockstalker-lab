@@ -1,15 +1,21 @@
 """Write the C1 trigger x gate cell modules, their catalog rows and their train replays from one table.
 
-The table is `strategies.g_gates.CELLS` (4 triggers x 8 gates minus the cells in `SKIPPED`). For each cell
+The table is `strategies.g_gates.CELLS` (4 triggers x 10 gates minus the cells in `SKIPPED`). For each cell
 this writes two thin modules, `strategies/g_<trigger>_<gate>.py` (trigger AND gate) and
-`strategies/g_<trigger>_<gate>_not.py` (trigger AND NOT gate). With `--queue` it also writes one
-`experiments/pending/<id>.yml` train replay per module (the trigger's own horizon) and appends any missing
-`cards/catalog.csv` row (one per cell, naming its complement). `--check` only verifies that every module on
-disk matches the table (used by `tests/test_g_gates.py`); queued files are consumed by the engine, so they
-are not checked.
+`strategies/g_<trigger>_<gate>_not.py` (trigger AND NOT gate). With `--queue` it also appends any missing
+`cards/catalog.csv` row (one per cell, naming its complement) and writes one train replay yml per module
+(the trigger's own horizon) for the cells of ONE batch (`--batch`, default 2):
 
-    python3 -m scripts.gen_g_cells            # modules only
-    python3 -m scripts.gen_g_cells --queue    # modules, catalog rows, pending replays
+    batch 1 (G1-G8)   -> experiments/pending/   (already queued and partly run on 12 Nov 2026)
+    batch 2 (G9-G10)  -> experiments/held/c4/   (moved to pending by hand after batch 1 is diagnosed)
+
+A yml is never written when its experiment id already exists in `experiments/pending/`, any folder under
+`experiments/held/`, or `experiments/done/`, so a rerun never recreates or disturbs a queued, held or
+finished replay. `--check` only verifies that every module on disk matches the table (used by
+`tests/test_g_gates.py`); queued files are consumed by the engine, so they are not checked.
+
+    python3 -m scripts.gen_g_cells                 # modules only
+    python3 -m scripts.gen_g_cells --queue         # modules, catalog rows, batch-2 held replays
     python3 -m scripts.gen_g_cells --check
 """
 
@@ -21,11 +27,15 @@ import io
 import sys
 from pathlib import Path
 
-from strategies.g_gates import CELLS, GATE_NAMES, SKIPPED, TRIGGERS, cell_id
+from strategies.g_gates import CELLS, GATE_NAMES, SKIPPED, TRIGGERS, cell_batch, cell_id
 
 ROOT = Path(__file__).resolve().parent.parent
 STRATEGIES = ROOT / "strategies"
-PENDING = ROOT / "experiments" / "pending"
+EXPERIMENTS = ROOT / "experiments"
+PENDING = EXPERIMENTS / "pending"
+HELD = EXPERIMENTS / "held"
+DONE = EXPERIMENTS / "done"
+QUEUE_DIRS = {1: PENDING, 2: HELD / "c4"}
 CATALOG = ROOT / "cards" / "catalog.csv"
 TRAIN = ("2015-01-01", "2020-12-31")  # config/splits.yml train
 
@@ -65,6 +75,7 @@ def experiment_text(trigger: str, gate: str, keep: bool) -> str:
 def catalog_row(trigger: str, gate: str) -> list[str]:
     t = TRIGGERS[trigger]
     cid, not_id = cell_id(trigger, gate), cell_id(trigger, gate, keep=False)
+    note = "RESEARCH.md section 4" if cell_batch(trigger, gate) == 1 else "RESEARCH_2_VERIFIED.md section 4 (batch 2)"
     return [
         cid,
         f"{t.label} {t.side_word} picks with {gate.upper()} {GATE_NAMES[gate].split(' (')[0]}",
@@ -73,10 +84,11 @@ def catalog_row(trigger: str, gate: str) -> list[str]:
         f"{t.label} {t.side_word} picks kept only where {gate.upper()} {GATE_NAMES[gate]} holds; complement {not_id} "
         f"keeps the rest. Rules in strategies/g_gates.py. Hypothesis fixed in advance: the gate improves {t.label}'s "
         f"train edge, judged against {t.label} alone and against {not_id}.",
-        f"as {t.label}; gate thresholds fixed in RESEARCH.md section 4",
+        f"as {t.label}; gate thresholds fixed in {note}",
         "ohlcv plus futures OI" if gate == "g7" or trigger == "e2a" else "ohlcv",
         "yes",
-        "projects/combined-strategy/RESEARCH.md sections 4-5 (C1); cards/COMPOSITE_INGREDIENTS.yml",
+        "projects/combined-strategy/RESEARCH.md sections 4-5 (C1); cards/COMPOSITE_INGREDIENTS.yml"
+        + ("" if cell_batch(trigger, gate) == 1 else "; RESEARCH_2_VERIFIED.md section 4 (batch 2)"),
         "",
         f"Does {gate.upper()} add to {t.label} on the {t.horizon} {t.side_word} table",
         "queued",
@@ -102,11 +114,30 @@ def write_modules(check: bool) -> list[str]:
     return stale
 
 
-def queue() -> None:
-    PENDING.mkdir(parents=True, exist_ok=True)
+def already_queued(exp_id: str, experiments: Path = EXPERIMENTS) -> bool:
+    """True when the replay is pending, held in any batch folder, or done."""
+    held = experiments / "held"
+    return (
+        (experiments / "pending" / f"{exp_id}.yml").exists()
+        or (held.is_dir() and any(held.glob(f"*/{exp_id}.yml")))
+        or (experiments / "done" / exp_id).exists()
+    )
+
+
+def queue(batch: int = 2, experiments: Path = EXPERIMENTS) -> list[str]:
+    """Write the batch's missing replay ymls into its queue folder and any missing catalog rows."""
+    target = experiments / QUEUE_DIRS[batch].relative_to(EXPERIMENTS)
+    written = []
     for trigger, gate in CELLS:
+        if cell_batch(trigger, gate) != batch:
+            continue
         for keep in (True, False):
-            (PENDING / f"{experiment_id(trigger, gate, keep)}.yml").write_text(experiment_text(trigger, gate, keep))
+            exp_id = experiment_id(trigger, gate, keep)
+            if already_queued(exp_id, experiments):
+                continue
+            target.mkdir(parents=True, exist_ok=True)
+            (target / f"{exp_id}.yml").write_text(experiment_text(trigger, gate, keep))
+            written.append(str((target / f"{exp_id}.yml").relative_to(experiments.parent)))
     existing = {row[0] for row in csv.reader(CATALOG.read_text().splitlines()) if row}
     buf = io.StringIO()
     writer = csv.writer(buf, lineterminator="\r\n")  # the catalog uses CRLF line ends
@@ -117,21 +148,24 @@ def queue() -> None:
     if buf.getvalue():
         text = CATALOG.read_bytes().decode()  # keep CRLF as is
         CATALOG.write_bytes((text + ("" if text.endswith("\n") else "\r\n") + buf.getvalue()).encode())
+    return written
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--queue", action="store_true")
+    ap.add_argument("--batch", type=int, choices=sorted(QUEUE_DIRS), default=2)
     args = ap.parse_args(argv)
     stale = write_modules(args.check)
     if args.check:
         for s in stale:
             print(f"out of sync: {s}")
         return 1 if stale else 0
-    if args.queue:
-        queue()
-    print(f"{len(CELLS)} cells, {2 * len(CELLS)} modules" + (", queued" if args.queue else ""))
+    written = queue(args.batch) if args.queue else []
+    for w in written:
+        print(f"queued {w}")
+    print(f"{len(CELLS)} cells, {2 * len(CELLS)} modules" + (f", batch {args.batch}: {len(written)} replays queued" if args.queue else ""))
     return 0
 
 

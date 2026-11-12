@@ -1,0 +1,941 @@
+{
+  "split": "train",
+  "selection": "top",
+  "per_pick_outcomes_in_picks_json": false,
+  "interval_method": "none: picks.json has no per-pick outcomes; by-year differences and a sign test instead",
+  "triggers": {
+    "e2a": {
+      "run": "e2a-day",
+      "side": "bearish",
+      "horizon": "day",
+      "edge_pts": 7.46,
+      "n_dates": 936
+    },
+    "t04": {
+      "run": "t04-connors-rsi2-day",
+      "side": "bullish",
+      "horizon": "day",
+      "edge_pts": 3.37,
+      "n_dates": 1087
+    },
+    "a05b": {
+      "run": "a05b-max-effect-ranked-week",
+      "side": "bullish",
+      "horizon": "week",
+      "edge_pts": 2.23,
+      "n_dates": 295
+    },
+    "a01": {
+      "run": "a01-weekly-reversal-week",
+      "side": "bearish",
+      "horizon": "week",
+      "edge_pts": 2.48,
+      "n_dates": 309
+    }
+  },
+  "cells": [
+    {
+      "cell": "G_E2A_G6",
+      "complement": "G_E2A_G6_NOT",
+      "trigger": "E2A",
+      "gate": "G6",
+      "gate_name": "order-block location (agreeing fresh zone at price)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 7.46,
+      "keep_edge_pts": 6.32,
+      "complement_edge_pts": 7.45,
+      "keep_t": 1.58,
+      "keep_n_picks": 173,
+      "complement_n_picks": 2618,
+      "date_share": 0.123,
+      "keep_directional_move_pct": 0.104,
+      "keep_years_positive": 5,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -23.31,
+        "2016": 3.81,
+        "2017": -1.79,
+        "2018": 10.1,
+        "2019": 0.16,
+        "2020": -5.61
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": -25.76,
+        "2016": 4.49,
+        "2017": -1.6,
+        "2018": 10.22,
+        "2019": 0.61,
+        "2020": -4.81
+      },
+      "years_keep_gt_trigger": 3,
+      "years_keep_gt_complement": 3,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.656,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": false,
+      "qualifies": false
+    },
+    {
+      "cell": "G_T04_G6",
+      "complement": "G_T04_G6_NOT",
+      "trigger": "T04",
+      "gate": "G6",
+      "gate_name": "order-block location (agreeing fresh zone at price)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 3.37,
+      "keep_edge_pts": 2.6,
+      "complement_edge_pts": 4.08,
+      "keep_t": 1.66,
+      "keep_n_picks": 1211,
+      "complement_n_picks": 3659,
+      "date_share": 0.523,
+      "keep_directional_move_pct": -0.396,
+      "keep_years_positive": 6,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -7.22,
+        "2016": -0.83,
+        "2017": 0.24,
+        "2018": -0.11,
+        "2019": -3.14,
+        "2020": 0.91
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": -8.3,
+        "2016": -1.69,
+        "2017": -0.82,
+        "2018": -0.2,
+        "2019": -3.95,
+        "2020": 0.27
+      },
+      "years_keep_gt_trigger": 2,
+      "years_keep_gt_complement": 1,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.984,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": false,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A05B_G1",
+      "complement": "G_A05B_G1_NOT",
+      "trigger": "A05B",
+      "gate": "G1",
+      "gate_name": "trend side (200-day average)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "keep_edge_pts": 2.41,
+      "complement_edge_pts": 1.09,
+      "keep_t": 1.82,
+      "keep_n_picks": 1336,
+      "complement_n_picks": 1339,
+      "date_share": 0.919,
+      "keep_directional_move_pct": -0.648,
+      "keep_years_positive": 4,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": 7.23,
+        "2016": -3.08,
+        "2017": -3.85,
+        "2018": 0.38,
+        "2019": -1.92,
+        "2020": 6.86
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": 8.0,
+        "2016": -1.54,
+        "2017": -3.08,
+        "2018": 4.91,
+        "2019": -0.38,
+        "2020": 5.32
+      },
+      "years_keep_gt_trigger": 3,
+      "years_keep_gt_complement": 3,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.656,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A05B_G2",
+      "complement": "G_A05B_G2_NOT",
+      "trigger": "A05B",
+      "gate": "G2",
+      "gate_name": "not fading a leader (63-day rank and 200-day average)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "keep_edge_pts": 1.14,
+      "complement_edge_pts": 1.59,
+      "keep_t": 0.9,
+      "keep_n_picks": 1475,
+      "complement_n_picks": 1334,
+      "date_share": 1.0,
+      "keep_directional_move_pct": -0.566,
+      "keep_years_positive": 4,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": 2.94,
+        "2016": -3.08,
+        "2017": -1.92,
+        "2018": -1.13,
+        "2019": -3.08,
+        "2020": 1.15
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": 7.71,
+        "2016": -1.15,
+        "2017": -2.31,
+        "2018": 1.89,
+        "2019": -0.77,
+        "2020": -2.34
+      },
+      "years_keep_gt_trigger": 2,
+      "years_keep_gt_complement": 2,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.891,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": false,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A05B_G4",
+      "complement": "G_A05B_G4_NOT",
+      "trigger": "A05B",
+      "gate": "G4",
+      "gate_name": "no-news proxy (no trigger-day gap over 1 sigma in the move's direction)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "keep_edge_pts": 1.64,
+      "complement_edge_pts": 1.36,
+      "keep_t": 1.32,
+      "keep_n_picks": 1454,
+      "complement_n_picks": 830,
+      "date_share": 0.99,
+      "keep_directional_move_pct": -0.497,
+      "keep_years_positive": 5,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": 0.59,
+        "2016": -1.56,
+        "2017": -1.15,
+        "2018": -0.0,
+        "2019": 0.0,
+        "2020": -1.02
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": -4.14,
+        "2016": 7.17,
+        "2017": -5.44,
+        "2018": 10.21,
+        "2019": 3.84,
+        "2020": -14.22
+      },
+      "years_keep_gt_trigger": 2,
+      "years_keep_gt_complement": 3,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.656,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A05B_G5",
+      "complement": "G_A05B_G5_NOT",
+      "trigger": "A05B",
+      "gate": "G5",
+      "gate_name": "market stress (universe 20-day volatility above its 250-day median)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "keep_edge_pts": 3.8,
+      "complement_edge_pts": 1.01,
+      "keep_t": 2.03,
+      "keep_n_picks": 665,
+      "complement_n_picks": 615,
+      "date_share": 0.451,
+      "keep_directional_move_pct": -0.434,
+      "keep_years_positive": 5,
+      "keep_minus_trigger_by_year_pts": {
+        "2016": 2.17,
+        "2017": 2.09,
+        "2018": -0.93,
+        "2019": 2.6,
+        "2020": 1.35
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2016": 4.23,
+        "2017": 3.2,
+        "2018": -3.79,
+        "2019": 4.83,
+        "2020": 3.2
+      },
+      "years_keep_gt_trigger": 4,
+      "years_keep_gt_complement": 4,
+      "years_compared_complement": 5,
+      "sign_test_p_keep_gt_complement": 0.188,
+      "difference_interval": null,
+      "crit_a_interval_substitute": true,
+      "crit_b_positive_years": true,
+      "crit_c_beats_complement": true,
+      "qualifies": true
+    },
+    {
+      "cell": "G_A05B_G6",
+      "complement": "G_A05B_G6_NOT",
+      "trigger": "A05B",
+      "gate": "G6",
+      "gate_name": "order-block location (agreeing fresh zone at price)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "keep_edge_pts": 3.15,
+      "complement_edge_pts": 2.3,
+      "keep_t": 1.21,
+      "keep_n_picks": 398,
+      "complement_n_picks": 1475,
+      "date_share": 0.617,
+      "keep_directional_move_pct": -0.119,
+      "keep_years_positive": 5,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": 1.43,
+        "2016": -2.49,
+        "2017": 2.38,
+        "2018": -4.06,
+        "2019": -0.52,
+        "2020": 7.78
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": 1.43,
+        "2016": -2.49,
+        "2017": 2.38,
+        "2018": -3.68,
+        "2019": -0.52,
+        "2020": 7.01
+      },
+      "years_keep_gt_trigger": 3,
+      "years_keep_gt_complement": 3,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.656,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A05B_G7",
+      "complement": "G_A05B_G7_NOT",
+      "trigger": "A05B",
+      "gate": "G7",
+      "gate_name": "OI state (D01C agrees)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "keep_edge_pts": 0.36,
+      "complement_edge_pts": 0.67,
+      "keep_t": 0.29,
+      "keep_n_picks": 1470,
+      "complement_n_picks": 1456,
+      "date_share": 1.0,
+      "keep_directional_move_pct": -0.63,
+      "keep_years_positive": 2,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -1.18,
+        "2016": -1.15,
+        "2017": -2.69,
+        "2018": -4.15,
+        "2019": 0.38,
+        "2020": -2.12
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": 0.2,
+        "2016": 5.38,
+        "2017": -5.29,
+        "2018": -0.09,
+        "2019": 3.85,
+        "2020": -5.71
+      },
+      "years_keep_gt_trigger": 1,
+      "years_keep_gt_complement": 3,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.656,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": false,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A05B_G8",
+      "complement": "G_A05B_G8_NOT",
+      "trigger": "A05B",
+      "gate": "G8",
+      "gate_name": "volume surge (trigger-day volume over 1.5x its 20-day average)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "keep_edge_pts": 1.29,
+      "complement_edge_pts": 1.35,
+      "keep_t": 0.88,
+      "keep_n_picks": 1360,
+      "complement_n_picks": 1475,
+      "date_share": 0.986,
+      "keep_directional_move_pct": -0.625,
+      "keep_years_positive": 5,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -0.0,
+        "2016": -5.56,
+        "2017": 2.56,
+        "2018": -0.85,
+        "2019": -0.59,
+        "2020": -0.87
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": 2.35,
+        "2016": -4.79,
+        "2017": 0.63,
+        "2018": 2.17,
+        "2019": 0.95,
+        "2020": -0.87
+      },
+      "years_keep_gt_trigger": 1,
+      "years_keep_gt_complement": 4,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.344,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": false,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A01_G1",
+      "complement": "G_A01_G1_NOT",
+      "trigger": "A01",
+      "gate": "G1",
+      "gate_name": "trend side (200-day average)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "keep_edge_pts": 2.85,
+      "complement_edge_pts": 0.19,
+      "keep_t": 2.05,
+      "keep_n_picks": 1313,
+      "complement_n_picks": 1339,
+      "date_share": 0.871,
+      "keep_directional_move_pct": 0.034,
+      "keep_years_positive": 5,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -4.92,
+        "2016": -0.96,
+        "2017": 2.02,
+        "2018": 5.28,
+        "2019": -1.92,
+        "2020": -1.95
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": -2.0,
+        "2016": -0.51,
+        "2017": 3.94,
+        "2018": 7.92,
+        "2019": 1.54,
+        "2020": 1.05
+      },
+      "years_keep_gt_trigger": 2,
+      "years_keep_gt_complement": 4,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.344,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A01_G2",
+      "complement": "G_A01_G2_NOT",
+      "trigger": "A01",
+      "gate": "G2",
+      "gate_name": "not fading a leader (63-day rank and 200-day average)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "keep_edge_pts": 2.78,
+      "complement_edge_pts": -0.18,
+      "keep_t": 2.08,
+      "keep_n_picks": 1482,
+      "complement_n_picks": 1338,
+      "date_share": 0.964,
+      "keep_directional_move_pct": 0.288,
+      "keep_years_positive": 4,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -0.25,
+        "2016": 1.47,
+        "2017": -2.69,
+        "2018": 4.91,
+        "2019": -2.69,
+        "2020": 0.77
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": 6.67,
+        "2016": 3.5,
+        "2017": -2.31,
+        "2018": 7.55,
+        "2019": 0.0,
+        "2020": 5.73
+      },
+      "years_keep_gt_trigger": 3,
+      "years_keep_gt_complement": 5,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.109,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A01_G3",
+      "complement": "G_A01_G3_NOT",
+      "trigger": "A01",
+      "gate": "G3",
+      "gate_name": "stock-specific move (market-adjusted trigger move)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "keep_edge_pts": 2.48,
+      "complement_edge_pts": -1.76,
+      "keep_t": 1.83,
+      "keep_n_picks": 1538,
+      "complement_n_picks": 831,
+      "date_share": 1.0,
+      "keep_directional_move_pct": 0.015,
+      "keep_years_positive": 5,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": 0.0,
+        "2016": 0.0,
+        "2017": 0.0,
+        "2018": 0.0,
+        "2019": 0.0,
+        "2020": 0.0
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": -0.79,
+        "2016": 9.85,
+        "2017": 7.53,
+        "2018": 1.05,
+        "2019": 2.14,
+        "2020": 5.13
+      },
+      "years_keep_gt_trigger": 0,
+      "years_keep_gt_complement": 5,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.109,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A01_G4",
+      "complement": "G_A01_G4_NOT",
+      "trigger": "A01",
+      "gate": "G4",
+      "gate_name": "no-news proxy (no trigger-day gap over 1 sigma in the move's direction)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "keep_edge_pts": 0.96,
+      "complement_edge_pts": 2.39,
+      "keep_t": 0.75,
+      "keep_n_picks": 1530,
+      "complement_n_picks": 1316,
+      "date_share": 0.997,
+      "keep_directional_move_pct": -0.059,
+      "keep_years_positive": 4,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -1.27,
+        "2016": -3.46,
+        "2017": 0.0,
+        "2018": 0.0,
+        "2019": -3.85,
+        "2020": -0.58
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": -2.06,
+        "2016": -6.2,
+        "2017": 3.88,
+        "2018": -4.37,
+        "2019": -3.85,
+        "2020": 4.17
+      },
+      "years_keep_gt_trigger": 1,
+      "years_keep_gt_complement": 2,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.891,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": false,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A01_G5",
+      "complement": "G_A01_G5_NOT",
+      "trigger": "A01",
+      "gate": "G5",
+      "gate_name": "market stress (universe 20-day volatility above its 250-day median)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "keep_edge_pts": 2.42,
+      "complement_edge_pts": 2.6,
+      "keep_t": 1.16,
+      "keep_n_picks": 658,
+      "complement_n_picks": 615,
+      "date_share": 0.43,
+      "keep_directional_move_pct": 0.028,
+      "keep_years_positive": 4,
+      "keep_minus_trigger_by_year_pts": {
+        "2016": -3.2,
+        "2017": -5.49,
+        "2018": 2.19,
+        "2019": -1.04,
+        "2020": 4.97
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2016": -6.0,
+        "2017": -8.39,
+        "2018": 8.94,
+        "2019": -1.93,
+        "2020": 11.75
+      },
+      "years_keep_gt_trigger": 2,
+      "years_keep_gt_complement": 2,
+      "years_compared_complement": 5,
+      "sign_test_p_keep_gt_complement": 0.812,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": false,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A01_G6",
+      "complement": "G_A01_G6_NOT",
+      "trigger": "A01",
+      "gate": "G6",
+      "gate_name": "order-block location (agreeing fresh zone at price)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "keep_edge_pts": -0.15,
+      "complement_edge_pts": 2.73,
+      "keep_t": -0.09,
+      "keep_n_picks": 920,
+      "complement_n_picks": 1497,
+      "date_share": 0.854,
+      "keep_directional_move_pct": 0.225,
+      "keep_years_positive": 3,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -5.77,
+        "2016": -5.54,
+        "2017": -1.46,
+        "2018": 8.03,
+        "2019": -6.27,
+        "2020": -6.24
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": -3.06,
+        "2016": -6.69,
+        "2017": -1.85,
+        "2018": 6.52,
+        "2019": -5.88,
+        "2020": -7.01
+      },
+      "years_keep_gt_trigger": 1,
+      "years_keep_gt_complement": 1,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.984,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": false,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A01_G7",
+      "complement": "G_A01_G7_NOT",
+      "trigger": "A01",
+      "gate": "G7",
+      "gate_name": "OI state (D01C agrees)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "keep_edge_pts": 3.06,
+      "complement_edge_pts": 0.16,
+      "keep_t": 2.25,
+      "keep_n_picks": 1524,
+      "complement_n_picks": 1480,
+      "date_share": 0.997,
+      "keep_directional_move_pct": 0.091,
+      "keep_years_positive": 5,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": -1.25,
+        "2016": 3.37,
+        "2017": -5.19,
+        "2018": 3.27,
+        "2019": -0.38,
+        "2020": 3.52
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": 4.48,
+        "2016": 7.24,
+        "2017": -10.19,
+        "2018": 4.18,
+        "2019": 5.03,
+        "2020": 6.85
+      },
+      "years_keep_gt_trigger": 3,
+      "years_keep_gt_complement": 5,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.109,
+      "difference_interval": null,
+      "crit_a_interval_substitute": false,
+      "crit_b_positive_years": false,
+      "crit_c_beats_complement": true,
+      "qualifies": false
+    },
+    {
+      "cell": "G_A01_G8",
+      "complement": "G_A01_G8_NOT",
+      "trigger": "A01",
+      "gate": "G8",
+      "gate_name": "volume surge (trigger-day volume over 1.5x its 20-day average)",
+      "batch": 1,
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "keep_edge_pts": 3.06,
+      "complement_edge_pts": 1.41,
+      "keep_t": 2.12,
+      "keep_n_picks": 1419,
+      "complement_n_picks": 1533,
+      "date_share": 0.981,
+      "keep_directional_move_pct": 0.236,
+      "keep_years_positive": 4,
+      "keep_minus_trigger_by_year_pts": {
+        "2015": 2.33,
+        "2016": 5.82,
+        "2017": -7.03,
+        "2018": -0.75,
+        "2019": 0.3,
+        "2020": 3.13
+      },
+      "keep_minus_complement_by_year_pts": {
+        "2015": 3.17,
+        "2016": 8.0,
+        "2017": -8.95,
+        "2018": -3.77,
+        "2019": 5.69,
+        "2020": 6.21
+      },
+      "years_keep_gt_trigger": 4,
+      "years_keep_gt_complement": 4,
+      "years_compared_complement": 6,
+      "sign_test_p_keep_gt_complement": 0.344,
+      "difference_interval": null,
+      "crit_a_interval_substitute": true,
+      "crit_b_positive_years": true,
+      "crit_c_beats_complement": true,
+      "qualifies": true
+    }
+  ],
+  "pending": [
+    {
+      "cell": "G_E2A_G1",
+      "batch": 1,
+      "missing": [
+        "g-e2a-g1-day",
+        "g-e2a-g1-not-day"
+      ]
+    },
+    {
+      "cell": "G_E2A_G2",
+      "batch": 1,
+      "missing": [
+        "g-e2a-g2-day",
+        "g-e2a-g2-not-day"
+      ]
+    },
+    {
+      "cell": "G_E2A_G3",
+      "batch": 1,
+      "missing": [
+        "g-e2a-g3-day",
+        "g-e2a-g3-not-day"
+      ]
+    },
+    {
+      "cell": "G_E2A_G4",
+      "batch": 1,
+      "missing": [
+        "g-e2a-g4-day",
+        "g-e2a-g4-not-day"
+      ]
+    },
+    {
+      "cell": "G_E2A_G5",
+      "batch": 1,
+      "missing": [
+        "g-e2a-g5-day",
+        "g-e2a-g5-not-day"
+      ]
+    },
+    {
+      "cell": "G_E2A_G8",
+      "batch": 1,
+      "missing": [
+        "g-e2a-g8-day",
+        "g-e2a-g8-not-day"
+      ]
+    },
+    {
+      "cell": "G_E2A_G10",
+      "batch": 2,
+      "missing": [
+        "g-e2a-g10-day",
+        "g-e2a-g10-not-day"
+      ]
+    },
+    {
+      "cell": "G_T04_G3",
+      "batch": 1,
+      "missing": [
+        "g-t04-g3-day",
+        "g-t04-g3-not-day"
+      ]
+    },
+    {
+      "cell": "G_T04_G4",
+      "batch": 1,
+      "missing": [
+        "g-t04-g4-day",
+        "g-t04-g4-not-day"
+      ]
+    },
+    {
+      "cell": "G_T04_G5",
+      "batch": 1,
+      "missing": [
+        "g-t04-g5-day",
+        "g-t04-g5-not-day"
+      ]
+    },
+    {
+      "cell": "G_T04_G7",
+      "batch": 1,
+      "missing": [
+        "g-t04-g7-day",
+        "g-t04-g7-not-day"
+      ]
+    },
+    {
+      "cell": "G_T04_G8",
+      "batch": 1,
+      "missing": [
+        "g-t04-g8-day",
+        "g-t04-g8-not-day"
+      ]
+    },
+    {
+      "cell": "G_T04_G9",
+      "batch": 2,
+      "missing": [
+        "g-t04-g9-day",
+        "g-t04-g9-not-day"
+      ]
+    },
+    {
+      "cell": "G_T04_G10",
+      "batch": 2,
+      "missing": [
+        "g-t04-g10-day",
+        "g-t04-g10-not-day"
+      ]
+    },
+    {
+      "cell": "G_A05B_G9",
+      "batch": 2,
+      "missing": [
+        "g-a05b-g9-week",
+        "g-a05b-g9-not-week"
+      ]
+    },
+    {
+      "cell": "G_A05B_G10",
+      "batch": 2,
+      "missing": [
+        "g-a05b-g10-week",
+        "g-a05b-g10-not-week"
+      ]
+    },
+    {
+      "cell": "G_A01_G10",
+      "batch": 2,
+      "missing": [
+        "g-a01-g10-week",
+        "g-a01-g10-not-week"
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "cell": "G_E2A_G7",
+      "trigger": "E2A",
+      "gate": "G7",
+      "why": "identity: E2A already contains the OI condition (RESEARCH.md section 4)"
+    },
+    {
+      "cell": "G_T04_G1",
+      "trigger": "T04",
+      "gate": "G1",
+      "why": "identity: T04 already requires close above the 200-day average (RESEARCH.md section 4)"
+    },
+    {
+      "cell": "G_T04_G2",
+      "trigger": "T04",
+      "gate": "G2",
+      "why": "identity: G2 only drops a bullish pick below its 200-day average, where T04 never picks"
+    },
+    {
+      "cell": "G_A05B_G3",
+      "trigger": "A05B",
+      "gate": "G3",
+      "why": "not applicable: A05B is a cross-sectional rank with no single move to market-adjust"
+    },
+    {
+      "cell": "G_E2A_G9",
+      "trigger": "E2A",
+      "gate": "G9",
+      "why": "not declared: G9 is a bullish-only gate, declared for T04 and A05B (RESEARCH_2_VERIFIED.md section 4)"
+    },
+    {
+      "cell": "G_A01_G9",
+      "trigger": "A01",
+      "gate": "G9",
+      "why": "not declared: G9 is a bullish-only gate, declared for T04 and A05B (RESEARCH_2_VERIFIED.md section 4)"
+    }
+  ]
+}

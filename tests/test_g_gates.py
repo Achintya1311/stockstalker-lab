@@ -1,4 +1,4 @@
-"""Synthetic tests for the C1 gates G1-G8 and the trigger x gate cells (`strategies/g_gates.py`).
+"""Synthetic tests for the C1 gates G1-G10 and the trigger x gate cells (`strategies/g_gates.py`).
 
 Per gate: one case where it keeps, one where it drops, one with too little data (no verdict). Then: keep
 and complement partition the trigger's side picks, future rows never change a verdict, the generated
@@ -39,6 +39,11 @@ def frame(symbol, closes, opens=None, volumes=None, oi_chg=None, highs=None, low
         out["oi_futstk"] = 100_000.0
         out["oi_chg_futstk"] = oi_chg
     return out
+
+
+@pytest.fixture(scope="module")
+def panel():
+    return synthetic_panel(n_symbols=12, n_rows=330)
 
 
 def trend(n, daily):
@@ -231,19 +236,83 @@ def test_g8_has_no_verdict_under_21_sessions():
     assert G.g8(frame("AAA", np.full(15, 100.0), volumes=np.full(15, 1e6)), {"AAA": 1}) == {}
 
 
+# ---------------------------------------------------------------- G9 pullback in a leader (batch 2)
+
+
+def _fallen_leader(n=260):
+    """Rises to 200 by row n-110, falls to 100 by row n-64, then rises 30% over the last 63 rows."""
+    up = np.linspace(100.0, 200.0, n - 110)
+    down = np.linspace(200.0, 100.0, 47)[1:]
+    rebound = np.linspace(100.0, 130.0, 65)[1:]
+    return frame("FALLEN", np.r_[up, down, rebound])
+
+
+def test_g9_keeps_a_bullish_pick_in_a_leader_near_its_252_day_high():
+    h = _ranked_universe(n_rows=260)
+    assert G.g9(h, {"TOP": 1}) == {"TOP": True}       # top rank, at its high
+
+
+def test_g9_drops_a_laggard_and_a_leader_more_than_15_percent_below_its_high():
+    h = _ranked_universe(n_rows=260)
+    assert G.g9(h, {"BOT": 1, "M3": 1}) == {"BOT": False, "M3": False}   # rank not above 0.70
+    h2 = pd.concat([h, _fallen_leader()], ignore_index=True)
+    assert G.leader_percentiles(G._adjusted_tail(h2))["FALLEN"] > 0.7
+    assert G.g9(h2, {"FALLEN": 1}) == {"FALLEN": False}                 # 130 < 0.85 x 200
+
+
+def test_g9_has_no_verdict_under_252_rows_or_for_a_bearish_pick():
+    assert G.g9(_ranked_universe(n_rows=200), {"TOP": 1}) == {}
+    assert G.g9(_ranked_universe(n_rows=260), {"TOP": -1}) == {}
+
+
+# ---------------------------------------------------------------- G10 market trend switch (batch 2)
+
+
+def _market(daily, n=260):
+    return pd.concat([frame(f"S{k}", trend(n, daily + 0.0001 * k)) for k in range(3)], ignore_index=True)
+
+
+def test_g10_keeps_bullish_picks_above_the_index_200_day_average_and_bearish_below():
+    up = _market(0.002)
+    assert G.g10(up, {"S0": 1, "S1": -1}) == {"S0": True, "S1": False}
+    down = _market(-0.002)
+    assert G.g10(down, {"S0": 1, "S1": -1}) == {"S0": False, "S1": True}
+
+
+def test_g10_has_no_verdict_under_200_index_dates():
+    assert G.g10(_market(0.002, n=200), {"S0": 1}) == {}   # 199 return dates
+    assert G.g10(_market(0.002, n=201), {"S0": 1}) == {"S0": True}
+
+
+def test_g10_does_not_depend_on_where_the_history_starts(panel):
+    dates = sorted(panel["date"].unique())
+    sides = {s: (1 if k % 2 else -1) for k, s in enumerate(sorted(panel["symbol"].unique()))}
+    for d in dates[-3:]:
+        full = truncate(panel, d)
+        late = full[full["date"] >= dates[60]]
+        a, b = G.market_trend_reading(G._adjusted_tail(full)), G.market_trend_reading(G._adjusted_tail(late))
+        assert a is not None and b is not None and np.isclose(a[0] / a[1], b[0] / b[1], rtol=0, atol=1e-12)
+        assert G.g10(full, sides) == G.g10(late, sides) and G.g10(full, sides)
+
+
+def test_batch2_gates_give_verdicts_on_the_synthetic_panel(panel):
+    sides = {s: 1 for s in panel["symbol"].unique()}
+    v9, v10 = G.g9(panel, sides), G.g10(panel, sides)
+    assert v9 and set(v9.values()) == {True, False}
+    assert len(v10) == len(sides) and len(set(v10.values())) == 1   # one verdict per date
+
+
 # ---------------------------------------------------------------- cells
 
 
-def test_cell_table_is_32_minus_the_skipped_cells():
-    assert len(G.CELLS) == 28 and len(G.SKIPPED) == 4
+def test_cell_table_is_40_minus_the_skipped_cells():
+    assert len(G.CELLS) == 34 and len(G.SKIPPED) == 6
     assert ("e2a", "g7") in G.SKIPPED and ("t04", "g1") in G.SKIPPED
+    assert ("e2a", "g9") in G.SKIPPED and ("a01", "g9") in G.SKIPPED
+    batch2 = [c for c in G.CELLS if G.cell_batch(*c) == 2]
+    assert sorted(batch2) == sorted([("t04", "g9"), ("a05b", "g9"), ("e2a", "g10"), ("t04", "g10"), ("a05b", "g10"), ("a01", "g10")])
     with pytest.raises(ValueError):
         G.cell("t04", "g1")
-
-
-@pytest.fixture(scope="module")
-def panel():
-    return synthetic_panel(n_symbols=12, n_rows=330)
 
 
 @pytest.mark.parametrize("trigger,gate", [c for c in G.CELLS if c[0] in ("a01", "a05b")])
@@ -271,6 +340,24 @@ def test_truncating_future_rows_never_changes_a_verdict(panel, gate):
         for trigger in G.TRIGGERS:
             sides = {s: G.TRIGGERS[trigger].side for s in clean["symbol"].unique()}
             assert G.GATES[gate](clean, sides, trigger) == G.GATES[gate](poisoned, sides, trigger)
+
+
+def test_queue_writes_batch_2_to_held_c4_and_never_touches_existing_replays(tmp_path, monkeypatch):
+    exp = tmp_path / "experiments"
+    for d in ("pending", "held/c1", "done/g-e2a-g10-day"):
+        (exp / d).mkdir(parents=True)
+    (exp / "pending" / "g-e2a-g1-day.yml").write_text("sentinel")
+    (exp / "held" / "c1" / "g-t04-g3-day.yml").write_text("sentinel")
+    catalog = tmp_path / "catalog.csv"
+    catalog.write_bytes(gen_g_cells.CATALOG.read_bytes())
+    monkeypatch.setattr(gen_g_cells, "CATALOG", catalog)
+    written = gen_g_cells.queue(2, exp)
+    assert len(written) == 11 and all("held/c4/" in w for w in written)   # g-e2a-g10-day is already done
+    assert sorted(p.name for p in (exp / "pending").iterdir()) == ["g-e2a-g1-day.yml"]
+    assert gen_g_cells.queue(2, exp) == []
+    assert gen_g_cells.queue(1, exp) and (exp / "pending" / "g-e2a-g1-day.yml").read_text() == "sentinel"
+    assert (exp / "held" / "c1" / "g-t04-g3-day.yml").read_text() == "sentinel"
+    assert not (exp / "pending" / "g-t04-g3-day.yml").exists()
 
 
 def test_generated_modules_match_the_table_and_import():

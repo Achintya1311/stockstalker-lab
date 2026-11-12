@@ -1,6 +1,6 @@
 """Causality check for the C1 gates and every trigger x gate cell (`strategies/g_gates.py`, SPEC.md section 5).
 
-One audit covers all 56 cell modules, since each is a one-line call into `g_gates.cell`. Three properties:
+One audit covers all 68 cell modules (batch 1, G1-G8, and batch 2, G9-G10), since each is a one-line call into `g_gates.cell`. Three properties:
 
 1. Future rows are invisible: for several pick dates near the end of a synthetic panel, every gate's verdict
    and every cell's score computed on `engine.replay.truncate(panel, date)` is identical to the one
@@ -8,10 +8,13 @@ One audit covers all 56 cell modules, since each is a one-line call into `g_gate
    values. (The engine already guarantees the truncation; this proves no gate re-reads anything else.)
 2. Cross-symbol causality for the per-symbol gates (G1, G4, G6, G7, G8): giving `S01` one extra leading row
    must not move any other symbol's verdict, the same shape as `strategies/consensus_db_v1_audit.py`.
-   G2, G3 and G5 read the universe by design (a rank, a market return, a market volatility), like A05B.
+   G2, G3, G5, G9 and G10 read the universe by design (a rank, a market return, a market volatility, a rank,
+   a market index), like A05B.
 3. The universe series those three use are causal: the equal-weight return and its 20-day volatility on
    every past date are the same whether computed from the panel up to that date or from the whole panel
-   (no centred window, no back-fill), and the 63-day leader percentile on a date uses only rows up to it.
+   (no centred window, no back-fill), the 63-day leader percentile on a date uses only rows up to it
+   (G2, G9), and G10's index-over-its-200-date-average ratio on every past date is the same from either
+   panel (the index restarts at a different date, but the ratio does not depend on where it starts).
 """
 
 from __future__ import annotations
@@ -103,6 +106,12 @@ def check_cross_symbol_causality() -> dict:
     return {"passed": not failures and compared > 0, "failures": failures, "compared": compared}
 
 
+def _trend_ratio(universe_returns: pd.Series) -> pd.Series:
+    """G10's reading on every date: the index over its trailing 200-date simple average."""
+    index = (1.0 + universe_returns).cumprod()
+    return index / index.rolling(G.MARKET_TREND_WINDOW).mean()
+
+
 def check_universe_series_causal() -> dict:
     panel = synthetic_panel(n_rows=400)
     full = G._adjusted_tail(panel)
@@ -118,6 +127,11 @@ def check_universe_series_causal() -> dict:
             failures.append(f"universe return before {d}")
         if not np.allclose(vol_part[common], vol_full[common], rtol=0, atol=1e-12):
             failures.append(f"universe volatility before {d}")
+        ratio_part = _trend_ratio(ret_part)
+        ratio_full = _trend_ratio(ret_full)
+        common_r = ratio_part.dropna().index.intersection(ratio_full.dropna().index)
+        if common_r.empty or not np.allclose(ratio_part[common_r], ratio_full[common_r], rtol=1e-10, atol=0):
+            failures.append(f"universe index trend ratio before {d}")
         pct_a = G.leader_percentiles(part)
         pct_b = G.leader_percentiles(G._adjusted_tail(_poison_from(panel, d, inclusive=False)[lambda f: f["date"] <= d]))
         if pct_a.empty or not pct_a.sort_index().round(12).equals(pct_b.sort_index().round(12)):

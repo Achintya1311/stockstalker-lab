@@ -1,0 +1,5 @@
+id: t22-vcp-day
+strategy: strategies.t22_vcp
+split: train
+horizon: day
+dates: {start: '2015-01-01', end: '2020-12-31'}

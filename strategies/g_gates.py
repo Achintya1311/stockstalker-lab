@@ -1,4 +1,4 @@
-"""C1 ingredient gates G1-G8 and the trigger x gate cell builder (`cards/COMPOSITE_INGREDIENTS.yml`).
+"""C1 ingredient gates G1-G10 and the trigger x gate cell builder (`cards/COMPOSITE_INGREDIENTS.yml`).
 
 The closed ingredient list is fixed in the combined-strategy research note (finance-portfolio-hub
 `projects/combined-strategy/RESEARCH.md`, sections 4 and 5; 12 Nov 2026, before any number was read).
@@ -78,6 +78,20 @@ G7 OI state: D01C's score (`strategies.d01c_oi_fade`, the last session's price m
 G8 volume surge: trigger-day raw volume > 1.5 x the mean raw volume of the 20 sessions before it (the
    window being judged is excluded from its own yardstick, A07's boundary convention). Fewer than 21 rows
    or a zero baseline: no verdict.
+
+Batch 2 (G9, G10), declared 12 Nov 2026 in `RESEARCH_2_VERIFIED.md` section 4 before any batch-1 result was
+used; queued to `experiments/held/c4/`, run only after batch 1 is diagnosed (FINISH row C4):
+
+G9 pullback in a leader (bullish triggers T04 and A05B only; E2A x G9 and A01 x G9 are not built): keep a
+   bullish pick only if its 63-day return percentile (`leader_percentiles`, as G2) is above 0.70 AND its last
+   adjusted close is at least 0.85 x the highest adjusted close of its last 252 rows (the last row
+   included). Fewer than 252 rows or no percentile: no verdict. A bearish pick gets no verdict.
+G10 market trend switch (all four triggers): equal-weight universe index = cumulative product of
+   1 + `universe_returns` over the return dates in the gate's tail (`TAIL_DATES` = 300 gives 299, enough;
+   not extended). Bullish keep if the index's last value is above the simple average of its last 200
+   values (the last included); bearish keep if below. Equal: dropped either side. Fewer than 200 index
+   dates: no verdict. One verdict per date for every pick (a date filter, like G5). The comparison is a
+   ratio of index values, so where the tail starts does not change it.
 """
 
 from __future__ import annotations
@@ -111,6 +125,8 @@ GAP_SIGMA = 1.0
 STRESS_VOL_WINDOW, STRESS_MEDIAN_WINDOW = 20, 250
 OB_ROWS = o01_order_block_retest.MIN_ROWS  # 60
 VOLUME_WINDOW, VOLUME_MULTIPLE = 20, 1.5
+PULLBACK_HIGH_WINDOW, PULLBACK_NEAR_HIGH = 252, 0.85  # G9 (LEADER_TOP reused for the rank)
+MARKET_TREND_WINDOW = 200  # G10
 
 
 @dataclass(frozen=True)
@@ -145,16 +161,28 @@ GATE_NAMES = {
     "g6": "order-block location (agreeing fresh zone at price)",
     "g7": "OI state (D01C agrees)",
     "g8": "volume surge (trigger-day volume over 1.5x its 20-day average)",
+    "g9": "pullback in a leader (63-day rank top 30% and within 15% of the 252-day high)",
+    "g10": "market trend switch (equal-weight universe index on the pick's side of its 200-day average)",
 }
+
+# Batch 2 (RESEARCH_2_VERIFIED.md section 4): queued to experiments/held/c4/, not experiments/pending/.
+BATCH_2_GATES = ("g9", "g10")
 
 SKIPPED: dict[tuple[str, str], str] = {
     ("e2a", "g7"): "identity: E2A already contains the OI condition (RESEARCH.md section 4)",
     ("t04", "g1"): "identity: T04 already requires close above the 200-day average (RESEARCH.md section 4)",
     ("t04", "g2"): "identity: G2 only drops a bullish pick below its 200-day average, where T04 never picks",
     ("a05b", "g3"): "not applicable: A05B is a cross-sectional rank with no single move to market-adjust",
+    ("e2a", "g9"): "not declared: G9 is a bullish-only gate, declared for T04 and A05B (RESEARCH_2_VERIFIED.md section 4)",
+    ("a01", "g9"): "not declared: G9 is a bullish-only gate, declared for T04 and A05B (RESEARCH_2_VERIFIED.md section 4)",
 }
 
 CELLS: list[tuple[str, str]] = [(t, g) for t in TRIGGERS for g in GATE_NAMES if (t, g) not in SKIPPED]
+
+
+def cell_batch(trigger: str, gate: str) -> int:
+    """1 for the G1-G8 cells, 2 for the G9-G10 cells."""
+    return 2 if gate in BATCH_2_GATES else 1
 
 
 # ---------------------------------------------------------------- shared preparation
@@ -218,7 +246,7 @@ def _sma_side(close: pd.Series) -> int | None:
     return int(np.sign(last - sma))
 
 
-# ---------------------------------------------------------------- the eight gates
+# ---------------------------------------------------------------- the eight batch-1 gates
 
 
 def g1(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None) -> dict[str, bool]:
@@ -392,7 +420,48 @@ def g8(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None)
     return out
 
 
-GATES: dict[str, Callable[..., dict[str, bool]]] = {"g1": g1, "g2": g2, "g3": g3, "g4": g4, "g5": g5, "g6": g6, "g7": g7, "g8": g8}
+# ---------------------------------------------------------------- batch 2
+
+
+def g9(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None) -> dict[str, bool]:
+    if not any(side > 0 for side in sides.values()):
+        return {}
+    adj = _adjusted_tail(history)
+    pct = leader_percentiles(adj)
+    out = {}
+    for s, side in sides.items():
+        if side <= 0 or s not in pct.index:
+            continue
+        close = adj.loc[adj["symbol"] == s, "adj_close"].to_numpy(float)
+        if len(close) < PULLBACK_HIGH_WINDOW:
+            continue
+        high = close[-PULLBACK_HIGH_WINDOW:].max()
+        out[s] = bool(pct[s] > LEADER_TOP and close[-1] >= PULLBACK_NEAR_HIGH * high)
+    return out
+
+
+def market_trend_reading(adj: pd.DataFrame) -> tuple[float, float] | None:
+    """(last equal-weight universe index value, average of its last 200 values), or None (G10)."""
+    mkt = universe_returns(adj)
+    if len(mkt) < MARKET_TREND_WINDOW:
+        return None
+    index = (1.0 + mkt).cumprod()
+    return float(index.iloc[-1]), float(index.iloc[-MARKET_TREND_WINDOW:].mean())
+
+
+def g10(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None) -> dict[str, bool]:
+    if not sides:
+        return {}
+    reading = market_trend_reading(_adjusted_tail(history))
+    if reading is None:
+        return {}
+    last, sma = reading
+    return {s: bool(last > sma) if side > 0 else bool(last < sma) for s, side in sides.items()}
+
+
+GATES: dict[str, Callable[..., dict[str, bool]]] = {
+    "g1": g1, "g2": g2, "g3": g3, "g4": g4, "g5": g5, "g6": g6, "g7": g7, "g8": g8, "g9": g9, "g10": g10,
+}
 
 
 # ---------------------------------------------------------------- cells
@@ -434,7 +503,7 @@ def cell(trigger: str, gate: str, keep: bool = True):
         return cell_score(trigger, gate, keep, history)
 
     def fired(history: pd.DataFrame, symbol: str) -> str:
-        # Full history, not the symbol's own rows: G2, G3 and G5 read the universe.
+        # Full history, not the symbol's own rows: G2, G3, G5, G9 and G10 read the universe.
         if symbol in cell_score(trigger, gate, keep, history).index:
             return f"{cid}: {t.label} {t.side_word} pick where {gate.upper()} {GATE_NAMES[gate]} {held}. " + t.mod.rules_fired(history, symbol)
         return f"{cid}: no {t.label} {t.side_word} pick, or {gate.upper()} {GATE_NAMES[gate]} gave no verdict or the other verdict, abstain"

@@ -264,6 +264,79 @@ skipped_cells:
 - trigger: A05B
   gate: G3
   why: 'not applicable: A05B is a cross-sectional rank with no single move to market-adjust'
+batch_2:
+  note: 'BATCH 2, declared 12 Nov 2026 before any batch-1 result was used (RESEARCH_2_VERIFIED.md section 4). G9 and
+    G10 are fixed there; their replays are held in experiments/held/c4/ and run only after batch 1 is diagnosed (FINISH
+    row C4). The batch-1 cells, rules and C2 rule above are unchanged; the same C2 rule applies to these cells.'
+  rules_plain: 'G9 pullback in a leader (bullish triggers T04 and A05B only): keep a bullish pick only if its 63-day
+    return percentile across the universe (as G2) is above 0.70 AND its adjusted close is at least 0.85 x its highest
+    adjusted close of the last 252 sessions; fewer than 252 rows or no percentile: no verdict. G10 market trend switch
+    (all four triggers): equal-weight universe index (cumulative product of 1 + the universe mean daily return); bullish
+    picks kept only while its last value is above its own 200-date simple average, bearish picks only while below;
+    fewer than 200 index dates: no verdict; one verdict per date. Exact rules in the docstring of strategies/g_gates.py.'
+  default_params:
+    g9: 63-day rank above 0.70 and close at least 0.85 x the 252-day high
+    g10: equal-weight universe index vs its 200-date simple average
+  cells:
+  - id: G_E2A_G10
+    complement: G_E2A_G10_NOT
+    trigger: E2A
+    gate: G10
+    table: day bearish
+    replays:
+    - g-e2a-g10-day
+    - g-e2a-g10-not-day
+  - id: G_T04_G9
+    complement: G_T04_G9_NOT
+    trigger: T04
+    gate: G9
+    table: day bullish
+    replays:
+    - g-t04-g9-day
+    - g-t04-g9-not-day
+  - id: G_T04_G10
+    complement: G_T04_G10_NOT
+    trigger: T04
+    gate: G10
+    table: day bullish
+    replays:
+    - g-t04-g10-day
+    - g-t04-g10-not-day
+  - id: G_A05B_G9
+    complement: G_A05B_G9_NOT
+    trigger: A05B
+    gate: G9
+    table: week bullish
+    replays:
+    - g-a05b-g9-week
+    - g-a05b-g9-not-week
+  - id: G_A05B_G10
+    complement: G_A05B_G10_NOT
+    trigger: A05B
+    gate: G10
+    table: week bullish
+    replays:
+    - g-a05b-g10-week
+    - g-a05b-g10-not-week
+  - id: G_A01_G10
+    complement: G_A01_G10_NOT
+    trigger: A01
+    gate: G10
+    table: week bearish
+    replays:
+    - g-a01-g10-week
+    - g-a01-g10-not-week
+  skipped_cells:
+  - trigger: E2A
+    gate: G9
+    why: 'not declared: G9 is a bullish-only gate, declared for T04 and A05B'
+  - trigger: A01
+    gate: G9
+    why: 'not declared: G9 is a bullish-only gate, declared for T04 and A05B'
+  red_flags:
+  - 6 cells and their 6 complements are added to the trial count on top of batch 1; they are counted as trials when replayed.
+  - G10, like G5, gives one verdict per date for every pick, so its cells are date filters; coverage is read next to edge.
+  - G9 uses the same 63-day rank as G2; for A05B (bullish) the two are not independent tests of the same picks.
 red_flags:
 - No claim is assumed true (SPEC.md section 5).
 - 28 cells and their 28 complements are queued together on 12 Nov 2026; the engine records every scored train replay in ledger/trials.csv
