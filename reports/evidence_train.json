@@ -100,6 +100,24 @@
     "n": 303,
     "coverage": 0.9805825242718447
    },
+   "composite-v1-week-bearish-not-week": {
+    "mean": 0.01405232357151993,
+    "lo": -0.013493842734039432,
+    "hi": 0.04201776425430093,
+    "p_le0": 0.167,
+    "block": 2,
+    "n": 309,
+    "coverage": 1.0
+   },
+   "composite-v1-week-bearish-week": {
+    "mean": 0.030593628649618603,
+    "lo": 0.002136749540548478,
+    "hi": 0.05982721635895592,
+    "p_le0": 0.015,
+    "block": 1,
+    "n": 303,
+    "coverage": 0.9805825242718447
+   },
    "consensus-wb-v1-week": {
     "mean": 0.024839810087161785,
     "lo": 0.00172598915246347,
@@ -741,11 +759,13 @@
    }
   },
   "joint": {
-   "n_models": 82,
+   "n_models": 84,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week",
-    "g-a01-g3-week": "a01-weekly-reversal-week"
+    "g-a01-g3-week": "a01-weekly-reversal-week",
+    "g-a01-g8-not-week": "composite-v1-week-bearish-not-week",
+    "g-a01-g8-week": "composite-v1-week-bearish-week"
    },
    "spa": {
     "lower": 0.0685,
@@ -764,6 +784,8 @@
     "a07c-volume-fade-week",
     "c02-turn-of-month-week",
     "champion-v1-week",
+    "composite-v1-week-bearish-not-week",
+    "composite-v1-week-bearish-week",
     "consensus-wb-v1-week",
     "consensus-wb-v2-week",
     "d02-stock-pcr-confirmatory-week",
@@ -787,8 +809,6 @@
     "g-a01-g6-week",
     "g-a01-g7-not-week",
     "g-a01-g7-week",
-    "g-a01-g8-not-week",
-    "g-a01-g8-week",
     "g01-residual-momentum-week",
     "g01b-residual-momentum-volatile-week",
     "g02-betting-against-beta-week",
@@ -835,7 +855,9 @@
     "t23-rs-rating-week",
     "t25-heikin-ashi-week",
     "a05b-max-effect-ranked-week",
-    "g-a01-g3-week"
+    "g-a01-g3-week",
+    "g-a01-g8-not-week",
+    "g-a01-g8-week"
    ]
   }
  },
@@ -912,6 +934,24 @@
     "block": 3,
     "n": 303,
     "coverage": 0.9805825242718447
+   },
+   "composite-v1-week-bullish-not-week": {
+    "mean": 0.010053909235020848,
+    "lo": -0.024021453155040316,
+    "hi": 0.0451192416531821,
+    "p_le0": 0.2655,
+    "block": 1,
+    "n": 123,
+    "coverage": 0.39805825242718446
+   },
+   "composite-v1-week-bullish-week": {
+    "mean": 0.038022801955629945,
+    "lo": 0.008776033544310143,
+    "hi": 0.06695163301936286,
+    "p_le0": 0.0055,
+    "block": 3,
+    "n": 133,
+    "coverage": 0.43042071197411
    },
    "d02-stock-pcr-confirmatory-week": {
     "mean": -0.03986094986987788,
@@ -1509,9 +1549,12 @@
    }
   },
   "joint": {
-   "n_models": 74,
+   "n_models": 76,
    "block": 1,
-   "twins": {},
+   "twins": {
+    "g-a05b-g5-not-week": "composite-v1-week-bullish-not-week",
+    "g-a05b-g5-week": "composite-v1-week-bullish-week"
+   },
    "spa": {
     "lower": 0.207,
     "consistent": 0.302,
@@ -1527,6 +1570,8 @@
     "a07-high-volume-premium-week",
     "a07c-volume-fade-week",
     "champion-v1-week",
+    "composite-v1-week-bullish-not-week",
+    "composite-v1-week-bullish-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
     "f06-trend-acceleration-week",
@@ -1541,8 +1586,6 @@
     "g-a05b-g2-week",
     "g-a05b-g4-not-week",
     "g-a05b-g4-week",
-    "g-a05b-g5-not-week",
-    "g-a05b-g5-week",
     "g-a05b-g6-not-week",
     "g-a05b-g6-week",
     "g-a05b-g7-not-week",
@@ -1591,7 +1634,9 @@
     "t19-obv-divergence-week",
     "t21-minervini-template-week",
     "t23-rs-rating-week",
-    "t25-heikin-ashi-week"
+    "t25-heikin-ashi-week",
+    "g-a05b-g5-not-week",
+    "g-a05b-g5-week"
    ]
   }
  },
@@ -1641,6 +1686,24 @@
     "block": 3,
     "n": 1435,
     "coverage": 0.978186775732788
+   },
+   "composite-v1-day-bullish-day": {
+    "mean": 0.0607765697143193,
+    "lo": 0.03392618399962221,
+    "hi": 0.0892496400264165,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 686,
+    "coverage": 0.4676209952283572
+   },
+   "composite-v1-day-bullish-not-day": {
+    "mean": 0.030838461903930327,
+    "lo": 0.010986466256051175,
+    "hi": 0.051592361044207696,
+    "p_le0": 0.0015,
+    "block": 1,
+    "n": 972,
+    "coverage": 0.6625766871165644
    },
    "consensus-dbu-v1-day": {
     "mean": 0.031969411929195266,
@@ -2328,7 +2391,7 @@
    }
   },
   "joint": {
-   "n_models": 81,
+   "n_models": 83,
    "block": 1,
    "twins": {},
    "spa": {
@@ -2337,6 +2400,8 @@
     "upper": 0.0
    },
    "stepm": [
+    "composite-v1-day-bullish-day",
+    "composite-v1-day-bullish-not-day",
     "consensus-dbu-v1-day",
     "d01c-day",
     "f14-trend-switched-fade-day",
@@ -2354,6 +2419,7 @@
    ],
    "mcs": [
     "a09-gap-fade-day",
+    "composite-v1-day-bullish-day",
     "consensus-dbu-v1-day",
     "d01c-day",
     "e3b-a02-low-ivol-day",
@@ -2426,6 +2492,24 @@
     "block": 1,
     "n": 1436,
     "coverage": 0.9788684389911384
+   },
+   "composite-v1-day-bearish-day": {
+    "mean": 0.08305342354592146,
+    "lo": 0.05856563578653708,
+    "hi": 0.10864542815737602,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 716,
+    "coverage": 0.48807089297886846
+   },
+   "composite-v1-day-bearish-not-day": {
+    "mean": 0.07153237436297052,
+    "lo": 0.04006836898276141,
+    "hi": 0.10250904452499777,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 602,
+    "coverage": 0.4103612815269257
    },
    "consensus-db-v1-day": {
     "mean": 0.04605736502238802,
@@ -3122,9 +3206,12 @@
    }
   },
   "joint": {
-   "n_models": 82,
+   "n_models": 84,
    "block": 1,
-   "twins": {},
+   "twins": {
+    "g-e2a-g2-day": "composite-v1-day-bearish-day",
+    "g-e2a-g2-not-day": "composite-v1-day-bearish-not-day"
+   },
    "spa": {
     "lower": 0.0,
     "consistent": 0.0,
@@ -3133,6 +3220,8 @@
    "stepm": [
     "a02-extreme-day-reversal-day",
     "a09-gap-fade-day",
+    "composite-v1-day-bearish-day",
+    "composite-v1-day-bearish-not-day",
     "consensus-db-v1-day",
     "d01c-day",
     "e1b-day",
@@ -3159,8 +3248,6 @@
     "g-e2a-g1-not-day",
     "g-e2a-g10-day",
     "g-e2a-g10-not-day",
-    "g-e2a-g2-day",
-    "g-e2a-g2-not-day",
     "g-e2a-g3-day",
     "g-e2a-g4-day",
     "g-e2a-g4-not-day",
@@ -3176,7 +3263,9 @@
     "t05c-upcross-fade-day",
     "t06-bollinger-pctb-day",
     "t13-williams-r-day",
-    "t15-adx-regime-day"
+    "t15-adx-regime-day",
+    "g-e2a-g2-day",
+    "g-e2a-g2-not-day"
    ],
    "mcs": [
     "consensus-db-v1-day",
