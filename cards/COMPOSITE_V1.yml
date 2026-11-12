@@ -1,0 +1,85 @@
+source_url: ''
+author: lab-original combined rule (C2); ingredients from the C1 table (cards/COMPOSITE_INGREDIENTS.yml)
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-11-12'
+horizon: day and week (each composite uses its trigger's horizon)
+claim_as_stated: 'Pre-registered before any composite replay: on each live table, the trigger AND every C1 gate that
+  qualified for it improves the trigger alone. Success rule per table, all three required, on the train split, top
+  selection, the trigger''s own side: (1) the composite''s edge is above the trigger''s edge; (2) the composite-minus-trigger
+  edge difference is positive in at least 4 of the 6 train years (a year without composite picks counts as not positive);
+  (3) the composite fires on at least 40% of the trigger''s dates (composite dates / trigger dates). A table that fails
+  keeps its plain trigger, and the report says so. The complement (trigger AND NOT all gates, among picks every gate
+  judged) is reported next to it and is a placebo, not a hypothesis.'
+rules_plain: 'One combined rule per live table, the trigger AND every qualifying gate, exactly as listed in
+  research/diagnostics/composite_ingredients.md (34 cells, 7 qualify): day bearish = E2A AND G2; day bullish = T04 AND
+  G3 AND G4 AND G7 AND G9; week bullish = A05B AND G5; week bearish = A01 AND G8. Gates are imported unchanged from
+  strategies/g_gates.py; no gate is added, dropped or re-thresholded. A pick is kept only if every listed gate returns
+  True; a pick any gate cannot judge abstains (in the composite and in the complement). Survivors keep the trigger''s
+  own unchanged score, so the engine ranks them as it ranks the trigger. Rules in strategies/composite_v1.py.'
+default_params:
+  day_bearish: {trigger: e2a, gates: [g2]}
+  day_bullish: {trigger: t04, gates: [g3, g4, g7, g9]}
+  week_bullish: {trigger: a05b, gates: [g5]}
+  week_bearish: {trigger: a01, gates: [g8]}
+  gate_thresholds: as C1 (RESEARCH.md section 4; G9 in RESEARCH_2_VERIFIED.md section 4); none changed
+  success_rule:
+    selection: top
+    composite_edge_above_trigger_edge: true
+    min_years_composite_above_trigger: 4
+    train_years: 6
+    min_date_coverage_of_trigger: 0.40
+data_needed: ohlcv plus futures OI
+testable_now: 'yes'
+source: finance-portfolio-hub projects/combined-strategy/RESEARCH.md section 5 (C2); research/diagnostics/composite_ingredients.md
+link: ''
+prior_claim: 'C1 qualifying cells (train, top, pts vs trigger): G_E2A_G2 +8.31 vs +7.46; G_T04_G3 +3.71, G_T04_G4 +3.65,
+  G_T04_G7 +3.40, G_T04_G9 +5.12 vs +3.37; G_A05B_G5 +3.80 vs +2.23; G_A01_G8 +3.06 vs +2.48. Each was judged alone;
+  their AND is untested.'
+composites:
+- id: COMPOSITE_V1_DAY_BEARISH
+  complement: COMPOSITE_V1_DAY_BEARISH_NOT
+  trigger: E2A
+  gates: [G2]
+  table: day bearish
+  replays:
+  - composite-v1-day-bearish-day
+  - composite-v1-day-bearish-not-day
+- id: COMPOSITE_V1_DAY_BULLISH
+  complement: COMPOSITE_V1_DAY_BULLISH_NOT
+  trigger: T04
+  gates: [G3, G4, G7, G9]
+  table: day bullish
+  replays:
+  - composite-v1-day-bullish-day
+  - composite-v1-day-bullish-not-day
+- id: COMPOSITE_V1_WEEK_BULLISH
+  complement: COMPOSITE_V1_WEEK_BULLISH_NOT
+  trigger: A05B
+  gates: [G5]
+  table: week bullish
+  replays:
+  - composite-v1-week-bullish-week
+  - composite-v1-week-bullish-not-week
+- id: COMPOSITE_V1_WEEK_BEARISH
+  complement: COMPOSITE_V1_WEEK_BEARISH_NOT
+  trigger: A01
+  gates: [G8]
+  table: week bearish
+  replays:
+  - composite-v1-week-bearish-week
+  - composite-v1-week-bearish-not-week
+red_flags:
+- No claim is assumed true (SPEC.md section 5).
+- 'Trial count: 4 composites + 4 complements = 8 new train replays, on top of C1''s 34 cells and their 34 complements
+  (68 replays); every scored replay is recorded in ledger/trials.csv. The gates were chosen after reading the C1 train
+  table, so the composites are selected on the same train data they are judged on.'
+- Three of the four composites are a single C1 cell under a new name (E2A AND G2, A05B AND G5, A01 AND G8); their replays
+  should reproduce those cells' picks exactly, so only day bullish (four gates) is a genuinely new combination.
+- 'Day bullish: G9 needs 252 rows, so the composite has no 2015 picks; under the success rule 2015 counts as not positive,
+  leaving at most 5 of 6 years.'
+- Complements are placebos for the gate set, not hypotheses; a composite that only shrinks coverage is not a success,
+  which is why the 40% date-coverage floor is part of the rule.
+- G5 gives one verdict per date for every pick, so the week-bullish composite is a date filter; coverage is read next to edge.
+- No difference interval: picks.json has no per-pick outcomes (see research/diagnostics/composite_ingredients.md).
+- Train split only; validation is a separate, later step.
+status: 'built; 8 train replays held in experiments/held/c2/ awaiting review'

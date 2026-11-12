@@ -1,0 +1,5 @@
+id: composite-v1-week-bullish-week
+strategy: strategies.composite_v1_week_bullish
+split: train
+horizon: week
+dates: {start: '2015-01-01', end: '2020-12-31'}

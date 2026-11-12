@@ -1,0 +1,49 @@
+{
+  "split": "train",
+  "selection": "top",
+  "rule": {
+    "min_years_above_trigger": 4,
+    "of_years": 6,
+    "min_date_coverage": 0.4
+  },
+  "trials": {
+    "c1_cells": 34,
+    "c2_composites": 4,
+    "c2_complements": 4
+  },
+  "tables": [],
+  "pending": [
+    {
+      "table": "day bearish",
+      "composite": "COMPOSITE_V1_DAY_BEARISH",
+      "missing": [
+        "composite-v1-day-bearish-day",
+        "composite-v1-day-bearish-not-day"
+      ]
+    },
+    {
+      "table": "day bullish",
+      "composite": "COMPOSITE_V1_DAY_BULLISH",
+      "missing": [
+        "composite-v1-day-bullish-day",
+        "composite-v1-day-bullish-not-day"
+      ]
+    },
+    {
+      "table": "week bullish",
+      "composite": "COMPOSITE_V1_WEEK_BULLISH",
+      "missing": [
+        "composite-v1-week-bullish-week",
+        "composite-v1-week-bullish-not-week"
+      ]
+    },
+    {
+      "table": "week bearish",
+      "composite": "COMPOSITE_V1_WEEK_BEARISH",
+      "missing": [
+        "composite-v1-week-bearish-week",
+        "composite-v1-week-bearish-not-week"
+      ]
+    }
+  ]
+}
