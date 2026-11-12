@@ -1,5 +1,0 @@
-id: g-t04-g4-not-day
-strategy: strategies.g_t04_g4_not
-split: train
-horizon: day
-dates: {start: '2015-01-01', end: '2020-12-31'}

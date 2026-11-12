@@ -1,0 +1,9 @@
+{
+  "id": "g-t04-g7-day",
+  "strategy": "strategies.g_t04_g7",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 9592,
+  "n_dates": 1152,
+  "pick_log_sha256": "3f3af92dd605f01afc3e5985c34ec13bc1091bd6c40f10231a5aa9ddc515a51e"
+}
