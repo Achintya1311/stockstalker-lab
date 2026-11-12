@@ -18,18 +18,41 @@ A table that fails keeps its plain trigger.
 
 | Table | Composite | Trig | Comp. | Compl. | t | Date coverage | Yrs above trig | 1 | 2 | 3 | Decision |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| (none yet) | | | | | | | | | | | |
+| day bearish | E2A AND G2 | +7.46 | +8.31 | +7.15 | +6.45 | 76% | 4 of 6 | yes | yes | yes | **adopt composite** |
+| day bullish | T04 AND G3 AND G4 AND G7 AND G9 | +3.37 | +6.08 | +3.08 | +4.32 | 63% | 4 of 6 | yes | yes | yes | **adopt composite** |
+| week bullish | A05B AND G5 | +2.23 | +3.80 | +1.01 | +2.03 | 45% | 4 of 6 | yes | yes | yes | **adopt composite** |
+| week bearish | A01 AND G8 | +2.48 | +3.06 | +1.41 | +2.12 | 98% | 4 of 6 | yes | yes | yes | **adopt composite** |
 
 ### Per-year composite minus trigger (pts)
 
 | Table | Year | Composite - trigger |
 |---|---|---|
+| day bearish | 2015 | -1.62 |
+| day bearish | 2016 | +1.35 |
+| day bearish | 2017 | +2.17 |
+| day bearish | 2018 | +2.07 |
+| day bearish | 2019 | +0.55 |
+| day bearish | 2020 | -1.34 |
+| day bullish | 2015 | - |
+| day bullish | 2016 | -0.27 |
+| day bullish | 2017 | +1.25 |
+| day bullish | 2018 | +3.89 |
+| day bullish | 2019 | +4.62 |
+| day bullish | 2020 | +3.89 |
+| week bullish | 2015 | - |
+| week bullish | 2016 | +2.17 |
+| week bullish | 2017 | +2.09 |
+| week bullish | 2018 | -0.93 |
+| week bullish | 2019 | +2.60 |
+| week bullish | 2020 | +1.35 |
+| week bearish | 2015 | +2.33 |
+| week bearish | 2016 | +5.82 |
+| week bearish | 2017 | -7.03 |
+| week bearish | 2018 | -0.75 |
+| week bearish | 2019 | +0.30 |
+| week bearish | 2020 | +3.13 |
 
 ## Pending (replay not landed yet)
 
 | Table | Composite | Missing replays |
 |---|---|---|
-| day bearish | COMPOSITE_V1_DAY_BEARISH | `composite-v1-day-bearish-day`, `composite-v1-day-bearish-not-day` |
-| day bullish | COMPOSITE_V1_DAY_BULLISH | `composite-v1-day-bullish-day`, `composite-v1-day-bullish-not-day` |
-| week bullish | COMPOSITE_V1_WEEK_BULLISH | `composite-v1-week-bullish-week`, `composite-v1-week-bullish-not-week` |
-| week bearish | COMPOSITE_V1_WEEK_BEARISH | `composite-v1-week-bearish-week`, `composite-v1-week-bearish-not-week` |

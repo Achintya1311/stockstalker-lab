@@ -11,39 +11,140 @@
     "c2_composites": 4,
     "c2_complements": 4
   },
-  "tables": [],
-  "pending": [
+  "tables": [
     {
       "table": "day bearish",
       "composite": "COMPOSITE_V1_DAY_BEARISH",
-      "missing": [
-        "composite-v1-day-bearish-day",
-        "composite-v1-day-bearish-not-day"
-      ]
+      "complement": "COMPOSITE_V1_DAY_BEARISH_NOT",
+      "trigger": "E2A",
+      "gates": [
+        "G2"
+      ],
+      "status": "results",
+      "trigger_edge_pts": 7.46,
+      "composite_edge_pts": 8.31,
+      "complement_edge_pts": 7.15,
+      "complement_landed": true,
+      "composite_t": 6.45,
+      "composite_n_picks": 1790,
+      "trigger_n_dates": 936,
+      "composite_n_dates": 716,
+      "date_coverage": 0.765,
+      "composite_minus_trigger_by_year_pts": {
+        "2015": -1.62,
+        "2016": 1.35,
+        "2017": 2.17,
+        "2018": 2.07,
+        "2019": 0.55,
+        "2020": -1.34
+      },
+      "years_composite_above_trigger": 4,
+      "rule_1_edge_above_trigger": true,
+      "rule_2_years_above": true,
+      "rule_3_coverage": true,
+      "passes": true,
+      "decision": "adopt composite"
     },
     {
       "table": "day bullish",
       "composite": "COMPOSITE_V1_DAY_BULLISH",
-      "missing": [
-        "composite-v1-day-bullish-day",
-        "composite-v1-day-bullish-not-day"
-      ]
+      "complement": "COMPOSITE_V1_DAY_BULLISH_NOT",
+      "trigger": "T04",
+      "gates": [
+        "G3",
+        "G4",
+        "G7",
+        "G9"
+      ],
+      "status": "results",
+      "trigger_edge_pts": 3.37,
+      "composite_edge_pts": 6.08,
+      "complement_edge_pts": 3.08,
+      "complement_landed": true,
+      "composite_t": 4.32,
+      "composite_n_picks": 1513,
+      "trigger_n_dates": 1087,
+      "composite_n_dates": 686,
+      "date_coverage": 0.631,
+      "composite_minus_trigger_by_year_pts": {
+        "2016": -0.27,
+        "2017": 1.25,
+        "2018": 3.89,
+        "2019": 4.62,
+        "2020": 3.89
+      },
+      "years_composite_above_trigger": 4,
+      "rule_1_edge_above_trigger": true,
+      "rule_2_years_above": true,
+      "rule_3_coverage": true,
+      "passes": true,
+      "decision": "adopt composite"
     },
     {
       "table": "week bullish",
       "composite": "COMPOSITE_V1_WEEK_BULLISH",
-      "missing": [
-        "composite-v1-week-bullish-week",
-        "composite-v1-week-bullish-not-week"
-      ]
+      "complement": "COMPOSITE_V1_WEEK_BULLISH_NOT",
+      "trigger": "A05B",
+      "gates": [
+        "G5"
+      ],
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "composite_edge_pts": 3.8,
+      "complement_edge_pts": 1.01,
+      "complement_landed": true,
+      "composite_t": 2.03,
+      "composite_n_picks": 665,
+      "trigger_n_dates": 295,
+      "composite_n_dates": 133,
+      "date_coverage": 0.451,
+      "composite_minus_trigger_by_year_pts": {
+        "2016": 2.17,
+        "2017": 2.09,
+        "2018": -0.93,
+        "2019": 2.6,
+        "2020": 1.35
+      },
+      "years_composite_above_trigger": 4,
+      "rule_1_edge_above_trigger": true,
+      "rule_2_years_above": true,
+      "rule_3_coverage": true,
+      "passes": true,
+      "decision": "adopt composite"
     },
     {
       "table": "week bearish",
       "composite": "COMPOSITE_V1_WEEK_BEARISH",
-      "missing": [
-        "composite-v1-week-bearish-week",
-        "composite-v1-week-bearish-not-week"
-      ]
+      "complement": "COMPOSITE_V1_WEEK_BEARISH_NOT",
+      "trigger": "A01",
+      "gates": [
+        "G8"
+      ],
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "composite_edge_pts": 3.06,
+      "complement_edge_pts": 1.41,
+      "complement_landed": true,
+      "composite_t": 2.12,
+      "composite_n_picks": 1419,
+      "trigger_n_dates": 309,
+      "composite_n_dates": 303,
+      "date_coverage": 0.981,
+      "composite_minus_trigger_by_year_pts": {
+        "2015": 2.33,
+        "2016": 5.82,
+        "2017": -7.03,
+        "2018": -0.75,
+        "2019": 0.3,
+        "2020": 3.13
+      },
+      "years_composite_above_trigger": 4,
+      "rule_1_edge_above_trigger": true,
+      "rule_2_years_above": true,
+      "rule_3_coverage": true,
+      "passes": true,
+      "decision": "adopt composite"
     }
-  ]
+  ],
+  "pending": []
 }
