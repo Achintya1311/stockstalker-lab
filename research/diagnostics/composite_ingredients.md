@@ -21,6 +21,11 @@ Columns: trigger, keep and complement edge (pts); keep t; keep picks; share of t
 
 | Cell | Trig | Keep | Compl | t | Picks | Date share | Dir. move | Yrs+ | K>T yrs | K>C yrs (p) | A | B | C | qualifies |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| G_E2A_G1 | +7.46 | +8.64 | +6.64 | +4.99 | 977 | 52% | +0.19% | 6 of 6 | 3 of 6 | 4 of 6 (0.344) | no | no | yes | **no** |
+| G_E2A_G2 | +7.46 | +8.31 | +7.15 | +6.45 | 1790 | 76% | +0.17% | 6 of 6 | 4 of 6 | 5 of 6 (0.109) | yes | yes | yes | **yes** |
+| G_E2A_G3 | +7.46 | +7.71 | -0.83 | +7.13 | 2749 | 100% | +0.13% | 6 of 6 | 3 of 6 | 4 of 6 (0.344) | no | no | yes | **no** |
+| G_E2A_G4 | +7.46 | +6.63 | +6.13 | +5.23 | 1969 | 86% | +0.16% | 6 of 6 | 2 of 6 | 4 of 6 (0.344) | no | no | yes | **no** |
+| G_E2A_G5 | +7.46 | +6.77 | +9.51 | +3.91 | 1063 | 39% | +0.13% | 5 of 6 | 2 of 6 | 2 of 5 (0.812) | no | no | no | **no** |
 | G_E2A_G6 | +7.46 | +6.32 | +7.45 | +1.58 | 173 | 12% | +0.10% | 5 of 6 | 3 of 6 | 3 of 6 (0.656) | no | no | no | **no** |
 | G_T04_G6 | +3.37 | +2.60 | +4.08 | +1.66 | 1211 | 52% | -0.40% | 6 of 6 | 2 of 6 | 1 of 6 (0.984) | no | no | no | **no** |
 | G_A05B_G1 | +2.23 | +2.41 | +1.09 | +1.82 | 1336 | 92% | -0.65% | 4 of 6 | 3 of 6 | 3 of 6 (0.656) | no | no | yes | **no** |
@@ -43,6 +48,36 @@ Columns: trigger, keep and complement edge (pts); keep t; keep picks; share of t
 
 | Cell | Year | Keep - trigger | Keep - complement |
 |---|---|---|---|
+| G_E2A_G1 | 2015 | -3.60 | -3.64 |
+| G_E2A_G1 | 2016 | +3.37 | +4.10 |
+| G_E2A_G1 | 2017 | +1.56 | +2.33 |
+| G_E2A_G1 | 2018 | -0.33 | -2.26 |
+| G_E2A_G1 | 2019 | +2.20 | +6.56 |
+| G_E2A_G1 | 2020 | -1.59 | +0.88 |
+| G_E2A_G2 | 2015 | -1.62 | -6.28 |
+| G_E2A_G2 | 2016 | +1.35 | +2.19 |
+| G_E2A_G2 | 2017 | +2.17 | +1.66 |
+| G_E2A_G2 | 2018 | +2.07 | +2.64 |
+| G_E2A_G2 | 2019 | +0.55 | +1.39 |
+| G_E2A_G2 | 2020 | -1.34 | +1.41 |
+| G_E2A_G3 | 2015 | -0.52 | -11.36 |
+| G_E2A_G3 | 2016 | +1.53 | +36.80 |
+| G_E2A_G3 | 2017 | -0.11 | +8.35 |
+| G_E2A_G3 | 2018 | +0.27 | -8.22 |
+| G_E2A_G3 | 2019 | +0.47 | +12.73 |
+| G_E2A_G3 | 2020 | -0.12 | +0.50 |
+| G_E2A_G4 | 2015 | +1.23 | +3.85 |
+| G_E2A_G4 | 2016 | -2.21 | -1.23 |
+| G_E2A_G4 | 2017 | -1.02 | +0.14 |
+| G_E2A_G4 | 2018 | -0.64 | -2.06 |
+| G_E2A_G4 | 2019 | +0.04 | +3.08 |
+| G_E2A_G4 | 2020 | -1.67 | +0.05 |
+| G_E2A_G5 | 2015 | - | - |
+| G_E2A_G5 | 2016 | -3.19 | -7.99 |
+| G_E2A_G5 | 2017 | +3.28 | +4.66 |
+| G_E2A_G5 | 2018 | -2.40 | -7.96 |
+| G_E2A_G5 | 2019 | -7.07 | -13.17 |
+| G_E2A_G5 | 2020 | +4.73 | +8.75 |
 | G_E2A_G6 | 2015 | -23.31 | -25.76 |
 | G_E2A_G6 | 2016 | +3.81 | +4.49 |
 | G_E2A_G6 | 2017 | -1.79 | -1.60 |
@@ -161,12 +196,7 @@ The engine's `picks.json` stores only date, symbol and score for each pick, with
 
 | Cell | Batch | Missing replays |
 |---|---|---|
-| G_E2A_G1 | 1 | `g-e2a-g1-day`, `g-e2a-g1-not-day` |
-| G_E2A_G2 | 1 | `g-e2a-g2-day`, `g-e2a-g2-not-day` |
-| G_E2A_G3 | 1 | `g-e2a-g3-day`, `g-e2a-g3-not-day` |
-| G_E2A_G4 | 1 | `g-e2a-g4-day`, `g-e2a-g4-not-day` |
-| G_E2A_G5 | 1 | `g-e2a-g5-day`, `g-e2a-g5-not-day` |
-| G_E2A_G8 | 1 | `g-e2a-g8-day`, `g-e2a-g8-not-day` |
+| G_E2A_G8 | 1 | `g-e2a-g8-not-day` |
 | G_E2A_G10 | 2 | `g-e2a-g10-day`, `g-e2a-g10-not-day` |
 | G_T04_G3 | 1 | `g-t04-g3-day`, `g-t04-g3-not-day` |
 | G_T04_G4 | 1 | `g-t04-g4-day`, `g-t04-g4-not-day` |
