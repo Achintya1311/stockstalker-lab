@@ -1,5 +1,0 @@
-id: composite-v1-week-bearish-week
-strategy: strategies.composite_v1_week_bearish
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}

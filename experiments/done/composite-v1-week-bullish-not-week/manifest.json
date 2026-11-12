@@ -1,0 +1,9 @@
+{
+  "id": "composite-v1-week-bullish-not-week",
+  "strategy": "strategies.composite_v1_week_bullish_not",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 12947,
+  "n_dates": 123,
+  "pick_log_sha256": "e7606e6ebe6a7b0f2e72b9873128e831712eb56dbc0e75e33c53e348d3432ba6"
+}
