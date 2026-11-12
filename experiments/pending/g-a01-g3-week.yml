@@ -1,5 +1,0 @@
-id: g-a01-g3-week
-strategy: strategies.g_a01_g3
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}

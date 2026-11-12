@@ -1,5 +1,0 @@
-id: g-e2a-g6-day
-strategy: strategies.g_e2a_g6
-split: train
-horizon: day
-dates: {start: '2015-01-01', end: '2020-12-31'}

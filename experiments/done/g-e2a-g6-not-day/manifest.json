@@ -1,0 +1,9 @@
+{
+  "id": "g-e2a-g6-not-day",
+  "strategy": "strategies.g_e2a_g6_not",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 4538,
+  "n_dates": 977,
+  "pick_log_sha256": "3fcbc342367e31522b012e66bdcefebef3a2801ae0488098649bdcb47cd509e5"
+}

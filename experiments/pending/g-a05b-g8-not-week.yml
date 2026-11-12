@@ -1,5 +1,0 @@
-id: g-a05b-g8-not-week
-strategy: strategies.g_a05b_g8_not
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}
