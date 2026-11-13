@@ -18,14 +18,45 @@ These are aggregate statements about rules, not about any single stock; nothing 
 |---|---|---|---|---|---|---|
 | day | day bullish | keep plain T04 | - | no | - | provisional (replays pending) |
 | day | day bearish | keep plain E2A | - | no | - | provisional (replays pending) |
-| week | week bullish | keep plain A05B | - | no | - | provisional (replays pending) |
-| week | week bearish | keep plain A01 | - | no | - | provisional (replays pending) |
+| week | week bullish | config | COMPOSITE_V2_WEEK_BULLISH_G5_Q0P4 | yes | +2.06 | final |
+| week | week bearish | keep plain A01 | - | no | - | final |
 
 ## Configs with results
 
 | Config | Key | Fam. | Trig | Config | t | Coverage | Fit gain | 2019 | 2020 | Fit | Check | Cov. | Eligible |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| (none yet) | | | | | | | | | | | | | |
+| COMPOSITE_V2_WEEK_BULLISH_VOTE_K1 | week_vote_k1 | A | +2.23 | +2.30 | +1.90 | 100% | +0.15 | +0.00 | +0.00 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_VOTE_K2 | week_vote_k2 | A | +2.23 | +2.01 | +1.54 | 96% | +0.21 | -0.77 | +0.00 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_VOTE_K3 | week_vote_k3 | A | +2.23 | +3.22 | +2.34 | 88% | +0.06 | -1.15 | +4.39 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_VOTE_K4 | week_vote_k4 | A | +2.23 | +0.58 | +0.36 | 75% | -2.01 | -0.61 | -2.46 | no | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_VOTE_K5 | week_vote_k5 | A | +2.23 | +1.23 | +0.36 | 34% | +0.47 | +0.16 | +0.44 | yes | yes | no | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_VOTE_K6 | week_vote_k6 | A | +2.23 | +8.43 | +1.03 | 8% | +6.85 | +10.67 | +9.68 | yes | yes | no | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_BOOST_W0P25 | week_boost_w0p25 | B | +2.23 | +1.48 | +1.24 | 100% | -1.83 | +0.38 | +2.31 | no | yes | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_BOOST_W0P5 | week_boost_w0p5 | B | +2.23 | +1.82 | +1.44 | 100% | -1.74 | +1.54 | +2.69 | no | yes | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_BOOST_W1P0 | week_boost_w1p0 | B | +2.23 | +2.03 | +1.60 | 100% | -0.72 | -0.77 | +2.69 | no | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_G2_CUT0P6 | week_g2_cut0p6 | C | +2.23 | +1.28 | +1.00 | 100% | -0.28 | -4.62 | +1.15 | no | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_G2_CUT0P8 | week_g2_cut0p8 | C | +2.23 | +1.14 | +0.92 | 100% | -0.75 | -3.08 | +0.77 | no | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_G8_X1P25 | week_g8_x1p25 | C | +2.23 | +1.24 | +0.95 | 99% | -1.56 | -1.18 | +2.60 | no | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_G8_X2P0 | week_g8_x2p0 | C | +2.23 | -1.74 | -1.00 | 94% | -5.22 | -0.89 | -5.90 | no | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_G5_Q0P4 | week_g5_q0p4 | C | +2.23 | +3.96 | +2.33 | 52% | +2.06 | +2.29 | +0.48 | yes | yes | yes | **yes** |
+| COMPOSITE_V2_WEEK_BULLISH_G5_Q0P6 | week_g5_q0p6 | C | +2.23 | +3.46 | +1.70 | 38% | +0.63 | +2.79 | +1.00 | yes | yes | no | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_G9_NEAR0P8 | week_g9_near0p8 | C | +2.23 | +3.09 | +2.21 | 88% | -1.21 | +0.77 | +5.50 | no | yes | yes | **no** |
+| COMPOSITE_V2_WEEK_BULLISH_G9_NEAR0P9 | week_g9_near0p9 | C | +2.23 | +1.68 | +1.20 | 86% | -1.90 | -1.41 | +3.05 | no | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_VOTE_K1 | week_vote_k1 | A | +2.48 | +2.48 | +1.83 | 100% | +0.00 | +0.00 | +0.00 | no | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_VOTE_K2 | week_vote_k2 | A | +2.48 | +3.20 | +2.37 | 100% | +0.62 | -0.77 | +2.69 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_VOTE_K3 | week_vote_k3 | A | +2.48 | +3.13 | +2.29 | 100% | +0.71 | -1.54 | +2.73 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_VOTE_K4 | week_vote_k4 | A | +2.48 | +3.36 | +2.39 | 95% | +0.93 | -2.69 | +3.80 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_VOTE_K5 | week_vote_k5 | A | +2.48 | +1.82 | +0.95 | 78% | +0.34 | -4.68 | +1.08 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_VOTE_K6 | week_vote_k6 | A | +2.48 | +5.88 | +2.14 | 42% | -3.54 | +6.09 | +9.16 | no | yes | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_BOOST_W0P25 | week_boost_w0p25 | B | +2.48 | +2.35 | +1.73 | 100% | +0.17 | -3.46 | +1.92 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_BOOST_W0P5 | week_boost_w0p5 | B | +2.48 | +2.42 | +1.82 | 100% | +0.36 | -3.46 | +1.54 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_BOOST_W1P0 | week_boost_w1p0 | B | +2.48 | +2.74 | +2.04 | 100% | +0.74 | -3.08 | +1.54 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_G2_CUT0P6 | week_g2_cut0p6 | C | +2.48 | +2.63 | +2.02 | 96% | +0.93 | -4.23 | +1.56 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_G2_CUT0P8 | week_g2_cut0p8 | C | +2.48 | +2.32 | +1.69 | 96% | +0.45 | -2.31 | -1.19 | yes | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_G8_X1P25 | week_g8_x1p25 | C | +2.48 | +3.18 | +2.21 | 99% | -0.14 | -0.61 | +5.48 | no | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_G8_X2P0 | week_g8_x2p0 | C | +2.48 | +1.83 | +1.11 | 96% | -1.69 | +0.09 | +3.53 | no | yes | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_G5_Q0P4 | week_g5_q0p4 | C | +2.48 | +2.47 | +1.27 | 50% | -0.90 | -2.31 | +5.47 | no | no | yes | **no** |
+| COMPOSITE_V2_WEEK_BEARISH_G5_Q0P6 | week_g5_q0p6 | C | +2.48 | +2.83 | +1.22 | 36% | -1.70 | -2.37 | +9.46 | no | no | no | **no** |
 
 ## Pending (replay not landed yet)
 
@@ -59,35 +90,3 @@ These are aggregate statements about rules, not about any single stock; nothing 
 | day bearish | COMPOSITE_V2_DAY_BEARISH_G8_X2P0 | `composite-v2-day-bearish-g8-x2p0-day` |
 | day bearish | COMPOSITE_V2_DAY_BEARISH_G5_Q0P4 | `composite-v2-day-bearish-g5-q0p4-day` |
 | day bearish | COMPOSITE_V2_DAY_BEARISH_G5_Q0P6 | `composite-v2-day-bearish-g5-q0p6-day` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_VOTE_K1 | `composite-v2-week-bullish-vote-k1-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_VOTE_K2 | `composite-v2-week-bullish-vote-k2-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_VOTE_K3 | `composite-v2-week-bullish-vote-k3-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_VOTE_K4 | `composite-v2-week-bullish-vote-k4-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_VOTE_K5 | `composite-v2-week-bullish-vote-k5-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_VOTE_K6 | `composite-v2-week-bullish-vote-k6-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_BOOST_W0P25 | `composite-v2-week-bullish-boost-w0p25-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_BOOST_W0P5 | `composite-v2-week-bullish-boost-w0p5-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_BOOST_W1P0 | `composite-v2-week-bullish-boost-w1p0-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_G2_CUT0P6 | `composite-v2-week-bullish-g2-cut0p6-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_G2_CUT0P8 | `composite-v2-week-bullish-g2-cut0p8-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_G8_X1P25 | `composite-v2-week-bullish-g8-x1p25-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_G8_X2P0 | `composite-v2-week-bullish-g8-x2p0-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_G5_Q0P4 | `composite-v2-week-bullish-g5-q0p4-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_G5_Q0P6 | `composite-v2-week-bullish-g5-q0p6-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_G9_NEAR0P8 | `composite-v2-week-bullish-g9-near0p8-week` |
-| week bullish | COMPOSITE_V2_WEEK_BULLISH_G9_NEAR0P9 | `composite-v2-week-bullish-g9-near0p9-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_VOTE_K1 | `composite-v2-week-bearish-vote-k1-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_VOTE_K2 | `composite-v2-week-bearish-vote-k2-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_VOTE_K3 | `composite-v2-week-bearish-vote-k3-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_VOTE_K4 | `composite-v2-week-bearish-vote-k4-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_VOTE_K5 | `composite-v2-week-bearish-vote-k5-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_VOTE_K6 | `composite-v2-week-bearish-vote-k6-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_BOOST_W0P25 | `composite-v2-week-bearish-boost-w0p25-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_BOOST_W0P5 | `composite-v2-week-bearish-boost-w0p5-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_BOOST_W1P0 | `composite-v2-week-bearish-boost-w1p0-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_G2_CUT0P6 | `composite-v2-week-bearish-g2-cut0p6-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_G2_CUT0P8 | `composite-v2-week-bearish-g2-cut0p8-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_G8_X1P25 | `composite-v2-week-bearish-g8-x1p25-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_G8_X2P0 | `composite-v2-week-bearish-g8-x2p0-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_G5_Q0P4 | `composite-v2-week-bearish-g5-q0p4-week` |
-| week bearish | COMPOSITE_V2_WEEK_BEARISH_G5_Q0P6 | `composite-v2-week-bearish-g5-q0p6-week` |

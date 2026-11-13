@@ -22,7 +22,1236 @@
     "composite_v2_day": 28,
     "composite_v2_week": 32
   },
-  "configs": [],
+  "configs": [
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K1",
+      "config_key": "week_vote_k1",
+      "family": "A",
+      "setting": "at least 1 of 6 gates (G1 G4 G5 G6 G9 G10) hold",
+      "experiment": "composite-v2-week-bullish-vote-k1-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 2.3,
+      "config_t": 1.9,
+      "config_n_picks": 1475,
+      "trigger_n_dates": 295,
+      "config_n_dates": 295,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.15,
+      "check_minus_trigger_pts": {
+        "2019": 0.0,
+        "2020": 0.0
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 0.59,
+        "2016": -0.38,
+        "2017": 0.0,
+        "2018": 0.38,
+        "2019": 0.0,
+        "2020": 0.0
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K2",
+      "config_key": "week_vote_k2",
+      "family": "A",
+      "setting": "at least 2 of 6 gates (G1 G4 G5 G6 G9 G10) hold",
+      "experiment": "composite-v2-week-bullish-vote-k2-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 2.01,
+      "config_t": 1.54,
+      "config_n_picks": 1370,
+      "trigger_n_dates": 295,
+      "config_n_dates": 283,
+      "date_coverage": 0.959,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.21,
+      "check_minus_trigger_pts": {
+        "2019": -0.77,
+        "2020": 0.0
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 3.16,
+        "2016": -2.31,
+        "2017": 0.0,
+        "2018": 0.0,
+        "2019": -0.77,
+        "2020": 0.0
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K3",
+      "config_key": "week_vote_k3",
+      "family": "A",
+      "setting": "at least 3 of 6 gates (G1 G4 G5 G6 G9 G10) hold",
+      "experiment": "composite-v2-week-bullish-vote-k3-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 3.22,
+      "config_t": 2.34,
+      "config_n_picks": 1279,
+      "trigger_n_dates": 295,
+      "config_n_dates": 260,
+      "date_coverage": 0.881,
+      "fit_years_used": [
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.06,
+      "check_minus_trigger_pts": {
+        "2019": -1.15,
+        "2020": 4.39
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2016": 0.97,
+        "2017": -1.15,
+        "2018": 0.38,
+        "2019": -1.15,
+        "2020": 4.39
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K4",
+      "config_key": "week_vote_k4",
+      "family": "A",
+      "setting": "at least 4 of 6 gates (G1 G4 G5 G6 G9 G10) hold",
+      "experiment": "composite-v2-week-bullish-vote-k4-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 0.58,
+      "config_t": 0.36,
+      "config_n_picks": 1028,
+      "trigger_n_dates": 295,
+      "config_n_dates": 222,
+      "date_coverage": 0.753,
+      "fit_years_used": [
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -2.01,
+      "check_minus_trigger_pts": {
+        "2019": -0.61,
+        "2020": -2.46
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2016": -6.24,
+        "2017": -2.31,
+        "2018": 2.52,
+        "2019": -0.61,
+        "2020": -2.46
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K5",
+      "config_key": "week_vote_k5",
+      "family": "A",
+      "setting": "at least 5 of 6 gates (G1 G4 G5 G6 G9 G10) hold",
+      "experiment": "composite-v2-week-bullish-vote-k5-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 1.23,
+      "config_t": 0.36,
+      "config_n_picks": 307,
+      "trigger_n_dates": 295,
+      "config_n_dates": 101,
+      "date_coverage": 0.342,
+      "fit_years_used": [
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.47,
+      "check_minus_trigger_pts": {
+        "2019": 0.16,
+        "2020": 0.44
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2016": 8.7,
+        "2017": -7.08,
+        "2018": -0.2,
+        "2019": 0.16,
+        "2020": 0.44
+      },
+      "eligible_fit": true,
+      "eligible_check": true,
+      "eligible_coverage": false,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K6",
+      "config_key": "week_vote_k6",
+      "family": "A",
+      "setting": "at least 6 of 6 gates (G1 G4 G5 G6 G9 G10) hold",
+      "experiment": "composite-v2-week-bullish-vote-k6-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 8.43,
+      "config_t": 1.03,
+      "config_n_picks": 29,
+      "trigger_n_dates": 295,
+      "config_n_dates": 22,
+      "date_coverage": 0.075,
+      "fit_years_used": [
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 6.85,
+      "check_minus_trigger_pts": {
+        "2019": 10.67,
+        "2020": 9.68
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2016": -6.19,
+        "2017": 3.88,
+        "2018": 22.87,
+        "2019": 10.67,
+        "2020": 9.68
+      },
+      "eligible_fit": true,
+      "eligible_check": true,
+      "eligible_coverage": false,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_BOOST_W0P25",
+      "config_key": "week_boost_w0p25",
+      "family": "B",
+      "setting": "every pick kept, score x (1 + 0.25 x gates holding among G1 G4 G5 G6 G9 G10)",
+      "experiment": "composite-v2-week-bullish-boost-w0p25-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 1.48,
+      "config_t": 1.24,
+      "config_n_picks": 1475,
+      "trigger_n_dates": 295,
+      "config_n_dates": 295,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -1.83,
+      "check_minus_trigger_pts": {
+        "2019": 0.38,
+        "2020": 2.31
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": -1.18,
+        "2016": -3.85,
+        "2017": -2.69,
+        "2018": 0.38,
+        "2019": 0.38,
+        "2020": 2.31
+      },
+      "eligible_fit": false,
+      "eligible_check": true,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_BOOST_W0P5",
+      "config_key": "week_boost_w0p5",
+      "family": "B",
+      "setting": "every pick kept, score x (1 + 0.5 x gates holding among G1 G4 G5 G6 G9 G10)",
+      "experiment": "composite-v2-week-bullish-boost-w0p5-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 1.82,
+      "config_t": 1.44,
+      "config_n_picks": 1475,
+      "trigger_n_dates": 295,
+      "config_n_dates": 295,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -1.74,
+      "check_minus_trigger_pts": {
+        "2019": 1.54,
+        "2020": 2.69
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": -1.18,
+        "2016": -2.69,
+        "2017": -4.23,
+        "2018": 1.13,
+        "2019": 1.54,
+        "2020": 2.69
+      },
+      "eligible_fit": false,
+      "eligible_check": true,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_BOOST_W1P0",
+      "config_key": "week_boost_w1p0",
+      "family": "B",
+      "setting": "every pick kept, score x (1 + 1 x gates holding among G1 G4 G5 G6 G9 G10)",
+      "experiment": "composite-v2-week-bullish-boost-w1p0-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 2.03,
+      "config_t": 1.6,
+      "config_n_picks": 1475,
+      "trigger_n_dates": 295,
+      "config_n_dates": 295,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -0.72,
+      "check_minus_trigger_pts": {
+        "2019": -0.77,
+        "2020": 2.69
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 0.59,
+        "2016": -2.31,
+        "2017": -2.31,
+        "2018": 1.13,
+        "2019": -0.77,
+        "2020": 2.69
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G2_CUT0P6",
+      "config_key": "week_g2_cut0p6",
+      "family": "C",
+      "setting": "G2 not fading a leader holds at leader_bottom=0.4",
+      "experiment": "composite-v2-week-bullish-g2-cut0p6-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 1.28,
+      "config_t": 1.0,
+      "config_n_picks": 1475,
+      "trigger_n_dates": 295,
+      "config_n_dates": 295,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -0.28,
+      "check_minus_trigger_pts": {
+        "2019": -4.62,
+        "2020": 1.15
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 2.35,
+        "2016": -2.69,
+        "2017": -1.15,
+        "2018": 0.38,
+        "2019": -4.62,
+        "2020": 1.15
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G2_CUT0P8",
+      "config_key": "week_g2_cut0p8",
+      "family": "C",
+      "setting": "G2 not fading a leader holds at leader_bottom=0.2",
+      "experiment": "composite-v2-week-bullish-g2-cut0p8-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 1.14,
+      "config_t": 0.92,
+      "config_n_picks": 1475,
+      "trigger_n_dates": 295,
+      "config_n_dates": 295,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -0.75,
+      "check_minus_trigger_pts": {
+        "2019": -3.08,
+        "2020": 0.77
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 2.35,
+        "2016": -2.69,
+        "2017": -1.92,
+        "2018": -0.75,
+        "2019": -3.08,
+        "2020": 0.77
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G8_X1P25",
+      "config_key": "week_g8_x1p25",
+      "family": "C",
+      "setting": "G8 volume surge holds at volume_multiple=1.25",
+      "experiment": "composite-v2-week-bullish-g8-x1p25-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 1.24,
+      "config_t": 0.95,
+      "config_n_picks": 1443,
+      "trigger_n_dates": 295,
+      "config_n_dates": 292,
+      "date_coverage": 0.99,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -1.56,
+      "check_minus_trigger_pts": {
+        "2019": -1.18,
+        "2020": 2.6
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 2.35,
+        "2016": -5.13,
+        "2017": -2.35,
+        "2018": -1.13,
+        "2019": -1.18,
+        "2020": 2.6
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G8_X2P0",
+      "config_key": "week_g8_x2p0",
+      "family": "C",
+      "setting": "G8 volume surge holds at volume_multiple=2",
+      "experiment": "composite-v2-week-bullish-g8-x2p0-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": -1.74,
+      "config_t": -1.0,
+      "config_n_picks": 975,
+      "trigger_n_dates": 295,
+      "config_n_dates": 276,
+      "date_coverage": 0.936,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -5.22,
+      "check_minus_trigger_pts": {
+        "2019": -0.89,
+        "2020": -5.9
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": -12.19,
+        "2016": -8.85,
+        "2017": 3.49,
+        "2018": -3.35,
+        "2019": -0.89,
+        "2020": -5.9
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G5_Q0P4",
+      "config_key": "week_g5_q0p4",
+      "family": "C",
+      "setting": "G5 market stress holds at stress_quantile=0.4",
+      "experiment": "composite-v2-week-bullish-g5-q0p4-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 3.96,
+      "config_t": 2.33,
+      "config_n_picks": 770,
+      "trigger_n_dates": 295,
+      "config_n_dates": 154,
+      "date_coverage": 0.522,
+      "fit_years_used": [
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 2.06,
+      "check_minus_trigger_pts": {
+        "2019": 2.29,
+        "2020": 0.48
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2016": 4.13,
+        "2017": 3.4,
+        "2018": -1.35,
+        "2019": 2.29,
+        "2020": 0.48
+      },
+      "eligible_fit": true,
+      "eligible_check": true,
+      "eligible_coverage": true,
+      "eligible": true
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G5_Q0P6",
+      "config_key": "week_g5_q0p6",
+      "family": "C",
+      "setting": "G5 market stress holds at stress_quantile=0.6",
+      "experiment": "composite-v2-week-bullish-g5-q0p6-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 3.46,
+      "config_t": 1.7,
+      "config_n_picks": 560,
+      "trigger_n_dates": 295,
+      "config_n_dates": 112,
+      "date_coverage": 0.38,
+      "fit_years_used": [
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.63,
+      "check_minus_trigger_pts": {
+        "2019": 2.79,
+        "2020": 1.0
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2016": 0.06,
+        "2017": 3.28,
+        "2018": -1.46,
+        "2019": 2.79,
+        "2020": 1.0
+      },
+      "eligible_fit": true,
+      "eligible_check": true,
+      "eligible_coverage": false,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G9_NEAR0P8",
+      "config_key": "week_g9_near0p8",
+      "family": "C",
+      "setting": "G9 pullback in a leader holds at near_high=0.8",
+      "experiment": "composite-v2-week-bullish-g9-near0p8-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 3.09,
+      "config_t": 2.21,
+      "config_n_picks": 1280,
+      "trigger_n_dates": 295,
+      "config_n_dates": 259,
+      "date_coverage": 0.878,
+      "fit_years_used": [
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -1.21,
+      "check_minus_trigger_pts": {
+        "2019": 0.77,
+        "2020": 5.5
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2016": -4.33,
+        "2017": -2.31,
+        "2018": 3.02,
+        "2019": 0.77,
+        "2020": 5.5
+      },
+      "eligible_fit": false,
+      "eligible_check": true,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G9_NEAR0P9",
+      "config_key": "week_g9_near0p9",
+      "family": "C",
+      "setting": "G9 pullback in a leader holds at near_high=0.9",
+      "experiment": "composite-v2-week-bullish-g9-near0p9-week",
+      "status": "results",
+      "trigger_edge_pts": 2.23,
+      "config_edge_pts": 1.68,
+      "config_t": 1.2,
+      "config_n_picks": 1230,
+      "trigger_n_dates": 295,
+      "config_n_dates": 254,
+      "date_coverage": 0.861,
+      "fit_years_used": [
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -1.9,
+      "check_minus_trigger_pts": {
+        "2019": -1.41,
+        "2020": 3.05
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2016": -4.75,
+        "2017": 1.54,
+        "2018": -2.48,
+        "2019": -1.41,
+        "2020": 3.05
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K1",
+      "config_key": "week_vote_k1",
+      "family": "A",
+      "setting": "at least 1 of 6 gates (G1 G2 G3 G7 G8 G10) hold",
+      "experiment": "composite-v2-week-bearish-vote-k1-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 2.48,
+      "config_t": 1.83,
+      "config_n_picks": 1538,
+      "trigger_n_dates": 309,
+      "config_n_dates": 309,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.0,
+      "check_minus_trigger_pts": {
+        "2019": 0.0,
+        "2020": 0.0
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 0.0,
+        "2016": 0.0,
+        "2017": 0.0,
+        "2018": 0.0,
+        "2019": 0.0,
+        "2020": 0.0
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K2",
+      "config_key": "week_vote_k2",
+      "family": "A",
+      "setting": "at least 2 of 6 gates (G1 G2 G3 G7 G8 G10) hold",
+      "experiment": "composite-v2-week-bearish-vote-k2-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 3.2,
+      "config_t": 2.37,
+      "config_n_picks": 1538,
+      "trigger_n_dates": 309,
+      "config_n_dates": 309,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.62,
+      "check_minus_trigger_pts": {
+        "2019": -0.77,
+        "2020": 2.69
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 2.08,
+        "2016": 1.54,
+        "2017": -1.15,
+        "2018": 0.0,
+        "2019": -0.77,
+        "2020": 2.69
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K3",
+      "config_key": "week_vote_k3",
+      "family": "A",
+      "setting": "at least 3 of 6 gates (G1 G2 G3 G7 G8 G10) hold",
+      "experiment": "composite-v2-week-bearish-vote-k3-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 3.13,
+      "config_t": 2.29,
+      "config_n_picks": 1519,
+      "trigger_n_dates": 309,
+      "config_n_dates": 308,
+      "date_coverage": 0.997,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.71,
+      "check_minus_trigger_pts": {
+        "2019": -1.54,
+        "2020": 2.73
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 2.12,
+        "2016": 2.31,
+        "2017": -3.85,
+        "2018": 2.26,
+        "2019": -1.54,
+        "2020": 2.73
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K4",
+      "config_key": "week_vote_k4",
+      "family": "A",
+      "setting": "at least 4 of 6 gates (G1 G2 G3 G7 G8 G10) hold",
+      "experiment": "composite-v2-week-bearish-vote-k4-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 3.36,
+      "config_t": 2.39,
+      "config_n_picks": 1388,
+      "trigger_n_dates": 309,
+      "config_n_dates": 293,
+      "date_coverage": 0.948,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.93,
+      "check_minus_trigger_pts": {
+        "2019": -2.69,
+        "2020": 3.8
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": -0.51,
+        "2016": 1.31,
+        "2017": 0.16,
+        "2018": 2.77,
+        "2019": -2.69,
+        "2020": 3.8
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K5",
+      "config_key": "week_vote_k5",
+      "family": "A",
+      "setting": "at least 5 of 6 gates (G1 G2 G3 G7 G8 G10) hold",
+      "experiment": "composite-v2-week-bearish-vote-k5-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 1.82,
+      "config_t": 0.95,
+      "config_n_picks": 965,
+      "trigger_n_dates": 309,
+      "config_n_dates": 241,
+      "date_coverage": 0.78,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.34,
+      "check_minus_trigger_pts": {
+        "2019": -4.68,
+        "2020": 1.08
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 1.08,
+        "2016": -6.78,
+        "2017": 2.05,
+        "2018": 5.03,
+        "2019": -4.68,
+        "2020": 1.08
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K6",
+      "config_key": "week_vote_k6",
+      "family": "A",
+      "setting": "at least 6 of 6 gates (G1 G2 G3 G7 G8 G10) hold",
+      "experiment": "composite-v2-week-bearish-vote-k6-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 5.88,
+      "config_t": 2.14,
+      "config_n_picks": 435,
+      "trigger_n_dates": 309,
+      "config_n_dates": 129,
+      "date_coverage": 0.417,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -3.54,
+      "check_minus_trigger_pts": {
+        "2019": 6.09,
+        "2020": 9.16
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 6.08,
+        "2016": 8.24,
+        "2017": -26.25,
+        "2018": -2.24,
+        "2019": 6.09,
+        "2020": 9.16
+      },
+      "eligible_fit": false,
+      "eligible_check": true,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_BOOST_W0P25",
+      "config_key": "week_boost_w0p25",
+      "family": "B",
+      "setting": "every pick kept, score x (1 + 0.25 x gates holding among G1 G2 G3 G7 G8 G10)",
+      "experiment": "composite-v2-week-bearish-boost-w0p25-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 2.35,
+      "config_t": 1.73,
+      "config_n_picks": 1538,
+      "trigger_n_dates": 309,
+      "config_n_dates": 309,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.17,
+      "check_minus_trigger_pts": {
+        "2019": -3.46,
+        "2020": 1.92
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": -0.83,
+        "2016": 1.92,
+        "2017": -2.31,
+        "2018": 1.89,
+        "2019": -3.46,
+        "2020": 1.92
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_BOOST_W0P5",
+      "config_key": "week_boost_w0p5",
+      "family": "B",
+      "setting": "every pick kept, score x (1 + 0.5 x gates holding among G1 G2 G3 G7 G8 G10)",
+      "experiment": "composite-v2-week-bearish-boost-w0p5-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 2.42,
+      "config_t": 1.82,
+      "config_n_picks": 1538,
+      "trigger_n_dates": 309,
+      "config_n_dates": 309,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.36,
+      "check_minus_trigger_pts": {
+        "2019": -3.46,
+        "2020": 1.54
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": -0.83,
+        "2016": 1.92,
+        "2017": -1.92,
+        "2018": 2.26,
+        "2019": -3.46,
+        "2020": 1.54
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_BOOST_W1P0",
+      "config_key": "week_boost_w1p0",
+      "family": "B",
+      "setting": "every pick kept, score x (1 + 1 x gates holding among G1 G2 G3 G7 G8 G10)",
+      "experiment": "composite-v2-week-bearish-boost-w1p0-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 2.74,
+      "config_t": 2.04,
+      "config_n_picks": 1538,
+      "trigger_n_dates": 309,
+      "config_n_dates": 309,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.74,
+      "check_minus_trigger_pts": {
+        "2019": -3.08,
+        "2020": 1.54
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": -0.42,
+        "2016": 1.54,
+        "2017": -2.31,
+        "2018": 4.15,
+        "2019": -3.08,
+        "2020": 1.54
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G2_CUT0P6",
+      "config_key": "week_g2_cut0p6",
+      "family": "C",
+      "setting": "G2 not fading a leader holds at leader_top=0.6",
+      "experiment": "composite-v2-week-bearish-g2-cut0p6-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 2.63,
+      "config_t": 2.02,
+      "config_n_picks": 1479,
+      "trigger_n_dates": 309,
+      "config_n_dates": 298,
+      "date_coverage": 0.964,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.93,
+      "check_minus_trigger_pts": {
+        "2019": -4.23,
+        "2020": 1.56
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 1.06,
+        "2016": 0.03,
+        "2017": -1.54,
+        "2018": 4.15,
+        "2019": -4.23,
+        "2020": 1.56
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G2_CUT0P8",
+      "config_key": "week_g2_cut0p8",
+      "family": "C",
+      "setting": "G2 not fading a leader holds at leader_top=0.8",
+      "experiment": "composite-v2-week-bearish-g2-cut0p8-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 2.32,
+      "config_t": 1.69,
+      "config_n_picks": 1485,
+      "trigger_n_dates": 309,
+      "config_n_dates": 298,
+      "date_coverage": 0.964,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.45,
+      "check_minus_trigger_pts": {
+        "2019": -2.31,
+        "2020": -1.19
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": -2.36,
+        "2016": 1.54,
+        "2017": -1.54,
+        "2018": 4.15,
+        "2019": -2.31,
+        "2020": -1.19
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G8_X1P25",
+      "config_key": "week_g8_x1p25",
+      "family": "C",
+      "setting": "G8 volume surge holds at volume_multiple=1.25",
+      "experiment": "composite-v2-week-bearish-g8-x1p25-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 3.18,
+      "config_t": 2.21,
+      "config_n_picks": 1482,
+      "trigger_n_dates": 309,
+      "config_n_dates": 305,
+      "date_coverage": 0.987,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -0.14,
+      "check_minus_trigger_pts": {
+        "2019": -0.61,
+        "2020": 5.48
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 1.01,
+        "2016": 2.32,
+        "2017": -3.5,
+        "2018": -0.38,
+        "2019": -0.61,
+        "2020": 5.48
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G8_X2P0",
+      "config_key": "week_g8_x2p0",
+      "family": "C",
+      "setting": "G8 volume surge holds at volume_multiple=2",
+      "experiment": "composite-v2-week-bearish-g8-x2p0-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 1.83,
+      "config_t": 1.11,
+      "config_n_picks": 1197,
+      "trigger_n_dates": 309,
+      "config_n_dates": 298,
+      "date_coverage": 0.964,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -1.69,
+      "check_minus_trigger_pts": {
+        "2019": 0.09,
+        "2020": 3.53
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 4.64,
+        "2016": -3.17,
+        "2017": -6.54,
+        "2018": -1.68,
+        "2019": 0.09,
+        "2020": 3.53
+      },
+      "eligible_fit": false,
+      "eligible_check": true,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G5_Q0P4",
+      "config_key": "week_g5_q0p4",
+      "family": "C",
+      "setting": "G5 market stress holds at stress_quantile=0.4",
+      "experiment": "composite-v2-week-bearish-g5-q0p4-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 2.47,
+      "config_t": 1.27,
+      "config_n_picks": 763,
+      "trigger_n_dates": 309,
+      "config_n_dates": 154,
+      "date_coverage": 0.498,
+      "fit_years_used": [
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -0.9,
+      "check_minus_trigger_pts": {
+        "2019": -2.31,
+        "2020": 5.47
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2016": -1.45,
+        "2017": -2.63,
+        "2018": 1.39,
+        "2019": -2.31,
+        "2020": 5.47
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G5_Q0P6",
+      "config_key": "week_g5_q0p6",
+      "family": "C",
+      "setting": "G5 market stress holds at stress_quantile=0.6",
+      "experiment": "composite-v2-week-bearish-g5-q0p6-week",
+      "status": "results",
+      "trigger_edge_pts": 2.48,
+      "config_edge_pts": 2.83,
+      "config_t": 1.22,
+      "config_n_picks": 553,
+      "trigger_n_dates": 309,
+      "config_n_dates": 112,
+      "date_coverage": 0.362,
+      "fit_years_used": [
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -1.7,
+      "check_minus_trigger_pts": {
+        "2019": -2.37,
+        "2020": 9.46
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2016": -0.42,
+        "2017": -5.58,
+        "2018": 0.89,
+        "2019": -2.37,
+        "2020": 9.46
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": false,
+      "eligible": false
+    }
+  ],
   "selections": [
     {
       "horizon": "day",
@@ -48,15 +1277,15 @@
     },
     {
       "horizon": "week",
-      "final": false,
+      "final": true,
       "keys_eligible_on_both": [],
       "tables": {
         "week_bullish": {
-          "decision": "keep plain A05B",
-          "config": null,
-          "config_key": null,
-          "one_side_only": false,
-          "fit_gain_pts": null
+          "decision": "config",
+          "config": "COMPOSITE_V2_WEEK_BULLISH_G5_Q0P4",
+          "config_key": "week_g5_q0p4",
+          "one_side_only": true,
+          "fit_gain_pts": 2.06
         },
         "week_bearish": {
           "decision": "keep plain A01",
@@ -264,230 +1493,6 @@
       "config": "COMPOSITE_V2_DAY_BEARISH_G5_Q0P6",
       "missing": [
         "composite-v2-day-bearish-g5-q0p6-day"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K1",
-      "missing": [
-        "composite-v2-week-bullish-vote-k1-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K2",
-      "missing": [
-        "composite-v2-week-bullish-vote-k2-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K3",
-      "missing": [
-        "composite-v2-week-bullish-vote-k3-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K4",
-      "missing": [
-        "composite-v2-week-bullish-vote-k4-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K5",
-      "missing": [
-        "composite-v2-week-bullish-vote-k5-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K6",
-      "missing": [
-        "composite-v2-week-bullish-vote-k6-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_BOOST_W0P25",
-      "missing": [
-        "composite-v2-week-bullish-boost-w0p25-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_BOOST_W0P5",
-      "missing": [
-        "composite-v2-week-bullish-boost-w0p5-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_BOOST_W1P0",
-      "missing": [
-        "composite-v2-week-bullish-boost-w1p0-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_G2_CUT0P6",
-      "missing": [
-        "composite-v2-week-bullish-g2-cut0p6-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_G2_CUT0P8",
-      "missing": [
-        "composite-v2-week-bullish-g2-cut0p8-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_G8_X1P25",
-      "missing": [
-        "composite-v2-week-bullish-g8-x1p25-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_G8_X2P0",
-      "missing": [
-        "composite-v2-week-bullish-g8-x2p0-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_G5_Q0P4",
-      "missing": [
-        "composite-v2-week-bullish-g5-q0p4-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_G5_Q0P6",
-      "missing": [
-        "composite-v2-week-bullish-g5-q0p6-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_G9_NEAR0P8",
-      "missing": [
-        "composite-v2-week-bullish-g9-near0p8-week"
-      ]
-    },
-    {
-      "table": "week_bullish",
-      "config": "COMPOSITE_V2_WEEK_BULLISH_G9_NEAR0P9",
-      "missing": [
-        "composite-v2-week-bullish-g9-near0p9-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K1",
-      "missing": [
-        "composite-v2-week-bearish-vote-k1-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K2",
-      "missing": [
-        "composite-v2-week-bearish-vote-k2-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K3",
-      "missing": [
-        "composite-v2-week-bearish-vote-k3-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K4",
-      "missing": [
-        "composite-v2-week-bearish-vote-k4-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K5",
-      "missing": [
-        "composite-v2-week-bearish-vote-k5-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K6",
-      "missing": [
-        "composite-v2-week-bearish-vote-k6-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_BOOST_W0P25",
-      "missing": [
-        "composite-v2-week-bearish-boost-w0p25-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_BOOST_W0P5",
-      "missing": [
-        "composite-v2-week-bearish-boost-w0p5-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_BOOST_W1P0",
-      "missing": [
-        "composite-v2-week-bearish-boost-w1p0-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_G2_CUT0P6",
-      "missing": [
-        "composite-v2-week-bearish-g2-cut0p6-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_G2_CUT0P8",
-      "missing": [
-        "composite-v2-week-bearish-g2-cut0p8-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_G8_X1P25",
-      "missing": [
-        "composite-v2-week-bearish-g8-x1p25-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_G8_X2P0",
-      "missing": [
-        "composite-v2-week-bearish-g8-x2p0-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_G5_Q0P4",
-      "missing": [
-        "composite-v2-week-bearish-g5-q0p4-week"
-      ]
-    },
-    {
-      "table": "week_bearish",
-      "config": "COMPOSITE_V2_WEEK_BEARISH_G5_Q0P6",
-      "missing": [
-        "composite-v2-week-bearish-g5-q0p6-week"
       ]
     }
   ]
