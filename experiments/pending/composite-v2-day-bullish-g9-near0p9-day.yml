@@ -1,5 +1,0 @@
-id: composite-v2-day-bullish-g9-near0p9-day
-strategy: strategies.composite_v2_day_bullish_g9_near0p9
-split: train
-horizon: day
-dates: {start: '2015-01-01', end: '2020-12-31'}

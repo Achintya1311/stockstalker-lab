@@ -1,0 +1,9 @@
+{
+  "id": "composite-v2-day-bearish-g2-cut0p8-day",
+  "strategy": "strategies.composite_v2_day_bearish_g2_cut0p8",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 3333,
+  "n_dates": 875,
+  "pick_log_sha256": "8711d4d0b29c863ea7d4f718fe80e35b4356b83f89871f559441865d5f8b741e"
+}

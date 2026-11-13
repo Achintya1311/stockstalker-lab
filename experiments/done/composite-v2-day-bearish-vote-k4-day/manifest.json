@@ -1,0 +1,9 @@
+{
+  "id": "composite-v2-day-bearish-vote-k4-day",
+  "strategy": "strategies.composite_v2_day_bearish_vote_k4",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 2306,
+  "n_dates": 782,
+  "pick_log_sha256": "e151e31819092a025c0d8b0d5947d2ca798fb3ea888f9ec2d6c968e9dd407d07"
+}
