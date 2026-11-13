@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 366. Gate 2's bar at that count: t >= 4.48.
+Trials recorded: 372. Gate 2's bar at that count: t >= 4.49.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -15,8 +15,11 @@ Trials recorded: 366. Gate 2's bar at that count: t >= 4.48.
 | f11-w12-day | day | bearish | 7335 | 58.88% | 54.54% | 4.35 | 7.69 | yes | 0.04 | 100.00% | candidate |
 | e2a-d01c-fallback-day | day | bearish | 4996 | 58.97% | 54.43% | 5.97 | 7.44 | yes | 0.06 | 100.00% | candidate |
 | f11-w15-day | day | bearish | 7335 | 58.61% | 54.54% | 4.07 | 7.21 | yes | 0.02 | 100.00% | candidate |
+| composite-v2-day-bearish-vote-k3-day | day | bearish | 2392 | 62.00% | 54.96% | 8.21 | 7.17 | yes | 0.18 | 100.00% | candidate |
 | g-e2a-g3-day | day | bearish | 2749 | 61.55% | 55.09% | 7.71 | 7.13 | yes | 0.13 | 100.00% | candidate |
+| composite-v2-day-bearish-boost-w0p5-day | day | bearish | 2767 | 61.62% | 55.08% | 7.57 | 7.04 | yes | 0.13 | 100.00% | candidate |
 | e2a-day | day | bearish | 2767 | 61.44% | 55.08% | 7.46 | 6.92 | yes | 0.13 | 100.00% | candidate |
+| composite-v2-day-bearish-vote-k2-day | day | bearish | 2716 | 61.67% | 55.07% | 7.53 | 6.90 | yes | 0.13 | 100.00% | candidate |
 | g-e2a-g6-not-day | day | bearish | 2618 | 61.54% | 55.10% | 7.45 | 6.72 | yes | 0.13 | 100.00% | candidate |
 | f19-body-volatility-fade-day | day | bearish | 7335 | 58.39% | 54.54% | 3.86 | 6.71 | yes | 0.02 | 100.00% | candidate |
 | f11-w06-day | day | bearish | 7335 | 58.34% | 54.54% | 3.80 | 6.70 | yes | 0.03 | 100.00% | candidate |
@@ -52,17 +55,20 @@ Trials recorded: 366. Gate 2's bar at that count: t >= 4.48.
 | g-t04-g6-not-day | day | bullish | 3659 | 49.19% | 45.13% | 4.08 | 4.29 |  | -0.42 | 100.00% |  |
 | g-t04-g9-day | day | bullish | 2075 | 51.08% | 45.39% | 5.12 | 4.09 |  | -0.35 | 100.00% |  |
 | a09-gap-fade-day | day | bearish | 4710 | 57.47% | 54.52% | 3.21 | 4.01 |  | 0.03 | 66.67% | candidate |
+| composite-v2-day-bullish-boost-w0p5-day | day | bullish | 3952 | 48.99% | 45.17% | 3.65 | 3.99 |  | -0.40 | 100.00% |  |
 | f14-trend-switched-fade-day | day | bearish | 6430 | 56.78% | 54.44% | 2.34 | 3.95 |  | 0.01 | 83.33% | candidate |
 | g-t04-g3-day | day | bullish | 3768 | 48.94% | 45.12% | 3.71 | 3.93 |  | -0.41 | 100.00% |  |
 | e3a-a02-high-ivol-day | day | bearish | 3390 | 58.82% | 54.30% | 3.97 | 3.91 |  | -0.06 | 100.00% |  |
 | g-e2a-g5-day | day | bearish | 1063 | 59.27% | 54.12% | 6.77 | 3.91 |  | 0.13 | 100.00% | candidate |
 | g-e2a-g4-not-day | day | bearish | 1311 | 60.56% | 54.19% | 6.13 | 3.90 |  | 0.07 | 100.00% | candidate |
+| composite-v2-day-bullish-vote-k2-day | day | bullish | 3945 | 48.75% | 45.17% | 3.50 | 3.83 |  | -0.41 | 100.00% |  |
 | g-t04-g4-day | day | bullish | 3661 | 48.68% | 45.08% | 3.65 | 3.81 |  | -0.40 | 100.00% |  |
 | f14-trend-switched-fade-day | day | bullish | 6245 | 47.33% | 45.02% | 2.38 | 3.80 |  | -0.51 | 100.00% |  |
 | t15-adx-regime-day | day | bearish | 6880 | 56.63% | 54.50% | 2.20 | 3.75 |  | -0.06 | 100.00% |  |
 | t04-connors-rsi2-day | day | bullish | 3952 | 48.61% | 45.17% | 3.37 | 3.69 |  | -0.41 | 100.00% |  |
 | g-t04-g7-day | day | bullish | 3904 | 48.82% | 45.13% | 3.40 | 3.69 |  | -0.41 | 100.00% |  |
 | h02-idiosyncratic-volatility-day | day | bearish | 7325 | 56.59% | 54.53% | 2.06 | 3.67 |  | 0.06 | 83.33% | candidate |
+| composite-v2-day-bullish-vote-k3-day | day | bullish | 3762 | 48.70% | 45.25% | 3.23 | 3.43 |  | -0.40 | 100.00% |  |
 | t05c-upcross-fade-day | day | bearish | 4819 | 57.19% | 54.95% | 2.70 | 3.39 |  | -0.06 | 83.33% |  |
 | q06r-wide-bar-wick-day | day | bullish | 7300 | 46.84% | 44.96% | 1.88 | 3.32 |  | -0.48 | 100.00% |  |
 | t01-sma-crossover-day | day | bearish | 7178 | 56.37% | 54.48% | 1.89 | 3.30 |  | -0.06 | 100.00% |  |

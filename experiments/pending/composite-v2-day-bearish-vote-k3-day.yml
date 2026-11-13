@@ -1,5 +1,0 @@
-id: composite-v2-day-bearish-vote-k3-day
-strategy: strategies.composite_v2_day_bearish_vote_k3
-split: train
-horizon: day
-dates: {start: '2015-01-01', end: '2020-12-31'}

@@ -1,0 +1,9 @@
+{
+  "id": "composite-v2-day-bullish-boost-w0p5-day",
+  "strategy": "strategies.composite_v2_day_bullish_boost_w0p5",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 10799,
+  "n_dates": 1161,
+  "pick_log_sha256": "111b977c5931a48fb7250bc1e9c9254b58af7138035caa7c5299339666ce2a86"
+}
