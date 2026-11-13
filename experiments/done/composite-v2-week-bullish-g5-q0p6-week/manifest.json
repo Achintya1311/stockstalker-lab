@@ -1,0 +1,9 @@
+{
+  "id": "composite-v2-week-bullish-g5-q0p6-week",
+  "strategy": "strategies.composite_v2_week_bullish_g5_q0p6",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 12192,
+  "n_dates": 112,
+  "pick_log_sha256": "4e0feb522d198e47f5d8b488147e610429fff12aa9a84c1b8a964319e8449b40"
+}

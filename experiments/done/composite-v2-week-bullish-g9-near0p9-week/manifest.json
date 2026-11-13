@@ -1,0 +1,9 @@
+{
+  "id": "composite-v2-week-bullish-g9-near0p9-week",
+  "strategy": "strategies.composite_v2_week_bullish_g9_near0p9",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 2861,
+  "n_dates": 254,
+  "pick_log_sha256": "33ac704240009f1f6d90555d2682298f239ccae3b23fd46d11731454bbfeaeb1"
+}

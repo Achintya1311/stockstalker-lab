@@ -1,0 +1,9 @@
+{
+  "id": "composite-v2-week-bullish-boost-w0p25-week",
+  "strategy": "strategies.composite_v2_week_bullish_boost_w0p25",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 30550,
+  "n_dates": 295,
+  "pick_log_sha256": "ec6891cab21db10efff1d216801d41e6d48ed54a4e35245684fea3b8053c0658"
+}

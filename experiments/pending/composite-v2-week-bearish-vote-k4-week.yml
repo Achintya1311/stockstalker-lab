@@ -1,5 +1,0 @@
-id: composite-v2-week-bearish-vote-k4-week
-strategy: strategies.composite_v2_week_bearish_vote_k4
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}

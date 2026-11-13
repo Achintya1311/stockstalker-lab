@@ -1,0 +1,9 @@
+{
+  "id": "composite-v2-week-bullish-vote-k2-week",
+  "strategy": "strategies.composite_v2_week_bullish_vote_k2",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 23060,
+  "n_dates": 286,
+  "pick_log_sha256": "23eaf7028f04a36c78e1c5ca112d4d6eb9738ee88c1de7d9bf07b4b57b9ccf69"
+}

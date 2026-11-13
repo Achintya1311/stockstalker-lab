@@ -1,0 +1,9 @@
+{
+  "id": "composite-v2-week-bullish-g2-cut0p8-week",
+  "strategy": "strategies.composite_v2_week_bullish_g2_cut0p8",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 20080,
+  "n_dates": 295,
+  "pick_log_sha256": "b5bb7890b222b199701f47158027855c00bcfa644c05d6d8470d570b589e7e00"
+}

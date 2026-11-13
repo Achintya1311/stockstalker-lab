@@ -1,0 +1,9 @@
+{
+  "id": "composite-v2-week-bearish-g5-q0p6-week",
+  "strategy": "strategies.composite_v2_week_bearish_g5_q0p6",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 11914,
+  "n_dates": 112,
+  "pick_log_sha256": "7b873d5bd0a13721d3df92203151b32eba22ed0ff59b4be2a9cc50778848b472"
+}

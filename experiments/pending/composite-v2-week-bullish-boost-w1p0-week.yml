@@ -1,5 +1,0 @@
-id: composite-v2-week-bullish-boost-w1p0-week
-strategy: strategies.composite_v2_week_bullish_boost_w1p0
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}
