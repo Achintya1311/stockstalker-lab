@@ -1,0 +1,13 @@
+{
+  "id": "composite-v1-week-bullish-not-week-validation",
+  "strategy": "strategies.composite_v1_week_bullish_not",
+  "horizon": "week",
+  "train_experiment": "composite-v1-week-bullish-not-week",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.010053909235020848,
+      "released_edge": 0.010053909235020848
+    }
+  }
+}

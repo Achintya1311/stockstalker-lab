@@ -1,0 +1,13 @@
+{
+  "id": "composite-v1-day-bullish-not-day-validation",
+  "strategy": "strategies.composite_v1_day_bullish_not",
+  "horizon": "day",
+  "train_experiment": "composite-v1-day-bullish-not-day",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.030838461903930327,
+      "released_edge": 0.0046161253471607485
+    }
+  }
+}

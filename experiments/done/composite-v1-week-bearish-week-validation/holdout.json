@@ -1,0 +1,13 @@
+{
+  "id": "composite-v1-week-bearish-week-validation",
+  "strategy": "strategies.composite_v1_week_bearish",
+  "horizon": "week",
+  "train_experiment": "composite-v1-week-bearish-week",
+  "selection": "top",
+  "released": {
+    "bearish": {
+      "train_edge": 0.030593628649618603,
+      "released_edge": 0.030593628649618603
+    }
+  }
+}

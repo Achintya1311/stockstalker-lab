@@ -1,0 +1,13 @@
+{
+  "id": "composite-v1-day-bearish-not-day-validation",
+  "strategy": "strategies.composite_v1_day_bearish_not",
+  "horizon": "day",
+  "train_experiment": "composite-v1-day-bearish-not-day",
+  "selection": "top",
+  "released": {
+    "bearish": {
+      "train_edge": 0.07153237436297052,
+      "released_edge": 0.07153237436297052
+    }
+  }
+}
