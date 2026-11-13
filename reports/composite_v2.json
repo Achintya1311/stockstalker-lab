@@ -24,6 +24,240 @@
   },
   "configs": [
     {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K2",
+      "config_key": "day_vote_k2",
+      "family": "A",
+      "setting": "at least 2 of 5 gates (G3 G4 G7 G9 G10) hold",
+      "experiment": "composite-v2-day-bullish-vote-k2-day",
+      "status": "results",
+      "trigger_edge_pts": 3.37,
+      "config_edge_pts": 3.5,
+      "config_t": 3.83,
+      "config_n_picks": 3945,
+      "trigger_n_dates": 1087,
+      "config_n_dates": 1086,
+      "date_coverage": 0.999,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.3,
+      "check_minus_trigger_pts": {
+        "2019": 0.27,
+        "2020": 0.05
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 1.05,
+        "2016": -0.03,
+        "2017": 0.0,
+        "2018": 0.18,
+        "2019": 0.27,
+        "2020": 0.05
+      },
+      "eligible_fit": true,
+      "eligible_check": true,
+      "eligible_coverage": true,
+      "eligible": true
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K3",
+      "config_key": "day_vote_k3",
+      "family": "A",
+      "setting": "at least 3 of 5 gates (G3 G4 G7 G9 G10) hold",
+      "experiment": "composite-v2-day-bullish-vote-k3-day",
+      "status": "results",
+      "trigger_edge_pts": 3.37,
+      "config_edge_pts": 3.23,
+      "config_t": 3.43,
+      "config_n_picks": 3762,
+      "trigger_n_dates": 1087,
+      "config_n_dates": 1072,
+      "date_coverage": 0.986,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -1.01,
+      "check_minus_trigger_pts": {
+        "2019": -0.05,
+        "2020": -0.65
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": -4.81,
+        "2016": -0.37,
+        "2017": 0.08,
+        "2018": 1.06,
+        "2019": -0.05,
+        "2020": -0.65
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_BOOST_W0P5",
+      "config_key": "day_boost_w0p5",
+      "family": "B",
+      "setting": "every pick kept, score x (1 + 0.5 x gates holding among G3 G4 G7 G9 G10)",
+      "experiment": "composite-v2-day-bullish-boost-w0p5-day",
+      "status": "results",
+      "trigger_edge_pts": 3.37,
+      "config_edge_pts": 3.65,
+      "config_t": 3.99,
+      "config_n_picks": 3952,
+      "trigger_n_dates": 1087,
+      "config_n_dates": 1087,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.4,
+      "check_minus_trigger_pts": {
+        "2019": -0.09,
+        "2020": 0.4
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 0.53,
+        "2016": 0.31,
+        "2017": -0.0,
+        "2018": 0.77,
+        "2019": -0.09,
+        "2020": 0.4
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K2",
+      "config_key": "day_vote_k2",
+      "family": "A",
+      "setting": "at least 2 of 6 gates (G1 G2 G3 G4 G8 G10) hold",
+      "experiment": "composite-v2-day-bearish-vote-k2-day",
+      "status": "results",
+      "trigger_edge_pts": 7.46,
+      "config_edge_pts": 7.53,
+      "config_t": 6.9,
+      "config_n_picks": 2716,
+      "trigger_n_dates": 936,
+      "config_n_dates": 929,
+      "date_coverage": 0.993,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": -0.02,
+      "check_minus_trigger_pts": {
+        "2019": -0.16,
+        "2020": 0.34
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": -0.94,
+        "2016": 0.29,
+        "2017": 0.42,
+        "2018": 0.13,
+        "2019": -0.16,
+        "2020": 0.34
+      },
+      "eligible_fit": false,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K3",
+      "config_key": "day_vote_k3",
+      "family": "A",
+      "setting": "at least 3 of 6 gates (G1 G2 G3 G4 G8 G10) hold",
+      "experiment": "composite-v2-day-bearish-vote-k3-day",
+      "status": "results",
+      "trigger_edge_pts": 7.46,
+      "config_edge_pts": 8.21,
+      "config_t": 7.17,
+      "config_n_picks": 2392,
+      "trigger_n_dates": 936,
+      "config_n_dates": 878,
+      "date_coverage": 0.938,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.48,
+      "check_minus_trigger_pts": {
+        "2019": 1.02,
+        "2020": 1.15
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 1.03,
+        "2016": -0.2,
+        "2017": 1.13,
+        "2018": -0.03,
+        "2019": 1.02,
+        "2020": 1.15
+      },
+      "eligible_fit": true,
+      "eligible_check": true,
+      "eligible_coverage": true,
+      "eligible": true
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_BOOST_W0P5",
+      "config_key": "day_boost_w0p5",
+      "family": "B",
+      "setting": "every pick kept, score x (1 + 0.5 x gates holding among G1 G2 G3 G4 G8 G10)",
+      "experiment": "composite-v2-day-bearish-boost-w0p5-day",
+      "status": "results",
+      "trigger_edge_pts": 7.46,
+      "config_edge_pts": 7.57,
+      "config_t": 7.04,
+      "config_n_picks": 2767,
+      "trigger_n_dates": 936,
+      "config_n_dates": 936,
+      "date_coverage": 1.0,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "fit_gain_pts": 0.04,
+      "check_minus_trigger_pts": {
+        "2019": 0.93,
+        "2020": -0.25
+      },
+      "config_minus_trigger_by_year_pts": {
+        "2015": 0.31,
+        "2016": 0.0,
+        "2017": -0.42,
+        "2018": 0.27,
+        "2019": 0.93,
+        "2020": -0.25
+      },
+      "eligible_fit": true,
+      "eligible_check": false,
+      "eligible_coverage": true,
+      "eligible": false
+    },
+    {
       "table": "week_bullish",
       "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K1",
       "config_key": "week_vote_k1",
@@ -1259,18 +1493,18 @@
       "keys_eligible_on_both": [],
       "tables": {
         "day_bullish": {
-          "decision": "keep plain T04",
-          "config": null,
-          "config_key": null,
-          "one_side_only": false,
-          "fit_gain_pts": null
+          "decision": "config",
+          "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K2",
+          "config_key": "day_vote_k2",
+          "one_side_only": true,
+          "fit_gain_pts": 0.3
         },
         "day_bearish": {
-          "decision": "keep plain E2A",
-          "config": null,
-          "config_key": null,
-          "one_side_only": false,
-          "fit_gain_pts": null
+          "decision": "config",
+          "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K3",
+          "config_key": "day_vote_k3",
+          "one_side_only": true,
+          "fit_gain_pts": 0.48
         }
       },
       "selected_key": null
@@ -1308,20 +1542,6 @@
     },
     {
       "table": "day_bullish",
-      "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K2",
-      "missing": [
-        "composite-v2-day-bullish-vote-k2-day"
-      ]
-    },
-    {
-      "table": "day_bullish",
-      "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K3",
-      "missing": [
-        "composite-v2-day-bullish-vote-k3-day"
-      ]
-    },
-    {
-      "table": "day_bullish",
       "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K4",
       "missing": [
         "composite-v2-day-bullish-vote-k4-day"
@@ -1339,13 +1559,6 @@
       "config": "COMPOSITE_V2_DAY_BULLISH_BOOST_W0P25",
       "missing": [
         "composite-v2-day-bullish-boost-w0p25-day"
-      ]
-    },
-    {
-      "table": "day_bullish",
-      "config": "COMPOSITE_V2_DAY_BULLISH_BOOST_W0P5",
-      "missing": [
-        "composite-v2-day-bullish-boost-w0p5-day"
       ]
     },
     {
@@ -1406,20 +1619,6 @@
     },
     {
       "table": "day_bearish",
-      "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K2",
-      "missing": [
-        "composite-v2-day-bearish-vote-k2-day"
-      ]
-    },
-    {
-      "table": "day_bearish",
-      "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K3",
-      "missing": [
-        "composite-v2-day-bearish-vote-k3-day"
-      ]
-    },
-    {
-      "table": "day_bearish",
       "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K4",
       "missing": [
         "composite-v2-day-bearish-vote-k4-day"
@@ -1437,13 +1636,6 @@
       "config": "COMPOSITE_V2_DAY_BEARISH_BOOST_W0P25",
       "missing": [
         "composite-v2-day-bearish-boost-w0p25-day"
-      ]
-    },
-    {
-      "table": "day_bearish",
-      "config": "COMPOSITE_V2_DAY_BEARISH_BOOST_W0P5",
-      "missing": [
-        "composite-v2-day-bearish-boost-w0p5-day"
       ]
     },
     {
