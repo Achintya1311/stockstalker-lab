@@ -118,6 +118,141 @@
     "n": 303,
     "coverage": 0.9805825242718447
    },
+   "composite-v2-week-bearish-boost-w0p25-week": {
+    "mean": 0.023545311705284767,
+    "lo": -0.001295588865869476,
+    "hi": 0.049967045576922775,
+    "p_le0": 0.033,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
+   "composite-v2-week-bearish-boost-w0p5-week": {
+    "mean": 0.02419256089622328,
+    "lo": -0.0003446838616395228,
+    "hi": 0.049863243683653816,
+    "p_le0": 0.0275,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
+   "composite-v2-week-bearish-boost-w1p0-week": {
+    "mean": 0.027428806850915834,
+    "lo": 0.0024908324062683277,
+    "hi": 0.053303846248619204,
+    "p_le0": 0.014,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
+   "composite-v2-week-bearish-g2-cut0p6-week": {
+    "mean": 0.026292336129268217,
+    "lo": 0.0001725714982856495,
+    "hi": 0.05149059693734148,
+    "p_le0": 0.024,
+    "block": 2,
+    "n": 298,
+    "coverage": 0.9644012944983819
+   },
+   "composite-v2-week-bearish-g2-cut0p8-week": {
+    "mean": 0.023216273489447183,
+    "lo": -0.004006912906238779,
+    "hi": 0.049532975542354384,
+    "p_le0": 0.0455,
+    "block": 1,
+    "n": 298,
+    "coverage": 0.9644012944983819
+   },
+   "composite-v2-week-bearish-g5-q0p4-week": {
+    "mean": 0.024686838064615753,
+    "lo": -0.012726250751102728,
+    "hi": 0.06214726007368778,
+    "p_le0": 0.1,
+    "block": 1,
+    "n": 154,
+    "coverage": 0.49838187702265374
+   },
+   "composite-v2-week-bearish-g5-q0p6-week": {
+    "mean": 0.028302445624608093,
+    "lo": -0.01887721844322218,
+    "hi": 0.0713731898848705,
+    "p_le0": 0.118,
+    "block": 1,
+    "n": 112,
+    "coverage": 0.36245954692556637
+   },
+   "composite-v2-week-bearish-g8-x1p25-week": {
+    "mean": 0.031797453110029995,
+    "lo": 0.004426892671091132,
+    "hi": 0.05994775816623051,
+    "p_le0": 0.0135,
+    "block": 1,
+    "n": 305,
+    "coverage": 0.9870550161812298
+   },
+   "composite-v2-week-bearish-g8-x2p0-week": {
+    "mean": 0.01833736021735291,
+    "lo": -0.01500568392438175,
+    "hi": 0.049201129893170555,
+    "p_le0": 0.1265,
+    "block": 1,
+    "n": 298,
+    "coverage": 0.9644012944983819
+   },
+   "composite-v2-week-bearish-vote-k1-week": {
+    "mean": 0.024839810087161792,
+    "lo": -0.0008826880543194512,
+    "hi": 0.05305313626028991,
+    "p_le0": 0.031,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
+   "composite-v2-week-bearish-vote-k2-week": {
+    "mean": 0.03195955118748542,
+    "lo": 0.00641077889826578,
+    "hi": 0.05886979314371463,
+    "p_le0": 0.0065,
+    "block": 1,
+    "n": 309,
+    "coverage": 1.0
+   },
+   "composite-v2-week-bearish-vote-k3-week": {
+    "mean": 0.03131750380521252,
+    "lo": 0.004511221252144022,
+    "hi": 0.057555062353898484,
+    "p_le0": 0.0075,
+    "block": 1,
+    "n": 308,
+    "coverage": 0.9967637540453075
+   },
+   "composite-v2-week-bearish-vote-k4-week": {
+    "mean": 0.03363190467478582,
+    "lo": 0.006901809857102093,
+    "hi": 0.06280224318708623,
+    "p_le0": 0.008,
+    "block": 2,
+    "n": 293,
+    "coverage": 0.948220064724919
+   },
+   "composite-v2-week-bearish-vote-k5-week": {
+    "mean": 0.018176615956932398,
+    "lo": -0.017722427419500218,
+    "hi": 0.05548153834834365,
+    "p_le0": 0.1735,
+    "block": 2,
+    "n": 241,
+    "coverage": 0.7799352750809061
+   },
+   "composite-v2-week-bearish-vote-k6-week": {
+    "mean": 0.05881998158542416,
+    "lo": 0.004588545081215946,
+    "hi": 0.11159070092701755,
+    "p_le0": 0.0165,
+    "block": 3,
+    "n": 129,
+    "coverage": 0.4174757281553398
+   },
    "consensus-wb-v1-week": {
     "mean": 0.024839810087161785,
     "lo": 0.00172598915246347,
@@ -759,18 +894,19 @@
    }
   },
   "joint": {
-   "n_models": 84,
+   "n_models": 99,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week",
+    "composite-v2-week-bearish-vote-k1-week": "a01-weekly-reversal-week",
     "g-a01-g3-week": "a01-weekly-reversal-week",
     "g-a01-g8-not-week": "composite-v1-week-bearish-not-week",
     "g-a01-g8-week": "composite-v1-week-bearish-week"
    },
    "spa": {
-    "lower": 0.0685,
-    "consistent": 0.1005,
-    "upper": 0.1005
+    "lower": 0.0815,
+    "consistent": 0.113,
+    "upper": 0.113
    },
    "stepm": [],
    "mcs": [
@@ -786,6 +922,20 @@
     "champion-v1-week",
     "composite-v1-week-bearish-not-week",
     "composite-v1-week-bearish-week",
+    "composite-v2-week-bearish-boost-w0p25-week",
+    "composite-v2-week-bearish-boost-w0p5-week",
+    "composite-v2-week-bearish-boost-w1p0-week",
+    "composite-v2-week-bearish-g2-cut0p6-week",
+    "composite-v2-week-bearish-g2-cut0p8-week",
+    "composite-v2-week-bearish-g5-q0p4-week",
+    "composite-v2-week-bearish-g5-q0p6-week",
+    "composite-v2-week-bearish-g8-x1p25-week",
+    "composite-v2-week-bearish-g8-x2p0-week",
+    "composite-v2-week-bearish-vote-k2-week",
+    "composite-v2-week-bearish-vote-k3-week",
+    "composite-v2-week-bearish-vote-k4-week",
+    "composite-v2-week-bearish-vote-k5-week",
+    "composite-v2-week-bearish-vote-k6-week",
     "consensus-wb-v1-week",
     "consensus-wb-v2-week",
     "d02-stock-pcr-confirmatory-week",
@@ -855,6 +1005,7 @@
     "t23-rs-rating-week",
     "t25-heikin-ashi-week",
     "a05b-max-effect-ranked-week",
+    "composite-v2-week-bearish-vote-k1-week",
     "g-a01-g3-week",
     "g-a01-g8-not-week",
     "g-a01-g8-week"
@@ -952,6 +1103,150 @@
     "block": 3,
     "n": 133,
     "coverage": 0.43042071197411
+   },
+   "composite-v2-week-bullish-boost-w0p25-week": {
+    "mean": 0.014834413887047775,
+    "lo": -0.009127611306734364,
+    "hi": 0.038082527515011545,
+    "p_le0": 0.1015,
+    "block": 2,
+    "n": 295,
+    "coverage": 0.9546925566343042
+   },
+   "composite-v2-week-bullish-boost-w0p5-week": {
+    "mean": 0.018224244395522348,
+    "lo": -0.006238509554831323,
+    "hi": 0.041659382503435816,
+    "p_le0": 0.068,
+    "block": 3,
+    "n": 295,
+    "coverage": 0.9546925566343042
+   },
+   "composite-v2-week-bullish-boost-w1p0-week": {
+    "mean": 0.0202581427006071,
+    "lo": -0.006092994924786654,
+    "hi": 0.045954282001103665,
+    "p_le0": 0.0585,
+    "block": 1,
+    "n": 295,
+    "coverage": 0.9546925566343042
+   },
+   "composite-v2-week-bullish-g2-cut0p6-week": {
+    "mean": 0.01280051558196303,
+    "lo": -0.013679525535436622,
+    "hi": 0.0374250858689445,
+    "p_le0": 0.1575,
+    "block": 1,
+    "n": 295,
+    "coverage": 0.9546925566343042
+   },
+   "composite-v2-week-bullish-g2-cut0p8-week": {
+    "mean": 0.011444583378573198,
+    "lo": -0.013391341143921919,
+    "hi": 0.03625043765541621,
+    "p_le0": 0.181,
+    "block": 1,
+    "n": 295,
+    "coverage": 0.9546925566343042
+   },
+   "composite-v2-week-bullish-g5-q0p4-week": {
+    "mean": 0.03963477931534999,
+    "lo": 0.010745921816809646,
+    "hi": 0.07014587212533124,
+    "p_le0": 0.004,
+    "block": 2,
+    "n": 154,
+    "coverage": 0.49838187702265374
+   },
+   "composite-v2-week-bullish-g5-q0p6-week": {
+    "mean": 0.03459776614612074,
+    "lo": 0.004255893555471739,
+    "hi": 0.06315558122789083,
+    "p_le0": 0.016,
+    "block": 4,
+    "n": 112,
+    "coverage": 0.36245954692556637
+   },
+   "composite-v2-week-bullish-g8-x1p25-week": {
+    "mean": 0.01244540281804115,
+    "lo": -0.01452873841037105,
+    "hi": 0.03873986108990727,
+    "p_le0": 0.174,
+    "block": 1,
+    "n": 292,
+    "coverage": 0.9449838187702265
+   },
+   "composite-v2-week-bullish-g8-x2p0-week": {
+    "mean": -0.017384005973405725,
+    "lo": -0.05144255011432303,
+    "hi": 0.017978810174504756,
+    "p_le0": 0.831,
+    "block": 2,
+    "n": 276,
+    "coverage": 0.8932038834951457
+   },
+   "composite-v2-week-bullish-g9-near0p8-week": {
+    "mean": 0.030867439160673856,
+    "lo": 0.0036593979825993786,
+    "hi": 0.05756727319965671,
+    "p_le0": 0.0145,
+    "block": 1,
+    "n": 259,
+    "coverage": 0.8381877022653722
+   },
+   "composite-v2-week-bullish-g9-near0p9-week": {
+    "mean": 0.01682042257433158,
+    "lo": -0.009153264259378232,
+    "hi": 0.041945354891838316,
+    "p_le0": 0.115,
+    "block": 1,
+    "n": 254,
+    "coverage": 0.8220064724919094
+   },
+   "composite-v2-week-bullish-vote-k1-week": {
+    "mean": 0.022970007107386756,
+    "lo": -0.00010034666277548932,
+    "hi": 0.04620523804267358,
+    "p_le0": 0.026,
+    "block": 2,
+    "n": 295,
+    "coverage": 0.9546925566343042
+   },
+   "composite-v2-week-bullish-vote-k2-week": {
+    "mean": 0.020147732741275057,
+    "lo": -0.003907195413798293,
+    "hi": 0.04693469959742518,
+    "p_le0": 0.049,
+    "block": 1,
+    "n": 283,
+    "coverage": 0.9158576051779935
+   },
+   "composite-v2-week-bullish-vote-k3-week": {
+    "mean": 0.03223562876619718,
+    "lo": 0.005831768082902815,
+    "hi": 0.0596887845312604,
+    "p_le0": 0.008,
+    "block": 1,
+    "n": 260,
+    "coverage": 0.8414239482200647
+   },
+   "composite-v2-week-bullish-vote-k4-week": {
+    "mean": 0.005815798961985901,
+    "lo": -0.02506632454603134,
+    "hi": 0.036426507720061056,
+    "p_le0": 0.3635,
+    "block": 1,
+    "n": 222,
+    "coverage": 0.7184466019417476
+   },
+   "composite-v2-week-bullish-vote-k5-week": {
+    "mean": 0.012288120866284918,
+    "lo": -0.05648399303295041,
+    "hi": 0.07676407812056137,
+    "p_le0": 0.3675,
+    "block": 1,
+    "n": 101,
+    "coverage": 0.3268608414239482
    },
    "d02-stock-pcr-confirmatory-week": {
     "mean": -0.03986094986987788,
@@ -1549,16 +1844,16 @@
    }
   },
   "joint": {
-   "n_models": 76,
+   "n_models": 92,
    "block": 1,
    "twins": {
     "g-a05b-g5-not-week": "composite-v1-week-bullish-not-week",
     "g-a05b-g5-week": "composite-v1-week-bullish-week"
    },
    "spa": {
-    "lower": 0.207,
-    "consistent": 0.302,
-    "upper": 0.344
+    "lower": 0.225,
+    "consistent": 0.3285,
+    "upper": 0.3685
    },
    "stepm": [],
    "mcs": [
@@ -1572,6 +1867,22 @@
     "champion-v1-week",
     "composite-v1-week-bullish-not-week",
     "composite-v1-week-bullish-week",
+    "composite-v2-week-bullish-boost-w0p25-week",
+    "composite-v2-week-bullish-boost-w0p5-week",
+    "composite-v2-week-bullish-boost-w1p0-week",
+    "composite-v2-week-bullish-g2-cut0p6-week",
+    "composite-v2-week-bullish-g2-cut0p8-week",
+    "composite-v2-week-bullish-g5-q0p4-week",
+    "composite-v2-week-bullish-g5-q0p6-week",
+    "composite-v2-week-bullish-g8-x1p25-week",
+    "composite-v2-week-bullish-g8-x2p0-week",
+    "composite-v2-week-bullish-g9-near0p8-week",
+    "composite-v2-week-bullish-g9-near0p9-week",
+    "composite-v2-week-bullish-vote-k1-week",
+    "composite-v2-week-bullish-vote-k2-week",
+    "composite-v2-week-bullish-vote-k3-week",
+    "composite-v2-week-bullish-vote-k4-week",
+    "composite-v2-week-bullish-vote-k5-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
     "f06-trend-acceleration-week",
