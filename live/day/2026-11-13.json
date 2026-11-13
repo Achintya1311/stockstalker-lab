@@ -314,7 +314,13 @@
           "rsi_band": "neutral",
           "vol_x20": 3.44,
           "range20": 42.2
-        }
+        },
+        "open": 4843.0,
+        "close": 4809.8,
+        "move_pct": -0.6855255007226835,
+        "move_rs": -33.19999999999982,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "TCS",
@@ -632,7 +638,13 @@
           "range20": 62.6,
           "ob_dist": 0.55,
           "ob_side": "demand"
-        }
+        },
+        "open": 2438.6,
+        "close": 2407.5,
+        "move_pct": -1.2753219060116394,
+        "move_rs": -31.09999999999991,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "HCLTECH",
@@ -945,7 +957,13 @@
           "range20": 61.8,
           "ob_dist": 0.62,
           "ob_side": "demand"
-        }
+        },
+        "open": 1380.7,
+        "close": 1378.0,
+        "move_pct": -0.1955529803722822,
+        "move_rs": -2.7000000000000455,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "TECHM",
@@ -1263,7 +1281,13 @@
           "range20": 77.9,
           "ob_dist": 0.73,
           "ob_side": "demand"
-        }
+        },
+        "open": 1772.0,
+        "close": 1764.0,
+        "move_pct": -0.4514672686230292,
+        "move_rs": -8.0,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "NHPC",
@@ -1581,7 +1605,13 @@
           "range20": 54.3,
           "ob_dist": 0.3,
           "ob_side": "demand"
-        }
+        },
+        "open": 76.31,
+        "close": 75.83,
+        "move_pct": -0.6290132354868305,
+        "move_rs": -0.480000000000004,
+        "hit": false,
+        "late": false
       }
     ],
     "bearish": [
@@ -1891,7 +1921,13 @@
           "range20": 100.0,
           "ob_dist": 0.28,
           "ob_side": "demand"
-        }
+        },
+        "open": 2300.0,
+        "close": 2255.0,
+        "move_pct": -1.9565217391304346,
+        "move_rs": -45.0,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "PAYTM",
@@ -2199,7 +2235,13 @@
           "range20": 100.0,
           "ob_dist": 0.33,
           "ob_side": "demand"
-        }
+        },
+        "open": 1920.0,
+        "close": 1939.9,
+        "move_pct": 1.0364583333333455,
+        "move_rs": 19.90000000000009,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "POLICYBZR",
@@ -2503,7 +2545,13 @@
           "rsi_band": "neutral",
           "vol_x20": 1.98,
           "range20": 78.1
-        }
+        },
+        "open": 1040.4,
+        "close": 1105.0,
+        "move_pct": 6.209150326797386,
+        "move_rs": 64.59999999999991,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "OBEROIRLTY",
@@ -2807,7 +2855,13 @@
           "rsi_band": "firm",
           "vol_x20": 2.43,
           "range20": 93.6
-        }
+        },
+        "open": 1821.8,
+        "close": 1797.6,
+        "move_pct": -1.32835657042486,
+        "move_rs": -24.200000000000045,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "KALYANKJIL",
@@ -3115,7 +3169,13 @@
           "range20": 97.3,
           "ob_dist": 0.48,
           "ob_side": "demand"
-        }
+        },
+        "open": 718.0,
+        "close": 697.0,
+        "move_pct": -2.924791086350975,
+        "move_rs": -21.0,
+        "hit": true,
+        "late": false
       }
     ]
   },
