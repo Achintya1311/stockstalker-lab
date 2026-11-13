@@ -2016,6 +2016,33 @@
     "n": 972,
     "coverage": 0.6625766871165644
    },
+   "composite-v2-day-bullish-boost-w0p5-day": {
+    "mean": 0.03646285992282198,
+    "lo": 0.01917212207278866,
+    "hi": 0.05405456220284551,
+    "p_le0": 0.0005,
+    "block": 1,
+    "n": 1087,
+    "coverage": 0.7409679618268575
+   },
+   "composite-v2-day-bullish-vote-k2-day": {
+    "mean": 0.03501098091427626,
+    "lo": 0.017461141550181837,
+    "hi": 0.051726965224199846,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 1086,
+    "coverage": 0.7402862985685071
+   },
+   "composite-v2-day-bullish-vote-k3-day": {
+    "mean": 0.03234168249034132,
+    "lo": 0.013329936917433123,
+    "hi": 0.050802885374172005,
+    "p_le0": 0.0005,
+    "block": 1,
+    "n": 1072,
+    "coverage": 0.7307430129516019
+   },
    "consensus-dbu-v1-day": {
     "mean": 0.031969411929195266,
     "lo": 0.021466296744867337,
@@ -2702,7 +2729,7 @@
    }
   },
   "joint": {
-   "n_models": 83,
+   "n_models": 86,
    "block": 1,
    "twins": {},
    "spa": {
@@ -2713,6 +2740,9 @@
    "stepm": [
     "composite-v1-day-bullish-day",
     "composite-v1-day-bullish-not-day",
+    "composite-v2-day-bullish-boost-w0p5-day",
+    "composite-v2-day-bullish-vote-k2-day",
+    "composite-v2-day-bullish-vote-k3-day",
     "consensus-dbu-v1-day",
     "d01c-day",
     "f14-trend-switched-fade-day",
@@ -2731,6 +2761,7 @@
    "mcs": [
     "a09-gap-fade-day",
     "composite-v1-day-bullish-day",
+    "composite-v2-day-bullish-boost-w0p5-day",
     "consensus-dbu-v1-day",
     "d01c-day",
     "e3b-a02-low-ivol-day",
@@ -2821,6 +2852,33 @@
     "block": 1,
     "n": 602,
     "coverage": 0.4103612815269257
+   },
+   "composite-v2-day-bearish-boost-w0p5-day": {
+    "mean": 0.07569284164326989,
+    "lo": 0.05365065815838741,
+    "hi": 0.09761811621376514,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 936,
+    "coverage": 0.6380368098159509
+   },
+   "composite-v2-day-bearish-vote-k2-day": {
+    "mean": 0.07529671424316367,
+    "lo": 0.05215741037772971,
+    "hi": 0.09618168391441156,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 929,
+    "coverage": 0.6332651670074982
+   },
+   "composite-v2-day-bearish-vote-k3-day": {
+    "mean": 0.08207088939307734,
+    "lo": 0.05817051139776609,
+    "hi": 0.1050616396138826,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 878,
+    "coverage": 0.5985003408316292
    },
    "consensus-db-v1-day": {
     "mean": 0.04605736502238802,
@@ -3517,7 +3575,7 @@
    }
   },
   "joint": {
-   "n_models": 84,
+   "n_models": 87,
    "block": 1,
    "twins": {
     "g-e2a-g2-day": "composite-v1-day-bearish-day",
@@ -3533,6 +3591,9 @@
     "a09-gap-fade-day",
     "composite-v1-day-bearish-day",
     "composite-v1-day-bearish-not-day",
+    "composite-v2-day-bearish-boost-w0p5-day",
+    "composite-v2-day-bearish-vote-k2-day",
+    "composite-v2-day-bearish-vote-k3-day",
     "consensus-db-v1-day",
     "d01c-day",
     "e1b-day",

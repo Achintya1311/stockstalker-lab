@@ -2,9 +2,9 @@
 
 Edge is in points of hit rate over the market line, per pick date, `top` selection, as in `train_leaderboard.md`. The 95% interval and P(edge <= 0) come from a stationary bootstrap over dates (block length chosen per series), so serial correlation is respected. SPA is Hansen's test that NO strategy beats the market line across all trials of that horizon and side (small p = something real survives snooping). StepM names the strategies individually superior at the 10% level. MCS is the set statistically indistinguishable from the best at 10%. Dates with no pick count as edge 0 in the joint tests.
 
-## day/bearish  (84 experiments, block 1)
+## day/bearish  (87 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, composite-v1-day-bearish-day, composite-v1-day-bearish-not-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-d01c-fallback-day, e2a-day, e2a-f11-fallback-day, e2b-day, e3a-a02-high-ivol-day, e3b-a02-low-ivol-day, f02-volume-signed-reversal-day, f03-conditional-reversal-day, f06-trend-acceleration-day, f07-high-push-fade-day, f10-vol-ratio-reversal-day, f11-range-top-fade-day, f11-w06-day, f11-w08-day, f11-w12-day, f11-w15-day, f13-accel-range-top-day, f14-trend-switched-fade-day, f19-body-volatility-fade-day, g-e2a-g1-day, g-e2a-g1-not-day, g-e2a-g10-day, g-e2a-g10-not-day, g-e2a-g3-day, g-e2a-g4-day, g-e2a-g4-not-day, g-e2a-g5-day, g-e2a-g5-not-day, g-e2a-g6-not-day, g-e2a-g8-day, h02-idiosyncratic-volatility-day, q06r-wide-bar-wick-day, q07-trend-residual-day, t01-sma-crossover-day, t04-connors-rsi2-day, t05c-upcross-fade-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day, g-e2a-g2-day, g-e2a-g2-not-day. MCS size: 5 of 84. g-e2a-g2-day repeats composite-v1-day-bearish-day exactly (same picks every date), so the joint tests ran on one copy. g-e2a-g2-not-day repeats composite-v1-day-bearish-not-day exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, composite-v1-day-bearish-day, composite-v1-day-bearish-not-day, composite-v2-day-bearish-boost-w0p5-day, composite-v2-day-bearish-vote-k2-day, composite-v2-day-bearish-vote-k3-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-d01c-fallback-day, e2a-day, e2a-f11-fallback-day, e2b-day, e3a-a02-high-ivol-day, e3b-a02-low-ivol-day, f02-volume-signed-reversal-day, f03-conditional-reversal-day, f06-trend-acceleration-day, f07-high-push-fade-day, f10-vol-ratio-reversal-day, f11-range-top-fade-day, f11-w06-day, f11-w08-day, f11-w12-day, f11-w15-day, f13-accel-range-top-day, f14-trend-switched-fade-day, f19-body-volatility-fade-day, g-e2a-g1-day, g-e2a-g1-not-day, g-e2a-g10-day, g-e2a-g10-not-day, g-e2a-g3-day, g-e2a-g4-day, g-e2a-g4-not-day, g-e2a-g5-day, g-e2a-g5-not-day, g-e2a-g6-not-day, g-e2a-g8-day, h02-idiosyncratic-volatility-day, q06r-wide-bar-wick-day, q07-trend-residual-day, t01-sma-crossover-day, t04-connors-rsi2-day, t05c-upcross-fade-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day, g-e2a-g2-day, g-e2a-g2-not-day. MCS size: 5 of 87. g-e2a-g2-day repeats composite-v1-day-bearish-day exactly (same picks every date), so the joint tests ran on one copy. g-e2a-g2-not-day repeats composite-v1-day-bearish-not-day exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -13,7 +13,10 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | g-e2a-g1-day | 485 | 33% | +8.64 | +5.15 to +11.82 | 0.000 | 1 |
 | composite-v1-day-bearish-day | 716 | 49% | +8.31 | +5.86 to +10.86 | 0.000 | 1 |
 | g-e2a-g2-day | 716 | 49% | +8.31 | +5.86 to +10.86 | 0.000 | 1 |
+| composite-v2-day-bearish-vote-k3-day | 878 | 60% | +8.21 | +5.82 to +10.51 | 0.000 | 2 |
 | g-e2a-g3-day | 935 | 64% | +7.71 | +5.53 to +9.91 | 0.000 | 2 |
+| composite-v2-day-bearish-boost-w0p5-day | 936 | 64% | +7.57 | +5.37 to +9.76 | 0.000 | 2 |
+| composite-v2-day-bearish-vote-k2-day | 929 | 63% | +7.53 | +5.22 to +9.62 | 0.000 | 2 |
 | e2a-day | 936 | 64% | +7.46 | +5.27 to +9.67 | 0.000 | 2 |
 | g-e2a-g6-not-day | 901 | 61% | +7.45 | +5.24 to +9.65 | 0.000 | 2 |
 | composite-v1-day-bearish-not-day | 602 | 41% | +7.15 | +4.01 to +10.25 | 0.000 | 1 |
@@ -93,9 +96,9 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | q01-price-volume-corr-day | 1453 | 99% | -1.51 | -2.65 to -0.26 | 0.993 | 2 |
 | d01-oi-buildup-day | 1467 | 100% | -2.48 | -3.54 to -1.44 | 1.000 | 1 |
 
-## day/bullish  (83 experiments, block 1)
+## day/bullish  (86 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: composite-v1-day-bullish-day, composite-v1-day-bullish-not-day, consensus-dbu-v1-day, d01c-day, f14-trend-switched-fade-day, g-t04-g3-day, g-t04-g4-day, g-t04-g6-not-day, g-t04-g7-day, g-t04-g8-not-day, g-t04-g9-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-connors-rsi2-day, t04-q06-fallback-day, t10-nr7-narrow-range-day. MCS size: 25 of 83.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: composite-v1-day-bullish-day, composite-v1-day-bullish-not-day, composite-v2-day-bullish-boost-w0p5-day, composite-v2-day-bullish-vote-k2-day, composite-v2-day-bullish-vote-k3-day, consensus-dbu-v1-day, d01c-day, f14-trend-switched-fade-day, g-t04-g3-day, g-t04-g4-day, g-t04-g6-not-day, g-t04-g7-day, g-t04-g8-not-day, g-t04-g9-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-connors-rsi2-day, t04-q06-fallback-day, t10-nr7-narrow-range-day. MCS size: 26 of 86.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -107,10 +110,13 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | t04-q06-fallback-day | 1420 | 97% | +3.85 | +2.39 to +5.35 | 0.000 | 1 |
 | g-t04-g3-day | 1075 | 73% | +3.71 | +1.89 to +5.60 | 0.000 | 1 |
 | g-t04-g4-day | 1054 | 72% | +3.65 | +1.90 to +5.47 | 0.000 | 1 |
+| composite-v2-day-bullish-boost-w0p5-day | 1087 | 74% | +3.65 | +1.92 to +5.41 | 0.001 | 1 |
+| composite-v2-day-bullish-vote-k2-day | 1086 | 74% | +3.50 | +1.75 to +5.17 | 0.000 | 2 |
 | g-t04-g10-day | 546 | 37% | +3.42 | +0.88 to +5.92 | 0.005 | 2 |
 | g-t04-g7-day | 1081 | 74% | +3.40 | +1.67 to +5.23 | 0.000 | 2 |
 | t04-connors-rsi2-day | 1087 | 74% | +3.37 | +1.62 to +5.13 | 0.001 | 1 |
 | g-t04-g10-not-day | 541 | 37% | +3.32 | +1.16 to +5.50 | 0.001 | 4 |
+| composite-v2-day-bullish-vote-k3-day | 1072 | 73% | +3.23 | +1.33 to +5.08 | 0.001 | 1 |
 | consensus-dbu-v1-day | 1467 | 100% | +3.20 | +2.15 to +4.27 | 0.000 | 1 |
 | composite-v1-day-bullish-not-day | 972 | 66% | +3.08 | +1.10 to +5.16 | 0.002 | 1 |
 | g-t04-g9-not-day | 944 | 64% | +2.61 | +0.70 to +4.48 | 0.005 | 1 |
