@@ -1,0 +1,494 @@
+{
+  "split": "train",
+  "selection": "top",
+  "rule": {
+    "fit_years": [
+      2015,
+      2016,
+      2017,
+      2018
+    ],
+    "check_years": [
+      2019,
+      2020
+    ],
+    "min_fit_years": 3,
+    "min_date_coverage": 0.4
+  },
+  "trials": {
+    "c1_cells_with_complements": 68,
+    "composite_v1_with_complements": 8,
+    "composite_v2_configs": 60,
+    "composite_v2_day": 28,
+    "composite_v2_week": 32
+  },
+  "configs": [],
+  "selections": [
+    {
+      "horizon": "day",
+      "final": false,
+      "keys_eligible_on_both": [],
+      "tables": {
+        "day_bullish": {
+          "decision": "keep plain T04",
+          "config": null,
+          "config_key": null,
+          "one_side_only": false,
+          "fit_gain_pts": null
+        },
+        "day_bearish": {
+          "decision": "keep plain E2A",
+          "config": null,
+          "config_key": null,
+          "one_side_only": false,
+          "fit_gain_pts": null
+        }
+      },
+      "selected_key": null
+    },
+    {
+      "horizon": "week",
+      "final": false,
+      "keys_eligible_on_both": [],
+      "tables": {
+        "week_bullish": {
+          "decision": "keep plain A05B",
+          "config": null,
+          "config_key": null,
+          "one_side_only": false,
+          "fit_gain_pts": null
+        },
+        "week_bearish": {
+          "decision": "keep plain A01",
+          "config": null,
+          "config_key": null,
+          "one_side_only": false,
+          "fit_gain_pts": null
+        }
+      },
+      "selected_key": null
+    }
+  ],
+  "pending": [
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K1",
+      "missing": [
+        "composite-v2-day-bullish-vote-k1-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K2",
+      "missing": [
+        "composite-v2-day-bullish-vote-k2-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K3",
+      "missing": [
+        "composite-v2-day-bullish-vote-k3-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K4",
+      "missing": [
+        "composite-v2-day-bullish-vote-k4-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_VOTE_K5",
+      "missing": [
+        "composite-v2-day-bullish-vote-k5-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_BOOST_W0P25",
+      "missing": [
+        "composite-v2-day-bullish-boost-w0p25-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_BOOST_W0P5",
+      "missing": [
+        "composite-v2-day-bullish-boost-w0p5-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_BOOST_W1P0",
+      "missing": [
+        "composite-v2-day-bullish-boost-w1p0-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_G8_X1P25",
+      "missing": [
+        "composite-v2-day-bullish-g8-x1p25-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_G8_X2P0",
+      "missing": [
+        "composite-v2-day-bullish-g8-x2p0-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_G5_Q0P4",
+      "missing": [
+        "composite-v2-day-bullish-g5-q0p4-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_G5_Q0P6",
+      "missing": [
+        "composite-v2-day-bullish-g5-q0p6-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_G9_NEAR0P8",
+      "missing": [
+        "composite-v2-day-bullish-g9-near0p8-day"
+      ]
+    },
+    {
+      "table": "day_bullish",
+      "config": "COMPOSITE_V2_DAY_BULLISH_G9_NEAR0P9",
+      "missing": [
+        "composite-v2-day-bullish-g9-near0p9-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K1",
+      "missing": [
+        "composite-v2-day-bearish-vote-k1-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K2",
+      "missing": [
+        "composite-v2-day-bearish-vote-k2-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K3",
+      "missing": [
+        "composite-v2-day-bearish-vote-k3-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K4",
+      "missing": [
+        "composite-v2-day-bearish-vote-k4-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_VOTE_K5",
+      "missing": [
+        "composite-v2-day-bearish-vote-k5-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_BOOST_W0P25",
+      "missing": [
+        "composite-v2-day-bearish-boost-w0p25-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_BOOST_W0P5",
+      "missing": [
+        "composite-v2-day-bearish-boost-w0p5-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_BOOST_W1P0",
+      "missing": [
+        "composite-v2-day-bearish-boost-w1p0-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_G2_CUT0P6",
+      "missing": [
+        "composite-v2-day-bearish-g2-cut0p6-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_G2_CUT0P8",
+      "missing": [
+        "composite-v2-day-bearish-g2-cut0p8-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_G8_X1P25",
+      "missing": [
+        "composite-v2-day-bearish-g8-x1p25-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_G8_X2P0",
+      "missing": [
+        "composite-v2-day-bearish-g8-x2p0-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_G5_Q0P4",
+      "missing": [
+        "composite-v2-day-bearish-g5-q0p4-day"
+      ]
+    },
+    {
+      "table": "day_bearish",
+      "config": "COMPOSITE_V2_DAY_BEARISH_G5_Q0P6",
+      "missing": [
+        "composite-v2-day-bearish-g5-q0p6-day"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K1",
+      "missing": [
+        "composite-v2-week-bullish-vote-k1-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K2",
+      "missing": [
+        "composite-v2-week-bullish-vote-k2-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K3",
+      "missing": [
+        "composite-v2-week-bullish-vote-k3-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K4",
+      "missing": [
+        "composite-v2-week-bullish-vote-k4-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K5",
+      "missing": [
+        "composite-v2-week-bullish-vote-k5-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_VOTE_K6",
+      "missing": [
+        "composite-v2-week-bullish-vote-k6-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_BOOST_W0P25",
+      "missing": [
+        "composite-v2-week-bullish-boost-w0p25-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_BOOST_W0P5",
+      "missing": [
+        "composite-v2-week-bullish-boost-w0p5-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_BOOST_W1P0",
+      "missing": [
+        "composite-v2-week-bullish-boost-w1p0-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G2_CUT0P6",
+      "missing": [
+        "composite-v2-week-bullish-g2-cut0p6-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G2_CUT0P8",
+      "missing": [
+        "composite-v2-week-bullish-g2-cut0p8-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G8_X1P25",
+      "missing": [
+        "composite-v2-week-bullish-g8-x1p25-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G8_X2P0",
+      "missing": [
+        "composite-v2-week-bullish-g8-x2p0-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G5_Q0P4",
+      "missing": [
+        "composite-v2-week-bullish-g5-q0p4-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G5_Q0P6",
+      "missing": [
+        "composite-v2-week-bullish-g5-q0p6-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G9_NEAR0P8",
+      "missing": [
+        "composite-v2-week-bullish-g9-near0p8-week"
+      ]
+    },
+    {
+      "table": "week_bullish",
+      "config": "COMPOSITE_V2_WEEK_BULLISH_G9_NEAR0P9",
+      "missing": [
+        "composite-v2-week-bullish-g9-near0p9-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K1",
+      "missing": [
+        "composite-v2-week-bearish-vote-k1-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K2",
+      "missing": [
+        "composite-v2-week-bearish-vote-k2-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K3",
+      "missing": [
+        "composite-v2-week-bearish-vote-k3-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K4",
+      "missing": [
+        "composite-v2-week-bearish-vote-k4-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K5",
+      "missing": [
+        "composite-v2-week-bearish-vote-k5-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_VOTE_K6",
+      "missing": [
+        "composite-v2-week-bearish-vote-k6-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_BOOST_W0P25",
+      "missing": [
+        "composite-v2-week-bearish-boost-w0p25-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_BOOST_W0P5",
+      "missing": [
+        "composite-v2-week-bearish-boost-w0p5-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_BOOST_W1P0",
+      "missing": [
+        "composite-v2-week-bearish-boost-w1p0-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G2_CUT0P6",
+      "missing": [
+        "composite-v2-week-bearish-g2-cut0p6-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G2_CUT0P8",
+      "missing": [
+        "composite-v2-week-bearish-g2-cut0p8-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G8_X1P25",
+      "missing": [
+        "composite-v2-week-bearish-g8-x1p25-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G8_X2P0",
+      "missing": [
+        "composite-v2-week-bearish-g8-x2p0-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G5_Q0P4",
+      "missing": [
+        "composite-v2-week-bearish-g5-q0p4-week"
+      ]
+    },
+    {
+      "table": "week_bearish",
+      "config": "COMPOSITE_V2_WEEK_BEARISH_G5_Q0P6",
+      "missing": [
+        "composite-v2-week-bearish-g5-q0p6-week"
+      ]
+    }
+  ]
+}

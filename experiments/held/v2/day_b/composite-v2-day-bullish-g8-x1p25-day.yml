@@ -1,0 +1,5 @@
+id: composite-v2-day-bullish-g8-x1p25-day
+strategy: strategies.composite_v2_day_bullish_g8_x1p25
+split: train
+horizon: day
+dates: {start: '2015-01-01', end: '2020-12-31'}

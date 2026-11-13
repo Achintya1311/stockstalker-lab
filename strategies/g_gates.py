@@ -92,11 +92,19 @@ G10 market trend switch (all four triggers): equal-weight universe index = cumul
    values (the last included); bearish keep if below. Equal: dropped either side. Fewer than 200 index
    dates: no verdict. One verdict per date for every pick (a date filter, like G5). The comparison is a
    ratio of index values, so where the tail starts does not change it.
+
+COMPOSITE_V2 additions (13 Nov 2026, `cards/COMPOSITE_V2.yml`), all additive: G2, G5, G8 and G9 take an
+optional keyword threshold whose default (None) reproduces the behaviour above exactly (`leader_top` /
+`leader_bottom`; `stress_quantile`, where None is the plain median; `volume_multiple`; `near_high`), and
+`shared_tail()` is an opt-in context manager that memoises the full-universe `_adjusted_tail(history)` for
+the same `history` object, so several gates asked about one date adjust the universe once. Outside the
+context nothing is cached; inside it every gate returns exactly what it returns outside.
 """
 
 from __future__ import annotations
 
 import importlib
+from contextlib import contextmanager
 from dataclasses import dataclass
 from typing import Callable
 
@@ -199,8 +207,36 @@ def _eligible(history: pd.DataFrame) -> pd.DataFrame:
     return history
 
 
+_TAIL_CACHE: dict | None = None  # active only inside `shared_tail()`
+
+
+@contextmanager
+def shared_tail():
+    """Memoise the full-universe `_adjusted_tail(history)` per `history` object while the context is open."""
+    global _TAIL_CACHE
+    outer = _TAIL_CACHE
+    if outer is None:
+        _TAIL_CACHE = {}
+    try:
+        yield
+    finally:
+        if outer is None:
+            _TAIL_CACHE = None
+
+
 def _adjusted_tail(history: pd.DataFrame, symbols=None) -> pd.DataFrame:
     """Adjusted rows on the last `TAIL_DATES` market dates, sorted by symbol then date."""
+    if symbols is None and _TAIL_CACHE is not None:
+        key = (id(history), len(history))
+        hit = _TAIL_CACHE.get(key)
+        if hit is None or hit[0] is not history:
+            hit = (history, _adjusted_tail_uncached(history, None))
+            _TAIL_CACHE[key] = hit
+        return hit[1]
+    return _adjusted_tail_uncached(history, symbols)
+
+
+def _adjusted_tail_uncached(history: pd.DataFrame, symbols=None) -> pd.DataFrame:
     if history.empty:
         return history.iloc[0:0]
     history = _eligible(history)
@@ -280,14 +316,23 @@ def leader_percentiles(adj: pd.DataFrame) -> pd.Series:
     return (r.round(10).rank(method="average") - 0.5) / len(r)
 
 
-def g2(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None) -> dict[str, bool]:
+def g2(
+    history: pd.DataFrame,
+    sides: dict[str, int],
+    trigger: str | None = None,
+    *,
+    leader_top: float | None = None,
+    leader_bottom: float | None = None,
+) -> dict[str, bool]:
+    top = LEADER_TOP if leader_top is None else leader_top
+    bottom = LEADER_BOTTOM if leader_bottom is None else leader_bottom
     adj = _adjusted_tail(history)
     pct = leader_percentiles(adj)
     out = {}
     for s, side in sides.items():
         if s not in pct.index:
             continue
-        extreme = pct[s] > LEADER_TOP if side < 0 else pct[s] < LEADER_BOTTOM
+        extreme = pct[s] > top if side < 0 else pct[s] < bottom
         if not extreme:
             out[s] = True
             continue
@@ -359,21 +404,28 @@ def g4(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None)
     return out
 
 
-def stress_reading(adj: pd.DataFrame) -> tuple[float, float] | None:
-    """(20-day universe volatility on the last date, median of its trailing 250 values), or None (G5)."""
+def stress_reading(adj: pd.DataFrame, quantile: float | None = None) -> tuple[float, float] | None:
+    """(20-day universe volatility on the last date, median of its trailing 250 values), or None (G5).
+
+    `quantile` (COMPOSITE_V2) replaces the median by that quantile of the same 250 values (linear
+    interpolation); None keeps the median exactly."""
     mkt = universe_returns(adj)
     if len(mkt) < STRESS_VOL_WINDOW + STRESS_MEDIAN_WINDOW - 1:
         return None
     vol = mkt.rolling(STRESS_VOL_WINDOW).std(ddof=0).dropna()
     if len(vol) < STRESS_MEDIAN_WINDOW:
         return None
-    return float(vol.iloc[-1]), float(vol.iloc[-STRESS_MEDIAN_WINDOW:].median())
+    trailing = vol.iloc[-STRESS_MEDIAN_WINDOW:]
+    level = trailing.median() if quantile is None else trailing.quantile(quantile)
+    return float(vol.iloc[-1]), float(level)
 
 
-def g5(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None) -> dict[str, bool]:
+def g5(
+    history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None, *, stress_quantile: float | None = None
+) -> dict[str, bool]:
     if not sides:
         return {}
-    reading = stress_reading(_adjusted_tail(history))
+    reading = stress_reading(_adjusted_tail(history), stress_quantile)
     if reading is None:
         return {}
     return {s: reading[0] > reading[1] for s in sides}
@@ -403,7 +455,10 @@ def g7(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None)
     return {s: bool(np.sign(d[s]) == sides[s]) for s in sides if s in d.index and d[s] != 0}
 
 
-def g8(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None) -> dict[str, bool]:
+def g8(
+    history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None, *, volume_multiple: float | None = None
+) -> dict[str, bool]:
+    multiple = VOLUME_MULTIPLE if volume_multiple is None else volume_multiple
     if history.empty or not sides or "volume" not in history.columns:
         return {}
     sub = _eligible(history)
@@ -416,14 +471,17 @@ def g8(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None)
         base = v[-(VOLUME_WINDOW + 1) : -1].mean()
         if not np.isfinite(base) or base <= 0 or not np.isfinite(v[-1]):
             continue
-        out[s] = bool(v[-1] > VOLUME_MULTIPLE * base)
+        out[s] = bool(v[-1] > multiple * base)
     return out
 
 
 # ---------------------------------------------------------------- batch 2
 
 
-def g9(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None) -> dict[str, bool]:
+def g9(
+    history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None, *, near_high: float | None = None
+) -> dict[str, bool]:
+    near = PULLBACK_NEAR_HIGH if near_high is None else near_high
     if not any(side > 0 for side in sides.values()):
         return {}
     adj = _adjusted_tail(history)
@@ -436,7 +494,7 @@ def g9(history: pd.DataFrame, sides: dict[str, int], trigger: str | None = None)
         if len(close) < PULLBACK_HIGH_WINDOW:
             continue
         high = close[-PULLBACK_HIGH_WINDOW:].max()
-        out[s] = bool(pct[s] > LEADER_TOP and close[-1] >= PULLBACK_NEAR_HIGH * high)
+        out[s] = bool(pct[s] > LEADER_TOP and close[-1] >= near * high)
     return out
 
 
