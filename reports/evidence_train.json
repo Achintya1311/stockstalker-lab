@@ -2025,6 +2025,24 @@
     "n": 1087,
     "coverage": 0.7409679618268575
    },
+   "composite-v2-day-bullish-g9-near0p8-day": {
+    "mean": 0.04637270689397011,
+    "lo": 0.02348913241611378,
+    "hi": 0.07049569495800748,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 815,
+    "coverage": 0.5555555555555556
+   },
+   "composite-v2-day-bullish-g9-near0p9-day": {
+    "mean": 0.03271530788572202,
+    "lo": 0.005817678993213478,
+    "hi": 0.05896755498677141,
+    "p_le0": 0.008,
+    "block": 2,
+    "n": 715,
+    "coverage": 0.48738922972051807
+   },
    "composite-v2-day-bullish-vote-k2-day": {
     "mean": 0.03501098091427626,
     "lo": 0.017461141550181837,
@@ -2042,6 +2060,15 @@
     "block": 1,
     "n": 1072,
     "coverage": 0.7307430129516019
+   },
+   "composite-v2-day-bullish-vote-k4-day": {
+    "mean": 0.058018235819179705,
+    "lo": 0.03638338969216889,
+    "hi": 0.08007258083844247,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 892,
+    "coverage": 0.6080436264485344
    },
    "consensus-dbu-v1-day": {
     "mean": 0.031969411929195266,
@@ -2729,7 +2756,7 @@
    }
   },
   "joint": {
-   "n_models": 86,
+   "n_models": 89,
    "block": 1,
    "twins": {},
    "spa": {
@@ -2741,8 +2768,10 @@
     "composite-v1-day-bullish-day",
     "composite-v1-day-bullish-not-day",
     "composite-v2-day-bullish-boost-w0p5-day",
+    "composite-v2-day-bullish-g9-near0p8-day",
     "composite-v2-day-bullish-vote-k2-day",
     "composite-v2-day-bullish-vote-k3-day",
+    "composite-v2-day-bullish-vote-k4-day",
     "consensus-dbu-v1-day",
     "d01c-day",
     "f14-trend-switched-fade-day",
@@ -2762,11 +2791,15 @@
     "a09-gap-fade-day",
     "composite-v1-day-bullish-day",
     "composite-v2-day-bullish-boost-w0p5-day",
+    "composite-v2-day-bullish-g9-near0p8-day",
+    "composite-v2-day-bullish-g9-near0p9-day",
+    "composite-v2-day-bullish-vote-k4-day",
     "consensus-dbu-v1-day",
     "d01c-day",
     "e3b-a02-low-ivol-day",
     "f09-volume-backed-fall-day",
     "f10-vol-ratio-reversal-day",
+    "f11-w08-day",
     "f11-w15-day",
     "f14-trend-switched-fade-day",
     "f16-position-turnover-corr-day",
@@ -2862,6 +2895,24 @@
     "n": 936,
     "coverage": 0.6380368098159509
    },
+   "composite-v2-day-bearish-g2-cut0p6-day": {
+    "mean": 0.08135536097224448,
+    "lo": 0.05356414938965592,
+    "hi": 0.10810467361999056,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 664,
+    "coverage": 0.45262440354464895
+   },
+   "composite-v2-day-bearish-g2-cut0p8-day": {
+    "mean": 0.07844989919943059,
+    "lo": 0.05541027060559003,
+    "hi": 0.10154835632532959,
+    "p_le0": 0.0,
+    "block": 1,
+    "n": 778,
+    "coverage": 0.5303340149965917
+   },
    "composite-v2-day-bearish-vote-k2-day": {
     "mean": 0.07529671424316367,
     "lo": 0.05215741037772971,
@@ -2879,6 +2930,15 @@
     "block": 2,
     "n": 878,
     "coverage": 0.5985003408316292
+   },
+   "composite-v2-day-bearish-vote-k4-day": {
+    "mean": 0.09578957635290083,
+    "lo": 0.06811055961936256,
+    "hi": 0.1231194584032284,
+    "p_le0": 0.0,
+    "block": 3,
+    "n": 676,
+    "coverage": 0.4608043626448534
    },
    "consensus-db-v1-day": {
     "mean": 0.04605736502238802,
@@ -3575,7 +3635,7 @@
    }
   },
   "joint": {
-   "n_models": 87,
+   "n_models": 90,
    "block": 1,
    "twins": {
     "g-e2a-g2-day": "composite-v1-day-bearish-day",
@@ -3592,8 +3652,11 @@
     "composite-v1-day-bearish-day",
     "composite-v1-day-bearish-not-day",
     "composite-v2-day-bearish-boost-w0p5-day",
+    "composite-v2-day-bearish-g2-cut0p6-day",
+    "composite-v2-day-bearish-g2-cut0p8-day",
     "composite-v2-day-bearish-vote-k2-day",
     "composite-v2-day-bearish-vote-k3-day",
+    "composite-v2-day-bearish-vote-k4-day",
     "consensus-db-v1-day",
     "d01c-day",
     "e1b-day",
