@@ -348,7 +348,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "OIL",
@@ -691,7 +692,8 @@
           }
         ],
         "checks_agree": 2,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "TORNTPHARM",
@@ -1029,7 +1031,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "SOLARINDS",
@@ -1372,7 +1375,8 @@
           }
         ],
         "checks_agree": 5,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "LUPIN",
@@ -1715,7 +1719,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       }
     ],
     "bearish": [
@@ -2059,7 +2064,8 @@
           }
         ],
         "checks_agree": 2,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "POLICYBZR",
@@ -2397,7 +2403,8 @@
           }
         ],
         "checks_agree": 5,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "POWERINDIA",
@@ -2730,7 +2737,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "DATAPATTNS",
@@ -3068,7 +3076,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "PNB",
@@ -3410,7 +3419,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       }
     ]
   },

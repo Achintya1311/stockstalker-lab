@@ -338,7 +338,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "late": false
       },
       {
         "symbol": "TCS",
@@ -685,7 +686,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "late": false
       },
       {
         "symbol": "MANAPPURAM",
@@ -1023,7 +1025,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "late": false
       },
       {
         "symbol": "HAL",
@@ -1361,7 +1364,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "late": false
       },
       {
         "symbol": "TECHM",
@@ -1708,7 +1712,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "late": false
       }
     ],
     "bearish": []
