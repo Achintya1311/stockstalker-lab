@@ -1,6 +1,0 @@
-id: exit-a01-trail-week
-strategy: strategies.a01_weekly_reversal
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}
-exit: {kind: trail, stop_atr: 3, max_sessions: 20, sides: [bearish]}

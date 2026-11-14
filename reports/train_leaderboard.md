@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 401. Gate 2's bar at that count: t >= 4.50.
+Trials recorded: 421. Gate 2's bar at that count: t >= 4.51.
 
 Month rows: four-week holds that overlap week to week; their t is a block t over 8 consecutive pick dates (see each results.md).
 
@@ -54,7 +54,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | q07-trend-residual-day | day | bearish | 7317 | 57.24% | 54.55% | 2.66 | 4.61 | yes | -0.02 | 100.00% |  |
 | q06-wick-balance-day | day | bullish | 7335 | 47.54% | 44.96% | 2.58 | 4.61 | yes | -0.42 | 100.00% |  |
 | f07-high-push-fade-day | day | bearish | 7235 | 57.29% | 54.59% | 2.69 | 4.57 | yes | 0.00 | 100.00% | candidate |
-| g-t04-g8-not-day | day | bullish | 3631 | 49.16% | 45.17% | 4.37 | 4.51 | yes | -0.40 | 100.00% |  |
+| g-t04-g8-not-day | day | bullish | 3631 | 49.16% | 45.17% | 4.37 | 4.51 |  | -0.40 | 100.00% |  |
 | g-e2a-g10-not-day | day | bearish | 1457 | 61.70% | 55.85% | 6.73 | 4.48 |  | 0.09 | 80.00% | candidate |
 | t06-bollinger-pctb-day | day | bearish | 5509 | 58.07% | 54.94% | 3.35 | 4.39 |  | -0.03 | 100.00% |  |
 | composite-v1-day-bullish-day | day | bullish | 1513 | 50.89% | 45.36% | 6.08 | 4.32 |  | -0.37 | 100.00% |  |
@@ -103,6 +103,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | composite-v2-week-bearish-vote-k4-week | week | bearish | 1388 | 54.25% | 50.95% | 3.36 | 2.39 |  | 0.18 | 83.33% | candidate |
 | composite-v2-week-bearish-vote-k2-week | week | bearish | 1538 | 53.90% | 50.91% | 3.20 | 2.37 |  | 0.09 | 83.33% | candidate |
 | champion-v1-day | day | bearish | 7171 | 55.84% | 54.48% | 1.37 | 2.37 |  | -0.05 | 100.00% |  |
+| r02-turtle-soup-week | week | bearish | 699 | 55.22% | 50.89% | 4.98 | 2.35 |  | 0.02 | 100.00% | candidate |
 | composite-v2-day-bullish-g9-near0p9-day | day | bullish | 1702 | 50.00% | 45.29% | 3.27 | 2.35 |  | -0.39 | 100.00% |  |
 | composite-v2-week-bullish-vote-k3-week | week | bullish | 1279 | 51.76% | 48.85% | 3.22 | 2.34 |  | -0.52 | 80.00% |  |
 | composite-v2-week-bullish-g5-q0p4-week | week | bullish | 770 | 52.21% | 48.24% | 3.96 | 2.33 |  | -0.45 | 100.00% |  |
@@ -136,6 +137,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | g-a01-g6-not-week | week | bearish | 1497 | 53.24% | 50.76% | 2.73 | 1.95 |  | -0.04 | 66.67% |  |
 | g-a05b-g6-not-week | week | bullish | 1475 | 51.46% | 49.16% | 2.30 | 1.95 |  | -0.49 | 83.33% |  |
 | composite-v2-week-bullish-vote-k1-week | week | bullish | 1475 | 51.46% | 49.16% | 2.30 | 1.90 |  | -0.48 | 100.00% |  |
+| r02b-turtle-soup-plus-one-week | week | bullish | 166 | 58.43% | 48.67% | 7.35 | 1.89 |  | 0.99 | 66.67% | too few picks |
 | a05b-max-effect-ranked-week | week | bullish | 1475 | 51.39% | 49.16% | 2.23 | 1.86 |  | -0.50 | 83.33% |  |
 | a01-weekly-reversal-week | week | bearish | 1538 | 53.19% | 50.91% | 2.48 | 1.83 |  | 0.02 | 83.33% | candidate |
 | composite-v2-week-bearish-vote-k1-week | week | bearish | 1538 | 53.19% | 50.91% | 2.48 | 1.83 |  | 0.02 | 83.33% | candidate |
@@ -211,6 +213,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | t06-bollinger-pctb-day | day | bullish | 4239 | 46.71% | 44.76% | 1.04 | 1.14 |  | -0.63 | 66.67% |  |
 | g-a05b-g8-not-week | week | bullish | 1475 | 50.51% | 49.16% | 1.35 | 1.13 |  | -0.50 | 83.33% |  |
 | t21-minervini-template-week | week | bullish | 1261 | 50.44% | 48.67% | 1.66 | 1.13 |  | -0.73 | 80.00% |  |
+| r03-anti-week | week | bearish | 757 | 53.63% | 50.75% | 2.33 | 1.12 |  | -0.23 | 83.33% |  |
 | t03-rsi-thresholds-day | day | bearish | 5109 | 56.12% | 54.88% | 0.89 | 1.12 |  | -0.04 | 83.33% |  |
 | g-a05b-g10-not-week | week | bullish | 720 | 51.11% | 49.11% | 2.00 | 1.12 |  | -0.63 | 83.33% |  |
 | composite-v2-week-bearish-g8-x2p0-week | week | bearish | 1197 | 51.88% | 51.00% | 1.83 | 1.11 |  | 0.06 | 66.67% | candidate |
@@ -249,6 +252,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | g-a01-g4-week | week | bearish | 1530 | 51.57% | 50.83% | 0.96 | 0.75 |  | -0.06 | 66.67% |  |
 | conf-min4-day | day | bullish | 1782 | 44.78% | 45.02% | 0.96 | 0.74 |  | -0.59 | 66.67% |  |
 | g-a05b-g4-not-week | week | bullish | 830 | 49.76% | 48.30% | 1.36 | 0.72 |  | -0.44 | 50.00% |  |
+| r04-eighty-twenty-week | week | bearish | 907 | 53.25% | 50.65% | 1.33 | 0.71 |  | -0.03 | 50.00% |  |
 | t22-vcp-week | week | bullish | 52 | 51.92% | 47.05% | 5.03 | 0.70 |  | -0.32 | 60.00% | too few picks |
 | e2b-day | day | bullish | 1853 | 47.71% | 44.91% | 0.88 | 0.65 |  | -0.41 | 50.00% |  |
 | g-a01-g10-not-week | week | bearish | 635 | 52.60% | 51.24% | 1.36 | 0.62 |  | -0.47 | 80.00% |  |
@@ -257,9 +261,11 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | g-a05b-g5-not-week | week | bullish | 615 | 51.06% | 50.05% | 1.01 | 0.57 |  | -0.41 | 40.00% |  |
 | g-a05b-g7-not-week | week | bullish | 1456 | 50.00% | 49.16% | 0.67 | 0.55 |  | -0.36 | 33.33% |  |
 | q03-up-day-balance-week | week | bullish | 1542 | 49.48% | 48.89% | 0.69 | 0.55 |  | -0.58 | 83.33% |  |
+| r03-anti-week | week | bullish | 754 | 49.07% | 49.21% | 1.05 | 0.55 |  | -0.30 | 50.00% |  |
 | t09-supertrend-day | day | bearish | 7127 | 54.72% | 54.40% | 0.32 | 0.53 |  | -0.05 | 50.00% |  |
 | a05b-max-effect-ranked-month | month | bullish | 1455 | 52.85% | 52.00% | 0.85 | 0.53 |  | -0.16 | 50.00% |  |
 | o04b-no-d01-day | day | bearish | 5641 | 54.44% | 54.31% | 0.33 | 0.47 |  | -0.16 | 50.00% |  |
+| r01-holy-grail-week | week | bearish | 891 | 51.63% | 51.06% | 0.89 | 0.47 |  | -0.08 | 66.67% |  |
 | f08-weighted-reversal-week | week | bearish | 1297 | 51.43% | 50.96% | 0.58 | 0.44 |  | 0.08 | 60.00% | candidate |
 | f05-close-location-change-day | day | bearish | 7333 | 54.77% | 54.54% | 0.23 | 0.42 |  | -0.14 | 33.33% |  |
 | o04b-no-d01-day | day | bullish | 6673 | 45.44% | 45.06% | 0.23 | 0.39 |  | -0.58 | 83.33% |  |
@@ -272,6 +278,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | f01-body-share-day | day | bearish | 7331 | 54.69% | 54.54% | 0.17 | 0.30 |  | -0.07 | 50.00% |  |
 | f13-accel-range-top-day | day | bullish | 7310 | 45.13% | 44.97% | 0.16 | 0.30 |  | -0.60 | 50.00% |  |
 | g-a05b-g7-week | week | bullish | 1470 | 49.46% | 49.16% | 0.36 | 0.29 |  | -0.63 | 33.33% |  |
+| r02b-turtle-soup-plus-one-week | week | bearish | 195 | 51.28% | 50.40% | 1.02 | 0.26 |  | -0.33 | 50.00% | too few picks |
 | o05-order-block-weekly-week | week | bearish | 1088 | 50.18% | 50.45% | 0.32 | 0.21 |  | -0.31 | 60.00% |  |
 | e1a-day | day | bullish | 335 | 48.06% | 44.28% | 0.59 | 0.20 |  | -0.47 | 33.33% | too few picks |
 | a04-52-week-high-month | month | bearish | 1280 | 47.19% | 46.87% | 0.32 | 0.18 |  | -1.20 | 60.00% |  |
@@ -298,6 +305,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | a01-weekly-reversal-week | week | bullish | 1545 | 48.87% | 48.89% | -0.03 | -0.02 |  | -0.51 | 50.00% |  |
 | t21-minervini-template-week | week | bearish | 1235 | 51.82% | 51.34% | -0.05 | -0.03 |  | -0.17 | 80.00% |  |
 | conf-min5-day | day | bullish | 506 | 43.28% | 44.10% | -0.12 | -0.05 |  | -0.63 | 16.67% |  |
+| p02-bollinger-1p5-week | week | bearish | 707 | 51.06% | 52.21% | -0.11 | -0.05 |  | -0.52 | 33.33% |  |
 | t05-macd-crossover-day | day | bearish | 4871 | 54.18% | 54.68% | -0.06 | -0.07 |  | -0.04 | 50.00% |  |
 | f06-trend-acceleration-week | week | bullish | 1544 | 48.77% | 48.89% | -0.09 | -0.08 |  | -0.56 | 33.33% |  |
 | t09-supertrend-week | week | bearish | 1504 | 50.66% | 50.76% | -0.11 | -0.08 |  | -0.14 | 50.00% |  |
@@ -329,9 +337,11 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | o04a-no-volume-day | day | bearish | 5641 | 53.57% | 54.31% | -0.37 | -0.53 |  | -0.15 | 33.33% |  |
 | o00-placebo-week | week | bullish | 1505 | 48.44% | 49.05% | -0.61 | -0.55 |  | -0.51 | 50.00% |  |
 | o03-trend-confirmed-day | day | bullish | 5975 | 44.45% | 44.97% | -0.36 | -0.55 |  | -0.59 | 16.67% |  |
+| p01-five-ema-week | week | bearish | 1228 | 50.81% | 51.47% | -0.84 | -0.56 |  | -0.31 | 33.33% |  |
 | t11-inside-bar-day | day | bullish | 6231 | 44.97% | 44.90% | -0.37 | -0.56 |  | -0.54 | 16.67% |  |
 | t25-heikin-ashi-day | day | bearish | 4997 | 54.31% | 54.26% | -0.44 | -0.57 |  | -0.07 | 50.00% |  |
 | t17-keltner-breakout-week | week | bearish | 919 | 50.71% | 51.66% | -1.18 | -0.68 |  | -0.14 | 50.00% |  |
+| r04-eighty-twenty-week | week | bullish | 833 | 49.10% | 49.21% | -1.28 | -0.70 |  | -0.37 | 33.33% |  |
 | a07-high-volume-premium-week | week | bearish | 1510 | 50.00% | 50.84% | -0.84 | -0.74 |  | -0.14 | 50.00% |  |
 | t10-nr7-narrow-range-day | day | bearish | 5756 | 54.57% | 54.60% | -0.55 | -0.79 |  | -0.09 | 16.67% |  |
 | f19-body-volatility-fade-day | day | bullish | 7335 | 44.53% | 44.96% | -0.43 | -0.79 |  | -0.62 | 50.00% |  |
@@ -346,6 +356,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | q03-up-day-balance-day | day | bullish | 7314 | 44.44% | 44.96% | -0.52 | -0.90 |  | -0.60 | 33.33% |  |
 | t14-cci-week | week | bearish | 1109 | 49.86% | 51.75% | -1.61 | -0.91 |  | -0.15 | 16.67% |  |
 | o04-order-block-composite-day | day | bearish | 5641 | 53.24% | 54.31% | -0.65 | -0.93 |  | -0.18 | 33.33% |  |
+| p02-bollinger-1p5-week | week | bullish | 517 | 45.07% | 48.04% | -2.34 | -0.93 |  | -0.77 | 33.33% |  |
 | t25-heikin-ashi-week | week | bearish | 1051 | 50.71% | 50.51% | -1.49 | -0.94 |  | -0.03 | 33.33% |  |
 | q07-trend-residual-week | week | bullish | 1541 | 47.57% | 48.89% | -1.19 | -0.94 |  | -0.77 | 33.33% |  |
 | composite-v2-week-bullish-g8-x2p0-week | week | bullish | 975 | 47.18% | 49.00% | -1.74 | -1.00 |  | -0.89 | 50.00% |  |
@@ -368,7 +379,9 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | f03-conditional-reversal-day | day | bullish | 7334 | 44.18% | 44.96% | -0.77 | -1.39 |  | -0.66 | 50.00% |  |
 | t01-sma-crossover-week | week | bullish | 1499 | 47.10% | 48.80% | -1.81 | -1.45 |  | -1.09 | 33.33% |  |
 | q02-return-volume-corr-week | week | bullish | 1545 | 46.99% | 48.89% | -1.90 | -1.58 |  | -0.51 | 33.33% |  |
+| r02-turtle-soup-week | week | bullish | 488 | 44.67% | 49.06% | -4.28 | -1.65 |  | -0.73 | 33.33% | too few picks |
 | h01-amihud-illiquidity-week | week | bearish | 1545 | 48.61% | 50.91% | -2.31 | -1.70 |  | -0.27 | 33.33% |  |
+| r01-holy-grail-week | week | bullish | 758 | 47.10% | 49.23% | -3.47 | -1.73 |  | -0.47 | 16.67% |  |
 | t14-cci-day | day | bearish | 5285 | 53.59% | 54.82% | -1.29 | -1.74 |  | -0.09 | 16.67% |  |
 | c02-turn-of-month-week | week | bearish | 885 | 49.15% | 51.87% | -2.72 | -1.74 |  | -0.45 | 25.00% |  |
 | o00-placebo-day | day | bullish | 7107 | 44.15% | 45.06% | -0.95 | -1.75 |  | -0.56 | 16.67% |  |
@@ -382,6 +395,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | q01-price-volume-corr-day | day | bullish | 7214 | 43.73% | 44.99% | -1.13 | -2.02 |  | -0.61 | 16.67% |  |
 | champion-v1-week | week | bullish | 1508 | 45.95% | 48.93% | -2.82 | -2.06 |  | -0.78 | 16.67% |  |
 | c01-day-of-week-day | day | bearish | 6900 | 53.25% | 54.39% | -1.15 | -2.07 |  | -0.18 | 33.33% |  |
+| p01-five-ema-week | week | bullish | 1066 | 45.22% | 48.80% | -3.69 | -2.35 |  | -0.74 | 0.00% |  |
 | o04a-no-volume-week | week | bullish | 1418 | 46.69% | 49.11% | -2.88 | -2.38 |  | -0.73 | 16.67% |  |
 | t05-macd-crossover-week | week | bullish | 1028 | 46.60% | 49.08% | -3.90 | -2.39 |  | -0.90 | 16.67% |  |
 | t09-supertrend-week | week | bullish | 1498 | 45.99% | 49.05% | -3.18 | -2.39 |  | -0.67 | 16.67% |  |

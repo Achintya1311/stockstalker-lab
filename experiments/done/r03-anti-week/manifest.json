@@ -1,0 +1,9 @@
+{
+  "id": "r03-anti-week",
+  "strategy": "strategies.r03_anti",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 2978,
+  "n_dates": 296,
+  "pick_log_sha256": "6668ba3790a96cfe40aefb8b8e6f7317be84ca882e940811a8264513566cabf1"
+}

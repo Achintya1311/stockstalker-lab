@@ -1,0 +1,9 @@
+{
+  "id": "p01-five-ema-week",
+  "strategy": "strategies.p01_five_ema",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 7679,
+  "n_dates": 300,
+  "pick_log_sha256": "3ac00aa19356b24d4c29313444adc290484e0bd3dfc32815efc085f633656cd6"
+}

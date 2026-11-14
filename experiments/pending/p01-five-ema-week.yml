@@ -1,5 +1,0 @@
-id: p01-five-ema-week
-strategy: strategies.p01_five_ema
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}

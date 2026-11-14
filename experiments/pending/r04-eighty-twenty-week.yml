@@ -1,5 +1,0 @@
-id: r04-eighty-twenty-week
-strategy: strategies.r04_eighty_twenty
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}

@@ -1,5 +1,0 @@
-id: r03-anti-week
-strategy: strategies.r03_anti
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}

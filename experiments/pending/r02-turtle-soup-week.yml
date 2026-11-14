@@ -1,5 +1,0 @@
-id: r02-turtle-soup-week
-strategy: strategies.r02_turtle_soup
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}

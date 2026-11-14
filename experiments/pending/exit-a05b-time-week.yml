@@ -1,6 +1,0 @@
-id: exit-a05b-time-week
-strategy: strategies.a05b_max_effect_ranked
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}
-exit: {kind: time, stop_atr: 2, max_sessions: 10, sides: [bullish]}

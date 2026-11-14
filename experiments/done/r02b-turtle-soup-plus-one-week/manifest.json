@@ -1,0 +1,9 @@
+{
+  "id": "r02b-turtle-soup-plus-one-week",
+  "strategy": "strategies.r02b_turtle_soup_plus_one",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 488,
+  "n_dates": 206,
+  "pick_log_sha256": "36e478e525e953798a85e22ef471d3e7198faa8f44c4c1daadc43cf0a5702976"
+}

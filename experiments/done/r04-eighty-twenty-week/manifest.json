@@ -1,0 +1,9 @@
+{
+  "id": "r04-eighty-twenty-week",
+  "strategy": "strategies.r04_eighty_twenty",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 3424,
+  "n_dates": 299,
+  "pick_log_sha256": "51bdf809841e2750727918cbb30c3c36e8e0e51d577cb49ee5b09611ec25cb42"
+}

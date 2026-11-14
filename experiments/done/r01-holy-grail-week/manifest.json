@@ -1,0 +1,9 @@
+{
+  "id": "r01-holy-grail-week",
+  "strategy": "strategies.r01_holy_grail",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 2813,
+  "n_dates": 299,
+  "pick_log_sha256": "cfdad346aea13ffe5b9ff86c21a25b9184d9d2710f467e3e9b965487acd9152d"
+}

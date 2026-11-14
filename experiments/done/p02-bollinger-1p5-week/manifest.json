@@ -1,0 +1,9 @@
+{
+  "id": "p02-bollinger-1p5-week",
+  "strategy": "strategies.p02_bollinger_1p5",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 2337,
+  "n_dates": 288,
+  "pick_log_sha256": "d38979a59538ff2972ecd3092de7dd73cb9a0dd942c2c34e3f72ddcab99ce222"
+}
