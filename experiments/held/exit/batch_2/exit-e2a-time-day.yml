@@ -1,0 +1,6 @@
+id: exit-e2a-time-day
+strategy: strategies.e2a_a02_crowded
+split: train
+horizon: day
+dates: {start: '2015-01-01', end: '2020-12-31'}
+exit: {kind: time, stop_atr: 2, max_sessions: 10, sides: [bearish]}

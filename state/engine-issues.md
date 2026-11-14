@@ -815,3 +815,32 @@ tables. A wording amendment is needed before any month table could go live. Live
 `picks/`, `config/live_source.json` and `scripts/provisional_candidates.py` only read day and week, so month rows
 in the trials ledger or leaderboard never reach a table. Five month train replays are held in
 `experiments/held/c5/` (A04, A05B, A01, and the new M01, M02); move them to `experiments/pending/` after merge.
+
+## DONE, NEEDS MERGE REVIEW: exit-plan payoff scoring added to `engine/` (AB approved 14 Nov 2026) - supervised change
+
+Hit rate alone cannot tell a rule that is right often but pays nothing from one that is right 4 times in 10 and
+pays well; the exit decides the payoff. What changed (additive and opt-in):
+
+- `engine/exits.py` (new): an experiment yml may carry `exit: {kind: fixed|trail|time, stop_atr, target_r,
+  max_sessions, sides}`. Entry at the pick date's open (the engine's usual entry); R = stop_atr x Wilder ATR(14) on
+  adjusted prices up to the previous close only. `fixed`: stop 1R, target target_r x R, time exit; a session touching
+  both counts as the stop; a gap through either fills at the open. `trail`: chandelier stop stop_atr x ATR from the
+  best close, plus the time exit. `time`: no stop (stop_atr only sets R). Outcomes in R and percent, net of the
+  engine's existing cost model (SPEC section 3: 0.415% bullish, 0.25% bearish round trip). Vectorised over
+  (pick x session) windows. A pick whose window would pass the split end is dropped.
+- Metrics (`top` selection): picks, share right, average and median R, profit factor, average %, average hold,
+  share ended by stop / target / time, worst losing run, the same plan on every universe stock on the same dates
+  (headline: average R above that baseline, with block t and moving-block bootstrap, block = max(8, one hold of pick
+  dates)), per-year breakdown, and a time-only control (same hold, same R) next to each plan.
+- `engine/run_queue.py` validates the block and copies it into the manifest; an `exit:` block on any split other than
+  train is refused. `engine/experiment_report.py` adds an `exit` block to results.json and a section to results.md;
+  such an experiment is a trial for the sides it simulates but gets no leaderboard row (its picks repeat a rule
+  already ranked). `scripts/provisional_candidates.py` skips exit replays. `scripts/exit_report.py` writes
+  `research/diagnostics/exit_v1.md`.
+- With no `exit:` block every output (picks, manifest, results, leaderboard, trials) is byte-identical to the engine
+  before this change: `tests/test_exits.py` against `tests/golden/no_exit_golden.json`.
+
+This is **train-only observation**. Twelve replays are held in `experiments/held/exit/batch_1` (week) and `batch_2`
+(day). SPEC.md has no payoff wording (sections 3, 6 and 10 speak of hit rate, edge and directional move only, and
+section 10 forbids entry, target or stop prices on the desk): a SPEC amendment is needed before any payoff number is
+used for a roster decision or shown on the desk.

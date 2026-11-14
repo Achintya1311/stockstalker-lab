@@ -1,0 +1,6 @@
+id: exit-a05b-trail-week
+strategy: strategies.a05b_max_effect_ranked
+split: train
+horizon: week
+dates: {start: '2015-01-01', end: '2020-12-31'}
+exit: {kind: trail, stop_atr: 3, max_sessions: 20, sides: [bullish]}

@@ -1,0 +1,6 @@
+id: exit-a01-time-week
+strategy: strategies.a01_weekly_reversal
+split: train
+horizon: week
+dates: {start: '2015-01-01', end: '2020-12-31'}
+exit: {kind: time, stop_atr: 2, max_sessions: 10, sides: [bearish]}

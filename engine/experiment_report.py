@@ -40,6 +40,13 @@ with a block t and add a moving-block bootstrap interval for the edge
 (`engine.scoring.MONTH_INTERVAL_METHOD`, written into results.json and
 results.md). A month pick whose window ends after its split's end date is
 dropped. Day and week scoring run exactly the code they ran before.
+
+Exit-plan payoff (owner-approved additive change, 14 Nov 2026; `engine.exits`): when a train experiment's
+manifest carries an `exit` plan, its results.json gains an `exit` block (payoff in R and percent of the
+`top` selection, its time-only control and the universe baseline under the same plan) and its results.md
+an extra section. Such an experiment is still a trial (one row per side it simulates; hit-rate edge and t,
+the payoff noted) but gets no leaderboard row: its picks repeat a rule already on the board. Experiments
+without `exit` are scored, recorded and ranked exactly as before.
 """
 
 from __future__ import annotations
@@ -70,6 +77,7 @@ from engine.scoring import (
     block_t,
     moves_any_horizon,
 )
+from engine.exits import ExitData, parse_exit_plan, render_exit, score_exit
 from gates.budgets import holdout_budget_remaining
 from gates.gates import MIN_TEST_PICKS, leak_alarm_triggered, required_t
 from gates.trials import LEDGER_PATH as TRIALS_LEDGER, cumulative_trial_count, record_trial
@@ -267,10 +275,30 @@ def score_done(ctx: Context, done_dir: Path) -> list[str]:
         payload = {"id": manifest["id"], "strategy": manifest["strategy"], "split": manifest["split"],
                    "horizon": manifest["horizon"], "pick_log_sha256": manifest.get("pick_log_sha256"),
                    "scorer_version": SCORER_VERSION, "picks_per_table": ctx.k, "selections": results}
+        text = (render_month if manifest["horizon"] == MONTH else render)(manifest, results, ctx.k)
+        if "exit" in manifest:
+            payload["exit"] = _score_exit(ctx, _load_picks(picks_path), manifest)
+            text += "\n" + render_exit(payload["exit"], manifest["horizon"])
         out.write_text(json.dumps(payload, indent=2) + "\n")
-        (d / "results.md").write_text((render_month if manifest["horizon"] == MONTH else render)(manifest, results, ctx.k))
+        (d / "results.md").write_text(text)
         scored.append(manifest["id"])
     return scored
+
+
+def _score_exit(ctx: Context, picks: pd.DataFrame, manifest: dict) -> dict:
+    """The `exit` block of results.json: `engine.exits.score_exit` on the `top` selection of each side."""
+    plan = parse_exit_plan(manifest["exit"])
+    if getattr(ctx, "_exit_data", None) is None:
+        ctx._exit_data = ExitData(ctx.dataset)
+    split_end = load_splits()[manifest["split"]].get("end")
+    if manifest["horizon"] == MONTH:  # the same month picks score_picks_month keeps
+        outcome = picks.merge(ctx.moves(MONTH)[["date", "symbol", "outcome_date"]], on=["date", "symbol"])
+        if split_end not in (None, "go-live"):
+            outcome = outcome[outcome["outcome_date"] <= str(split_end)]
+        picks = outcome[["date", "symbol", "score"]]
+    picks = picks.merge(ctx.in_universe, on=["date", "symbol"], how="inner")
+    side_picks = {SIDES[s]: select(picks, s, ctx.k) for s in SIDES if SIDES[s] in plan["sides"]}
+    return score_exit(side_picks, plan, ctx._exit_data, ctx.in_universe, manifest["horizon"], split_end)
 
 
 def _results(done_dir: Path):
@@ -289,14 +317,20 @@ def record_trials(done_dir: Path, ledger: Path = TRIALS_LEDGER) -> int:
             seen = {row["trial_id"] for row in csv.DictReader(f)}
     added = 0
     for r in _results(done_dir):
+        exit_block = r.get("exit")
         for side, m in r["selections"]["top"].items():
             trial_id = f"{r['id']}-{side}"
             if trial_id in seen or not m.get("n_picks"):
                 continue
+            if exit_block is not None and side not in exit_block["plan"]["sides"]:
+                continue
             record_trial({"trial_id": trial_id, "timestamp": pd.Timestamp.now(tz="UTC").isoformat(),
                           "strategy_id": r["strategy"], "version": r.get("version", ""), "horizon": r["horizon"],
                           "side": side, "split": r["split"], "edge": m["edge"], "t_stat": m["edge_t"],
-                          "all_gates_passed": "n/a", "notes": "train, top selection; recorded by engine/experiment_report.py"},
+                          "all_gates_passed": "n/a", "notes": "train, top selection; recorded by engine/experiment_report.py"
+                          if exit_block is None else
+                          f"train, top selection, exit plan ({exit_block['plan_label']}); edge and t are the "
+                          f"hit-rate figures, payoff in results.json exit; recorded by engine/experiment_report.py"},
                          ledger)
             added += 1
     return added
@@ -304,7 +338,7 @@ def record_trials(done_dir: Path, ledger: Path = TRIALS_LEDGER) -> int:
 
 def write_leaderboard(done_dir: Path, out_path: Path = LEADERBOARD, ledger: Path = TRIALS_LEDGER) -> int:
     """One row per (experiment, side) for the `top` selection, highest t first."""
-    rows = [(r["id"], r["horizon"], side, m) for r in _results(done_dir)
+    rows = [(r["id"], r["horizon"], side, m) for r in _results(done_dir) if "exit" not in r
             for side, m in r["selections"]["top"].items() if m.get("n_picks")]
     rows.sort(key=lambda row: row[3]["edge_t"] if row[3]["edge_t"] is not None else float("-inf"), reverse=True)
     n_trials = max(cumulative_trial_count(ledger), 1)

@@ -33,6 +33,8 @@ def _rows(done_dir: Path):
         res = json.loads(path.read_text())
         if res.get("split") != "train" or res.get("strategy") in NOT_STRATEGIES:
             continue
+        if "exit" in res:  # exit-plan replays repeat a rule's picks (engine/exits.py); never a separate candidate
+            continue
         yield res
 
 
