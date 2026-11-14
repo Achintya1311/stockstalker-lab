@@ -1,0 +1,17 @@
+{
+  "id": "r02-turtle-soup-week-validation",
+  "strategy": "strategies.r02_turtle_soup",
+  "horizon": "week",
+  "train_experiment": "r02-turtle-soup-week",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": -0.04275514904176032,
+      "released_edge": 0.0003390942097705827
+    },
+    "bearish": {
+      "train_edge": 0.04984288509839792,
+      "released_edge": 0.02645516588156656
+    }
+  }
+}

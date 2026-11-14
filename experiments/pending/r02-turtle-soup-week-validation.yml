@@ -1,6 +1,0 @@
-id: r02-turtle-soup-week-validation
-strategy: strategies.r02_turtle_soup
-split: validation
-horizon: week
-dates: {start: '2021-01-01', end: '2023-12-31'}
-train_experiment: r02-turtle-soup-week
