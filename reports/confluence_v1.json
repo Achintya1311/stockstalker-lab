@@ -30,11 +30,552 @@
     "replays": 20,
     "side_readings": 40
   },
-  "configs": [],
+  "configs": [
+    {
+      "table": "day_bullish",
+      "config": "CONFLUENCE_MIN3",
+      "name": "confluence_min3",
+      "min_count": 3,
+      "dropped": null,
+      "experiment": "conf-min3-day",
+      "n_picks": 3984,
+      "n_dates": 1233,
+      "edge_pts": 1.45,
+      "edge_t": 1.64,
+      "directional_move": -0.004857236376407913,
+      "years_positive": 3,
+      "edge_by_year_pts": {
+        "2015": -2.78,
+        "2016": 7.13,
+        "2017": 5.04,
+        "2018": 2.77,
+        "2019": -2.38,
+        "2020": -2.32
+      },
+      "live_rule": "T04",
+      "live_edge_pts": 3.37,
+      "edge_minus_live_pts": -1.92,
+      "rule": {
+        "picks": true,
+        "edge_positive": true,
+        "beats_live": false,
+        "years_positive": false
+      },
+      "passes_rule": false,
+      "fit_mean_pts": 3.04,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -5.73,
+        "2020": -3.92
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "day_bullish",
+      "config": "CONFLUENCE_MIN4",
+      "name": "confluence_min4",
+      "min_count": 4,
+      "dropped": null,
+      "experiment": "conf-min4-day",
+      "n_picks": 1782,
+      "n_dates": 764,
+      "edge_pts": 0.96,
+      "edge_t": 0.74,
+      "directional_move": -0.005938092755339754,
+      "years_positive": 4,
+      "edge_by_year_pts": {
+        "2015": 5.42,
+        "2016": 2.27,
+        "2017": 6.54,
+        "2018": 0.19,
+        "2019": -3.02,
+        "2020": -4.03
+      },
+      "live_rule": "T04",
+      "live_edge_pts": 3.37,
+      "edge_minus_live_pts": -2.41,
+      "rule": {
+        "picks": true,
+        "edge_positive": true,
+        "beats_live": false,
+        "years_positive": true
+      },
+      "passes_rule": false,
+      "fit_mean_pts": 3.61,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -6.37,
+        "2020": -5.63
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "day_bullish",
+      "config": "CONFLUENCE_MIN5",
+      "name": "confluence_min5",
+      "min_count": 5,
+      "dropped": null,
+      "experiment": "conf-min5-day",
+      "n_picks": 506,
+      "n_dates": 283,
+      "edge_pts": -0.12,
+      "edge_t": -0.05,
+      "directional_move": -0.006327123948445298,
+      "years_positive": 1,
+      "edge_by_year_pts": {
+        "2015": -29.38,
+        "2016": -1.11,
+        "2017": 5.75,
+        "2018": -5.26,
+        "2019": -6.04,
+        "2020": -0.26
+      },
+      "live_rule": "T04",
+      "live_edge_pts": 3.37,
+      "edge_minus_live_pts": -3.49,
+      "rule": {
+        "picks": true,
+        "edge_positive": false,
+        "beats_live": false,
+        "years_positive": false
+      },
+      "passes_rule": false,
+      "fit_mean_pts": -7.5,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -9.39,
+        "2020": -1.86
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "day_bearish",
+      "config": "CONFLUENCE_MIN3",
+      "name": "confluence_min3",
+      "min_count": 3,
+      "dropped": null,
+      "experiment": "conf-min3-day",
+      "n_picks": 5090,
+      "n_dates": 1334,
+      "edge_pts": 0.65,
+      "edge_t": 0.9,
+      "directional_move": -0.0011198910172806244,
+      "years_positive": 4,
+      "edge_by_year_pts": {
+        "2015": 2.55,
+        "2016": 0.99,
+        "2017": 1.91,
+        "2018": 0.58,
+        "2019": -0.69,
+        "2020": -1.03
+      },
+      "live_rule": "E2A",
+      "live_edge_pts": 7.46,
+      "edge_minus_live_pts": -6.81,
+      "rule": {
+        "picks": true,
+        "edge_positive": true,
+        "beats_live": false,
+        "years_positive": true
+      },
+      "passes_rule": false,
+      "fit_mean_pts": 1.51,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -9.95,
+        "2020": -11.49
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "day_bearish",
+      "config": "CONFLUENCE_MIN4",
+      "name": "confluence_min4",
+      "min_count": 4,
+      "dropped": null,
+      "experiment": "conf-min4-day",
+      "n_picks": 2381,
+      "n_dates": 909,
+      "edge_pts": 1.37,
+      "edge_t": 1.21,
+      "directional_move": -0.0013916796686968265,
+      "years_positive": 4,
+      "edge_by_year_pts": {
+        "2015": 1.96,
+        "2016": 0.81,
+        "2017": 6.83,
+        "2018": 0.33,
+        "2019": -0.01,
+        "2020": -1.12
+      },
+      "live_rule": "E2A",
+      "live_edge_pts": 7.46,
+      "edge_minus_live_pts": -6.09,
+      "rule": {
+        "picks": true,
+        "edge_positive": true,
+        "beats_live": false,
+        "years_positive": true
+      },
+      "passes_rule": false,
+      "fit_mean_pts": 2.48,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -9.27,
+        "2020": -11.57
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "day_bearish",
+      "config": "CONFLUENCE_MIN5",
+      "name": "confluence_min5",
+      "min_count": 5,
+      "dropped": null,
+      "experiment": "conf-min5-day",
+      "n_picks": 702,
+      "n_dates": 336,
+      "edge_pts": -0.93,
+      "edge_t": -0.44,
+      "directional_move": -0.0025236459206478615,
+      "years_positive": 2,
+      "edge_by_year_pts": {
+        "2015": 6.72,
+        "2016": -6.59,
+        "2017": -8.01,
+        "2018": -0.22,
+        "2019": 3.12,
+        "2020": -3.0
+      },
+      "live_rule": "E2A",
+      "live_edge_pts": 7.46,
+      "edge_minus_live_pts": -8.39,
+      "rule": {
+        "picks": true,
+        "edge_positive": false,
+        "beats_live": false,
+        "years_positive": false
+      },
+      "passes_rule": false,
+      "fit_mean_pts": -2.03,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -6.14,
+        "2020": -13.46
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "CONFLUENCE_MIN3",
+      "name": "confluence_min3",
+      "min_count": 3,
+      "dropped": null,
+      "experiment": "conf-min3-week",
+      "n_picks": 833,
+      "n_dates": 258,
+      "edge_pts": -0.04,
+      "edge_t": -0.02,
+      "directional_move": -0.002979702149583179,
+      "years_positive": 3,
+      "edge_by_year_pts": {
+        "2015": 2.99,
+        "2016": -1.09,
+        "2017": 1.12,
+        "2018": -6.32,
+        "2019": -2.23,
+        "2020": 6.47
+      },
+      "live_rule": "A05B",
+      "live_edge_pts": 2.23,
+      "edge_minus_live_pts": -2.27,
+      "rule": {
+        "picks": true,
+        "edge_positive": false,
+        "beats_live": false,
+        "years_positive": false
+      },
+      "passes_rule": false,
+      "fit_mean_pts": -0.83,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -3.97,
+        "2020": 5.42
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "CONFLUENCE_MIN4",
+      "name": "confluence_min4",
+      "min_count": 4,
+      "dropped": null,
+      "experiment": "conf-min4-week",
+      "n_picks": 379,
+      "n_dates": 161,
+      "edge_pts": -0.04,
+      "edge_t": -0.01,
+      "directional_move": -0.005319062711433713,
+      "years_positive": 4,
+      "edge_by_year_pts": {
+        "2015": 11.3,
+        "2016": 4.07,
+        "2017": 4.37,
+        "2018": -14.2,
+        "2019": -6.86,
+        "2020": 7.46
+      },
+      "live_rule": "A05B",
+      "live_edge_pts": 2.23,
+      "edge_minus_live_pts": -2.27,
+      "rule": {
+        "picks": false,
+        "edge_positive": false,
+        "beats_live": false,
+        "years_positive": true
+      },
+      "passes_rule": false,
+      "fit_mean_pts": 1.38,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -8.61,
+        "2020": 6.4
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "week_bullish",
+      "config": "CONFLUENCE_MIN5",
+      "name": "confluence_min5",
+      "min_count": 5,
+      "dropped": null,
+      "experiment": "conf-min5-week",
+      "n_picks": 114,
+      "n_dates": 66,
+      "edge_pts": 0.83,
+      "edge_t": 0.16,
+      "directional_move": -0.0036903004779755963,
+      "years_positive": 2,
+      "edge_by_year_pts": {
+        "2015": -40.0,
+        "2016": -4.31,
+        "2017": 7.55,
+        "2018": -5.58,
+        "2019": -6.48,
+        "2020": 5.24
+      },
+      "live_rule": "A05B",
+      "live_edge_pts": 2.23,
+      "edge_minus_live_pts": -1.4,
+      "rule": {
+        "picks": false,
+        "edge_positive": true,
+        "beats_live": false,
+        "years_positive": false
+      },
+      "passes_rule": false,
+      "fit_mean_pts": -10.59,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -8.22,
+        "2020": 4.19
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "CONFLUENCE_MIN3",
+      "name": "confluence_min3",
+      "min_count": 3,
+      "dropped": null,
+      "experiment": "conf-min3-week",
+      "n_picks": 1081,
+      "n_dates": 283,
+      "edge_pts": 0.56,
+      "edge_t": 0.38,
+      "directional_move": -0.0011066256913624599,
+      "years_positive": 3,
+      "edge_by_year_pts": {
+        "2015": 2.45,
+        "2016": 6.21,
+        "2017": -1.04,
+        "2018": -0.59,
+        "2019": -9.12,
+        "2020": 5.59
+      },
+      "live_rule": "A01",
+      "live_edge_pts": 2.48,
+      "edge_minus_live_pts": -1.92,
+      "rule": {
+        "picks": true,
+        "edge_positive": true,
+        "beats_live": false,
+        "years_positive": false
+      },
+      "passes_rule": false,
+      "fit_mean_pts": 1.76,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -11.11,
+        "2020": 1.49
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "CONFLUENCE_MIN4",
+      "name": "confluence_min4",
+      "min_count": 4,
+      "dropped": null,
+      "experiment": "conf-min4-week",
+      "n_picks": 520,
+      "n_dates": 206,
+      "edge_pts": 0.26,
+      "edge_t": 0.11,
+      "directional_move": -0.0019329923306554905,
+      "years_positive": 4,
+      "edge_by_year_pts": {
+        "2015": 8.34,
+        "2016": 2.27,
+        "2017": 0.7,
+        "2018": -1.92,
+        "2019": -8.34,
+        "2020": 5.35
+      },
+      "live_rule": "A01",
+      "live_edge_pts": 2.48,
+      "edge_minus_live_pts": -2.22,
+      "rule": {
+        "picks": true,
+        "edge_positive": true,
+        "beats_live": false,
+        "years_positive": true
+      },
+      "passes_rule": false,
+      "fit_mean_pts": 2.35,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -10.33,
+        "2020": 1.25
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    },
+    {
+      "table": "week_bearish",
+      "config": "CONFLUENCE_MIN5",
+      "name": "confluence_min5",
+      "min_count": 5,
+      "dropped": null,
+      "experiment": "conf-min5-week",
+      "n_picks": 147,
+      "n_dates": 73,
+      "edge_pts": 1.65,
+      "edge_t": 0.38,
+      "directional_move": -0.008962032114983896,
+      "years_positive": 4,
+      "edge_by_year_pts": {
+        "2015": 1.42,
+        "2016": 12.76,
+        "2017": 41.45,
+        "2018": -4.86,
+        "2019": -4.3,
+        "2020": 3.43
+      },
+      "live_rule": "A01",
+      "live_edge_pts": 2.48,
+      "edge_minus_live_pts": -0.83,
+      "rule": {
+        "picks": false,
+        "edge_positive": true,
+        "beats_live": false,
+        "years_positive": true
+      },
+      "passes_rule": false,
+      "fit_mean_pts": 12.69,
+      "fit_years_used": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "check_minus_live_pts": {
+        "2019": -6.29,
+        "2020": -0.67
+      },
+      "beats_live_2019_2020": false,
+      "qualifies": false
+    }
+  ],
   "selections": [
     {
       "horizon": "day",
-      "final": false,
+      "final": true,
       "counts_qualifying_on_both": [],
       "tables": {
         "day_bullish": {
@@ -53,7 +594,7 @@
     },
     {
       "horizon": "week",
-      "final": false,
+      "final": true,
       "counts_qualifying_on_both": [],
       "tables": {
         "week_bullish": {
@@ -73,21 +614,6 @@
   ],
   "ablations": [],
   "pending": [
-    {
-      "horizon": "day",
-      "config": "CONFLUENCE_MIN3",
-      "experiment": "conf-min3-day"
-    },
-    {
-      "horizon": "day",
-      "config": "CONFLUENCE_MIN4",
-      "experiment": "conf-min4-day"
-    },
-    {
-      "horizon": "day",
-      "config": "CONFLUENCE_MIN5",
-      "experiment": "conf-min5-day"
-    },
     {
       "horizon": "day",
       "config": "CONFLUENCE_MIN4_NO_OB",
@@ -122,21 +648,6 @@
       "horizon": "day",
       "config": "CONFLUENCE_MIN4_NO_MARKET",
       "experiment": "conf-min4-no-market-day"
-    },
-    {
-      "horizon": "week",
-      "config": "CONFLUENCE_MIN3",
-      "experiment": "conf-min3-week"
-    },
-    {
-      "horizon": "week",
-      "config": "CONFLUENCE_MIN4",
-      "experiment": "conf-min4-week"
-    },
-    {
-      "horizon": "week",
-      "config": "CONFLUENCE_MIN5",
-      "experiment": "conf-min5-week"
     },
     {
       "horizon": "week",
