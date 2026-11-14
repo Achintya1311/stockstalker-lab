@@ -2614,6 +2614,60 @@
     "n": 781,
     "coverage": 0.5323790047716428
    },
+   "exit-e2a-fixed-day": {
+    "mean": -0.015789762056940458,
+    "lo": -0.040045967519882375,
+    "hi": 0.008713505259467562,
+    "p_le0": 0.8995,
+    "block": 1,
+    "n": 808,
+    "coverage": 0.5507839127471029
+   },
+   "exit-e2a-time-day": {
+    "mean": -0.015789762056940458,
+    "lo": -0.040045967519882375,
+    "hi": 0.008713505259467562,
+    "p_le0": 0.8995,
+    "block": 1,
+    "n": 808,
+    "coverage": 0.5507839127471029
+   },
+   "exit-e2a-trail-day": {
+    "mean": -0.015789762056940458,
+    "lo": -0.040045967519882375,
+    "hi": 0.008713505259467562,
+    "p_le0": 0.8995,
+    "block": 1,
+    "n": 808,
+    "coverage": 0.5507839127471029
+   },
+   "exit-t04-fixed-day": {
+    "mean": 0.033702970318406154,
+    "lo": 0.016193973552161043,
+    "hi": 0.05129556712592321,
+    "p_le0": 0.0005,
+    "block": 1,
+    "n": 1087,
+    "coverage": 0.7409679618268575
+   },
+   "exit-t04-time-day": {
+    "mean": 0.033702970318406154,
+    "lo": 0.016193973552161043,
+    "hi": 0.05129556712592321,
+    "p_le0": 0.0005,
+    "block": 1,
+    "n": 1087,
+    "coverage": 0.7409679618268575
+   },
+   "exit-t04-trail-day": {
+    "mean": 0.033702970318406154,
+    "lo": 0.016193973552161043,
+    "hi": 0.05129556712592321,
+    "p_le0": 0.0005,
+    "block": 1,
+    "n": 1087,
+    "coverage": 0.7409679618268575
+   },
    "f01-body-share-day": {
     "mean": -0.026984117214955975,
     "lo": -0.038363995174273725,
@@ -3219,9 +3273,16 @@
    }
   },
   "joint": {
-   "n_models": 93,
+   "n_models": 99,
    "block": 1,
-   "twins": {},
+   "twins": {
+    "exit-e2a-fixed-day": "e2a-day",
+    "exit-e2a-time-day": "e2a-day",
+    "exit-e2a-trail-day": "e2a-day",
+    "exit-t04-time-day": "exit-t04-fixed-day",
+    "exit-t04-trail-day": "exit-t04-fixed-day",
+    "t04-connors-rsi2-day": "exit-t04-fixed-day"
+   },
    "spa": {
     "lower": 0.0,
     "consistent": 0.0,
@@ -3237,6 +3298,7 @@
     "composite-v2-day-bullish-vote-k4-day",
     "consensus-dbu-v1-day",
     "d01c-day",
+    "exit-t04-fixed-day",
     "f14-trend-switched-fade-day",
     "g-t04-g3-day",
     "g-t04-g4-day",
@@ -3246,9 +3308,11 @@
     "g-t04-g9-day",
     "q06-wick-balance-day",
     "q06r-wide-bar-wick-day",
-    "t04-connors-rsi2-day",
     "t04-q06-fallback-day",
-    "t10-nr7-narrow-range-day"
+    "t10-nr7-narrow-range-day",
+    "exit-t04-time-day",
+    "exit-t04-trail-day",
+    "t04-connors-rsi2-day"
    ],
    "mcs": [
     "a09-gap-fade-day",
@@ -3541,6 +3605,60 @@
     "block": 1,
     "n": 1050,
     "coverage": 0.7157464212678937
+   },
+   "exit-e2a-fixed-day": {
+    "mean": 0.07462446557489383,
+    "lo": 0.05268232421401389,
+    "hi": 0.09668237091306214,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 936,
+    "coverage": 0.6380368098159509
+   },
+   "exit-e2a-time-day": {
+    "mean": 0.07462446557489383,
+    "lo": 0.05268232421401389,
+    "hi": 0.09668237091306214,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 936,
+    "coverage": 0.6380368098159509
+   },
+   "exit-e2a-trail-day": {
+    "mean": 0.07462446557489383,
+    "lo": 0.05268232421401389,
+    "hi": 0.09668237091306214,
+    "p_le0": 0.0,
+    "block": 2,
+    "n": 936,
+    "coverage": 0.6380368098159509
+   },
+   "exit-t04-fixed-day": {
+    "mean": 0.023160941016442175,
+    "lo": 0.005702477877338435,
+    "hi": 0.03983263192635594,
+    "p_le0": 0.004,
+    "block": 1,
+    "n": 1123,
+    "coverage": 0.765507839127471
+   },
+   "exit-t04-time-day": {
+    "mean": 0.023160941016442175,
+    "lo": 0.005702477877338435,
+    "hi": 0.03983263192635594,
+    "p_le0": 0.004,
+    "block": 1,
+    "n": 1123,
+    "coverage": 0.765507839127471
+   },
+   "exit-t04-trail-day": {
+    "mean": 0.023160941016442175,
+    "lo": 0.005702477877338435,
+    "hi": 0.03983263192635594,
+    "p_le0": 0.004,
+    "block": 1,
+    "n": 1123,
+    "coverage": 0.765507839127471
    },
    "f01-body-share-day": {
     "mean": 0.0016583647951669354,
@@ -4138,11 +4256,17 @@
    }
   },
   "joint": {
-   "n_models": 94,
+   "n_models": 100,
    "block": 1,
    "twins": {
+    "exit-e2a-fixed-day": "e2a-day",
+    "exit-e2a-time-day": "e2a-day",
+    "exit-e2a-trail-day": "e2a-day",
+    "exit-t04-time-day": "exit-t04-fixed-day",
+    "exit-t04-trail-day": "exit-t04-fixed-day",
     "g-e2a-g2-day": "composite-v1-day-bearish-day",
-    "g-e2a-g2-not-day": "composite-v1-day-bearish-not-day"
+    "g-e2a-g2-not-day": "composite-v1-day-bearish-not-day",
+    "t04-connors-rsi2-day": "exit-t04-fixed-day"
    },
    "spa": {
     "lower": 0.0,
@@ -4169,6 +4293,7 @@
     "e2a-f11-fallback-day",
     "e3a-a02-high-ivol-day",
     "e3b-a02-low-ivol-day",
+    "exit-t04-fixed-day",
     "f02-volume-signed-reversal-day",
     "f03-conditional-reversal-day",
     "f06-trend-acceleration-day",
@@ -4196,13 +4321,18 @@
     "q06r-wide-bar-wick-day",
     "q07-trend-residual-day",
     "t01-sma-crossover-day",
-    "t04-connors-rsi2-day",
     "t05c-upcross-fade-day",
     "t06-bollinger-pctb-day",
     "t13-williams-r-day",
     "t15-adx-regime-day",
+    "exit-e2a-fixed-day",
+    "exit-e2a-time-day",
+    "exit-e2a-trail-day",
+    "exit-t04-time-day",
+    "exit-t04-trail-day",
     "g-e2a-g2-day",
-    "g-e2a-g2-not-day"
+    "g-e2a-g2-not-day",
+    "t04-connors-rsi2-day"
    ],
    "mcs": [
     "consensus-db-v1-day",
