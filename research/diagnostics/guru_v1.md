@@ -8,13 +8,29 @@ These are aggregate statements about rules, not about any single stock; nothing 
 
 Live rule: T04 Connors RSI(2) (`t04-connors-rsi2-day`): edge +3.37 pts, years 6/6, picks per date 3.64.
 
-not run yet
+| Setup | Dates covered | Dates with picks | Coverage | Picks/date | Hit rate | Market line | Edge (pts) | 95% interval | t | Years + | Edge - live (pts) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| R01 Holy Grail (ADX trend pullback to EMA20) | 2015-03-30 to 2020-12-31 | 1187 | 0.84 | 3.03 | 0.440 | 0.450 | -0.80 | -2.63 to +1.03 | -0.85 | 2/6 | -4.17 |
+| R02 Turtle Soup (failed 20-session breakout) | 2015-03-30 to 2020-12-31 | 905 | 0.66 | 2.60 | 0.464 | 0.448 | +0.59 | -1.70 to +2.89 | +0.50 | 3/6 | -2.78 |
+| R02B Turtle Soup Plus One | 2015-03-30 to 2020-12-30 | 420 | 0.46 | 1.85 | 0.453 | 0.459 | -2.46 | -6.25 to +1.33 | -1.27 | 0/6 | -5.83 |
+| R03 Anti (3-10 oscillator pullback) | 2015-03-30 to 2020-12-31 | 1114 | 0.80 | 3.19 | 0.447 | 0.446 | -0.44 | -2.30 to +1.42 | -0.47 | 2/6 | -3.81 |
+| R04 80-20 (reversal of an extreme bar) | 2015-03-30 to 2020-12-31 | 1177 | 0.83 | 3.39 | 0.439 | 0.449 | -0.96 | -2.72 to +0.79 | -1.08 | 3/6 | -4.33 |
+| P01 Five-EMA alert candle (daily adaptation) | 2015-03-30 to 2020-12-31 | 1290 | 0.91 | 3.81 | 0.431 | 0.453 | -2.52 | -4.06 to -0.99 | -3.22 | 1/6 | -5.89 |
+| P02 Bollinger 1.5 sd alert candle | 2015-03-30 to 2020-12-31 | 830 | 0.62 | 2.72 | 0.440 | 0.456 | -2.32 | -4.64 to +0.01 | -1.95 | 1/6 | -5.69 |
 
 ## day bearish
 
 Live rule: E2A crowded extreme-day reversal (`e2a-day`): edge +7.46 pts, years 6/6, picks per date 2.96.
 
-not run yet
+| Setup | Dates covered | Dates with picks | Coverage | Picks/date | Hit rate | Market line | Edge (pts) | 95% interval | t | Years + | Edge - live (pts) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| R01 Holy Grail (ADX trend pullback to EMA20) | 2015-03-30 to 2020-12-31 | 1213 | 0.86 | 3.38 | 0.540 | 0.546 | -0.18 | -1.91 to +1.55 | -0.20 | 4/6 | -7.64 |
+| R02 Turtle Soup (failed 20-session breakout) | 2015-03-30 to 2020-12-31 | 1135 | 0.83 | 2.87 | 0.580 | 0.547 | +3.03 | +1.16 to +4.89 | +3.18 | 5/6 | -4.43 |
+| R02B Turtle Soup Plus One | 2015-03-30 to 2020-12-30 | 601 | 0.65 | 1.73 | 0.552 | 0.557 | -2.23 | -5.43 to +0.97 | -1.37 | 1/6 | -9.69 |
+| R03 Anti (3-10 oscillator pullback) | 2015-03-30 to 2020-12-31 | 1076 | 0.77 | 3.25 | 0.545 | 0.545 | +0.16 | -1.70 to +2.02 | +0.17 | 3/6 | -7.30 |
+| R04 80-20 (reversal of an extreme bar) | 2015-03-30 to 2020-12-31 | 1185 | 0.84 | 3.52 | 0.542 | 0.548 | -0.29 | -2.04 to +1.46 | -0.33 | 4/6 | -7.75 |
+| P01 Five-EMA alert candle (daily adaptation) | 2015-03-30 to 2020-12-31 | 1305 | 0.92 | 4.30 | 0.542 | 0.548 | -0.83 | -2.23 to +0.58 | -1.15 | 1/6 | -8.29 |
+| P02 Bollinger 1.5 sd alert candle | 2015-03-30 to 2020-12-31 | 1054 | 0.79 | 3.25 | 0.543 | 0.556 | -1.06 | -3.04 to +0.91 | -1.06 | 2/6 | -8.52 |
 
 ## week bullish
 
@@ -43,7 +59,3 @@ Live rule: A01 weekly reversal (`a01-weekly-reversal-week`): edge +2.48 pts, yea
 | R04 80-20 (reversal of an extreme bar) | 2015-03-30 to 2020-12-28 | 254 | 0.85 | 3.57 | 0.533 | 0.506 | +1.33 | -2.34 to +5.00 | +0.71 | 3/6 | -1.15 |
 | P01 Five-EMA alert candle (daily adaptation) | 2015-03-30 to 2020-12-28 | 281 | 0.94 | 4.37 | 0.508 | 0.515 | -0.84 | -3.83 to +2.14 | -0.56 | 2/6 | -3.32 |
 | P02 Bollinger 1.5 sd alert candle | 2015-03-30 to 2020-12-28 | 229 | 0.80 | 3.09 | 0.511 | 0.522 | -0.11 | -4.20 to +3.98 | -0.05 | 2/6 | -2.59 |
-
-## Pending
-
-`r01-holy-grail-day`, `r02-turtle-soup-day`, `r02b-turtle-soup-plus-one-day`, `r03-anti-day`, `r04-eighty-twenty-day`, `p01-five-ema-day`, `p02-bollinger-1p5-day`
