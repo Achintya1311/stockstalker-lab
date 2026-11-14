@@ -253,6 +253,24 @@
     "n": 129,
     "coverage": 0.4174757281553398
    },
+   "conf-min3-week": {
+    "mean": 0.0055884093910458675,
+    "lo": -0.02493901835112097,
+    "hi": 0.03808390320282949,
+    "p_le0": 0.3575,
+    "block": 2,
+    "n": 283,
+    "coverage": 0.9158576051779935
+   },
+   "conf-min4-week": {
+    "mean": 0.00256956060003572,
+    "lo": -0.04514756034151543,
+    "hi": 0.048629841129744805,
+    "p_le0": 0.451,
+    "block": 1,
+    "n": 206,
+    "coverage": 0.6666666666666666
+   },
    "consensus-wb-v1-week": {
     "mean": 0.024839810087161785,
     "lo": 0.00172598915246347,
@@ -894,7 +912,7 @@
    }
   },
   "joint": {
-   "n_models": 99,
+   "n_models": 101,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week",
@@ -904,9 +922,9 @@
     "g-a01-g8-week": "composite-v1-week-bearish-week"
    },
    "spa": {
-    "lower": 0.0815,
-    "consistent": 0.113,
-    "upper": 0.113
+    "lower": 0.0895,
+    "consistent": 0.1205,
+    "upper": 0.1205
    },
    "stepm": [],
    "mcs": [
@@ -936,6 +954,8 @@
     "composite-v2-week-bearish-vote-k4-week",
     "composite-v2-week-bearish-vote-k5-week",
     "composite-v2-week-bearish-vote-k6-week",
+    "conf-min3-week",
+    "conf-min4-week",
     "consensus-wb-v1-week",
     "consensus-wb-v2-week",
     "d02-stock-pcr-confirmatory-week",
@@ -1372,6 +1392,24 @@
     "block": 1,
     "n": 101,
     "coverage": 0.3268608414239482
+   },
+   "conf-min3-week": {
+    "mean": -0.00038031219520446566,
+    "lo": -0.03636036143131528,
+    "hi": 0.035813909709387116,
+    "p_le0": 0.516,
+    "block": 2,
+    "n": 258,
+    "coverage": 0.8349514563106796
+   },
+   "conf-min4-week": {
+    "mean": -0.0004426235038303696,
+    "lo": -0.06152302536588496,
+    "hi": 0.058563440041678134,
+    "p_le0": 0.5,
+    "block": 2,
+    "n": 161,
+    "coverage": 0.5210355987055016
    },
    "d02-stock-pcr-confirmatory-week": {
     "mean": -0.03986094986987788,
@@ -1969,16 +2007,16 @@
    }
   },
   "joint": {
-   "n_models": 92,
+   "n_models": 94,
    "block": 1,
    "twins": {
     "g-a05b-g5-not-week": "composite-v1-week-bullish-not-week",
     "g-a05b-g5-week": "composite-v1-week-bullish-week"
    },
    "spa": {
-    "lower": 0.225,
-    "consistent": 0.3285,
-    "upper": 0.3685
+    "lower": 0.2525,
+    "consistent": 0.3525,
+    "upper": 0.391
    },
    "stepm": [],
    "mcs": [
@@ -2008,6 +2046,8 @@
     "composite-v2-week-bullish-vote-k3-week",
     "composite-v2-week-bullish-vote-k4-week",
     "composite-v2-week-bullish-vote-k5-week",
+    "conf-min3-week",
+    "conf-min4-week",
     "d02-stock-pcr-confirmatory-week",
     "d02-stock-pcr-contrarian-week",
     "f06-trend-acceleration-week",
@@ -2203,6 +2243,33 @@
     "block": 1,
     "n": 333,
     "coverage": 0.22699386503067484
+   },
+   "conf-min3-day": {
+    "mean": 0.01452283132195424,
+    "lo": -0.0024094092372928273,
+    "hi": 0.03156247061394109,
+    "p_le0": 0.0485,
+    "block": 1,
+    "n": 1233,
+    "coverage": 0.8404907975460123
+   },
+   "conf-min4-day": {
+    "mean": 0.009592882094083101,
+    "lo": -0.014372347380203638,
+    "hi": 0.03588598873319599,
+    "p_le0": 0.2215,
+    "block": 2,
+    "n": 764,
+    "coverage": 0.5207907293796864
+   },
+   "conf-min5-day": {
+    "mean": -0.0012034560638915612,
+    "lo": -0.05019457912613093,
+    "hi": 0.04551118340450888,
+    "p_le0": 0.52,
+    "block": 1,
+    "n": 283,
+    "coverage": 0.1929107021131561
    },
    "consensus-dbu-v1-day": {
     "mean": 0.031969411929195266,
@@ -2890,7 +2957,7 @@
    }
   },
   "joint": {
-   "n_models": 90,
+   "n_models": 93,
    "block": 1,
    "twins": {},
    "spa": {
@@ -2928,12 +2995,16 @@
     "composite-v2-day-bullish-g9-near0p8-day",
     "composite-v2-day-bullish-g9-near0p9-day",
     "composite-v2-day-bullish-vote-k4-day",
+    "conf-min3-day",
     "consensus-dbu-v1-day",
     "d01c-day",
     "e3b-a02-low-ivol-day",
+    "f04-open-volume-corr-day",
     "f09-volume-backed-fall-day",
     "f10-vol-ratio-reversal-day",
+    "f11-w06-day",
     "f11-w08-day",
+    "f11-w12-day",
     "f11-w15-day",
     "f14-trend-switched-fade-day",
     "f16-position-turnover-corr-day",
@@ -3082,6 +3153,33 @@
     "block": 1,
     "n": 404,
     "coverage": 0.27539195637355146
+   },
+   "conf-min3-day": {
+    "mean": 0.006474684949593361,
+    "lo": -0.008022650565332958,
+    "hi": 0.020823140328068694,
+    "p_le0": 0.1865,
+    "block": 1,
+    "n": 1334,
+    "coverage": 0.9093387866394002
+   },
+   "conf-min4-day": {
+    "mean": 0.013667703204000969,
+    "lo": -0.008634866806827736,
+    "hi": 0.035767900517522724,
+    "p_le0": 0.1255,
+    "block": 2,
+    "n": 909,
+    "coverage": 0.6196319018404908
+   },
+   "conf-min5-day": {
+    "mean": -0.009254888057791236,
+    "lo": -0.04925254014327916,
+    "hi": 0.03069832800127192,
+    "p_le0": 0.655,
+    "block": 2,
+    "n": 336,
+    "coverage": 0.22903885480572597
    },
    "consensus-db-v1-day": {
     "mean": 0.04605736502238802,
@@ -3778,7 +3876,7 @@
    }
   },
   "joint": {
-   "n_models": 91,
+   "n_models": 94,
    "block": 1,
    "twins": {
     "g-e2a-g2-day": "composite-v1-day-bearish-day",
@@ -3807,7 +3905,6 @@
     "e2a-d01c-fallback-day",
     "e2a-day",
     "e2a-f11-fallback-day",
-    "e2b-day",
     "e3a-a02-high-ivol-day",
     "e3b-a02-low-ivol-day",
     "f02-volume-signed-reversal-day",
@@ -3830,7 +3927,6 @@
     "g-e2a-g3-day",
     "g-e2a-g4-day",
     "g-e2a-g4-not-day",
-    "g-e2a-g5-day",
     "g-e2a-g5-not-day",
     "g-e2a-g6-not-day",
     "g-e2a-g8-day",
