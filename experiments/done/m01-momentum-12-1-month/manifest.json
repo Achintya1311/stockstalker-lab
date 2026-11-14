@@ -1,0 +1,10 @@
+{
+  "id": "m01-momentum-12-1-month",
+  "strategy": "strategies.m01_momentum_12_1",
+  "split": "train",
+  "horizon": "month",
+  "n_picks": 44731,
+  "n_dates": 251,
+  "pick_log_sha256": "fe498386ce8a0ec7a35b699c25f29117e9f98348b5260aa3e9353c5bdbfe39fe",
+  "outcome_window": "pick date's open to the close of the last trading date of ISO week 4 (pick week = 1); overlapping; picks whose window ends after the split end (2020-12-31) dropped"
+}

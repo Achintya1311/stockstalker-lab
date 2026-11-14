@@ -1,0 +1,10 @@
+{
+  "id": "a01-weekly-reversal-month",
+  "strategy": "strategies.a01_weekly_reversal",
+  "split": "train",
+  "horizon": "month",
+  "n_picks": 63213,
+  "n_dates": 308,
+  "pick_log_sha256": "b63130da9522d6547a5d79012d192ca030a7611457d8530b4d331cd1649cc7ba",
+  "outcome_window": "pick date's open to the close of the last trading date of ISO week 4 (pick week = 1); overlapping; picks whose window ends after the split end (2020-12-31) dropped"
+}

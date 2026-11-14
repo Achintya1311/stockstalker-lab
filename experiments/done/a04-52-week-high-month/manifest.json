@@ -1,0 +1,10 @@
+{
+  "id": "a04-52-week-high-month",
+  "strategy": "strategies.a04_52_week_high",
+  "split": "train",
+  "horizon": "month",
+  "n_picks": 54201,
+  "n_dates": 256,
+  "pick_log_sha256": "aafe2aa358b8f469e6837b71e9574188ff4d5aae89e3ddeffab7ff908158774a",
+  "outcome_window": "pick date's open to the close of the last trading date of ISO week 4 (pick week = 1); overlapping; picks whose window ends after the split end (2020-12-31) dropped"
+}
