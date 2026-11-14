@@ -291,8 +291,12 @@ def test_main_runs_month_train_and_validation_and_feeds_leaderboard_and_trials(d
 def test_held_c5_experiments_are_month_train_runs_of_catalogued_strategies():
     import importlib
     root = Path(__file__).resolve().parent.parent
-    ymls = sorted((root / "experiments" / "held" / "c5").glob("*.yml"))
-    assert len(ymls) == 5
+    # held/ first, pending/ once queued, removed when the result lands in done/
+    names = ["a01-weekly-reversal-month", "a04-52-week-high-month", "a05b-max-effect-ranked-month",
+             "m01-momentum-12-1-month", "m02-leader-pullback-month"]
+    ymls = [p for n in names for p in ((root / "experiments" / "held" / "c5" / f"{n}.yml"),
+                                       (root / "experiments" / "pending" / f"{n}.yml")) if p.exists()]
+    assert all(any(y.stem == n for y in ymls) or (root / "experiments" / "done" / n).exists() for n in names)
     with open(root / "cards" / "catalog.csv", newline="") as f:
         ids = {r["id"] for r in csv.DictReader(f)}
     assert {"A01", "A04", "A05B", "M01", "M02"} <= ids
