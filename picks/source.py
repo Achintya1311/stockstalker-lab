@@ -43,6 +43,7 @@ _REGISTRY = {
     "a04_52_week_high@v1": "strategies.a04_52_week_high",
     "o05_order_block_weekly@v1": "strategies.o05_order_block_weekly",
     "i02_low_vol_level@v1": "strategies.i02_low_vol_level",
+    "composite_v1_day_bearish@v1": "strategies.composite_v1_day_bearish",
 }
 
 # The provisional fallback this contract names when no source file exists
