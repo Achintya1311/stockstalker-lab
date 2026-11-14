@@ -1,0 +1,5 @@
+id: conf-min4-no-oi-week
+strategy: strategies.confluence_min4_no_oi
+split: train
+horizon: week
+dates: {start: '2015-01-01', end: '2020-12-31'}

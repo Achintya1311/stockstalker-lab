@@ -1,0 +1,177 @@
+{
+  "split": "train",
+  "selection": "top",
+  "rule": {
+    "min_picks": 500,
+    "edge_above": "zero and the live rule",
+    "live_edge_pts": {
+      "day_bullish": 3.37,
+      "day_bearish": 7.46,
+      "week_bullish": 2.23,
+      "week_bearish": 2.48
+    },
+    "min_years_positive": 4,
+    "of_years": 6,
+    "selection_fit_years": [
+      2015,
+      2016,
+      2017,
+      2018
+    ],
+    "selection_check_years": [
+      2019,
+      2020
+    ],
+    "selection_check": "edge above the live rule's own edge in each check year"
+  },
+  "trials": {
+    "modules": 10,
+    "horizons": 2,
+    "replays": 20,
+    "side_readings": 40
+  },
+  "configs": [],
+  "selections": [
+    {
+      "horizon": "day",
+      "final": false,
+      "counts_qualifying_on_both": [],
+      "tables": {
+        "day_bullish": {
+          "selected": null,
+          "min_count": null,
+          "one_side_only": false,
+          "fit_mean_pts": null
+        },
+        "day_bearish": {
+          "selected": null,
+          "min_count": null,
+          "one_side_only": false,
+          "fit_mean_pts": null
+        }
+      }
+    },
+    {
+      "horizon": "week",
+      "final": false,
+      "counts_qualifying_on_both": [],
+      "tables": {
+        "week_bullish": {
+          "selected": null,
+          "min_count": null,
+          "one_side_only": false,
+          "fit_mean_pts": null
+        },
+        "week_bearish": {
+          "selected": null,
+          "min_count": null,
+          "one_side_only": false,
+          "fit_mean_pts": null
+        }
+      }
+    }
+  ],
+  "ablations": [],
+  "pending": [
+    {
+      "horizon": "day",
+      "config": "CONFLUENCE_MIN3",
+      "experiment": "conf-min3-day"
+    },
+    {
+      "horizon": "day",
+      "config": "CONFLUENCE_MIN4",
+      "experiment": "conf-min4-day"
+    },
+    {
+      "horizon": "day",
+      "config": "CONFLUENCE_MIN5",
+      "experiment": "conf-min5-day"
+    },
+    {
+      "horizon": "day",
+      "config": "CONFLUENCE_MIN4_NO_OB",
+      "experiment": "conf-min4-no-ob-day"
+    },
+    {
+      "horizon": "day",
+      "config": "CONFLUENCE_MIN4_NO_SR",
+      "experiment": "conf-min4-no-sr-day"
+    },
+    {
+      "horizon": "day",
+      "config": "CONFLUENCE_MIN4_NO_SWEEP",
+      "experiment": "conf-min4-no-sweep-day"
+    },
+    {
+      "horizon": "day",
+      "config": "CONFLUENCE_MIN4_NO_CANDLE",
+      "experiment": "conf-min4-no-candle-day"
+    },
+    {
+      "horizon": "day",
+      "config": "CONFLUENCE_MIN4_NO_EMA",
+      "experiment": "conf-min4-no-ema-day"
+    },
+    {
+      "horizon": "day",
+      "config": "CONFLUENCE_MIN4_NO_OI",
+      "experiment": "conf-min4-no-oi-day"
+    },
+    {
+      "horizon": "day",
+      "config": "CONFLUENCE_MIN4_NO_MARKET",
+      "experiment": "conf-min4-no-market-day"
+    },
+    {
+      "horizon": "week",
+      "config": "CONFLUENCE_MIN3",
+      "experiment": "conf-min3-week"
+    },
+    {
+      "horizon": "week",
+      "config": "CONFLUENCE_MIN4",
+      "experiment": "conf-min4-week"
+    },
+    {
+      "horizon": "week",
+      "config": "CONFLUENCE_MIN5",
+      "experiment": "conf-min5-week"
+    },
+    {
+      "horizon": "week",
+      "config": "CONFLUENCE_MIN4_NO_OB",
+      "experiment": "conf-min4-no-ob-week"
+    },
+    {
+      "horizon": "week",
+      "config": "CONFLUENCE_MIN4_NO_SR",
+      "experiment": "conf-min4-no-sr-week"
+    },
+    {
+      "horizon": "week",
+      "config": "CONFLUENCE_MIN4_NO_SWEEP",
+      "experiment": "conf-min4-no-sweep-week"
+    },
+    {
+      "horizon": "week",
+      "config": "CONFLUENCE_MIN4_NO_CANDLE",
+      "experiment": "conf-min4-no-candle-week"
+    },
+    {
+      "horizon": "week",
+      "config": "CONFLUENCE_MIN4_NO_EMA",
+      "experiment": "conf-min4-no-ema-week"
+    },
+    {
+      "horizon": "week",
+      "config": "CONFLUENCE_MIN4_NO_OI",
+      "experiment": "conf-min4-no-oi-week"
+    },
+    {
+      "horizon": "week",
+      "config": "CONFLUENCE_MIN4_NO_MARKET",
+      "experiment": "conf-min4-no-market-week"
+    }
+  ]
+}

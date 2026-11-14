@@ -1,0 +1,5 @@
+id: conf-min4-no-ema-day
+strategy: strategies.confluence_min4_no_ema
+split: train
+horizon: day
+dates: {start: '2015-01-01', end: '2020-12-31'}

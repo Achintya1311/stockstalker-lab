@@ -1,0 +1,91 @@
+source_url: ''
+author: 'none: a generic practitioner method ("smart money concepts" style chart reading), no single source'
+license: own work, summarised only (SPEC.md section 5)
+published_on: '2026-11-14'
+horizon: day and week (every module scores both sides; each is replayed at both horizons)
+claim_as_stated: 'none verified. Practitioners say a setup is worth acting on only when several readings line up:
+  an order block or a support / resistance level at price, a liquidity sweep or a reversal candle, the moving
+  averages, open interest, the volatility index and the overall market. No audited record of this method was
+  found. Tested here as one pre-declared train experiment requested by AB (14 Nov 2026): the confluence IS the
+  trigger, not a filter on another trigger (earlier lab work used such conditions only as filters on bounce-back
+  triggers, strategies/g_gates.py and strategies/composite_v2.py, and that did not survive unseen data).'
+rules_plain: 'Seven components per symbol and side, each True / False / no verdict, from split/bonus adjusted daily
+  bars up to the last close, the bearish side the exact mirror of the bullish one. Locations: (1) order block, the
+  zone strategies/ob_core.py finds on the last 60 bars is a demand zone (bearish: supply) and the last close is
+  inside it or within 10% of the 20-session high-low range of it; (2) support / resistance, the nearest swing low
+  below the last close (bearish: swing high above), from picks/chart.py swing_levels on the last 45 bars, is within
+  10% of the 20-session range. Events: (3) liquidity sweep, the last session traded below the lowest low of the
+  prior 10 sessions and closed back above it (bearish: above the prior 10-session high, closed back below);
+  (4) candle, a bullish engulfing bar or a hammer, lower wick at least 2x the body and close in the top third of
+  the range (bearish: bearish engulfing or shooting star). Others: (5) moving averages, close above the 50-session
+  EMA and 20-session EMA above the 50-session EMA (bearish: below and below); (6) open interest, G7''s reading
+  (D01C agrees with the side); (7) market backdrop stand-in, G10''s equal-weight universe trend on the side AND
+  G5''s universe volatility calm for bullish, stressed for bearish. A setup needs at least one location AND at
+  least one event True; its count is the number of True components out of 7. Score = side x (count + a tie-break
+  in (0, 1), the event strength percentile among the day''s setups). A symbol with setups on both sides abstains.
+  Modules keep setups with count >= 3, 4 or 5; ablations at 4 ignore one component completely (not counted, not
+  usable for the location / event requirement). Rules in strategies/confluence_core.py.'
+params:
+  range_sessions: 20
+  near_share_of_range: 0.10
+  order_block: {rows: 60, detector: strategies/ob_core.py DEFAULTS (impulse 1.5 ATR, break 10 bars, zone lookback 5, max age 20)}
+  support_resistance: {bars: 45, swing: 3 bars either side, function: picks/chart.py swing_levels}
+  sweep_prior_sessions: 10
+  candle: {hammer_wick_to_body: 2.0, hammer_close_share_of_range: top third, engulfing: last body strictly larger and covering the prior body}
+  moving_averages: {fast_ema: 20, slow_ema: 50, min_rows: 100}
+  open_interest: G7 (strategies/g_gates.py, D01C sign)
+  market: G10 (200-date universe index average) AND G5 (20-day universe volatility vs its 250-day median)
+  min_counts: [3, 4, 5]
+  ablations_at_min: 4
+  tie_break: event strength (sweep depth / 20-session range; engulfing body or rejection wick / bar range), mid-rank percentile among the day's setups, largest over the fired events
+default_params:
+  min_counts: [3, 4, 5]
+  ablation_min_count: 4
+  ablated_components: [ob, sr, sweep, candle, ema, oi, market]
+  success_rule_per_table:
+    written: 14 Nov 2026, before any replay
+    selection: top
+    min_train_picks: 500
+    train_edge_above: zero and the table's live rule
+    live_rule_train_edge_pts: {day_bullish: 3.37, day_bearish: 7.46, week_bullish: 2.23, week_bearish: 2.48}
+    live_rules: {day_bullish: T04, day_bearish: E2A, week_bullish: A05B, week_bearish: A01}
+    min_positive_years: 4 of 6
+  selection_for_unseen_check:
+    one_min_count_per_table: true
+    candidates: counts meeting the success rule on that table
+    score: mean edge over 2015-2018 (years with picks, at least 3)
+    must_beat_live_rule_edge_in: [2019, 2020]
+    prefer: a count qualifying on both the bullish and the bearish table of a horizon (highest sum of the two fit means; ties - the lower count)
+    fallback: each table's own best qualifying count, marked one side only
+    nothing_qualifies: no validation query for that table
+    ablations: descriptive only, never a validation query
+data_needed: ohlcv plus futures OI
+testable_now: 'yes'
+source: AB request 14 Nov 2026; strategies/confluence_core.py
+link: ''
+prior_claim: none verified
+replays:
+- {folder: experiments/held/conf/main_day, ids: [conf-min3-day, conf-min4-day, conf-min5-day]}
+- {folder: experiments/held/conf/main_week, ids: [conf-min3-week, conf-min4-week, conf-min5-week]}
+- {folder: experiments/held/conf/ablation_day, ids: [conf-min4-no-ob-day, conf-min4-no-sr-day, conf-min4-no-sweep-day, conf-min4-no-candle-day, conf-min4-no-ema-day, conf-min4-no-oi-day, conf-min4-no-market-day]}
+- {folder: experiments/held/conf/ablation_week, ids: [conf-min4-no-ob-week, conf-min4-no-sr-week, conf-min4-no-sweep-week, conf-min4-no-candle-week, conf-min4-no-ema-week, conf-min4-no-oi-week, conf-min4-no-market-week]}
+red_flags:
+- No claim is assumed true (SPEC.md section 5). This is a discretionary method with no audited record; the rules
+  above are one honest mechanical reading of it, and a practitioner could reasonably define every component
+  differently.
+- 'Trial count: 10 modules x 2 horizons = 20 train replays, 40 side readings (ledger/trials.csv counts one row per
+  side). Seven of the ten modules are ablations, descriptive only, but they are still trials. Three minimum counts
+  per table compete for one selection.'
+- 'No volatility index and no overseas index series exist in the dataset. The market component is a stand-in built
+  from the lab''s own universe: an equal-weight index trend (G10) and its 20-day realised volatility against its
+  250-day median (G5). It is not the India VIX and not a global market reading.'
+- Daily bars are used for the week horizon too (the history ends at Friday's close); no weekly-bar reading.
+- 'The market component never judges 2015 (G5 needs 270 universe-return dates), so in 2015 the count is out of 6
+  readable components at most; G7 has no verdict where futures OI is missing.'
+- Several components reuse readings already tested in this lab (order blocks O01 / G6, D01C, G5, G10), on the same
+  2015-2020 data; their individual train results were seen before this card was written.
+- The open-interest component is True on exactly one side for every symbol with OI data (D01C's sign), and the
+  moving-average component is True on at most one side, so the counts lean on the side those readings point to.
+- 'No difference interval: picks.json has no per-pick outcomes.'
+- Train split only; validation is a separate, later step, one query per table for the selected count only.
+status: 'built; 20 train replays held in experiments/held/conf/ (main_day 3, main_week 3, ablation_day 7, ablation_week 7), none pending'
