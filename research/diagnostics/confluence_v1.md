@@ -16,16 +16,27 @@ These are aggregate statements about rules, not about any single stock; nothing 
 
 | Horizon | Table | Selected | Min count | One side only | Fit mean | Status |
 |---|---|---|---|---|---|---|
-| day | day bullish | none | - | no | - | provisional (replays pending) |
-| day | day bearish | none | - | no | - | provisional (replays pending) |
-| week | week bullish | none | - | no | - | provisional (replays pending) |
-| week | week bearish | none | - | no | - | provisional (replays pending) |
+| day | day bullish | none | - | no | - | final |
+| day | day bearish | none | - | no | - | final |
+| week | week bullish | none | - | no | - | final |
+| week | week bearish | none | - | no | - | final |
 
 ## Minimum counts with results
 
 | Table | Config | Picks | Dates | Edge | t | Years + | Live rule | vs live | 2019 vs live | 2020 vs live | Fit mean | Rule | Qualifies |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| (none yet) | | | | | | | | | | | | | |
+| day bullish | CONFLUENCE_MIN3 | 3984 | 1233 | +1.45 | +1.64 | 3 of 6 | T04 +3.37 | -1.92 | -5.73 | -3.92 | +3.04 | no | **no** |
+| day bullish | CONFLUENCE_MIN4 | 1782 | 764 | +0.96 | +0.74 | 4 of 6 | T04 +3.37 | -2.41 | -6.37 | -5.63 | +3.61 | no | **no** |
+| day bullish | CONFLUENCE_MIN5 | 506 | 283 | -0.12 | -0.05 | 1 of 6 | T04 +3.37 | -3.49 | -9.39 | -1.86 | -7.50 | no | **no** |
+| day bearish | CONFLUENCE_MIN3 | 5090 | 1334 | +0.65 | +0.90 | 4 of 6 | E2A +7.46 | -6.81 | -9.95 | -11.49 | +1.51 | no | **no** |
+| day bearish | CONFLUENCE_MIN4 | 2381 | 909 | +1.37 | +1.21 | 4 of 6 | E2A +7.46 | -6.09 | -9.27 | -11.57 | +2.48 | no | **no** |
+| day bearish | CONFLUENCE_MIN5 | 702 | 336 | -0.93 | -0.44 | 2 of 6 | E2A +7.46 | -8.39 | -6.14 | -13.46 | -2.03 | no | **no** |
+| week bullish | CONFLUENCE_MIN3 | 833 | 258 | -0.04 | -0.02 | 3 of 6 | A05B +2.23 | -2.27 | -3.97 | +5.42 | -0.83 | no | **no** |
+| week bullish | CONFLUENCE_MIN4 | 379 | 161 | -0.04 | -0.01 | 4 of 6 | A05B +2.23 | -2.27 | -8.61 | +6.40 | +1.38 | no | **no** |
+| week bullish | CONFLUENCE_MIN5 | 114 | 66 | +0.83 | +0.16 | 2 of 6 | A05B +2.23 | -1.40 | -8.22 | +4.19 | -10.59 | no | **no** |
+| week bearish | CONFLUENCE_MIN3 | 1081 | 283 | +0.56 | +0.38 | 3 of 6 | A01 +2.48 | -1.92 | -11.11 | +1.49 | +1.76 | no | **no** |
+| week bearish | CONFLUENCE_MIN4 | 520 | 206 | +0.26 | +0.11 | 4 of 6 | A01 +2.48 | -2.22 | -10.33 | +1.25 | +2.35 | no | **no** |
+| week bearish | CONFLUENCE_MIN5 | 147 | 73 | +1.65 | +0.38 | 4 of 6 | A01 +2.48 | -0.83 | -6.29 | -0.67 | +12.69 | no | **no** |
 
 ## Ablations (minimum 4, one component ignored; descriptive)
 
@@ -37,9 +48,6 @@ These are aggregate statements about rules, not about any single stock; nothing 
 
 | Horizon | Config | Replay |
 |---|---|---|
-| day | CONFLUENCE_MIN3 | `conf-min3-day` |
-| day | CONFLUENCE_MIN4 | `conf-min4-day` |
-| day | CONFLUENCE_MIN5 | `conf-min5-day` |
 | day | CONFLUENCE_MIN4_NO_OB | `conf-min4-no-ob-day` |
 | day | CONFLUENCE_MIN4_NO_SR | `conf-min4-no-sr-day` |
 | day | CONFLUENCE_MIN4_NO_SWEEP | `conf-min4-no-sweep-day` |
@@ -47,9 +55,6 @@ These are aggregate statements about rules, not about any single stock; nothing 
 | day | CONFLUENCE_MIN4_NO_EMA | `conf-min4-no-ema-day` |
 | day | CONFLUENCE_MIN4_NO_OI | `conf-min4-no-oi-day` |
 | day | CONFLUENCE_MIN4_NO_MARKET | `conf-min4-no-market-day` |
-| week | CONFLUENCE_MIN3 | `conf-min3-week` |
-| week | CONFLUENCE_MIN4 | `conf-min4-week` |
-| week | CONFLUENCE_MIN5 | `conf-min5-week` |
 | week | CONFLUENCE_MIN4_NO_OB | `conf-min4-no-ob-week` |
 | week | CONFLUENCE_MIN4_NO_SR | `conf-min4-no-sr-week` |
 | week | CONFLUENCE_MIN4_NO_SWEEP | `conf-min4-no-sweep-week` |
