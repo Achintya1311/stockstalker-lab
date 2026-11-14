@@ -86,6 +86,8 @@ def experiment_id(strategy_id: str, horizon: str, done_dir: Path = EXPERIMENTS_D
             m = json.loads(manifest.read_text())
         except (OSError, ValueError):
             continue
+        if m.get("exit"):
+            continue  # exit-plan observation replays reuse a live module; they are not its evidence
         if m.get("strategy") == module_path and m.get("split") == "train" and m.get("horizon") == horizon:
             found.append(m.get("id") or manifest.parent.name)
     return found[0] if len(found) == 1 else None
