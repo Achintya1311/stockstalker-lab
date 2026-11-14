@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 421. Gate 2's bar at that count: t >= 4.51.
+Trials recorded: 427. Gate 2's bar at that count: t >= 4.52.
 
 Month rows: four-week holds that overlap week to week; their t is a block t over 8 consecutive pick dates (see each results.md).
 

@@ -1,6 +1,0 @@
-id: exit-t04-trail-day
-strategy: strategies.t04_connors_rsi2
-split: train
-horizon: day
-dates: {start: '2015-01-01', end: '2020-12-31'}
-exit: {kind: trail, stop_atr: 3, max_sessions: 20, sides: [bullish]}
