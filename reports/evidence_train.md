@@ -226,13 +226,14 @@ SPA p-value (consistent): **0.315**  (lower 0.315, upper 0.345). StepM superior:
 | a05b-max-effect-ranked-month | 291 | 94% | +0.85 | -2.17 to +3.94 | 0.294 | 5 |
 | a01-weekly-reversal-month | 305 | 99% | -3.57 | -6.00 to -1.24 | 1.000 | 1 |
 
-## week/bearish  (101 experiments, block 1)
+## week/bearish  (114 experiments, block 1)
 
-SPA p-value (consistent): **0.120**  (lower 0.089, upper 0.120). StepM superior: none. MCS size: 101 of 101. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy. composite-v2-week-bearish-vote-k1-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. g-a01-g3-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. g-a01-g8-not-week repeats composite-v1-week-bearish-not-week exactly (same picks every date), so the joint tests ran on one copy. g-a01-g8-week repeats composite-v1-week-bearish-week exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.141**  (lower 0.115, upper 0.141). StepM superior: none. MCS size: 114 of 114. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy. composite-v2-week-bearish-vote-k1-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. exit-a01-fixed-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. exit-a01-time-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. exit-a01-trail-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. exit-a05b-fixed-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy. exit-a05b-time-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy. exit-a05b-trail-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy. g-a01-g3-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. g-a01-g8-not-week repeats composite-v1-week-bearish-not-week exactly (same picks every date), so the joint tests ran on one copy. g-a01-g8-week repeats composite-v1-week-bearish-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
 | composite-v2-week-bearish-vote-k6-week | 129 | 42% | +5.88 | +0.46 to +11.16 | 0.017 | 3 |
+| r02-turtle-soup-week | 243 | 79% | +4.98 | +0.70 to +9.43 | 0.016 | 2 |
 | g01-residual-momentum-week | 255 | 83% | +4.22 | +1.30 to +7.25 | 0.003 | 1 |
 | a01-i01-filter-week | 258 | 83% | +4.17 | +1.38 to +6.93 | 0.003 | 1 |
 | t05c-upcross-fade-week | 276 | 89% | +4.02 | +0.79 to +7.18 | 0.007 | 1 |
@@ -262,6 +263,9 @@ SPA p-value (consistent): **0.120**  (lower 0.089, upper 0.120). StepM superior:
 | g-a01-g5-not-week | 123 | 40% | +2.60 | -1.78 to +6.80 | 0.103 | 1 |
 | a01-weekly-reversal-week | 309 | 100% | +2.48 | -0.09 to +5.31 | 0.031 | 1 |
 | composite-v2-week-bearish-vote-k1-week | 309 | 100% | +2.48 | -0.09 to +5.31 | 0.031 | 1 |
+| exit-a01-fixed-week | 309 | 100% | +2.48 | -0.09 to +5.31 | 0.031 | 1 |
+| exit-a01-time-week | 309 | 100% | +2.48 | -0.09 to +5.31 | 0.031 | 1 |
+| exit-a01-trail-week | 309 | 100% | +2.48 | -0.09 to +5.31 | 0.031 | 1 |
 | g-a01-g3-week | 309 | 100% | +2.48 | -0.09 to +5.31 | 0.031 | 1 |
 | consensus-wb-v1-week | 309 | 100% | +2.48 | +0.17 to +4.84 | 0.018 | 1 |
 | composite-v2-week-bearish-g5-q0p4-week | 154 | 50% | +2.47 | -1.27 to +6.21 | 0.100 | 1 |
@@ -272,6 +276,7 @@ SPA p-value (consistent): **0.120**  (lower 0.089, upper 0.120). StepM superior:
 | composite-v2-week-bearish-boost-w0p25-week | 309 | 100% | +2.35 | -0.13 to +5.00 | 0.033 | 1 |
 | consensus-wb-v2-week | 309 | 100% | +2.35 | +0.06 to +4.54 | 0.020 | 1 |
 | g01b-residual-momentum-volatile-week | 255 | 83% | +2.34 | -0.49 to +5.19 | 0.059 | 2 |
+| r03-anti-week | 232 | 75% | +2.33 | -1.81 to +6.33 | 0.133 | 1 |
 | composite-v2-week-bearish-g2-cut0p8-week | 298 | 96% | +2.32 | -0.40 to +4.95 | 0.045 | 1 |
 | q07-trend-residual-week | 309 | 100% | +2.16 | -0.42 to +4.77 | 0.057 | 1 |
 | t02-golden-death-cross-week | 271 | 88% | +2.05 | -0.60 to +4.71 | 0.065 | 1 |
@@ -292,10 +297,13 @@ SPA p-value (consistent): **0.120**  (lower 0.089, upper 0.120). StepM superior:
 | g-a01-g8-not-week | 309 | 100% | +1.41 | -1.35 to +4.20 | 0.167 | 2 |
 | g-a01-g10-not-week | 127 | 41% | +1.36 | -2.98 to +5.60 | 0.284 | 1 |
 | a07c-volume-fade-week | 302 | 98% | +1.34 | -1.32 to +3.80 | 0.151 | 1 |
+| r04-eighty-twenty-week | 254 | 82% | +1.33 | -2.77 to +5.56 | 0.276 | 8 |
 | h03-turnover-variability-week | 301 | 97% | +1.14 | -1.09 to +3.37 | 0.168 | 1 |
 | t18-ichimoku-cloud-week | 286 | 93% | +1.06 | -1.46 to +3.57 | 0.204 | 2 |
+| r02b-turtle-soup-plus-one-week | 123 | 40% | +1.02 | -6.60 to +8.57 | 0.387 | 1 |
 | f12-trend-pullback-low-week | 261 | 84% | +0.97 | -1.49 to +3.42 | 0.215 | 1 |
 | g-a01-g4-week | 308 | 100% | +0.96 | -1.58 to +3.50 | 0.238 | 1 |
+| r01-holy-grail-week | 257 | 83% | +0.89 | -2.77 to +4.66 | 0.329 | 1 |
 | a03-momentum-12-1-week | 255 | 83% | +0.85 | -1.79 to +3.60 | 0.285 | 1 |
 | f08-weighted-reversal-week | 260 | 84% | +0.58 | -2.24 to +3.10 | 0.343 | 1 |
 | conf-min3-week | 283 | 92% | +0.56 | -2.49 to +3.81 | 0.357 | 2 |
@@ -313,15 +321,20 @@ SPA p-value (consistent): **0.120**  (lower 0.089, upper 0.120). StepM superior:
 | h04-return-seasonality-week | 204 | 66% | -0.03 | -2.90 to +2.86 | 0.503 | 1 |
 | t21-minervini-template-week | 253 | 82% | -0.05 | -2.88 to +2.81 | 0.498 | 1 |
 | t09-supertrend-week | 301 | 97% | -0.11 | -2.56 to +2.47 | 0.532 | 1 |
+| p02-bollinger-1p5-week | 229 | 74% | -0.11 | -4.10 to +4.06 | 0.501 | 2 |
 | g-a01-g6-week | 264 | 85% | -0.15 | -3.29 to +2.97 | 0.548 | 2 |
 | g-a01-g2-not-week | 269 | 87% | -0.18 | -2.98 to +2.51 | 0.560 | 1 |
 | a05-max-effect-week | 295 | 95% | -0.28 | -2.73 to +2.12 | 0.572 | 1 |
 | a05b-max-effect-ranked-week | 295 | 95% | -0.28 | -2.73 to +2.12 | 0.572 | 1 |
+| exit-a05b-fixed-week | 295 | 95% | -0.28 | -2.73 to +2.12 | 0.572 | 1 |
+| exit-a05b-time-week | 295 | 95% | -0.28 | -2.73 to +2.12 | 0.572 | 1 |
+| exit-a05b-trail-week | 295 | 95% | -0.28 | -2.73 to +2.12 | 0.572 | 1 |
 | o04-order-block-composite-week | 293 | 95% | -0.44 | -3.28 to +2.22 | 0.619 | 2 |
 | a04-52-week-high-week | 260 | 84% | -0.50 | -3.17 to +2.23 | 0.626 | 2 |
 | q01-price-volume-corr-week | 306 | 99% | -0.58 | -3.14 to +1.98 | 0.676 | 1 |
 | h06-downside-beta-week | 260 | 84% | -0.73 | -3.61 to +2.32 | 0.672 | 1 |
 | a07-high-volume-premium-week | 302 | 98% | -0.84 | -3.04 to +1.42 | 0.776 | 1 |
+| p01-five-ema-week | 281 | 91% | -0.84 | -4.08 to +2.37 | 0.688 | 2 |
 | t08-donchian-breakout-55-week | 255 | 83% | -0.90 | -5.08 to +3.38 | 0.662 | 2 |
 | o03-trend-confirmed-week | 265 | 86% | -0.91 | -4.25 to +2.58 | 0.695 | 2 |
 | o04b-no-d01-week | 293 | 95% | -1.12 | -4.08 to +1.62 | 0.778 | 2 |
@@ -334,9 +347,9 @@ SPA p-value (consistent): **0.120**  (lower 0.089, upper 0.120). StepM superior:
 | t08-donchian-breakout-20-week | 289 | 94% | -2.72 | -5.86 to +0.34 | 0.966 | 2 |
 | c02-turn-of-month-week | 177 | 57% | -2.72 | -5.80 to +0.23 | 0.964 | 1 |
 
-## week/bullish  (94 experiments, block 1)
+## week/bullish  (106 experiments, block 1)
 
-SPA p-value (consistent): **0.352**  (lower 0.253, upper 0.391). StepM superior: none. MCS size: 93 of 94. g-a05b-g5-not-week repeats composite-v1-week-bullish-not-week exactly (same picks every date), so the joint tests ran on one copy. g-a05b-g5-week repeats composite-v1-week-bullish-week exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.400**  (lower 0.268, upper 0.441). StepM superior: none. MCS size: 105 of 106. exit-a01-fixed-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. exit-a01-time-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. exit-a01-trail-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. exit-a05b-fixed-week repeats a05b-max-effect-ranked-week exactly (same picks every date), so the joint tests ran on one copy. exit-a05b-time-week repeats a05b-max-effect-ranked-week exactly (same picks every date), so the joint tests ran on one copy. exit-a05b-trail-week repeats a05b-max-effect-ranked-week exactly (same picks every date), so the joint tests ran on one copy. g-a05b-g5-not-week repeats composite-v1-week-bullish-not-week exactly (same picks every date), so the joint tests ran on one copy. g-a05b-g5-week repeats composite-v1-week-bullish-week exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -355,6 +368,9 @@ SPA p-value (consistent): **0.352**  (lower 0.253, upper 0.391). StepM superior:
 | composite-v2-week-bullish-vote-k1-week | 295 | 95% | +2.30 | -0.01 to +4.62 | 0.026 | 2 |
 | g01-residual-momentum-week | 255 | 83% | +2.25 | -0.62 to +5.04 | 0.068 | 1 |
 | a05b-max-effect-ranked-week | 295 | 95% | +2.23 | -0.10 to +4.70 | 0.032 | 1 |
+| exit-a05b-fixed-week | 295 | 95% | +2.23 | -0.10 to +4.70 | 0.032 | 1 |
+| exit-a05b-time-week | 295 | 95% | +2.23 | -0.10 to +4.70 | 0.032 | 1 |
+| exit-a05b-trail-week | 295 | 95% | +2.23 | -0.10 to +4.70 | 0.032 | 1 |
 | h02-idiosyncratic-volatility-week | 309 | 100% | +2.11 | -0.18 to +4.40 | 0.036 | 1 |
 | f08-weighted-reversal-week | 260 | 84% | +2.04 | -0.81 to +4.63 | 0.070 | 1 |
 | composite-v2-week-bullish-boost-w1p0-week | 295 | 95% | +2.03 | -0.61 to +4.60 | 0.059 | 1 |
@@ -385,6 +401,7 @@ SPA p-value (consistent): **0.352**  (lower 0.253, upper 0.391). StepM superior:
 | g-a05b-g2-week | 295 | 95% | +1.14 | -1.36 to +3.61 | 0.181 | 1 |
 | g-a05b-g1-not-week | 271 | 88% | +1.09 | -1.14 to +3.29 | 0.168 | 3 |
 | t02-golden-death-cross-week | 271 | 88% | +1.09 | -1.82 to +3.79 | 0.231 | 1 |
+| r03-anti-week | 231 | 75% | +1.05 | -2.74 to +4.69 | 0.313 | 1 |
 | composite-v1-week-bullish-not-week | 123 | 40% | +1.01 | -2.40 to +4.51 | 0.266 | 1 |
 | g-a05b-g5-not-week | 123 | 40% | +1.01 | -2.40 to +4.51 | 0.266 | 1 |
 | a07c-volume-fade-week | 302 | 98% | +0.90 | -1.35 to +3.08 | 0.206 | 1 |
@@ -396,6 +413,9 @@ SPA p-value (consistent): **0.352**  (lower 0.253, upper 0.391). StepM superior:
 | a03-momentum-12-1-week | 255 | 83% | +0.21 | -2.60 to +2.84 | 0.457 | 1 |
 | h05-intermediate-momentum-week | 260 | 84% | +0.15 | -2.27 to +2.67 | 0.456 | 1 |
 | a01-weekly-reversal-week | 309 | 100% | -0.03 | -2.23 to +2.03 | 0.509 | 2 |
+| exit-a01-fixed-week | 309 | 100% | -0.03 | -2.23 to +2.03 | 0.509 | 2 |
+| exit-a01-time-week | 309 | 100% | -0.03 | -2.23 to +2.03 | 0.509 | 2 |
+| exit-a01-trail-week | 309 | 100% | -0.03 | -2.23 to +2.03 | 0.509 | 2 |
 | conf-min3-week | 258 | 83% | -0.04 | -3.64 to +3.58 | 0.516 | 2 |
 | conf-min4-week | 161 | 52% | -0.04 | -6.15 to +5.86 | 0.500 | 2 |
 | f06-trend-acceleration-week | 309 | 100% | -0.09 | -2.24 to +2.29 | 0.535 | 2 |
@@ -414,6 +434,7 @@ SPA p-value (consistent): **0.352**  (lower 0.253, upper 0.391). StepM superior:
 | q07-trend-residual-week | 309 | 100% | -1.19 | -3.69 to +1.13 | 0.838 | 2 |
 | t19-obv-divergence-week | 305 | 99% | -1.20 | -3.29 to +1.01 | 0.853 | 1 |
 | h04-return-seasonality-week | 204 | 66% | -1.24 | -4.00 to +1.62 | 0.794 | 1 |
+| r04-eighty-twenty-week | 251 | 81% | -1.28 | -4.70 to +1.97 | 0.771 | 2 |
 | a07-high-volume-premium-week | 302 | 98% | -1.42 | -3.86 to +1.25 | 0.854 | 1 |
 | o03-trend-confirmed-week | 290 | 94% | -1.45 | -3.97 to +1.10 | 0.866 | 1 |
 | t18-ichimoku-cloud-week | 284 | 92% | -1.56 | -3.75 to +0.68 | 0.922 | 4 |
@@ -423,15 +444,19 @@ SPA p-value (consistent): **0.352**  (lower 0.253, upper 0.391). StepM superior:
 | q02-return-volume-corr-week | 309 | 100% | -1.90 | -4.16 to +0.32 | 0.955 | 2 |
 | t17-keltner-breakout-week | 248 | 80% | -2.20 | -5.52 to +1.38 | 0.893 | 1 |
 | o01-retest-week | 299 | 97% | -2.21 | -4.47 to -0.12 | 0.981 | 2 |
+| p02-bollinger-1p5-week | 186 | 60% | -2.34 | -7.02 to +2.59 | 0.815 | 1 |
 | h06-downside-beta-week | 260 | 84% | -2.69 | -5.36 to -0.04 | 0.976 | 1 |
 | champion-v1-week | 303 | 98% | -2.82 | -5.51 to -0.36 | 0.991 | 3 |
 | o04a-no-volume-week | 299 | 97% | -2.88 | -5.22 to -0.59 | 0.996 | 1 |
 | o04-order-block-composite-week | 299 | 97% | -2.95 | -5.34 to -0.56 | 0.994 | 1 |
 | t09-supertrend-week | 301 | 97% | -3.18 | -5.85 to -0.53 | 0.991 | 1 |
 | q01-price-volume-corr-week | 309 | 100% | -3.39 | -5.69 to -1.25 | 1.000 | 2 |
+| r01-holy-grail-week | 249 | 81% | -3.47 | -7.11 to +0.01 | 0.974 | 4 |
+| p01-five-ema-week | 277 | 90% | -3.69 | -6.51 to -0.97 | 0.996 | 3 |
 | t05-macd-crossover-week | 276 | 89% | -3.90 | -7.04 to -0.68 | 0.991 | 1 |
 | t08-donchian-breakout-20-week | 299 | 97% | -3.97 | -6.88 to -0.88 | 0.996 | 1 |
 | d02-stock-pcr-confirmatory-week | 225 | 73% | -3.99 | -8.58 to +0.44 | 0.958 | 1 |
 | t16-parabolic-sar-week | 288 | 93% | -3.99 | -6.59 to -1.31 | 0.999 | 1 |
+| r02-turtle-soup-week | 184 | 60% | -4.28 | -9.22 to +0.76 | 0.953 | 1 |
 | t08-donchian-breakout-55-week | 272 | 88% | -5.09 | -8.38 to -1.76 | 0.997 | 1 |
 
