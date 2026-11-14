@@ -1,0 +1,13 @@
+{
+  "id": "composite-v2-day-bearish-vote-k4-day-validation",
+  "strategy": "strategies.composite_v2_day_bearish_vote_k4",
+  "horizon": "day",
+  "train_experiment": "composite-v2-day-bearish-vote-k4-day",
+  "selection": "top",
+  "released": {
+    "bearish": {
+      "train_edge": 0.09578957635290083,
+      "released_edge": 0.07160563032269127
+    }
+  }
+}

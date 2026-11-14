@@ -1,6 +1,0 @@
-id: composite-v2-day-bullish-vote-k4-day-validation
-strategy: strategies.composite_v2_day_bullish_vote_k4
-split: validation
-horizon: day
-dates: {start: '2021-01-01', end: '2023-12-31'}
-train_experiment: composite-v2-day-bullish-vote-k4-day

@@ -1,0 +1,13 @@
+{
+  "id": "composite-v2-week-bullish-g5-q0p4-week-validation",
+  "strategy": "strategies.composite_v2_week_bullish_g5_q0p4",
+  "horizon": "week",
+  "train_experiment": "composite-v2-week-bullish-g5-q0p4-week",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.03963477931534999,
+      "released_edge": 0.03963477931534999
+    }
+  }
+}

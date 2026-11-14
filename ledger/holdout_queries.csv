@@ -49,3 +49,6 @@ composite-v1-week-bearish-not-week-validation-bearish,2026-11-13T02:33:38.384996
 composite-v1-week-bearish-week-validation-bearish,2026-11-13T02:39:05.284590+00:00,edge_top,week,bearish,0.03,0.01,0.030593628649618603,0.030593628649618603,False
 composite-v1-week-bullish-not-week-validation-bullish,2026-11-13T02:45:06.915879+00:00,edge_top,week,bullish,0.03,0.01,0.010053909235020848,0.010053909235020848,False
 composite-v1-week-bullish-week-validation-bullish,2026-11-13T02:51:08.200663+00:00,edge_top,week,bullish,0.03,0.01,0.038022801955629945,0.0018534595561499022,True
+composite-v2-day-bearish-vote-k4-day-validation-bearish,2026-11-14T01:07:47.268691+00:00,edge_top,day,bearish,0.03,0.01,0.09578957635290083,0.07160563032269127,True
+composite-v2-day-bullish-vote-k4-day-validation-bullish,2026-11-14T01:36:05.041762+00:00,edge_top,day,bullish,0.03,0.01,0.058018235819179705,-0.02170534621002817,True
+composite-v2-week-bullish-g5-q0p4-week-validation-bullish,2026-11-14T01:40:57.042837+00:00,edge_top,week,bullish,0.03,0.01,0.03963477931534999,0.03963477931534999,False

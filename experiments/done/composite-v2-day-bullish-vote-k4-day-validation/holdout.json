@@ -1,0 +1,13 @@
+{
+  "id": "composite-v2-day-bullish-vote-k4-day-validation",
+  "strategy": "strategies.composite_v2_day_bullish_vote_k4",
+  "horizon": "day",
+  "train_experiment": "composite-v2-day-bullish-vote-k4-day",
+  "selection": "top",
+  "released": {
+    "bullish": {
+      "train_edge": 0.058018235819179705,
+      "released_edge": -0.02170534621002817
+    }
+  }
+}

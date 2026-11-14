@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 378. Gate 2's bar at that count: t >= 4.49.
+Trials recorded: 380. Gate 2's bar at that count: t >= 4.49.
 
 | Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -70,6 +70,7 @@ Trials recorded: 378. Gate 2's bar at that count: t >= 4.49.
 | composite-v2-day-bullish-g9-near0p8-day | day | bullish | 2241 | 51.05% | 45.58% | 4.64 | 3.81 |  | -0.37 | 100.00% |  |
 | f14-trend-switched-fade-day | day | bullish | 6245 | 47.33% | 45.02% | 2.38 | 3.80 |  | -0.51 | 100.00% |  |
 | t15-adx-regime-day | day | bearish | 6880 | 56.63% | 54.50% | 2.20 | 3.75 |  | -0.06 | 100.00% |  |
+| composite-v2-day-bearish-vote-k5-day | day | bearish | 742 | 60.78% | 55.35% | 7.21 | 3.70 |  | 0.18 | 83.33% | candidate |
 | t04-connors-rsi2-day | day | bullish | 3952 | 48.61% | 45.17% | 3.37 | 3.69 |  | -0.41 | 100.00% |  |
 | g-t04-g7-day | day | bullish | 3904 | 48.82% | 45.13% | 3.40 | 3.69 |  | -0.41 | 100.00% |  |
 | h02-idiosyncratic-volatility-day | day | bearish | 7325 | 56.59% | 54.53% | 2.06 | 3.67 |  | 0.06 | 83.33% | candidate |
@@ -95,6 +96,7 @@ Trials recorded: 378. Gate 2's bar at that count: t >= 4.49.
 | g-t04-g10-not-day | day | bullish | 1939 | 49.36% | 46.02% | 3.32 | 2.52 |  | -0.41 | 100.00% |  |
 | t05c-upcross-fade-week | week | bearish | 1028 | 53.31% | 50.72% | 4.02 | 2.45 |  | 0.24 | 83.33% | candidate |
 | g-e2a-g8-not-day | day | bearish | 1009 | 59.07% | 54.50% | 4.41 | 2.42 |  | 0.06 | 100.00% | candidate |
+| composite-v2-day-bullish-vote-k5-day | day | bullish | 743 | 48.32% | 43.95% | 4.79 | 2.40 |  | -0.43 | 100.00% |  |
 | composite-v2-week-bearish-vote-k4-week | week | bearish | 1388 | 54.25% | 50.95% | 3.36 | 2.39 |  | 0.18 | 83.33% | candidate |
 | composite-v2-week-bearish-vote-k2-week | week | bearish | 1538 | 53.90% | 50.91% | 3.20 | 2.37 |  | 0.09 | 83.33% | candidate |
 | champion-v1-day | day | bearish | 7171 | 55.84% | 54.48% | 1.37 | 2.37 |  | -0.05 | 100.00% |  |
