@@ -1,0 +1,5 @@
+id: a01-weekly-reversal-month
+strategy: strategies.a01_weekly_reversal
+split: train
+horizon: month
+dates: {start: '2015-01-01', end: '2020-12-31'}

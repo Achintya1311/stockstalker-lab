@@ -29,6 +29,17 @@ tried. `reports/train_leaderboard.md` is rebuilt from every results file each
 run, ranked by t, with that bar shown. A row is a provisional-rule candidate
 only with at least 500 picks (the same bar as gate 4), positive edge and
 positive directional move.
+
+`horizon: month` (owner-approved additive change, 14 Nov 2026): picks on the
+first trading date of each ISO week, outcome over a four-week hold
+(`engine.scoring.month_window_ends`), so consecutive windows overlap. The
+market line, hit, edge and directional move after costs (one cost per
+four-week hold, as for a week pick) are the usual ones on the month move.
+Because the dates are not independent, month results replace the per-date t
+with a block t and add a moving-block bootstrap interval for the edge
+(`engine.scoring.MONTH_INTERVAL_METHOD`, written into results.json and
+results.md). A month pick whose window ends after its split's end date is
+dropped. Day and week scoring run exactly the code they ran before.
 """
 
 from __future__ import annotations
@@ -42,6 +53,7 @@ import pandas as pd
 
 from engine.holdout import thresholdout_query
 from engine.holdout_report import LEDGER_FIELDS, THRESHOLD, TOLERANCE, _already_logged
+from engine.replay import load_splits
 from engine.scoring import (
     directional_move_after_costs,
     hit,
@@ -49,6 +61,14 @@ from engine.scoring import (
     market_line,
     moves_for_horizon,
     universe_membership,
+)
+from engine.scoring import (
+    MONTH,
+    MONTH_BLOCK,
+    MONTH_INTERVAL_METHOD,
+    block_bootstrap_interval,
+    block_t,
+    moves_any_horizon,
 )
 from gates.budgets import holdout_budget_remaining
 from gates.gates import MIN_TEST_PICKS, leak_alarm_triggered, required_t
@@ -74,7 +94,7 @@ class Context:
 
     def moves(self, horizon: str) -> pd.DataFrame:
         if horizon not in self._moves:
-            self._moves[horizon] = moves_for_horizon(self.dataset, horizon)
+            self._moves[horizon] = moves_any_horizon(self.dataset, horizon)  # day/week: moves_for_horizon
         return self._moves[horizon]
 
     def line(self, horizon: str, side: int) -> pd.Series:
@@ -127,11 +147,47 @@ def side_metrics(side_picks: pd.DataFrame, side: int, horizon: str, ctx: Context
     }
 
 
-def score_picks(picks: pd.DataFrame, horizon: str, ctx: Context) -> dict:
+def score_picks(picks: pd.DataFrame, horizon: str, ctx: Context, split_end=None) -> dict:
+    if horizon == MONTH:
+        return score_picks_month(picks, ctx, split_end)
     picks = picks.merge(ctx.in_universe, on=["date", "symbol"], how="inner")
     n_dates = int(picks["date"].nunique())
     return {
         sel: {SIDES[side]: side_metrics(select(picks, side, k), side, horizon, ctx, n_dates) for side in SIDES}
+        for sel, k in (("top", ctx.k), ("all", None))
+    }
+
+
+def side_metrics_month(side_picks: pd.DataFrame, side: int, ctx: Context, n_dates: int) -> dict:
+    """`side_metrics` on the month move, with `edge_t` replaced by the block t and a block-bootstrap interval."""
+    m = side_metrics(side_picks, side, MONTH, ctx, n_dates)
+    if not m.get("n_picks"):
+        return m
+    joined = side_picks.merge(ctx.moves(MONTH), on=["date", "symbol"], how="inner")
+    joined["hit"] = hit(joined["move"], side)
+    per_date = joined.groupby("date")["hit"].mean().to_frame("hit_rate").join(
+        ctx.line(MONTH, side).rename("market_line"), how="inner"
+    ).sort_index()
+    diff = (per_date["hit_rate"] - per_date["market_line"]).to_numpy()
+    interval = block_bootstrap_interval(diff)
+    m["edge_t"] = block_t(diff)
+    m["edge_interval"] = list(interval) if interval is not None else None
+    m["interval_method"] = MONTH_INTERVAL_METHOD
+    return m
+
+
+def score_picks_month(picks: pd.DataFrame, ctx: Context, split_end=None) -> dict:
+    """`score_picks` for `horizon: month`. Picks whose four-week window is incomplete, or ends after
+    `split_end` (when given), are dropped before anything is scored."""
+    moves = ctx.moves(MONTH)
+    outcome = picks.merge(moves[["date", "symbol", "outcome_date"]], on=["date", "symbol"], how="inner")
+    if split_end not in (None, "go-live"):
+        outcome = outcome[outcome["outcome_date"] <= str(split_end)]
+    picks = outcome[["date", "symbol", "score"]]
+    picks = picks.merge(ctx.in_universe, on=["date", "symbol"], how="inner")
+    n_dates = int(picks["date"].nunique())
+    return {
+        sel: {SIDES[side]: side_metrics_month(select(picks, side, k), side, ctx, n_dates) for side in SIDES}
         for sel, k in (("top", ctx.k), ("all", None))
     }
 
@@ -171,6 +227,27 @@ def render(manifest: dict, results: dict, k: int) -> str:
     return "\n".join(lines)
 
 
+def render_month(manifest: dict, results: dict, k: int) -> str:
+    """`render` plus the month horizon's outcome window, overlap and interval method."""
+    lines = [render(manifest, results, k), "## Month horizon: method", "",
+             "Outcome: the pick date's open (first trading date of the ISO week) to the close of the last "
+             "trading date of the 4th ISO week, counting the pick week as week 1. A new four-week window starts "
+             "every week, so windows overlap. A pick whose window ends after its split's end date is dropped. "
+             "Cost is charged once per four-week hold.", "",
+             f"Intervals: {MONTH_INTERVAL_METHOD}. The t above is this block t.", "",
+             "| Selection | Side | Edge | 95% block-bootstrap interval |", "|---|---|---|---|"]
+    for sel in ("top", "all"):
+        for side in SIDES.values():
+            m = results[sel][side]
+            if not m.get("n_picks"):
+                continue
+            iv = m.get("edge_interval")
+            iv_text = "n/a" if iv is None else f"{_pct(iv[0])} to {_pct(iv[1])}"
+            lines.append(f"| {sel} | {side} | {_pct(m['edge'])} | {iv_text} |")
+    lines.append("")
+    return "\n".join(lines)
+
+
 def score_done(ctx: Context, done_dir: Path) -> list[str]:
     """Score every train experiment lacking current results; return the ids scored."""
     scored = []
@@ -183,12 +260,15 @@ def score_done(ctx: Context, done_dir: Path) -> list[str]:
             continue
         if out.exists() and json.loads(out.read_text()).get("scorer_version") == SCORER_VERSION:
             continue
-        results = score_picks(_load_picks(picks_path), manifest["horizon"], ctx)
+        if manifest["horizon"] == MONTH:
+            results = score_picks(_load_picks(picks_path), MONTH, ctx, load_splits()[manifest["split"]].get("end"))
+        else:
+            results = score_picks(_load_picks(picks_path), manifest["horizon"], ctx)
         payload = {"id": manifest["id"], "strategy": manifest["strategy"], "split": manifest["split"],
                    "horizon": manifest["horizon"], "pick_log_sha256": manifest.get("pick_log_sha256"),
                    "scorer_version": SCORER_VERSION, "picks_per_table": ctx.k, "selections": results}
         out.write_text(json.dumps(payload, indent=2) + "\n")
-        (d / "results.md").write_text(render(manifest, results, ctx.k))
+        (d / "results.md").write_text((render_month if manifest["horizon"] == MONTH else render)(manifest, results, ctx.k))
         scored.append(manifest["id"])
     return scored
 
@@ -237,6 +317,9 @@ def write_leaderboard(done_dir: Path, out_path: Path = LEADERBOARD, ledger: Path
              f"Trials recorded: {n_trials}. Gate 2's bar at that count: t >= {bar:.2f}.", "",
              "| Experiment | Horizon | Side | Picks | Accuracy | Market line | Edge | t | Clears bar | Dir. move | Positive years | |",
              "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    if any(row[1] == MONTH for row in rows):
+        lines[-2:-2] = [f"Month rows: four-week holds that overlap week to week; their t is a block t over "
+                        f"{MONTH_BLOCK} consecutive pick dates (see each results.md).", ""]
     for exp_id, horizon, side, m in rows:
         t = "n/a" if m["edge_t"] is None else f"{m['edge_t']:.2f}"
         clears = "yes" if m["edge_t"] is not None and m["edge_t"] >= bar else ""

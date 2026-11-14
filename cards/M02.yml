@@ -1,0 +1,38 @@
+source_url: ""
+author: "Lab rule, finance-portfolio-hub RESEARCH_2 (strength that persists over about a month); conditions from strategies/g_gates.py (G1, G2, G9)"
+license: "Lab rule built from existing lab gates (SPEC.md section 5)"
+published_on: "2026"
+claim_as_stated: >
+  Strength persists over about a month: a stock that leads the universe over the last quarter,
+  trades above its 200-day average and near its one-year high keeps outperforming over the next
+  month, and a down day is a fair point to pick it.
+horizon: month
+rules_plain: >
+  Bullish only. On adjusted closes: the 63-day return percentile across the universe (g_gates
+  leader_percentiles) is above 0.70; the close is above its 200-day simple average (g_gates _sma_side);
+  the last session's daily return is below zero; and the last close is at least 0.85 x the highest close
+  of the last 252 rows (within 15% of the 252-day high). Score = the 63-day percentile; every other
+  symbol abstains, and no bearish picks are made. Scored on the month horizon: Monday's open to the close
+  of the 4th ISO week (pick week = week 1), windows overlapping week to week.
+default_params:
+  leader_window: 63
+  leader_top: 0.70
+  trend_window: 200
+  high_window: 252
+  near_high: 0.85
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "RESEARCH_2 (hub note); strategies/g_gates.py G9 'pullback in a leader'"
+link: ""
+prior_claim: "Intermediate-horizon strength persists; leaders bought on a pullback continue over the next month"
+success_rule: >
+  Pre-declared 14 Nov 2026, before any month result was read. Train split, `top` selection, bullish
+  side: helps if the edge is above zero, its 95% block-bootstrap interval (engine month method) excludes
+  zero, and the edge is positive in at least 4 of the 6 calendar years 2015 to 2020. Anything else is a
+  miss; no parameter is changed after the result. The bearish side has no picks by design.
+red_flags:
+  - "Four conditions at once: coverage can be low on weak-market dates; read coverage next to the edge."
+  - "Thresholds (0.70, 0.85, 200, 252) are reused from G2 and G9 as they stand, not fitted here."
+  - "Month windows overlap three weeks in four; read the block interval, not the pick count."
+  - "SPEC.md sections 1 and 10 describe two horizons; a month result cannot reach a live table without a supervised amendment."
+status: queued
