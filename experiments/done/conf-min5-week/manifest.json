@@ -1,0 +1,9 @@
+{
+  "id": "conf-min5-week",
+  "strategy": "strategies.confluence_min5",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 373,
+  "n_dates": 153,
+  "pick_log_sha256": "f0dad90589332dc06b40413a5256c8a4b6605f1ed9adac3a120be970a6abd739"
+}

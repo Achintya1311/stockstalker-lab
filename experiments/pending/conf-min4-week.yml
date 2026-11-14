@@ -1,5 +1,0 @@
-id: conf-min4-week
-strategy: strategies.confluence_min4
-split: train
-horizon: week
-dates: {start: '2015-01-01', end: '2020-12-31'}

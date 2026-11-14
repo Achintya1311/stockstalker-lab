@@ -1,0 +1,9 @@
+{
+  "id": "conf-min4-day",
+  "strategy": "strategies.confluence_min4",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 6251,
+  "n_dates": 1309,
+  "pick_log_sha256": "c126f8f346df67cfa785f96704014a31eb2d536a95aa6f5ec20cad46c142e96c"
+}
