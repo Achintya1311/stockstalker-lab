@@ -204,3 +204,134 @@ def random_baseline_percentile(
     if len(valid) == 0:
         raise ValueError("no random draw had any valid outcome")
     return float(np.mean(real_hit_rate > valid))
+
+
+# ---- month horizon (owner-approved additive change, 14 Nov 2026) -----------
+#
+# Everything below is new and used only for `horizon: month`; the day and week
+# functions above are untouched. SPEC.md sections 1 and 10 still describe two
+# horizons; see `state/engine-issues.md`.
+
+MONTH = "month"
+MONTH_WEEKS = 4  # a four-week hold: the pick's own ISO week counts as week 1
+MONTH_BLOCK = 8  # consecutive pick dates per block for month intervals (>= 4; see block_t)
+MONTH_BOOTSTRAP_REPS = 2000
+MONTH_INTERVAL_METHOD = (
+    f"month: windows overlap (a new four-week hold starts every week), so dates are not independent. "
+    f"t = mean / standard error of the means of non-overlapping blocks of {MONTH_BLOCK} consecutive pick dates; "
+    f"95% interval = moving-block bootstrap, block length {MONTH_BLOCK} pick dates, "
+    f"{MONTH_BOOTSTRAP_REPS} resamples, seed 0, percentile method"
+)
+
+
+def month_window_ends(dates) -> dict:
+    """Pick date -> outcome date for the month horizon, on the market's trading calendar.
+
+    The pick date is the first trading date of an ISO week (the same dates as
+    `week`). The outcome date is the last trading date of the 4th ISO week,
+    counting the pick's own week as week 1 (Monday of the pick week + 21 days
+    gives the 4th week). Consecutive windows overlap by three weeks; that is
+    intended. A pick date is left out (no outcome) when its window is not
+    complete in `dates`: the 4th week has no trading date, or no trading date
+    after that week exists yet, so the week's last trading date is not final.
+    """
+    ds = sorted({str(d) for d in dates})
+    if not ds:
+        return {}
+    weeks: dict[tuple, list[str]] = {}
+    for d in ds:
+        weeks.setdefault(tuple(pd.Timestamp(d).isocalendar()[:2]), []).append(d)
+    last_date = pd.Timestamp(ds[-1])
+    out = {}
+    for days in weeks.values():
+        first = pd.Timestamp(days[0])
+        monday = first - pd.Timedelta(days=first.weekday())
+        fourth_monday = monday + pd.Timedelta(days=7 * (MONTH_WEEKS - 1))
+        fourth_sunday = fourth_monday + pd.Timedelta(days=6)
+        target = weeks.get(tuple(fourth_monday.isocalendar()[:2]))
+        if not target or last_date <= fourth_sunday:
+            continue
+        out[days[0]] = target[-1]
+    return out
+
+
+def month_moves(dataset: pd.DataFrame) -> pd.DataFrame:
+    """Four-week fractional move, indexed by the pick date (the week's first trading date).
+
+    move = close on the outcome date (`month_window_ends`) / open on the pick
+    date - 1, for each symbol with a row on both dates. Windows overlap (one
+    starts every week). Also carries `outcome_date`, so callers can drop a pick
+    whose window ends after its split (no leakage across splits).
+    """
+    ends = month_window_ends(dataset["date"].unique())
+    cols = ["date", "symbol", "move", "outcome_date"]
+    if not ends:
+        return pd.DataFrame(columns=cols)
+    windows = pd.DataFrame({"date": list(ends), "outcome_date": list(ends.values())})
+    opens = dataset[["date", "symbol", "open"]].assign(date=lambda f: f["date"].astype(str)).merge(windows, on="date")
+    closes = dataset[["date", "symbol", "close"]].assign(date=lambda f: f["date"].astype(str))
+    closes = closes.rename(columns={"date": "outcome_date"})
+    merged = opens.merge(closes, on=["outcome_date", "symbol"], how="inner")
+    merged["move"] = merged["close"] / merged["open"] - 1.0
+    return merged[cols].sort_values(["date", "symbol"]).reset_index(drop=True)
+
+
+def moves_any_horizon(dataset: pd.DataFrame, horizon: str) -> pd.DataFrame:
+    """`moves_for_horizon` for day and week (unchanged), `month_moves` for month."""
+    if horizon == MONTH:
+        return month_moves(dataset)
+    return moves_for_horizon(dataset, horizon)
+
+
+def drop_month_overrun(picks: pd.DataFrame, split_end, dates) -> pd.DataFrame:
+    """Keep only month picks whose whole four-week window is known and ends on or before `split_end`.
+
+    `dates` is the trading calendar (`month_window_ends`). `split_end` None or
+    "go-live" means open-ended: only incomplete windows are dropped.
+    """
+    ends = month_window_ends(dates)
+    outcome = picks["date"].astype(str).map(ends)
+    keep = outcome.notna()
+    if split_end not in (None, "go-live"):
+        keep &= outcome.fillna("9999-12-31") <= str(split_end)
+    return picks[keep.to_numpy()].reset_index(drop=True)
+
+
+def block_t(diff, block: int = MONTH_BLOCK) -> float | None:
+    """t statistic of the mean of `diff` (per-date edge, in date order) from non-overlapping block means.
+
+    The series is cut into consecutive blocks of `block` pick dates (a trailing
+    partial block is dropped); t = mean of block means / (sd of block means /
+    sqrt(number of blocks)). None with fewer than two blocks or no spread.
+    """
+    x = np.asarray(diff, dtype=float)
+    nb = len(x) // block
+    if nb < 2:
+        return None
+    means = x[: nb * block].reshape(nb, block).mean(axis=1)
+    sd = float(means.std(ddof=1))
+    if not sd > 0:
+        return None
+    return float(means.mean() / (sd / np.sqrt(nb)))
+
+
+def block_bootstrap_interval(
+    diff, block: int = MONTH_BLOCK, reps: int = MONTH_BOOTSTRAP_REPS, seed: int = 0, level: float = 0.95
+) -> tuple[float, float] | None:
+    """Moving-block bootstrap percentile interval for the mean of `diff` (in date order).
+
+    Each resample joins randomly started runs of `block` consecutive values
+    (overlapping start points, with replacement) until it is as long as the
+    series, then takes the mean. None with fewer than `block` + 1 values.
+    """
+    x = np.asarray(diff, dtype=float)
+    n = len(x)
+    if n <= block:
+        return None
+    rng = np.random.default_rng(seed)
+    n_blocks = -(-n // block)
+    starts = rng.integers(0, n - block + 1, size=(reps, n_blocks))
+    idx = (starts[:, :, None] + np.arange(block)[None, None, :]).reshape(reps, -1)[:, :n]
+    means = x[idx].mean(axis=1)
+    alpha = (1.0 - level) / 2.0
+    return float(np.quantile(means, alpha)), float(np.quantile(means, 1.0 - alpha))

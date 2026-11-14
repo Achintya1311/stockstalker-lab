@@ -790,3 +790,28 @@ pre-declared rule (`research/diagnostics/e2a_f11_fb.md`). SPEC 10 replaces E2A o
 1 point higher (+7.72), which this blend is not expected to reach, so the lab spent no query. If AB prefers a full
 table for about 1.1 points of train edge, that is a SPEC 10 wording decision; the next step would be one validation
 query for E2A_F11_FB, then a change on a roster window (the week's last trading day before 12:00 UTC).
+
+## DONE, NEEDS MERGE REVIEW: month horizon added to `engine/` (AB approved 14 Nov 2026) - supervised change
+
+What changed in `engine/` (additive; day and week code paths untouched, proven byte-identical by
+`tests/test_month_horizon.py` against values frozen from the pre-change engine in `tests/golden/horizon_golden.json`):
+
+- `engine/scoring.py`: new `month_window_ends`, `month_moves`, `moves_any_horizon`, `drop_month_overrun`,
+  `block_t`, `block_bootstrap_interval`. Month pick = first trading date of each ISO week (as week); outcome = that
+  date's open to the close of the last trading date of the 4th ISO week, counting the pick week as week 1.
+  Windows overlap (one starts every week). Market line, hit, edge as before on that move; one cost per hold.
+- `engine/run_queue.py`: `horizon: month` runs through `run_month_experiment`: every weekly date is authorised as
+  usual, then pick dates whose window is incomplete or ends after the split's end date are dropped before the
+  strategy runs (train, validation and test alike), so the pick log never holds them. Manifest gains
+  `outcome_window` for month only.
+- `engine/experiment_report.py`: month scoring (`score_picks_month`) drops any pick whose window ends after the
+  split end; its t is a block t (non-overlapping blocks of 8 consecutive pick dates) and it adds a 95%
+  moving-block bootstrap interval (block 8, 2000 resamples, seed 0), with the method written into results.json
+  and results.md. Leaderboard, trials ledger and the validation (holdout) path accept month.
+- Strategies are called exactly as before (they are never told the horizon); a week strategy runs at month unchanged.
+
+Still to do in a supervised session: SPEC.md sections 1 and 10 still describe two horizons (day, week) and four
+tables. A wording amendment is needed before any month table could go live. Live picks are unaffected:
+`picks/`, `config/live_source.json` and `scripts/provisional_candidates.py` only read day and week, so month rows
+in the trials ledger or leaderboard never reach a table. Five month train replays are held in
+`experiments/held/c5/` (A04, A05B, A01, and the new M01, M02); move them to `experiments/pending/` after merge.

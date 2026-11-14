@@ -31,6 +31,14 @@ this also (re)writes `reports/market_line_train.md` (`engine.reports`) and
 `engine/`, `strategies/`, `experiments/pending/` or `gates/` and triggers
 `replay.yml` regenerates both from the real cached dataset - independently
 of whether anything is queued.
+
+`horizon: month` (owner-approved additive change, 14 Nov 2026) uses the same
+pick dates as `week` (the first trading date of each ISO week) and a four-week
+outcome window (`engine.scoring.month_window_ends`); windows overlap. Every
+weekly date is authorised as usual, then any pick date whose window is not
+complete or ends after the split's end date is dropped before the strategy
+runs, so neither the pick log nor the scores see an outcome from the next
+split. Day and week runs take exactly the code path they took before.
 """
 
 from __future__ import annotations
@@ -46,6 +54,8 @@ from engine.champion_report import REQUIRED_COLUMNS, maybe_write_champion_report
 from engine.experiment_report import LEADERBOARD, TRIALS_LEDGER, Context, answer_validation, record_trials, score_done, write_leaderboard
 from engine.holdout_report import LEDGER_PATH as HOLDOUT_LEDGER, maybe_log_holdout_query
 from engine.replay import SplitViolation, hash_picks, load_splits, run_dates
+from engine.replay import authorize
+from engine.scoring import MONTH, MONTH_WEEKS, drop_month_overrun, month_window_ends
 from engine.reports import maybe_write_market_line_report
 from engine.selftest import maybe_write_selftest_report
 
@@ -89,12 +99,36 @@ def pick_dates_for_horizon(available_dates: list[str], start: str, end: str, hor
 
 
 def run_experiment(dataset: pd.DataFrame, exp: dict, splits: dict) -> tuple[pd.DataFrame, str]:
+    if exp.get("horizon") == MONTH:
+        return run_month_experiment(dataset, exp, splits)
     strategy = resolve_strategy(exp["strategy"])
     available = sorted(dataset["date"].unique())
     dates = pick_dates_for_horizon(
         available, str(exp["dates"]["start"]), str(exp["dates"]["end"]), exp["horizon"]
     )
     picks = run_dates(dataset, strategy, dates, exp["split"], splits)
+    return picks, hash_picks(picks)
+
+
+def month_pick_dates(available_dates: list[str], start: str, end: str, split: str, splits: dict) -> list[str]:
+    """Month pick dates: the `week` pick dates in `[start, end]`, each authorised for `split`, minus any
+    whose four-week outcome window is incomplete or ends after the split's end date (no leakage)."""
+    weekly = pick_dates_for_horizon(available_dates, start, end, "week")
+    for d in weekly:
+        authorize(d, split, splits)  # refuse out-of-split dates exactly as day/week runs do
+    ends = month_window_ends(available_dates)
+    split_end = splits.get(split, {}).get("end")
+    open_ended = split_end in (None, "go-live")
+    return [d for d in weekly if d in ends and (open_ended or ends[d] <= str(split_end))]
+
+
+def run_month_experiment(dataset: pd.DataFrame, exp: dict, splits: dict) -> tuple[pd.DataFrame, str]:
+    """`run_experiment` for `horizon: month`. The strategy is called exactly as for `week`."""
+    strategy = resolve_strategy(exp["strategy"])
+    available = sorted(dataset["date"].unique())
+    dates = month_pick_dates(available, str(exp["dates"]["start"]), str(exp["dates"]["end"]), exp["split"], splits)
+    picks = run_dates(dataset, strategy, dates, exp["split"], splits)
+    picks = drop_month_overrun(picks, splits.get(exp["split"], {}).get("end"), available)  # belt and braces
     return picks, hash_picks(picks)
 
 
@@ -170,6 +204,10 @@ def main() -> None:
             "n_dates": int(picks["date"].nunique()) if not picks.empty else 0,
             "pick_log_sha256": pick_hash,
         }
+        if exp["horizon"] == MONTH:
+            manifest["outcome_window"] = (f"pick date's open to the close of the last trading date of ISO week "
+                                          f"{MONTH_WEEKS} (pick week = 1); overlapping; picks whose window ends "
+                                          f"after the split end ({splits[exp['split']].get('end')}) dropped")
         (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
         exp_path.unlink()
         print(f"{exp_id}: {manifest['n_picks']} picks over {manifest['n_dates']} dates -> {out_dir}")

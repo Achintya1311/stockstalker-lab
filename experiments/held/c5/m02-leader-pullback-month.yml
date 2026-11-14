@@ -1,0 +1,5 @@
+id: m02-leader-pullback-month
+strategy: strategies.m02_leader_pullback
+split: train
+horizon: month
+dates: {start: '2015-01-01', end: '2020-12-31'}

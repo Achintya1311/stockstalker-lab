@@ -1,0 +1,5 @@
+id: m01-momentum-12-1-month
+strategy: strategies.m01_momentum_12_1
+split: train
+horizon: month
+dates: {start: '2015-01-01', end: '2020-12-31'}

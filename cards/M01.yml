@@ -1,0 +1,34 @@
+source_url: ""
+author: "Narasimhan Jegadeesh and Sheridan Titman, Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency, Journal of Finance 48(1), 1993"
+license: "Idea from the paper, summarised and re-implemented (SPEC.md section 5)"
+published_on: "1993"
+claim_as_stated: >
+  Stocks ranked highest on their return over the past 12 months, skipping the most recent month,
+  keep outperforming the lowest-ranked stocks over the following 3 to 12 months (US stocks).
+horizon: month
+rules_plain: >
+  On adjusted closes, the 12-1 return = close 21 sessions back over close 273 sessions back, minus 1
+  (A03's formation return). Ranked across the universe on the last visible date (symbols with a row
+  and an active future on that date): mid-rank percentile pct = (rank - 0.5) / n; score = 2 x pct - 1.
+  The strongest names are bullish picks, the weakest are bearish picks; the engine's `top` selection
+  takes the 5 strongest and the 5 weakest. Scored on the month horizon: Monday's open to the close of
+  the 4th ISO week (pick week = week 1), windows overlapping week to week.
+default_params:
+  lookback: 252
+  skip: 21
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Jegadeesh and Titman (1993) Journal of Finance"
+link: ""
+prior_claim: "US: 12-1 winners keep outperforming 12-1 losers for 3 to 12 months"
+success_rule: >
+  Pre-declared 14 Nov 2026, before any month result was read. Train split, `top` selection, judged per
+  side: helps if the edge is above zero, its 95% block-bootstrap interval (engine month method) excludes
+  zero, and the edge is positive in at least 4 of the 6 calendar years 2015 to 2020. Anything else is a
+  miss; no parameter is changed after the result.
+red_flags:
+  - "A03 already tested the same 12-1 return as a raw score at one week: train +0.21 week-bull / +0.85 week-bear, directional moves negative. M01 differs in two ways only: a cross-sectional rank and the month horizon."
+  - "Month windows overlap three weeks in four, so there are about a quarter as many independent outcomes as pick dates; read the block interval, not the pick count."
+  - "Momentum is known to crash in sharp rebounds (2020 here); check the year table, not only the pooled edge."
+  - "SPEC.md sections 1 and 10 describe two horizons; a month result cannot reach a live table without a supervised amendment."
+status: queued
