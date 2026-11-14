@@ -2,9 +2,9 @@
 
 Edge is in points of hit rate over the market line, per pick date, `top` selection, as in `train_leaderboard.md`. The 95% interval and P(edge <= 0) come from a stationary bootstrap over dates (block length chosen per series), so serial correlation is respected. SPA is Hansen's test that NO strategy beats the market line across all trials of that horizon and side (small p = something real survives snooping). StepM names the strategies individually superior at the 10% level. MCS is the set statistically indistinguishable from the best at 10%. Dates with no pick count as edge 0 in the joint tests.
 
-## day/bearish  (100 experiments, block 1)
+## day/bearish  (107 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, composite-v1-day-bearish-day, composite-v1-day-bearish-not-day, composite-v2-day-bearish-boost-w0p5-day, composite-v2-day-bearish-g2-cut0p6-day, composite-v2-day-bearish-g2-cut0p8-day, composite-v2-day-bearish-vote-k2-day, composite-v2-day-bearish-vote-k3-day, composite-v2-day-bearish-vote-k4-day, composite-v2-day-bearish-vote-k5-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-d01c-fallback-day, e2a-day, e2a-f11-fallback-day, e3a-a02-high-ivol-day, e3b-a02-low-ivol-day, exit-t04-fixed-day, f02-volume-signed-reversal-day, f03-conditional-reversal-day, f06-trend-acceleration-day, f07-high-push-fade-day, f10-vol-ratio-reversal-day, f11-range-top-fade-day, f11-w06-day, f11-w08-day, f11-w12-day, f11-w15-day, f13-accel-range-top-day, f14-trend-switched-fade-day, f19-body-volatility-fade-day, g-e2a-g1-day, g-e2a-g1-not-day, g-e2a-g10-day, g-e2a-g10-not-day, g-e2a-g3-day, g-e2a-g4-day, g-e2a-g4-not-day, g-e2a-g5-not-day, g-e2a-g6-not-day, g-e2a-g8-day, h02-idiosyncratic-volatility-day, q06r-wide-bar-wick-day, q07-trend-residual-day, t01-sma-crossover-day, t05c-upcross-fade-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day, exit-e2a-fixed-day, exit-e2a-time-day, exit-e2a-trail-day, exit-t04-time-day, exit-t04-trail-day, g-e2a-g2-day, g-e2a-g2-not-day, t04-connors-rsi2-day. MCS size: 5 of 100. exit-e2a-fixed-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-time-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-trail-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-time-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-trail-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. g-e2a-g2-day repeats composite-v1-day-bearish-day exactly (same picks every date), so the joint tests ran on one copy. g-e2a-g2-not-day repeats composite-v1-day-bearish-not-day exactly (same picks every date), so the joint tests ran on one copy. t04-connors-rsi2-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: a02-extreme-day-reversal-day, a09-gap-fade-day, composite-v1-day-bearish-day, composite-v1-day-bearish-not-day, composite-v2-day-bearish-boost-w0p5-day, composite-v2-day-bearish-g2-cut0p6-day, composite-v2-day-bearish-g2-cut0p8-day, composite-v2-day-bearish-vote-k2-day, composite-v2-day-bearish-vote-k3-day, composite-v2-day-bearish-vote-k4-day, composite-v2-day-bearish-vote-k5-day, consensus-db-v1-day, d01c-day, e1b-day, e2a-d01c-fallback-day, e2a-day, e2a-f11-fallback-day, e3a-a02-high-ivol-day, e3b-a02-low-ivol-day, f02-volume-signed-reversal-day, f03-conditional-reversal-day, f06-trend-acceleration-day, f07-high-push-fade-day, f10-vol-ratio-reversal-day, f11-range-top-fade-day, f11-w06-day, f11-w08-day, f11-w12-day, f11-w15-day, f13-accel-range-top-day, f14-trend-switched-fade-day, f19-body-volatility-fade-day, g-e2a-g1-day, g-e2a-g1-not-day, g-e2a-g10-day, g-e2a-g10-not-day, g-e2a-g3-day, g-e2a-g4-day, g-e2a-g4-not-day, g-e2a-g5-not-day, g-e2a-g6-not-day, g-e2a-g8-day, h02-idiosyncratic-volatility-day, q06r-wide-bar-wick-day, q07-trend-residual-day, r02-turtle-soup-day, t01-sma-crossover-day, t05c-upcross-fade-day, t06-bollinger-pctb-day, t13-williams-r-day, t15-adx-regime-day, exit-e2a-fixed-day, exit-e2a-time-day, exit-e2a-trail-day, g-e2a-g2-day, g-e2a-g2-not-day. MCS size: 5 of 107. exit-e2a-fixed-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-time-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-trail-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-time-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-trail-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. g-e2a-g2-day repeats composite-v1-day-bearish-day exactly (same picks every date), so the joint tests ran on one copy. g-e2a-g2-not-day repeats composite-v1-day-bearish-not-day exactly (same picks every date), so the joint tests ran on one copy. t04-connors-rsi2-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -58,6 +58,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | t06-bollinger-pctb-day | 1329 | 91% | +3.35 | +1.85 to +4.80 | 0.000 | 1 |
 | f02-volume-signed-reversal-day | 1467 | 100% | +3.26 | +2.15 to +4.33 | 0.000 | 1 |
 | a09-gap-fade-day | 1272 | 87% | +3.21 | +1.64 to +4.67 | 0.000 | 1 |
+| r02-turtle-soup-day | 1135 | 77% | +3.03 | +1.23 to +4.81 | 0.000 | 2 |
 | t13-williams-r-day | 1445 | 99% | +2.89 | +1.76 to +4.04 | 0.000 | 3 |
 | q06r-wide-bar-wick-day | 1465 | 100% | +2.79 | +1.69 to +3.89 | 0.000 | 1 |
 | t05c-upcross-fade-day | 1300 | 89% | +2.70 | +1.07 to +4.27 | 0.001 | 1 |
@@ -89,12 +90,15 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | t09-supertrend-day | 1426 | 97% | +0.32 | -0.80 to +1.46 | 0.292 | 2 |
 | f05-close-location-change-day | 1467 | 100% | +0.23 | -0.87 to +1.30 | 0.345 | 2 |
 | f01-body-share-day | 1467 | 100% | +0.17 | -0.96 to +1.22 | 0.400 | 1 |
+| r03-anti-day | 1076 | 73% | +0.16 | -1.64 to +1.93 | 0.453 | 2 |
 | q02-return-volume-corr-day | 1465 | 100% | +0.05 | -1.00 to +1.10 | 0.460 | 1 |
 | o02-oi-confirmed-day | 802 | 55% | +0.01 | -2.38 to +2.36 | 0.486 | 2 |
 | t05-macd-crossover-day | 1323 | 90% | -0.06 | -1.56 to +1.44 | 0.522 | 2 |
 | t11-inside-bar-day | 1377 | 94% | -0.08 | -1.28 to +1.21 | 0.559 | 2 |
+| r01-holy-grail-day | 1213 | 83% | -0.18 | -1.91 to +1.55 | 0.586 | 1 |
 | t10-nr4-narrow-range-day | 1405 | 96% | -0.23 | -1.48 to +1.08 | 0.639 | 2 |
 | t16-parabolic-sar-day | 1366 | 93% | -0.23 | -1.35 to +0.92 | 0.656 | 3 |
+| r04-eighty-twenty-day | 1185 | 81% | -0.29 | -2.02 to +1.37 | 0.651 | 1 |
 | t12-stochastic-day | 1279 | 87% | -0.31 | -1.83 to +1.27 | 0.644 | 2 |
 | o04a-no-volume-day | 1389 | 95% | -0.37 | -1.78 to +1.03 | 0.687 | 1 |
 | t25-heikin-ashi-day | 1284 | 88% | -0.44 | -1.90 to +1.14 | 0.699 | 1 |
@@ -102,16 +106,19 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | t10-nr7-narrow-range-day | 1346 | 92% | -0.55 | -1.83 to +0.81 | 0.785 | 2 |
 | o00-placebo-day | 1426 | 97% | -0.65 | -1.72 to +0.43 | 0.887 | 1 |
 | o04-order-block-composite-day | 1389 | 95% | -0.65 | -2.00 to +0.72 | 0.824 | 1 |
+| p01-five-ema-day | 1305 | 89% | -0.83 | -2.21 to +0.62 | 0.871 | 1 |
 | conf-min5-day | 336 | 23% | -0.93 | -4.93 to +3.07 | 0.655 | 2 |
+| p02-bollinger-1p5-day | 1054 | 72% | -1.06 | -3.03 to +0.89 | 0.865 | 1 |
 | c01-day-of-week-day | 1380 | 94% | -1.15 | -2.22 to -0.17 | 0.986 | 3 |
 | t14-cci-day | 1322 | 90% | -1.29 | -2.67 to +0.17 | 0.956 | 2 |
 | t24-pivot-points-day | 1466 | 100% | -1.47 | -2.59 to -0.42 | 0.997 | 2 |
 | q01-price-volume-corr-day | 1453 | 99% | -1.51 | -2.65 to -0.26 | 0.993 | 2 |
+| r02b-turtle-soup-plus-one-day | 601 | 41% | -2.23 | -5.50 to +1.20 | 0.899 | 2 |
 | d01-oi-buildup-day | 1467 | 100% | -2.48 | -3.54 to -1.44 | 1.000 | 1 |
 
-## day/bullish  (99 experiments, block 1)
+## day/bullish  (106 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: composite-v1-day-bullish-day, composite-v1-day-bullish-not-day, composite-v2-day-bullish-boost-w0p5-day, composite-v2-day-bullish-g9-near0p8-day, composite-v2-day-bullish-vote-k2-day, composite-v2-day-bullish-vote-k3-day, composite-v2-day-bullish-vote-k4-day, consensus-dbu-v1-day, d01c-day, exit-t04-fixed-day, f14-trend-switched-fade-day, g-t04-g3-day, g-t04-g4-day, g-t04-g6-not-day, g-t04-g7-day, g-t04-g8-not-day, g-t04-g9-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-q06-fallback-day, t10-nr7-narrow-range-day, exit-t04-time-day, exit-t04-trail-day, t04-connors-rsi2-day. MCS size: 34 of 99. exit-e2a-fixed-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-time-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-trail-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-time-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-trail-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. t04-connors-rsi2-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: composite-v1-day-bullish-day, composite-v1-day-bullish-not-day, composite-v2-day-bullish-boost-w0p5-day, composite-v2-day-bullish-g9-near0p8-day, composite-v2-day-bullish-vote-k2-day, composite-v2-day-bullish-vote-k3-day, composite-v2-day-bullish-vote-k4-day, consensus-dbu-v1-day, d01c-day, exit-t04-fixed-day, f14-trend-switched-fade-day, g-t04-g3-day, g-t04-g4-day, g-t04-g6-not-day, g-t04-g7-day, g-t04-g8-not-day, g-t04-g9-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-q06-fallback-day, t10-nr7-narrow-range-day, exit-t04-time-day, exit-t04-trail-day, t04-connors-rsi2-day. MCS size: 34 of 106. exit-e2a-fixed-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-time-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-trail-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-time-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-trail-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. t04-connors-rsi2-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -171,6 +178,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | f04-open-volume-corr-day | 1467 | 100% | +0.63 | -0.37 to +1.66 | 0.124 | 1 |
 | f07-high-push-fade-day | 1451 | 99% | +0.61 | -0.54 to +1.76 | 0.144 | 1 |
 | e1a-day | 217 | 15% | +0.59 | -5.41 to +6.28 | 0.426 | 1 |
+| r02-turtle-soup-day | 905 | 62% | +0.59 | -1.74 to +2.86 | 0.310 | 1 |
 | f02-volume-signed-reversal-day | 1467 | 100% | +0.46 | -0.56 to +1.55 | 0.201 | 1 |
 | o04b-no-d01-day | 1419 | 97% | +0.23 | -0.98 to +1.47 | 0.345 | 1 |
 | f13-accel-range-top-day | 1462 | 100% | +0.16 | -0.92 to +1.31 | 0.383 | 1 |
@@ -181,14 +189,17 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | o03-trend-confirmed-day | 1368 | 93% | -0.36 | -1.51 to +0.88 | 0.725 | 3 |
 | t11-inside-bar-day | 1380 | 94% | -0.37 | -1.81 to +0.99 | 0.709 | 3 |
 | f19-body-volatility-fade-day | 1467 | 100% | -0.43 | -1.50 to +0.70 | 0.770 | 1 |
+| r03-anti-day | 1114 | 76% | -0.44 | -2.21 to +1.39 | 0.683 | 2 |
 | o01-retest-day | 1419 | 97% | -0.47 | -1.67 to +0.71 | 0.797 | 1 |
 | f06-trend-acceleration-day | 1465 | 100% | -0.50 | -1.60 to +0.64 | 0.827 | 1 |
 | q03-up-day-balance-day | 1465 | 100% | -0.52 | -1.64 to +0.64 | 0.815 | 1 |
 | t15-adx-regime-day | 1418 | 97% | -0.64 | -1.77 to +0.46 | 0.874 | 4 |
 | f05-close-location-change-day | 1467 | 100% | -0.66 | -1.73 to +0.40 | 0.885 | 1 |
 | f03-conditional-reversal-day | 1467 | 100% | -0.77 | -1.89 to +0.31 | 0.910 | 1 |
+| r01-holy-grail-day | 1187 | 81% | -0.80 | -2.59 to +1.02 | 0.804 | 2 |
 | e1b-day | 1055 | 72% | -0.91 | -3.01 to +1.13 | 0.794 | 2 |
 | o00-placebo-day | 1424 | 97% | -0.95 | -2.05 to +0.14 | 0.957 | 1 |
+| r04-eighty-twenty-day | 1177 | 80% | -0.96 | -2.65 to +0.81 | 0.851 | 1 |
 | q02-return-volume-corr-day | 1465 | 100% | -0.97 | -2.03 to +0.09 | 0.965 | 1 |
 | o04a-no-volume-day | 1419 | 97% | -1.08 | -2.28 to +0.12 | 0.958 | 2 |
 | a02-extreme-day-reversal-day | 1067 | 73% | -1.10 | -2.97 to +0.87 | 0.862 | 2 |
@@ -203,9 +214,12 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | exit-e2a-time-day | 808 | 55% | -1.58 | -4.00 to +0.87 | 0.899 | 1 |
 | exit-e2a-trail-day | 808 | 55% | -1.58 | -4.00 to +0.87 | 0.899 | 1 |
 | t16-parabolic-sar-day | 1366 | 93% | -1.88 | -3.02 to -0.71 | 1.000 | 1 |
+| p02-bollinger-1p5-day | 830 | 57% | -2.32 | -4.57 to -0.02 | 0.975 | 1 |
 | f17-close-location-recency-day | 1467 | 100% | -2.39 | -3.45 to -1.27 | 1.000 | 2 |
 | t14-cci-day | 1274 | 87% | -2.44 | -4.10 to -0.78 | 0.998 | 1 |
+| r02b-turtle-soup-plus-one-day | 420 | 29% | -2.46 | -6.17 to +1.36 | 0.893 | 1 |
 | t09-supertrend-day | 1426 | 97% | -2.51 | -3.62 to -1.39 | 1.000 | 1 |
+| p01-five-ema-day | 1290 | 88% | -2.52 | -4.03 to -1.01 | 1.000 | 2 |
 | f01-body-share-day | 1466 | 100% | -2.70 | -3.84 to -1.63 | 1.000 | 1 |
 | t05-macd-crossover-day | 1300 | 89% | -2.86 | -4.47 to -1.25 | 1.000 | 1 |
 | t20-volume-breakout-day | 1252 | 85% | -3.75 | -5.61 to -1.99 | 1.000 | 1 |
