@@ -39,6 +39,11 @@ weekly date is authorised as usual, then any pick date whose window is not
 complete or ends after the split's end date is dropped before the strategy
 runs, so neither the pick log nor the scores see an outcome from the next
 split. Day and week runs take exactly the code path they took before.
+
+An optional `exit:` block (owner-approved additive change, 14 Nov 2026; `engine.exits`) asks for exit-plan
+payoff scoring on top of the usual results. It is validated here (`engine.exits.parse_exit_plan`), copied
+into the manifest, and accepted on `split: train` only: any other split with an `exit:` block is refused.
+The replay itself is unchanged. An experiment without `exit:` takes exactly the path it took before.
 """
 
 from __future__ import annotations
@@ -51,6 +56,7 @@ from pathlib import Path
 import pandas as pd
 
 from engine.champion_report import REQUIRED_COLUMNS, maybe_write_champion_report
+from engine.exits import parse_exit_plan
 from engine.experiment_report import LEADERBOARD, TRIALS_LEDGER, Context, answer_validation, record_trials, score_done, write_leaderboard
 from engine.holdout_report import LEDGER_PATH as HOLDOUT_LEDGER, maybe_log_holdout_query
 from engine.replay import SplitViolation, hash_picks, load_splits, run_dates
@@ -172,6 +178,23 @@ def main() -> None:
     validation = []
     for exp_path, exp in experiments:
         exp_id = exp.setdefault("id", exp_path.stem)
+        exit_plan = None
+        if "exit" in exp:
+            reason = None
+            if exp.get("split") != "train":
+                reason = "an exit: block is train-only observation; not accepted on any other split"
+            else:
+                try:
+                    exit_plan = parse_exit_plan(exp["exit"])
+                except ValueError as e:
+                    reason = f"invalid exit: block: {e}"
+            if reason:
+                out_dir = done_dir / exp_id
+                out_dir.mkdir(parents=True, exist_ok=True)
+                (out_dir / "refused.json").write_text(json.dumps({"id": exp_id, "reason": reason}, indent=2) + "\n")
+                exp_path.unlink()
+                print(f"{exp_id}: refused - {reason}")
+                continue
         if exp.get("split") == "validation":
             validation.append((exp_path, exp))
             continue
@@ -208,6 +231,8 @@ def main() -> None:
             manifest["outcome_window"] = (f"pick date's open to the close of the last trading date of ISO week "
                                           f"{MONTH_WEEKS} (pick week = 1); overlapping; picks whose window ends "
                                           f"after the split end ({splits[exp['split']].get('end')}) dropped")
+        if exit_plan is not None:
+            manifest["exit"] = exit_plan
         (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
         exp_path.unlink()
         print(f"{exp_id}: {manifest['n_picks']} picks over {manifest['n_dates']} dates -> {out_dir}")
