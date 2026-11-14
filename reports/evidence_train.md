@@ -197,6 +197,29 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | o02-oi-confirmed-day | 895 | 61% | -5.15 | -7.30 to -2.83 | 1.000 | 1 |
 | a10-gap-and-go-day | 558 | 38% | -5.41 | -8.80 to -1.99 | 1.000 | 1 |
 
+## month/bearish  (4 experiments, block 4)
+
+SPA p-value (consistent): **0.018**  (lower 0.018, upper 0.018). StepM superior: a01-weekly-reversal-month. MCS size: 4 of 4.
+
+| Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
+|---|---|---|---|---|---|---|
+| a01-weekly-reversal-month | 305 | 99% | +3.79 | +1.37 to +6.11 | 0.001 | 2 |
+| a05b-max-effect-ranked-month | 291 | 94% | +2.53 | -0.36 to +5.33 | 0.038 | 3 |
+| m01-momentum-12-1-month | 251 | 81% | +2.42 | -1.31 to +6.22 | 0.093 | 6 |
+| a04-52-week-high-month | 256 | 83% | +0.32 | -3.00 to +3.78 | 0.424 | 5 |
+
+## month/bullish  (5 experiments, block 5)
+
+SPA p-value (consistent): **0.315**  (lower 0.315, upper 0.345). StepM superior: none. MCS size: 4 of 5.
+
+| Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
+|---|---|---|---|---|---|---|
+| m01-momentum-12-1-month | 251 | 81% | +2.46 | -1.62 to +6.36 | 0.117 | 5 |
+| m02-leader-pullback-month | 255 | 83% | +2.19 | -0.91 to +5.19 | 0.086 | 2 |
+| a04-52-week-high-month | 256 | 83% | +1.71 | -1.84 to +5.42 | 0.185 | 5 |
+| a05b-max-effect-ranked-month | 291 | 94% | +0.85 | -2.17 to +3.94 | 0.294 | 5 |
+| a01-weekly-reversal-month | 305 | 99% | -3.57 | -6.00 to -1.24 | 1.000 | 1 |
+
 ## week/bearish  (99 experiments, block 1)
 
 SPA p-value (consistent): **0.113**  (lower 0.082, upper 0.113). StepM superior: none. MCS size: 99 of 99. a05b-max-effect-ranked-week repeats a05-max-effect-week exactly (same picks every date), so the joint tests ran on one copy. composite-v2-week-bearish-vote-k1-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. g-a01-g3-week repeats a01-weekly-reversal-week exactly (same picks every date), so the joint tests ran on one copy. g-a01-g8-not-week repeats composite-v1-week-bearish-not-week exactly (same picks every date), so the joint tests ran on one copy. g-a01-g8-week repeats composite-v1-week-bearish-week exactly (same picks every date), so the joint tests ran on one copy.

@@ -1,0 +1,10 @@
+{
+  "id": "a05b-max-effect-ranked-month",
+  "strategy": "strategies.a05b_max_effect_ranked",
+  "split": "train",
+  "horizon": "month",
+  "n_picks": 60164,
+  "n_dates": 291,
+  "pick_log_sha256": "b196b769cc2b8cbbd7dc55b97e1a54fdb72b88170e8d25039e96a76d1c526028",
+  "outcome_window": "pick date's open to the close of the last trading date of ISO week 4 (pick week = 1); overlapping; picks whose window ends after the split end (2020-12-31) dropped"
+}

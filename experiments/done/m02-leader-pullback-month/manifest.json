@@ -1,0 +1,10 @@
+{
+  "id": "m02-leader-pullback-month",
+  "strategy": "strategies.m02_leader_pullback",
+  "split": "train",
+  "horizon": "month",
+  "n_picks": 4123,
+  "n_dates": 255,
+  "pick_log_sha256": "2938365255bc8d7b159e709de377eabbb5f2b1efc20ec20d39f55bbcfa96b067",
+  "outcome_window": "pick date's open to the close of the last trading date of ISO week 4 (pick week = 1); overlapping; picks whose window ends after the split end (2020-12-31) dropped"
+}
