@@ -15,6 +15,7 @@ import pandas as pd
 
 from engine.replay import truncate
 from picks.chart import chart_for
+from picks.checks import checks_for
 from picks.tech import tech_for
 from engine.scoring import load_universe_config, universe_membership
 
@@ -63,7 +64,7 @@ def pick_table(
     n: int | None = None,
     exclude: frozenset[str] = frozenset(),
 ) -> list[dict]:
-    """One table's picks for `session`: `[{"symbol", "strategy", "reasoning", "chart"?, "tech"?}, ...]`.
+    """One table's picks for `session`: `[{"symbol", "strategy", "reasoning", "chart"?, "tech"?, "checks"?, ...}, ...]`.
 
     `strategy` must expose `score(history) -> pd.Series` and
     `rules_fired(history, symbol) -> str` (SPEC.md section 5). Both are
@@ -79,10 +80,11 @@ def pick_table(
     history = truncate(dataset, session)
     eligible = eligible_symbols(dataset, asof)
     scores = strategy.score(history)
-    return _picks(history, strategy, strategy_id, select_side(scores, side, eligible, n, exclude))
+    return _picks(history, strategy, strategy_id, select_side(scores, side, eligible, n, exclude), side)
 
 
-def _picks(history: pd.DataFrame, strategy, strategy_id: str, chosen: pd.Series) -> list[dict]:
+def _picks(history: pd.DataFrame, strategy, strategy_id: str, chosen: pd.Series, side: int) -> list[dict]:
+    checks = checks_for(history, strategy, side, chosen.index)
     picks = []
     for symbol in chosen.index:
         pick = {"symbol": symbol, "strategy": strategy_id, "reasoning": strategy.rules_fired(history, symbol)}
@@ -92,6 +94,8 @@ def _picks(history: pd.DataFrame, strategy, strategy_id: str, chosen: pd.Series)
         tech = tech_for(history, symbol)
         if tech:
             pick["tech"] = tech
+        if symbol in checks:
+            pick.update(checks[symbol])
         picks.append(pick)
     return picks
 
@@ -130,7 +134,7 @@ def pick_both_sides(
             break
         dropped |= shared
     return (
-        _picks(history, bull_strategy, bull_id, bull),
-        _picks(history, bear_strategy, bear_id, bear),
+        _picks(history, bull_strategy, bull_id, bull, 1),
+        _picks(history, bear_strategy, bear_id, bear, -1),
         sorted(dropped),
     )
