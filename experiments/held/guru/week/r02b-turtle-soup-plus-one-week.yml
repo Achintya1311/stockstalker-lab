@@ -1,0 +1,5 @@
+id: r02b-turtle-soup-plus-one-week
+strategy: strategies.r02b_turtle_soup_plus_one
+split: train
+horizon: week
+dates: {start: '2015-01-01', end: '2020-12-31'}

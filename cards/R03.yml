@@ -1,0 +1,53 @@
+# R03: Anti (3-10 oscillator pullback). Strategy module strategies/r03_anti.py (rules in strategies/guru_core.py).
+source_url: ""
+author: "Linda Bradford Raschke"
+license: "published book / talk; rules restated in the lab's own words, nothing copied (SPEC.md section 5)"
+published_on: "1995"
+horizon: both
+claim_as_stated: >
+  When the slow line of the 3-10 oscillator trends and the fast line makes a short counter-move and hooks back,
+  the move resumes in the slow line's direction. No audited hit rate on NSE stocks.
+rules_plain: |
+  Bullish (bearish is the mirror: slow line falling, fast line rising then turning down).
+  - fast = SMA(3) - SMA(10) of close; slow = SMA(16) of fast.
+  - slow rose on each of the last 3 sessions (slow at S above S-1 above S-2 above S-3).
+  - fast fell on the 2 sessions before S (S-3 above S-2 above S-1) and rose at S.
+  - Score = (slow at S - slow at S-3) / 3 / ATR(14) at S, the slow line's slope in ATR units.
+  Both sides, one module; a symbol whose two sides fire at once abstains. Daily bars only, split / bonus adjusted, last 250 market dates; the signal session is the last visible session (no lookahead). Judged: symbols with a futures contract on the last visible date and at least 60 rows.
+params:
+  fast_sma: 3
+  slow_sma: 10
+  signal_sma: 16
+  slow_rising_sessions: 3
+  fast_pullback_sessions: 2
+  atr_period: 14
+  min_rows: 60
+  tail_dates: 250
+default_params:
+  fast_sma: 3
+  slow_sma: 10
+  signal_sma: 16
+  slow_rising_sessions: 3
+  fast_pullback_sessions: 2
+  atr_period: 14
+  min_rows: 60
+  tail_dates: 250
+assumptions:
+  - "The oscillator uses simple averages of close (the classic 3-10 definition), not exponential ones."
+  - "'Rising for at least 3 sessions' = three consecutive increases ending on the signal session; 'pulled back for 2+ sessions' = exactly the two sessions before the turn must be declines (longer pullbacks qualify since only those two are checked)."
+  - "The original is read visually (the fast line hooks back toward the slow line); no requirement on where the fast line sits relative to the slow line is added."
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Linda Bradford Raschke's 'Anti' setup on the 3-10 oscillator (also discussed in Street Smarts, 1995)"
+link: ""
+prior_claim: "Practitioner setup; no audited record"
+replays:
+  - experiments/held/guru/day/r03-anti-day.yml
+  - experiments/held/guru/week/r03-anti-week.yml
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): the card moves to confirmed or refuted only on real replay numbers, train first."
+  - "Literal coding with one fixed parameter set; nothing tuned (owner's instruction, 14 Nov 2026). A poor result says the literal daily rule does not work here, not that no variant could."
+  - "Scored on the lab's tables (day: open to close of the next session; week: Monday open to Friday close), not on the author's own exit and payoff rules; exit and payoff scoring is being added to engine/ separately."
+  - "Selective: abstains on most symbol-dates, so picks per date and coverage must be read next to any hit rate (scripts/guru_report.py prints both)."
+  - "Idea vintage (SPEC.md section 5): the train split overlaps the years after publication only partly; any post-publication record is reported separately once numbers exist."
+status: "held; 2 train replays (day, week) in experiments/held/guru/, none pending; results via python3 -m scripts.guru_report"

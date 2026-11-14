@@ -1,0 +1,54 @@
+# R01: Holy Grail (ADX trend pullback to the 20 EMA). Strategy module strategies/r01_holy_grail.py (rules in strategies/guru_core.py).
+source_url: ""
+author: "Linda Bradford Raschke and Laurence A. Connors"
+license: "published book / talk; rules restated in the lab's own words, nothing copied (SPEC.md section 5)"
+published_on: "1995"
+horizon: both
+claim_as_stated: >
+  In a strong trend (ADX(14) above 30 and rising), the first pullback to the 20-period EMA tends to be followed
+  by a resumption of the trend; the book presents it as a high-probability pattern. No audited hit rate on NSE
+  stocks.
+rules_plain: |
+  Bullish (bearish is the mirror: -DI above +DI, high at or above the EMA, a break of the prior session's low).
+  - A touch session has its low at or below its EMA(20).
+  - T = the most recent touch among the 3 sessions before the signal session S; no session after T and before S traded above its prior session's high, so S is the first break since the touch; S's high is above the prior session's high.
+  - The trend qualifies on Q, the session just before the first touch of the run of consecutive touch sessions ending at T: ADX(14) at Q above 30, ADX at Q above ADX 3 sessions before Q, and +DI above -DI at Q.
+  - Score = ADX(14) at S (bullish positive, bearish negative); ranked by ADX.
+  Both sides, one module; a symbol whose two sides fire at once abstains. Daily bars only, split / bonus adjusted, last 250 market dates; the signal session is the last visible session (no lookahead). Judged: symbols with a futures contract on the last visible date and at least 60 rows.
+params:
+  adx_period: 14
+  adx_min: 30
+  adx_rising_vs_sessions_ago: 3
+  ema: 20
+  touch_window_sessions: 3
+  min_rows: 60
+  tail_dates: 250
+default_params:
+  adx_period: 14
+  adx_min: 30
+  adx_rising_vs_sessions_ago: 3
+  ema: 20
+  touch_window_sessions: 3
+  min_rows: 60
+  tail_dates: 250
+assumptions:
+  - "'ADX above 30 and rising' is checked on the session before the pullback first reaches the EMA (the book describes ADX establishing the trend first, then often turning down during the pullback); 'rising' = higher than 3 sessions earlier."
+  - "Trend direction is +DI versus -DI on that same session (the book reads direction from the chart; the owner specified +DI / -DI)."
+  - "The touch must be within the last 3 sessions before the break and the break must be the first since the touch; the book trails the trigger to each new bar's high without a stated expiry."
+  - "The signal is the daily bar whose high exceeds the prior bar's high (the book's intraday trigger above that high); scored from the next session's open, not from the trigger level."
+  - "Ranked by ADX on the signal session (owner's instruction); the book gives no ranking across stocks."
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Raschke and Connors, Street Smarts: High Probability Short-Term Trading Strategies (M. Gordon Publishing, 1995), Holy Grail chapter"
+link: ""
+prior_claim: "Book claims a high-probability trend-continuation pattern; no audited record"
+replays:
+  - experiments/held/guru/day/r01-holy-grail-day.yml
+  - experiments/held/guru/week/r01-holy-grail-week.yml
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): the card moves to confirmed or refuted only on real replay numbers, train first."
+  - "Literal coding with one fixed parameter set; nothing tuned (owner's instruction, 14 Nov 2026). A poor result says the literal daily rule does not work here, not that no variant could."
+  - "Scored on the lab's tables (day: open to close of the next session; week: Monday open to Friday close), not on the author's own exit and payoff rules; exit and payoff scoring is being added to engine/ separately."
+  - "Selective: abstains on most symbol-dates, so picks per date and coverage must be read next to any hit rate (scripts/guru_report.py prints both)."
+  - "Idea vintage (SPEC.md section 5): the train split overlaps the years after publication only partly; any post-publication record is reported separately once numbers exist."
+status: "held; 2 train replays (day, week) in experiments/held/guru/, none pending; results via python3 -m scripts.guru_report"

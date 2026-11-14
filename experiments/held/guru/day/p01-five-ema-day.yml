@@ -1,0 +1,5 @@
+id: p01-five-ema-day
+strategy: strategies.p01_five_ema
+split: train
+horizon: day
+dates: {start: '2015-01-01', end: '2020-12-31'}

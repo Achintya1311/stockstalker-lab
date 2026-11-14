@@ -1,0 +1,46 @@
+# R02B: Turtle Soup Plus One. Strategy module strategies/r02b_turtle_soup_plus_one.py (rules in strategies/guru_core.py).
+source_url: ""
+author: "Linda Bradford Raschke and Laurence A. Connors"
+license: "published book / talk; rules restated in the lab's own words, nothing copied (SPEC.md section 5)"
+published_on: "1995"
+horizon: both
+claim_as_stated: >
+  As Turtle Soup, but the failure is confirmed one session later: the new extreme closes beyond the earlier
+  extreme and the next session reverses back inside. No audited hit rate on NSE stocks.
+rules_plain: |
+  Bullish (bearish is the mirror at 20-session highs).
+  - On session S-1: a new 20-session low (its low below the lowest low of the 20 sessions before S-1), that earlier low made at least 4 sessions before S-1, and S-1 closes at or below that earlier low.
+  - On the signal session S: the close is back above that earlier low.
+  - Score = (earlier low - the lower of the lows of S-1 and S) / ATR(14) at S.
+  Both sides, one module; a symbol whose two sides fire at once abstains. Daily bars only, split / bonus adjusted, last 250 market dates; the signal session is the last visible session (no lookahead). Judged: symbols with a futures contract on the last visible date and at least 60 rows.
+params:
+  channel_sessions: 20
+  min_sessions_since_prior_extreme: 4
+  atr_period: 14
+  min_rows: 60
+  tail_dates: 250
+default_params:
+  channel_sessions: 20
+  min_sessions_since_prior_extreme: 4
+  atr_period: 14
+  min_rows: 60
+  tail_dates: 250
+assumptions:
+  - "S-1 must close at or below the earlier low (the book's day-one condition), so R02 and R02B never fire on the same session for the same symbol."
+  - "The book's next-day trigger is intraday at the earlier low; here S must close above it."
+  - "Depth uses the lower of the two sessions' lows, since S may undercut S-1 before reclaiming."
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Raschke and Connors, Street Smarts (1995), Turtle Soup Plus One chapter"
+link: ""
+prior_claim: "Book claims a confirmed failed breakout reverses; no audited record"
+replays:
+  - experiments/held/guru/day/r02b-turtle-soup-plus-one-day.yml
+  - experiments/held/guru/week/r02b-turtle-soup-plus-one-week.yml
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): the card moves to confirmed or refuted only on real replay numbers, train first."
+  - "Literal coding with one fixed parameter set; nothing tuned (owner's instruction, 14 Nov 2026). A poor result says the literal daily rule does not work here, not that no variant could."
+  - "Scored on the lab's tables (day: open to close of the next session; week: Monday open to Friday close), not on the author's own exit and payoff rules; exit and payoff scoring is being added to engine/ separately."
+  - "Selective: abstains on most symbol-dates, so picks per date and coverage must be read next to any hit rate (scripts/guru_report.py prints both)."
+  - "Idea vintage (SPEC.md section 5): the train split overlaps the years after publication only partly; any post-publication record is reported separately once numbers exist."
+status: "held; 2 train replays (day, week) in experiments/held/guru/, none pending; results via python3 -m scripts.guru_report"

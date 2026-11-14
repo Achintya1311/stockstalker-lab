@@ -1,0 +1,5 @@
+id: p02-bollinger-1p5-week
+strategy: strategies.p02_bollinger_1p5
+split: train
+horizon: week
+dates: {start: '2015-01-01', end: '2020-12-31'}

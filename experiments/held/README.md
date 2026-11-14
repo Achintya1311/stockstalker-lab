@@ -7,3 +7,6 @@ previous Replay run has committed its results. Nothing reads this folder.
 
 `c5/`: month-horizon train replays (A04, A05B, A01, M01, M02; AB approved the month horizon 14 Nov 2026). They
 need the month engine change on main first; see `state/engine-issues.md`.
+
+`guru/`: GURU_V1 train replays of the published setups (R01-R04, R02B, P01, P02; cards in `cards/`), day tables in
+`guru/day/`, week tables in `guru/week/`; 14 files, train split only. Results table: `python3 -m scripts.guru_report`.

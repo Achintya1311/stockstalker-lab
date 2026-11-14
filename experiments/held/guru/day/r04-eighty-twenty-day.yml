@@ -1,0 +1,5 @@
+id: r04-eighty-twenty-day
+strategy: strategies.r04_eighty_twenty
+split: train
+horizon: day
+dates: {start: '2015-01-01', end: '2020-12-31'}
