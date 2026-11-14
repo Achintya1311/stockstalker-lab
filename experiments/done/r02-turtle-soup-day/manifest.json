@@ -1,0 +1,9 @@
+{
+  "id": "r02-turtle-soup-day",
+  "strategy": "strategies.r02_turtle_soup",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 8489,
+  "n_dates": 1396,
+  "pick_log_sha256": "2ec89ef8c254097baac680d89e0cd8336617f215ac038ca1a36ee3019959d2d3"
+}

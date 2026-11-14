@@ -1,0 +1,9 @@
+{
+  "id": "r03-anti-day",
+  "strategy": "strategies.r03_anti",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 13967,
+  "n_dates": 1407,
+  "pick_log_sha256": "734696d5b04e5b9e3bef2e5785b7be302f0ca8ac8507b3a4e6e18a7e66486096"
+}
