@@ -1,0 +1,9 @@
+{
+  "id": "b4-put-writing-day",
+  "strategy": "strategies.b4_put_writing",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 50987,
+  "n_dates": 1403,
+  "pick_log_sha256": "9ee5e8a88819fc4e94bc9289dcdd085106b0b12ba030a44b61f0af03555de76e"
+}

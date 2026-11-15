@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 458. Gate 2's bar at that count: t >= 4.53.
+Trials recorded: 461. Gate 2's bar at that count: t >= 4.53.
 
 Month rows: four-week holds that overlap week to week; their t is a block t over 8 consecutive pick dates (see each results.md).
 
@@ -237,6 +237,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | composite-v2-week-bullish-g8-x1p25-week | week | bullish | 1443 | 50.38% | 49.15% | 1.24 | 0.95 |  | -0.58 | 83.33% |  |
 | o01-retest-day | day | bearish | 5641 | 54.85% | 54.31% | 0.66 | 0.95 |  | -0.12 | 50.00% |  |
 | composite-v2-week-bullish-g2-cut0p8-week | week | bullish | 1475 | 50.31% | 49.16% | 1.14 | 0.92 |  | -0.53 | 66.67% |  |
+| b5-failed-bearish-day | day | bullish | 1633 | 44.03% | 43.63% | 1.30 | 0.91 |  | -0.54 | 83.33% |  |
 | t07-bollinger-squeeze-breakout-week | week | bearish | 10 | 60.00% | 48.72% | 11.28 | 0.91 |  | -0.52 | 83.33% | too few picks |
 | g-a05b-g1-not-week | week | bullish | 1339 | 49.89% | 48.87% | 1.09 | 0.91 |  | -0.45 | 50.00% |  |
 | g-a05b-g2-week | week | bullish | 1475 | 50.31% | 49.16% | 1.14 | 0.90 |  | -0.57 | 66.67% |  |
@@ -409,6 +410,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | q01-price-volume-corr-day | day | bullish | 7214 | 43.73% | 44.99% | -1.13 | -2.02 |  | -0.61 | 16.67% |  |
 | champion-v1-week | week | bullish | 1508 | 45.95% | 48.93% | -2.82 | -2.06 |  | -0.78 | 16.67% |  |
 | c01-day-of-week-day | day | bearish | 6900 | 53.25% | 54.39% | -1.15 | -2.07 |  | -0.18 | 33.33% |  |
+| b4-put-writing-day | day | bullish | 6820 | 43.83% | 44.86% | -1.27 | -2.12 |  | -0.55 | 33.33% |  |
 | p01-five-ema-week | week | bullish | 1066 | 45.22% | 48.80% | -3.69 | -2.35 |  | -0.74 | 0.00% |  |
 | o04a-no-volume-week | week | bullish | 1418 | 46.69% | 49.11% | -2.88 | -2.38 |  | -0.73 | 16.67% |  |
 | t05-macd-crossover-week | week | bullish | 1028 | 46.60% | 49.08% | -3.90 | -2.39 |  | -0.90 | 16.67% |  |

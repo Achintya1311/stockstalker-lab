@@ -1,0 +1,17 @@
+{
+  "id": "b1-trend-cross-trail-day",
+  "strategy": "strategies.b1_trend_cross",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 1151,
+  "n_dates": 628,
+  "pick_log_sha256": "076b26ef14909869c2a09f60532c0234e62df70a3211c2c4dc32122f937f86dd",
+  "exit": {
+    "kind": "trail",
+    "stop_atr": 3.0,
+    "max_sessions": 20,
+    "sides": [
+      "bullish"
+    ]
+  }
+}

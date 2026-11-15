@@ -1,0 +1,9 @@
+{
+  "id": "b5-failed-bearish-day",
+  "strategy": "strategies.b5_failed_bearish",
+  "split": "train",
+  "horizon": "day",
+  "n_picks": 2324,
+  "n_dates": 763,
+  "pick_log_sha256": "7c1932539627d63c7276addaf803d4867364d29bf41a1a35e64d46cdc82969fc"
+}
