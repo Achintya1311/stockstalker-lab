@@ -2603,6 +2603,33 @@
     "n": 558,
     "coverage": 0.3803680981595092
    },
+   "b1-trend-cross-trail-day": {
+    "mean": -0.00566711687231549,
+    "lo": -0.039002051998504976,
+    "hi": 0.02736038527051497,
+    "p_le0": 0.631,
+    "block": 1,
+    "n": 550,
+    "coverage": 0.37491479209270623
+   },
+   "b4-put-writing-day": {
+    "mean": -0.012685836170463762,
+    "lo": -0.024179585703381225,
+    "hi": -0.0002713498620818249,
+    "p_le0": 0.9765,
+    "block": 2,
+    "n": 1386,
+    "coverage": 0.9447852760736196
+   },
+   "b5-failed-bearish-day": {
+    "mean": 0.012983049172607277,
+    "lo": -0.015029308150235824,
+    "hi": 0.04141799228347276,
+    "p_le0": 0.171,
+    "block": 1,
+    "n": 692,
+    "coverage": 0.47171097477845947
+   },
    "champion-v1-day": {
     "mean": -0.015478078034135766,
     "lo": -0.027275830157714433,
@@ -3523,7 +3550,7 @@
    }
   },
   "joint": {
-   "n_models": 106,
+   "n_models": 109,
    "block": 1,
    "twins": {
     "exit-e2a-fixed-day": "e2a-day",
@@ -3566,6 +3593,7 @@
    ],
    "mcs": [
     "a09-gap-fade-day",
+    "b5-failed-bearish-day",
     "composite-v1-day-bullish-day",
     "composite-v2-day-bullish-boost-w0p5-day",
     "composite-v2-day-bullish-g9-near0p8-day",

@@ -116,9 +116,9 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | r02b-turtle-soup-plus-one-day | 601 | 41% | -2.23 | -5.50 to +1.20 | 0.899 | 2 |
 | d01-oi-buildup-day | 1467 | 100% | -2.48 | -3.54 to -1.44 | 1.000 | 1 |
 
-## day/bullish  (106 experiments, block 1)
+## day/bullish  (109 experiments, block 1)
 
-SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: composite-v1-day-bullish-day, composite-v1-day-bullish-not-day, composite-v2-day-bullish-boost-w0p5-day, composite-v2-day-bullish-g9-near0p8-day, composite-v2-day-bullish-vote-k2-day, composite-v2-day-bullish-vote-k3-day, composite-v2-day-bullish-vote-k4-day, consensus-dbu-v1-day, d01c-day, exit-t04-fixed-day, f14-trend-switched-fade-day, g-t04-g3-day, g-t04-g4-day, g-t04-g6-not-day, g-t04-g7-day, g-t04-g8-not-day, g-t04-g9-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-q06-fallback-day, t10-nr7-narrow-range-day, exit-t04-time-day, exit-t04-trail-day, t04-connors-rsi2-day. MCS size: 34 of 106. exit-e2a-fixed-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-time-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-trail-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-time-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-trail-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. t04-connors-rsi2-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy.
+SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior: composite-v1-day-bullish-day, composite-v1-day-bullish-not-day, composite-v2-day-bullish-boost-w0p5-day, composite-v2-day-bullish-g9-near0p8-day, composite-v2-day-bullish-vote-k2-day, composite-v2-day-bullish-vote-k3-day, composite-v2-day-bullish-vote-k4-day, consensus-dbu-v1-day, d01c-day, exit-t04-fixed-day, f14-trend-switched-fade-day, g-t04-g3-day, g-t04-g4-day, g-t04-g6-not-day, g-t04-g7-day, g-t04-g8-not-day, g-t04-g9-day, q06-wick-balance-day, q06r-wide-bar-wick-day, t04-q06-fallback-day, t10-nr7-narrow-range-day, exit-t04-time-day, exit-t04-trail-day, t04-connors-rsi2-day. MCS size: 35 of 109. exit-e2a-fixed-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-time-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-e2a-trail-day repeats e2a-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-time-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. exit-t04-trail-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy. t04-connors-rsi2-day repeats exit-t04-fixed-day exactly (same picks every date), so the joint tests ran on one copy.
 
 | Experiment | Dates | Coverage | Edge (pts) | 95% interval | P(edge<=0) | Block |
 |---|---|---|---|---|---|---|
@@ -162,6 +162,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | g-t04-g8-day | 579 | 39% | +1.42 | -1.53 to +4.33 | 0.183 | 4 |
 | e3b-a02-low-ivol-day | 781 | 53% | +1.41 | -0.98 to +3.92 | 0.120 | 2 |
 | t10-nr4-narrow-range-day | 1398 | 95% | +1.34 | +0.15 to +2.49 | 0.015 | 1 |
+| b5-failed-bearish-day | 692 | 47% | +1.30 | -1.50 to +4.14 | 0.171 | 1 |
 | f11-w15-day | 1467 | 100% | +1.25 | +0.13 to +2.35 | 0.013 | 1 |
 | h02-idiosyncratic-volatility-day | 1465 | 100% | +1.18 | +0.09 to +2.25 | 0.016 | 4 |
 | t06-bollinger-pctb-day | 1217 | 83% | +1.04 | -0.73 to +2.90 | 0.124 | 1 |
@@ -193,6 +194,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | o01-retest-day | 1419 | 97% | -0.47 | -1.67 to +0.71 | 0.797 | 1 |
 | f06-trend-acceleration-day | 1465 | 100% | -0.50 | -1.60 to +0.64 | 0.827 | 1 |
 | q03-up-day-balance-day | 1465 | 100% | -0.52 | -1.64 to +0.64 | 0.815 | 1 |
+| b1-trend-cross-trail-day | 550 | 37% | -0.57 | -3.90 to +2.74 | 0.631 | 1 |
 | t15-adx-regime-day | 1418 | 97% | -0.64 | -1.77 to +0.46 | 0.874 | 4 |
 | f05-close-location-change-day | 1467 | 100% | -0.66 | -1.73 to +0.40 | 0.885 | 1 |
 | f03-conditional-reversal-day | 1467 | 100% | -0.77 | -1.89 to +0.31 | 0.910 | 1 |
@@ -206,6 +208,7 @@ SPA p-value (consistent): **0.000**  (lower 0.000, upper 0.000). StepM superior:
 | t03-rsi-thresholds-day | 1324 | 90% | -1.13 | -2.64 to +0.30 | 0.940 | 3 |
 | q01-price-volume-corr-day | 1462 | 100% | -1.13 | -2.21 to -0.05 | 0.981 | 1 |
 | o04-order-block-composite-day | 1419 | 97% | -1.16 | -2.38 to +0.01 | 0.974 | 1 |
+| b4-put-writing-day | 1386 | 94% | -1.27 | -2.42 to -0.03 | 0.977 | 2 |
 | e3a-a02-high-ivol-day | 860 | 59% | -1.35 | -3.69 to +1.06 | 0.877 | 1 |
 | t01-sma-crossover-day | 1428 | 97% | -1.46 | -2.62 to -0.33 | 0.994 | 3 |
 | champion-v1-day | 1435 | 98% | -1.55 | -2.73 to -0.36 | 0.996 | 3 |
