@@ -82,6 +82,24 @@
     "n": 302,
     "coverage": 0.9773462783171522
    },
+   "b2-a04-relative-week": {
+    "mean": -0.004996285601987102,
+    "lo": -0.03166789842241073,
+    "hi": 0.02228459569644836,
+    "p_le0": 0.6265,
+    "block": 2,
+    "n": 260,
+    "coverage": 0.8414239482200647
+   },
+   "b2-m01-relative-week": {
+    "mean": 0.008474449434291457,
+    "lo": -0.017930769946130177,
+    "hi": 0.0359738294878878,
+    "p_le0": 0.285,
+    "block": 1,
+    "n": 255,
+    "coverage": 0.8252427184466019
+   },
    "c02-turn-of-month-week": {
     "mean": -0.02716443723848988,
     "lo": -0.05797543305594352,
@@ -1029,10 +1047,12 @@
    }
   },
   "joint": {
-   "n_models": 114,
+   "n_models": 116,
    "block": 1,
    "twins": {
     "a05b-max-effect-ranked-week": "a05-max-effect-week",
+    "b2-a04-relative-week": "a04-52-week-high-week",
+    "b2-m01-relative-week": "a03-momentum-12-1-week",
     "composite-v2-week-bearish-vote-k1-week": "a01-weekly-reversal-week",
     "exit-a01-fixed-week": "a01-weekly-reversal-week",
     "exit-a01-time-week": "a01-weekly-reversal-week",
@@ -1155,6 +1175,8 @@
     "t23-rs-rating-week",
     "t25-heikin-ashi-week",
     "a05b-max-effect-ranked-week",
+    "b2-a04-relative-week",
+    "b2-m01-relative-week",
     "composite-v2-week-bearish-vote-k1-week",
     "exit-a01-fixed-week",
     "exit-a01-time-week",
@@ -1197,6 +1219,60 @@
     "n": 291,
     "coverage": 0.941747572815534
    },
+   "b2-a04-relative-month": {
+    "mean": 0.017072641076048483,
+    "lo": -0.018387989506321686,
+    "hi": 0.05422345410446289,
+    "p_le0": 0.185,
+    "block": 5,
+    "n": 256,
+    "coverage": 0.8284789644012945
+   },
+   "b2-m01-relative-month": {
+    "mean": 0.024563878368545032,
+    "lo": -0.016174414786277097,
+    "hi": 0.06362532639325677,
+    "p_le0": 0.117,
+    "block": 5,
+    "n": 251,
+    "coverage": 0.8122977346278317
+   },
+   "b2-m02-relative-month": {
+    "mean": 0.021861124414890402,
+    "lo": -0.0091094370475051,
+    "hi": 0.05192179545537009,
+    "p_le0": 0.086,
+    "block": 2,
+    "n": 255,
+    "coverage": 0.8252427184466019
+   },
+   "b3-m01-top10-month": {
+    "mean": 0.024563878368545032,
+    "lo": -0.016174414786277097,
+    "hi": 0.06362532639325677,
+    "p_le0": 0.117,
+    "block": 5,
+    "n": 251,
+    "coverage": 0.8122977346278317
+   },
+   "b3-m01-top15-month": {
+    "mean": 0.024563878368545032,
+    "lo": -0.016174414786277097,
+    "hi": 0.06362532639325677,
+    "p_le0": 0.117,
+    "block": 5,
+    "n": 251,
+    "coverage": 0.8122977346278317
+   },
+   "b3-m01-top20-month": {
+    "mean": 0.024563878368545032,
+    "lo": -0.016174414786277097,
+    "hi": 0.06362532639325677,
+    "p_le0": 0.117,
+    "block": 5,
+    "n": 251,
+    "coverage": 0.8122977346278317
+   },
    "m01-momentum-12-1-month": {
     "mean": 0.024563878368545032,
     "lo": -0.016174414786277097,
@@ -1217,9 +1293,16 @@
    }
   },
   "joint": {
-   "n_models": 5,
+   "n_models": 11,
    "block": 5,
-   "twins": {},
+   "twins": {
+    "b2-a04-relative-month": "a04-52-week-high-month",
+    "b3-m01-top10-month": "b2-m01-relative-month",
+    "b3-m01-top15-month": "b2-m01-relative-month",
+    "b3-m01-top20-month": "b2-m01-relative-month",
+    "m01-momentum-12-1-month": "b2-m01-relative-month",
+    "m02-leader-pullback-month": "b2-m02-relative-month"
+   },
    "spa": {
     "lower": 0.3145,
     "consistent": 0.3145,
@@ -1229,6 +1312,12 @@
    "mcs": [
     "a04-52-week-high-month",
     "a05b-max-effect-ranked-month",
+    "b2-m01-relative-month",
+    "b2-m02-relative-month",
+    "b2-a04-relative-month",
+    "b3-m01-top10-month",
+    "b3-m01-top15-month",
+    "b3-m01-top20-month",
     "m01-momentum-12-1-month",
     "m02-leader-pullback-month"
    ]
@@ -1263,6 +1352,51 @@
     "n": 291,
     "coverage": 0.941747572815534
    },
+   "b2-a04-relative-month": {
+    "mean": 0.0032133099004057874,
+    "lo": -0.029991243811012435,
+    "hi": 0.03782043444002862,
+    "p_le0": 0.4245,
+    "block": 5,
+    "n": 256,
+    "coverage": 0.8284789644012945
+   },
+   "b2-m01-relative-month": {
+    "mean": 0.024213824619392404,
+    "lo": -0.01310872528083734,
+    "hi": 0.062172373901432015,
+    "p_le0": 0.0935,
+    "block": 6,
+    "n": 251,
+    "coverage": 0.8122977346278317
+   },
+   "b3-m01-top10-month": {
+    "mean": 0.024213824619392404,
+    "lo": -0.01310872528083734,
+    "hi": 0.062172373901432015,
+    "p_le0": 0.0935,
+    "block": 6,
+    "n": 251,
+    "coverage": 0.8122977346278317
+   },
+   "b3-m01-top15-month": {
+    "mean": 0.024213824619392404,
+    "lo": -0.01310872528083734,
+    "hi": 0.062172373901432015,
+    "p_le0": 0.0935,
+    "block": 6,
+    "n": 251,
+    "coverage": 0.8122977346278317
+   },
+   "b3-m01-top20-month": {
+    "mean": 0.024213824619392404,
+    "lo": -0.01310872528083734,
+    "hi": 0.062172373901432015,
+    "p_le0": 0.0935,
+    "block": 6,
+    "n": 251,
+    "coverage": 0.8122977346278317
+   },
    "m01-momentum-12-1-month": {
     "mean": 0.024213824619392404,
     "lo": -0.01310872528083734,
@@ -1274,9 +1408,15 @@
    }
   },
   "joint": {
-   "n_models": 4,
+   "n_models": 9,
    "block": 4,
-   "twins": {},
+   "twins": {
+    "b2-a04-relative-month": "a04-52-week-high-month",
+    "b3-m01-top10-month": "b2-m01-relative-month",
+    "b3-m01-top15-month": "b2-m01-relative-month",
+    "b3-m01-top20-month": "b2-m01-relative-month",
+    "m01-momentum-12-1-month": "b2-m01-relative-month"
+   },
    "spa": {
     "lower": 0.018,
     "consistent": 0.018,
@@ -1289,6 +1429,11 @@
     "a01-weekly-reversal-month",
     "a04-52-week-high-month",
     "a05b-max-effect-ranked-month",
+    "b2-m01-relative-month",
+    "b2-a04-relative-month",
+    "b3-m01-top10-month",
+    "b3-m01-top15-month",
+    "b3-m01-top20-month",
     "m01-momentum-12-1-month"
    ]
   }
@@ -1357,6 +1502,42 @@
     "block": 1,
     "n": 302,
     "coverage": 0.9773462783171522
+   },
+   "b1-trend-cross-trail-week": {
+    "mean": -0.02241297085232967,
+    "lo": -0.09784594497011939,
+    "hi": 0.05186898918455558,
+    "p_le0": 0.728,
+    "block": 1,
+    "n": 123,
+    "coverage": 0.39805825242718446
+   },
+   "b2-a04-relative-week": {
+    "mean": 0.019222808253376664,
+    "lo": -0.008859583725435426,
+    "hi": 0.04591478825303272,
+    "p_le0": 0.088,
+    "block": 2,
+    "n": 260,
+    "coverage": 0.8414239482200647
+   },
+   "b2-m01-relative-week": {
+    "mean": 0.0021094560141841725,
+    "lo": -0.026017662860622254,
+    "hi": 0.028419380616899536,
+    "p_le0": 0.4565,
+    "block": 1,
+    "n": 255,
+    "coverage": 0.8252427184466019
+   },
+   "b5-failed-bearish-week": {
+    "mean": 0.07049378751163277,
+    "lo": 0.01020128092994858,
+    "hi": 0.13069155581158323,
+    "p_le0": 0.0115,
+    "block": 1,
+    "n": 137,
+    "coverage": 0.44336569579288027
    },
    "champion-v1-week": {
     "mean": -0.02823810021919649,
@@ -2251,9 +2432,11 @@
    }
   },
   "joint": {
-   "n_models": 106,
+   "n_models": 110,
    "block": 1,
    "twins": {
+    "b2-a04-relative-week": "a04-52-week-high-week",
+    "b2-m01-relative-week": "a03-momentum-12-1-week",
     "exit-a01-fixed-week": "a01-weekly-reversal-week",
     "exit-a01-time-week": "a01-weekly-reversal-week",
     "exit-a01-trail-week": "a01-weekly-reversal-week",
@@ -2264,9 +2447,9 @@
     "g-a05b-g5-week": "composite-v1-week-bullish-week"
    },
    "spa": {
-    "lower": 0.2675,
-    "consistent": 0.4,
-    "upper": 0.441
+    "lower": 0.273,
+    "consistent": 0.408,
+    "upper": 0.446
    },
    "stepm": [],
    "mcs": [
@@ -2277,6 +2460,8 @@
     "a06-low-volatility-week",
     "a07-high-volume-premium-week",
     "a07c-volume-fade-week",
+    "b1-trend-cross-trail-week",
+    "b5-failed-bearish-week",
     "champion-v1-week",
     "composite-v1-week-bullish-not-week",
     "composite-v1-week-bullish-week",
@@ -2367,6 +2552,8 @@
     "t21-minervini-template-week",
     "t23-rs-rating-week",
     "t25-heikin-ashi-week",
+    "b2-a04-relative-week",
+    "b2-m01-relative-week",
     "exit-a01-fixed-week",
     "exit-a01-time-week",
     "exit-a01-trail-week",
