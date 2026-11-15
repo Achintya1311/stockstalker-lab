@@ -1,0 +1,53 @@
+# B1: 20/50 EMA cross above the 200-day average, bullish only, judged by payoff with a trailing exit plan.
+# Strategy module strategies/b1_trend_cross.py (rules in strategies/bull_core.py). Trial B1 of the 14 Nov 2026 bullish plan.
+source_url: ""
+author: "practitioner trend rule (moving-average crossover with a long-average trend filter); no single author"
+license: "folk rule, restated in the lab's own words; nothing copied (SPEC.md section 5)"
+published_on: "unknown (decades-old practitioner rule)"
+horizon: both
+claim_as_stated: >
+  A short average crossing above a medium one while price is above its 200-day average marks the start of an
+  up-leg. In the owner's outside tests on 12 Indian large caps this was the one bullish rule with a large
+  average gain, while right only about 4 times in 10. No audited record on NSE F&O stocks.
+rules_plain: |
+  Bullish side only; one fixed parameter set.
+  - On the signal session S (the last visible session): EMA(20) of the close is above EMA(50), and on the session before it was not (at or below). So the cross happened on S itself.
+  - The close on S is above the simple 200-session average of the close.
+  - Score = (EMA20 - EMA50) / ATR(14), all at S.
+  Daily bars, split / bonus adjusted, last 250 market dates, at least 200 rows; judged only for symbols with a futures contract on the last visible date.
+  Replays carry the exit block (engine/exits.py): trail, stop 3 ATR from the best close, time exit after 20 sessions, bullish side.
+params:
+  ema_fast: 20
+  ema_slow: 50
+  sma_trend: 200
+  atr_period: 14
+  min_rows: 200
+  tail_dates: 250
+  exit: {kind: trail, stop_atr: 3, max_sessions: 20, sides: [bullish]}
+default_params:
+  ema_fast: 20
+  ema_slow: 50
+  sma_trend: 200
+  atr_period: 14
+assumptions:
+  - "EMAs are the span form (alpha = 2 / (n + 1)), adjust=False, seeded with the first close of the 250-session tail; with at least 200 rows the seed's weight in EMA50 is under 0.3%."
+  - "Cross = EMA20 strictly above EMA50 on S and at or below it on S-1; a tie on S does not count."
+  - "Trend filter = close on S strictly above SMA(200) of closes on S (S included)."
+  - "Rank by the size of the gap just after the cross, in ATR(14) units (Wilder); the owner's choice. Being just after a cross, gaps are small."
+  - "Week horizon uses the same rule on Friday's close: only crosses on the week's last session count, so week picks are far fewer than day picks (no 'cross in the last 5 sessions' widening, to keep one fixed parameter set)."
+  - "Payoff is the yardstick (plan B1): the exit block reports R multiples next to the usual hit-rate tables; the hit-rate edge is expected to be poor."
+data_needed: "ohlcv"
+testable_now: "yes"
+source: "Practitioner moving-average trend rule; owner's outside grid on 12 Indian large caps (Nov 2026)"
+link: ""
+prior_claim: "Owner's outside test: right ~4 in 10 with a large average gain"
+replays:
+  - experiments/held/bull/day/b1-trend-cross-trail-day.yml
+  - experiments/held/bull/week_month/b1-trend-cross-trail-week.yml
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5): confirmed or refuted only on replay numbers, train first."
+  - "One fixed parameter set, fixed before any replay (plan of 14 Nov 2026); nothing tuned."
+  - "The outside grid that motivated it tried many rules on 12 stocks; picking its best is a selection effect, so this replay is the real first test."
+  - "Pass bar for B1 (fixed in the plan): at least 500 picks, average payoff above the market baseline with t >= 2, positive in 4 of 6 train years, average move after costs above zero."
+  - "Selective: a cross is rare per stock, so coverage must be read next to any result."
+status: "held; 2 train replays (day, week, both with the trail exit block) in experiments/held/bull/, none pending"

@@ -1,0 +1,46 @@
+# B5: failed E2A bearish setup read as bullish, bullish only.
+# Strategy module strategies/b5_failed_bearish.py (rules in strategies/bull_core.py). Trial B5 of the 14 Nov 2026 bullish plan.
+source_url: ""
+author: "lab-original, built on the lab's own E2A rule (cards/E2A.yml); the 'failed signal' idea is old trading lore (a setup that fails often moves hard the other way)"
+license: "own work (SPEC.md section 5)"
+published_on: "2026-11-15"
+horizon: both
+claim_as_stated: >
+  When a strong bearish setup does not deliver the expected fall within three sessions, those positioned for
+  the fall have to cover, pushing the stock up. No audited record.
+rules_plain: |
+  Bullish side only; one fixed parameter set.
+  - T3 = the market date three sessions before the signal session S (S is the last visible session).
+  - E2A, imported unchanged, run on the history up to and including T3, gives the stock a bearish score (an extreme up day of at least 2 sigmas with futures OI rising), and the stock's own last row in that history is dated T3.
+  - The adjusted close on S is at or above the adjusted close on T3 (the fall did not come).
+  - Score = (close on S - close on T3) / ATR(14) on S; an exactly equal close scores a tiny floor (1e-6) so it still counts and ranks last.
+  Judged only for symbols with a futures contract on S.
+params:
+  base: E2A (bearish side)
+  lag_sessions: 3
+  atr_period: 14
+  e2a_window_dates: 250
+  equal_close_floor: 0.000001
+default_params:
+  base: E2A
+  lag_sessions: 3
+assumptions:
+  - "'Met the live day-bearish setup' = any bearish E2A score on T3, not only E2A's top 5 published picks."
+  - "E2A is handed the last 250 market dates up to T3 (it needs 22 rows per stock), which matches the full history on the synthetic panel; a stock with fewer than 22 rows in that window but more overall would differ (suspensions; rare)."
+  - "Closes are split / bonus adjusted so a split between T3 and S is not read as a fall."
+  - "Week horizon uses the same rule on Friday's close, so T3 is the Tuesday of that week."
+  - "A stock with no row on T3 abstains even if E2A would score its last earlier row."
+data_needed: "ohlcv plus futures OI (oi_chg_futstk)"
+testable_now: "yes"
+source: "Bullish plan B5 (14 Nov 2026)"
+link: ""
+prior_claim: "Failed-signal lore; untested"
+replays:
+  - experiments/held/bull/day/b5-failed-bearish-day.yml
+  - experiments/held/bull/week_month/b5-failed-bearish-week.yml
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5)."
+  - "One fixed parameter set, fixed before any replay (plan of 14 Nov 2026); nothing tuned."
+  - "E2A scored about 1,200 to 1,900 stock-days a year on train (both sides together), and many bearish ones do fall, so B5 picks may be few; check coverage and the 500-pick bar."
+  - "Lag of 3 sessions is the plan's, not a fitted value."
+status: "held; 2 train replays (day, week) in experiments/held/bull/, none pending"

@@ -16,3 +16,8 @@ inside the 300-minute limit). Move a batch's files flat into `experiments/pendin
 
 `guru/`: GURU_V1 train replays of the published setups (R01-R04, R02B, P01, P02; cards in `cards/`), day tables in
 `guru/day/`, week tables in `guru/week/`; 14 files, train split only. Results table: `python3 -m scripts.guru_report`.
+
+`bull/`: bullish-table trials B1, B4, B5 of the 14 Nov 2026 plan (cards `B1`, `B4A`, `B4B`, `B5`; rules in
+`strategies/bull_core.py`). Train split only, one fixed parameter set each. `bull/day/` holds the four day
+replays (B1 with the trail exit block), `bull/week_month/` the two week replays (B1 with the same exit block, B5).
+B4B is near-identical to E2B's bullish half (already replayed); see `cards/B4B.yml` before spending a day replay on it.
