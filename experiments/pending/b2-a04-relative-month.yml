@@ -1,6 +1,0 @@
-id: b2-a04-relative-month
-strategy: strategies.a04_52_week_high
-split: train
-horizon: month
-dates: {start: '2015-01-01', end: '2020-12-31'}
-yardstick: relative

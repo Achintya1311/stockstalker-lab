@@ -1,0 +1,10 @@
+{
+  "id": "b2-m01-relative-week",
+  "strategy": "strategies.m01_momentum_12_1",
+  "split": "train",
+  "horizon": "week",
+  "n_picks": 45269,
+  "n_dates": 255,
+  "pick_log_sha256": "20014456df414956be7bd09f88057d831b14c439d482fea642459374af9f4c22",
+  "yardstick": "relative"
+}

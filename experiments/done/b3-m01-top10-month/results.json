@@ -1,0 +1,212 @@
+{
+  "id": "b3-m01-top10-month",
+  "strategy": "strategies.m01_momentum_12_1",
+  "split": "train",
+  "horizon": "month",
+  "pick_log_sha256": "fe498386ce8a0ec7a35b699c25f29117e9f98348b5260aa3e9353c5bdbfe39fe",
+  "scorer_version": 1,
+  "picks_per_table": 10,
+  "selections": {
+    "top": {
+      "bullish": {
+        "n_picks": 2510,
+        "n_dates": 251,
+        "coverage": 1.0,
+        "accuracy": 0.5454183266932271,
+        "market_line": 0.5355954841812557,
+        "edge": 0.009822842511971316,
+        "edge_t": 0.6694953943049111,
+        "directional_move": -0.0005093404300724063,
+        "positive_year_share": 0.4,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 460,
+            "accuracy": 0.5717391304347826,
+            "edge": -0.019191600312853063
+          },
+          {
+            "year": 2017,
+            "n_picks": 520,
+            "accuracy": 0.5711538461538461,
+            "edge": -0.01773062415159595
+          },
+          {
+            "year": 2018,
+            "n_picks": 530,
+            "accuracy": 0.4660377358490566,
+            "edge": 0.027853056910376855
+          },
+          {
+            "year": 2019,
+            "n_picks": 520,
+            "accuracy": 0.5615384615384615,
+            "edge": 0.06002322009145648
+          },
+          {
+            "year": 2020,
+            "n_picks": 480,
+            "accuracy": 0.5625,
+            "edge": -0.0068141650047225015
+          }
+        ],
+        "leak_alarm": false,
+        "edge_interval": [
+          -0.02057865223314103,
+          0.040600957520036264
+        ],
+        "interval_method": "month: windows overlap (a new four-week hold starts every week), so dates are not independent. t = mean / standard error of the means of non-overlapping blocks of 8 consecutive pick dates; 95% interval = moving-block bootstrap, block length 8 pick dates, 2000 resamples, seed 0, percentile method"
+      },
+      "bearish": {
+        "n_picks": 2510,
+        "n_dates": 251,
+        "coverage": 1.0,
+        "accuracy": 0.4892430278884462,
+        "market_line": 0.46323637458379485,
+        "edge": 0.02600665330465136,
+        "edge_t": 2.0216032716774293,
+        "directional_move": -0.00770967284568097,
+        "positive_year_share": 0.6,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 460,
+            "accuracy": 0.4434782608695652,
+            "edge": 0.035314821048998725
+          },
+          {
+            "year": 2017,
+            "n_picks": 520,
+            "accuracy": 0.3923076923076923,
+            "edge": -0.01710423078096834
+          },
+          {
+            "year": 2018,
+            "n_picks": 530,
+            "accuracy": 0.5490566037735849,
+            "edge": -0.011854129491914538
+          },
+          {
+            "year": 2019,
+            "n_picks": 520,
+            "accuracy": 0.5846153846153846,
+            "edge": 0.08724217832940588
+          },
+          {
+            "year": 2020,
+            "n_picks": 480,
+            "accuracy": 0.46875,
+            "edge": 0.03925591253679723
+          }
+        ],
+        "leak_alarm": false,
+        "edge_interval": [
+          0.00022451314091550203,
+          0.053006152558003186
+        ],
+        "interval_method": "month: windows overlap (a new four-week hold starts every week), so dates are not independent. t = mean / standard error of the means of non-overlapping blocks of 8 consecutive pick dates; 95% interval = moving-block bootstrap, block length 8 pick dates, 2000 resamples, seed 0, percentile method"
+      }
+    },
+    "all": {
+      "bullish": {
+        "n_picks": 19498,
+        "n_dates": 251,
+        "coverage": 1.0,
+        "accuracy": 0.544927684890758,
+        "market_line": 0.5355954841812557,
+        "edge": 0.018685845743059884,
+        "edge_t": 3.395043845775536,
+        "directional_move": -0.0002904963869249422,
+        "positive_year_share": 1.0,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 3022,
+            "accuracy": 0.6019192587690272,
+            "edge": 0.020333526621530023
+          },
+          {
+            "year": 2017,
+            "n_picks": 4287,
+            "accuracy": 0.5964543970142291,
+            "edge": 0.013864053700799833
+          },
+          {
+            "year": 2018,
+            "n_picks": 4871,
+            "accuracy": 0.44980496817901866,
+            "edge": 0.012686916176992243
+          },
+          {
+            "year": 2019,
+            "n_picks": 4059,
+            "accuracy": 0.530179847253018,
+            "edge": 0.031709585953936394
+          },
+          {
+            "year": 2020,
+            "n_picks": 3259,
+            "accuracy": 0.584841976066278,
+            "edge": 0.014845192447724502
+          }
+        ],
+        "leak_alarm": false,
+        "edge_interval": [
+          0.00884278955871792,
+          0.030629313619160638
+        ],
+        "interval_method": "month: windows overlap (a new four-week hold starts every week), so dates are not independent. t = mean / standard error of the means of non-overlapping blocks of 8 consecutive pick dates; 95% interval = moving-block bootstrap, block length 8 pick dates, 2000 resamples, seed 0, percentile method"
+      },
+      "bearish": {
+        "n_picks": 17352,
+        "n_dates": 251,
+        "coverage": 1.0,
+        "accuracy": 0.49164361456892575,
+        "market_line": 0.46323637458379485,
+        "edge": 0.018949456442643307,
+        "edge_t": 3.1627237822888343,
+        "directional_move": -0.004457745338564703,
+        "positive_year_share": 1.0,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 2500,
+            "accuracy": 0.4404,
+            "edge": 0.022186278397006706
+          },
+          {
+            "year": 2017,
+            "n_picks": 3654,
+            "accuracy": 0.42911877394636017,
+            "edge": 0.012429186501287813
+          },
+          {
+            "year": 2018,
+            "n_picks": 4123,
+            "accuracy": 0.5804026194518555,
+            "edge": 0.011597842564616094
+          },
+          {
+            "year": 2019,
+            "n_picks": 3785,
+            "accuracy": 0.5315719947159842,
+            "edge": 0.033834512665562595
+          },
+          {
+            "year": 2020,
+            "n_picks": 3290,
+            "accuracy": 0.44285714285714284,
+            "edge": 0.014903057255006019
+          }
+        ],
+        "leak_alarm": false,
+        "edge_interval": [
+          0.00848479339726471,
+          0.03153331580063964
+        ],
+        "interval_method": "month: windows overlap (a new four-week hold starts every week), so dates are not independent. t = mean / standard error of the means of non-overlapping blocks of 8 consecutive pick dates; 95% interval = moving-block bootstrap, block length 8 pick dates, 2000 resamples, seed 0, percentile method"
+      }
+    }
+  },
+  "top_n": 10
+}

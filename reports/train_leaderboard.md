@@ -2,7 +2,7 @@
 
 Train split only (2015 to 2020), the picks a table would publish, ranked by t (how hard the result is to explain by luck). A **candidate** for the provisional rule (SPEC.md section 10) has at least 500 picks, positive edge and positive directional move after costs; it still needs a validation query. Rebuilt by `engine/run_queue.py` on every replay.
 
-Trials recorded: 441. Gate 2's bar at that count: t >= 4.52.
+Trials recorded: 458. Gate 2's bar at that count: t >= 4.53.
 
 Month rows: four-week holds that overlap week to week; their t is a block t over 8 consecutive pick dates (see each results.md).
 
@@ -112,6 +112,7 @@ Month rows: four-week holds that overlap week to week; their t is a block t over
 | composite-v2-week-bearish-vote-k3-week | week | bearish | 1519 | 53.85% | 50.83% | 3.13 | 2.29 |  | 0.19 | 83.33% | candidate |
 | f04-open-volume-corr-day | day | bearish | 7335 | 55.79% | 54.54% | 1.25 | 2.28 |  | -0.03 | 83.33% |  |
 | f17-close-location-recency-day | day | bearish | 7335 | 55.79% | 54.54% | 1.25 | 2.28 |  | -0.08 | 66.67% |  |
+| b5-failed-bearish-week | week | bullish | 305 | 51.80% | 47.01% | 7.05 | 2.26 |  | -0.68 | 100.00% | too few picks |
 | e2b-day | day | bearish | 3143 | 56.12% | 54.36% | 2.34 | 2.25 |  | -0.17 | 83.33% |  |
 | g-a01-g7-week | week | bearish | 1524 | 53.54% | 50.83% | 3.06 | 2.25 |  | 0.09 | 83.33% | candidate |
 | composite-v2-week-bullish-g9-near0p8-week | week | bullish | 1280 | 51.48% | 48.68% | 3.09 | 2.21 |  | -0.47 | 80.00% |  |

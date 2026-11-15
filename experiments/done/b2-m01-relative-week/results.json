@@ -1,0 +1,197 @@
+{
+  "id": "b2-m01-relative-week",
+  "strategy": "strategies.m01_momentum_12_1",
+  "split": "train",
+  "horizon": "week",
+  "pick_log_sha256": "20014456df414956be7bd09f88057d831b14c439d482fea642459374af9f4c22",
+  "scorer_version": 1,
+  "picks_per_table": 5,
+  "selections": {
+    "top": {
+      "bullish": {
+        "n_picks": 1275,
+        "n_dates": 255,
+        "coverage": 1.0,
+        "accuracy": 0.5035294117647059,
+        "market_line": 0.4982673699727918,
+        "edge": 0.0052620417919141274,
+        "edge_t": 0.34388269582023245,
+        "directional_move": -0.0057423918477216875,
+        "positive_year_share": 0.6,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 230,
+            "accuracy": 0.4434782608695652,
+            "edge": -0.05471334667676173
+          },
+          {
+            "year": 2017,
+            "n_picks": 260,
+            "accuracy": 0.5115384615384615,
+            "edge": 0.013162992068934178
+          },
+          {
+            "year": 2018,
+            "n_picks": 265,
+            "accuracy": 0.5207547169811321,
+            "edge": 0.022198874109200482
+          },
+          {
+            "year": 2019,
+            "n_picks": 260,
+            "accuracy": 0.5384615384615384,
+            "edge": 0.0400383018393689
+          },
+          {
+            "year": 2020,
+            "n_picks": 260,
+            "accuracy": 0.49615384615384617,
+            "edge": -0.0016225578259662088
+          }
+        ],
+        "leak_alarm": false,
+        "excess_move": -0.0005980379145303934
+      },
+      "bearish": {
+        "n_picks": 1275,
+        "n_dates": 255,
+        "coverage": 1.0,
+        "accuracy": 0.5184313725490196,
+        "market_line": 0.4982673699727918,
+        "edge": 0.020164002576227857,
+        "edge_t": 1.3199075509898748,
+        "directional_move": -0.0025911774144930836,
+        "positive_year_share": 0.8,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 230,
+            "accuracy": 0.5,
+            "edge": 0.0018083924536730453
+          },
+          {
+            "year": 2017,
+            "n_picks": 260,
+            "accuracy": 0.4846153846153846,
+            "edge": -0.013760084854142743
+          },
+          {
+            "year": 2018,
+            "n_picks": 265,
+            "accuracy": 0.5056603773584906,
+            "edge": 0.007104534486558975
+          },
+          {
+            "year": 2019,
+            "n_picks": 260,
+            "accuracy": 0.5807692307692308,
+            "edge": 0.08234599414706122
+          },
+          {
+            "year": 2020,
+            "n_picks": 260,
+            "accuracy": 0.5192307692307693,
+            "edge": 0.02145436525095689
+          }
+        ],
+        "leak_alarm": false,
+        "excess_move": -0.0010855313476843787
+      }
+    },
+    "all": {
+      "bullish": {
+        "n_picks": 19789,
+        "n_dates": 255,
+        "coverage": 1.0,
+        "accuracy": 0.5103845570771641,
+        "market_line": 0.4982673699727918,
+        "edge": 0.011490903134269448,
+        "edge_t": 2.4954516393201414,
+        "directional_move": -0.004321224619289137,
+        "positive_year_share": 0.8,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 3026,
+            "accuracy": 0.4980171844018506,
+            "edge": -0.00033002417200704993
+          },
+          {
+            "year": 2017,
+            "n_picks": 4295,
+            "accuracy": 0.5075669383003493,
+            "edge": 0.009481171600728158
+          },
+          {
+            "year": 2018,
+            "n_picks": 4871,
+            "accuracy": 0.5136522274686922,
+            "edge": 0.014964489584754593
+          },
+          {
+            "year": 2019,
+            "n_picks": 4061,
+            "accuracy": 0.5195764590002463,
+            "edge": 0.020472689614805712
+          },
+          {
+            "year": 2020,
+            "n_picks": 3536,
+            "accuracy": 0.5093325791855203,
+            "edge": 0.011435436152909203
+          }
+        ],
+        "leak_alarm": false,
+        "excess_move": 0.0012826795688526966
+      },
+      "bearish": {
+        "n_picks": 17638,
+        "n_dates": 255,
+        "coverage": 1.0,
+        "accuracy": 0.5115659371810863,
+        "market_line": 0.4982673699727918,
+        "edge": 0.012793054690618257,
+        "edge_t": 2.550829188552953,
+        "directional_move": -0.0016643535448152076,
+        "positive_year_share": 0.8,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 2500,
+            "accuracy": 0.498,
+            "edge": -0.0004439508168187585
+          },
+          {
+            "year": 2017,
+            "n_picks": 3655,
+            "accuracy": 0.5069767441860465,
+            "edge": 0.009307868937215592
+          },
+          {
+            "year": 2018,
+            "n_picks": 4129,
+            "accuracy": 0.515863405182853,
+            "edge": 0.017602284967309947
+          },
+          {
+            "year": 2019,
+            "n_picks": 3795,
+            "accuracy": 0.5214756258234519,
+            "edge": 0.02319850569586823
+          },
+          {
+            "year": 2020,
+            "n_picks": 3559,
+            "accuracy": 0.5102556898005057,
+            "edge": 0.01268073268256794
+          }
+        ],
+        "leak_alarm": false,
+        "excess_move": -0.0006003008708704426
+      }
+    }
+  },
+  "yardstick": "relative",
+  "yardstick_method": "relative yardstick: a bullish pick is right when its move is strictly above the median move of all in-universe stocks on that pick date (bearish: strictly below); market line = exact share of in-universe stocks strictly beating that median in the side's direction (ties count as misses, so it is at or just under 50%); costs cancel in this comparison (same side, same cost); directional move after costs is the usual absolute one"
+}

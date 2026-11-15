@@ -1,0 +1,123 @@
+{
+  "id": "b2-m02-relative-month",
+  "strategy": "strategies.m02_leader_pullback",
+  "split": "train",
+  "horizon": "month",
+  "pick_log_sha256": "2938365255bc8d7b159e709de377eabbb5f2b1efc20ec20d39f55bbcfa96b067",
+  "scorer_version": 1,
+  "picks_per_table": 5,
+  "selections": {
+    "top": {
+      "bullish": {
+        "n_picks": 1222,
+        "n_dates": 255,
+        "coverage": 1.0,
+        "accuracy": 0.5049099836333879,
+        "market_line": 0.4982413443214757,
+        "edge": 0.014242315809243247,
+        "edge_t": 0.9742396966989675,
+        "directional_move": -0.00490732710068718,
+        "positive_year_share": 0.6,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 236,
+            "accuracy": 0.4872881355932203,
+            "edge": 0.013095673765758686
+          },
+          {
+            "year": 2017,
+            "n_picks": 258,
+            "accuracy": 0.4844961240310077,
+            "edge": -0.012406805061686062
+          },
+          {
+            "year": 2018,
+            "n_picks": 259,
+            "accuracy": 0.5675675675675675,
+            "edge": 0.07200161886550162
+          },
+          {
+            "year": 2019,
+            "n_picks": 257,
+            "accuracy": 0.49416342412451364,
+            "edge": -0.004185188070406012
+          },
+          {
+            "year": 2020,
+            "n_picks": 212,
+            "accuracy": 0.4858490566037736,
+            "edge": 0.00022572366596887615
+          }
+        ],
+        "leak_alarm": false,
+        "excess_move": -0.0013703013229663687,
+        "edge_interval": [
+          -0.020800433996148976,
+          0.043108347713920345
+        ],
+        "interval_method": "month: windows overlap (a new four-week hold starts every week), so dates are not independent. t = mean / standard error of the means of non-overlapping blocks of 8 consecutive pick dates; 95% interval = moving-block bootstrap, block length 8 pick dates, 2000 resamples, seed 0, percentile method"
+      },
+      "bearish": {
+        "n_picks": 0
+      }
+    },
+    "all": {
+      "bullish": {
+        "n_picks": 3769,
+        "n_dates": 255,
+        "coverage": 1.0,
+        "accuracy": 0.5266648978508889,
+        "market_line": 0.4982413443214757,
+        "edge": 0.03436588198426684,
+        "edge_t": 3.584262084162124,
+        "directional_move": -0.006312012775836881,
+        "positive_year_share": 1.0,
+        "by_year": [
+          {
+            "year": 2016,
+            "n_picks": 598,
+            "accuracy": 0.5167224080267558,
+            "edge": 0.0322542718049162
+          },
+          {
+            "year": 2017,
+            "n_picks": 1095,
+            "accuracy": 0.5105022831050229,
+            "edge": 0.027109319491354218
+          },
+          {
+            "year": 2018,
+            "n_picks": 819,
+            "accuracy": 0.5665445665445665,
+            "edge": 0.06687661543006793
+          },
+          {
+            "year": 2019,
+            "n_picks": 782,
+            "accuracy": 0.5140664961636828,
+            "edge": 0.026444694043463588
+          },
+          {
+            "year": 2020,
+            "n_picks": 475,
+            "accuracy": 0.5284210526315789,
+            "edge": 0.01678856856028073
+          }
+        ],
+        "leak_alarm": false,
+        "excess_move": 0.0034904304479598967,
+        "edge_interval": [
+          0.010332926962943126,
+          0.055929306307521506
+        ],
+        "interval_method": "month: windows overlap (a new four-week hold starts every week), so dates are not independent. t = mean / standard error of the means of non-overlapping blocks of 8 consecutive pick dates; 95% interval = moving-block bootstrap, block length 8 pick dates, 2000 resamples, seed 0, percentile method"
+      },
+      "bearish": {
+        "n_picks": 0
+      }
+    }
+  },
+  "yardstick": "relative",
+  "yardstick_method": "relative yardstick: a bullish pick is right when its move is strictly above the median move of all in-universe stocks on that pick date (bearish: strictly below); market line = exact share of in-universe stocks strictly beating that median in the side's direction (ties count as misses, so it is at or just under 50%); costs cancel in this comparison (same side, same cost); directional move after costs is the usual absolute one"
+}
