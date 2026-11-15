@@ -335,3 +335,53 @@ def block_bootstrap_interval(
     means = x[idx].mean(axis=1)
     alpha = (1.0 - level) / 2.0
     return float(np.quantile(means, alpha)), float(np.quantile(means, 1.0 - alpha))
+
+
+# ---- relative yardstick (owner-approved opt-in change, 15 Nov 2026) --------
+#
+# Everything below is new and used only when an experiment's yml says
+# `yardstick: relative` (train split only; `engine/run_queue.py`). The default
+# `absolute` yardstick is the SPEC.md section 3 hit and market line above,
+# untouched.
+#
+# Under `relative`, a bullish pick is right when its horizon move is strictly
+# above the cross-sectional median move of the in-universe stocks on that pick
+# date; a bearish pick is right when it is strictly below. A move equal to the
+# median is a miss (the same convention as a flat move under `absolute`). The
+# market line is the exact share of in-universe stocks strictly beating the
+# median in the side's direction, so ties are handled and it sits at or just
+# under 50% (not assumed to be 50%). Costs: a pick and the median stock pay the
+# same round-trip cost for the same side, so costs cancel in the comparison;
+# the directional move after costs is reported exactly as under `absolute`.
+
+ABSOLUTE = "absolute"
+RELATIVE = "relative"
+YARDSTICKS = (ABSOLUTE, RELATIVE)
+RELATIVE_NOTE = (
+    "relative yardstick: a bullish pick is right when its move is strictly above the median move of all "
+    "in-universe stocks on that pick date (bearish: strictly below); market line = exact share of in-universe "
+    "stocks strictly beating that median in the side's direction (ties count as misses, so it is at or just "
+    "under 50%); costs cancel in this comparison (same side, same cost); directional move after costs is the "
+    "usual absolute one"
+)
+
+
+def universe_median_move(moves: pd.DataFrame, universe: pd.DataFrame) -> pd.Series:
+    """Per-date median move of the in-universe stocks, indexed by date."""
+    in_universe = universe.loc[universe["in_universe"], ["date", "symbol"]]
+    merged = moves[["date", "symbol", "move"]].merge(in_universe, on=["date", "symbol"], how="inner")
+    return merged.groupby("date")["move"].median()
+
+
+def relative_hit(move: pd.Series, median: pd.Series, side) -> pd.Series:
+    """True iff the move beats the date's median strictly in the picked direction; equal to it is a miss."""
+    return ((move - median) * side) > 0
+
+
+def relative_market_line(moves: pd.DataFrame, universe: pd.DataFrame, side: int) -> pd.Series:
+    """Per-date share of the universe that beat the universe median in `side`'s direction."""
+    in_universe = universe.loc[universe["in_universe"], ["date", "symbol"]]
+    merged = moves[["date", "symbol", "move"]].merge(in_universe, on=["date", "symbol"], how="inner")
+    med = merged.groupby("date")["move"].transform("median")
+    merged["beat"] = relative_hit(merged["move"], med, side)
+    return merged.groupby("date")["beat"].mean()

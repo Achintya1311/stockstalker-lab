@@ -16,3 +16,7 @@ inside the 300-minute limit). Move a batch's files flat into `experiments/pendin
 
 `guru/`: GURU_V1 train replays of the published setups (R01-R04, R02B, P01, P02; cards in `cards/`), day tables in
 `guru/day/`, week tables in `guru/week/`; 14 files, train split only. Results table: `python3 -m scripts.guru_report`.
+
+`bull/`: BULLISH_PLAN trials, train only. `bull/week_month/` holds B2 (yardstick: relative; M01 and A04 at week and
+month, M02 at month) and B3 (M01 month, top_n 10 / 15 / 20). Other workers add B1, B4, B5 ymls under `bull/`.
+Results table: `python3 -m scripts.bull_report`.

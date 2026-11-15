@@ -844,3 +844,32 @@ This is **train-only observation**. Twelve replays are held in `experiments/held
 (day). SPEC.md has no payoff wording (sections 3, 6 and 10 speak of hit rate, edge and directional move only, and
 section 10 forbids entry, target or stop prices on the desk): a SPEC amendment is needed before any payoff number is
 used for a roster decision or shown on the desk.
+
+## DONE, NEEDS MERGE REVIEW: opt-in `yardstick` and `top_n` scoring keys in `engine/` (AB approved 15 Nov 2026, "yes include b2") - supervised change
+
+BULLISH_PLAN B2 (judge a bullish pick by whether it beat the market, not whether it rose) and B3 (a wider leaders
+basket). What changed (additive and opt-in):
+
+- `engine/run_queue.py`: `parse_scoring_options` validates two optional top-level yml keys. `yardstick: absolute |
+  relative` (default absolute = SPEC section 3 as written) and `top_n: 1..50` (default `picks_per_table`, today 5:
+  how many picks per date and side the `top` selection keeps when a replay is scored; `picks/` live selection is
+  untouched). Non-default values are copied into the manifest; a default value, written or not, is dropped, so
+  outputs stay byte-identical. Top-level yml keys outside the known set are now refused (a misspelt option must not
+  run silently under the default). Non-default values on any split but train are refused; to allow a validation
+  query later, flip `SCORING_OPTIONS_TRAIN_ONLY` in `engine/run_queue.py` (`answer_validation` already scores the
+  holdout with the experiment's options and refuses a mismatch with its train experiment).
+- `engine/scoring.py`: relative hit = move strictly above (bullish) / below (bearish) the date's median move of the
+  in-universe stocks; equal to the median is a miss. Relative market line = exact share of in-universe stocks
+  strictly beating that median (ties handled; at or just under 50%). Costs cancel in the comparison (same side,
+  same cost); directional move after costs is the usual absolute one. t / interval method per horizon unchanged
+  (per-date t for day and week, block t and block bootstrap for month).
+- `engine/experiment_report.py`: results.json gains `yardstick`, `yardstick_method`, `top_n` (and `excess_move` per
+  side under relative) only when non-default. Such runs are trials (notes name the options) but get no leaderboard
+  row; `scripts/provisional_candidates.py` and `picks/source.py` (experiment_id) skip them.
+- Proof: `tests/test_scoring_options.py` (golden `tests/golden/no_exit_golden.json` with the keys absent and with
+  them written at their defaults). Eight train replays held in `experiments/held/bull/week_month/`; table:
+  `python3 -m scripts.bull_report` -> `research/diagnostics/bull_v1.md`.
+
+This is **train-only observation**. SPEC.md section 3 defines a hit as a rise and the market line as the share that
+rose, and section 10 fixes five picks per table: a SPEC wording amendment is needed before a relative-yardstick
+number or a wider basket is used for a roster decision or shown on the desk.

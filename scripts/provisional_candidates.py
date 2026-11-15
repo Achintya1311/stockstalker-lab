@@ -35,6 +35,8 @@ def _rows(done_dir: Path):
             continue
         if "exit" in res:  # exit-plan replays repeat a rule's picks (engine/exits.py); never a separate candidate
             continue
+        if res.get("yardstick", "absolute") != "absolute" or res.get("top_n") is not None:
+            continue  # opt-in scoring replays (engine/run_queue.py: yardstick, top_n) are train-only observation
         yield res
 
 

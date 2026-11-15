@@ -1,0 +1,6 @@
+id: b2-a04-relative-week
+strategy: strategies.a04_52_week_high
+split: train
+horizon: week
+dates: {start: '2015-01-01', end: '2020-12-31'}
+yardstick: relative

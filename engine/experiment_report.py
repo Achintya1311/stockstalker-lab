@@ -47,6 +47,15 @@ manifest carries an `exit` plan, its results.json gains an `exit` block (payoff 
 an extra section. Such an experiment is still a trial (one row per side it simulates; hit-rate edge and t,
 the payoff noted) but gets no leaderboard row: its picks repeat a rule already on the board. Experiments
 without `exit` are scored, recorded and ranked exactly as before.
+
+Opt-in scoring options (owner-approved, 15 Nov 2026; validated in `engine.run_queue.parse_scoring_options`,
+train only): a manifest may carry `yardstick: relative` (a pick is right when it beats the date's universe
+median move in its direction; the market line is the exact share of the universe doing so;
+`engine.scoring.RELATIVE_NOTE`) and/or `top_n: N` (the `top` selection keeps N picks per date and side instead
+of `picks_per_table`). Directional move after costs and the t / interval method per horizon are unchanged;
+relative results add `excess_move` (mean move above the median, costs cancel). Such an experiment is a trial
+(its notes name the options) but gets no leaderboard row. A manifest without either key is scored exactly as
+before (`tests/test_scoring_options.py`).
 """
 
 from __future__ import annotations
@@ -78,6 +87,7 @@ from engine.scoring import (
     moves_any_horizon,
 )
 from engine.exits import ExitData, parse_exit_plan, render_exit, score_exit
+from engine.scoring import ABSOLUTE, RELATIVE, RELATIVE_NOTE, relative_hit, relative_market_line, universe_median_move
 from gates.budgets import holdout_budget_remaining
 from gates.gates import MIN_TEST_PICKS, leak_alarm_triggered, required_t
 from gates.trials import LEDGER_PATH as TRIALS_LEDGER, cumulative_trial_count, record_trial
@@ -110,6 +120,28 @@ class Context:
             self._lines[(horizon, side)] = market_line(self.moves(horizon), self.universe, side)
         return self._lines[(horizon, side)]
 
+    def median(self, horizon: str) -> pd.Series:
+        """Per-date universe median move (relative yardstick only)."""
+        key = ("median", horizon)
+        if key not in self._moves:
+            self._moves[key] = universe_median_move(self.moves(horizon), self.universe)
+        return self._moves[key]
+
+    def line_for(self, horizon: str, side: int, yardstick: str = ABSOLUTE) -> pd.Series:
+        """`line` for the absolute yardstick (unchanged); the relative market line otherwise."""
+        if yardstick == ABSOLUTE:
+            return self.line(horizon, side)
+        key = (RELATIVE, horizon, side)
+        if key not in self._lines:
+            self._lines[key] = relative_market_line(self.moves(horizon), self.universe, side)
+        return self._lines[key]
+
+
+def _hits(joined: pd.DataFrame, side: int, horizon: str, ctx: Context, yardstick: str) -> pd.Series:
+    if yardstick == ABSOLUTE:
+        return hit(joined["move"], side)
+    return relative_hit(joined["move"], joined["date"].map(ctx.median(horizon)), side)
+
 
 def select(picks: pd.DataFrame, side: int, k: int | None) -> pd.DataFrame:
     """`date, symbol, side` rows for one side; the `k` largest |score| per date, or all if k is None.
@@ -121,14 +153,15 @@ def select(picks: pd.DataFrame, side: int, k: int | None) -> pd.DataFrame:
     return s[["date", "symbol"]].assign(side=side)
 
 
-def side_metrics(side_picks: pd.DataFrame, side: int, horizon: str, ctx: Context, n_dates: int) -> dict:
+def side_metrics(side_picks: pd.DataFrame, side: int, horizon: str, ctx: Context, n_dates: int,
+                 yardstick: str = ABSOLUTE) -> dict:
     joined = side_picks.merge(ctx.moves(horizon), on=["date", "symbol"], how="inner")
     if joined.empty:
         return {"n_picks": 0}
-    joined["hit"] = hit(joined["move"], side)
+    joined["hit"] = _hits(joined, side, horizon, ctx, yardstick)
     # Per-date edge, the same alignment as engine.scoring.edge (tests check they agree).
     per_date = joined.groupby("date")["hit"].mean().to_frame("hit_rate").join(
-        ctx.line(horizon, side).rename("market_line"), how="inner"
+        ctx.line_for(horizon, side, yardstick).rename("market_line"), how="inner"
     )
     diff = per_date["hit_rate"] - per_date["market_line"]
     by_year = diff.groupby(pd.to_datetime(diff.index).year)
@@ -140,7 +173,7 @@ def side_metrics(side_picks: pd.DataFrame, side: int, horizon: str, ctx: Context
     ]
     accuracy, edge_value = float(joined["hit"].mean()), float(diff.mean())
     sd = float(diff.std(ddof=1)) if len(diff) > 1 else float("nan")
-    return {
+    out = {
         "n_picks": int(len(joined)),
         "n_dates": int(len(per_date)),
         "coverage": len(per_date) / n_dates if n_dates else None,
@@ -153,28 +186,37 @@ def side_metrics(side_picks: pd.DataFrame, side: int, horizon: str, ctx: Context
         "by_year": years,
         "leak_alarm": bool(leak_alarm_triggered(accuracy, edge_value)),
     }
+    if yardstick != ABSOLUTE:  # mean move above the date's universe median, in the side's direction (costs cancel)
+        med = joined["date"].map(ctx.median(horizon))
+        out["excess_move"] = float(((joined["move"] - med) * side).mean())
+    return out
 
 
-def score_picks(picks: pd.DataFrame, horizon: str, ctx: Context, split_end=None) -> dict:
+def score_picks(picks: pd.DataFrame, horizon: str, ctx: Context, split_end=None,
+                yardstick: str = ABSOLUTE, top_n: int | None = None) -> dict:
+    """`yardstick` and `top_n` are the opt-in scoring options (`engine.run_queue.parse_scoring_options`);
+    left at their defaults this is exactly the scoring that ran before they existed."""
     if horizon == MONTH:
-        return score_picks_month(picks, ctx, split_end)
+        return score_picks_month(picks, ctx, split_end, yardstick, top_n)
     picks = picks.merge(ctx.in_universe, on=["date", "symbol"], how="inner")
     n_dates = int(picks["date"].nunique())
     return {
-        sel: {SIDES[side]: side_metrics(select(picks, side, k), side, horizon, ctx, n_dates) for side in SIDES}
-        for sel, k in (("top", ctx.k), ("all", None))
+        sel: {SIDES[side]: side_metrics(select(picks, side, k), side, horizon, ctx, n_dates, yardstick)
+              for side in SIDES}
+        for sel, k in (("top", top_n or ctx.k), ("all", None))
     }
 
 
-def side_metrics_month(side_picks: pd.DataFrame, side: int, ctx: Context, n_dates: int) -> dict:
+def side_metrics_month(side_picks: pd.DataFrame, side: int, ctx: Context, n_dates: int,
+                       yardstick: str = ABSOLUTE) -> dict:
     """`side_metrics` on the month move, with `edge_t` replaced by the block t and a block-bootstrap interval."""
-    m = side_metrics(side_picks, side, MONTH, ctx, n_dates)
+    m = side_metrics(side_picks, side, MONTH, ctx, n_dates, yardstick)
     if not m.get("n_picks"):
         return m
     joined = side_picks.merge(ctx.moves(MONTH), on=["date", "symbol"], how="inner")
-    joined["hit"] = hit(joined["move"], side)
+    joined["hit"] = _hits(joined, side, MONTH, ctx, yardstick)
     per_date = joined.groupby("date")["hit"].mean().to_frame("hit_rate").join(
-        ctx.line(MONTH, side).rename("market_line"), how="inner"
+        ctx.line_for(MONTH, side, yardstick).rename("market_line"), how="inner"
     ).sort_index()
     diff = (per_date["hit_rate"] - per_date["market_line"]).to_numpy()
     interval = block_bootstrap_interval(diff)
@@ -184,7 +226,8 @@ def side_metrics_month(side_picks: pd.DataFrame, side: int, ctx: Context, n_date
     return m
 
 
-def score_picks_month(picks: pd.DataFrame, ctx: Context, split_end=None) -> dict:
+def score_picks_month(picks: pd.DataFrame, ctx: Context, split_end=None,
+                      yardstick: str = ABSOLUTE, top_n: int | None = None) -> dict:
     """`score_picks` for `horizon: month`. Picks whose four-week window is incomplete, or ends after
     `split_end` (when given), are dropped before anything is scored."""
     moves = ctx.moves(MONTH)
@@ -195,8 +238,8 @@ def score_picks_month(picks: pd.DataFrame, ctx: Context, split_end=None) -> dict
     picks = picks.merge(ctx.in_universe, on=["date", "symbol"], how="inner")
     n_dates = int(picks["date"].nunique())
     return {
-        sel: {SIDES[side]: side_metrics_month(select(picks, side, k), side, ctx, n_dates) for side in SIDES}
-        for sel, k in (("top", ctx.k), ("all", None))
+        sel: {SIDES[side]: side_metrics_month(select(picks, side, k), side, ctx, n_dates, yardstick) for side in SIDES}
+        for sel, k in (("top", top_n or ctx.k), ("all", None))
     }
 
 
@@ -214,6 +257,10 @@ def render(manifest: dict, results: dict, k: int) -> str:
              f"`{manifest['strategy']}`, {manifest['horizon']} horizon, {manifest['split']} split. "
              f"`top` = the {k} picks a table would publish each date; `all` = every positive or negative score. "
              "Edge and market line in points; definitions in SPEC.md section 3.", ""]
+    if manifest.get("yardstick", ABSOLUTE) != ABSOLUTE or manifest.get("top_n") is not None:
+        lines += [f"Opt-in scoring (train-only observation, not SPEC section 3 as written): "
+                  f"yardstick {manifest.get('yardstick', ABSOLUTE)}, top_n {k}."
+                  + (f" Under the {RELATIVE_NOTE}." if manifest.get("yardstick") == RELATIVE else ""), ""]
     for sel in ("top", "all"):
         for side in SIDES.values():
             m = results[sel][side]
@@ -227,7 +274,8 @@ def render(manifest: dict, results: dict, k: int) -> str:
                 f"{m['n_picks']} picks on {m['n_dates']} dates (coverage {_pct(m['coverage'])}%). "
                 f"Accuracy {_pct(m['accuracy'])}% vs market line {_pct(m['market_line'])}%: "
                 f"edge {_pct(m['edge'])} (t {t}). Directional move after costs {_pct(m['directional_move'])}. "
-                f"Positive years {_pct(m['positive_year_share'])}%." + (" **LEAK ALARM.**" if m["leak_alarm"] else ""),
+                f"Positive years {_pct(m['positive_year_share'])}%." + (" **LEAK ALARM.**" if m["leak_alarm"] else "")
+                + (f" Move above the universe median (costs cancel) {_pct(m['excess_move'])}." if "excess_move" in m else ""),
                 "", "| Year | Picks | Accuracy | Edge |", "|---|---|---|---|",
             ]
             lines += [f"| {y['year']} | {y['n_picks']} | {_pct(y['accuracy'])}% | {_pct(y['edge'])} |" for y in m["by_year"]]
@@ -268,14 +316,22 @@ def score_done(ctx: Context, done_dir: Path) -> list[str]:
             continue
         if out.exists() and json.loads(out.read_text()).get("scorer_version") == SCORER_VERSION:
             continue
+        yardstick, top_n = manifest.get("yardstick", ABSOLUTE), manifest.get("top_n")
+        k = top_n or ctx.k
         if manifest["horizon"] == MONTH:
-            results = score_picks(_load_picks(picks_path), MONTH, ctx, load_splits()[manifest["split"]].get("end"))
+            results = score_picks(_load_picks(picks_path), MONTH, ctx, load_splits()[manifest["split"]].get("end"),
+                                  yardstick=yardstick, top_n=top_n)
         else:
-            results = score_picks(_load_picks(picks_path), manifest["horizon"], ctx)
+            results = score_picks(_load_picks(picks_path), manifest["horizon"], ctx, yardstick=yardstick, top_n=top_n)
         payload = {"id": manifest["id"], "strategy": manifest["strategy"], "split": manifest["split"],
                    "horizon": manifest["horizon"], "pick_log_sha256": manifest.get("pick_log_sha256"),
-                   "scorer_version": SCORER_VERSION, "picks_per_table": ctx.k, "selections": results}
-        text = (render_month if manifest["horizon"] == MONTH else render)(manifest, results, ctx.k)
+                   "scorer_version": SCORER_VERSION, "picks_per_table": k, "selections": results}
+        if yardstick != ABSOLUTE:
+            payload["yardstick"] = yardstick
+            payload["yardstick_method"] = RELATIVE_NOTE
+        if top_n is not None:
+            payload["top_n"] = top_n
+        text = (render_month if manifest["horizon"] == MONTH else render)(manifest, results, k)
         if "exit" in manifest:
             payload["exit"] = _score_exit(ctx, _load_picks(picks_path), manifest)
             text += "\n" + render_exit(payload["exit"], manifest["horizon"])
@@ -297,8 +353,14 @@ def _score_exit(ctx: Context, picks: pd.DataFrame, manifest: dict) -> dict:
             outcome = outcome[outcome["outcome_date"] <= str(split_end)]
         picks = outcome[["date", "symbol", "score"]]
     picks = picks.merge(ctx.in_universe, on=["date", "symbol"], how="inner")
-    side_picks = {SIDES[s]: select(picks, s, ctx.k) for s in SIDES if SIDES[s] in plan["sides"]}
+    side_picks = {SIDES[s]: select(picks, s, manifest.get("top_n") or ctx.k) for s in SIDES if SIDES[s] in plan["sides"]}
     return score_exit(side_picks, plan, ctx._exit_data, ctx.in_universe, manifest["horizon"], split_end)
+
+
+def _opt_in(r: dict) -> bool:
+    """True for results scored with a non-default yardstick or top_n (manifest / results.json carry the key
+    only when it is not the default). Such a row repeats a rule's picks under another question or basket."""
+    return r.get("yardstick", ABSOLUTE) != ABSOLUTE or r.get("top_n") is not None
 
 
 def _results(done_dir: Path):
@@ -324,13 +386,16 @@ def record_trials(done_dir: Path, ledger: Path = TRIALS_LEDGER) -> int:
                 continue
             if exit_block is not None and side not in exit_block["plan"]["sides"]:
                 continue
+            notes = ("train, top selection; recorded by engine/experiment_report.py" if exit_block is None else
+                     f"train, top selection, exit plan ({exit_block['plan_label']}); edge and t are the "
+                     f"hit-rate figures, payoff in results.json exit; recorded by engine/experiment_report.py")
+            if _opt_in(r):
+                notes += (f"; opt-in scoring: yardstick {r.get('yardstick', ABSOLUTE)}, "
+                          f"top_n {r.get('top_n') or r.get('picks_per_table')}")
             record_trial({"trial_id": trial_id, "timestamp": pd.Timestamp.now(tz="UTC").isoformat(),
                           "strategy_id": r["strategy"], "version": r.get("version", ""), "horizon": r["horizon"],
                           "side": side, "split": r["split"], "edge": m["edge"], "t_stat": m["edge_t"],
-                          "all_gates_passed": "n/a", "notes": "train, top selection; recorded by engine/experiment_report.py"
-                          if exit_block is None else
-                          f"train, top selection, exit plan ({exit_block['plan_label']}); edge and t are the "
-                          f"hit-rate figures, payoff in results.json exit; recorded by engine/experiment_report.py"},
+                          "all_gates_passed": "n/a", "notes": notes},
                          ledger)
             added += 1
     return added
@@ -338,7 +403,7 @@ def record_trials(done_dir: Path, ledger: Path = TRIALS_LEDGER) -> int:
 
 def write_leaderboard(done_dir: Path, out_path: Path = LEADERBOARD, ledger: Path = TRIALS_LEDGER) -> int:
     """One row per (experiment, side) for the `top` selection, highest t first."""
-    rows = [(r["id"], r["horizon"], side, m) for r in _results(done_dir) if "exit" not in r
+    rows = [(r["id"], r["horizon"], side, m) for r in _results(done_dir) if "exit" not in r and not _opt_in(r)
             for side, m in r["selections"]["top"].items() if m.get("n_picks")]
     rows.sort(key=lambda row: row[3]["edge_t"] if row[3]["edge_t"] is not None else float("-inf"), reverse=True)
     n_trials = max(cumulative_trial_count(ledger), 1)
@@ -386,12 +451,15 @@ def answer_validation(picks: pd.DataFrame, exp: dict, ctx: Context, done_dir: Pa
     train = json.loads(train_path.read_text())
     if train["horizon"] != exp["horizon"]:
         return f"refused: horizon {exp['horizon']} differs from train experiment's {train['horizon']}"
+    yardstick, top_n = exp.get("yardstick", ABSOLUTE), exp.get("top_n")
+    if (train.get("yardstick", ABSOLUTE), train.get("top_n")) != (yardstick, top_n):
+        return "refused: yardstick / top_n differ from the train experiment's (a validation answer must ask the same question)"
     todo = [s for s in SIDES.values() if not _already_logged(ledger, f"{exp_id}-{s}")]
     if not todo:
         return "done"  # already answered; never re-ask
     if holdout_budget_remaining(now, path=ledger) < len(todo):
         return "waiting: this week's holdout budget cannot cover both sides"
-    holdout = score_picks(picks, exp["horizon"], ctx)["top"]
+    holdout = score_picks(picks, exp["horizon"], ctx, yardstick=yardstick, top_n=top_n)["top"]
     released = {}
     ledger.parent.mkdir(parents=True, exist_ok=True)
     for side in todo:

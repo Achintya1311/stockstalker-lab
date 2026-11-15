@@ -44,6 +44,15 @@ An optional `exit:` block (owner-approved additive change, 14 Nov 2026; `engine.
 payoff scoring on top of the usual results. It is validated here (`engine.exits.parse_exit_plan`), copied
 into the manifest, and accepted on `split: train` only: any other split with an `exit:` block is refused.
 The replay itself is unchanged. An experiment without `exit:` takes exactly the path it took before.
+
+Optional scoring keys (owner-approved opt-in change, 15 Nov 2026; `parse_scoring_options`):
+`yardstick: absolute | relative` (default absolute = SPEC.md section 3; relative = right when the pick beats
+the universe median move on its date, `engine.scoring.RELATIVE_NOTE`) and `top_n: <1..50>` (default
+`picks_per_table` in config/universe.yml, today 5: how many picks per date and side the `top` selection
+keeps when scoring a replay; `picks/` live selection is not affected). A non-default value is copied into the
+manifest; a default value, written or not, leaves the manifest and every output byte-identical. Non-default
+values are train only (`SCORING_OPTIONS_TRAIN_ONLY`). Top-level yml keys outside `ALLOWED_KEYS` are refused,
+so a misspelt option can never run silently under the default.
 """
 
 from __future__ import annotations
@@ -62,6 +71,7 @@ from engine.holdout_report import LEDGER_PATH as HOLDOUT_LEDGER, maybe_log_holdo
 from engine.replay import SplitViolation, hash_picks, load_splits, run_dates
 from engine.replay import authorize
 from engine.scoring import MONTH, MONTH_WEEKS, drop_month_overrun, month_window_ends
+from engine.scoring import ABSOLUTE, YARDSTICKS, load_universe_config
 from engine.reports import maybe_write_market_line_report
 from engine.selftest import maybe_write_selftest_report
 
@@ -70,6 +80,39 @@ DONE_DIR = Path("experiments/done")
 MARKET_LINE_REPORT = Path("reports/market_line_train.md")
 SELFTEST_REPORT = Path("reports/selftest.md")
 CHAMPION_REPORT = Path("reports/champion_v1_train.md")
+
+ALLOWED_KEYS = {"id", "strategy", "split", "horizon", "dates", "exit", "train_experiment", "yardstick", "top_n"}
+TOP_N_MAX = 50
+# Non-default yardstick / top_n are refused on every split but train. To let a validation query ask the same
+# question later (a separate owner decision), set this to False: `answer_validation` already scores the holdout
+# with the experiment's options and refuses a mismatch with its train experiment.
+SCORING_OPTIONS_TRAIN_ONLY = True
+
+
+def parse_scoring_options(exp: dict) -> dict:
+    """Validate the optional top-level scoring keys of an experiment yml. Returns only the non-default ones
+    ({} when both are absent or at their defaults). Raises ValueError on an unknown key or a bad value.
+
+    Schema (both optional):
+        yardstick: absolute | relative
+        top_n: integer, 1..50   (default: picks_per_table in config/universe.yml)
+    """
+    unknown = set(exp) - ALLOWED_KEYS
+    if unknown:
+        raise ValueError(f"unknown experiment keys {sorted(unknown)}; allowed: {sorted(ALLOWED_KEYS)}")
+    out = {}
+    yardstick = exp.get("yardstick", ABSOLUTE)
+    if yardstick not in YARDSTICKS:
+        raise ValueError(f"yardstick must be one of {list(YARDSTICKS)}, got {yardstick!r}")
+    if yardstick != ABSOLUTE:
+        out["yardstick"] = yardstick
+    if "top_n" in exp:
+        n = exp["top_n"]
+        if isinstance(n, bool) or not isinstance(n, int) or not 1 <= n <= TOP_N_MAX:
+            raise ValueError(f"top_n must be an integer from 1 to {TOP_N_MAX}, got {n!r}")
+        if n != int(load_universe_config()["picks_per_table"]):
+            out["top_n"] = n
+    return out
 
 
 def load_experiment(path: Path) -> dict:
@@ -179,6 +222,23 @@ def main() -> None:
     for exp_path, exp in experiments:
         exp_id = exp.setdefault("id", exp_path.stem)
         exit_plan = None
+        try:
+            options = parse_scoring_options(exp)
+            reason = None
+        except ValueError as e:
+            options, reason = {}, f"invalid experiment: {e}"
+        if reason is None and options and SCORING_OPTIONS_TRAIN_ONLY and exp.get("split") != "train":
+            reason = f"yardstick / top_n options {options} are train-only observation; not accepted on any other split"
+        if reason:
+            out_dir = done_dir / exp_id
+            out_dir.mkdir(parents=True, exist_ok=True)
+            (out_dir / "refused.json").write_text(json.dumps({"id": exp_id, "reason": reason}, indent=2) + "\n")
+            exp_path.unlink()
+            print(f"{exp_id}: refused - {reason}")
+            continue
+        exp.pop("yardstick", None)
+        exp.pop("top_n", None)
+        exp.update(options)  # only non-default values remain, so a default reads exactly like an absent key
         if "exit" in exp:
             reason = None
             if exp.get("split") != "train":
@@ -233,6 +293,7 @@ def main() -> None:
                                           f"after the split end ({splits[exp['split']].get('end')}) dropped")
         if exit_plan is not None:
             manifest["exit"] = exit_plan
+        manifest.update(options)
         (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
         exp_path.unlink()
         print(f"{exp_id}: {manifest['n_picks']} picks over {manifest['n_dates']} dates -> {out_dir}")

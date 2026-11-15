@@ -1,0 +1,6 @@
+id: b3-m01-top10-month
+strategy: strategies.m01_momentum_12_1
+split: train
+horizon: month
+dates: {start: '2015-01-01', end: '2020-12-31'}
+top_n: 10
