@@ -12,6 +12,7 @@ Observation only. No payoff figure is a gate, a roster input or desk content unt
 
 | Rule | Horizon | Side | Exit plan | Picks | Right | Avg R | Median R | Profit factor | Avg % | Avg hold | Stop / target / time | Worst losing run | Avg R above baseline (t, 95% interval) | Control avg R | Control above baseline (t) | Exit minus control (avg R) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| b1-trend-cross-trail-day | day | bullish | trail: stop 3 ATR from the best close (1R = 3 ATR), time exit after 20 sessions | 878 | 45.2% | -0.007 | -0.139 | 0.98 | -0.13% | 16.3 | 43% / 0% / 57% | 16 | 0.035 (t 1.14, -0.034 to 0.107) | -0.007 | 0.029 (t 0.89) | 0.000 |
 | b1-trend-cross-trail-week | week | bullish | trail: stop 3 ATR from the best close (1R = 3 ATR), time exit after 20 sessions | 192 | 44.3% | 0.049 | -0.152 | 1.14 | 0.27% | 16.5 | 43% / 0% / 57% | 9 | 0.160 (t 2.21, 0.018 to 0.288) | 0.035 | 0.153 (t 2.21) | 0.014 |
 | A01 | week | bearish | fixed: stop 2 ATR (= 1R), target 2R, time exit after 10 sessions | 1528 | 47.3% | -0.004 | -0.080 | 0.99 | 0.00% | 8.2 | 30% / 7% / 63% | 16 | 0.019 (t 0.53, -0.044 to 0.076) | 0.019 | 0.050 (t 1.38) | -0.024 |
 | A01 | week | bearish | time: exit at the close of session 10 (1R = 2 ATR, no stop) | 1528 | 50.6% | 0.019 | 0.012 | 1.05 | 0.03% | 10.0 | 0% / 0% / 100% | 16 | 0.050 (t 1.38, -0.020 to 0.110) | 0.019 | 0.050 (t 1.38) | 0.000 |

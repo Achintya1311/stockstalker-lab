@@ -10,7 +10,7 @@ Intervals: month rows use the engine's moving-block bootstrap (block t); day and
 
 | Id | Horizon | Yardstick | Top n | Picks | Dates | Hit rate | Market line | Edge (pts) | t | 95% interval | Years positive | Dir. move after costs | Avg R above baseline (t) | Profit factor | PASS |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| b1-trend-cross-trail-day | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| b1-trend-cross-trail-day | day | absolute | 5 | 887 | 550 | 44.0% | 44.5% | -0.57 | -0.32 | -4.06 to +2.93 | 5 / 6 (payoff); 3 / 6 (edge) | -0.13% (exit plan); -0.52% (horizon) | 0.035 (t 1.14) | 0.98 | no |
 | b1-trend-cross-trail-week | week | absolute | 5 | 194 | 123 | 47.4% | 49.6% | -2.24 | -0.59 | -9.73 to +5.25 | 4 / 6 (payoff); 2 / 6 (edge) | 0.27% (exit plan); -0.05% (horizon) | 0.160 (t 2.21) | 1.14 | no |
 | b2-a04-relative-month | month | relative | 5 | 1280 | 256 | 51.4% | 49.8% | +1.58 | 0.63 | -3.11 to +5.74 | 3 / 5 | -0.37% |  |  | no |
 | b2-a04-relative-week | week | relative | 5 | 1300 | 260 | 51.6% | 49.8% | +1.79 | 1.10 | -1.39 to +4.97 | 4 / 5 | -0.55% |  |  | no |
@@ -21,8 +21,8 @@ Intervals: month rows use the engine's moving-block bootstrap (block t); day and
 | b3-m01-top15-month | month | absolute | 15 | 3765 | 251 | 54.7% | 53.6% | +1.13 | 0.91 | -1.35 to +3.65 | 2 / 5 | -0.04% |  |  | no |
 | b3-m01-top20-month | month | absolute | 20 | 5020 | 251 | 55.2% | 53.6% | +1.62 | 1.57 | -0.35 to +3.86 | 2 / 5 | -0.00% |  |  | no |
 | b4-long-liquidation-end-day | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| b4-put-writing-day | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| b5-failed-bearish-day | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| b4-put-writing-day | day | absolute | 5 | 6820 | 1386 | 43.8% | 44.9% | -1.27 | -2.12 | -2.44 to -0.10 | 2 / 6 | -0.55% |  |  | no |
+| b5-failed-bearish-day | day | absolute | 5 | 1633 | 692 | 44.0% | 43.6% | +1.30 | 0.91 | -1.49 to +4.09 | 5 / 6 | -0.54% |  |  | no |
 | b5-failed-bearish-week | week | absolute | 5 | 305 | 137 | 51.8% | 47.0% | +7.05 | 2.26 | +0.95 to +13.15 | 6 / 6 | -0.68% |  |  | no |
 
 Passing: none yet.
