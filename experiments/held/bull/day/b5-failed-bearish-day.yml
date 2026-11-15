@@ -1,0 +1,5 @@
+id: b5-failed-bearish-day
+strategy: strategies.b5_failed_bearish
+split: train
+horizon: day
+dates: {start: '2015-01-01', end: '2020-12-31'}

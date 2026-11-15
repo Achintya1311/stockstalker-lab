@@ -1,0 +1,44 @@
+# B4A: put writing on an up day (put OI rises faster than call OI), bullish only.
+# Strategy module strategies/b4_put_writing.py (rules in strategies/bull_core.py). Trial B4 (first reading) of the 14 Nov 2026 bullish plan.
+source_url: ""
+author: "Indian derivatives-desk lore (option-chain reading: put writers defend support); lab hypothesis, no single author"
+license: "folk reading, restated in the lab's own words; nothing copied (SPEC.md section 5)"
+published_on: "unknown"
+horizon: day
+claim_as_stated: >
+  When a stock rises and its put open interest grows faster than its call open interest, sellers of puts are
+  building positions underneath, which reads as support, and the stock tends to keep rising. No audited record.
+rules_plain: |
+  Bullish side only; one fixed parameter set.
+  - The signal session S is the last visible session; S-1 is the panel's previous market date, and the stock must have a row on both.
+  - The stock closed up on S: its close above S's previous-close base (the exchange's adjusted base, so a split is not read as a fall).
+  - Near-month stock option open interest, calls and puts summed across strikes, is present on S and present and above zero on S-1.
+  - The near-month futures expiry is the same on S and S-1 (no expiry roll).
+  - Put OI % change from S-1 to S is above zero and above the call OI % change.
+  - Score = put OI % change minus call OI % change (as fractions).
+params:
+  oi_columns: [oi_ce_optstk, oi_pe_optstk]
+  up_day: "close > prevclose on S"
+  skip_expiry_roll: true
+default_params:
+  oi_columns: [oi_ce_optstk, oi_pe_optstk]
+assumptions:
+  - "'Closed up on the session' = close above the previous close (the bhavcopy PREVCLOSE of S, which is split adjusted), not close above the open."
+  - "'Put OI rose by a larger percentage' = put % change strictly above zero and strictly above the call % change; the call side may rise, be flat or fall."
+  - "Option OI is the dataset's near-month expiry summed across strikes (scripts/build_dataset.py). On the session after an expiry the near-month switches and OI resets, so sessions whose futures expiry differs from S-1's are skipped; NSE stock options and stock futures share the monthly expiry."
+  - "Missing or zero OI on S-1, or missing OI on S, makes the stock abstain; a missing expiry value also abstains."
+  - "Ranking by the raw % spread favours stocks with thin option OI; kept as the owner fixed it."
+  - "Day horizon only; reads only S and S-1."
+data_needed: "ohlcv plus FO bhavcopy stock-option OI (oi_ce_optstk, oi_pe_optstk) and futures expiry (expiry_futstk)"
+testable_now: "yes"
+source: "Bullish plan B4 (14 Nov 2026): option OI held but never used on the bullish side"
+link: ""
+prior_claim: "Desk lore: put writing on a rising stock signals support"
+replays:
+  - experiments/held/bull/day/b4-put-writing-day.yml
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5)."
+  - "One fixed parameter set, fixed before any replay (plan of 14 Nov 2026); nothing tuned."
+  - "OI change cannot tell writing from buying: rising put OI may be protective put buying, which reads the other way."
+  - "Fires often (any up day with the put spread positive); the top-5 selection rests on the ranking."
+status: "held; 1 train replay (day) in experiments/held/bull/day/, none pending"

@@ -10,6 +10,8 @@ Intervals: month rows use the engine's moving-block bootstrap (block t); day and
 
 | Id | Horizon | Yardstick | Top n | Picks | Dates | Hit rate | Market line | Edge (pts) | t | 95% interval | Years positive | Dir. move after costs | Avg R above baseline (t) | Profit factor | PASS |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| b1-trend-cross-trail-day | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| b1-trend-cross-trail-week | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | b2-a04-relative-month | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | b2-a04-relative-week | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | b2-m01-relative-month | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
@@ -18,6 +20,10 @@ Intervals: month rows use the engine's moving-block bootstrap (block t); day and
 | b3-m01-top10-month | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | b3-m01-top15-month | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | b3-m01-top20-month | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| b4-long-liquidation-end-day | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| b4-put-writing-day | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| b5-failed-bearish-day | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| b5-failed-bearish-week | not run yet |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 
 Passing: none yet.
 

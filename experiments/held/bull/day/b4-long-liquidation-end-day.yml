@@ -1,0 +1,5 @@
+id: b4-long-liquidation-end-day
+strategy: strategies.b4_long_liquidation_end
+split: train
+horizon: day
+dates: {start: '2015-01-01', end: '2020-12-31'}

@@ -1,0 +1,40 @@
+# B4B: end of long liquidation, the mirror of E2A, bullish only.
+# Strategy module strategies/b4_long_liquidation_end.py (rules in strategies/bull_core.py). Trial B4 (second reading) of the 14 Nov 2026 bullish plan.
+source_url: ""
+author: "lab-original: mirror of the lab's working bearish rule E2A (cards/E2A.yml) on A02 (cards/A02.yml)"
+license: "own work (SPEC.md section 5)"
+published_on: "2026-11-15"
+horizon: day
+claim_as_stated: >
+  A sharp down day on which futures open interest falls is long holders leaving, not new short sellers
+  arriving; once the forced selling is done the stock tends to recover. Mirror image of E2A (crowded up day
+  with rising OI fades). No audited record.
+rules_plain: |
+  Bullish side only; one fixed parameter set.
+  - A02's test on the signal session S: the close-to-close return on S is at least 2 trailing sigmas down (sigma = the 20 daily returns before S, adjusted closes).
+  - Near-month futures OI change on S is below zero (strict), read exactly as E2A reads it.
+  - Score = A02's score (minus the z of the move), so the deepest falls rank first: E2A's own ranking with the sign mirrored.
+  Imports A02 and the E2 helpers; nothing copied.
+params:
+  base: A02
+  sigma_window: 20
+  z_threshold: 2.0
+  oi_condition: "oi_chg_futstk < 0 on S"
+default_params:
+  base: A02
+assumptions:
+  - "Mirror of E2A's 'OI > 0' is 'OI < 0' (strict); a flat OI day is neither."
+  - "As in E2A, the OI change is the symbol's last visible row's; a missing value makes the stock abstain."
+  - "Overlap: this equals the bullish half of E2B (A02 where OI <= 0) except on days with OI change exactly zero. E2B's day train replay already reported edge +0.88 day-bull (cards/catalog.csv), so this replay mainly repeats that number; tested here because the plan names it."
+data_needed: "ohlcv plus futures OI (oi_chg_futstk)"
+testable_now: "yes"
+source: "Bullish plan B4 (14 Nov 2026); mirror of E2A"
+link: ""
+prior_claim: "E2B day-bull edge +0.88 on train (near-identical rule)"
+replays:
+  - experiments/held/bull/day/b4-long-liquidation-end-day.yml
+red_flags:
+  - "No claim is assumed true (SPEC.md section 5)."
+  - "One fixed parameter set, fixed before any replay (plan of 14 Nov 2026); nothing tuned."
+  - "Near-duplicate of E2B's bullish half (see assumptions); a replay adds a trial for little new information."
+status: "held; 1 train replay (day) in experiments/held/bull/day/, none pending"
