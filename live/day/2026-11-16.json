@@ -309,7 +309,13 @@
           "rsi_band": "neutral",
           "vol_x20": 2.62,
           "range20": 51.6
-        }
+        },
+        "open": 3020.0,
+        "close": 3084.4,
+        "move_pct": 2.1324503311258347,
+        "move_rs": 64.40000000000009,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "TCS",
@@ -627,7 +633,13 @@
           "range20": 42.6,
           "ob_dist": 0.61,
           "ob_side": "demand"
-        }
+        },
+        "open": 2435.0,
+        "close": 2405.0,
+        "move_pct": -1.2320328542094416,
+        "move_rs": -30.0,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "MANAPPURAM",
@@ -936,7 +948,13 @@
           "rsi_band": "neutral",
           "vol_x20": 7.42,
           "range20": 63.0
-        }
+        },
+        "open": 305.0,
+        "close": 303.8,
+        "move_pct": -0.39344262295081256,
+        "move_rs": -1.1999999999999886,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "HAL",
@@ -1245,7 +1263,13 @@
           "rsi_band": "neutral",
           "vol_x20": 1.05,
           "range20": 35.2
-        }
+        },
+        "open": 4814.0,
+        "close": 4789.0,
+        "move_pct": -0.5193186539260486,
+        "move_rs": -25.0,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "TECHM",
@@ -1563,7 +1587,13 @@
           "range20": 71.0,
           "ob_dist": 0.83,
           "ob_side": "demand"
-        }
+        },
+        "open": 1755.5,
+        "close": 1776.4,
+        "move_pct": 1.1905440045571147,
+        "move_rs": 20.90000000000009,
+        "hit": true,
+        "late": false
       }
     ],
     "bearish": []

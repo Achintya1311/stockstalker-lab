@@ -285,7 +285,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 443.3,
+        "close": 441.5,
+        "move_pct": -0.4060455673358887,
+        "move_rs": -1.8000000000000114,
+        "hit": false
       },
       {
         "symbol": "POLICYBZR",
@@ -565,7 +570,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 969.3,
+        "close": 1105.0,
+        "move_pct": 13.999793665531834,
+        "move_rs": 135.70000000000005,
+        "hit": true
       },
       {
         "symbol": "TORNTPHARM",
@@ -845,7 +855,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 4812.5,
+        "close": 4670.0,
+        "move_pct": -2.9610389610389642,
+        "move_rs": -142.5,
+        "hit": false
       },
       {
         "symbol": "SOLARINDS",
@@ -1125,7 +1140,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 18619.0,
+        "close": 19338.0,
+        "move_pct": 3.861646704978794,
+        "move_rs": 719.0,
+        "hit": true
       },
       {
         "symbol": "KAYNES",
@@ -1405,7 +1425,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 3263.0,
+        "close": 3430.0,
+        "move_pct": 5.11798958014098,
+        "move_rs": 167.0,
+        "hit": true
       }
     ],
     "bearish": [
@@ -1694,7 +1719,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 1313.0,
+        "close": 1388.0,
+        "move_pct": 5.712109672505705,
+        "move_rs": 75.0,
+        "hit": false
       },
       {
         "symbol": "MUTHOOTFIN",
@@ -1981,7 +2011,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 2889.0,
+        "close": 2840.0,
+        "move_pct": -1.696088611976465,
+        "move_rs": -49.0,
+        "hit": true
       },
       {
         "symbol": "ASHOKLEY",
@@ -2261,7 +2296,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 178.0,
+        "close": 169.2,
+        "move_pct": -4.943820224719109,
+        "move_rs": -8.800000000000011,
+        "hit": true
       },
       {
         "symbol": "KALYANKJIL",
@@ -2548,7 +2588,12 @@
             "retested": false
           }
         },
-        "late": false
+        "late": false,
+        "open": 595.0,
+        "close": 697.0,
+        "move_pct": 17.14285714285715,
+        "move_rs": 102.0,
+        "hit": false
       },
       {
         "symbol": "NAM-INDIA",
@@ -2828,7 +2873,12 @@
             ]
           ]
         },
-        "late": false
+        "late": false,
+        "open": 1075.5,
+        "close": 1094.1,
+        "move_pct": 1.7294281729428151,
+        "move_rs": 18.59999999999991,
+        "hit": false
       }
     ]
   },

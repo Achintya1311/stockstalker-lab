@@ -314,7 +314,8 @@
           "rsi_band": "neutral",
           "vol_x20": 0.97,
           "range20": 34.4
-        }
+        },
+        "late": false
       },
       {
         "symbol": "OIL",
@@ -623,7 +624,8 @@
           "rsi_band": "weak",
           "vol_x20": 2.44,
           "range20": 37.6
-        }
+        },
+        "late": false
       },
       {
         "symbol": "TORNTPHARM",
@@ -927,7 +929,8 @@
           "rsi_band": "weak",
           "vol_x20": 0.76,
           "range20": 55.2
-        }
+        },
+        "late": false
       },
       {
         "symbol": "SOLARINDS",
@@ -1236,7 +1239,8 @@
           "rsi_band": "neutral",
           "vol_x20": 0.69,
           "range20": 51.3
-        }
+        },
+        "late": false
       },
       {
         "symbol": "LUPIN",
@@ -1545,7 +1549,8 @@
           "rsi_band": "neutral",
           "vol_x20": 0.44,
           "range20": 58.9
-        }
+        },
+        "late": false
       }
     ],
     "bearish": [
@@ -1855,7 +1860,8 @@
           "range20": 90.7,
           "ob_dist": 0.41,
           "ob_side": "demand"
-        }
+        },
+        "late": false
       },
       {
         "symbol": "POLICYBZR",
@@ -2159,7 +2165,8 @@
           "rsi_band": "neutral",
           "vol_x20": 3.12,
           "range20": 96.2
-        }
+        },
+        "late": false
       },
       {
         "symbol": "POWERINDIA",
@@ -2458,7 +2465,8 @@
           "rsi_band": "firm",
           "vol_x20": 5.77,
           "range20": 90.4
-        }
+        },
+        "late": false
       },
       {
         "symbol": "DATAPATTNS",
@@ -2762,7 +2770,8 @@
           "rsi_band": "firm",
           "vol_x20": 1.11,
           "range20": 92.2
-        }
+        },
+        "late": false
       },
       {
         "symbol": "PNB",
@@ -3070,7 +3079,8 @@
           "range20": 91.4,
           "ob_dist": 0.57,
           "ob_side": "demand"
-        }
+        },
+        "late": false
       }
     ]
   },
