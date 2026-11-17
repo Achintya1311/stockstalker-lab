@@ -72,7 +72,7 @@
           "n_hits": 25
         }
       },
-      "market_line": 0.4427528308170906
+      "market_line": 0.44275283081709066
     },
     "day_bearish": {
       "n_picks": 133,
@@ -294,16 +294,16 @@
           "n_hits": 9
         }
       },
-      "market_line": 0.6166467242166357
+      "market_line": 0.6166467242166356
     },
     "description": "Exam: the go-live strategies replayed once, in the first live run, on every session from 3 Aug 2026 up to go-live, using only data available before each session, then scored the same way as live picks. It was written after those sessions, so it is a back-test, not a live record. The live record starts on frozen_before.",
     "frozen_before": "2026-11-02"
   },
   "live": {
     "day_bullish": {
-      "n_picks": 20,
-      "n_scored": 15,
-      "n_hits": 7,
+      "n_picks": 25,
+      "n_scored": 20,
+      "n_hits": 10,
       "by_week": {
         "2026-W45": {
           "n_picks": 3,
@@ -314,22 +314,22 @@
           "n_hits": 2
         },
         "2026-W47": {
-          "n_picks": 10,
-          "n_hits": 2
+          "n_picks": 15,
+          "n_hits": 5
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 20,
-          "n_hits": 7
+          "n_picks": 25,
+          "n_hits": 10
         }
       },
-      "market_line": 0.5769585253456222
+      "market_line": 0.5781315458734814
     },
     "day_bearish": {
       "n_picks": 35,
-      "n_scored": 33,
-      "n_hits": 14,
+      "n_scored": 35,
+      "n_hits": 15,
       "by_week": {
         "2026-W45": {
           "n_picks": 19,
@@ -341,16 +341,16 @@
         },
         "2026-W47": {
           "n_picks": 2,
-          "n_hits": 0
+          "n_hits": 1
         }
       },
       "by_month": {
         "2026-11": {
           "n_picks": 35,
-          "n_hits": 14
+          "n_hits": 15
         }
       },
-      "market_line": 0.4142857142857143
+      "market_line": 0.4126518642647674
     },
     "week_bullish": {
       "n_picks": 15,
@@ -376,7 +376,7 @@
           "n_hits": 7
         }
       },
-      "market_line": 0.6190476190476191
+      "market_line": 0.6666666666666666
     },
     "week_bearish": {
       "n_picks": 15,
@@ -402,7 +402,7 @@
           "n_hits": 4
         }
       },
-      "market_line": 0.3778801843317972
+      "market_line": 0.3317972350230414
     }
   }
 }

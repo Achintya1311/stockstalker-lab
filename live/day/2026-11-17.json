@@ -343,7 +343,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 2395.0,
+        "close": 2406.6,
+        "move_pct": 0.4843423799582469,
+        "move_rs": 11.599999999999909,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "HAL",
@@ -681,7 +687,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 4798.0,
+        "close": 4727.0,
+        "move_pct": -1.4797832430179292,
+        "move_rs": -71.0,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "NAUKRI",
@@ -1019,7 +1031,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1164.1,
+        "close": 1175.0,
+        "move_pct": 0.9363456747702115,
+        "move_rs": 10.900000000000091,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "JSWENERGY",
@@ -1357,7 +1375,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 510.6,
+        "close": 514.9,
+        "move_pct": 0.8421464943203949,
+        "move_rs": 4.2999999999999545,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "WIPRO",
@@ -1704,7 +1728,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 192.2,
+        "close": 189.89,
+        "move_pct": -1.201873048907387,
+        "move_rs": -2.3100000000000023,
+        "hit": false,
+        "late": false
       }
     ],
     "bearish": [
@@ -2053,7 +2083,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 6
+        "checks_total": 6,
+        "open": 1020.0,
+        "close": 1030.9,
+        "move_pct": 1.0686274509803972,
+        "move_rs": 10.900000000000091,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "ITC",
@@ -2395,7 +2431,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "open": 295.15,
+        "close": 293.3,
+        "move_pct": -0.6267999322378315,
+        "move_rs": -1.849999999999966,
+        "hit": true,
+        "late": false
       }
     ]
   },
