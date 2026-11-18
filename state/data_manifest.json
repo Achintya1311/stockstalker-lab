@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-17T21:54Z",
-  "rows": 5024013,
+  "generated_at": "2026-11-18T21:32Z",
+  "rows": 5026769,
   "symbols": 3865,
   "date_start": "2015-01-01",
-  "date_end": "2026-11-17",
-  "trading_days": 2941,
+  "date_end": "2026-11-18",
+  "trading_days": 2942,
   "max_gap_days": 5,
-  "sha256": "38c8353e2558b0ff6cdc5e835d2add2327daa54fdab802a26549ee686027d1b6"
+  "sha256": "86651c48075af9bdeddc91cb53e423f3a87fdb675b258547393e0764a9631d79"
 }
