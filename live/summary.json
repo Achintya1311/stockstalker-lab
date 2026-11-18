@@ -146,7 +146,7 @@
           "n_hits": 24
         }
       },
-      "market_line": 0.5481845759964705
+      "market_line": 0.5481845759964704
     },
     "week_bullish": {
       "n_picks": 65,
@@ -220,7 +220,7 @@
           "n_hits": 8
         }
       },
-      "market_line": 0.3807818619403009
+      "market_line": 0.38078186194030095
     },
     "week_bearish": {
       "n_picks": 65,
@@ -294,15 +294,15 @@
           "n_hits": 9
         }
       },
-      "market_line": 0.6166467242166356
+      "market_line": 0.6166467242166357
     },
     "description": "Exam: the go-live strategies replayed once, in the first live run, on every session from 3 Aug 2026 up to go-live, using only data available before each session, then scored the same way as live picks. It was written after those sessions, so it is a back-test, not a live record. The live record starts on frozen_before.",
     "frozen_before": "2026-11-02"
   },
   "live": {
     "day_bullish": {
-      "n_picks": 25,
-      "n_scored": 20,
+      "n_picks": 30,
+      "n_scored": 25,
       "n_hits": 10,
       "by_week": {
         "2026-W45": {
@@ -314,17 +314,17 @@
           "n_hits": 2
         },
         "2026-W47": {
-          "n_picks": 15,
+          "n_picks": 20,
           "n_hits": 5
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 25,
+          "n_picks": 30,
           "n_hits": 10
         }
       },
-      "market_line": 0.5781315458734814
+      "market_line": 0.5526113671274961
     },
     "day_bearish": {
       "n_picks": 35,
@@ -350,7 +350,7 @@
           "n_hits": 15
         }
       },
-      "market_line": 0.4126518642647674
+      "market_line": 0.4385560675883256
     },
     "week_bullish": {
       "n_picks": 15,
@@ -376,7 +376,7 @@
           "n_hits": 7
         }
       },
-      "market_line": 0.6666666666666666
+      "market_line": 0.6159754224270353
     },
     "week_bearish": {
       "n_picks": 15,
@@ -402,7 +402,7 @@
           "n_hits": 4
         }
       },
-      "market_line": 0.3317972350230414
+      "market_line": 0.38402457757296465
     }
   }
 }

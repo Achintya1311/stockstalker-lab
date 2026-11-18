@@ -343,7 +343,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 4732.9,
+        "close": 4675.0,
+        "move_pct": -1.2233514335819429,
+        "move_rs": -57.899999999999636,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "WIPRO",
@@ -690,7 +696,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 188.2,
+        "close": 185.14,
+        "move_pct": -1.6259298618490958,
+        "move_rs": -3.0600000000000023,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "JSWSTEEL",
@@ -1027,7 +1039,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1320.6,
+        "close": 1315.9,
+        "move_pct": -0.3558988338633773,
+        "move_rs": -4.699999999999818,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "IDEA",
@@ -1365,7 +1383,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 12.28,
+        "close": 12.1,
+        "move_pct": -1.4657980456026065,
+        "move_rs": -0.17999999999999972,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "SIEMENS",
@@ -1712,7 +1736,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 3565.5,
+        "close": 3520.0,
+        "move_pct": -1.2761183564717449,
+        "move_rs": -45.5,
+        "hit": false,
+        "late": false
       }
     ],
     "bearish": []
