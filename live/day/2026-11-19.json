@@ -343,7 +343,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 4690.0,
+        "close": 4760.0,
+        "move_pct": 1.4925373134328401,
+        "move_rs": 70.0,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "JSWSTEEL",
@@ -685,7 +691,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1308.2,
+        "close": 1336.8,
+        "move_pct": 2.1862100596238943,
+        "move_rs": 28.59999999999991,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "TCS",
@@ -1023,7 +1035,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 2367.0,
+        "close": 2342.7,
+        "move_pct": -1.0266159695817567,
+        "move_rs": -24.300000000000182,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "IDEA",
@@ -1361,7 +1379,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 12.09,
+        "close": 12.11,
+        "move_pct": 0.16542597187758634,
+        "move_rs": 0.019999999999999574,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "PERSISTENT",
@@ -1699,7 +1723,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 5870.0,
+        "close": 5880.0,
+        "move_pct": 0.17035775127767216,
+        "move_rs": 10.0,
+        "hit": true,
+        "late": false
       }
     ],
     "bearish": []
