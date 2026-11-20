@@ -104,3 +104,15 @@ def test_checks_use_only_the_history_the_pick_was_made_from():
     future.loc[future["date"] >= session, "close"] *= 1.3
     b = pick_table(future, fake, "t04_connors_rsi2@v1", session, 1, asof)
     assert a[0]["checks"] == b[0]["checks"]
+
+
+def test_composite_table_rule_gets_trigger_checks_without_its_own_gates():
+    from picks import checks as C
+    from strategies import composite_v1 as C1
+
+    assert C.trigger_of("strategies.composite_v1_day_bearish") == "e2a"
+    assert C.selecting_gates("strategies.composite_v1_day_bearish") == C1.COMPOSITES["day_bearish"][1]
+    assert C.trigger_of("strategies.composite_v1_day_bearish_not") is None
+    assert C.selecting_gates("strategies.e2a_a02_crowded") == ()
+    shown = [g for g in C.candidates_for("e2a") if g not in C.selecting_gates("strategies.composite_v1_day_bearish")]
+    assert "g2" not in shown and shown

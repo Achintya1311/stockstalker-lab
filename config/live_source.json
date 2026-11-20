@@ -1,5 +1,5 @@
 {
-  "chosen_on": "2026-10-30",
+  "chosen_on": "2026-11-20",
   "tables": {
     "day_bullish": {
       "strategy": "t04_connors_rsi2@v1",
@@ -7,9 +7,9 @@
       "why": "AB's edge-only rule for bullish tables (26 Oct 2026, SPEC 10 wording change pending a supervised session): highest released validation edge among day-bullish readings with at least 500 train picks and a positive train edge: +4.36 (train +3.37, 3,952 picks). Directional move after costs is negative. research/notes/validation_answers_2026-10-26.md"
     },
     "day_bearish": {
-      "strategy": "e2a_a02_crowded@v1",
+      "strategy": "composite_v1_day_bearish@v1",
       "label": "provisional",
-      "why": "highest released validation edge among eligible day-bearish strategies: +6.72 (train +7.46); research/notes/validation_answers_2026-10-26.md"
+      "why": "E2A with the market-leader filter G2 (COMPOSITE_V1 day bearish): released validation edge +8.31 held (train equal), at least 1 point above E2A's +6.72 (SPEC 10); ledger/holdout_queries.csv row composite-v1-day-bearish-day-validation-bearish; AB approved 14 Nov 2026. E2A keeps its public record under its own name."
     },
     "week_bullish": {
       "strategy": "a05b_max_effect_ranked@v1",

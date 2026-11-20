@@ -20,7 +20,10 @@ PROVISIONAL = "Provisional strategy: it has not yet passed the lab's validation 
 @pytest.mark.skipif(not LIVE_SOURCE_PATH.exists(), reason="no live source committed")
 def test_live_source_contract():
     source = json.loads(LIVE_SOURCE_PATH.read_text())
-    assert source["chosen_on"] == "2026-10-30"
+    # first file 30 Oct 2026; it changes only on a roster day (the week's last trading day, SPEC 10)
+    import datetime as dt
+    chosen = dt.date.fromisoformat(source["chosen_on"])
+    assert chosen >= dt.date(2026, 10, 30)
     assert set(source["tables"]) == set(TABLE_KEYS)
     for table in source["tables"].values():
         assert table["label"] in ("provisional", "gated")
