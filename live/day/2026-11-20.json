@@ -333,7 +333,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1326.0,
+        "close": 1344.4,
+        "move_pct": 1.3876319758672873,
+        "move_rs": 18.40000000000009,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "TECHM",
@@ -671,7 +677,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1719.8,
+        "close": 1746.2,
+        "move_pct": 1.5350622165368089,
+        "move_rs": 26.40000000000009,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "PAYTM",
@@ -1009,7 +1021,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1730.0,
+        "close": 1740.0,
+        "move_pct": 0.5780346820809301,
+        "move_rs": 10.0,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "APLAPOLLO",
@@ -1356,7 +1374,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 2124.0,
+        "close": 2121.6,
+        "move_pct": -0.1129943502824915,
+        "move_rs": -2.400000000000091,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "TORNTPHARM",
@@ -1689,7 +1713,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 4618.9,
+        "close": 4689.5,
+        "move_pct": 1.5285024572950334,
+        "move_rs": 70.60000000000036,
+        "hit": true,
+        "late": false
       }
     ],
     "bearish": []
