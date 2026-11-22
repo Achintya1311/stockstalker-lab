@@ -352,7 +352,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "late": false
       },
       {
         "symbol": "KARURVYSYA",
@@ -690,7 +691,8 @@
           }
         ],
         "checks_agree": 5,
-        "checks_total": 5
+        "checks_total": 5,
+        "late": false
       }
     ],
     "bearish": []
