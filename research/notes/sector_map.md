@@ -1,0 +1,6 @@
+# Sector map (`config/sectors.csv`, FINISH F13, design lab-requests L2)
+
+- **Source, in order:** NSE's Nifty 500 constituent list (`ind_nifty500list.csv`, its `Industry` column), then three hand-checked rows in `config/sectors_manual.csv`. A manual row never overrides an NSE row.
+- **How it was read (22 Nov 2026):** niftyindices.com and nseindia.com are blocked from the build session, so the list came from the copy NSE's file is mirrored to in the public PKScreener repository (`results/Indices/ind_nifty500list.csv`, same five NSE columns, 501 stocks). To refresh from NSE directly: download the file, then `python3 scripts/build_sectors.py --constituents ind_nifty500list.csv --checked <date>`.
+- **Coverage:** 504 symbols. Against the F&O universe in `live/day/2026-11-23.json` (218 stocks): 215 from the NSE list, 3 manual (UJJIVANSFB outside the Nifty 500; LTM and ICICILIFE are the current symbols of names the list still carries as LTIM and ICICIPRULI, neither of which is in the F&O universe now). 100% covered; the pass rule is at least 95% (`tests/test_sectors.py`).
+- **Limitation:** NSE's industry level is coarse. "Financial Services" holds banks, lenders and insurers together (97 of 504 rows). A sector line on the desk is a grouping for display, not a research claim.

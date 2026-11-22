@@ -7,7 +7,11 @@ moves across the eligible universe in fixed bins; `m` is that same move for each
 decimals (null when the stock has no bar), so a page can show a board of the market. Built from the same
 truncated history the picks use. `p` is the stock's cumulative percent move over the last `PATH_SESSIONS`
 sessions, one value per session (close against the exchange's adjusted previous close, so splits do not
-show as moves), null when the stock has fewer bars; `path_dates` names those sessions.
+show as moves), null when the stock has fewer bars; `path_dates` names those sessions. `o` is the stock's
+open-interest state on its last session, from the sign of the price change (close against adjusted previous
+close) times the sign of the near-month stock-future OI change in the F&O bhavcopy: `LB` long build-up
+(up, OI up), `SB` short build-up (down, OI up), `SC` short covering (up, OI down), `LU` long unwinding (down,
+OI down); null with no future, a flat price or OI, or missing fields. A description of positioning, not a signal.
 """
 
 from __future__ import annotations
@@ -55,6 +59,28 @@ def recent_paths(history: pd.DataFrame, eligible: set[str], n: int = PATH_SESSIO
     return dates, out
 
 
+OI_STATES = {(1, 1): "LB", (-1, 1): "SB", (1, -1): "SC", (-1, -1): "LU"}
+
+
+def oi_states(history: pd.DataFrame, eligible: set[str]) -> dict[str, str]:
+    """Each eligible stock's OI state (LB / SB / SC / LU) on its last bar; stocks without one are left out."""
+    need = {"close", "prevclose", "oi_chg_futstk"}
+    if history.empty or not need <= set(history.columns):
+        return {}
+    last = history[history["symbol"].isin(eligible)].sort_values("date").groupby("symbol").tail(1)
+    out = {}
+    for row in last.itertuples(index=False):
+        if "has_future" in last.columns and not bool(row.has_future):
+            continue
+        close, prev, chg = row.close, row.prevclose, row.oi_chg_futstk
+        if pd.isna(close) or pd.isna(prev) or pd.isna(chg) or prev <= 0:
+            continue
+        state = OI_STATES.get((int(np.sign(close - prev)), int(np.sign(chg))))
+        if state:
+            out[row.symbol] = state
+    return out
+
+
 def breadth(history: pd.DataFrame, eligible: set[str]) -> dict:
     moves = last_moves(history, eligible).to_numpy()
     edges = [-np.inf, *BIN_EDGES, np.inf]
@@ -70,6 +96,8 @@ def build_xray(dataset: pd.DataFrame, source: dict, session: str, asof: str) -> 
     bear = _percentiles(resolve_strategy(bear_cfg["strategy"]).score(history), eligible, -1)
     moves = {sym: round(float(v), 2) for sym, v in last_moves(history, eligible).items() if np.isfinite(v)}
     dates, paths = recent_paths(history, eligible)
-    stocks = [{"s": sym, "b": bull.get(sym), "d": bear.get(sym), "m": moves.get(sym), "p": paths.get(sym)} for sym in sorted(eligible)]
+    oi = oi_states(history, eligible)
+    stocks = [{"s": sym, "b": bull.get(sym), "d": bear.get(sym), "m": moves.get(sym), "p": paths.get(sym), "o": oi.get(sym)}
+              for sym in sorted(eligible)]
     return {"asof": asof, "path_dates": dates, "bullish_strategy": bull_cfg["strategy"], "bearish_strategy": bear_cfg["strategy"],
             "n": len(stocks), "stocks": stocks, "breadth": breadth(history, eligible)}

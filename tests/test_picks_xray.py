@@ -20,7 +20,7 @@ def test_xray_ranks_each_side_among_its_own_names_and_publishes_no_prices():
     assert set(by) == {"UP", "UP2", "DOWN", "FLAT"} and x["n"] == 4
     assert by["UP2"]["b"] == 100 and by["UP"]["b"] < by["UP2"]["b"]      # stronger trend ranks higher among bullish names
     assert by["DOWN"]["d"] == 100 and by["DOWN"]["b"] is None            # bearish name has no bullish rank
-    assert all(set(r) == {"s", "b", "d", "m", "p"} for r in x["stocks"])  # ranks and percent moves only: no price fields
+    assert all(set(r) == {"s", "b", "d", "m", "p", "o"} for r in x["stocks"])  # ranks, percent moves, OI state: no price fields
 
 
 def test_xray_move_is_the_last_open_to_close_percent_and_agrees_with_breadth():
@@ -56,3 +56,27 @@ def test_xray_path_is_the_cumulative_percent_over_the_last_sessions():
     assert len(by["UP"]["p"]) == PATH_SESSIONS
     assert by["UP"]["p"][0] == 1.0 and by["UP"]["p"][-1] == round((1.01 ** PATH_SESSIONS - 1) * 100, 1)   # +1% a day, compounded
     assert by["FLAT"]["p"] == [0.0] * PATH_SESSIONS and by["DOWN"]["p"][-1] < 0
+
+
+def test_xray_oi_state_is_price_sign_times_oi_change_sign_on_the_last_session():
+    ds, asof, session = _setup()
+    ds["oi_futstk"] = 100_000.0
+    ds["oi_chg_futstk"] = 0.0
+    last = ds["date"] == asof
+    for sym, chg in {"UP": 500.0, "UP2": -500.0, "DOWN": 500.0, "FLAT": 500.0}.items():
+        ds.loc[last & (ds["symbol"] == sym), "oi_chg_futstk"] = chg
+    ds.loc[(ds["date"] == session) & (ds["symbol"] == "UP"), "oi_chg_futstk"] = -9e9   # the pick session itself is never read
+    by = {r["s"]: r["o"] for r in build_xray(ds, SOURCE, session, asof)["stocks"]}
+    assert by == {"UP": "LB", "UP2": "SC", "DOWN": "SB", "FLAT": None}                  # flat price: no state
+
+
+def test_xray_oi_state_long_unwinding_and_nulls_without_a_future_or_oi_data():
+    from picks.xray import oi_states
+    ds, asof, session = _setup()
+    assert all(r["o"] is None for r in build_xray(ds, SOURCE, session, asof)["stocks"])  # no OI columns at all
+    ds["oi_chg_futstk"] = -10.0
+    hist = ds[ds["date"] < session].copy()
+    assert oi_states(hist, {"DOWN", "UP"}) == {"DOWN": "LU", "UP": "SC"}
+    hist.loc[hist["symbol"] == "DOWN", "has_future"] = False
+    hist.loc[hist["symbol"] == "UP", "oi_chg_futstk"] = float("nan")
+    assert oi_states(hist, {"DOWN", "UP"}) == {}
