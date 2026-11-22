@@ -338,7 +338,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "TCS",
@@ -681,7 +682,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "TECHM",
@@ -1024,7 +1026,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "SOLARINDS",
@@ -1367,7 +1370,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "OIL",
@@ -1705,7 +1709,8 @@
           }
         ],
         "checks_agree": 1,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       }
     ],
     "bearish": [
@@ -2049,7 +2054,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "BLUESTARCO",
@@ -2391,7 +2397,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "IREDA",
@@ -2733,7 +2740,8 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "IDFCFIRSTB",
@@ -3080,7 +3088,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       },
       {
         "symbol": "INDUSINDBK",
@@ -3422,7 +3431,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 6
+        "checks_total": 6,
+        "late": false
       }
     ]
   },

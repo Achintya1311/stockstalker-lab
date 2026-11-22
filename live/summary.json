@@ -146,7 +146,7 @@
           "n_hits": 24
         }
       },
-      "market_line": 0.5481845759964705
+      "market_line": 0.5481845759964704
     },
     "week_bullish": {
       "n_picks": 65,
@@ -220,7 +220,7 @@
           "n_hits": 8
         }
       },
-      "market_line": 0.3807818619403009
+      "market_line": 0.38078186194030084
     },
     "week_bearish": {
       "n_picks": 65,
@@ -294,7 +294,7 @@
           "n_hits": 9
         }
       },
-      "market_line": 0.6166467242166357
+      "market_line": 0.6166467242166356
     },
     "description": "Exam: the go-live strategies replayed once, in the first live run, on every session from 3 Aug 2026 up to go-live, using only data available before each session, then scored the same way as live picks. It was written after those sessions, so it is a back-test, not a live record. The live record starts on frozen_before.",
     "frozen_before": "2026-11-02"
