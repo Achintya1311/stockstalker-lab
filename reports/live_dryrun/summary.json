@@ -5,9 +5,9 @@
   },
   "live": {
     "day_bullish": {
-      "n_picks": 20,
-      "n_scored": 10,
-      "n_hits": 7,
+      "n_picks": 22,
+      "n_scored": 15,
+      "n_hits": 11,
       "by_week": {
         "2026-W43": {
           "n_picks": 5,
@@ -19,7 +19,11 @@
         },
         "2026-W47": {
           "n_picks": 10,
-          "n_hits": 2
+          "n_hits": 6
+        },
+        "2026-W48": {
+          "n_picks": 2,
+          "n_hits": 0
         }
       },
       "by_month": {
@@ -28,11 +32,11 @@
           "n_hits": 5
         },
         "2026-11": {
-          "n_picks": 10,
-          "n_hits": 2
+          "n_picks": 12,
+          "n_hits": 6
         }
       },
-      "market_line": 0.5474523954438745
+      "market_line": 0.5907669044601095
     },
     "day_bearish": {
       "n_picks": 23,
@@ -66,10 +70,10 @@
           "n_hits": 1
         }
       },
-      "market_line": 0.44793930962525
+      "market_line": 0.40233474578862577
     },
     "week_bullish": {
-      "n_picks": 15,
+      "n_picks": 20,
       "n_scored": 10,
       "n_hits": 6,
       "by_week": {
@@ -84,6 +88,10 @@
         "2026-W47": {
           "n_picks": 5,
           "n_hits": 0
+        },
+        "2026-W48": {
+          "n_picks": 5,
+          "n_hits": 0
         }
       },
       "by_month": {
@@ -92,14 +100,14 @@
           "n_hits": 6
         },
         "2026-11": {
-          "n_picks": 5,
+          "n_picks": 10,
           "n_hits": 0
         }
       },
-      "market_line": 0.6330645161290323
+      "market_line": 0.6399769585253456
     },
     "week_bearish": {
-      "n_picks": 15,
+      "n_picks": 20,
       "n_scored": 10,
       "n_hits": 6,
       "by_week": {
@@ -114,6 +122,10 @@
         "2026-W47": {
           "n_picks": 5,
           "n_hits": 0
+        },
+        "2026-W48": {
+          "n_picks": 5,
+          "n_hits": 0
         }
       },
       "by_month": {
@@ -122,11 +134,11 @@
           "n_hits": 6
         },
         "2026-11": {
-          "n_picks": 5,
+          "n_picks": 10,
           "n_hits": 0
         }
       },
-      "market_line": 0.36457699330493
+      "market_line": 0.35766455090861665
     }
   }
 }
