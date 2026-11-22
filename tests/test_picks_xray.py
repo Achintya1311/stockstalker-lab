@@ -60,12 +60,12 @@ def test_xray_path_is_the_cumulative_percent_over_the_last_sessions():
 
 def test_xray_oi_state_is_price_sign_times_oi_change_sign_on_the_last_session():
     ds, asof, session = _setup()
-    ds["oi_futstk"] = 100_000.0
-    ds["oi_chg_futstk"] = 0.0
+    ds["oi_chg_futstk"] = -1e6        # near-month OI falls everywhere (rollover): must not be read
+    ds["oi_chg_all_futstk"] = 0.0
     last = ds["date"] == asof
     for sym, chg in {"UP": 500.0, "UP2": -500.0, "DOWN": 500.0, "FLAT": 500.0}.items():
-        ds.loc[last & (ds["symbol"] == sym), "oi_chg_futstk"] = chg
-    ds.loc[(ds["date"] == session) & (ds["symbol"] == "UP"), "oi_chg_futstk"] = -9e9   # the pick session itself is never read
+        ds.loc[last & (ds["symbol"] == sym), "oi_chg_all_futstk"] = chg
+    ds.loc[(ds["date"] == session) & (ds["symbol"] == "UP"), "oi_chg_all_futstk"] = -9e9   # the pick session itself is never read
     by = {r["s"]: r["o"] for r in build_xray(ds, SOURCE, session, asof)["stocks"]}
     assert by == {"UP": "LB", "UP2": "SC", "DOWN": "SB", "FLAT": None}                  # flat price: no state
 
@@ -75,8 +75,10 @@ def test_xray_oi_state_long_unwinding_and_nulls_without_a_future_or_oi_data():
     ds, asof, session = _setup()
     assert all(r["o"] is None for r in build_xray(ds, SOURCE, session, asof)["stocks"])  # no OI columns at all
     ds["oi_chg_futstk"] = -10.0
+    assert all(r["o"] is None for r in build_xray(ds, SOURCE, session, asof)["stocks"])  # near-month only: no state
+    ds["oi_chg_all_futstk"] = -10.0
     hist = ds[ds["date"] < session].copy()
     assert oi_states(hist, {"DOWN", "UP"}) == {"DOWN": "LU", "UP": "SC"}
     hist.loc[hist["symbol"] == "DOWN", "has_future"] = False
-    hist.loc[hist["symbol"] == "UP", "oi_chg_futstk"] = float("nan")
+    hist.loc[hist["symbol"] == "UP", "oi_chg_all_futstk"] = float("nan")
     assert oi_states(hist, {"DOWN", "UP"}) == {}

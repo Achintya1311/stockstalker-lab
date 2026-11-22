@@ -92,6 +92,7 @@ def test_parse_fo_old_keeps_near_month_oi_when_several_expiries_trade(tmp_path):
     assert list(out["symbol"]) == ["RELIANCE"]
     assert out.iloc[0]["open_int"] == 10000.0 and out.iloc[0]["chg_in_oi"] == 100.0
     assert out.iloc[0]["expiry"] == "2015-01-29"  # the soonest, not 26-FEB/26-MAR
+    assert out.iloc[0]["open_int_all"] == 12500.0 and out.iloc[0]["chg_in_oi_all"] == 135.0   # all three expiries summed
 
 
 UDIFF_FO_TWO_EXPIRIES_CSV = (
@@ -112,6 +113,7 @@ def test_parse_fo_udiff_keeps_near_month_oi_when_several_expiries_trade(tmp_path
     assert list(out["symbol"]) == ["RELIANCE"]
     assert out.iloc[0]["open_int"] == 10000.0 and out.iloc[0]["chg_in_oi"] == 50.0
     assert out.iloc[0]["expiry"] == "2024-07-25"  # the soonest, not 2024-08-29
+    assert out.iloc[0]["open_int_all"] == 12000.0 and out.iloc[0]["chg_in_oi_all"] == 60.0
 
 
 def test_parse_cm_udiff_keeps_only_eq_stk(tmp_path):

@@ -127,7 +127,11 @@ def parse_fo_file(path: Path) -> pd.DataFrame:
     month) on the same date; D01's "near-month futures OI" convention means
     the soonest-expiry contract, so where more than one expiry is present the
     others are dropped here, not averaged or summed - same convention applies
-    to which expiry date is kept.
+    to which expiry date is kept. `open_int_all`/`chg_in_oi_all` add the same
+    two fields summed across every live expiry of the symbol (the desk's OI
+    state, FINISH F13): near-month OI alone falls for every stock in the days
+    before expiry as positions roll to the next month, which reads as
+    unwinding everywhere; the all-expiry total does not.
     """
     df = _read_zip_csv(path)
     d = _filename_date(path)
@@ -151,9 +155,11 @@ def parse_fo_file(path: Path) -> pd.DataFrame:
     else:
         raise ValueError(f"unrecognised FO bhavcopy columns in {path}: {sorted(cols)}")
     out["date"] = d
+    totals = out.groupby("symbol")[["open_int", "chg_in_oi"]].sum(min_count=1).add_suffix("_all")
     out = out.sort_values("expiry").drop_duplicates(subset=["symbol"], keep="first")
     out["expiry"] = out["expiry"].dt.strftime("%Y-%m-%d")
-    return out[["date", "symbol", "open_int", "chg_in_oi", "expiry"]].reset_index(drop=True)
+    out = out.join(totals, on="symbol")
+    return out[["date", "symbol", "open_int", "chg_in_oi", "expiry", "open_int_all", "chg_in_oi_all"]].reset_index(drop=True)
 
 
 def parse_fo_options_file(path: Path) -> pd.DataFrame:
@@ -241,7 +247,7 @@ def build(raw_root: Path) -> pd.DataFrame:
 
     prices = pd.concat(cm_frames, ignore_index=True) if cm_frames else pd.DataFrame(columns=PRICE_COLUMNS)
     futures = (pd.concat(fo_frames, ignore_index=True) if fo_frames
-               else pd.DataFrame(columns=["date", "symbol", "open_int", "chg_in_oi", "expiry"]))
+               else pd.DataFrame(columns=["date", "symbol", "open_int", "chg_in_oi", "expiry", "open_int_all", "chg_in_oi_all"]))
     options = (pd.concat(options_frames, ignore_index=True) if options_frames
                else pd.DataFrame(columns=["date", "symbol", "oi_ce_optstk", "oi_pe_optstk"]))
     delivery = (pd.concat(delivery_frames, ignore_index=True) if delivery_frames
@@ -252,7 +258,8 @@ def build(raw_root: Path) -> pd.DataFrame:
     options = options.drop_duplicates(subset=["date", "symbol"], keep="last")
     delivery = delivery.drop_duplicates(subset=["date", "symbol"], keep="last")
     futures["has_future"] = True
-    futures = futures.rename(columns={"open_int": "oi_futstk", "chg_in_oi": "oi_chg_futstk", "expiry": "expiry_futstk"})
+    futures = futures.rename(columns={"open_int": "oi_futstk", "chg_in_oi": "oi_chg_futstk", "expiry": "expiry_futstk",
+                                      "open_int_all": "oi_all_futstk", "chg_in_oi_all": "oi_chg_all_futstk"})
 
     merged = prices.merge(futures, on=["date", "symbol"], how="left")
     merged["has_future"] = merged["has_future"].fillna(False)
@@ -296,7 +303,7 @@ def main() -> None:
 
     raw_root = Path(a.raw)
     out_path = Path(a.out)
-    empty_columns = PRICE_COLUMNS + ["has_future", "oi_futstk", "oi_chg_futstk", "expiry_futstk", "deliv_qty", "deliv_pct"]
+    empty_columns = PRICE_COLUMNS + ["has_future", "oi_futstk", "oi_chg_futstk", "expiry_futstk", "oi_all_futstk", "oi_chg_all_futstk", "deliv_qty", "deliv_pct"]
     fresh = build(raw_root) if raw_root.exists() else pd.DataFrame(columns=empty_columns)
 
     existing = pd.read_parquet(out_path) if out_path.exists() else pd.DataFrame(columns=empty_columns)

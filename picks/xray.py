@@ -9,7 +9,8 @@ truncated history the picks use. `p` is the stock's cumulative percent move over
 sessions, one value per session (close against the exchange's adjusted previous close, so splits do not
 show as moves), null when the stock has fewer bars; `path_dates` names those sessions. `o` is the stock's
 open-interest state on its last session, from the sign of the price change (close against adjusted previous
-close) times the sign of the near-month stock-future OI change in the F&O bhavcopy: `LB` long build-up
+close) times the sign of the stock-future OI change summed over every live expiry (`oi_chg_all_futstk`; near-month OI alone
+falls everywhere in the days before expiry as positions roll, which would read as unwinding on every stock): `LB` long build-up
 (up, OI up), `SB` short build-up (down, OI up), `SC` short covering (up, OI down), `LU` long unwinding (down,
 OI down); null with no future, a flat price or OI, or missing fields. A description of positioning, not a signal.
 """
@@ -64,7 +65,7 @@ OI_STATES = {(1, 1): "LB", (-1, 1): "SB", (1, -1): "SC", (-1, -1): "LU"}
 
 def oi_states(history: pd.DataFrame, eligible: set[str]) -> dict[str, str]:
     """Each eligible stock's OI state (LB / SB / SC / LU) on its last bar; stocks without one are left out."""
-    need = {"close", "prevclose", "oi_chg_futstk"}
+    need = {"close", "prevclose", "oi_chg_all_futstk"}
     if history.empty or not need <= set(history.columns):
         return {}
     last = history[history["symbol"].isin(eligible)].sort_values("date").groupby("symbol").tail(1)
@@ -72,7 +73,7 @@ def oi_states(history: pd.DataFrame, eligible: set[str]) -> dict[str, str]:
     for row in last.itertuples(index=False):
         if "has_future" in last.columns and not bool(row.has_future):
             continue
-        close, prev, chg = row.close, row.prevclose, row.oi_chg_futstk
+        close, prev, chg = row.close, row.prevclose, row.oi_chg_all_futstk
         if pd.isna(close) or pd.isna(prev) or pd.isna(chg) or prev <= 0:
             continue
         state = OI_STATES.get((int(np.sign(close - prev)), int(np.sign(chg))))
