@@ -343,7 +343,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "late": false
       },
       {
         "symbol": "CHOLAFIN",
@@ -676,7 +677,8 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "late": false
       }
     ],
     "bearish": []

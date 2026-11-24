@@ -72,7 +72,7 @@
           "n_hits": 25
         }
       },
-      "market_line": 0.44275283081709066
+      "market_line": 0.44275283081709077
     },
     "day_bearish": {
       "n_picks": 133,
@@ -220,7 +220,7 @@
           "n_hits": 8
         }
       },
-      "market_line": 0.38078186194030084
+      "market_line": 0.3807818619403009
     },
     "week_bearish": {
       "n_picks": 65,
@@ -328,7 +328,7 @@
           "n_hits": 19
         }
       },
-      "market_line": 0.5619667695429754
+      "market_line": 0.5619667695429755
     },
     "day_bearish": {
       "n_picks": 35,
@@ -384,7 +384,7 @@
           "n_hits": 8
         }
       },
-      "market_line": 0.552810425738807
+      "market_line": 0.5528104257388069
     },
     "week_bearish": {
       "n_picks": 20,
@@ -414,7 +414,7 @@
           "n_hits": 8
         }
       },
-      "market_line": 0.4471895742611931
+      "market_line": 0.44718957426119305
     }
   }
 }
