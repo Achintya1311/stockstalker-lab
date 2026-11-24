@@ -353,7 +353,12 @@
         ],
         "checks_agree": 3,
         "checks_total": 5,
-        "late": false
+        "late": false,
+        "open": 1955.0,
+        "close": 1670.0,
+        "move_pct": -14.57800511508951,
+        "move_rs": -285.0,
+        "hit": false
       },
       {
         "symbol": "KARURVYSYA",
@@ -692,7 +697,12 @@
         ],
         "checks_agree": 5,
         "checks_total": 5,
-        "late": false
+        "late": false,
+        "open": 380.0,
+        "close": 384.1,
+        "move_pct": 1.0789473684210682,
+        "move_rs": 4.100000000000023,
+        "hit": true
       }
     ],
     "bearish": []

@@ -315,7 +315,12 @@
           "vol_x20": 0.97,
           "range20": 34.4
         },
-        "late": false
+        "late": false,
+        "open": 1769.9,
+        "close": 1750.0,
+        "move_pct": -1.12435730832251,
+        "move_rs": -19.90000000000009,
+        "hit": false
       },
       {
         "symbol": "OIL",
@@ -625,7 +630,12 @@
           "vol_x20": 2.44,
           "range20": 37.6
         },
-        "late": false
+        "late": false,
+        "open": 446.15,
+        "close": 432.0,
+        "move_pct": -3.1715790653367604,
+        "move_rs": -14.149999999999977,
+        "hit": false
       },
       {
         "symbol": "TORNTPHARM",
@@ -930,7 +940,12 @@
           "vol_x20": 0.76,
           "range20": 55.2
         },
-        "late": false
+        "late": false,
+        "open": 4708.5,
+        "close": 4689.5,
+        "move_pct": -0.4035255389189807,
+        "move_rs": -19.0,
+        "hit": false
       },
       {
         "symbol": "SOLARINDS",
@@ -1240,7 +1255,12 @@
           "vol_x20": 0.69,
           "range20": 51.3
         },
-        "late": false
+        "late": false,
+        "open": 19341.0,
+        "close": 18710.0,
+        "move_pct": -3.262499353704562,
+        "move_rs": -631.0,
+        "hit": false
       },
       {
         "symbol": "LUPIN",
@@ -1550,7 +1570,12 @@
           "vol_x20": 0.44,
           "range20": 58.9
         },
-        "late": false
+        "late": false,
+        "open": 1982.3,
+        "close": 2014.0,
+        "move_pct": 1.5991524996216588,
+        "move_rs": 31.700000000000045,
+        "hit": true
       }
     ],
     "bearish": [
@@ -1861,7 +1886,12 @@
           "ob_dist": 0.41,
           "ob_side": "demand"
         },
-        "late": false
+        "late": false,
+        "open": 694.0,
+        "close": 638.7,
+        "move_pct": -7.968299711815552,
+        "move_rs": -55.299999999999955,
+        "hit": true
       },
       {
         "symbol": "POLICYBZR",
@@ -2166,7 +2196,12 @@
           "vol_x20": 3.12,
           "range20": 96.2
         },
-        "late": false
+        "late": false,
+        "open": 1119.9,
+        "close": 1022.8,
+        "move_pct": -8.670417001518004,
+        "move_rs": -97.10000000000014,
+        "hit": true
       },
       {
         "symbol": "POWERINDIA",
@@ -2466,7 +2501,12 @@
           "vol_x20": 5.77,
           "range20": 90.4
         },
-        "late": false
+        "late": false,
+        "open": 31895.0,
+        "close": 30150.0,
+        "move_pct": -5.471076971312117,
+        "move_rs": -1745.0,
+        "hit": true
       },
       {
         "symbol": "DATAPATTNS",
@@ -2771,7 +2811,12 @@
           "vol_x20": 1.11,
           "range20": 92.2
         },
-        "late": false
+        "late": false,
+        "open": 4280.0,
+        "close": 4215.0,
+        "move_pct": -1.5186915887850483,
+        "move_rs": -65.0,
+        "hit": true
       },
       {
         "symbol": "PNB",
@@ -3080,7 +3125,12 @@
           "ob_dist": 0.57,
           "ob_side": "demand"
         },
-        "late": false
+        "late": false,
+        "open": 143.96,
+        "close": 155.33,
+        "move_pct": 7.898027229786053,
+        "move_rs": 11.370000000000005,
+        "hit": false
       }
     ]
   },
