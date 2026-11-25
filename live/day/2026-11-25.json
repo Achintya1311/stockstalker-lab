@@ -344,7 +344,12 @@
         ],
         "checks_agree": 4,
         "checks_total": 5,
-        "late": false
+        "late": false,
+        "open": 1040.65,
+        "close": 1030.0,
+        "move_pct": -1.023398837265177,
+        "move_rs": -10.650000000000091,
+        "hit": false
       },
       {
         "symbol": "CHOLAFIN",
@@ -678,7 +683,12 @@
         ],
         "checks_agree": 4,
         "checks_total": 5,
-        "late": false
+        "late": false,
+        "open": 1895.0,
+        "close": 1868.0,
+        "move_pct": -1.4248021108179465,
+        "move_rs": -27.0,
+        "hit": false
       }
     ],
     "bearish": []
