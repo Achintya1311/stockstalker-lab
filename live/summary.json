@@ -72,7 +72,7 @@
           "n_hits": 25
         }
       },
-      "market_line": 0.44275283081709077
+      "market_line": 0.44275283081709066
     },
     "day_bearish": {
       "n_picks": 133,
@@ -220,7 +220,7 @@
           "n_hits": 8
         }
       },
-      "market_line": 0.3807818619403009
+      "market_line": 0.38078186194030084
     },
     "week_bearish": {
       "n_picks": 65,
@@ -294,16 +294,16 @@
           "n_hits": 9
         }
       },
-      "market_line": 0.6166467242166357
+      "market_line": 0.6166467242166358
     },
     "description": "Exam: the go-live strategies replayed once, in the first live run, on every session from 3 Aug 2026 up to go-live, using only data available before each session, then scored the same way as live picks. It was written after those sessions, so it is a back-test, not a live record. The live record starts on frozen_before.",
     "frozen_before": "2026-11-02"
   },
   "live": {
     "day_bullish": {
-      "n_picks": 44,
-      "n_scored": 39,
-      "n_hits": 19,
+      "n_picks": 47,
+      "n_scored": 44,
+      "n_hits": 22,
       "by_week": {
         "2026-W45": {
           "n_picks": 3,
@@ -318,22 +318,22 @@
           "n_hits": 13
         },
         "2026-W48": {
-          "n_picks": 9,
-          "n_hits": 1
+          "n_picks": 12,
+          "n_hits": 4
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 44,
-          "n_hits": 19
+          "n_picks": 47,
+          "n_hits": 22
         }
       },
-      "market_line": 0.5558002684648882
+      "market_line": 0.5482005764720804
     },
     "day_bearish": {
-      "n_picks": 40,
-      "n_scored": 35,
-      "n_hits": 15,
+      "n_picks": 42,
+      "n_scored": 40,
+      "n_hits": 18,
       "by_week": {
         "2026-W45": {
           "n_picks": 19,
@@ -348,17 +348,17 @@
           "n_hits": 1
         },
         "2026-W48": {
-          "n_picks": 5,
-          "n_hits": 0
+          "n_picks": 7,
+          "n_hits": 3
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 40,
-          "n_hits": 15
+          "n_picks": 42,
+          "n_hits": 18
         }
       },
-      "market_line": 0.4352817295903268
+      "market_line": 0.44340600993282786
     },
     "week_bullish": {
       "n_picks": 20,
@@ -388,7 +388,7 @@
           "n_hits": 8
         }
       },
-      "market_line": 0.592948040417706
+      "market_line": 0.5998287743626602
     },
     "week_bearish": {
       "n_picks": 20,
@@ -418,7 +418,7 @@
           "n_hits": 8
         }
       },
-      "market_line": 0.4059051705914683
+      "market_line": 0.40017122563733987
     }
   }
 }

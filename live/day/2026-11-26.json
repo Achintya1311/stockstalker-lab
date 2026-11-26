@@ -343,7 +343,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1031.9,
+        "close": 1050.0,
+        "move_pct": 1.754045934683579,
+        "move_rs": 18.09999999999991,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "OFSS",
@@ -680,7 +686,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 9337.5,
+        "close": 9291.0,
+        "move_pct": -0.4979919678714806,
+        "move_rs": -46.5,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "ADANIENSOL",
@@ -1013,7 +1025,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1420.0,
+        "close": 1382.0,
+        "move_pct": -2.6760563380281654,
+        "move_rs": -38.0,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "360ONE",
@@ -1350,7 +1368,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1172.15,
+        "close": 1210.0,
+        "move_pct": 3.229108902444211,
+        "move_rs": 37.84999999999991,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "SOLARINDS",
@@ -1683,7 +1707,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 18088.0,
+        "close": 18250.0,
+        "move_pct": 0.8956214064573143,
+        "move_rs": 162.0,
+        "hit": true,
+        "late": false
       }
     ],
     "bearish": [
@@ -2018,7 +2048,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 3601.0,
+        "close": 3533.0,
+        "move_pct": -1.8883643432379915,
+        "move_rs": -68.0,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "CIPLA",
@@ -2351,7 +2387,13 @@
           }
         ],
         "checks_agree": 2,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1438.2,
+        "close": 1450.0,
+        "move_pct": 0.8204700319844216,
+        "move_rs": 11.799999999999955,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "NESTLEIND",
@@ -2679,7 +2721,13 @@
           }
         ],
         "checks_agree": 2,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1365.0,
+        "close": 1320.3,
+        "move_pct": -3.2747252747252764,
+        "move_rs": -44.700000000000045,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "COLPAL",
@@ -3016,7 +3064,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1828.2,
+        "close": 1800.0,
+        "move_pct": -1.5425008204791646,
+        "move_rs": -28.200000000000045,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "HEROMOTOCO",
@@ -3353,7 +3407,13 @@
           }
         ],
         "checks_agree": 2,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 5780.0,
+        "close": 5789.0,
+        "move_pct": 0.15570934256055047,
+        "move_rs": 9.0,
+        "hit": false,
+        "late": false
       }
     ]
   },
