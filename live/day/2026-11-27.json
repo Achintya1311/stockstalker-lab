@@ -338,7 +338,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1388.8,
+        "close": 1337.0,
+        "move_pct": -3.7298387096774133,
+        "move_rs": -51.799999999999955,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "ADANIGREEN",
@@ -676,7 +682,13 @@
           }
         ],
         "checks_agree": 4,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 1357.2,
+        "close": 1327.6,
+        "move_pct": -2.1809608016504667,
+        "move_rs": -29.600000000000136,
+        "hit": false,
+        "late": false
       },
       {
         "symbol": "OFSS",
@@ -1013,7 +1025,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 9332.0,
+        "close": 9250.0,
+        "move_pct": -0.8786969567081027,
+        "move_rs": -82.0,
+        "hit": false,
+        "late": false
       }
     ],
     "bearish": [
@@ -1352,7 +1370,13 @@
           }
         ],
         "checks_agree": 3,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 995.0,
+        "close": 989.0,
+        "move_pct": -0.6030150753768893,
+        "move_rs": -6.0,
+        "hit": true,
+        "late": false
       },
       {
         "symbol": "GODREJPROP",
@@ -1680,7 +1704,13 @@
           }
         ],
         "checks_agree": 2,
-        "checks_total": 5
+        "checks_total": 5,
+        "open": 2004.3,
+        "close": 1943.0,
+        "move_pct": -3.058424387566727,
+        "move_rs": -61.299999999999955,
+        "hit": true,
+        "late": false
       }
     ]
   },

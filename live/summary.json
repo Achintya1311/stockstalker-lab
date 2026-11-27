@@ -72,7 +72,7 @@
           "n_hits": 25
         }
       },
-      "market_line": 0.44275283081709066
+      "market_line": 0.44275283081709077
     },
     "day_bearish": {
       "n_picks": 133,
@@ -220,7 +220,7 @@
           "n_hits": 8
         }
       },
-      "market_line": 0.38078186194030084
+      "market_line": 0.3807818619403009
     },
     "week_bearish": {
       "n_picks": 65,
@@ -294,15 +294,15 @@
           "n_hits": 9
         }
       },
-      "market_line": 0.6166467242166358
+      "market_line": 0.6166467242166357
     },
     "description": "Exam: the go-live strategies replayed once, in the first live run, on every session from 3 Aug 2026 up to go-live, using only data available before each session, then scored the same way as live picks. It was written after those sessions, so it is a back-test, not a live record. The live record starts on frozen_before.",
     "frozen_before": "2026-11-02"
   },
   "live": {
     "day_bullish": {
-      "n_picks": 47,
-      "n_scored": 44,
+      "n_picks": 52,
+      "n_scored": 47,
       "n_hits": 22,
       "by_week": {
         "2026-W45": {
@@ -320,20 +320,24 @@
         "2026-W48": {
           "n_picks": 12,
           "n_hits": 4
+        },
+        "2026-W49": {
+          "n_picks": 5,
+          "n_hits": 0
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 47,
+          "n_picks": 52,
           "n_hits": 22
         }
       },
-      "market_line": 0.5482005764720804
+      "market_line": 0.5383871907251606
     },
     "day_bearish": {
-      "n_picks": 42,
-      "n_scored": 40,
-      "n_hits": 18,
+      "n_picks": 44,
+      "n_scored": 42,
+      "n_hits": 20,
       "by_week": {
         "2026-W45": {
           "n_picks": 19,
@@ -349,19 +353,23 @@
         },
         "2026-W48": {
           "n_picks": 7,
-          "n_hits": 3
+          "n_hits": 5
+        },
+        "2026-W49": {
+          "n_picks": 2,
+          "n_hits": 0
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 42,
-          "n_hits": 18
+          "n_picks": 44,
+          "n_hits": 20
         }
       },
-      "market_line": 0.44340600993282786
+      "market_line": 0.45343085443706926
     },
     "week_bullish": {
-      "n_picks": 20,
+      "n_picks": 25,
       "n_scored": 15,
       "n_hits": 8,
       "by_week": {
@@ -380,18 +388,22 @@
         "2026-W48": {
           "n_picks": 5,
           "n_hits": 0
+        },
+        "2026-W49": {
+          "n_picks": 5,
+          "n_hits": 0
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 20,
+          "n_picks": 25,
           "n_hits": 8
         }
       },
-      "market_line": 0.5998287743626602
+      "market_line": 0.6032691413351372
     },
     "week_bearish": {
-      "n_picks": 20,
+      "n_picks": 25,
       "n_scored": 15,
       "n_hits": 8,
       "by_week": {
@@ -410,15 +422,19 @@
         "2026-W48": {
           "n_picks": 5,
           "n_hits": 0
+        },
+        "2026-W49": {
+          "n_picks": 5,
+          "n_hits": 0
         }
       },
       "by_month": {
         "2026-11": {
-          "n_picks": 20,
+          "n_picks": 25,
           "n_hits": 8
         }
       },
-      "market_line": 0.40017122563733987
+      "market_line": 0.39443728068321143
     }
   }
 }
